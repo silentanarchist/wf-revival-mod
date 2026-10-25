@@ -110,6 +110,7 @@
   "challenge.unavailable": "Challenges are not available right now.",
   "challenge.unreadable": "A challenge arrived with rules this game cannot read, so it cannot be accepted. Both players should update the mod and try again.",
   "challenge.yourDeck": "You play your deck for this mode.",
+  "chat.online": "{count} online",
   "common.cancel": "Cancel",
   "common.close": "Close",
   "common.loading": "Loading...",

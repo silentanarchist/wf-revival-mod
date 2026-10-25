@@ -8,6 +8,9 @@ Changes made on the server take effect for everyone at once; the ones listed her
 
 ## Unreleased
 
+### New
+- **Players online:** the main menu's chat box shows how many players are online right now, next to the Global chat (not on the alliance page's chat).
+
 ## 0.15.0 - 2026-10-24
 
 The mod is now called **WF Revival**: its file is `WFRevival.dll` (PC) / `WFRevival.Android.dll` (Android). A game with an older mod updates itself and moves the mod to its new name by itself; nothing to do. Android devices with Warpforge Patcher 0.4.0 or older need WF Revival Patcher 0.4.1 installed by hand once (see the Patcher guide).

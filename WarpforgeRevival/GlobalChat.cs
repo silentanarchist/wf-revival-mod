@@ -464,6 +464,8 @@ namespace WarpforgeRevival
                             if (f.Value.ValueKind == JsonValueKind.String) seen[f.Name] = f.Value.GetString();
                         if (!Same(seen, friendStatus)) friendStatus = seen;       // M-13: the game's table is rewritten only on a change
                     }
+                    if (data.TryGetProperty("online", out var on) && on.ValueKind == JsonValueKind.Number && on.TryGetInt32(out var count))
+                        OnlineCount.Set(count);
                     if (data.TryGetProperty("friendRequests", out var fq) && fq.ValueKind == JsonValueKind.Number && fq.TryGetInt32(out var waiting))
                         FriendRequests.Waiting = waiting;
                     TakePrivate(data);
@@ -531,6 +533,7 @@ namespace WarpforgeRevival
             if (!Ui.Alive(m)) { manager = null; return; }
             float now = UnityEngine.Time.realtimeSinceStartup;
             ShowFriendStatus(m);
+            OnlineCount.Tick();
             while (PrivateInbox.TryDequeue(out var pm)) ReceivePrivate(m, pm.from, pm.data);
 
             // Without Photon Chat nobody tells the game "chat is connected", and it is that moment
@@ -712,6 +715,7 @@ namespace WarpforgeRevival
                     if ((object)__instance == null || __instance.Pointer == IntPtr.Zero) return;
                     __instance.Show();
                     RevivalMod.Log.Msg("[chat] chat button shown on the main menu");
+                    OnlineCount.Attach(__instance);
                 }
                 catch (Exception e) { RevivalMod.Log.Warning("[chat] could not show the chat button: " + e.Message); }
             }
