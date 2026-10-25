@@ -9,7 +9,7 @@ Changes made on the server take effect for everyone at once; the ones listed her
 ## Unreleased
 
 ### New
-- **Players online:** the main menu's chat box shows how many players are online right now, next to the Global chat (not on the alliance page's chat).
+- **Players online:** the main menu shows how many players are online right now ("12 Players Online" with a green dot), left of the settings button, on every main-menu tab.
 
 ## 0.15.0 - 2026-10-24
 
