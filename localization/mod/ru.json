@@ -282,5 +282,9 @@
   "update.newer": "На сервере доступен более новый мод Warpforge Revival. Загрузка...",
   "update.noMod": "На сервере нет мода для загрузки.",
   "update.noServer": "Нет подключения к серверу.",
-  "update.updating": "Обновление мода до версии {version}..."
+  "update.updating": "Обновление мода до версии {version}...",
+  "challenge.rule.serverDeal": "Дела по серверу (тест)",
+  "challenge.sum.serverDeal": "Дела по серверу (тест): перетасовка сервера и делов по нему",
+  "decks.customOnlyTest": "Карты, созданные игроками, могут быть доданы только в колоду в тестовом моде с созданными игроками картами.",
+  "mode.skirmishDraft": "Стычка"
 }
