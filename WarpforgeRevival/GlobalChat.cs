@@ -193,7 +193,18 @@ namespace WarpforgeRevival
                     float vs = vp.lossyScale.x, ss = srt.lossyScale.x;
                     if (vs <= 0f || ss <= 0f) return;
                     float cut = srt.rect.width * ss / vs + 12f;       // the button's width in the text area's units, and a gap
+                    // the hint ("Type message") is not stretched with the text area: it moved left with its right
+                    // edge and its start was cut off (0.15.8). Its left edge is kept where it was.
+                    var hint = (object)input.placeholder == null ? null : input.placeholder.rectTransform;
+                    float hintLeft = (object)hint == null ? 0f : Ui.WorldBox(hint).left;
                     vp.offsetMax = new UnityEngine.Vector2(vp.offsetMax.x - cut, vp.offsetMax.y);
+                    if ((object)hint != null)
+                    {
+                        UnityEngine.Canvas.ForceUpdateCanvases();
+                        float moved = Ui.WorldBox(hint).left - hintLeft;
+                        if (System.Math.Abs(moved) > 0.0001f && hint.lossyScale.x > 0f)
+                            hint.anchoredPosition = new UnityEngine.Vector2(hint.anchoredPosition.x - moved / hint.parent.lossyScale.x, hint.anchoredPosition.y);
+                    }
                     RevivalMod.Log.Msg($"[chat] typing area ends {cut:0} before the right edge, clear of the Send button");
                 }
                 catch (Exception e) { RevivalMod.Log.Warning("[chat] typing box next to the Send button: " + e.Message); }
