@@ -8,6 +8,9 @@ Changes made on the server take effect for everyone at once; the ones listed her
 
 ## Unreleased
 
+### New
+- **Bug reports: "Include extended logs"** (off unless you tick it): sends every log the game and its mod loader keep and, on PC, Unity's own log and the files from recent crashes, so a crash can be looked at without hunting for files. Only the admins see them.
+
 ### Fixes
 - **Updating from an old mod:** games with mod 0.14.0 to 0.14.42 can update themselves again (they refused every build since the rename to WF Revival, so they could not sign in).
 

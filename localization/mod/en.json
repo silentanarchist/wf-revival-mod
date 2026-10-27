@@ -49,6 +49,7 @@
   "bugReport.savedForLater": "Couldn't send it now ({error}). It is saved and will be sent the next time you start the game.",
   "bugReport.send": "Send",
   "bugReport.sendDump": "Send Unity's crash dump (admins only)",
+  "bugReport.sendExtended": "Include extended logs (admins only)",
   "bugReport.sendLog": "Send the recent log",
   "bugReport.sendShot": "Send the screenshot",
   "bugReport.sentHeading": "Bug {id} sent",

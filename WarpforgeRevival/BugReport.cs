@@ -486,7 +486,8 @@ namespace WarpforgeRevival
             public string Kind = "manual", Title = "", Category = "other", Severity = "annoying", Description = "";
             public string Log = "", ContextJson = "{}";
             public byte[] Screenshot, Dump;
-            public bool SendShot = true, SendLog = true, SendDump = true;
+            public bool SendShot = true, SendLog = true, SendDump = true, SendExtended;
+            public byte[] Extended;                // built as the report is sent, when SendExtended is ticked
         }
 
         private static void OfferCrash(string folder)
@@ -559,11 +560,16 @@ namespace WarpforgeRevival
                 if (d.SendLog && !string.IsNullOrEmpty(d.Log)) w.WriteString("log", Scrub(d.Log));
                 // The server takes at most 8 MB per request and attachments grow by a third as base64: a
                 // screenshot and a crash dump together could pass that (security review #25), so the
-                // screenshot is left out when both would not fit; the crash dump says more.
-                bool shotFits = d.Screenshot != null && d.Screenshot.Length <= 3 * 1024 * 1024 &&
-                                (!(d.SendDump && d.Dump != null) || d.Screenshot.Length + d.Dump.Length <= 5 * 1024 * 1024);
+                // screenshot is left out when both would not fit; the crash dump says more. The extended logs
+                // (0.15.3) already hold the newest crash dump, so with them the dump is not sent a second time,
+                // and they come before the screenshot too.
+                bool ext = d.SendExtended && d.Extended != null;
+                bool dumpToo = d.SendDump && d.Dump != null && !ext;
+                long others = (dumpToo ? d.Dump.Length : 0) + (ext ? d.Extended.Length : 0);
+                bool shotFits = d.Screenshot != null && d.Screenshot.Length <= 3 * 1024 * 1024 && d.Screenshot.Length + others <= 5 * 1024 * 1024;
                 if (d.SendShot && shotFits) w.WriteString("screenshot", Convert.ToBase64String(d.Screenshot));
-                if (d.SendDump && d.Dump != null) w.WriteString("dump", Convert.ToBase64String(d.Dump));
+                if (dumpToo) w.WriteString("dump", Convert.ToBase64String(d.Dump));
+                if (ext) w.WriteString("extended", Convert.ToBase64String(d.Extended));
                 w.WriteEndObject();
             }
             return Encoding.UTF8.GetString(ms.ToArray());
@@ -759,7 +765,8 @@ namespace WarpforgeRevival
 
                 if (d.Screenshot != null) d.SendShot = Tick(cx, cy, Loc.T("bugReport.sendShot", "Send the screenshot"), d.SendShot);
                 d.SendLog = Tick(cx + cw / 2, cy, Loc.T("bugReport.sendLog", "Send the recent log"), d.SendLog); cy += 42;
-                if (d.Dump != null) { d.SendDump = Tick(cx, cy, Loc.T("bugReport.sendDump", "Send Unity's crash dump (admins only)"), d.SendDump); cy += 42; }
+                if (d.Dump != null) d.SendDump = Tick(cx, cy, Loc.T("bugReport.sendDump", "Send Unity's crash dump (admins only)"), d.SendDump);
+                d.SendExtended = Tick(cx + cw / 2, cy, Loc.T("bugReport.sendExtended", "Include extended logs (admins only)"), d.SendExtended); cy += 42;
                 GUI.Label(R(cx, cy, cw, 60), Loc.T("bugReport.alsoSent", "Also sent: mod version, device, graphics, screen and what you were doing in the game (scene, match rules). Only you and the admins see the log and screenshot."), small);
                 cy += 66;
 
@@ -798,11 +805,26 @@ namespace WarpforgeRevival
             {
                 if ((d.Title ?? "").Trim().Length < 3) { status = Loc.T("bugReport.needTitle", "Give it a title (what went wrong, at least 3 letters)."); problem = true; return; }
                 busy = true; problem = false;
-                string body;
-                try { body = Body(d); }
-                catch (Exception e) { busy = false; status = Loc.T("bugReport.buildFailed", "Could not put the report together: {error}", ("error", e.Message)); problem = true; return; }
+                var draft = d;
+                string unityLog = draft.SendExtended ? ExtendedLogs.UnityLogPath() : null;
                 Task.Run(async () =>
                 {
+                    string body;
+                    try
+                    {
+                        // every log and the recent crash files, zipped off the main thread (they can be a few MB)
+                        if (draft.SendExtended && draft.Extended == null)
+                        {
+                            try { draft.Extended = ExtendedLogs.Build(unityLog, Scrub, out _, out _); }
+                            catch (Exception e) { RevivalMod.Log.Warning("[bugs] extended logs left out: " + e.Message); }      // the report goes without them
+                        }
+                        body = Body(draft);
+                    }
+                    catch (Exception e)
+                    {
+                        PlayFabTransport.OnMainThread(() => { busy = false; status = Loc.T("bugReport.buildFailed", "Could not put the report together: {error}", ("error", e.Message)); problem = true; });
+                        return;
+                    }
                     var (id, url, error, keepIt) = await Post(body);
                     if (id == null && keepIt) KeepDraft(body);
                     PlayFabTransport.OnMainThread(() =>
