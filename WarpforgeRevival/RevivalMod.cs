@@ -3,6 +3,12 @@ using System.IO;
 using MelonLoader;
 
 [assembly: MelonInfo(typeof(WarpforgeRevival.RevivalMod), "WF Revival", WarpforgeRevival.RevivalMod.Version, "WF Revival community")]
+// The old name next to the version (0.15.3, owner 2026-10-27): mods 0.14.0-0.14.42 find a download's version by
+// looking for "Warpforge Revival" followed by it, and refused every build named only "WF Revival" ("the download names
+// no version"), so they could not update or sign in. With this they take the current build like any update. Its
+// signature must be made under the old file name (WarpforgeRevival.dll / WarpforgeRevival.Android.dll), the name those
+// mods check it under; newer mods accept either name. Keep as long as the rename migration is kept.
+[assembly: System.Reflection.AssemblyMetadata("Warpforge Revival", WarpforgeRevival.RevivalMod.Version)]
 [assembly: MelonGame("Everguild", "Warpforge")]
 // The mod applies its hooks itself, one class at a time (SafePatch): MelonLoader's automatic PatchAll stops
 // at the first hook that fails. The phone build also pauses the game's garbage collector meanwhile (PatchQuietly).
@@ -20,9 +26,9 @@ namespace WarpforgeRevival
     public class RevivalMod : MelonMod
     {
         #if ANDROID_PORT
-        public const string Version = "0.15.2-a";
+        public const string Version = "0.15.3-a";
 #else
-        public const string Version = "0.15.2-w";
+        public const string Version = "0.15.3-w";
 #endif
 
         /// <summary>

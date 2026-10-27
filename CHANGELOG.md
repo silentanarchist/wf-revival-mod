@@ -8,6 +8,9 @@ Changes made on the server take effect for everyone at once; the ones listed her
 
 ## Unreleased
 
+### Fixes
+- **Updating from an old mod:** games with mod 0.14.0 to 0.14.42 can update themselves again (they refused every build since the rename to WF Revival, so they could not sign in).
+
 ### New
 - **Players online:** the main menu shows how many players are online right now ("12 Players Online" with a green dot), left of the settings button, on every main-menu tab.
 
