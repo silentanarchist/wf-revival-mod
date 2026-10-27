@@ -10,13 +10,12 @@ Changes made on the server take effect for everyone at once; the ones listed her
 
 ### New
 - **Bug reports: "Include extended logs"** (off unless you tick it): sends every log the game and its mod loader keep and, on PC, Unity's own log and the files from recent crashes, so a crash can be looked at without hunting for files. A note under the tick says what they hold; only the admins see them.
+- **Players online:** the main menu shows how many players are online right now ("12 Players Online" with a green dot), left of the settings button, on every main-menu tab.
 
 ### Fixes
+- **Chat:** the typing box ends left of the Send button, so the end of a long message no longer hides under it.
 - **Opponent's profile on the first click:** in a match, clicking the opponent should now open their profile the first time (the original game often needed a second click). Not yet confirmed in play.
 - **Updating from an old mod:** games with mod 0.14.0 to 0.14.42 can update themselves again (they refused every build since the rename to WF Revival, so they could not sign in).
-
-### New
-- **Players online:** the main menu shows how many players are online right now ("12 Players Online" with a green dot), left of the settings button, on every main-menu tab.
 
 ## 0.15.0 - 2026-10-24
 

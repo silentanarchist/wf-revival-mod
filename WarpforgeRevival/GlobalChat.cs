@@ -173,6 +173,36 @@ namespace WarpforgeRevival
                     }
                 }
                 catch (Exception e) { RevivalMod.Log.Warning("[chat] longer messages: " + e.Message); }
+                ClearOfSend(__instance);
+            }
+
+            /// <summary>The game's Send button sits on top of the right end of the typing box, so the end of a long
+            /// message (600 characters since 0.13.x) was hidden under it while typing (owner, 2026-10-27). The box is
+            /// made a little narrower so it ends just left of the button.</summary>
+            private static void ClearOfSend(ChatPanel panel)
+            {
+                try
+                {
+                    var input = panel.inputField;
+                    var send = panel.sendMessageButton;
+                    if ((object)input == null || (object)send == null) return;
+                    var irt = input.GetComponent<UnityEngine.RectTransform>();
+                    var srt = send.GetComponent<UnityEngine.RectTransform>();
+                    if ((object)irt == null || (object)srt == null) return;
+                    UnityEngine.Canvas.ForceUpdateCanvases();
+                    var (it, ib, il, ir) = Ui.WorldBox(irt);
+                    var (st, sb, sl, sr) = Ui.WorldBox(srt);
+                    bool overlaps = sl < ir && sr > il && st > ib && sb < it;
+                    if (!overlaps) { RevivalMod.Log.Msg("[chat] the Send button is clear of the typing box"); return; }
+                    float scale = irt.lossyScale.x;
+                    if (scale <= 0f) return;
+                    float gap = 8f * scale;
+                    float cut = (ir - (sl - gap)) / scale;           // in the box's own units
+                    if (cut <= 0f || cut > irt.rect.width * 0.5f) { RevivalMod.Log.Msg($"[chat] typing box left as it is (would lose {cut:0} of {irt.rect.width:0})"); return; }
+                    irt.offsetMax = new UnityEngine.Vector2(irt.offsetMax.x - cut, irt.offsetMax.y);
+                    RevivalMod.Log.Msg($"[chat] typing box made {cut:0} narrower so it ends left of the Send button");
+                }
+                catch (Exception e) { RevivalMod.Log.Warning("[chat] typing box next to the Send button: " + e.Message); }
             }
         }
 
