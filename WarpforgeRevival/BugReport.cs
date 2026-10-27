@@ -766,9 +766,15 @@ namespace WarpforgeRevival
                 if (d.Screenshot != null) d.SendShot = Tick(cx, cy, Loc.T("bugReport.sendShot", "Send the screenshot"), d.SendShot);
                 d.SendLog = Tick(cx + cw / 2, cy, Loc.T("bugReport.sendLog", "Send the recent log"), d.SendLog); cy += 42;
                 if (d.Dump != null) d.SendDump = Tick(cx, cy, Loc.T("bugReport.sendDump", "Send Unity's crash dump (admins only)"), d.SendDump);
-                d.SendExtended = Tick(cx + cw / 2, cy, Loc.T("bugReport.sendExtended", "Include extended logs (admins only)"), d.SendExtended); cy += 42;
+                d.SendExtended = Tick(cx + cw / 2, cy, Loc.T("bugReport.sendExtendedLogs", "Include extended logs"), d.SendExtended); cy += 42;
                 GUI.Label(R(cx, cy, cw, 60), Loc.T("bugReport.alsoSent", "Also sent: mod version, device, graphics, screen and what you were doing in the game (scene, match rules). Only you and the admins see the log and screenshot."), small);
                 cy += 66;
+                if (d.SendExtended)
+                {
+                    // what the extended logs hold, before the player sends them (owner, 2026-10-27)
+                    GUI.Label(R(cx, cy, cw, 60), Loc.T("bugReport.extendedNote", "Extended logs are the full log files of your recent game sessions and, on PC, Unity's log and crash files. They can show your computer's user name and details about your PC. Only the admins can see them, not even you, and they are deleted 30 days after the report is closed."), small);
+                    cy += 62;
+                }
 
                 var keep = GUI.color;
                 if (problem) GUI.color = new Color(1f, 0.55f, 0.5f);

@@ -9,7 +9,7 @@ Changes made on the server take effect for everyone at once; the ones listed her
 ## Unreleased
 
 ### New
-- **Bug reports: "Include extended logs"** (off unless you tick it): sends every log the game and its mod loader keep and, on PC, Unity's own log and the files from recent crashes, so a crash can be looked at without hunting for files. Only the admins see them.
+- **Bug reports: "Include extended logs"** (off unless you tick it): sends every log the game and its mod loader keep and, on PC, Unity's own log and the files from recent crashes, so a crash can be looked at without hunting for files. A note under the tick says what they hold; only the admins see them.
 
 ### Fixes
 - **Opponent's profile on the first click:** in a match, clicking the opponent should now open their profile the first time (the original game often needed a second click). Not yet confirmed in play.
