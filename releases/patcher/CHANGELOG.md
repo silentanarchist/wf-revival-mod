@@ -5,10 +5,13 @@ Called Warpforge Patcher up to 0.4.0.
 The Android app that patches the game on the device itself. Write "device", not "phone", unless something only applies to phones. Newest first. A heading ending in
 "(test build)" is published as a pre-release.
 
-## 0.4.2 - 2026-10-28 (test build)
+## 0.4.2 - 2026-10-28
 
 ### New
-- **No more black screen while the game starts.** A game patched with this version shows "WF Revival" and "Loading…" from the moment you open it until the game's own loading screen appears. Patch again (Patch and install) once to get it; your settings, mod and signing key are kept.
+- **No more black screen while the game starts.** A game patched with this version shows "WF Revival" and "Loading…" from the moment you open it until the game's own loading screen appears. Press **Patch and install** once to get it; your settings, mod and signing key are kept.
+
+### Fixed
+- Having a newer mod on the device than the server's (a test build, for example) no longer stops patching. The newer mod is kept, and **Update the mod only** now says so instead of showing an error.
 
 ### Changes
 - Patching from a PC with the scripts and a cable is archived and no longer updated. This app is the way to patch the game.
