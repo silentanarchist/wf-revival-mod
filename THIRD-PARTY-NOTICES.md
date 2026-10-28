@@ -2,14 +2,14 @@
 
 This repository contains this project's own work and, in `loader-changes/`, changes to other
 people's software. The built programs (`LemonPatch.exe` and the loader package `melon_data.zip`) are
-not stored here since 2026-10-17: `patcher/1 - patch.bat` downloads them into `patcher/tool/` from
+not stored here since 2026-10-17: `archive/pc-patcher/1 - patch.bat` downloads them into `archive/pc-patcher/tool/` from
 [the commit of the old Android repository where they were published](https://github.com/silentanarchist/wf-revival-mod-android/tree/52b333dd265cbee4471db22bfe140d95e99754c5/patcher/tool),
 and everything below applies to them as it did there. This file says what is whose, under which licence,
 and what was changed. The licence texts are in [`licenses/`](licenses).
 
 ## This project's own work: MIT
 
-The mod (`WarpforgeRevival/`, `WarpforgeRevival.Android/`), the scripts in `patcher/` and the
+The mod (`WarpforgeRevival/`, `WarpforgeRevival.Android/`), the scripts in `archive/pc-patcher/` and the
 documentation are under the MIT licence in [LICENSE](LICENSE). That licence covers this project's
 own work only. It does not cover the game, and it does not replace the licences below.
 
@@ -21,9 +21,9 @@ alone are also here as diffs.
 
 | What | Where it is here | Licence | Complete source (fork), and what it is based on | Changes alone |
 |---|---|---|---|---|
-| **MelonLoader**, LemonLoader's Android port. Copyright 2020 - 2022 Lava Gang; Android port by the LemonLoader team. | Built into `patcher/tool/melon_data.zip` (`MelonLoader/`, `native/libmain.so`) | Apache-2.0 ([text](licenses/Apache-2.0.txt), [NOTICE](licenses/MelonLoader-NOTICE.txt)) | <https://github.com/silentanarchist/MelonLoader/tree/warpforge-revival> (`2e075e7f2407`), based on <https://github.com/LemonLoader/MelonLoader> branch `0.7.0` at `7b14dac3281fe9a88a1b8f0c96f5b9a46f558cdf` | [`loader-changes/melonloader-lemonloader-0.7.diff`](loader-changes/melonloader-lemonloader-0.7.diff) |
-| **Il2CppInterop** (ARM64). By knah, BepInEx and contributors; ARM64 version by the LemonLoader team. | Built into `patcher/tool/melon_data.zip` (`MelonLoader/net6/Il2CppInterop.*.dll`) | LGPL-3.0 ([text](licenses/LGPL-3.0.txt), which adds to [GPL-3.0](licenses/GPL-3.0.txt)) | <https://github.com/silentanarchist/Il2CppInteropARM64/tree/warpforge-revival> (`abb023d18096`), based on <https://github.com/LemonLoader/Il2CppInteropARM64> master at `a60ebf5` plus six fixes from <https://github.com/BepInEx/Il2CppInterop> (together `f194da048db229ca6e649494095f9c9d3fce4e31`, in the fork) | [`loader-changes/il2cppinterop-arm64.diff`](loader-changes/il2cppinterop-arm64.diff) |
-| **MelonLoader Installer** (LemonLoader). The patching program `LemonPatch.exe` is its patching code with a command-line front end. | `patcher/tool/LemonPatch.exe` (downloaded as `.part0`/`.part1`) | GPL-3.0 ([text](licenses/GPL-3.0.txt)) | <https://github.com/silentanarchist/MelonLoaderInstaller/tree/warpforge-revival> (`94f7a5ffbce5`), based on <https://github.com/LemonLoader/MelonLoaderInstaller> at `ac443fce9f2ef890caddf8c64bba9194a43361bd` | [`patcher/LemonPatch-core-change.diff`](patcher/LemonPatch-core-change.diff), [`patcher/LemonPatch-source.cs`](patcher/LemonPatch-source.cs), [`patcher/LemonPatch.csproj`](patcher/LemonPatch.csproj) |
+| **MelonLoader**, LemonLoader's Android port. Copyright 2020 - 2022 Lava Gang; Android port by the LemonLoader team. | Built into `archive/pc-patcher/tool/melon_data.zip` (`MelonLoader/`, `native/libmain.so`) | Apache-2.0 ([text](licenses/Apache-2.0.txt), [NOTICE](licenses/MelonLoader-NOTICE.txt)) | <https://github.com/silentanarchist/MelonLoader/tree/warpforge-revival> (`2e075e7f2407`), based on <https://github.com/LemonLoader/MelonLoader> branch `0.7.0` at `7b14dac3281fe9a88a1b8f0c96f5b9a46f558cdf` | [`loader-changes/melonloader-lemonloader-0.7.diff`](loader-changes/melonloader-lemonloader-0.7.diff) |
+| **Il2CppInterop** (ARM64). By knah, BepInEx and contributors; ARM64 version by the LemonLoader team. | Built into `archive/pc-patcher/tool/melon_data.zip` (`MelonLoader/net6/Il2CppInterop.*.dll`) | LGPL-3.0 ([text](licenses/LGPL-3.0.txt), which adds to [GPL-3.0](licenses/GPL-3.0.txt)) | <https://github.com/silentanarchist/Il2CppInteropARM64/tree/warpforge-revival> (`abb023d18096`), based on <https://github.com/LemonLoader/Il2CppInteropARM64> master at `a60ebf5` plus six fixes from <https://github.com/BepInEx/Il2CppInterop> (together `f194da048db229ca6e649494095f9c9d3fce4e31`, in the fork) | [`loader-changes/il2cppinterop-arm64.diff`](loader-changes/il2cppinterop-arm64.diff) |
+| **MelonLoader Installer** (LemonLoader). The patching program `LemonPatch.exe` is its patching code with a command-line front end. | `archive/pc-patcher/tool/LemonPatch.exe` (downloaded as `.part0`/`.part1`) | GPL-3.0 ([text](licenses/GPL-3.0.txt)) | <https://github.com/silentanarchist/MelonLoaderInstaller/tree/warpforge-revival> (`94f7a5ffbce5`), based on <https://github.com/LemonLoader/MelonLoaderInstaller> at `ac443fce9f2ef890caddf8c64bba9194a43361bd` | [`archive/pc-patcher/LemonPatch-core-change.diff`](archive/pc-patcher/LemonPatch-core-change.diff), [`archive/pc-patcher/LemonPatch-source.cs`](archive/pc-patcher/LemonPatch-source.cs), [`archive/pc-patcher/LemonPatch.csproj`](archive/pc-patcher/LemonPatch.csproj) |
 
 `LemonPatch.exe` as a whole, including this project's front end and changes to it, is offered
 under GPL-3.0. The changed Il2CppInterop libraries are offered under LGPL-3.0, and the changed
@@ -34,7 +34,7 @@ component will be published in this repository.
 
 ## Unchanged software inside the loader package
 
-`patcher/tool/melon_data.zip` also carries these, unchanged, as MelonLoader ships them. The
+`archive/pc-patcher/tool/melon_data.zip` also carries these, unchanged, as MelonLoader ships them. The
 package keeps MelonLoader's own notices in `MelonLoader/Documentation/` and the .NET runtime's in
 `dotnet/LICENSE.txt` and `dotnet/ThirdPartyNotices.txt`.
 

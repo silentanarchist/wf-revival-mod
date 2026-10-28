@@ -11,22 +11,22 @@ refs-android/
 *.apks
 *.apk
 !releases/patcher/*.apk
-patcher/game-files/*
-!patcher/game-files/.gitkeep
-patcher/patched/
-patcher/work-temp/
-patcher/patch-log.txt
-patcher/phone-logs/
-patcher/phone-logs.zip
-patcher/uninstall-backup/
-patcher/tool/signing-key.pem
-patcher/tool/platform-tools/
-patcher/tool/ffmpeg/
-# downloaded by "1 - patch.bat" (patcher/tool/get-tools.ps1), and joined from those pieces on every run
-patcher/tool/*.part*
-patcher/tool/*.download
-patcher/tool/LemonPatch.exe
-patcher/tool/melon_data.zip
+archive/pc-patcher/game-files/*
+!archive/pc-patcher/game-files/.gitkeep
+archive/pc-patcher/patched/
+archive/pc-patcher/work-temp/
+archive/pc-patcher/patch-log.txt
+archive/pc-patcher/phone-logs/
+archive/pc-patcher/phone-logs.zip
+archive/pc-patcher/uninstall-backup/
+archive/pc-patcher/tool/signing-key.pem
+archive/pc-patcher/tool/platform-tools/
+archive/pc-patcher/tool/ffmpeg/
+# downloaded by "1 - patch.bat" (archive/pc-patcher/tool/get-tools.ps1), and joined from those pieces on every run
+archive/pc-patcher/tool/*.part*
+archive/pc-patcher/tool/*.download
+archive/pc-patcher/tool/LemonPatch.exe
+archive/pc-patcher/tool/melon_data.zip
 # editor files
 .vs/
 .vscode/

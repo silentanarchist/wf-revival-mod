@@ -35,7 +35,7 @@ date. **The website needs an account:** sign in (or make a free account) at
 [wf-revival.silentanarchist.com](https://wf-revival.silentanarchist.com/login) to read them.
 
 - [Android device: the Warpforge Patcher app](https://wf-revival.silentanarchist.com/guides/phone) (the easiest way on Android)
-- [Android device: with a PC](https://wf-revival.silentanarchist.com/guides/android-pc) (the scripts in `patcher/`, with a cable)
+- Android device with a PC and a cable: **archived** (the scripts are kept in `archive/pc-patcher/`, no longer updated); use the app above.
 - [Android on a PC with MuMu Player](https://wf-revival.silentanarchist.com/guides/mumu)
 
 No account yet? Make one on the [website](https://wf-revival.silentanarchist.com/login): you can read
@@ -64,21 +64,12 @@ A server needs two things for phones, both described in the
 | `WarpforgeRevival/` | The mod's source. The same files build the Windows mod; the parts marked `ANDROID_PORT` are the Android differences. |
 | `WarpforgeRevival.Android/` | The project that builds `WarpforgeRevival.Android.dll` from that source. |
 | `releases/` | Built mods, Windows and Android. Each zip committed here is also published under Releases. |
-| `patcher/0 - get phone logs.bat` | Collects the phone's logs when something goes wrong (can be used at any point). |
-| `patcher/1 - patch.bat` | Patches your copy of the game. |
-| `patcher/2 - install on phone.bat` | Installs the patched game over USB. |
-| `patcher/3 - put mod on phone.bat` | Copies the mod from `patcher\mods` to the phone. |
-| `patcher/4 - put game login on phone.bat` | Copies a game login file from the server's website to the phone. |
-| `patcher/5 - uninstall from phone.bat` | Removes the game, the loader and the mod from a phone (copies its settings file and logs to `patcher\uninstall-backup` first). Your account and progress stay on the server. |
-| `patcher/6 - fix loading video.bat` | Makes two things from your own game file with ffmpeg (not included; put `ffmpeg.exe` in `patcher\tool\ffmpeg`) and puts them on the phone: a WebM copy of the opening video (for phones whose decoder plays it badly) and the clip's last frame as a picture (for the Still setting). Option 2 removes them. Nothing made from the game is published. |
-| `patcher/7 - loading video setting.bat` | Sets the mod's LoadingVideo setting on the phone: Still (no video, the picture instead - the fix for the Pixel 6 Pro's black menu), Normal, Off or Texture. |
-| `patcher/tool/get-tools.ps1` | Downloads the patching program (`LemonPatch.exe`, two halves) and the loader package (`melon_data.zip`, three pieces) and checks them; `1 - patch.bat` joins them on every run. |
-| `patcher/LemonPatch-source.cs`, `LemonPatch.csproj`, `LemonPatch-core-change.diff` | Its source: a small command-line front end, and two changes to LemonLoader's installer code. |
+| `archive/pc-patcher/` | **Archived (2026-10-28), no longer updated:** the old way of patching from a Windows PC with a cable (`1 - patch.bat`, `2 - install on phone.bat` and the other numbered scripts, the downloader for `LemonPatch.exe` and the loader package, and LemonPatch's source). Use the WF Revival Patcher app instead; see `ARCHIVED.md` there. |
 | `loader-changes/` | The changes made to the mod loader itself, as diffs against the public sources. |
 
 ### The patching program
 
-`LemonPatch.exe` is LemonLoader's official patching code
+The WF Revival Patcher app and the archived `LemonPatch.exe` run the same code: LemonLoader's official patching code
 ([LemonLoader/MelonLoaderInstaller](https://github.com/LemonLoader/MelonLoaderInstaller), commit
 `ac443fc`, GPL-3.0) with a command-line front end and two changes. Its complete source is the
 [`warpforge-revival` branch of this project's fork](https://github.com/silentanarchist/MelonLoaderInstaller/tree/warpforge-revival):
@@ -176,7 +167,7 @@ not in this repository because they are not ours to publish.
 | Folder | Where it comes from |
 |---|---|
 | `refs/net6` | the .NET 6 runtime libraries (`Microsoft.NETCore.App` 6.x) |
-| `refs-android/ml` | `MelonLoader/net6` from the loader package (the pieces `1 - patch.bat` downloads into `patcher\tool`, joined, then unzipped) |
+| `refs-android/ml` | `MelonLoader/net6` from the loader package (the pieces `1 - patch.bat` downloads into `archive\pc-patcher\tool`, joined, then unzipped) |
 | `refs-android/il2cpp` | `MelonLoader/Il2CppAssemblies` from the loader package (the interface files) |
 
 ```
@@ -204,9 +195,10 @@ The result is `WarpforgeRevival.Android/bin/Release/net6.0/WarpforgeRevival.Andr
 
 Check out the `warpforge-revival` branch of
 [silentanarchist/MelonLoaderInstaller](https://github.com/silentanarchist/MelonLoaderInstaller/tree/warpforge-revival)
-and publish `LemonPatch/LemonPatch.csproj` for `win-x64` as a single self-contained file. (The
-copies of the same source in `patcher/` here are for reading; the project file there expects the
-installer checked out next to `patcher` as `inst`.)
+and publish `LemonPatch/LemonPatch.csproj` for `win-x64` as a single self-contained file. (Archived: the
+PC tool is no longer updated. The copies of its source in `archive/pc-patcher/` are for reading; the project
+file there expects the installer checked out next to that folder as `inst`. The app is built from
+`WarpforgePatcher/` in the same branch, see its README.)
 
 ---
 

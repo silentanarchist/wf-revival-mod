@@ -78,7 +78,7 @@ date. **The website needs an account:** sign in (or make a free account) at
 
 - [PC (Windows)](https://wf-revival.silentanarchist.com/guides/pc)
 - [Android device: the Warpforge Patcher app](https://wf-revival.silentanarchist.com/guides/phone) (the easiest way on Android)
-- [Android device: with a PC](https://wf-revival.silentanarchist.com/guides/android-pc) (the scripts in `patcher/`, with a cable)
+- Android device with a PC and a cable: **archived** (the scripts are kept in `archive/pc-patcher/`, no longer updated); use the app above.
 - [Android on a PC with MuMu Player](https://wf-revival.silentanarchist.com/guides/mumu)
 
 No account yet? Make one on the [website](https://wf-revival.silentanarchist.com/login): you can read
