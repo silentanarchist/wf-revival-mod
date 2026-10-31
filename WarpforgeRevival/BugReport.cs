@@ -672,25 +672,58 @@ namespace WarpforgeRevival
 
             internal static void Hide() { Open = false; d = null; BlockGame(false); }
 
-            // The game's own buttons sit under this window and would get the same clicks: its event
-            // system is switched off while the window is open.
-            private static UnityEngine.EventSystems.EventSystem blocked;
+            // The game's own buttons and cards sit under this window and would get the same clicks. The game reads
+            // clicks two ways: its menus through Unity's event system, and the board and cards (battle, collection)
+            // through its own TouchInputManager, which kept working while only the event system was off (owner,
+            // 2026-10-30: clicks on the report window went through to the game). Both are switched off while the
+            // window is open, and the touch state is cleared so nothing stays "pressed". KeepBlocked runs while the
+            // window draws, in case the game switches either one back on (a scene change brings a new event system).
+            private static readonly System.Collections.Generic.List<UnityEngine.EventSystems.EventSystem> blocked =
+                new System.Collections.Generic.List<UnityEngine.EventSystems.EventSystem>();
+            private static Il2Cpp.TouchInputManager blockedTouch;
+            private static float nextBlockCheck;
+
             private static void BlockGame(bool on)
             {
                 try
                 {
-                    if (on)
-                    {
-                        var es = UnityEngine.EventSystems.EventSystem.current;
-                        if ((object)es != null && es.enabled) { es.enabled = false; blocked = es; }
-                    }
-                    else if ((object)blocked != null)
-                    {
-                        if (blocked.Pointer != IntPtr.Zero && blocked.m_CachedPtr != IntPtr.Zero) blocked.enabled = true;
-                        blocked = null;
-                    }
+                    if (on) { KeepBlocked(true); return; }
+                    foreach (var es in blocked)
+                        if (Ui.Alive(es)) es.enabled = true;
+                    blocked.Clear();
+                    if (Ui.Alive(blockedTouch)) { ClearTouch(); blockedTouch.enabled = true; }
+                    blockedTouch = null;
                 }
-                catch (Exception e) { RevivalMod.Log.Warning("[bugs] " + e.Message); blocked = null; }
+                catch (Exception e) { RevivalMod.Log.Warning("[bugs] " + e.Message); blocked.Clear(); blockedTouch = null; }
+            }
+
+            /// <summary>Switches off every enabled event system and the game's touch input (cheap; at most twice a second).</summary>
+            private static void KeepBlocked(bool now = false)
+            {
+                if (!now && Time.realtimeSinceStartup < nextBlockCheck) return;
+                nextBlockCheck = Time.realtimeSinceStartup + 0.5f;
+                try
+                {
+                    foreach (var es in UnityEngine.Object.FindObjectsOfType<UnityEngine.EventSystems.EventSystem>())
+                        if (Ui.Alive(es) && es.enabled) { es.enabled = false; if (!blocked.Contains(es)) blocked.Add(es); }
+                    var t = Il2Cpp.TouchInputManager.Instance;
+                    if (Ui.Alive(t) && t.enabled) { t.enabled = false; blockedTouch = t; ClearTouch(); }
+                }
+                catch (Exception e) { RevivalMod.Log.Warning("[bugs] blocking the game's input: " + e.Message); }
+            }
+
+            private static void ClearTouch()
+            {
+                try
+                {
+                    Il2Cpp.TouchInputManager.TouchPressed = false;
+                    Il2Cpp.TouchInputManager.TouchPressedSecondary = false;
+                    Il2Cpp.TouchInputManager.IsDragging = false;
+                    Il2Cpp.TouchInputManager.TouchDragDelta = Vector2.zero;
+                    Il2Cpp.TouchInputManager.TouchDragDeltaViewport = Vector2.zero;
+                    Il2Cpp.TouchInputManager.ScrollDelta = 0f;
+                }
+                catch { }
             }
 
             private static GUIStyle box, label, small, field, button;
@@ -726,7 +759,8 @@ namespace WarpforgeRevival
 
             internal static void Draw()
             {
-                if (d == null) { Open = false; return; }
+                if (d == null) { Hide(); return; }
+                KeepBlocked();
                 Styles();
                 float w = Screen.width / sc, h = Screen.height / sc;
                 GUI.DrawTexture(R(0, 0, w, h), shade);
