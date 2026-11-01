@@ -584,8 +584,8 @@ namespace WarpforgeRevival
 
         /// <summary>The popup is never shown: as the game opens it (the Challenge button on a profile or an alliance
         /// member), it is closed again and the Challenge page opens with that player picked and the mode as it was.</summary>
-        [HarmonyPatch(typeof(DuelPopupWindow), nameof(DuelPopupWindow.Open))]
-        private static class DuelOpened { private static void Postfix(DuelPopupWindow __instance) => FromDuelPopup(__instance, null); }
+        // hooked through SharedHooks (one hook per game method): HarmonyPatch(typeof(DuelPopupWindow), nameof(DuelPopupWindow.Open))
+        internal static class DuelOpened { internal static void Postfix(DuelPopupWindow __instance) => FromDuelPopup(__instance, null); }
 
         private static void OpenPage()
         {

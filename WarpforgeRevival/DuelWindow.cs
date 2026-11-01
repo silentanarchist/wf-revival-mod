@@ -11,10 +11,10 @@ namespace WarpforgeRevival
     /// </summary>
     internal static class DuelWindow
     {
-        [HarmonyPatch(typeof(DuelPopupWindow), nameof(DuelPopupWindow.Open))]
-        private static class Opened
+        // hooked through SharedHooks (one hook per game method): HarmonyPatch(typeof(DuelPopupWindow), nameof(DuelPopupWindow.Open))
+        internal static class Opened
         {
-            private static void Postfix(DuelPopupWindow __instance)
+            internal static void Postfix(DuelPopupWindow __instance)
             {
                 try
                 {

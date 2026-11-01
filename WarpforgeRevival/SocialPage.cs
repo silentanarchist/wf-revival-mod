@@ -13,10 +13,10 @@ namespace WarpforgeRevival
     /// </summary>
     internal static class SocialPage
     {
-        [HarmonyPatch(typeof(GameWindowWithTabs), nameof(GameWindowWithTabs.GetStartingTab))]
-        private static class StartOnFriends
+        // hooked through SharedHooks (one hook per game method): HarmonyPatch(typeof(GameWindowWithTabs), nameof(GameWindowWithTabs.GetStartingTab))
+        internal static class StartOnFriends
         {
-            private static void Postfix(GameWindowWithTabs __instance, ref WindowTabBase __result)
+            internal static void Postfix(GameWindowWithTabs __instance, ref WindowTabBase __result)
             {
                 try
                 {

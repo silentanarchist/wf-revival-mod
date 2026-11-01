@@ -170,6 +170,11 @@ not in this repository because they are not ours to publish.
 | `refs-android/ml` | `MelonLoader/net6` from the loader package (the pieces `1 - patch.bat` downloads into `archive\pc-patcher\tool`, joined, then unzipped) |
 | `refs-android/il2cpp` | `MelonLoader/Il2CppAssemblies` from the loader package (the interface files) |
 
+The loader package's interface files were generated with .NET 9 and name `System.Private.CoreLib` 9.0, which a
+.NET 6 build refuses (CS1705). Build against copies whose reference to `System.Private.CoreLib` is set to 6.0.0.0
+(only the version numbers in the copies' assembly-reference table; they are compile-time references, never shipped),
+so the mod keeps naming CoreLib 6.0 as every earlier release did.
+
 ```
 dotnet build WarpforgeRevival.Android/WarpforgeRevival.Android.csproj -c Release
 ```

@@ -35,11 +35,11 @@ namespace WarpforgeRevival
 
 
         // The menu bar is built (a new one after every match): the button goes in with it.
-        [HarmonyLib.HarmonyPatch(typeof(NavigationPanelController), nameof(NavigationPanelController.Awake))]
-        private static class BarBuilt { private static void Postfix(NavigationPanelController __instance) => Ensure(__instance); }
+        // hooked through SharedHooks (one hook per game method): HarmonyPatch(typeof(NavigationPanelController), nameof(NavigationPanelController.Awake))
+        internal static class BarBuilt { internal static void Postfix(NavigationPanelController __instance) => Ensure(__instance); }
 
-        [HarmonyLib.HarmonyPatch(typeof(NavigationPanelController), nameof(NavigationPanelController.OnInitializationComplete))]
-        private static class BarReady { private static void Postfix(NavigationPanelController __instance) => Ensure(__instance); }
+        // hooked through SharedHooks (one hook per game method): HarmonyPatch(typeof(NavigationPanelController), nameof(NavigationPanelController.OnInitializationComplete))
+        internal static class BarReady { internal static void Postfix(NavigationPanelController __instance) => Ensure(__instance); }
 
         /// <summary>The server has said (or changed) whether this player is a tester; called on the main thread.</summary>
         internal static void RoleChanged()

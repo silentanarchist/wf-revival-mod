@@ -158,10 +158,10 @@ namespace WarpforgeRevival
         // on older versions still see the longer messages; the server takes chat messages up to 8000 characters.
         internal const int MaxMessage = 600;
 
-        [HarmonyPatch(typeof(ChatPanel), nameof(ChatPanel.Start))]
-        private static class LongerBox
+        // hooked through SharedHooks (one hook per game method): HarmonyPatch(typeof(ChatPanel), nameof(ChatPanel.Start))
+        internal static class LongerBox
         {
-            private static void Postfix(ChatPanel __instance)
+            internal static void Postfix(ChatPanel __instance)
             {
                 try
                 {
@@ -290,10 +290,10 @@ namespace WarpforgeRevival
         /// PC. The game only listens for the Enter key, which a phone keyboard never sends; the
         /// input box reports the check mark as "submitted", so that now sends the message too.
         /// </summary>
-        [HarmonyPatch(typeof(ChatPanel), nameof(ChatPanel.Start))]
-        private static class KeyboardSends
+        // hooked through SharedHooks (one hook per game method): HarmonyPatch(typeof(ChatPanel), nameof(ChatPanel.Start))
+        internal static class KeyboardSends
         {
-            private static void Postfix(ChatPanel __instance)
+            internal static void Postfix(ChatPanel __instance)
             {
                 try
                 {

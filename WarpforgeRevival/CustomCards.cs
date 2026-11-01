@@ -69,10 +69,10 @@ namespace WarpforgeRevival
 
         /// <summary>The deck editor's card list: custom cards only in the Testers window's own deck editor (TestersEditor,
         /// 0.14.64), and there only when editing a deck of a mode that allows them. The game's shared editor never offers them.</summary>
-        [HarmonyPatch(typeof(DeckEditingWindow), nameof(DeckEditingWindow.GetCardCollection))]
-        private static class EditorList
+        // hooked through SharedHooks (one hook per game method): HarmonyPatch(typeof(DeckEditingWindow), nameof(DeckEditingWindow.GetCardCollection))
+        internal static class EditorList
         {
-            private static void Postfix(DeckEditingWindow __instance, ref Il2CppSystem.Collections.Generic.List<RawCardScript> __result)
+            internal static void Postfix(DeckEditingWindow __instance, ref Il2CppSystem.Collections.Generic.List<RawCardScript> __result)
             {
                 try
                 {

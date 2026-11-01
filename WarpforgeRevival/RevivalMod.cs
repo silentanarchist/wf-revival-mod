@@ -26,9 +26,9 @@ namespace WarpforgeRevival
     public class RevivalMod : MelonMod
     {
         #if ANDROID_PORT
-        public const string Version = "0.15.11-a";
+        public const string Version = "0.15.12-a";
 #else
-        public const string Version = "0.15.11-w";
+        public const string Version = "0.15.12-w";
 #endif
 
         /// <summary>
@@ -219,6 +219,9 @@ namespace WarpforgeRevival
 
         public override void OnApplicationQuit() { if (!inactive) BugReport.End(); }
 
+        /// <summary>A scene was loaded: follow its window manager's window and tab changes (MenuEvents).</summary>
+        public override void OnSceneWasInitialized(int buildIndex, string sceneName) { if (!inactive) MenuEvents.SceneReady(); }
+
 #if ANDROID_PORT
         private static bool graphicsNoted;
 #endif
@@ -245,6 +248,7 @@ namespace WarpforgeRevival
                 catch (Exception e) { Log.Msg("[graphics] could not read the drawing system: " + e.Message); }
             }
 #endif
+            MenuEvents.Tick();          // first: features act on this frame's window/tab changes
             FrameWatch.Tick();
             MatchCounts.Tick();
             CustomBundle.Tick();

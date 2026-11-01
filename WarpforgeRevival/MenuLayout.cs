@@ -203,10 +203,10 @@ namespace WarpforgeRevival
 
         private static readonly List<Watched> watched = new List<Watched>();
 
-        [HarmonyPatch(typeof(GameWindowWithTabs), nameof(GameWindowWithTabs.SetupTabs))]
-        private static class Built
+        // hooked through SharedHooks (one hook per game method): HarmonyPatch(typeof(GameWindowWithTabs), nameof(GameWindowWithTabs.SetupTabs))
+        internal static class Built
         {
-            private static void Postfix(GameWindowWithTabs __instance)
+            internal static void Postfix(GameWindowWithTabs __instance)
             {
                 try
                 {

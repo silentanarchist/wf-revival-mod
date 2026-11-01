@@ -60,13 +60,13 @@ namespace WarpforgeRevival
             }
         }
 
-        [HarmonyPatch(typeof(NavigationPanelController), nameof(NavigationPanelController.Awake))]
-        private static class OnAwake { private static void Postfix(NavigationPanelController __instance) { GameState.SawNav(__instance); Apply(__instance); } }
+        // hooked through SharedHooks (one hook per game method): HarmonyPatch(typeof(NavigationPanelController), nameof(NavigationPanelController.Awake))
+        internal static class OnAwake { internal static void Postfix(NavigationPanelController __instance) { GameState.SawNav(__instance); Apply(__instance); } }
 
-        [HarmonyPatch(typeof(NavigationPanelController), nameof(NavigationPanelController.OnInitializationComplete))]
-        private static class OnReady
+        // hooked through SharedHooks (one hook per game method): HarmonyPatch(typeof(NavigationPanelController), nameof(NavigationPanelController.OnInitializationComplete))
+        internal static class OnReady
         {
-            private static void Postfix(NavigationPanelController __instance)
+            internal static void Postfix(NavigationPanelController __instance)
             {
                 Apply(__instance);
             }

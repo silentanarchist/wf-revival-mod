@@ -49,11 +49,11 @@ namespace WarpforgeRevival
             return null;
         }
 
-        [HarmonyPatch(typeof(GameWindowWithTabs), nameof(GameWindowWithTabs.SetupTabs))]
-        private static class AddTabs
+        // hooked through SharedHooks (one hook per game method): HarmonyPatch(typeof(GameWindowWithTabs), nameof(GameWindowWithTabs.SetupTabs))
+        internal static class AddTabs
         {
             /// <summary>Before the game wires up the ribbon: the tabs and their buttons.</summary>
-            private static void Prefix(GameWindowWithTabs __instance)
+            internal static void Prefix(GameWindowWithTabs __instance)
             {
                 try
                 {

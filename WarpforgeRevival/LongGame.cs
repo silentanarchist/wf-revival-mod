@@ -305,10 +305,10 @@ namespace WarpforgeRevival
         }
 
         // The deck list screen: the player first picks a mode, then sees that mode's decks.
-        [HarmonyPatch(typeof(SelectDecksTab), nameof(SelectDecksTab.ToggleSelectDeck))]
-        private static class DeckListMode
+        // hooked through SharedHooks (one hook per game method): HarmonyPatch(typeof(SelectDecksTab), nameof(SelectDecksTab.ToggleSelectDeck))
+        internal static class DeckListMode
         {
-            private static void Prefix(IOwnDeckPlayEvent deckPlayEvent)
+            internal static void Prefix(IOwnDeckPlayEvent deckPlayEvent)
             {
                 try { filterLines = 12; SetPage((object)deckPlayEvent == null ? null : deckPlayEvent.TryCast<IPlayEvent>(), "deck list"); }
                 catch (Exception ex) { RevivalMod.Log.Warning("[long] deck list: " + ex); }

@@ -66,10 +66,10 @@ namespace WarpforgeRevival
             }
         }
 
-        [HarmonyPatch(typeof(DeckEditingWindow), nameof(DeckEditingWindow.GetCardCollection))]
-        private static class Editor
+        // hooked through SharedHooks (one hook per game method): HarmonyPatch(typeof(DeckEditingWindow), nameof(DeckEditingWindow.GetCardCollection))
+        internal static class Editor
         {
-            private static void Postfix(Il2CppSystem.Collections.Generic.List<RawCardScript> __result)
+            internal static void Postfix(Il2CppSystem.Collections.Generic.List<RawCardScript> __result)
             {
                 try
                 {

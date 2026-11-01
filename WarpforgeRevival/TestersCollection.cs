@@ -176,10 +176,10 @@ namespace WarpforgeRevival
         /// stays out of sight (its open code is shared by all collection tabs and too short to hook on Android).
         /// The mode tiles are built inside the tab, so the game shows and hides them with it.
         /// </summary>
-        [HarmonyPatch(typeof(GameWindowWithTabs), nameof(GameWindowWithTabs.SetupTabs))]
-        private static class PlayTab
+        // hooked through SharedHooks (one hook per game method): HarmonyPatch(typeof(GameWindowWithTabs), nameof(GameWindowWithTabs.SetupTabs))
+        internal static class PlayTab
         {
-            private static void Postfix(GameWindowWithTabs __instance)
+            internal static void Postfix(GameWindowWithTabs __instance)
             {
                 try
                 {
@@ -213,18 +213,7 @@ namespace WarpforgeRevival
         private static void DropWhenClosed(float now)
         {
             if (!Ui.Alive(copy)) { copy = null; closedAt = 0; return; }
-            bool open;
-            try
-            {
-                open = copy.IsOpen() || copy.CurrentState != WindowState.Closed;
-                // still in the window manager's list (for example under the deck editor): keep it
-                var list = WindowsManager.Instance?.openWindows;
-                if (!open && list != null)
-                    for (int i = 0; i < list.Count; i++)
-                        if ((object)list[i] != null && list[i].Pointer == copy.Pointer) { open = true; break; }
-            }
-            catch { open = true; }
-            if (open) { closedAt = 0; return; }
+            if (StillOpen()) { closedAt = 0; return; }
             if (closedAt == 0) { closedAt = now; return; }
             if (now - closedAt < 1.5f) return;
             UnityEngine.Object.Destroy(copy.gameObject);
@@ -234,10 +223,49 @@ namespace WarpforgeRevival
             TestersEditor.Drop();
         }
 
+        /// <summary>The Testers window is open, on screen or underneath another window (the deck editor): it is
+        /// open itself, or still in the window manager's list of open windows.</summary>
+        private static bool StillOpen()
+        {
+            if (!Ui.Alive(copy)) return false;
+            try
+            {
+                if (copy.IsOpen() || copy.CurrentState != WindowState.Closed) return true;
+                var list = WindowsManager.Instance?.openWindows;
+                if (list != null)
+                    for (int i = 0; i < list.Count; i++)
+                        if ((object)list[i] != null && list[i].Pointer == copy.Pointer) return true;
+                return false;
+            }
+            catch { return true; }
+        }
+
+        private static IntPtr watchedCollection;
+
+        /// <summary>Logs when the bar's Collection button is switched on while the Testers window is open: that
+        /// opens the normal Collection over it (the deck editor bug of 2026-11-01). Added once per button.</summary>
+        private static void WatchCollection(Toggle toggle)
+        {
+            if ((object)toggle == null || toggle.Pointer == watchedCollection) return;
+            watchedCollection = toggle.Pointer;
+            toggle.onValueChanged.AddListener(DelegateSupport.ConvertDelegate<UnityEngine.Events.UnityAction<bool>>(new Action<bool>(on =>
+            {
+                if (!on || !Ui.Alive(copy)) return;
+                string current = "?";
+                try { var w = WindowsManager.Instance?.CurrentWindow; current = (object)w == null ? "none" : w.name; } catch { }
+                RevivalMod.Log.Warning($"[testers] menu bar: Collection switched on while the Testers window is open (window on screen: {current}); the normal Collection opens over it");
+            })));
+        }
+
         /// <summary>
         /// The menu bar lights the button of the window type on screen, so with the Testers window up it lit
         /// Collection. While the Testers window is the one on screen, Collection is switched off (without
         /// opening anything) and the Testers button lit instead.
+        /// The bar's buttons are a group that must keep one button lit; while the Testers window is open it may
+        /// have none. That stays so while the Testers window is underneath the deck editor: the editor hides the
+        /// bar and shows it again as it closes, and a group that must keep one lit then switches a button on as
+        /// if tapped - Collection, which opened the normal Collection over the Testers window (fixed 0.15.12).
+        /// The game's own setting comes back once the Testers window is closed.
         /// </summary>
         private static void Highlight()
         {
@@ -254,6 +282,7 @@ namespace WarpforgeRevival
                 var col = (object)nav == null ? null : nav.GetToggle(NavigationPanelToggleType.Collection);
                 var toggle = (object)col == null ? null : col.toggle;
                 var group = (object)toggle == null ? null : toggle.group;
+                if (Ui.Alive(copy)) WatchCollection(toggle);
                 if (showing && (object)toggle != null)
                 {
                     // the bar's buttons are a group that keeps one button on; let it have none while Testers is up
@@ -269,7 +298,7 @@ namespace WarpforgeRevival
                         if (!unlitLogged) { unlitLogged = true; RevivalMod.Log.Msg($"[testers] menu bar: Collection unlit ({(toggle.isOn ? "still on" : "off")})"); }
                     }
                 }
-                else if (!showing && switchOffChanged && (object)group != null && group.Pointer == groupPtr)
+                else if (!showing && switchOffChanged && (object)group != null && group.Pointer == groupPtr && !StillOpen())
                 {
                     group.allowSwitchOff = false;    // back to the game's own setting
                     switchOffChanged = false;
@@ -396,10 +425,10 @@ namespace WarpforgeRevival
         }
 
         // The window opens on Play.
-        [HarmonyPatch(typeof(GameWindowWithTabs), nameof(GameWindowWithTabs.GetStartingTab))]
-        private static class StartingTab
+        // hooked through SharedHooks (one hook per game method): HarmonyPatch(typeof(GameWindowWithTabs), nameof(GameWindowWithTabs.GetStartingTab))
+        internal static class StartingTab
         {
-            private static void Postfix(GameWindowWithTabs __instance, ref WindowTabBase __result)
+            internal static void Postfix(GameWindowWithTabs __instance, ref WindowTabBase __result)
             {
                 try
                 {
@@ -488,10 +517,10 @@ namespace WarpforgeRevival
             catch (Exception e) { RevivalMod.Log.Warning("[testers] deck list switch: " + e.Message); }
         }
 
-        [HarmonyPatch(typeof(SelectDecksTab), nameof(SelectDecksTab.ToggleSelectDeck))]
-        private static class ListShown
+        // hooked through SharedHooks (one hook per game method): HarmonyPatch(typeof(SelectDecksTab), nameof(SelectDecksTab.ToggleSelectDeck))
+        internal static class ListShown
         {
-            private static void Postfix(SelectDecksTab __instance, IOwnDeckPlayEvent deckPlayEvent)
+            internal static void Postfix(SelectDecksTab __instance, IOwnDeckPlayEvent deckPlayEvent)
             {
                 try { if (IsCopy(__instance.Window)) ShowSwitch(__instance, deckPlayEvent); }
                 catch (Exception e) { RevivalMod.Log.Warning("[testers] deck list switch button: " + e.Message); }
