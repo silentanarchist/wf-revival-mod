@@ -19,12 +19,24 @@ namespace WarpforgeRevival
     /// whose fingerprints differ; comparing the two lists for that turn shows which card the games disagree on.
     /// Only online matches (a match room), never replays. Nothing hidden from a player is sent: both games already
     /// know every card's number and place (the deck order is not part of the list). Logged as [state].
+    ///
+    /// Server Deal matches only (0.15.14, server-deal referee): a step fingerprint after every action as well. When
+    /// an action has resolved and nothing is left in the game's queues (BattleManager.FinishResolvingAction - the
+    /// point where the player gets control back), the game notes a short fingerprint: the board's hash plus, for each
+    /// side (named by its warlord's in-match number, the same on both games), Energy (total/unused), hand size and
+    /// deck size. The steps of a turn travel with that turn's board in the same request (no extra requests); the
+    /// server compares both games' steps and names the first action after which they differ.
     /// </summary>
     internal static class MatchState
     {
         private static string room;
         private static int turn;
         private static int sentLogged;
+        private static readonly List<(int n, string h, string c)> steps = new List<(int, string, string)>();
+        private static int stepN;
+        private static bool? dealMatch;            // decided once per match (ServerDeal.Active reads room properties)
+        private static int stepFailLogged;
+        private static BattleCardManager cards;    // kept for the match (searching the scene after every action costs)
 
         private static string Zone(CardStateOptions s)
         {
@@ -83,7 +95,7 @@ namespace WarpforgeRevival
         [HarmonyPatch(typeof(BattleManager), nameof(BattleManager.StartBattleManager))]
         private static class NewBattle
         {
-            private static void Prefix() { room = null; turn = 0; }
+            private static void Prefix() { room = null; turn = 0; steps.Clear(); stepN = 0; dealMatch = null; cards = null; }
         }
 
         [HarmonyPatch(typeof(BattleManager), nameof(BattleManager.ResolveEndTurn))]
@@ -105,12 +117,27 @@ namespace WarpforgeRevival
                     if (board.Length > 12000) board = board.Substring(0, 12000);
                     string hash = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(board))).ToLowerInvariant().Substring(0, 16);
                     int t = turn;
+                    var sent = steps.ToArray();
+                    steps.Clear();
                     string json = Net.Json(w =>
                     {
                         w.WriteString("room", name);
                         w.WriteNumber("turn", t);
                         w.WriteString("hash", hash);
                         w.WriteString("board", board);
+                        if (sent.Length > 0)
+                        {
+                            w.WriteStartArray("steps");
+                            foreach (var st in sent)
+                            {
+                                w.WriteStartObject();
+                                w.WriteNumber("n", st.n);
+                                w.WriteString("h", st.h);
+                                w.WriteString("c", st.c);
+                                w.WriteEndObject();
+                            }
+                            w.WriteEndArray();
+                        }
                     });
                     if (sentLogged < 3) { sentLogged++; RevivalMod.Log.Msg($"[state] end of turn {t}: board fingerprint {hash} ({board.Length} characters) sent to the server"); }
                     System.Threading.Tasks.Task.Run(async () =>
@@ -120,6 +147,54 @@ namespace WarpforgeRevival
                     });
                 }
                 catch (Exception e) { RevivalMod.Log.Warning("[state] " + e.GetType().Name + ": " + e.Message); }
+            }
+        }
+
+        /// <summary>An action has finished resolving: in a Server Deal match with the queues empty, note a step.</summary>
+        [HarmonyPatch(typeof(BattleManager), nameof(BattleManager.FinishResolvingAction))]
+        private static class Step
+        {
+            private static void Postfix(BattleManager __instance)
+            {
+                try
+                {
+                    if ((object)__instance == null) return;
+                    if (dealMatch == null)
+                    {
+                        if (Replays.IsReplay(__instance) || !PhotonNetwork.inRoom) return;
+                        dealMatch = ServerDeal.Active;
+                    }
+                    if (dealMatch != true) return;
+                    if (__instance.ActionsLeftInQueue() != 0 || __instance.AutoActionsLeftInQueue() != 0) return;
+                    if (!Ui.Alive(cards)) cards = UnityEngine.Object.FindObjectOfType<BattleCardManager>();
+                    var manager = cards;
+                    if ((object)manager == null) return;
+                    string board = Board(manager);
+                    var sides = new SortedDictionary<int, string>();
+                    foreach (bool mine in new[] { true, false })
+                    {
+                        var hero = __instance.GetHero(mine);
+                        if ((object)hero == null) continue;
+                        int hand = 0, deck = 0;
+                        var all = manager.GetAllCardsInGame();
+                        for (int i = 0; all != null && i < all.Count; i++)
+                        {
+                            var c = all[i];
+                            if ((object)c == null || c.isPlayer != mine) continue;
+                            string z = Zone(c.cardState);
+                            if (z == "H") hand++;
+                            else if (z == "D") deck++;
+                        }
+                        sides[hero.uniqueInGameID] = hero.uniqueInGameID + ":" + __instance.GetTotalMana(mine) + "/" + __instance.GetUnusedMana(mine) + ":" + hand + ":" + deck;
+                    }
+                    string c2 = string.Join(",", sides.Values);
+                    string h = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(board + "|" + c2))).ToLowerInvariant().Substring(0, 12);
+                    if (steps.Count < 300) steps.Add((++stepN, h, c2.Length > 120 ? c2.Substring(0, 120) : c2));
+                }
+                catch (Exception e)
+                {
+                    if (stepFailLogged++ < 3) RevivalMod.Log.Warning("[state] step fingerprint: " + e.GetType().Name + ": " + e.Message);
+                }
             }
         }
     }
