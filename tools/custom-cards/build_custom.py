@@ -322,6 +322,9 @@ def main():
         c = json.load(open(f, encoding='utf-8'))
         if c.get('status') != 'approved':
             print('skipped (not approved):', f); continue
+        if c.get('updates'):
+            # an update to an official card (compiled with that card's own id): a patch, not a new card - not built here yet
+            print('skipped (update to official card %s, a patch):' % c['updates'], f); continue
         if not isinstance(c.get('native'), dict):
             raise SystemExit('no compiled layout in ' + f)
         cards.append({'id': c['id'], 'name': c.get('name', ''), 'text': c.get('text', ''), 'lore': c.get('lore', ''),
