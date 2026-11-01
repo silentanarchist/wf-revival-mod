@@ -26,9 +26,9 @@ namespace WarpforgeRevival
     public class RevivalMod : MelonMod
     {
         #if ANDROID_PORT
-        public const string Version = "0.15.12-a";
+        public const string Version = "0.15.13-a";
 #else
-        public const string Version = "0.15.12-w";
+        public const string Version = "0.15.13-w";
 #endif
 
         /// <summary>
@@ -220,7 +220,7 @@ namespace WarpforgeRevival
         public override void OnApplicationQuit() { if (!inactive) BugReport.End(); }
 
         /// <summary>A scene was loaded: follow its window manager's window and tab changes (MenuEvents).</summary>
-        public override void OnSceneWasInitialized(int buildIndex, string sceneName) { if (!inactive) MenuEvents.SceneReady(); }
+        public override void OnSceneWasInitialized(int buildIndex, string sceneName) { if (!inactive) { MenuEvents.SceneReady(); MemoryWatch.SceneReady(sceneName); } }
 
 #if ANDROID_PORT
         private static bool graphicsNoted;
@@ -249,6 +249,7 @@ namespace WarpforgeRevival
             }
 #endif
             MenuEvents.Tick();          // first: features act on this frame's window/tab changes
+            MemoryWatch.Tick();
             FrameWatch.Tick();
             MatchCounts.Tick();
             CustomBundle.Tick();

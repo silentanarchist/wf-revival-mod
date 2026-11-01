@@ -19,6 +19,7 @@ Changes made on the server take effect for everyone at once; the ones listed her
 - **Updating from an old mod:** games with mod 0.14.0 to 0.14.42 can update themselves again (they refused every build since the rename to WF Revival, so they could not sign in).
 
 ### Changed
+- **Memory in the log:** the log notes the game's memory use before and after every match and every 5 minutes, and when the phone says memory is low; on Android 11 and newer it also notes how the game's last runs ended (closed for low memory, crash, closed by you, ...), and an automatic crash report includes it. This is to find out whether long sessions run out of memory on phones.
 - **Fewer hooks into the game:** game methods that several of the mod's features changed now carry one hook each instead of two or three (9 fewer), a little less start-up time, mostly on phones.
 
 ## 0.15.0 - 2026-10-24

@@ -509,6 +509,17 @@ namespace WarpforgeRevival
             ctx["mod"] = ctx.TryGetValue("mod", out var m) ? m : RevivalMod.Version;
             if (frozenFor.Length > 0) ctx["frozenSeconds"] = frozenFor;
             ctx["closedAt"] = meta[2];
+            // Android 11+: how Android itself recorded the end of that run (low memory, native crash, ...)
+            try
+            {
+                var exit = MemoryWatch.ExitNear(DateTime.Parse(meta[2]).ToUniversalTime());
+                if (exit != null)
+                {
+                    ctx["androidExit"] = exit.ToString();
+                    log += "\n---- how Android recorded the end of this run ----\n" + exit + "\n";
+                }
+            }
+            catch (Exception e) { RevivalMod.Log.Warning("[bugs] Android's record of the run's end: " + e.Message); }
             byte[] dump = null;
 #if !ANDROID_PORT
             try
