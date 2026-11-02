@@ -180,6 +180,7 @@
   "admin.people.online": "{count} online now",
   "admin.people.onlyFounder": "Only the founding owner can give or take owner",
   "admin.people.onlyOwner": "Only an owner can give or take admin",
+  "admin.people.onlyOwnerTester": "Only an owner can give or take the tester role (testers apply on Become an in-game tester)",
   "admin.people.ownerOff": "owner off",
   "admin.people.ownerOn": "owner on",
   "admin.people.playing": "({count} in a match)",
