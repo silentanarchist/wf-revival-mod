@@ -24,15 +24,20 @@ namespace WarpforgeRevival
     /// an action has resolved and nothing is left in the game's queues (BattleManager.FinishResolvingAction - the
     /// point where the player gets control back), the game notes a short fingerprint: the board's hash plus, for each
     /// side (named by its warlord's in-match number, the same on both games), Energy (total/unused), hand size and
-    /// deck size. The steps of a turn travel with that turn's board in the same request (no extra requests); the
-    /// server compares both games' steps and names the first action after which they differ.
+    /// deck size, keyed by how many moves each side has made (0.15.15; the last fingerprint per key is kept). The steps
+    /// of a turn travel with that turn's board in the same request (no extra requests); the server compares both
+    /// games' steps key by key and names the first move after which they differ.
     /// </summary>
     internal static class MatchState
     {
         private static string room;
         private static int turn;
         private static int sentLogged;
-        private static readonly List<(int n, string h, string c)> steps = new List<(int, string, string)>();
+        // the turn's steps, keyed by the moves made so far by each side ("<warlord no>:<moves>,<warlord no>:<moves>"):
+        // the same moment on both games. A game can settle more than once after one move (its own animations,
+        // draws, choices); the last fingerprint for the key is the one kept (0.15.14 numbered every settling,
+        // and the two games settle a different number of times per turn, 2026-11-01).
+        private static readonly List<(string k, string h, string c)> steps = new List<(string, string, string)>();
         private static int stepN;
         private static bool? dealMatch;            // decided once per match (ServerDeal.Active reads room properties)
         private static int stepFailLogged;
@@ -131,7 +136,7 @@ namespace WarpforgeRevival
                             foreach (var st in sent)
                             {
                                 w.WriteStartObject();
-                                w.WriteNumber("n", st.n);
+                                w.WriteString("k", st.k);
                                 w.WriteString("h", st.h);
                                 w.WriteString("c", st.c);
                                 w.WriteEndObject();
@@ -171,10 +176,13 @@ namespace WarpforgeRevival
                     if ((object)manager == null) return;
                     string board = Board(manager);
                     var sides = new SortedDictionary<int, string>();
+                    var moved = new SortedDictionary<int, int>();
                     foreach (bool mine in new[] { true, false })
                     {
                         var hero = __instance.GetHero(mine);
                         if ((object)hero == null) continue;
+                        var log = mine ? __instance.playerActionsLog : __instance.enemyActionsLog;
+                        moved[hero.uniqueInGameID] = log == null ? 0 : log.Count;
                         int hand = 0, deck = 0;
                         var all = manager.GetAllCardsInGame();
                         for (int i = 0; all != null && i < all.Count; i++)
@@ -189,7 +197,13 @@ namespace WarpforgeRevival
                     }
                     string c2 = string.Join(",", sides.Values);
                     string h = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(board + "|" + c2))).ToLowerInvariant().Substring(0, 12);
-                    if (steps.Count < 300) steps.Add((++stepN, h, c2.Length > 120 ? c2.Substring(0, 120) : c2));
+                    var key = new StringBuilder();
+                    foreach (var kv in moved) { if (key.Length > 0) key.Append(','); key.Append(kv.Key).Append(':').Append(kv.Value); }
+                    string k = key.ToString();
+                    var entry = (k, h, c2.Length > 120 ? c2.Substring(0, 120) : c2);
+                    stepN++;
+                    if (steps.Count > 0 && steps[steps.Count - 1].k == k) steps[steps.Count - 1] = entry;   // settled again after the same move
+                    else if (steps.Count < 300) steps.Add(entry);
                 }
                 catch (Exception e)
                 {
