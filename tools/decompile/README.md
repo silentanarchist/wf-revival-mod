@@ -87,3 +87,18 @@ files into a maps folder and apply them the same way. Only decompiler-made names
 `assemble.py` copies `tree-README.md` into `game-code/README.md`; it explains how to read the
 files: field offsets, `obj.field` from offsets, `// interface call`, coroutine state machines, the compiler's
 null checks, what `str_...` identifiers and `*(x + 0x38)` leftovers mean.
+
+## 6. (Optional) the website's code browser
+
+The site can show the readable tree to accounts with the Developer switch (server: Revival/Code*, page /#code).
+It needs the cross-references, which `readable.py` writes when `READABLE_XREF` names a file:
+
+```
+READABLE_XREF=xref.tsv python3 readable.py stringliteral.json libil2cpp.so raw/ /tmp/discard/
+python3 build_code_index.py game-code/ xref.tsv code-data/ Battle Cards Decks
+```
+
+(the readable output of that run can be thrown away; the cross-references do not depend on the AI-chosen names).
+`build_code_index.py` copies the served folders and writes `index.json` (files, types, methods with line ranges,
+fields, the search's name list, the cross-references). Copy `code-data/` to the server's `data/code/` (never under
+`content/files`); the server reads it again when `index.json` changes. Serve more folders by adding them to the list.

@@ -286,6 +286,7 @@ class Func:
         self.m = method
         self.raw = raw
         self.types = {}      # variable / dotted path -> C# type
+        self.xref = set()    # ("c", method id) calls, ("r"|"w", "Type.field") field reads and writes
         self.notes = []
 
     # ---- helpers on the type environment
@@ -493,6 +494,7 @@ class Func:
             while k and k not in seen:
                 seen.add(k)
                 for mm in MODEL[k]["methods"]:
+                    if mm.get("slot") == slot: self.xref.add(("c", method_id(k, mm)))
                     if mm.get("slot") == slot: return "%s.%s(" % (path, mm["name"].replace("get_", "").replace("set_", "") if mm["name"][:4] in ("get_", "set_") else mm["name"])
                 base = MODEL[k]["base"].split(",")[0].strip() if MODEL[k]["base"] else ""
                 k = resolve_type(base, MODEL[k]["ns"])[0] if base else None
@@ -559,7 +561,7 @@ class Func:
                     rtype = "object"
                     if k:
                         for mm in MODEL[k]["methods"]:
-                            if mm.get("slot") == slot: name = mm["name"]; rtype = mm["ret"]; break
+                            if mm.get("slot") == slot: name = mm["name"]; rtype = mm["ret"]; self.xref.add(("c", method_id(k, mm))); break
                     call = render_call(obj, name, a, rtype)
                     self.calltypes = getattr(self, "calltypes", {})
                     self.calltypes[call] = rtype
@@ -599,7 +601,9 @@ class Func:
         name = m.group(1)
         for i in [x.start() for x in re.finditer("_", name)][::-1]:
             c = CALLEES.get((name[:i], name[i + 1:]))
-            if c: return short_type(c[0][0]) + "." + name[i + 1:]
+            if c:
+                self.xref.add(("c", method_id(c[0][0], c[0][1])))
+                return short_type(c[0][0]) + "." + name[i + 1:]
         return "method:" + name
 
     def string_literal(self, m):
@@ -607,7 +611,7 @@ class Func:
         if not vals: return m.group(0).lstrip("&_")
         if len(vals) == 1: return c_string(next(iter(vals)))
         if m.group(1) == "str_": return '""'
-        return c_string(max(vals, key=len)) + "/*~*/"
+        return c_string(max(sorted(vals), key=len)) + "/*~*/"
 
     def icall(self, m):
         s = so_string(int(m.group(1), 16))
@@ -619,6 +623,14 @@ class Func:
     ARRAY2 = re.compile(r"\*\(((?:this|\w+)(?:\.[\w<>]+)*) \+ (?:\(int\))?(\w+) \* (?:8|4|2|1) \+ 0x20\)")
     ARRAY3 = re.compile(r"\*\(((?:this|\w+)(?:\.[\w<>]+)*) \+ (\w+) \* (?:8|4|2|1)\)")
     STATIC = re.compile(r"\*\(\*\(typeof\(([^()]*)\) \+ 0xb8\) \+ (0x[0-9a-f]+|\d+)\)|\*\*\(typeof\(([^()]*)\) \+ 0xb8\)()")
+
+    def note_field(self, bt, off, name, how):
+        """Cross-reference: a read or write of the field `name` (maybe "field.sub" inside a struct) of a bt object."""
+        fs = fields_of(bt)
+        top = off if off in fs else max((o for o in fs if o < off), default=None)
+        if top is None: return
+        owner = field_owner(bt, top)
+        if owner: self.xref.add((how, owner + "." + name.split(".")[0]))
 
     def rewrite_fields(self, t):
         def statics(m):
@@ -638,6 +650,7 @@ class Func:
             sf = static_fields_of(tyname)
             if off in sf:
                 self.types[tyname + "." + sf[off][0]] = sf[off][1]
+                if full: self.xref.add(("w" if is_store(m) else "r", full + "." + sf[off][0]))
                 return tyname + "." + sf[off][0]
             return m.group(0)
         t = self.STATIC.sub(st, t)
@@ -649,6 +662,8 @@ class Func:
                 sf = static_fields_of(bt[7:])
                 if off in sf:
                     self.types[bt[7:] + "." + sf[off][0]] = sf[off][1]
+                    k = resolve_type(bt[7:])[0]
+                    if k: self.xref.add(("w" if is_store(m) else "r", k + "." + sf[off][0]))
                     return bt[7:] + "." + sf[off][0]
                 return m.group(0)
             if bt.endswith("[]"):
@@ -662,6 +677,7 @@ class Func:
             r = field_at(bt, off)
             if not r: return m.group(0)
             self.types[base + "." + r[0]] = r[1]
+            self.note_field(bt, off, r[0], "w" if is_store(m) else "r")
             return base + "." + r[0]
         t = self.FIELD.sub(fld, t)
         def deref(m):
@@ -684,6 +700,7 @@ class Func:
                 return "&" + bt[7:] + "." + sf[off][0] if off in sf else m.group(0)
             r = field_at(bt, off)
             if not r: return m.group(0)
+            self.note_field(bt, off, r[0], "r")
             return "&" + base + "." + r[0]
         t = self.FIELD_ADDR.sub(fa, t)
         return t
@@ -714,6 +731,7 @@ class Func:
                 continue
             if args and re.fullmatch(r"\s*(0|0x0|method(?:_\d+)?|method:\S+|_?Method_\S+)\s*", args[-1]): args = args[:-1]
             full, meth = pick_overload(cands, args)
+            self.xref.add(("c", method_id(full, meth)))
             cls_short = short_type(full)
             out_var = None
             if is_value_type(meth["ret"]) and args and args[0].strip().startswith("&") and len(args) > len(meth["params"]) + (0 if meth["static"] else 1):
@@ -991,6 +1009,33 @@ def elem_size(t):
     if is_value_type(t): return 8   # unknown; most small structs
     return 8
 
+def method_id(full, meth):
+    """How the cross-reference index names a method: its code address, or Type::Name when it has no code
+    (interface and abstract methods, generic definitions, the engine's own)."""
+    return "%x" % meth["addr"] if meth.get("addr", -1) > 0 else "%s::%s" % (full, meth["name"])
+
+def field_owner(t, off):
+    """The model key of the type that declares the instance field at this offset of t (base classes walked)."""
+    k, _ = resolve_type(t)
+    seen = set()
+    while k and k not in seen:
+        seen.add(k)
+        if k in KNOWN_LAYOUT:
+            if off in KNOWN_LAYOUT[k]: return k
+        else:
+            for f in MODEL[k]["fields"]:
+                if not f["static"] and not f["const"] and f["offset"] == off: return k
+        base = MODEL[k]["base"].split(",")[0].strip() if MODEL[k]["base"] else ""
+        if not base or base in ("ValueType", "Enum"): return None
+        if base.startswith("MulticastDelegate") or base == "Delegate": k = "System.Delegate"; continue
+        k = resolve_type(base, MODEL[k]["ns"])[0]
+    return None
+
+def is_store(m):
+    """True when the matched expression is the left side of a plain assignment."""
+    after = m.string[m.end():m.end() + 4]
+    return after[:3] == " = " and after[3:4] != "="
+
 def gparams_of(full):
     return generic_base(full)[1]
 
@@ -1131,6 +1176,7 @@ def tidy(t):
     return t
 
 if __name__ == "__main__":
+    XREF = open(os.environ["READABLE_XREF"], "w", encoding="utf-8") if os.environ.get("READABLE_XREF") else None
     load_strings(sys.argv[1])
     load_script(os.path.join(os.path.dirname(sys.argv[1]), "script.json"))
     load_so(sys.argv[2])
@@ -1149,10 +1195,15 @@ if __name__ == "__main__":
         if addr not in addr_index: continue
         full, m = addr_index[addr]
         raw = open(os.path.join(raw_dir, f), encoding="utf-8", errors="replace").read()
+        fn = Func(full, m, raw)
         try:
-            res = Func(full, m, raw).run()
+            res = fn.run()
         except Exception as e:
             res = Func(full, m, raw).emit_header() + "    /* readability pass failed: %s */\n" % e + raw
+        if XREF is not None:
+            for kind, target in sorted(fn.xref):
+                XREF.write("%s\t%s\t%s\n" % (addr, kind, target))
         open(os.path.join(out_dir, addr + ".cs"), "w", encoding="utf-8").write(res)
         n += 1
     print("rewrote", n)
+    if XREF is not None: XREF.close()
