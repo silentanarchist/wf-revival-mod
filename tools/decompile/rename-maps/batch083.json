@@ -1,0 +1,304 @@
+{
+ "3035280": {
+  "summary": "Removes one copy of a card from the deck list UI, destroying its item when the count hits zero, then refreshes counts and slot visibility.",
+  "renames": {
+   "lVar3": "closure",
+   "uVar2": "unusedFlag",
+   "uVar5": "hasDefensiveItem",
+   "method_00": "unused1",
+   "auVar8_x1": "unused2"
+  }
+ },
+ "303f554": {
+  "summary": "Updates the card counter text with the deck size using a format string.",
+  "renames": {
+   "uVar1": "hasCounter"
+  }
+ },
+ "303f42c": {
+  "summary": "Shows or hides the defensive card and hero card placeholder slots depending on whether the deck has them.",
+  "renames": {
+   "uVar2": "heroPresent",
+   "uVar3": "hasSlotItem"
+  }
+ },
+ "3040478": {
+  "summary": "Removes the close and background-close button click listeners when the deck selection popup is destroyed.",
+  "renames": {
+   "iVar1": "runtimeCallCount",
+   "lVar8": "itemsArray",
+   "plVar4": "matchingCalls",
+   "uVar2": "matchCount",
+   "uVar6": "isMatch"
+  }
+ },
+ "3040540": {
+  "summary": "Opens the deck selection popup, validates its context, wires close buttons, filters player decks and registers a selection callback.",
+  "renames": {
+   "lVar6_4": "cachedState",
+   "plVar5": "staticFields",
+   "uVar1_2": "unused1"
+  }
+ },
+ "3040950": {
+  "summary": "Opens the popup and selects the context deck in the collection display, deselecting the previous one.",
+  "renames": {
+   "lVar1": "selectMethod",
+   "puVar6": "selectedDeckSlot",
+   "uVar4": "hasItemObject"
+  }
+ },
+ "30409b8": {
+  "summary": "Opens a deck info window for the chosen deck with a select button bound to a closure.",
+  "renames": {
+   "lVar1": "closure",
+   "lVar2": "selectLabel",
+   "plVar4": "deckRef"
+  }
+ },
+ "3040c18": {
+  "summary": "Constructor setting popup defaults and default open/close delegates.",
+  "renames": {
+   "iVar1": "classInitFlag",
+   "puVar3": "staticFields"
+  }
+ },
+ "3041a34": {
+  "summary": "Static constructor creating the singleton lambda holder instance.",
+  "renames": {
+   "uVar1": "newInstance"
+  }
+ },
+ "3041b54": {
+  "summary": "Lambda returning the nullable difficulty level of a deck prebuilt deck.",
+  "renames": {
+   "lStack_18": "nullableDifficulty"
+  }
+ },
+ "3040cd4": {
+  "summary": "Builds the sorted list of bot practice decks and registers toggle, button and search bar listeners.",
+  "renames": {
+   "lVar2": "addMethod",
+   "puVar6": "slotPtr",
+   "uVar1": "callCount"
+  }
+ },
+ "30415f0": {
+  "summary": "Shows the player own decks in the collection display, or when state is false re-fires the own decks toggle events.",
+  "renames": {
+   "lVar11": "argClass",
+   "abStack_64": "boolBuffer",
+   "bVar1": "toggleValue"
+  }
+ },
+ "3041490": {
+  "summary": "Shows prebuilt bot decks in the collection display, or when state is false re-fires the prebuilt toggle events.",
+  "renames": {
+   "lVar9": "argClass",
+   "abStack_64": "boolBuffer",
+   "bVar1": "toggleValue"
+  }
+ },
+ "304177c": {
+  "summary": "Filters decks by the search text if non-empty, otherwise returns them unchanged (decompiled LINQ Where/Zip internals).",
+  "renames": {
+   "apcStack_70": "whereMethodSlot",
+   "apcStack_d0": "zipMethodSlotShared",
+   "auStack_80": "savedExit",
+   "auStack_c0": "savedExit2",
+   "auVar17_x1": "predicateFunc",
+   "auVar18_x1": "secondSource",
+   "auVar2": "firstSourceCopy",
+   "auVar2_x1": "genericClassCopy",
+   "bVar1": "typeDepth",
+   "lStack_88": "savedGenericClass",
+   "lStack_90": "savedStack90",
+   "lStack_a8": "savedClass2",
+   "lStack_b0": "savedClass3",
+   "lVar10": "whereMethod",
+   "lVar11": "zipMethod",
+   "lVar12": "whereMethodShared",
+   "lVar13": "sourceClass",
+   "lVar13_2": "zipSharedMethodCopy",
+   "lVar15": "genericInst",
+   "lVar6_2": "zipResult",
+   "lVar7": "typeInfo",
+   "pcStack_a0": "zipMethodPtr",
+   "pcVar16": "ctorFnPtr",
+   "plVar14": "sourceSeq",
+   "ppcVar3": "stackSlots",
+   "puVar8": "argName",
+   "unaff_x22": "iteratorObj",
+   "unaff_x23": "typeInfo2"
+  }
+ },
+ "3041858": {
+  "summary": "Predicate checking whether a deck custom game mode event matches the context prebuilt deck event.",
+  "renames": {
+   "lVar3_2": "prebuiltDeck"
+  }
+ },
+ "30418a8": {
+  "summary": "Predicate checking whether a deck custom game mode event matches the context prebuilt deck event.",
+  "renames": {
+   "lVar3_2": "prebuiltDeck"
+  }
+ },
+ "30418f8": {
+  "summary": "Predicate accepting decks whose game mode event matches the context and that have no banned cards.",
+  "renames": {
+   "lVar4_2": "prebuiltDeck"
+  }
+ },
+ "3041970": {
+  "summary": "Predicate matching a deck by search text against its army name, hero name or deck name.",
+  "renames": {
+   "plVar1_2": "armyName",
+   "extraout_var": "indexResult"
+  }
+ },
+ "3041be8": {
+  "summary": "Static constructor creating the singleton lambda holder instance.",
+  "renames": {
+   "uVar1": "newInstance"
+  }
+ },
+ "3034748": {
+  "summary": "Sets the troop and stratagem count texts from the number of matching cards in the deck.",
+  "renames": {
+   "uVar1": "formatString"
+  }
+ },
+ "3041c90": {
+  "summary": "Registers close, import and input field listeners, disables the import button and clears input and error message.",
+  "renames": {
+   "lRam0000000006b720f0": "emptyStringHolder"
+  }
+ },
+ "3041e78": {
+  "summary": "Removes close, import and input field listeners when the import popup is disabled.",
+  "renames": {
+   "iVar1": "runtimeCallCount",
+   "lVar8": "itemsArray",
+   "plVar4": "matchingCalls",
+   "uVar2": "matchCount",
+   "uVar6": "isMatch"
+  }
+ },
+ "3042008": {
+  "summary": "Hides the error message, enables the import button when input is non-empty and updates its selection state.",
+  "renames": {
+   "uVar5": "selectionState"
+  }
+ },
+ "304206c": {
+  "summary": "Parses the pasted deck string and opens the deck info window, or shows an error if invalid.",
+  "renames": {
+   "bVar1": "isInvalid",
+   "lVar2_2": "inputText",
+   "lVar4_3": "errorString"
+  }
+ },
+ "3042258": {
+  "summary": "Validates a deck and opens an import deck info window with an import button if valid.",
+  "renames": {
+   "lVar2": "closure",
+   "lVar4_2": "deckArg",
+   "plVar5": "argsPtr",
+   "uStack_44": "validationError",
+   "in_x6": "unused1"
+  }
+ },
+ "30421ec": {
+  "summary": "Shows the error text and marks the import button state as non-interactable.",
+  "renames": {
+   "uVar5": "selectionState"
+  }
+ },
+ "3042478": {
+  "summary": "Constructor setting popup defaults and default open/close delegates.",
+  "renames": {
+   "iVar1": "classInitFlag",
+   "puVar3": "staticFields"
+  }
+ },
+ "30450a4": {
+  "summary": "Sets up the select decks tab: hooks buttons, sets import interactivity and chooses between game mode tab or deck collection tab (heavily mangled decompile).",
+  "renames": {
+   "auVar16_x1": "unused1",
+   "auVar17": "unwindResult",
+   "auVar17_part8": "unwindKind",
+   "lVar5_7": "caughtException",
+   "piVar13": "interfaceOffsetPtr",
+   "plVar1": "stackPtrA",
+   "plVar12": "sourceEnumerable",
+   "puVar2": "stackPtrB",
+   "uVar11": "currentItem",
+   "uVar9": "loopFlag",
+   "unaff_x19": "unused2",
+   "unaff_x19_2": "unused3",
+   "unaff_x20": "unused4",
+   "unaff_x20_2": "disposable",
+   "unaff_x21_2": "unused5",
+   "unaff_x21_3": "unused6",
+   "unaff_x22": "unused7",
+   "unaff_x23": "unused8",
+   "unaff_x24": "unused9",
+   "unaff_x26": "unused10",
+   "unaff_x27": "unused11",
+   "unaff_x28": "unused12",
+   "unaff_x29": "unused13",
+   "unaff_x30": "unused14",
+   "method_02": "unused15",
+   "register0x00000008": "stackPointer"
+  }
+ },
+ "3045490": {
+  "summary": "Focuses the select decks tab: opens the game mode tab with live ops events when several exist, otherwise the deck collection tab (mangled decompile).",
+  "renames": {
+   "auVar16": "unwindResult",
+   "auVar16_part8": "unwindKind",
+   "auVar17_x1": "unused1",
+   "auVar18_x1": "selectedEvent",
+   "lVar6_3": "objectClass",
+   "method_00": "unused2",
+   "pcVar15": "savedFnPtr",
+   "piVar13": "interfaceOffsetPtr",
+   "plVar8_6": "disposable",
+   "puVar2": "stackPtr",
+   "uVar11": "currentItem",
+   "uVar7": "loopFlag",
+   "unaff_x20": "loopIndex",
+   "unaff_x21": "arrayData",
+   "unaff_x22": "unused3",
+   "unaff_x24": "unused4",
+   "unaff_x26": "unused5",
+   "unaff_x29": "unused6",
+   "unaff_x30": "unused7",
+   "register0x00000008": "stackPointer"
+  }
+ },
+ "30326f4": {
+  "summary": "Handles back button in the select decks tab, returning to game mode tab or choosing which tab to open (mangled decompile).",
+  "renames": {
+   "auVar16": "unwindResult",
+   "auVar16_part8": "unwindKind",
+   "auVar17_x1": "selectedEvent",
+   "lVar10": "windowClass",
+   "lVar10_6": "objectClass",
+   "method_00": "unused1",
+   "pcVar15": "savedFnPtr",
+   "piVar12": "interfaceOffsetPtr",
+   "puVar2": "stackPtr",
+   "uVar4": "loopFlag",
+   "unaff_x20": "loopIndex",
+   "unaff_x21": "arrayData",
+   "unaff_x22": "unused2",
+   "unaff_x24": "unused3",
+   "unaff_x26": "unused4",
+   "unaff_x29": "unused5",
+   "unaff_x30": "unused6",
+   "register0x00000008": "stackPointer"
+  }
+ }
+}

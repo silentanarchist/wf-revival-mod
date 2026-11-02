@@ -1,0 +1,241 @@
+{
+ "32905b8": {
+  "summary": "Triggers the slay effect on the target card, then runs the common end-of-action handling (hero death check, minion reordering, turn UI refresh).",
+  "renames": {
+   "uVar13": "actionTypeCopy",
+   "auVar19": "duringBattleFlagValue",
+   "auVar18": "obscuredFlag",
+   "uStack_c8": "enemyHealthPartB",
+   "uStack_c0": "enemyHealthPartC",
+   "uVar4_2": "enemyHealthRef",
+   "uStack_80": "typeObjA",
+   "uStack_78": "typeObjB",
+   "uStack_70": "typeObjC",
+   "auStack_58": "nowTime",
+   "abStack_44": "isPlayerDead",
+   "uVar13_2": "shouldLoseOnDisconnect",
+   "uVar13_4": "isPlayerTurn",
+   "uVar13_5": "heroCardUi",
+   "uVar13_6": "autoActionsResult",
+   "uVar13_7": "scriptedStageAvailable",
+   "iVar5_2": "heroCardState",
+   "iVar5_4": "playerHealthRef",
+   "lVar16_5": "leaderboardEventClass",
+   "lVar16_8": "matchResultPtr",
+   "piVar15": "interfaceMapPtr",
+   "dVar17": "matchMinutes",
+   "extraout_x0": "unused1",
+   "extraout_x0_00": "unused2",
+   "param_4": "unused3",
+   "auVar19_part8": "flagInitedPart",
+   "uStack_e8": "playerHealthInitedCopy",
+   "uStack_e0": "playerHealthFakeCopy",
+   "uStack_f0_2": "playerHealthCopy",
+   "uStack_90": "scratch1",
+   "uStack_a8": "scratch2",
+   "uStack_d0_2": "enemyHealthCopy"
+  }
+ },
+ "329065c": {
+  "summary": "Triggers the teleport effect on the target card, then runs the common end-of-action handling (hero death check, minion reordering, turn UI refresh).",
+  "renames": {
+   "uVar13": "actionTypeCopy",
+   "auVar18": "duringBattleFlagValue",
+   "auVar19": "obscuredFlag",
+   "uStack_c8": "enemyHealthPartB",
+   "uStack_c0": "enemyHealthPartC",
+   "uVar4_2": "enemyHealthRef",
+   "uStack_80": "typeObjA",
+   "uStack_78": "typeObjB",
+   "uStack_70": "typeObjC",
+   "auStack_58": "nowTime",
+   "abStack_44": "isPlayerDead",
+   "uVar13_2": "shouldLoseOnDisconnect",
+   "uVar13_4": "isPlayerTurn",
+   "uVar13_5": "heroCardUi",
+   "uVar13_6": "autoActionsResult",
+   "uVar13_7": "scriptedStageAvailable",
+   "iVar5_2": "heroCardState",
+   "iVar5_4": "playerHealthRef",
+   "lVar16_5": "leaderboardEventClass",
+   "lVar16_8": "matchResultPtr",
+   "piVar15": "interfaceMapPtr",
+   "dVar17": "matchMinutes",
+   "extraout_x0": "unused1",
+   "extraout_x0_00": "unused2",
+   "param_4": "unused3",
+   "auVar18_part8": "flagInitedPart",
+   "uStack_e8": "playerHealthInitedCopy",
+   "uStack_e0": "playerHealthFakeCopy",
+   "uStack_f0_2": "playerHealthCopy",
+   "uStack_90": "scratch1",
+   "uStack_a8": "scratch2",
+   "uStack_d0_2": "enemyHealthCopy"
+  }
+ },
+ "3290700": {
+  "summary": "Triggers the spirit stone effect on the target card, then runs the common end-of-action handling (hero death check, minion reordering, turn UI refresh).",
+  "renames": {
+   "uVar13": "actionTypeCopy",
+   "auVar19": "duringBattleFlagValue",
+   "auVar18": "obscuredFlag",
+   "uStack_c8": "enemyHealthPartB",
+   "uStack_c0": "enemyHealthPartC",
+   "uVar4_2": "enemyHealthRef",
+   "uStack_80": "typeObjA",
+   "uStack_78": "typeObjB",
+   "uStack_70": "typeObjC",
+   "auStack_58": "nowTime",
+   "abStack_44": "isPlayerDead",
+   "uVar13_2": "shouldLoseOnDisconnect",
+   "uVar13_4": "isPlayerTurn",
+   "uVar13_5": "heroCardUi",
+   "uVar13_6": "autoActionsResult",
+   "uVar13_7": "scriptedStageAvailable",
+   "iVar5_2": "heroCardState",
+   "iVar5_4": "playerHealthRef",
+   "lVar16_5": "leaderboardEventClass",
+   "lVar16_8": "matchResultPtr",
+   "piVar15": "interfaceMapPtr",
+   "dVar17": "matchMinutes",
+   "extraout_x0": "unused1",
+   "extraout_x0_00": "unused2",
+   "param_4": "unused3",
+   "auVar19_part8": "flagInitedPart",
+   "uStack_e8": "playerHealthInitedCopy",
+   "uStack_e0": "playerHealthFakeCopy",
+   "uStack_f0_2": "playerHealthCopy",
+   "uStack_90": "scratch1",
+   "uStack_a8": "scratch2",
+   "uStack_d0_2": "enemyHealthCopy"
+  }
+ },
+ "32907a8": {
+  "summary": "Executes a swarm action: spawns the swarm effect object from the acting card toward its target, then runs common end-of-action handling.",
+  "renames": {
+   "lVar15": "closureObj",
+   "lVar15_2": "cardClosure",
+   "uVar22": "battleActionCopy",
+   "uVar12": "swarmObjExists",
+   "uVar12_2": "actionTypeCopy",
+   "uVar12_3": "shouldLoseOnDisconnect",
+   "uVar12_5": "heroCardUi",
+   "uVar12_6": "autoActionsResult",
+   "uVar12_7": "scriptedStageAvailable",
+   "auVar23": "duringBattleFlagValue",
+   "auVar24": "obscuredFlag",
+   "auVar23_part8": "flagInitedPart",
+   "uVar4_3": "enemyHealthPartC",
+   "uStack_d0_2": "enemyHealthPartA",
+   "uStack_c8": "enemyHealthPartB",
+   "uStack_c0": "enemyHealthPartCCopy",
+   "uStack_e8": "playerHealthInitedCopy",
+   "uStack_e0": "playerHealthFakeCopy",
+   "uStack_f0_2": "playerHealthCopy",
+   "uStack_90": "scratch1",
+   "uStack_a8": "scratch2",
+   "iVar5_2": "heroCardState",
+   "iVar5_4": "playerHealthRef",
+   "iVar5_5": "enemySkullCount",
+   "lVar18_5": "leaderboardEventClass",
+   "lVar18_8": "matchResultPtr",
+   "piVar17": "interfaceMapPtr",
+   "dVar21": "matchMinutes",
+   "param_5": "battleManagerRef",
+   "param_6": "battleActionPtr",
+   "param_8": "unused3",
+   "extraout_x0": "unused1",
+   "extraout_x0_00": "unused2"
+  }
+ },
+ "3291184": {
+  "summary": "Resolves a jammed unit: triggers jam reaction, broadcasts it, cancels its queued effects, then runs common end-of-action handling.",
+  "renames": {
+   "uVar13": "actionTypeCopy",
+   "auVar18": "obscuredFlag",
+   "auVar19": "duringBattleFlagValue",
+   "auVar19_part8": "flagInitedPart",
+   "uStack_e8": "playerHealthInitedCopy",
+   "uStack_e0": "playerHealthFakeCopy",
+   "uStack_f0_2": "playerHealthCopy",
+   "uStack_c8": "enemyHealthInitedCopy",
+   "uStack_c0": "enemyHealthFakeCopy",
+   "uStack_d0_2": "enemyHealthCopy",
+   "uStack_90": "scratch1",
+   "uStack_a8": "scratch2",
+   "auStack_58": "nowTime",
+   "abStack_44": "isPlayerDead",
+   "uVar13_2": "shouldLoseOnDisconnect",
+   "uVar13_5": "autoActionsResult",
+   "uVar13_6": "scriptedStageAvailable",
+   "uVar4_2": "enemyHealthRef",
+   "iVar5_2": "playerHealthRef",
+   "lVar12_5": "leaderboardEventClass",
+   "lVar12_8": "matchResultPtr",
+   "piVar16": "interfaceMapPtr",
+   "dVar17": "matchMinutes",
+   "extraout_x0": "unused1",
+   "extraout_x0_00": "unused2",
+   "param_4": "unused3"
+  }
+ },
+ "3295d78": {
+  "summary": "Cancels queued actions caused by a disappearing unit across all action queues, optionally ignoring destroy actions.",
+  "renames": {
+   "uStack_88": "queuedActingCard",
+   "uStack_14c": "queuedTargetHigh",
+   "uStack_150": "queuedTargetLow",
+   "uStack_158": "scratch1",
+   "uVar2": "condition",
+   "iStack_70": "queuedSubType"
+  }
+ },
+ "3295010": {
+  "summary": "Cancels queued animation actions belonging to a unit across all action queues.",
+  "renames": {
+   "uStack_88": "queuedActingCard",
+   "uStack_14c": "queuedTargetHigh",
+   "uStack_150": "queuedTargetLow",
+   "uStack_158": "scratch1",
+   "uVar1": "condition"
+  }
+ },
+ "3295df4": {
+  "summary": "Walks a queue backwards removing actions caused by a jammed unit that match the target card.",
+  "renames": {
+   "uStack_88": "queuedActingCard",
+   "uStack_14c": "queuedTargetHigh",
+   "uStack_150": "queuedTargetLow",
+   "uStack_158": "scratch1",
+   "uVar2": "condition",
+   "iStack_70": "queuedSubType"
+  }
+ },
+ "3296118": {
+  "summary": "Walks a queue backwards removing animation actions belonging to the given unit.",
+  "renames": {
+   "uStack_88": "queuedActingCard",
+   "uStack_14c": "queuedTargetHigh",
+   "uStack_150": "queuedTargetLow",
+   "uStack_158": "scratch1",
+   "uVar1": "condition"
+  }
+ },
+ "3296378": {
+  "summary": "Removes the action at an index from a queue, cancelling an attack or hiding an object first depending on its type.",
+  "renames": {
+   "uVar1": "hasObject",
+   "lStack_130": "queuedActingCard",
+   "iStack_34": "actionIndexCopy",
+   "aiStack_138": "queuedActionData",
+   "lStack_128": "queuedTargetObject"
+  }
+ },
+ "3291228": {
+  "summary": "Applies a mana buff: adds, refills, destroys, faith, spirit stone or quest points mana for the affected players.",
+  "renames": {
+   "lVar3": "closureObj",
+   "method_2": "amountArg"
+  }
+ }
+}

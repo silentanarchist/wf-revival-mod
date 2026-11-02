@@ -1,0 +1,637 @@
+{
+ "2f70f6c": {
+  "summary": "Each turn, walks hand effects backwards, logging and removing those expired by end of turn, turn start, or enchanting card leaving play.",
+  "renames": {
+   "auVar13_x1": "cardRemovedArg",
+   "iVar1": "skipDrawIndex",
+   "lStack_90": "savedThis",
+   "lStack_a0": "savedStrings",
+   "lVar5_10": "effectListAlias",
+   "pcStack_d8": "savedRemoveFn",
+   "puStack_b8": "savedPrefixText",
+   "puStack_c0": "savedGetItem",
+   "puStack_c8": "savedIdLabel",
+   "puStack_d0": "savedStatusLabel",
+   "uStack_68": "cardStateValue",
+   "uStack_70": "scratchMinusOne",
+   "uStack_88": "savedEndOfTurn",
+   "uStack_98": "savedIndex",
+   "uStack_b0": "savedMinusOne",
+   "uStack_f0": "scratchMinusOne2",
+   "uVar11_2": "effectIndex",
+   "uVar11_3": "isSameCard",
+   "uVar8": "idText"
+  }
+ },
+ "2f7199c": {
+  "summary": "Walks the active hand effects backwards and removes every extrinsic effect whose enchanting card is the card being removed.",
+  "renames": {
+   "auVar9": "playerHandRef",
+   "auVar9_x1": "cardRemovedRef",
+   "iVar1": "skipDrawIndex",
+   "lVar3_4": "effectListAlias",
+   "uStack_70": "scratchMinusOne",
+   "uVar7": "isSameCard"
+  }
+ },
+ "2f70ce8": {
+  "summary": "Removes the hand effect at an index, first stripping that effect from every card in hand (decompilation includes inlined array helper noise).",
+  "renames": {
+   "auVar27_x1": "searchValue",
+   "auVar28": "listObj",
+   "auVar28_part8": "rangeIndex",
+   "lVar12_4": "arrayItems",
+   "lVar23": "searchTarget",
+   "pcVar26": "savedMethod",
+   "plVar19_3": "element",
+   "puVar1": "frameB",
+   "puVar18": "messageText",
+   "puVar2": "frameC",
+   "puVar3": "frameA",
+   "puVar4": "frameD",
+   "puVar5": "frameE",
+   "uVar10": "startOffset",
+   "uVar20": "lastIndex",
+   "uVar24": "savedSlot",
+   "unaff_x21": "unused1",
+   "unaff_x22": "unused2",
+   "unaff_x23": "unused3",
+   "unaff_x24": "unused4"
+  }
+ },
+ "2f71cd0": {
+  "summary": "Returns whether the player may draw a turn-start card, checking sentinels and skip-draw hand effects, optionally consuming one use.",
+  "renames": {
+   "iVar1": "skipDrawIndex"
+  }
+ },
+ "2f71e10": {
+  "summary": "Returns true if any unit in play has the sentinel trait, logging a warning when one is found.",
+  "renames": {
+   "auVar8_x1": "unused1",
+   "bVar7": "hasSentinel",
+   "uVar1": "foundMessage"
+  }
+ },
+ "2f71f5c": {
+  "summary": "Plays sentinel trigger animations on sentinel units, spawns the sentinel deck effect, and plays the activate-sentinel sound.",
+  "renames": {
+   "auVar21_2": "animOrCue",
+   "auVar21_x1": "battleAnimsArg",
+   "in_s1": "unused1",
+   "in_s2": "unused2",
+   "lStackY_98": "savedSoundManager",
+   "lStackY_a0": "savedAudioSource",
+   "lStack_78": "audioSourceSlot",
+   "lVar3_4": "soundManager",
+   "pcStackY_b0": "savedPlay2D",
+   "pcStackY_c0": "savedPlay2DCopy",
+   "puStackY_a8": "savedAudioCue",
+   "puVar10": "zeroVectorStatic",
+   "puVar9": "identityQuatStatic",
+   "puVar9_2": "identityQuatStatic2",
+   "uStackY_c8": "savedZero",
+   "uStackY_d0": "savedVector",
+   "uStackY_d8": "savedSource",
+   "uStackY_e0": "savedZeroVector",
+   "uStackY_e8": "scratchZero2",
+   "uStackY_f0": "scratchZero1",
+   "uVar16": "zeroVectorY",
+   "uVar18": "quatY",
+   "uVar19": "quatZ",
+   "uVar20": "quatW",
+   "uVar8": "hasAudioSource"
+  }
+ },
+ "2f7237c": {
+  "summary": "Returns the number of cards currently in the hand.",
+  "renames": {
+   "auVar1_x1": "unused1"
+  }
+ },
+ "2f723cc": {
+  "summary": "Starts the coroutine that displays the hand without the given card.",
+  "renames": {
+   "apcStack_20": "savedReturnAddr",
+   "auVar5": "selfRef",
+   "auVar5_x1": "coroutineRef",
+   "unaff_x19": "exceptionObj",
+   "unaff_x20": "savedThis",
+   "unaff_x21": "unused1",
+   "unaff_x30": "returnAddr"
+  }
+ },
+ "2f72494": {
+  "summary": "Starts the coroutine that moves cards in hand back to their positions after a card is released.",
+  "renames": {
+   "apcStack_20": "savedReturnAddr",
+   "auVar5": "selfRef",
+   "auVar5_x1": "coroutineRef",
+   "unaff_x19": "exceptionObj",
+   "unaff_x20": "savedThis",
+   "unaff_x21": "unused1",
+   "unaff_x30": "returnAddr"
+  }
+ },
+ "2f724bc": {
+  "summary": "Removes a card from the hand, resets its card view, and starts the coroutine repositioning remaining cards.",
+  "renames": {
+   "auVar5": "selfRef",
+   "auVar5_x1": "coroutineRef",
+   "unaff_x19": "exceptionObj",
+   "unaff_x20": "savedThis",
+   "unaff_x21": "unused1",
+   "unaff_x30": "returnAddr"
+  }
+ },
+ "2f72570": {
+  "summary": "Shows or hides the cards-in-hand count text, updating it with the localized label and hand size.",
+  "renames": {
+   "auVar8": "isTextNull"
+  }
+ },
+ "2f701f8": {
+  "summary": "Creates and returns the coroutine enumerator that moves hand cards to position.",
+  "renames": {
+   "lVar1": "enumerator"
+  }
+ },
+ "2f7291c": {
+  "summary": "Positions a card in the hand layout at the given index, stopping any hand-showing state first.",
+  "renames": {
+   "uStack_50": "rotationExtra",
+   "uStack_54": "rotationOut",
+   "uStack_58": "positionOut",
+   "uStack_5c": "cardRef"
+  }
+ },
+ "2f723f8": {
+  "summary": "Creates and returns the coroutine enumerator that displays the hand minus one excluded card.",
+  "renames": {
+   "lVar1": "enumerator"
+  }
+ },
+ "2f729f4": {
+  "summary": "Shifts other hand cards left or right to open a gap for the card being dragged near the closest hand slot.",
+  "renames": {
+   "iVar1": "slotShift",
+   "iVar3": "draggedIndex",
+   "uVar5": "isOtherCard",
+   "uVar7": "shiftBase"
+  }
+ },
+ "2f72d70": {
+  "summary": "Returns the card at a hand index, logging an error and returning null if out of range (with inlined list helper noise).",
+  "renames": {
+   "auVar8": "listRef",
+   "auVar8_part8": "itemIndex",
+   "auVar9": "objRef",
+   "auVar9_x1": "typeRef",
+   "puVar3": "slotPtr",
+   "uStack_28": "indexSlot",
+   "uStack_28_part4": "indexCopy",
+   "uVar5": "setIndex",
+   "uVar6": "indexUnsigned"
+  }
+ },
+ "2f72f7c": {
+  "summary": "Returns whether any card in hand was created from the given raw card data.",
+  "renames": {
+   "uVar3": "isMatch"
+  }
+ },
+ "2f7305c": {
+  "summary": "Deactivates the game objects of every card in the hand and in the current mulligan.",
+  "renames": {
+   "auVar1": "scratchWide",
+   "auVar1_x1": "scratchLow",
+   "auVar4_x1": "unused1"
+  }
+ },
+ "2f73148": {
+  "summary": "Parents a card's transform to the hand anchor layout transform.",
+  "renames": {}
+ },
+ "2f7713c": {
+  "summary": "Coroutine step: waits the delay, then sets the player's quest points display and invokes the finish callback.",
+  "renames": {
+   "auVar9": "isManaManagerNull",
+   "cVar2": "flagByte",
+   "piVar5": "questTargetPtr",
+   "uStack_60": "fakeCopy",
+   "uStack_68": "initedCopy",
+   "uStack_70": "questValueCopy",
+   "uVar3": "isOuterNull"
+  }
+ },
+ "2f77348": {
+  "summary": "Enumerator Reset is not supported and throws NotSupportedException.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "2f74b88": {
+  "summary": "Sets the hero card, parents it to the minion manager, positions and scales it in play, and shows its visuals.",
+  "renames": {
+   "bVar1": "hasAmbush",
+   "extraout_s0": "unused1",
+   "in_s1": "unused2",
+   "in_s2": "unused3",
+   "lVar8": "heroUnit",
+   "plVar7": "heroCardPtr",
+   "uVar10": "unused4",
+   "uVar11": "unused5"
+  }
+ },
+ "2f74ca4": {
+  "summary": "Stores the saved mana value and updates the mana UI with unused, total and saved mana.",
+  "renames": {
+   "uStack_34": "savedFake",
+   "uStack_3c": "savedInited",
+   "uStack_44": "savedValue"
+  }
+ },
+ "2f74d90": {
+  "summary": "Returns the saved mana value.",
+  "renames": {
+   "iVar1": "result",
+   "uStack_50": "fakeCopy",
+   "uStack_58": "initedCopy",
+   "uStack_60": "valueCopy"
+  }
+ },
+ "2f74c7c": {
+  "summary": "Gets the hero full position from the card owner's minion manager (selected by card side).",
+  "renames": {
+   "lVar1": "managerOffset"
+  }
+ },
+ "2f74e14": {
+  "summary": "Updates whether the hero can act or attack this turn based on turn, state, attacks used, stun and traits.",
+  "renames": {
+   "auVar3": "canActValue"
+  }
+ },
+ "2f74e30": {
+  "summary": "Resets all mana pools to their initial values, updates the mana UI, and sets up spirit stone, faith and quest point displays.",
+  "renames": {
+   "cVar1": "flagByte",
+   "iVar3_2": "manaArg",
+   "iVar3_3": "questTotal",
+   "piVar5": "questTargetPtr",
+   "uStack_64": "totalManaValue",
+   "uStack_5c": "totalManaInited",
+   "uStack_54": "totalManaFake",
+   "uStack_78": "unusedManaValue",
+   "uStack_70": "unusedManaInited",
+   "uStack_68": "unusedManaFake",
+   "uStack_8c": "plasmaManaValue",
+   "uStack_84": "plasmaManaInited",
+   "uStack_7c": "plasmaManaFake",
+   "uStack_a0": "psychicManaValue",
+   "uStack_98": "psychicManaInited",
+   "uStack_90": "psychicManaFake",
+   "uStack_b4": "spiritManaValue",
+   "uStack_ac": "spiritManaInited",
+   "uStack_a4": "spiritManaFake"
+  }
+ },
+ "2f750ec": {
+  "summary": "Adds one mana crystal to the total (and optionally until-end-of-turn and unused mana), then refreshes the mana UI.",
+  "renames": {
+   "auVar4": "manaResult",
+   "iVar2": "manaValue",
+   "uStack_90": "totalReadValue",
+   "uStack_88": "totalReadInited",
+   "uStack_80": "totalReadFake",
+   "uStack_74": "totalNewValue",
+   "uStack_6c": "totalNewInited",
+   "uStack_64": "totalNewFake",
+   "uStack_b0": "eotReadValue",
+   "uStack_a8": "eotReadInited",
+   "uStack_a0": "eotReadFake",
+   "uStack_d0": "unusedReadValue",
+   "uStack_c8": "unusedReadInited",
+   "uStack_c0": "unusedReadFake",
+   "uStack_110": "unusedRead2Value",
+   "uStack_108": "unusedRead2Inited",
+   "uStack_100": "unusedRead2Fake",
+   "uStack_130": "totalRead2Value",
+   "uStack_128": "totalRead2Inited",
+   "uStack_120": "totalRead2Fake"
+  }
+ },
+ "2f75354": {
+  "summary": "Returns whether the selected mana pool (psychic, plasma, spirit stone or normal) has at least the required mana.",
+  "renames": {
+   "iVar1": "currentMana",
+   "puVar2": "manaCopyPtr",
+   "uStack_80": "psychicValue",
+   "uStack_78": "psychicInited",
+   "uStack_70": "psychicFake",
+   "uStack_a0": "plasmaValue",
+   "uStack_98": "plasmaInited",
+   "uStack_90": "plasmaFake",
+   "uStack_c0": "spiritValue",
+   "uStack_b8": "spiritInited",
+   "uStack_b0": "spiritFake",
+   "uStack_e0": "unusedValue",
+   "uStack_d8": "unusedInited",
+   "uStack_d0": "unusedFake"
+  }
+ },
+ "2f754b4": {
+  "summary": "Returns the current unused mana value.",
+  "renames": {
+   "iVar1": "result",
+   "uStack_50": "fakeCopy",
+   "uStack_58": "initedCopy",
+   "uStack_60": "valueCopy"
+  }
+ },
+ "2f75538": {
+  "summary": "Returns the current total mana value.",
+  "renames": {
+   "iVar1": "result",
+   "uStack_50": "fakeCopy",
+   "uStack_58": "initedCopy",
+   "uStack_60": "valueCopy"
+  }
+ },
+ "2f755bc": {
+  "summary": "Returns the current spirit stone mana value.",
+  "renames": {
+   "iVar1": "result",
+   "uStack_50": "fakeCopy",
+   "uStack_58": "initedCopy",
+   "uStack_60": "valueCopy"
+  }
+ },
+ "2f75640": {
+  "summary": "Returns the current faith mana value.",
+  "renames": {
+   "iVar1": "result",
+   "uStack_50": "fakeCopy",
+   "uStack_58": "initedCopy",
+   "uStack_60": "valueCopy"
+  }
+ },
+ "2f756c4": {
+  "summary": "Returns the current secrets played count value.",
+  "renames": {
+   "iVar1": "result",
+   "uStack_50": "fakeCopy",
+   "uStack_58": "initedCopy",
+   "uStack_60": "valueCopy"
+  }
+ },
+ "2f75748": {
+  "summary": "Returns the current quest points value.",
+  "renames": {
+   "iVar1": "result",
+   "uStack_50": "fakeCopy",
+   "uStack_58": "initedCopy",
+   "uStack_60": "valueCopy"
+  }
+ },
+ "2f757cc": {
+  "summary": "Spends mana of the given type (spirit stone or normal), logging an error if overspent, firing spent-all-mana triggers and updating the UI.",
+  "renames": {
+   "auVar7": "unusedAfter",
+   "iVar2": "availableValue",
+   "uStack_48_part4": "manaUsedCopy",
+   "uStack_70_3": "fakeFlagTemp",
+   "uStack_70_part4": "hiBits70",
+   "uStack_80_part4": "hiBits80",
+   "uStack_90_part4": "hiBits90",
+   "uStack_a0_part4": "hiBitsA0",
+   "uStack_b0_part4": "hiBitsB0",
+   "uStack_e0_part4": "hiBitsE0",
+   "uStack_100": "tmp100",
+   "uStack_108": "tmp108",
+   "uStack_110": "tmp110",
+   "uStack_88": "tmp88",
+   "uStack_90": "tmp90",
+   "uStack_98": "tmp98",
+   "uStack_a0": "tmpA0",
+   "uStack_a8": "tmpA8",
+   "uStack_b0": "tmpB0",
+   "uStack_b4": "tmpB4",
+   "uStack_b8": "tmpB8",
+   "uStack_bc": "tmpBC",
+   "uStack_c0": "tmpC0",
+   "uStack_c4": "tmpC4",
+   "uStack_cc": "tmpCC",
+   "uStack_d0": "tmpD0",
+   "uStack_d4": "tmpD4",
+   "uStack_d8": "tmpD8",
+   "uStack_e0": "tmpE0",
+   "uStack_e8": "tmpE8",
+   "uStack_f0": "tmpF0"
+  }
+ },
+ "2f75d20": {
+  "summary": "Returns the transform of the psychic mana text, caching it if needed.",
+  "renames": {
+   "uVar2": "isTransformNull"
+  }
+ },
+ "2f75d44": {
+  "summary": "Returns the transform of the spirit stone mana holder (inlined Unity marshalling noise).",
+  "renames": {
+   "lVar5_3": "targetObj"
+  }
+ },
+ "2f75d80": {
+  "summary": "Returns the transform of the plasma mana text, caching it if needed.",
+  "renames": {
+   "uVar2": "isTransformNull"
+  }
+ },
+ "2f757ec": {
+  "summary": "Spends normal mana, logging an error if overspent, firing spent-all-mana triggers and updating the mana UI.",
+  "renames": {
+   "auVar7": "unusedAfter",
+   "iStack_44": "manaUsedCopy",
+   "iVar2": "availableValue",
+   "uStack_a0": "unusedReadValue",
+   "uStack_98": "unusedReadInited",
+   "uStack_90": "unusedReadFake",
+   "uStack_c0": "unusedRead2Value",
+   "uStack_b8": "unusedRead2Inited",
+   "uStack_b0": "unusedRead2Fake",
+   "uStack_f0": "unusedFinalValue",
+   "uStack_e8": "unusedFinalInited",
+   "uStack_e0": "unusedFinalFake",
+   "uStack_110": "totalReadValue",
+   "uStack_108": "totalReadInited",
+   "uStack_100": "totalReadFake",
+   "uStack_d4": "newUnusedValue",
+   "uStack_cc": "newUnusedInited",
+   "uStack_c4": "newUnusedFake"
+  }
+ },
+ "2f75b24": {
+  "summary": "Spends spirit stone mana, logging an error if overspent, and updates the spirit stone mana UI.",
+  "renames": {
+   "iStack_34": "manaUsedCopy",
+   "iVar2": "availableValue",
+   "uStack_90": "spiritReadValue",
+   "uStack_88": "spiritReadInited",
+   "uStack_80": "spiritReadFake",
+   "uStack_b0": "spiritRead2Value",
+   "uStack_a8": "spiritRead2Inited",
+   "uStack_a0": "spiritRead2Fake",
+   "uStack_e0": "spiritFinalValue",
+   "uStack_d8": "spiritFinalInited",
+   "uStack_d0": "spiritFinalFake",
+   "uStack_c4": "newSpiritValue",
+   "uStack_bc": "newSpiritInited",
+   "uStack_b4": "newSpiritFake"
+  }
+ },
+ "2f75dd4": {
+  "summary": "At the player's turn start, refills mana, adds maintenance cost and pays it from unused mana, firing triggers and updating the UI.",
+  "renames": {
+   "iStack_44": "manaUsedCopy",
+   "iVar2": "availableValue",
+   "uStack_a0": "unusedReadValue",
+   "uStack_98": "unusedReadInited",
+   "uStack_90": "unusedReadFake",
+   "uStack_c0": "unusedRead2Value",
+   "uStack_b8": "unusedRead2Inited",
+   "uStack_b0": "unusedRead2Fake",
+   "uStack_f0": "unusedFinalValue",
+   "uStack_e8": "unusedFinalInited",
+   "uStack_e0": "unusedFinalFake",
+   "uStack_110": "totalReadValue",
+   "uStack_108": "totalReadInited",
+   "uStack_100": "totalReadFake",
+   "uStack_d4": "newUnusedValue",
+   "uStack_cc": "newUnusedInited",
+   "uStack_c4": "newUnusedFake",
+   "auVar8": "unusedAfter",
+   "iVar3_2": "totalValue"
+  }
+ },
+ "2f76048": {
+  "summary": "Adds spirit stone mana and updates the spirit stone UI.",
+  "renames": {
+   "iVar1": "spiritValue",
+   "uStack_70": "spiritReadValue",
+   "uStack_68": "spiritReadInited",
+   "uStack_60": "spiritReadFake",
+   "uStack_84": "spiritNewValue",
+   "uStack_7c": "spiritNewInited",
+   "uStack_74": "spiritNewFake",
+   "uStack_a0": "spiritFinalValue",
+   "uStack_98": "spiritFinalInited",
+   "uStack_90": "spiritFinalFake"
+  }
+ },
+ "2f76128": {
+  "summary": "Adds faith mana and updates the faith UI.",
+  "renames": {
+   "iVar1": "faithValue",
+   "uStack_70": "faithReadValue",
+   "uStack_68": "faithReadInited",
+   "uStack_60": "faithReadFake",
+   "uStack_84": "faithNewValue",
+   "uStack_7c": "faithNewInited",
+   "uStack_74": "faithNewFake",
+   "uStack_a0": "faithFinalValue",
+   "uStack_98": "faithFinalInited",
+   "uStack_90": "faithFinalFake"
+  }
+ },
+ "2f76208": {
+  "summary": "Increments the secrets played counter.",
+  "renames": {
+   "uStack_70": "secretsReadValue",
+   "uStack_68": "secretsReadInited",
+   "uStack_60": "secretsReadFake",
+   "uStack_4c": "newInited",
+   "uStack_44": "newFake"
+  }
+ },
+ "2f762a0": {
+  "summary": "Adds quest points, capped at the trigger threshold; on reaching it resolves the quest and starts a delayed UI update coroutine.",
+  "renames": {
+   "auVar7": "questAfter",
+   "cVar1": "flagByte",
+   "iVar2": "questValue",
+   "puVar5": "questTargetPtr",
+   "uVar4": "questArg",
+   "uStack_80": "questReadValue",
+   "uStack_78": "questReadInited",
+   "uStack_70": "questReadFake",
+   "uStack_94": "questNewValue",
+   "uStack_8c": "questNewInited",
+   "uStack_84": "questNewFake",
+   "uStack_b0": "questNewReadValue",
+   "uStack_a8": "questNewReadInited",
+   "uStack_a0": "questNewReadFake",
+   "uStack_d0": "questRead2Value",
+   "uStack_c8": "questRead2Inited",
+   "uStack_c0": "questRead2Fake",
+   "uStack_110": "questRead3Value",
+   "uStack_108": "questRead3Inited",
+   "uStack_100": "questRead3Fake"
+  }
+ },
+ "2f76518": {
+  "summary": "Creates and returns the coroutine enumerator that sets quest points after a delay.",
+  "renames": {
+   "lVar1": "enumerator"
+  }
+ },
+ "2f75f5c": {
+  "summary": "Returns the total maintenance cost of all units in play for this player.",
+  "renames": {
+   "auVar5_x1": "unused1",
+   "iVar4": "totalMaintenance"
+  }
+ },
+ "2f75e5c": {
+  "summary": "Refills unused mana to the total mana and updates the mana UI (unless the enemy has ambush minions).",
+  "renames": {
+   "auVar3_x1": "unused1",
+   "uStack_60": "totalReadValue",
+   "uStack_58": "totalReadInited",
+   "uStack_50": "totalReadFake"
+  }
+ },
+ "2f765d8": {
+  "summary": "Adds a custom amount of mana to unused mana and optionally updates the mana UI.",
+  "renames": {
+   "auVar4": "unusedAfter",
+   "iVar2": "manaValue",
+   "uStack_70": "unusedReadValue",
+   "uStack_68": "unusedReadInited",
+   "uStack_60": "unusedReadFake",
+   "uStack_84": "unusedNewValue",
+   "uStack_7c": "unusedNewInited",
+   "uStack_74": "unusedNewFake",
+   "uStack_a0": "totalReadValue",
+   "uStack_98": "totalReadInited",
+   "uStack_90": "totalReadFake"
+  }
+ },
+ "2f76738": {
+  "summary": "Refills one unused mana if below total, logging the values and updating the mana UI.",
+  "renames": {
+   "auVar6": "unusedAfter",
+   "iVar2": "unusedValue",
+   "iVar3": "totalValue",
+   "uStack_f0": "unusedReadValue",
+   "uStack_e8": "unusedReadInited",
+   "uStack_e0": "unusedReadFake",
+   "uStack_d4": "newUnusedValue",
+   "uStack_cc": "newUnusedInited",
+   "uStack_c4": "newUnusedFake",
+   "uStack_110": "totalReadValue",
+   "uStack_108": "totalReadInited",
+   "uStack_100": "totalReadFake"
+  }
+ }
+}

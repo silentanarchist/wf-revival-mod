@@ -1,0 +1,452 @@
+{
+ "32b70e0": {
+  "summary": "Updates the milestone count text to show \"x\" followed by the milestone index plus one.",
+  "renames": {
+   "iStack_24": "displayCount"
+  }
+ },
+ "32b6fac": {
+  "summary": "Handles reaching a milestone by updating the milestone count text to \"x\" plus milestone number plus one.",
+  "renames": {
+   "iStack_24": "displayCount"
+  }
+ },
+ "32b7524": {
+  "summary": "Plays the score-up animation: spawns a milestone icon copy, punches, rotates and moves it toward the hero, then fires the completion callback.",
+  "renames": {
+   "fVar10": "punchScaleY",
+   "in_s1": "targetY",
+   "lVar1": "closure",
+   "plVar8": "closureRef",
+   "puVar6": "vectorStatics"
+  }
+ },
+ "32b6f6c": {
+  "summary": "Returns true once when the life value falls to or below the threshold and marks the threshold as accomplished.",
+  "renames": {
+   "bVar1": "reached"
+  }
+ },
+ "32b8c8c": {
+  "summary": "Returns the anchor (or opponent anchor) transform if the position option matches the desired one, otherwise null.",
+  "renames": {
+   "lVar1": "anchorFieldOffset"
+  }
+ },
+ "32b7aa0": {
+  "summary": "Singleton getter that finds the BattleHud in the scene if not cached, logging an error if missing.",
+  "renames": {
+   "uVar1": "hasInstance",
+   "uVar2": "cachedInstance"
+  }
+ },
+ "32b7bac": {
+  "summary": "Sets up the BattleHud singleton, destroying duplicates, and registers the settings button click listener.",
+  "renames": {
+   "lVar2": "addMethod",
+   "puVar8": "slotPtr",
+   "uVar1": "callCount",
+   "uVar4": "isDuplicate",
+   "uVar5_3": "staticInstance"
+  }
+ },
+ "32b7d44": {
+  "summary": "Removes the settings and offensive button listeners and clears the singleton when this hud is destroyed.",
+  "renames": {
+   "uVar3": "isSingleton"
+  }
+ },
+ "32b7e9c": {
+  "summary": "Opens the settings window on Escape during normal battle if not already open, and records a window-open analytics event.",
+  "renames": {
+   "lVar10": "eventName",
+   "lVar11": "scratch1",
+   "lVar14_3": "playerDataManager",
+   "puVar9": "loggerMethod",
+   "uStack_58": "scratch2",
+   "uStack_70": "scratch3",
+   "uVar5": "errorMessage",
+   "uVar5_5": "playerDataManagerPtr"
+  }
+ },
+ "32b833c": {
+  "summary": "Gets the replay hud and battle manager and checks the replay object holder; seems to set replay UI visibility by match type.",
+  "renames": {
+   "iVar1": "currentMatchType",
+   "uVar2": "hasBattleManager",
+   "uVar5_2": "playerDataManagerPtr"
+  }
+ },
+ "32b8354": {
+  "summary": "Returns the world position of the player or enemy card draw transform.",
+  "renames": {
+   "uStack_28": "positionZ",
+   "uStack_30": "positionXY"
+  }
+ },
+ "32b8184": {
+  "summary": "Initializes player and enemy profile UI: name, title, avatar and avatar border.",
+  "renames": {
+   "uVar2": "unusedFlag",
+   "uVar6": "hasValue"
+  }
+ },
+ "32b85d4": {
+  "summary": "Shows the offensive card button unless the card is empty, and toggles the turn-cards holder if a third card was played.",
+  "renames": {
+   "uVar3": "hasOffensiveCard",
+   "uVar4": "activeState"
+  }
+ },
+ "32b8718": {
+  "summary": "Activates the first N offensive turn card objects and deactivates the rest, according to cards played.",
+  "renames": {
+   "lVar2": "unusedClass"
+  }
+ },
+ "32b87e8": {
+  "summary": "Returns the transform of the offensive card button, with unmarshalling boilerplate.",
+  "renames": {
+   "lVar5_3": "unused1"
+  }
+ },
+ "32b86dc": {
+  "summary": "Compares the id of the empty offensive card with the given offensive card id for string equality.",
+  "renames": {
+   "bVar3": "charsEqual",
+   "lVar1": "leftChars",
+   "lVar2": "rightChars",
+   "uVar6_2": "differs"
+  }
+ },
+ "32b8800": {
+  "summary": "Plays the hud show/hide animation clip, choosing the clip name by visibility, animation and hand flags.",
+  "renames": {
+   "lVar3": "clipName",
+   "plVar4": "hideClipName",
+   "plVar5": "showClipName",
+   "uStack_38": "scratch1",
+   "uStack_40": "scratch2",
+   "uStack_48": "stringLength",
+   "uStack_58": "spanLength",
+   "uStack_60": "spanPointer"
+  }
+ },
+ "32b7fa4": {
+  "summary": "Opens the settings window through the windows manager and records a window-open analytics event.",
+  "renames": {
+   "iVar2": "topWindowIndex",
+   "lVar11": "eventName",
+   "lVar12": "scratch1",
+   "lVar13": "windowArray",
+   "lVar5_3": "analyticsManagerCopy",
+   "lVar8_3": "analyticsManager",
+   "puVar9": "loggerMethod",
+   "uStack_58": "scratch2",
+   "uStack_70": "scratch3",
+   "uVar1": "windowCount",
+   "uVar4": "isNullFlag",
+   "uVar6": "errorMessage",
+   "uVar6_4": "playerDataManagerPtr"
+  }
+ },
+ "32b898c": {
+  "summary": "Shows the overtime splash and indicator with fade tweens and plays the entering-overtime sound.",
+  "renames": {
+   "alStack_78": "audioSourceBuf",
+   "auVar17": "hasAudioClip",
+   "auVar17_x1": "audioClipArg",
+   "lStack_98": "savedSoundManager",
+   "lStack_a0": "savedAudioSource",
+   "lVar2": "soundManager",
+   "lVar7_2": "soundManagerCopy",
+   "pcStack_b0": "savedFrame",
+   "pcStack_c0": "savedFrame2",
+   "puStack_a8": "savedAudioCue",
+   "puVar10": "vectorStatics2",
+   "puVar9": "vectorStatics",
+   "uStack_88": "scratch1",
+   "uStack_90": "scratch2",
+   "uStack_c8": "scratch3",
+   "uStack_d0": "savedPosition",
+   "uStack_d8": "savedAudioSource2",
+   "uStack_e0": "savedZeroVector",
+   "uStack_e8": "scratch4",
+   "uStack_f0": "scratch5",
+   "uVar15": "positionYZ",
+   "uVar16": "positionYZ2",
+   "uVar6": "hasAudioSource"
+  }
+ },
+ "32b89a4": {
+  "summary": "Opens the card display window for the battle manager offensive card, initializing card UIs, lore, voice-over and sprite.",
+  "renames": {
+   "auStack_48": "nullableTier",
+   "auVar22": "restoredInstance",
+   "auVar22_x1": "restoredArg",
+   "bVar2": "skipMaterialUpdate",
+   "fVar20": "spriteRectX",
+   "fVar21": "spriteRectY",
+   "in_s2": "rectPosX",
+   "in_s3": "rectPosY",
+   "lVar11": "scratch1",
+   "lVar8_3": "flavourText",
+   "lVar8_5": "displayClosure",
+   "lVar9_3": "currentSprite",
+   "lVar9_5": "cardDisplayWindow",
+   "plVar18": "availableSoundsHolder",
+   "plVar19": "spriteSlot",
+   "puVar15": "callSlot",
+   "uVar7": "hasValue"
+  }
+ },
+ "32b8a38": {
+  "summary": "Broadcasts the \"ChangedLanguage\" message to this object and its children.",
+  "renames": {
+   "uStack_38": "scratch1",
+   "uStack_40": "scratch2",
+   "uStack_58": "spanLength",
+   "uStack_60": "spanPointer"
+  }
+ },
+ "32b8a84": {
+  "summary": "Initializes the multi-card display with cards and header, opens it via the windows manager and records an analytics event.",
+  "renames": {
+   "iVar2": "topWindowIndex",
+   "lVar11": "eventName",
+   "lVar12": "scratch1",
+   "lVar13": "windowArray",
+   "lVar5_3": "analyticsManagerCopy",
+   "lVar8_3": "analyticsManager",
+   "puVar9": "loggerMethod",
+   "uStack_58": "scratch2",
+   "uStack_70": "scratch3",
+   "uVar1": "windowCount",
+   "uVar4": "isNullFlag",
+   "uVar6": "errorMessage",
+   "uVar6_4": "playerDataManagerPtr"
+  }
+ },
+ "32b8b0c": {
+  "summary": "Finds the anchor transform matching the desired position and player side, logging an error and falling back to own transform.",
+  "renames": {
+   "iStack_44": "positionArg",
+   "lVar4": "foundAnchor",
+   "plVar1": "anchorSlot",
+   "plVar7": "anchorCursor",
+   "uVar2": "positionBoxed"
+  }
+ },
+ "32b820c": {
+  "summary": "Shows or hides the reset camera zoom button and plays a punch-scale tween on it when shown.",
+  "renames": {
+   "fVar9": "scaleZ",
+   "lVar3": "tweenClosure",
+   "plVar7": "targetRef",
+   "plVar8": "castTarget"
+  }
+ },
+ "32b8cc8": {
+  "summary": "Opens the settings window when the settings button is clicked and records a window-open analytics event.",
+  "renames": {
+   "iVar2": "topWindowIndex",
+   "lVar11": "eventName",
+   "lVar12": "scratch1",
+   "lVar13": "windowArray",
+   "lVar5_3": "analyticsManagerCopy",
+   "lVar8_3": "analyticsManager",
+   "puVar9": "loggerMethod",
+   "uStack_58": "scratch2",
+   "uStack_70": "scratch3",
+   "uVar1": "windowCount",
+   "uVar4": "isNullFlag",
+   "uVar6": "errorMessage",
+   "uVar6_4": "playerDataManagerPtr"
+  }
+ },
+ "32b838c": {
+  "summary": "Sets a profile UI controller name, title, avatar and avatar border from deck data or the tutorial hero.",
+  "renames": {
+   "lVar9": "currentBorder",
+   "uVar2": "unusedFlag",
+   "uVar7": "hasValue"
+  }
+ },
+ "32b892c": {
+  "summary": "Tries to open the settings window through the windows manager and records a window-open analytics event.",
+  "renames": {
+   "iVar2": "topWindowIndex",
+   "lVar11": "eventName",
+   "lVar12": "scratch1",
+   "lVar13": "windowArray",
+   "lVar5_3": "analyticsManagerCopy",
+   "lVar8_3": "analyticsManager",
+   "puVar9": "loggerMethod",
+   "uStack_58": "scratch2",
+   "uStack_70": "scratch3",
+   "uVar1": "windowCount",
+   "uVar4": "isNullFlag",
+   "uVar6": "errorMessage",
+   "uVar6_4": "playerDataManagerPtr"
+  }
+ },
+ "32b8ccc": {
+  "summary": "Copies the current profile data and reloads the active scene to replay the battle.",
+  "renames": {
+   "iVar1": "classInitState",
+   "lVar2": "playerDataManager",
+   "lVar3": "replayData"
+  }
+ },
+ "32b8d60": {
+  "summary": "Starts the auto-replay by enabling replay play and starting the \"ReplayPlayAction\" coroutine on the battle manager.",
+  "renames": {
+   "lStack_30_2": "savedMethodName",
+   "pcStack_40": "scratch1",
+   "pcStack_60": "spanPointer",
+   "uStack_28": "savedException",
+   "uStack_38": "scratch2",
+   "uStack_58": "spanLength"
+  }
+ },
+ "32b8df4": {
+  "summary": "Stops the auto-replay by clearing the queue and stopping the \"ReplayPlayAction\" coroutine.",
+  "renames": {
+   "uStack_28": "scratch1",
+   "uStack_30": "scratch2",
+   "uStack_48": "spanLength",
+   "uStack_50": "spanPointer"
+  }
+ },
+ "32b8e88": {
+  "summary": "Queues the next replay action, speeds up time, and starts the \"AddNextReplayAction\" coroutine if it is the first queued.",
+  "renames": {
+   "lStack_30_2": "savedMethodName",
+   "pcStack_40": "scratch1",
+   "pcStack_60": "spanPointer",
+   "uStack_28": "savedException",
+   "uStack_38": "scratch2",
+   "uStack_58": "spanLength",
+   "uVar1": "queueCountText"
+  }
+ },
+ "32b8f1c": {
+  "summary": "Opens the card display window for the offensive card when the offensive button is clicked.",
+  "renames": {
+   "auStack_48": "nullableTier",
+   "auVar22": "restoredInstance",
+   "auVar22_x1": "restoredArg",
+   "bVar2": "skipMaterialUpdate",
+   "fVar20": "spriteRectX",
+   "fVar21": "spriteRectY",
+   "in_s2": "rectPosX",
+   "in_s3": "rectPosY",
+   "lVar11": "scratch1",
+   "lVar8_3": "flavourText",
+   "lVar8_5": "displayClosure",
+   "lVar9_3": "currentSprite",
+   "lVar9_5": "cardDisplayWindow",
+   "plVar18": "availableSoundsHolder",
+   "plVar19": "spriteSlot",
+   "puVar15": "callSlot",
+   "uVar7": "hasValue"
+  }
+ },
+ "32b8fb0": {
+  "summary": "Opens the alliance panel with the player name, title, score, avatar, border and alliance data from player data.",
+  "renames": {
+   "lVar3": "playerProfile",
+   "uVar4": "idArg"
+  }
+ },
+ "32b91d0": {
+  "summary": "Delegate constructor for ConnectionStatusChanged that stores target and method pointers.",
+  "renames": {
+   "cVar1": "methodFlag",
+   "lVar3": "unused1",
+   "uVar2": "isStatic",
+   "uVar4": "methodPtr"
+  }
+ },
+ "32b9284": {
+  "summary": "Begins asynchronous invocation of the ConnectionStatusChanged delegate with the previous and new status.",
+  "renames": {
+   "iStack_34": "prevStatus",
+   "iStack_38": "newStatus",
+   "uStack_40": "scratch1",
+   "uStack_48": "boxedNewStatus",
+   "uStack_50": "boxedPrevStatus"
+  }
+ },
+ "32b9324": {
+  "summary": "Ends asynchronous delegate invocation, retrieving and copying out parameters; low-level runtime glue.",
+  "renames": {
+   "auStack_48": "scratch1",
+   "auVar11": "asyncState",
+   "auVar11_x1": "delegateObj",
+   "in_x3": "outArray",
+   "lStack_58": "resultHandle",
+   "lVar10": "outParamCount",
+   "lVar3": "delegateTarget",
+   "lVar8": "methodInfo",
+   "plVar4": "resultPtr",
+   "plVar6": "paramTypes",
+   "uVar1": "outArrayObj",
+   "uVar2": "stateObj",
+   "uVar5": "paramCount"
+  }
+ },
+ "32b9330": {
+  "summary": "Static constructor that creates the singleton instance of the compiler-generated lambda holder class.",
+  "renames": {
+   "uVar1": "instance"
+  }
+ },
+ "32b93a0": {
+  "summary": "Predicate returning true if the card is non-null and has a unique id.",
+  "renames": {
+   "bVar1": "hasUniqueId",
+   "uVar2": "isNotNull"
+  }
+ },
+ "32b94ac": {
+  "summary": "Predicate checking whether a card id equals the deck warlord transformed warlord id.",
+  "renames": {
+   "bVar1": "charsEqual",
+   "uVar5_2": "differs"
+  }
+ },
+ "32b94e4": {
+  "summary": "Predicate checking whether a card unique id equals the defensive card id.",
+  "renames": {
+   "bVar1": "charsEqual",
+   "uVar4_2": "differs"
+  }
+ },
+ "32b9504": {
+  "summary": "Predicate checking whether a card unique id equals the offensive card id.",
+  "renames": {
+   "bVar1": "charsEqual",
+   "uVar4_2": "differs"
+  }
+ },
+ "32b952c": {
+  "summary": "Predicate returning true if the forge card exists and its army matches the used army.",
+  "renames": {
+   "bVar1": "matches",
+   "iVar2": "cardArmy",
+   "plVar3": "forgeCard"
+  }
+ },
+ "32b95a0": {
+  "summary": "Starts the battle end sequence coroutine on the outer battle manager.",
+  "renames": {
+   "apcStack_20": "savedRegs",
+   "auVar6_x1": "sequenceArg",
+   "unaff_x19": "unused1",
+   "unaff_x20": "unused2",
+   "unaff_x21": "unused3",
+   "unaff_x30": "unused4"
+  }
+ }
+}

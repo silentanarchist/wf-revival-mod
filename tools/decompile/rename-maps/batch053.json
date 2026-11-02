@@ -1,0 +1,456 @@
+{
+ "2f542a0": {
+  "summary": "Coroutine that applies incoming damage to a card, handling dodge, shield, drop pod, bastion, armour and vulnerable, then plays damage animations and death checks.",
+  "renames": {
+   "iVar2_2": "dropPodHealth",
+   "iVar2_4": "armourValue",
+   "iVar2_6": "healthValue",
+   "iVar2_9": "healthForVulnerable",
+   "iVar4": "armourReduction",
+   "uStack_80": "dropPodHealthCopy",
+   "uStack_78": "dropPodInitedCopy",
+   "uStack_70": "dropPodFakeCopy",
+   "uStack_94": "newDropPodHealth",
+   "uStack_8c": "newDropPodInited",
+   "uStack_84": "newDropPodFake",
+   "uStack_e0": "armourCopy",
+   "uStack_d8": "armourInitedCopy",
+   "uStack_d0": "armourFakeCopy",
+   "uStack_100": "armourCopy2",
+   "uStack_f8": "armourInitedCopy2",
+   "uStack_f0": "armourFakeCopy2",
+   "uStack_134": "healthAfterArmour",
+   "uStack_12c": "healthAfterArmourInited",
+   "uStack_124": "healthAfterArmourFake",
+   "uStack_164": "newHealth",
+   "uStack_15c": "newHealthInited",
+   "uStack_154": "newHealthFake",
+   "uStack_150": "healthCopy",
+   "uStack_148": "healthInitedCopy",
+   "uStack_140": "healthFakeCopy",
+   "uStack_b0": "healthCopy2",
+   "uStack_a8": "healthInitedCopy2",
+   "uStack_a0": "healthFakeCopy2",
+   "uStack_c4": "healthAfterBastion",
+   "uStack_bc": "healthAfterBastionInited",
+   "uStack_b4": "healthAfterBastionFake",
+   "uStack_180": "healthCopy3",
+   "uStack_178": "healthInitedCopy3",
+   "uStack_170": "healthFakeCopy3",
+   "uVar10": "bastionAbsorbedAll",
+   "uVar8": "hasCard"
+  }
+ },
+ "2f54c24": {
+  "summary": "Unsupported IEnumerator.Reset on the compiler-generated coroutine; always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "2f551e0": {
+  "summary": "Unsupported IEnumerator.Reset on the compiler-generated coroutine; always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "2f55360": {
+  "summary": "Unsupported IEnumerator.Reset on the compiler-generated coroutine; always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "2f55760": {
+  "summary": "Unsupported IEnumerator.Reset on the compiler-generated coroutine; always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "2f558d0": {
+  "summary": "Unsupported IEnumerator.Reset on the compiler-generated coroutine; always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "2f55cf8": {
+  "summary": "Unsupported IEnumerator.Reset on the compiler-generated coroutine; always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "2f55e08": {
+  "summary": "Unsupported IEnumerator.Reset on the compiler-generated coroutine; always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "2f56ab0": {
+  "summary": "Unsupported IEnumerator.Reset on the compiler-generated coroutine; always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "2f54c90": {
+  "summary": "Coroutine that plays a ranged attack animation: tweens the card back to its play position, waits, then spawns ranged attack particles.",
+  "renames": {
+   "auStack_34": "boolBuffer",
+   "puVar8": "quaternionStatics",
+   "uVar7": "nextState"
+  }
+ },
+ "2f5524c": {
+  "summary": "Coroutine that increments attacks this turn, runs the ranged attack animation, and calls AfterAttack when animation can continue.",
+  "renames": {
+   "uVar3": "outerIsNull"
+  }
+ },
+ "2f553cc": {
+  "summary": "Coroutine that animates a card returning to its deck: flips it, tweens scale, rotation and position to the deck, then hides it.",
+  "renames": {
+   "in_s1": "unusedS1",
+   "in_s2": "unusedS2",
+   "uStack_8c": "deckScaleX",
+   "uStack_88": "deckScaleY",
+   "uStack_84": "deckScaleZ",
+   "uStack_80": "deckRotX",
+   "uStack_7c": "deckRotY",
+   "uStack_78": "deckRotZ",
+   "uVar2": "outerIsNull"
+  }
+ },
+ "2f557cc": {
+  "summary": "Coroutine that briefly highlights an enemy card in hand for half a second, then removes the highlight.",
+  "renames": {
+   "auVar4_x1": "methodInfo",
+   "auVar4": "selfCopy",
+   "this_00": "selfAlias",
+   "this_00_2": "cardController2D"
+  }
+ },
+ "2f5593c": {
+  "summary": "Coroutine that turns a unit in play back into a hand card, playing a back-to-hand animation and sound, with teleport delay handling.",
+  "renames": {
+   "fVar10": "upZ",
+   "fVar7": "scaleX",
+   "in_s1": "unusedS1",
+   "in_s2": "unusedS2",
+   "uVar3": "outerIsNull",
+   "uVar8": "threeValue"
+  }
+ },
+ "2f55d64": {
+  "summary": "Trivial coroutine that waits about 0.7 seconds then finishes.",
+  "renames": {
+   "uVar3": "nextState"
+  }
+ },
+ "2f55e48": {
+  "summary": "Async method that fades in card items over the dissolve time, waits that long, then re-enables the card collider.",
+  "renames": {
+   "auVar8_x1": "methodInfo",
+   "auVar8": "selfCopy",
+   "iVar1": "delayMs"
+  }
+ },
+ "2f56128": {
+  "summary": "Sets the async state machine on the builder, throwing if null or already initialized; also contains async completion tracing.",
+  "renames": {
+   "plVar1": "coreStatePtr",
+   "plVar5": "builderCore"
+  }
+ },
+ "2f56160": {
+  "summary": "Coroutine for a unit dying: plays death sound, shake, spawns death particles, hides the 3D body, then sends the card to the cemetery.",
+  "renames": {
+   "in_s1": "unusedS1",
+   "in_s2": "unusedS2",
+   "in_s3": "unusedS3",
+   "lVar11_5": "soundManager",
+   "plVar9": "warningText",
+   "puVar10": "durationPtr",
+   "uVar13": "scratchA",
+   "uVar14": "scratchB"
+  }
+ },
+ "2f2c474": {
+  "summary": "Event add accessor that thread-safely combines a handler into the OnDisplaySummonMessage delegate.",
+  "renames": {
+   "auVar6_x1": "unusedValue",
+   "bVar2": "exchangeFailed",
+   "uVar1": "actionType"
+  }
+ },
+ "2f2c524": {
+  "summary": "Event remove accessor that thread-safely removes a handler from the OnDisplaySummonMessage delegate.",
+  "renames": {
+   "bVar2": "exchangeFailed"
+  }
+ },
+ "2f2c720": {
+  "summary": "Getter returning the obscured canAct value.",
+  "renames": {
+   "auVar1": "result",
+   "auVar1_part0": "resultLow",
+   "auVar1_part12": "resultHigh"
+  }
+ },
+ "2f2c73c": {
+  "summary": "Getter returning the obscured canAttack value.",
+  "renames": {
+   "auVar1": "result",
+   "auVar1_part0": "resultLow",
+   "auVar1_part12": "resultHigh"
+  }
+ },
+ "2f2c8e0": {
+  "summary": "Returns the player's trait combinations list from the player data manager.",
+  "renames": {
+   "lVar1": "playerData"
+  }
+ },
+ "2f2ca04": {
+  "summary": "Setter that sets the card transform's local scale to the given vector.",
+  "renames": {
+   "param_4": "frame",
+   "uStack_2c": "argSelf",
+   "uStack_28": "argValue",
+   "uStack_24": "argMethod"
+  }
+ },
+ "2f2ca68": {
+  "summary": "Unity Awake: initializes canAct, canAttack, active effects list, UI component and highlight component.",
+  "renames": {
+   "auVar3": "falseValue"
+  }
+ },
+ "2f2cbb0": {
+  "summary": "Per-frame update that moves and rotates the card toward the attack target while aiming an attack.",
+  "renames": {
+   "fVar1": "clampedT",
+   "fVar13": "backZ",
+   "fVar15": "upZ",
+   "fVar4": "directionSign",
+   "fVar7": "normalizedTime",
+   "fVar8": "localPosX",
+   "in_s2": "scratchY",
+   "lVar3": "vectorStatics"
+  }
+ },
+ "2f2cf84": {
+  "summary": "Assigns battle manager and raw card data, finds the card UI, initializes it and names the game object.",
+  "renames": {
+   "puVar4": "logMethod",
+   "uStack_48": "spanLength",
+   "uStack_50": "spanPtr",
+   "uVar2_2": "idText",
+   "uVar3": "cardUIMissing"
+  }
+ },
+ "2f2d104": {
+  "summary": "Initializes a card for battle: sets stats, invulnerability, drop pod values, traits, UI toggles and spawn particles.",
+  "renames": {
+   "iVar2": "currentHealthValue",
+   "iVar2_4": "armourValue",
+   "in_s2": "unusedS2",
+   "uStack_84": "pendingStatValue",
+   "uStack_7c": "pendingStatInited",
+   "uStack_74": "pendingStatFake",
+   "uStack_98": "meleeValue",
+   "uStack_90": "meleeInited",
+   "uStack_88": "meleeFake",
+   "uStack_ac": "rangedValue",
+   "uStack_a4": "rangedInited",
+   "uStack_9c": "rangedFake",
+   "uStack_c0": "healthCopy",
+   "uStack_b8": "healthInitedCopy",
+   "uStack_b0": "healthFakeCopy",
+   "uStack_d4": "clampedHealth",
+   "uStack_cc": "clampedInited",
+   "uStack_c4": "clampedFake",
+   "uStack_f0": "armourCopy",
+   "uStack_e8": "armourInitedCopy",
+   "uStack_e0": "armourFakeCopy"
+  }
+ },
+ "2f2ddb0": {
+  "summary": "Hides an enemy secret card's details: sets classified texts and swaps the card frame sprite on the rarity holder image.",
+  "renames": {
+   "extraout_x1": "frameSprite",
+   "fVar13": "emptyRectX",
+   "fVar14": "emptyRectY",
+   "in_s2": "rectX",
+   "in_s3": "rectY",
+   "lVar5_4": "currentSpriteA",
+   "lVar5_6": "currentSpriteB",
+   "plVar1": "locKeyPtr",
+   "plVar10": "spriteFieldPtr",
+   "uVar7": "flag"
+  }
+ },
+ "2f2ddcc": {
+  "summary": "Updates whether a minion can act and attack this turn based on ownership, state, attacks used and traits, and refreshes the attack indicator.",
+  "renames": {
+   "auVar4": "canActValue"
+  }
+ },
+ "2f2e5f8": {
+  "summary": "Sets the card's unique in-game id and updates the id text in the UI.",
+  "renames": {
+   "uVar1": "hasText",
+   "uVar2_3": "idText"
+  }
+ },
+ "2f2e6b8": {
+  "summary": "Sets whether the card belongs to the player and, for player trap or secret tactics, re-initializes the card UI and name.",
+  "renames": {
+   "iVar1": "cardTypeValue",
+   "iVar1_2": "spellTypeValue",
+   "puVar4": "logMethod",
+   "uStack_48": "spanLength",
+   "uStack_50": "spanPtr",
+   "uVar3": "cardUIMissing",
+   "uVar5_3": "idText"
+  }
+ },
+ "2f2e998": {
+  "summary": "Returns whether the card has a requiem trait or a while-in-play ability with an adjacent-effect expansion pack id of 100.",
+  "renames": {}
+ },
+ "2f2ea74": {
+  "summary": "Returns whether the card can act now, either by attacking or by using an active ability or oath with enough mana.",
+  "renames": {
+   "lVar1": "managerFieldOffset",
+   "pcVar8": "allowActionsFlagPtr",
+   "uStack_30": "canActCopy",
+   "uVar6_2": "canActValue"
+  }
+ },
+ "2f2e1a8": {
+  "summary": "Returns whether the card can attack now, checking attack values, traits, allowed actions, card state, UI state and canAct.",
+  "renames": {
+   "pcVar5": "allowActionsFlagPtr",
+   "uVar4_2": "canActValue"
+  }
+ },
+ "2f2e32c": {
+  "summary": "Returns whether the card can use its active ability now, checking mana cost, oath, card state, UI state and canAct.",
+  "renames": {
+   "lVar1": "managerFieldOffset",
+   "pcVar8": "allowActionsFlagPtr",
+   "uVar6_2": "canActValue"
+  }
+ },
+ "2f2f06c": {
+  "summary": "Handles start of turn for a card: resets sickness and counters, removes drop pod or stealth, triggers turn-start abilities, psyker, reactor and transient.",
+  "renames": {
+   "auVar9": "canActValue",
+   "iVar3_2": "currentTurnCounter",
+   "uStack_70": "turnCounterCopy",
+   "uStack_68": "turnCounterInitedCopy",
+   "uStack_60": "turnCounterFakeCopy"
+  }
+ },
+ "2f2fd84": {
+  "summary": "Returns whether this card's bastion value is at least the attacking card's combat attack.",
+  "renames": {
+   "bVar1": "result",
+   "uVar4": "attackerIsNull"
+  }
+ },
+ "2f2fef8": {
+  "summary": "Triggers this card's abilities for another card's landing event, unless that card is this one.",
+  "renames": {
+   "uVar1": "isOtherCard"
+  }
+ },
+ "2f2ff9c": {
+  "summary": "Triggers this card's abilities for another card's spirit stone event, unless that card is this one.",
+  "renames": {
+   "uVar1": "isOtherCard"
+  }
+ },
+ "2f30040": {
+  "summary": "Triggers this card's abilities for another card's requiem event, unless that card is this one.",
+  "renames": {
+   "uVar1": "isOtherCard"
+  }
+ },
+ "2f300e4": {
+  "summary": "Triggers this card's abilities for another card's mob event, unless that card is this one.",
+  "renames": {
+   "uVar1": "isOtherCard"
+  }
+ },
+ "2f301b4": {
+  "summary": "Triggers this card's abilities for another card's regiment event, unless that card is this one.",
+  "renames": {
+   "uVar1": "isOtherCard"
+  }
+ },
+ "2f30258": {
+  "summary": "Triggers this card's abilities for another card's codex event, unless that card is this one.",
+  "renames": {
+   "uVar1": "isOtherCard"
+  }
+ },
+ "2f30404": {
+  "summary": "Triggers the given ability card's abilities as played, if the card is not null.",
+  "renames": {
+   "uVar1": "hasAbilityCard"
+  }
+ },
+ "2f2faf0": {
+  "summary": "Plays psyker animations and grants the player psychic mana equal to this card's psyker value.",
+  "renames": {
+   "bVar2": "isPlayerFlag",
+   "uVar11": "packedPlayerAndAmount"
+  }
+ },
+ "2f2fc24": {
+  "summary": "Plays reactor animations and grants the player plasma mana equal to this card's reactor value.",
+  "renames": {
+   "bVar2": "isPlayerFlag",
+   "uVar11": "packedPlayerAndAmount"
+  }
+ },
+ "2f2fd58": {
+  "summary": "Queues a destroy-unit battle action for this card (transient) and marks the unit as destroyed.",
+  "renames": {
+   "alStack_140": "actionTargets",
+   "auStack_150": "actionBuffer",
+   "auStack_250": "actionCopy",
+   "lStack_148": "actionCard",
+   "uStack_60": "actionPriority"
+  }
+ },
+ "2f2efd0": {
+  "summary": "Queues a remove-effect battle action for this card and effect with the given priority.",
+  "renames": {
+   "alStack_120": "actionCard",
+   "alStack_c0": "actionEffect",
+   "auStack_130": "actionBuffer",
+   "auStack_230": "actionCopy"
+  }
+ },
+ "2f30660": {
+  "summary": "Queues a clear-end-of-turn-effects battle action for this card with the given priority.",
+  "renames": {
+   "alStack_128": "actionCard",
+   "auStack_130": "actionBuffer",
+   "auStack_230": "actionCopy"
+  }
+ },
+ "2f30714": {
+  "summary": "Shows or hides the card back by toggling the card front and back container.",
+  "renames": {
+   "uVar2": "backVisible"
+  }
+ },
+ "2f30730": {
+  "summary": "Sets whether a card can be played and updates highlight, codex, oath and ephemeral displays.",
+  "renames": {
+   "iVar2": "cardTypeValue",
+   "uStack_30": "stateScratch",
+   "uVar5": "stateName"
+  }
+ }
+}

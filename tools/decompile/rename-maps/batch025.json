@@ -1,0 +1,218 @@
+{
+ "32b3f7c": {
+  "summary": "Sends the PUNReceiveCardSeen RPC with a card id to all players (decompiler output also merges Photon RPC and interest-group internals).",
+  "renames": {
+   "acStack_114": "disableGroupByte",
+   "acStack_118": "enableGroupByte",
+   "auVar30": "exceptionResult",
+   "auVar30_part8": "exceptionResultPart8",
+   "auVar30_x1": "exceptionResultX1",
+   "iStack_24": "cardIdCopy",
+   "iVar19": "bucketCount",
+   "lStack_c0_2": "savedReceivers",
+   "lStack_d8": "savedRaiseOptions",
+   "lStack_f0": "savedPhotonView",
+   "lVar17": "classHandle1",
+   "lVar18": "classHandle2",
+   "lVar25_3": "eventParams",
+   "lVar7_2": "keyOrGroups",
+   "pcStack_108": "callerMethod",
+   "piVar23": "interfaceEntry",
+   "piVar29": "entryPtr",
+   "plStack_b8": "savedPeer",
+   "plVar9": "networkingPeerPtr",
+   "puVar15": "messagePart1",
+   "puVar21": "messagePart2",
+   "uStack_98": "rpcScratch",
+   "uStack_98_part4": "rpcScratchPart4",
+   "uStack_a0": "typeScratch2",
+   "uStack_a8": "typeScratch1",
+   "uStack_b0": "boxedValue",
+   "uStack_b0_part1": "boxedValuePart1",
+   "uStack_b0_part2": "boxedValuePart2",
+   "uStack_b0_part4": "boxedValuePart4",
+   "uStack_c8": "scratch3",
+   "uStack_d0": "scratch2",
+   "uStack_e0": "scratch1",
+   "uStack_e8": "savedMethodName",
+   "uVar1": "freeListHead",
+   "uVar14_ReceiverGroup": "bucketLimit",
+   "uVar16": "groupCount",
+   "uVar2": "interestGroup",
+   "uVar22": "interfaceCount",
+   "uVar24": "bucketIndex",
+   "uVar5": "containsResult",
+   "uVar8": "enableGroups",
+   "unaff_x27": "unused1"
+  }
+ },
+ "32b4070": {
+  "summary": "Sends the PUNReceiveMatchFinished RPC to all players via Photon, including the RPC checks and interest-group handling the decompiler merged in.",
+  "renames": {
+   "acStack_e4": "disableGroupByte",
+   "acStack_e8": "enableGroupByte",
+   "auVar30": "exceptionResult",
+   "auVar30_part8": "exceptionResultPart8",
+   "auVar30_x1": "exceptionResultX1",
+   "iVar19": "bucketCount",
+   "lStack_90": "savedPhotonView",
+   "lStack_a8": "savedRaiseOptions",
+   "lStack_c0": "savedStrings",
+   "lVar17": "classHandle1",
+   "lVar18": "classHandle2",
+   "pcStack_d8": "callerMethod",
+   "piVar23": "interfaceEntry",
+   "piVar29": "entryPtr",
+   "plStack_88": "savedPeer",
+   "plVar9": "networkingPeerPtr",
+   "puVar13": "messagePart1",
+   "puVar21": "messagePart2",
+   "uStack_68": "rpcScratch",
+   "uStack_68_part4": "rpcScratchPart4",
+   "uStack_70": "typeScratch2",
+   "uStack_78": "typeScratch1",
+   "uStack_80": "boxedValue",
+   "uStack_80_part1": "boxedValuePart1",
+   "uStack_80_part2": "boxedValuePart2",
+   "uStack_80_part4": "boxedValuePart4",
+   "uStack_98": "scratch3",
+   "uStack_a0": "scratch2",
+   "uStack_b0": "scratch1",
+   "uStack_b8": "savedMethodName",
+   "uVar1": "freeListHead",
+   "uVar15": "groupCount",
+   "uVar22": "interfaceCount",
+   "uVar24": "bucketIndex",
+   "unaff_x27": "unused1"
+  }
+ },
+ "32b4160": {
+  "summary": "Sends the PUNReceiveCardReorder RPC with a card id and new index to all players.",
+  "renames": {
+   "uVar5": "stageName",
+   "auVar6": "exceptionResult",
+   "auVar6_x1": "exceptionResultX1",
+   "iStack_38": "newIndexCopy",
+   "iStack_34": "cardIdCopy",
+   "lVar1": "boxedArg",
+   "pcStack_80": "callerMethod",
+   "uStack_90": "typeScratch"
+  }
+ },
+ "32b42a8": {
+  "summary": "Handles the opponent's mulligan RPC: logs it and, if from the opponent during the Mulligan stage, passes the data to the battle manager.",
+  "renames": {
+   "auVar4_x1": "argsCopy",
+   "auVar4_2": "isWrongSender",
+   "uStack_50": "typeScratch",
+   "uVar2": "stageName"
+  }
+ },
+ "32b4404": {
+  "summary": "Handles a request to resend the mulligan from the opponent, logging it and telling the battle manager to resend.",
+  "renames": {
+   "uVar4": "isWrongSender",
+   "uStack_24": "attemptCounterCopy",
+   "uStack_38": "typeScratch"
+  }
+ },
+ "32b4630": {
+  "summary": "Handles the opponent's mulligan acknowledgement RPC, forwarding it to the battle manager during the Mulligan stage.",
+  "renames": {
+   "auVar4_x1": "argsCopy",
+   "auVar4_2": "isWrongSender",
+   "uStack_50": "typeScratch",
+   "uVar2": "stageName"
+  }
+ },
+ "32b478c": {
+  "summary": "Handles a wrong-room notice from another player and cancels the match without a result if it came from the opponent.",
+  "renames": {
+   "uVar3": "isSenderOpponent",
+   "auVar6_2": "isSenderLocalPlayer",
+   "auVar6_x1": "infoCopy",
+   "uStack_40": "typeScratch1",
+   "uStack_48": "stageType",
+   "uStack_58": "typeScratch2"
+  }
+ },
+ "32b49c4": {
+  "summary": "Receives an opponent action over the network, checks its counter, and either forwards it to the battle manager, ignores duplicates, or requests resend.",
+  "renames": {
+   "auVar13_x1": "actionTypeCopy",
+   "auVar13_2": "isWrongSender",
+   "auVar13_3": "commsRef",
+   "auVar13_part8": "commsRefPart8",
+   "iStackY_144": "lastActionReceivedCopy",
+   "iStack_64": "actionTypeValue",
+   "iStack_70": "actionCounterCopy",
+   "iVar1": "counterValue",
+   "iVar2_2": "lastCounterRead",
+   "iVar2_3": "counterValue2",
+   "iVar2_4": "actionTypeValue2",
+   "iVar3": "counterOrTime",
+   "lStackY_118": "savedThis",
+   "lVar8": "senderInfoPtr",
+   "pcStackY_140": "callerMethod",
+   "puStackY_120": "savedStringArray",
+   "puStackY_128": "savedPos",
+   "puVar10": "arrayElementPtr",
+   "puVar9": "attackTypeCopy",
+   "uStackY_130": "savedTargetCardId",
+   "uStackY_138": "savedActingCardId",
+   "uStackY_148": "actionsLogCount",
+   "uStackY_150": "battleStageValue",
+   "uStackY_158": "typeScratch",
+   "uStack_68": "actingCardIdCopy",
+   "uStack_6c": "targetCardIdCopy",
+   "uStack_c0": "counterSnapshot1Fake",
+   "uStack_c8": "counterSnapshot1Inited",
+   "uStack_d0": "counterSnapshot1",
+   "uStack_e0": "counterSnapshot2Fake",
+   "uStack_e8": "counterSnapshot2Inited",
+   "uStack_f0": "counterSnapshot2",
+   "uVar6": "stageName",
+   "uVar7": "isWrongSender2"
+  }
+ },
+ "32b4f1c": {
+  "summary": "Handles the opponent's request to resend lost actions, logging it and starting the sync coroutine from the given action.",
+  "renames": {
+   "auVar5_x1": "lastActionArgCopy",
+   "iStack_34": "lastActionValue",
+   "uStack_48": "typeScratch",
+   "uVar2": "stageName",
+   "uVar3": "isWrongSender"
+  }
+ },
+ "32b50d4": {
+  "summary": "Creates and returns the iterator object for the SyncLastPlayerActions coroutine.",
+  "renames": {
+   "lVar1": "iteratorObj"
+  }
+ },
+ "32b5178": {
+  "summary": "Handles the opponent forfeiting: marks connection status, ends the battle, records ranked result and winner, saves the match and finishes the battle.",
+  "renames": {
+   "abStack_44": "isPlayerFlag",
+   "auStack_58": "nowTime",
+   "auVar15": "isNotOpponent",
+   "auVar15_2": "falseObscured",
+   "auVar15_part8": "falseObscuredPart8",
+   "auVar16": "trueObscured",
+   "dVar14": "matchMinutes",
+   "iVar3_2": "playerHealthValue",
+   "param_4": "unused1",
+   "piVar11": "interfaceEntry",
+   "uStack_90": "typeScratch1",
+   "uStack_a8": "typeScratch2",
+   "uStack_c0": "enemyHealthFakeActive",
+   "uStack_c8": "enemyHealthInited",
+   "uStack_d0_2": "enemyHealthSnapshot",
+   "uStack_e0": "playerHealthFakeActive",
+   "uStack_e8": "playerHealthInited",
+   "uStack_f0_2": "playerHealthSnapshot",
+   "uVar4": "shouldLoseFlag"
+  }
+ }
+}

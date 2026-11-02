@@ -1,0 +1,579 @@
+{
+ "2f7aee4": {
+  "summary": "Spawns or reuses a cached tap-hit particle system, positions it on the hit point or parent, plays it and its 3D sound.",
+  "renames": {
+   "lVar3_3": "audioCueLoaded",
+   "plVar6": "audioCueSlot",
+   "puVar5": "zeroVectorPtr",
+   "puVar5_2": "zeroRotationPtr",
+   "uVar2": "lookupResult",
+   "param_7": "particleDef",
+   "param_8": "parentTransform"
+  }
+ },
+ "2f7ade8": {
+  "summary": "Plays tap-hit particles if the cooldown has elapsed and the definition is valid, then resets the cooldown.",
+  "renames": {
+   "bVar1": "isValid",
+   "param_7": "particleDef"
+  }
+ },
+ "2f7b2ac": {
+  "summary": "Counts down the remaining time before tap particles can play again.",
+  "renames": {
+   "fVar2": "frameDelta"
+  }
+ },
+ "2f7b2f8": {
+  "summary": "Clears the static cache of tap-hit particle systems when the object is destroyed.",
+  "renames": {
+   "iVar1": "entryCount",
+   "lVar2": "particleCache"
+  }
+ },
+ "2f7b378": {
+  "summary": "Static constructor that creates the shared dictionary caching tap-hit particle systems.",
+  "renames": {
+   "uVar1": "particleCache"
+  }
+ },
+ "2f7b424": {
+  "summary": "Initializes the tap controller by fetching the BattleManager instance and its match type.",
+  "renames": {
+   "iVar1": "currentMatchType",
+   "plVar2": "managerInstance"
+  }
+ },
+ "2f7b4e8": {
+  "summary": "On a mouse click or touch during the match, raycasts from the board camera and plays tap particles on the nearest hit.",
+  "renames": {
+   "abStack_68": "hasComponentByte",
+   "auStack_104": "tempBuffer",
+   "auStack_120": "ray",
+   "bVar2": "hasComponent",
+   "extraout_x1_00": "closestHit",
+   "fVar16": "hitDistance",
+   "fVar17": "closestDistance",
+   "iVar3": "activeTouches",
+   "in_d1": "unusedD1",
+   "in_s2": "unusedS2",
+   "uStack_110": "rayWord2",
+   "uStack_118": "rayWord1",
+   "uStack_64": "hitCount",
+   "uStack_64_2": "hitDistanceBoxed",
+   "uStack_80": "scratch1",
+   "uStack_88": "scratch2",
+   "uStack_90": "scratch3",
+   "uStack_98": "scratch4",
+   "uStack_a0": "scratch5",
+   "uStack_a8": "scratch6",
+   "uStack_b0": "scratch7",
+   "uStack_b8": "scratch8",
+   "uStack_c0": "touch",
+   "uStack_f4": "rayData2",
+   "uStack_fc": "rayData1",
+   "uVar15": "closestIndex"
+  }
+ },
+ "2f7bbec": {
+  "summary": "Plays tap particles for a raycast hit's collider if its material definition is valid and its cooldown has expired.",
+  "renames": {
+   "param_5": "hitInfo",
+   "uVar3": "hasComponent",
+   "uVar7": "hitCopy"
+  }
+ },
+ "2f7c530": {
+  "summary": "Coroutine Reset for CloseTip; always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "2f7c64c": {
+  "summary": "Coroutine Reset for DeactivateTip; always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "2f7c854": {
+  "summary": "Coroutine Reset for OpenTip; always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "2f7c984": {
+  "summary": "Coroutine Reset for RenewTip; always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "2f7c690": {
+  "summary": "Coroutine step that animates the tip box open, fades in the tip text, then clears the animating flag.",
+  "renames": {
+   "bVar5": "hasMore"
+  }
+ },
+ "2f7c898": {
+  "summary": "Coroutine step that closes the current tip and, if still active, reopens it with the new tip.",
+  "renames": {
+   "auVar5": "selfRef",
+   "auVar5_x1": "methodInfo"
+  }
+ },
+ "2f7bd50": {
+  "summary": "Resets the tip background scale and tip text color to their closed state.",
+  "renames": {
+   "auVar4_3": "savedScale",
+   "auVar4_x1": "methodInfo",
+   "in_q1": "scaleVector",
+   "uVar2": "isTipTextNull"
+  }
+ },
+ "2f7be00": {
+  "summary": "Stores a new tip and starts the OpenTip or RenewTip coroutine unless an animation is running.",
+  "renames": {
+   "lStack_30": "savedName",
+   "pcStack_40": "spanTemp",
+   "pcStack_60": "nameSpan",
+   "plVar1": "namePtr",
+   "uStack_28": "savedException",
+   "uStack_38": "spanTempB",
+   "uStack_48": "nameLength",
+   "uStack_58": "nameSpanB",
+   "lVar5": "coroutineName"
+  }
+ },
+ "2f7be94": {
+  "summary": "Stores the player data, picks the next tip and starts the OpenTip or RenewTip coroutine unless animating.",
+  "renames": {
+   "lStack_30": "savedName",
+   "pcStack_40": "spanTemp",
+   "pcStack_60": "nameSpan",
+   "plVar1": "namePtr",
+   "uStack_28": "savedException",
+   "uStack_38": "spanTempB",
+   "uStack_48": "nameLength",
+   "uStack_58": "nameSpanB",
+   "lVar6": "coroutineName"
+  }
+ },
+ "2f7bebc": {
+  "summary": "Gets a random localized prebattle tip, retrying up to five times to avoid empty or repeated tips.",
+  "renames": {
+   "auVar3_x1": "methodInfo",
+   "iVar2": "retriesLeft"
+  }
+ },
+ "2f7c034": {
+  "summary": "On tap, picks the next tip and starts the OpenTip or RenewTip coroutine unless animating.",
+  "renames": {
+   "lStack_30": "savedName",
+   "pcStack_40": "spanTemp",
+   "pcStack_60": "nameSpan",
+   "plVar1": "namePtr",
+   "uStack_28": "savedException",
+   "uStack_38": "spanTempB",
+   "uStack_48": "nameLength",
+   "uStack_58": "nameSpanB",
+   "lVar5": "coroutineName",
+   "auVar8": "hasNoPlayerData"
+  }
+ },
+ "2f7c0b8": {
+  "summary": "Stops tip animations, closes the tip and starts the deactivate coroutine if the object is active.",
+  "renames": {
+   "auVar5": "thisRef",
+   "auVar5_x1": "routineArg",
+   "register0x00000008": "stackPointer",
+   "unaff_x19": "argException",
+   "unaff_x20": "savedThis",
+   "unaff_x21": "unused1",
+   "unaff_x30": "unused2"
+  }
+ },
+ "2f7c200": {
+  "summary": "Creates and returns the compiler-generated coroutine enumerator for OpenTip.",
+  "renames": {
+   "lVar1": "routine"
+  }
+ },
+ "2f7c294": {
+  "summary": "Creates and returns the compiler-generated coroutine enumerator for CloseTip.",
+  "renames": {
+   "lVar1": "routine"
+  }
+ },
+ "2f7c328": {
+  "summary": "Creates and returns the compiler-generated coroutine enumerator for RenewTip.",
+  "renames": {
+   "lVar1": "routine"
+  }
+ },
+ "2f7c194": {
+  "summary": "Creates and returns the compiler-generated coroutine enumerator for DeactivateTip.",
+  "renames": {
+   "lVar1": "routine"
+  }
+ },
+ "2f7dcb8": {
+  "summary": "Lambda that appends a card trait's defined trait to the captured trait list.",
+  "renames": {
+   "extraout_x1": "unused1",
+   "lVar4": "addMethod"
+  }
+ },
+ "2f7dd60": {
+  "summary": "Lambda that appends a card trait's defined trait to the captured list if not already present.",
+  "renames": {
+   "extraout_x1": "unused1",
+   "lVar5": "addMethod"
+  }
+ },
+ "2f7c9cc": {
+  "summary": "Shows a card's trait descriptions in slots, loading each trait's icon and text with staggered animations and hiding unused slots.",
+  "renames": {
+   "register0x00000008": "stackPointer",
+   "unaff_d8": "savedD8",
+   "unaff_d9": "savedD9",
+   "unaff_d10": "savedD10",
+   "unaff_d11": "savedD11",
+   "unaff_d12": "savedD12",
+   "unaff_x19": "savedX19",
+   "unaff_x20": "savedX20",
+   "unaff_x21": "savedX21",
+   "unaff_x22": "savedX22",
+   "unaff_x24": "slotIndexCopy",
+   "unaff_x25": "traitSlot",
+   "unaff_x26": "classPtr",
+   "unaff_x27": "getItemMethod",
+   "unaff_x28": "slotOffset",
+   "unaff_x29": "slotIndex",
+   "unaff_x30": "returnAddress",
+   "bVar2": "isAltByte",
+   "fVar13": "itemScale",
+   "iVar4_2": "traitAtIndex",
+   "lVar11": "slotArray",
+   "lVar11_3": "slotArrayAlt",
+   "puVar3": "savedRegisters",
+   "uVar8": "scratchWord"
+  }
+ },
+ "2f7d16c": {
+  "summary": "Shows a raw card's trait descriptions in slots, loading each trait's icon and text with staggered animations and hiding unused slots.",
+  "renames": {
+   "register0x00000008": "stackPointer",
+   "unaff_d8": "savedD8",
+   "unaff_d9": "savedD9",
+   "unaff_d10": "savedD10",
+   "unaff_d11": "savedD11",
+   "unaff_d12": "savedD12",
+   "unaff_x19": "savedX19",
+   "unaff_x20": "savedX20",
+   "unaff_x22": "savedX22",
+   "unaff_x24": "slotIndexCopy",
+   "unaff_x25": "traitSlot",
+   "unaff_x26": "classPtr",
+   "unaff_x27": "getItemMethod",
+   "unaff_x28": "slotOffset",
+   "unaff_x29": "slotIndex",
+   "unaff_x30": "returnAddress",
+   "bVar2": "isAltByte",
+   "fVar10": "itemScale",
+   "iVar3_2": "traitAtIndex",
+   "lVar7": "slotArray",
+   "lVar7_3": "slotArrayAlt"
+  }
+ },
+ "2f7ce28": {
+  "summary": "Shows a list of traits in description slots, loading icons and text with staggered animations and hiding unused slots.",
+  "renames": {
+   "register0x00000008": "stackPointer",
+   "unaff_d8": "savedD8",
+   "unaff_d9": "savedD9",
+   "unaff_d10": "savedD10",
+   "unaff_d11": "savedD11",
+   "unaff_d12": "savedD12",
+   "unaff_x19": "savedX19",
+   "unaff_x20": "savedX20",
+   "unaff_x21": "savedX21",
+   "unaff_x22": "savedX22",
+   "unaff_x24": "slotIndexCopy",
+   "unaff_x25": "traitSlot",
+   "unaff_x26": "classPtr",
+   "unaff_x27": "getItemMethod",
+   "unaff_x28": "slotOffset",
+   "unaff_x29": "slotIndex",
+   "unaff_x30": "returnAddress",
+   "bVar2": "isAltByte",
+   "fVar10": "itemScale",
+   "iVar4_2": "traitAtIndex",
+   "lVar8": "slotArray",
+   "lVar8_3": "slotArrayAlt",
+   "puVar3": "savedRegisters",
+   "uVar7": "scratchFlag"
+  }
+ },
+ "2f7d82c": {
+  "summary": "Sets the first trait box background to the red box sprite for non-collectable traits, filling in title and description text.",
+  "renames": {
+   "auVar8": "selfRef",
+   "auVar8_part8": "traitArg",
+   "in_w3": "isAltArg",
+   "lVar2": "slotSpriteHolder",
+   "plVar3": "descTextComponent"
+  }
+ },
+ "2f7ca2c": {
+  "summary": "Builds the list of traits to display for a card, adding showing traits, removing redundant ones and adding spell power traits.",
+  "renames": {
+   "iVar3_2": "cardSpellType",
+   "lVar4": "closure",
+   "lVar8": "listObj",
+   "lVar9": "itemsArray",
+   "plVar10": "traitListPtr",
+   "uVar1": "oldSize",
+   "uVar7": "hasTrait"
+  }
+ },
+ "2f7d1d4": {
+  "summary": "Builds the list of traits to display for a raw card from its traits, adding special traits and removing redundant ones.",
+  "renames": {
+   "lStack_70": "enumCurrent",
+   "lStack_88": "enumExtra",
+   "puStack_78": "enumStateB",
+   "puStack_90": "enumStateA",
+   "uStack_80": "traitEnumerator"
+  }
+ },
+ "2f7dc28": {
+  "summary": "Sets the sorting layer of this object and all child transforms' objects, including sprite and renderer components.",
+  "renames": {
+   "alStack_48": "disposeSlot",
+   "auVar14": "exceptionInfo",
+   "auVar14_part8": "exceptionKind",
+   "auVar15": "isTargetNull",
+   "auVar15_x1": "recoveredLayerName",
+   "lStack_60": "caughtException",
+   "lVar4_3": "exceptionValue",
+   "lVar4_4": "targetObject",
+   "pcStack_80": "savedMethodB",
+   "pcStack_90": "spanTemp",
+   "pcStack_b0": "nameSpan",
+   "plStack_38": "enumeratorRef",
+   "plStack_50": "disposeSlotPtr",
+   "plStack_70": "savedDisposable",
+   "plStack_78": "savedChild",
+   "plVar7_3": "childTransform",
+   "pplStack_58": "enumeratorRefPtr",
+   "pplVar11": "enumeratorRefPtr2",
+   "puStack_88": "spanTempB",
+   "puStack_a8": "nameSpanB",
+   "uStack_68": "exceptionPtr",
+   "uVar3": "isNull"
+  }
+ },
+ "2f7db88": {
+  "summary": "Kills the item's running move and scale tweens and restarts the item animation with the target position.",
+  "renames": {}
+ },
+ "2f7e02c": {
+  "summary": "Kills running tweens, activates the item, shrinks it, then tweens it to the target position and open size with a delay.",
+  "renames": {
+   "in_stack_00000008": "scaleDuration",
+   "puVar2": "scaleAnimSlot",
+   "uStack0000000000000000": "openSizeXY",
+   "uStack0000000000000004": "openSizeZ"
+  }
+ },
+ "2f7de60": {
+  "summary": "Activates the item, shrinks it, then tweens it to the target position and open size with a delay.",
+  "renames": {
+   "in_stack_00000008": "scaleDuration",
+   "puVar2": "scaleAnimSlot",
+   "uStack0000000000000000": "openSizeXY",
+   "uStack0000000000000004": "openSizeZ"
+  }
+ },
+ "2f7de34": {
+  "summary": "Kills the item's move tween and kills its scale tween, inlining DOTween's kill and pool-recycle logic.",
+  "renames": {
+   "bVar1": "canContinue",
+   "piVar10": "counterPtr",
+   "puVar7": "targetSlotPtr",
+   "uVar4": "messageStr"
+  }
+ },
+ "2f7e0f8": {
+  "summary": "Sets the trait title and description text and assigns the trait icon sprite to the trait image.",
+  "renames": {
+   "bVar1": "skipMaterialUpdate",
+   "fVar11": "iconRectX",
+   "fVar12": "iconRectY",
+   "in_s2": "newRectX",
+   "in_s3": "newRectY",
+   "lVar8": "currentSprite",
+   "lVar8_3": "currentSpriteAlt",
+   "plVar7": "spriteSlot",
+   "uVar5": "isSet"
+  }
+ },
+ "2f7e210": {
+  "summary": "Sets the spirit stone title and description text and assigns the spirit stone icon to the trait image.",
+  "renames": {
+   "bVar1": "skipMaterialUpdate",
+   "fVar12": "iconRectX",
+   "fVar13": "iconRectY",
+   "in_s2": "newRectX",
+   "in_s3": "newRectY",
+   "lVar10": "currentSprite",
+   "plVar9": "spriteSlot",
+   "uVar5": "isSet"
+  }
+ },
+ "2f7e4b0": {
+  "summary": "Kills the description's running move and scale tweens and restarts the item animation with the target position.",
+  "renames": {}
+ },
+ "2f7e740": {
+  "summary": "Kills running tweens, activates the item, shrinks it, then tweens it to the target position and open size with a delay.",
+  "renames": {
+   "in_stack_00000008": "scaleDuration",
+   "puVar2": "scaleAnimSlot",
+   "uStack0000000000000000": "openSizeXY",
+   "uStack0000000000000004": "openSizeZ"
+  }
+ },
+ "2f7e804": {
+  "summary": "Sets the content transform's local position to zero or to the configured content offset.",
+  "renames": {
+   "puVar2": "offsetSource",
+   "puVar3": "offsetValuePtr",
+   "uStack_24": "offsetZ",
+   "uStack_28": "offsetXY"
+  }
+ },
+ "2f7e574": {
+  "summary": "Activates the item, shrinks it, then tweens it to the target position and open size with a delay.",
+  "renames": {
+   "in_stack_00000008": "scaleDuration",
+   "puVar2": "scaleAnimSlot",
+   "uStack0000000000000000": "openSizeXY",
+   "uStack0000000000000004": "openSizeZ"
+  }
+ },
+ "2f7e548": {
+  "summary": "Kills the item's move tween and kills its scale tween, inlining DOTween's kill and pool-recycle logic.",
+  "renames": {
+   "bVar1": "canContinue",
+   "piVar10": "counterPtr",
+   "puVar7": "targetSlotPtr",
+   "uVar4": "messageStr"
+  }
+ },
+ "2f7e8cc": {
+  "summary": "Updates the hunt mark counter text with the new value and plays a punch-scale animation.",
+  "renames": {
+   "iStack_14": "valueBuffer"
+  }
+ },
+ "2f7e9e4": {
+  "summary": "Initializes the markerlight in its off state and sets each floor material's ripple scale from the transform's scale.",
+  "renames": {
+   "auVar7": "selfRef",
+   "auVar7_part8": "stateOption",
+   "uVar1": "isEnabledFlag"
+  }
+ },
+ "2f7eb48": {
+  "summary": "Updates the markerlight counter text, plays a punch-scale animation and spawns an update VFX scaled to the object.",
+  "renames": {
+   "fVar10": "punchScaleZ",
+   "fVar8": "punchScaleY",
+   "iStack_64": "valueBuffer",
+   "puVar5": "identityQuatPtr",
+   "uVar12": "rotationY",
+   "uVar13": "rotationZ",
+   "uVar14": "rotationW",
+   "uVar2": "hasUpdateVfx"
+  }
+ },
+ "2f7ed78": {
+  "summary": "Starts a fade on the normal or expiring material fader to show or hide the aiming-attack effect.",
+  "renames": {
+   "uVar1": "fadeOutFlag"
+  }
+ },
+ "2f7edec": {
+  "summary": "Toggles the Remnant Aeldari body, optionally playing the transition animation and sound, then updates card 3D body visibility.",
+  "renames": {
+   "alStack_78": "audioSourceBuf",
+   "auVar13": "hasCue",
+   "auVar13_x1": "audioClipArg",
+   "in_s1": "positionY",
+   "in_s2": "positionZ",
+   "lStack_98": "savedSoundManager",
+   "lStack_a0": "savedAudioSource",
+   "lVar6_2": "soundManagerRef",
+   "pcStack_b0": "savedMethodB",
+   "pcStack_c0": "savedMethodC",
+   "puStack_a8": "savedAudioCue",
+   "puVar8": "zeroVectorPtr",
+   "this_00": "soundManager",
+   "uStack_88": "unused1",
+   "uStack_90": "unused2",
+   "uStack_c8": "unused3",
+   "uStack_e0": "savedPosition",
+   "uStack_e8": "scratch1",
+   "uStack_f0": "scratch2",
+   "uVar12": "zeroVectorZ",
+   "uVar4": "hasSource",
+   "uVar7": "animFlag",
+   "uVar9": "worldPosition"
+  }
+ },
+ "2f7ef94": {
+  "summary": "Handles Remnant Aeldari destruction, playing waystone-collect or death sound and VFX, then destroying the game object.",
+  "renames": {
+   "in_s1": "rotationY",
+   "in_s2": "rotationZ",
+   "uVar2": "hasComponent",
+   "uVar7": "rotationBitsY",
+   "uVar8": "rotationBitsZ"
+  }
+ },
+ "2f7efa4": {
+  "summary": "Plays the waystone collect sound, spawns the collect VFX and destroys the game object.",
+  "renames": {
+   "in_s1": "rotationY",
+   "in_s2": "rotationZ",
+   "uVar2": "hasComponent"
+  }
+ },
+ "2f7f354": {
+  "summary": "Returns the world position of the waystone idle transform.",
+  "renames": {
+   "uStack_28": "positionZ",
+   "uStack_30": "positionXY"
+  }
+ },
+ "2f7ef50": {
+  "summary": "Activates or deactivates the game object and toggles the card UI's 3D body inversely.",
+  "renames": {
+   "auStack_24": "toggleArgs"
+  }
+ },
+ "2f7eec8": {
+  "summary": "Toggles the card UI's 3D body visibility.",
+  "renames": {
+   "auStack_24": "toggleArgs"
+  }
+ },
+ "2f7f14c": {
+  "summary": "Plays the death sound and spawns the death particles at the death position, then destroys the game object.",
+  "renames": {
+   "in_s1": "rotationY",
+   "in_s2": "rotationZ",
+   "uVar1": "hasComponent"
+  }
+ }
+}

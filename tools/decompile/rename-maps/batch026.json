@@ -1,0 +1,300 @@
+{
+ "32b5230": {
+  "summary": "Handles an enemy-desync message from the opponent, records a match won by cancel via PlayFab cloud script, and contains many unrelated PlayFab API stubs.",
+  "renames": {
+   "uVar8": "scratch8",
+   "lVar11": "playerDataManager",
+   "auVar14": "isNotOpponent",
+   "cVar1": "classInitFlag",
+   "uVar7": "scratch7",
+   "lVar11_3": "apiRequest",
+   "uVar10_5": "scratch10",
+   "auVar14_x1": "scratchX1"
+  }
+ },
+ "32b52d4": {
+  "summary": "Marks that the opponent claims the match is finished when the message sender is the opponent.",
+  "renames": {
+   "auVar3": "isNotOpponent",
+   "auVar4": "obscuredTrue"
+  }
+ },
+ "32b5378": {
+  "summary": "Receives an opponent chat message, displays it with voice lines, handles cooldown and a mute-chat tip, and logs it to the replay.",
+  "renames": {
+   "abStack_54": "isOwnMessage",
+   "uVar8": "isNotOpponent",
+   "uVar10": "vectorX",
+   "uStack_68": "unused1",
+   "iStack_60": "messageIndexCopy",
+   "lVar7_5": "heroCard",
+   "iVar1": "chatsReceivedCount",
+   "uVar11": "vectorY"
+  }
+ },
+ "32b53e4": {
+  "summary": "Shows the enemy's card in hand when the opponent reports a card as seen, matching by unique in-game ID.",
+  "renames": {
+   "auVar7": "isNotOpponent"
+  }
+ },
+ "32b5444": {
+  "summary": "Moves a card in the enemy hand to a new index when the opponent reorders it.",
+  "renames": {
+   "auVar8": "isNotOpponent",
+   "uVar2_3": "movedResult"
+  }
+ },
+ "32b54ac": {
+  "summary": "Constructor that zero-initialises the lastActionCounterReceived obscured int.",
+  "renames": {
+   "uStack_34": "zeroValue",
+   "uStack_2c": "initedFlag",
+   "uStack_24": "fakeValueActiveFlag"
+  }
+ },
+ "32b5768": {
+  "summary": "Caches the original camera sensor size, shift and hand area scale, and applies mobile sizing if needed.",
+  "renames": {
+   "in_s1": "sensorSizeY",
+   "in_s2": "handAreaZ",
+   "uStack_f0": "sensorShift",
+   "auStack_108": "scratchBuffer"
+  }
+ },
+ "32b586c": {
+  "summary": "Switches camera sensor size, lens shift and hand area scale between mobile and original values.",
+  "renames": {
+   "uVar3": "lensShiftY"
+  }
+ },
+ "32b5930": {
+  "summary": "Fills the battle-end player panel with name, clan, badge, troops, tactics, damage and quote text from the result data.",
+  "renames": {
+   "lVar7": "playerResult"
+  }
+ },
+ "32b5cd8": {
+  "summary": "Shows the rank text, rounding the given rank value to the nearest integer and displaying it.",
+  "renames": {
+   "iStack_3c": "roundedInt",
+   "dVar4": "rankDouble",
+   "dVar3": "fraction",
+   "dStack_38": "roundedValue",
+   "auVar5_x1": "scratchX1"
+  }
+ },
+ "32b5e18": {
+  "summary": "Shows the sub-rank text with an up or down marker and the rank difference, or clears it when unchanged.",
+  "renames": {
+   "bVar2": "isNotDraw",
+   "iStack_24": "rankDifference",
+   "lVar3_3": "playerResult",
+   "puVar1": "rankArrowText"
+  }
+ },
+ "32b5fd4": {
+  "summary": "Caches hero cards, creates health-change signals and stores initial player and enemy health values.",
+  "renames": {
+   "uVar1": "initialHealth",
+   "uStack_70": "healthValue",
+   "uStack_68": "healthInitedFlag",
+   "uStack_60": "healthFakeActiveFlag",
+   "lVar2_2": "healthSourceCard",
+   "plVar5": "cardPtr"
+  }
+ },
+ "32b61fc": {
+  "summary": "Each frame checks whether enemy or player hero health changed and raises the matching health-change signal with the delta.",
+  "renames": {
+   "iVar1": "observedHealth",
+   "uVar2": "newHealth",
+   "uVar3": "hasCard",
+   "uStack_c0": "playerNewHealthValue",
+   "uStack_b8": "playerNewInited",
+   "uStack_b0": "playerNewFakeActive",
+   "uStack_a0": "playerCheckValue",
+   "uStack_98": "playerCheckInited",
+   "uStack_90": "playerCheckFakeActive",
+   "uStack_80": "enemyNewHealthValue",
+   "uStack_78": "enemyNewInited",
+   "uStack_70": "enemyNewFakeActive",
+   "uStack_60": "enemyCheckValue",
+   "uStack_58": "enemyCheckInited",
+   "uStack_50": "enemyCheckFakeActive"
+  }
+ },
+ "32b6200": {
+  "summary": "Checks whether enemy or player hero health changed and raises the matching health-change signal with the delta.",
+  "renames": {
+   "iVar1": "observedHealth",
+   "uVar2": "newHealth",
+   "uVar3": "hasCard",
+   "uStack_c0": "playerNewHealthValue",
+   "uStack_b8": "playerNewInited",
+   "uStack_b0": "playerNewFakeActive",
+   "uStack_a0": "playerCheckValue",
+   "uStack_98": "playerCheckInited",
+   "uStack_90": "playerCheckFakeActive",
+   "uStack_80": "enemyNewHealthValue",
+   "uStack_78": "enemyNewInited",
+   "uStack_70": "enemyNewFakeActive",
+   "uStack_60": "enemyCheckValue",
+   "uStack_58": "enemyCheckInited",
+   "uStack_50": "enemyCheckFakeActive"
+  }
+ },
+ "32b6948": {
+  "summary": "Registers the OnHealthChange handler for EnemyHealthChangeSignal with the signal broker.",
+  "renames": {
+   "lVar5": "brokerClass",
+   "uVar8": "typeHandleClass",
+   "lVar3": "methodInfo",
+   "puVar4": "methodKlass",
+   "uVar6": "interfaceCount",
+   "piVar7": "interfaceEntry"
+  }
+ },
+ "32b6a78": {
+  "summary": "Unregisters the OnHealthChange handler for EnemyHealthChangeSignal from the signal broker.",
+  "renames": {
+   "lVar5": "brokerClass",
+   "uVar8": "typeHandleClass",
+   "lVar3": "methodInfo",
+   "puVar4": "methodKlass",
+   "uVar6": "interfaceCount",
+   "piVar7": "interfaceEntry"
+  }
+ },
+ "32b69dc": {
+  "summary": "On enemy health change, computes damage since lowest health and invokes the OnScore UnityEvent with it.",
+  "renames": {
+   "lVar9": "castCheckClass",
+   "iStack_64": "boxedDeltaHealth",
+   "lVar8": "invokableClass",
+   "plVar12": "argsArray",
+   "puVar10": "persistentCallGroupSlot"
+  }
+ },
+ "32b705c": {
+  "summary": "Static constructor creating the singleton compiler-generated closure class instance.",
+  "renames": {
+   "uVar1": "closureInstance"
+  }
+ },
+ "32b6be4": {
+  "summary": "Loads the milestone thresholds, registers the health-change handler and initialises the skull counter UI.",
+  "renames": {
+   "plVar6": "configPtr",
+   "iVar1": "milestoneCount"
+  }
+ },
+ "32b6d74": {
+  "summary": "Counts the thresholds matching a cached predicate using inlined LINQ Count (decompiler output is mostly iterator and exception noise).",
+  "renames": {
+   "plVar4": "countMethod",
+   "lVar9": "classPtr",
+   "plVar11": "genericClass",
+   "ppuVar12": "defaultIfEmptyClassPtr",
+   "puVar13": "interfaceSlot",
+   "lVar14": "objectClass",
+   "pplVar15": "enumeratorSlotPtr",
+   "puStack_c8": "argFrame",
+   "plStack_50": "pendingException",
+   "plVar10": "sourceArg",
+   "in_x3": "extraArg3",
+   "plStack_38": "enumerator",
+   "puVar7": "argumentName",
+   "uVar17": "matchCount",
+   "piVar20": "interfaceEntry",
+   "pplStack_48": "enumeratorPtr",
+   "lStack_b8": "stackGuard",
+   "auVar31": "thrownValue31",
+   "auVar3": "scratchResult3",
+   "auVar28": "scratchResult28",
+   "aplStack_e0": "exceptionFrame",
+   "uVar19": "enumeratorObject",
+   "puVar6": "interfaceSlot2",
+   "plVar22_2": "disposableObject",
+   "lVar23_4": "threadLocal",
+   "plVar16": "genericArgs",
+   "uVar25": "elementSize",
+   "puVar26": "stackBuffer",
+   "uStack_d0": "sourceEnumerator",
+   "auVar29": "scratchResult29",
+   "uVar18": "interfaceCountInner",
+   "puStack_c8_2": "argFrameValue",
+   "cStack_bc": "moveNextResult",
+   "plVar4_2": "classScratch",
+   "uVar24_4": "predicateArg",
+   "auVar30": "scratchResult30",
+   "uVar2": "valueTypeFlag",
+   "puVar1": "copySource",
+   "puVar13_2": "copiedValue",
+   "pcVar27": "iteratorMethod",
+   "auVar3_x1": "scratchX3",
+   "auVar28_x1": "scratchX28",
+   "auVar31_part8": "thrownPart",
+   "auVar29_x1": "scratchX29",
+   "auVar30_x1": "scratchX30"
+  }
+ },
+ "32b6e70": {
+  "summary": "Counts how many threshold entries have a value at or above ownLife; later code is decompiler noise from an unrelated tail.",
+  "renames": {
+   "lVar2": "thresholdsCopy",
+   "lVar4": "thresholdEntry",
+   "auVar8": "thrownValue1",
+   "auVar9": "thrownValue2",
+   "auVar9_part8": "thrownPart2",
+   "auVar8_x1": "thrownPart1"
+  }
+ },
+ "32b6ed8": {
+  "summary": "On enemy health change, marks thresholds reached by current health and updates the UI milestone count.",
+  "renames": {
+   "auVar3": "thrownValue",
+   "lVar2": "thresholdEntry",
+   "auVar3_part8": "thrownPart"
+  }
+ },
+ "32b6f98": {
+  "summary": "Updates the milestone count text to show skullCount plus one.",
+  "renames": {
+   "iStack_24": "newSkullCount"
+  }
+ },
+ "32b6fb0": {
+  "summary": "Constructor that sets targetThresholds to an empty array.",
+  "renames": {
+   "lVar1": "emptyMethod",
+   "lVar2": "emptyKlass"
+  }
+ },
+ "32b6d18": {
+  "summary": "Initialises the milestone UI, showing or hiding icon and text and setting the count text to x0.",
+  "renames": {
+   "uStack_24": "zeroCount"
+  }
+ },
+ "32b7180": {
+  "summary": "Creates a milestone icon for each threshold, and contains an inlined score-up animation (move, punch, rotate tweens) for the UI.",
+  "renames": {
+   "lVar6": "classOrException",
+   "pplVar8": "enumeratorSlot",
+   "lVar9": "displayClass",
+   "puVar10": "scaleAddress",
+   "uVar11": "moveNextResult",
+   "fVar16": "scaleFactor",
+   "lStack_68": "pendingException",
+   "plStack_58": "enumeratorStorage",
+   "pplStack_60": "enumeratorStoragePtr",
+   "plVar3_2": "iconTarget",
+   "auVar20": "unwindResult",
+   "auVar19": "catchResult",
+   "piVar12": "interfaceEntry",
+   "auVar20_part8": "unwindPart",
+   "auVar19_x1": "catchPart"
+  }
+ }
+}

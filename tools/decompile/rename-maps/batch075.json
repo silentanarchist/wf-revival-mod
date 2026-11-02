@@ -1,0 +1,471 @@
+{
+ "2f84d08": {
+  "summary": "Unsubscribes the chat button press handlers when destroyed and (via decompiler noise) resets the popup rect position.",
+  "renames": {
+   "afStack_68": "anchoredPos",
+   "auVar6_2": "unused1",
+   "auVar6_x1": "unused2",
+   "in_s1": "anchorY",
+   "lStack_58": "savedSelf",
+   "lStack_60_2": "savedRect",
+   "plVar3": "rectSlot"
+  }
+ },
+ "2f84de4": {
+  "summary": "Caches the popup RectTransform, records its original and off-screen anchored positions, and moves it to the off-screen position.",
+  "renames": {
+   "afStack_18": "anchoredPos",
+   "in_s1": "anchorY",
+   "lVar1_3": "rectTransform",
+   "plVar3": "rectSlot"
+  }
+ },
+ "2f82b10": {
+  "summary": "Sets up each chat button with the warlord voice lines, press handler, text and availability based on match type.",
+  "renames": {
+   "puVar5": "loggerMethod",
+   "uVar3": "hasWarlord",
+   "uVar6": "unused1"
+  }
+ },
+ "2f84f4c": {
+  "summary": "Refreshes the chat button texts and interactability from the player warlord (or secret identity); decompiler output is mostly LINQ noise.",
+  "renames": {
+   "acStack_18c": "savedFlags1",
+   "auStack_e8": "savedTuple1",
+   "auVar1": "tupleVal1",
+   "auVar1_x1": "tupleVal2",
+   "auVar28": "tupleVal3",
+   "auVar28_part8": "rawArg",
+   "auVar29_x1": "tupleVal4",
+   "auVar30": "tupleVal5",
+   "auVar30_x1": "tupleVal6",
+   "auVar31": "tupleVal7",
+   "auVar31_x1": "tupleVal8",
+   "extraout_w1": "unused1",
+   "lStack_38": "savedRef1",
+   "lVar14": "classInfo1",
+   "lVar15": "classInfo2",
+   "lVar4_3": "displayClass",
+   "lVar4_4": "classInfo3",
+   "pcStack_100": "savedFunc1",
+   "pcStack_60": "savedFunc2",
+   "pcStack_b0": "savedFunc3",
+   "pcVar17": "funcPtr1",
+   "piVar18": "interfaceEntry",
+   "plStack_108": "savedObj1",
+   "plStack_118": "savedObj2",
+   "plStack_198": "savedObj3",
+   "plStack_198_2": "savedObj4",
+   "plStack_198_3": "savedObj5",
+   "plStack_1a0": "savedObj6",
+   "plStack_1b0": "savedObj7",
+   "plStack_40": "savedObj8",
+   "plStack_48": "savedObj9",
+   "plStack_50": "savedObj10",
+   "plStack_68": "savedObj11",
+   "plStack_78": "savedObj12",
+   "plStack_90": "savedObj13",
+   "plStack_98": "savedObj14",
+   "plStack_a0": "savedObj15",
+   "plStack_b8": "savedObj16",
+   "plStack_c8": "savedObj17",
+   "plStack_f0": "savedObj18",
+   "plVar13": "chatText",
+   "plVar19_3": "objRef1",
+   "plVar20": "chatButton",
+   "plVar20_3": "objRef2",
+   "plVar22_3": "objRef3",
+   "plVar23_3": "objRef4",
+   "plVar7_2": "objRef5",
+   "pplStack_110": "savedSlot1",
+   "pplStack_1a8": "savedSlot2",
+   "pplStack_70": "savedSlot3",
+   "pplStack_c0": "savedSlot4",
+   "pplVar16": "enumeratorSlot1",
+   "puStack_58": "savedPtr1",
+   "puStack_a8": "savedPtr2",
+   "puStack_f8": "savedPtr3",
+   "puVar11": "vtableEntry1",
+   "puVar12": "vtableEntry2",
+   "puVar25": "indexSlot",
+   "puVar8": "vtableEntry3",
+   "puVar9": "vtableEntry4",
+   "uStack_88": "savedInt1",
+   "uStack_d8": "savedInt2",
+   "uVar10": "intVal1",
+   "uVar10_3": "intVal2",
+   "uVar21": "intVal3",
+   "uVar24": "indexX",
+   "uVar27": "intVal4",
+   "uVar3": "currentType"
+  }
+ },
+ "2f83d70": {
+  "summary": "Updates chat buttons with a transformed warlord voice lines and sets their availability by match type.",
+  "renames": {
+   "lVar2_2": "allowedMatchTypes",
+   "this_00": "scratchResult"
+  }
+ },
+ "2f84f34": {
+  "summary": "Checks whether the match type of the match data is one of the allowed match types via a LINQ Any call.",
+  "renames": {
+   "acStack_15c": "savedFlags1",
+   "auStack_b8": "savedTuple1",
+   "auVar2": "tupleVal1",
+   "auVar26": "tupleVal2",
+   "auVar26_part8": "rawArg",
+   "auVar27": "tupleVal3",
+   "auVar27_x1": "tupleVal4",
+   "auVar28": "tupleVal5",
+   "auVar28_x1": "tupleVal6",
+   "auVar29": "tupleVal7",
+   "auVar29_x1": "tupleVal8",
+   "auVar2_x1": "tupleVal9",
+   "bVar3": "anyMatch",
+   "lStack_158": "savedRef1",
+   "lVar13": "classInfo1",
+   "lVar14": "classInfo2",
+   "lVar5": "displayClass",
+   "lVar5_2": "classInfo3",
+   "lVar5_3": "classInfo4",
+   "lVar5_4": "classInfo5",
+   "lVar5_5": "classInfo6",
+   "lVar5_6": "classInfo7",
+   "pcStack_80": "savedFunc1",
+   "pcStack_d0": "savedFunc2",
+   "pcVar17": "funcPtr1",
+   "piVar19": "interfaceEntry",
+   "plStack_168": "savedObj1",
+   "plStack_170": "savedObj2",
+   "plStack_180": "savedObj3",
+   "plStack_38": "savedObj4",
+   "plStack_48": "savedObj5",
+   "plStack_60": "savedObj6",
+   "plStack_88": "savedObj7",
+   "plStack_98": "savedObj8",
+   "plStack_d8": "savedObj9",
+   "plStack_e8": "savedObj10",
+   "plVar12": "methodInfo",
+   "plVar15": "objRef1",
+   "plVar20": "objRef2",
+   "plVar20_2": "objRef3",
+   "plVar22": "objRef4",
+   "plVar23": "objRef5",
+   "plVar24": "objRef6",
+   "plVar6_2": "objRef7",
+   "pplStack_178": "savedSlot1",
+   "pplStack_40": "savedSlot2",
+   "pplStack_90": "savedSlot3",
+   "pplStack_e0": "savedSlot4",
+   "pplVar16": "enumeratorSlot1",
+   "puVar10": "vtableEntry1",
+   "puVar11": "vtableEntry2",
+   "puVar7": "vtableEntry3",
+   "puVar8": "vtableEntry4",
+   "uStack_58": "savedInt1",
+   "uStack_68": "savedInt2",
+   "uStack_a8": "savedInt3",
+   "uVar1": "intVal1",
+   "uVar18": "interfaceCount",
+   "uVar21": "matchFlag",
+   "uVar25": "matchFlag2",
+   "uVar9": "intVal2",
+   "uVar9_3": "intVal3",
+   "unaff_x22": "currentEnumerator",
+   "unaff_x23": "unused1"
+  }
+ },
+ "2f850e4": {
+  "summary": "Returns whether the given match type is contained in the array of possible match types using LINQ Any.",
+  "renames": {
+   "acStack_15c": "savedFlags1",
+   "auStack_b8": "savedTuple1",
+   "auVar2": "tupleVal1",
+   "auVar26": "tupleVal2",
+   "auVar26_part8": "rawArg",
+   "auVar27": "tupleVal3",
+   "auVar27_x1": "tupleVal4",
+   "auVar28": "tupleVal5",
+   "auVar28_x1": "tupleVal6",
+   "auVar29": "tupleVal7",
+   "auVar29_x1": "tupleVal8",
+   "auVar2_x1": "tupleVal9",
+   "bVar3": "anyMatch",
+   "lStack_158": "savedRef1",
+   "lVar13": "classInfo1",
+   "lVar14": "classInfo2",
+   "lVar5": "displayClass",
+   "lVar5_2": "classInfo3",
+   "lVar5_3": "classInfo4",
+   "lVar5_4": "classInfo5",
+   "lVar5_5": "classInfo6",
+   "lVar5_6": "classInfo7",
+   "pcStack_80": "savedFunc1",
+   "pcStack_d0": "savedFunc2",
+   "pcVar17": "funcPtr1",
+   "piVar19": "interfaceEntry",
+   "plStack_168": "savedObj1",
+   "plStack_170": "savedObj2",
+   "plStack_180": "savedObj3",
+   "plStack_38": "savedObj4",
+   "plStack_48": "savedObj5",
+   "plStack_60": "savedObj6",
+   "plStack_88": "savedObj7",
+   "plStack_98": "savedObj8",
+   "plStack_d8": "savedObj9",
+   "plStack_e8": "savedObj10",
+   "plVar12": "methodInfo",
+   "plVar15": "objRef1",
+   "plVar20": "objRef2",
+   "plVar20_2": "objRef3",
+   "plVar22": "objRef4",
+   "plVar23": "objRef5",
+   "plVar24": "objRef6",
+   "plVar6_2": "objRef7",
+   "pplStack_178": "savedSlot1",
+   "pplStack_40": "savedSlot2",
+   "pplStack_90": "savedSlot3",
+   "pplStack_e0": "savedSlot4",
+   "pplVar16": "enumeratorSlot1",
+   "puVar10": "vtableEntry1",
+   "puVar11": "vtableEntry2",
+   "puVar7": "vtableEntry3",
+   "puVar8": "vtableEntry4",
+   "uStack_58": "savedInt1",
+   "uStack_68": "savedInt2",
+   "uStack_a8": "savedInt3",
+   "uVar1": "intVal1",
+   "uVar18": "interfaceCount",
+   "uVar21": "matchFlag",
+   "uVar25": "matchFlag2",
+   "uVar4": "currentType",
+   "uVar9": "intVal2",
+   "uVar9_3": "intVal3",
+   "unaff_x22": "currentEnumerator",
+   "unaff_x23": "unused1"
+  }
+ },
+ "2f8525c": {
+  "summary": "Kills any running tween, then slides the popup off-screen and fades it out, invoking a callback on completion.",
+  "renames": {
+   "auVar6": "isPlaying",
+   "auVar6_x1": "unused1",
+   "plVar5": "tweenSlot"
+  }
+ },
+ "2f853e4": {
+  "summary": "Kills any running tween, then slides the popup to its original position and fades it in.",
+  "renames": {
+   "auVar5": "isPlaying",
+   "auVar5_x1": "unused1",
+   "plVar4": "tweenSlot"
+  }
+ },
+ "2f85840": {
+  "summary": "Throws NotSupportedException because Reset is not supported on this coroutine iterator.",
+  "renames": {
+   "uVar2": "methodInfo"
+  }
+ },
+ "2f85514": {
+  "summary": "Hides the background image object and sets up the text object of the your-turn banner.",
+  "renames": {
+   "auVar3_x1": "unused1"
+  }
+ },
+ "2f85564": {
+  "summary": "Creates and returns the DisplaySign coroutine iterator bound to this YourTurnUI.",
+  "renames": {
+   "lVar1": "enumerator"
+  }
+ },
+ "2f855f8": {
+  "summary": "Accesses the text game object to finish the your-turn banner animation.",
+  "renames": {
+   "auVar3_x1": "unused1"
+  }
+ },
+ "2f94928": {
+  "summary": "Returns a random whitelisted avatar id from all avatars, falling back to the default; decompiler merged in neighbouring functions.",
+  "renames": {
+   "auVar22": "cardLevelConfigRef",
+   "auVar22_part8": "botRank",
+   "auVar23": "configSelf",
+   "auVar23_x1": "uniqueIdList",
+   "fStack_198": "tierChance",
+   "fVar21": "tierBaseChance",
+   "lStack_150": "savedRef1",
+   "lStack_70": "savedRef2",
+   "lStack_78": "savedRef3",
+   "lStack_80": "savedRef4",
+   "lStack_e0": "savedRef5",
+   "lStack_e8_2": "savedRef6",
+   "lStack_f0": "savedRef7",
+   "lVar11": "addMethod",
+   "lVar9": "avatarEnumClass",
+   "lVar9_2": "currentAvatar",
+   "lVar9_3": "currentEntry",
+   "pcStack_140": "savedFunc1",
+   "pcStack_d0": "savedFunc2",
+   "pfVar14": "chanceFieldPtr",
+   "piVar15": "interfaceEntry",
+   "plStack_100": "savedObj1",
+   "plStack_138": "savedObj2",
+   "plStack_58": "savedObj3",
+   "plStack_90": "savedObj4",
+   "plStack_c8": "savedObj5",
+   "plVar4_3": "avatarEnumerator",
+   "plVar4_5": "titleEnumerator",
+   "plVar4_7": "cardbackEnumerator",
+   "pplStack_148": "savedSlot1",
+   "pplStack_68": "savedSlot2",
+   "pplStack_d8": "savedSlot3",
+   "pplVar12": "enumeratorHolder",
+   "puStack_108": "savedPtr1",
+   "puStack_120": "savedPtr2",
+   "puStack_128": "savedPtr3",
+   "puStack_130": "savedPtr4",
+   "puStack_98": "savedPtr5",
+   "puStack_b0": "savedPtr6",
+   "puStack_b8": "savedPtr7",
+   "puStack_c0": "savedPtr8",
+   "puVar20": "titleWhitelist",
+   "uStack_194": "tierX",
+   "uStack_88": "savedInt1",
+   "uStack_f8": "savedInt2",
+   "uVar1": "nextTier",
+   "uVar17_3": "resultTierCopy",
+   "uVar18": "resultTier"
+  }
+ },
+ "2f94d9c": {
+  "summary": "Returns a random whitelisted title id from the player cosmetic collection, falling back to the default title.",
+  "renames": {
+   "auVar21": "cardLevelConfigRef",
+   "auVar21_part8": "botRank",
+   "auVar22": "configSelf",
+   "auVar22_x1": "tupleVal1",
+   "fStack_128": "tierChance",
+   "fVar20": "tierBaseChance",
+   "lStack_70": "savedRef1",
+   "lStack_78": "savedRef2",
+   "lStack_80": "savedRef3",
+   "lStack_e0": "savedRef4",
+   "lVar10": "enumClass",
+   "lVar12": "addMethod",
+   "pcStack_d0": "savedFunc1",
+   "pfVar15": "chanceFieldPtr",
+   "piVar16": "interfaceEntry",
+   "plStack_58": "savedObj1",
+   "plStack_90": "savedObj2",
+   "plStack_c8": "savedObj3",
+   "plVar5_3": "titleEnumerator",
+   "plVar5_5": "cardbackEnumerator",
+   "pplStack_68": "savedSlot1",
+   "pplStack_d8": "savedSlot2",
+   "pplVar13": "enumeratorHolder",
+   "puStack_98": "savedPtr1",
+   "puStack_b0": "savedPtr2",
+   "puStack_b8": "savedPtr3",
+   "puStack_c0": "savedPtr4",
+   "uStack_124": "tierX",
+   "uStack_88": "savedInt1",
+   "uVar1": "nextTier",
+   "uVar17_3": "resultTierCopy",
+   "uVar18": "resultTier"
+  }
+ },
+ "2f95228": {
+  "summary": "Returns a random whitelisted cardback id from the cosmetic collection, falling back to the default cardback.",
+  "renames": {
+   "auVar19": "cardLevelConfigRef",
+   "auVar19_part8": "botRank",
+   "fStack_b8": "tierChance",
+   "fVar18": "tierBaseChance",
+   "lStack_70": "savedRef1",
+   "lVar9": "enumClass",
+   "pfVar13": "chanceFieldPtr",
+   "piVar14": "interfaceEntry",
+   "plStack_58": "savedObj1",
+   "plVar5_3": "enumerator",
+   "pplStack_68": "savedSlot1",
+   "pplVar11": "enumeratorHolder",
+   "uStack_b4": "tierX",
+   "uVar1": "nextTier",
+   "uVar15_3": "resultTierCopy",
+   "uVar16": "resultTier"
+  }
+ },
+ "2f956b4": {
+  "summary": "Rolls the bot card tier for a given bot rank by testing tier chances scaled by rank, returning the highest passing tier.",
+  "renames": {
+   "fStack_48": "tierChance",
+   "fVar8": "tierBaseChance",
+   "iStack_44": "tierIndex",
+   "iVar1": "nextTier",
+   "iVar2_2": "currentTier",
+   "iVar2_3": "resultTier",
+   "pfVar6": "chanceFieldPtr"
+  }
+ },
+ "2f84568": {
+  "summary": "Returns true randomly based on the configured chance that the AI replies to an emote.",
+  "renames": {
+   "fVar1": "roll"
+  }
+ },
+ "2f845a0": {
+  "summary": "Returns true randomly based on the configured chance that the AI emotes after an action.",
+  "renames": {
+   "fVar1": "roll"
+  }
+ },
+ "2f845d8": {
+  "summary": "Returns a random emote reply delay between the configured minimum and maximum.",
+  "renames": {
+   "auVar5": "unused1",
+   "auVar5_x1": "unused2",
+   "fVar3": "randomDelay"
+  }
+ },
+ "2f95818": {
+  "summary": "Returns a random first-action delay between the configured minimum and maximum.",
+  "renames": {
+   "auVar5": "unused1",
+   "auVar5_x1": "unused2",
+   "fVar3": "randomDelay"
+  }
+ },
+ "2f95834": {
+  "summary": "Returns a random action delay between the configured minimum and maximum.",
+  "renames": {
+   "auVar5": "unused1",
+   "auVar5_x1": "unused2",
+   "fVar3": "randomDelay"
+  }
+ },
+ "2f95850": {
+  "summary": "Returns a random end-turn delay between the configured minimum and maximum.",
+  "renames": {
+   "auVar5": "unused1",
+   "auVar5_x1": "unused2",
+   "fVar3": "randomDelay"
+  }
+ },
+ "2fa0630": {
+  "summary": "Singleton setup: keeps the first instance, destroying this object if another instance already exists.",
+  "renames": {
+   "uVar1": "isOtherInstance",
+   "uVar3": "existingInstance"
+  }
+ },
+ "2fa0790": {
+  "summary": "Clears the singleton reference if this instance is the registered one.",
+  "renames": {
+   "uVar1": "isThisInstance",
+   "uVar2": "existingInstance"
+  }
+ }
+}

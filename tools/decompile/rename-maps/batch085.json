@@ -1,0 +1,453 @@
+{
+ "304fe80": {
+  "summary": "Handles the debug Win button: closes the window, and in offline battles ends the match, records the result and saves it.",
+  "renames": {
+   "uStack_70": "scratch3",
+   "uStack_78": "scratch2",
+   "uStack_80": "scratch1",
+   "uStack_90": "scratch4",
+   "uStack_a8": "scratch5",
+   "uStack_c0": "enemyHealthFake",
+   "uStack_c8": "enemyHealthInited",
+   "uStack_d0_2": "enemyHealthValue",
+   "uStack_e0": "playerHealthFake",
+   "uStack_e8": "playerHealthInited",
+   "uStack_f0_2": "playerHealthValue",
+   "abStack_44": "isPlayerDeadFlag",
+   "auStack_58": "nowTime",
+   "iVar3_2": "playerHealthArg",
+   "auVar16_2": "falseFlag",
+   "auVar16_part8": "falseFlagInited",
+   "dVar15": "elapsedMinutes",
+   "lVar4_5": "leaderboardClass",
+   "lVar4_8": "matchResultRef",
+   "piVar12": "interfaceMapPtr",
+   "uVar2_3": "enemyHealthDelta",
+   "uVar7": "flagOrCount",
+   "auVar16_x1": "unused1",
+   "uVar2": "unusedDevToolsFlag",
+   "uVar5_2": "battleMgr"
+  }
+ },
+ "3050008": {
+  "summary": "Skips the tutorial from the settings window by ending the tutorial battle as a win and saving the result.",
+  "renames": {
+   "uStack_70": "scratch3",
+   "uStack_78": "scratch2",
+   "uStack_80": "scratch1",
+   "uStack_90": "scratch4",
+   "uStack_a8": "scratch5",
+   "uStack_c0": "enemyHealthFake",
+   "uStack_c8": "enemyHealthInited",
+   "uStack_d0_2": "enemyHealthValue",
+   "uStack_e0": "playerHealthFake",
+   "uStack_e8": "playerHealthInited",
+   "uStack_f0_2": "playerHealthValue",
+   "abStack_44": "isPlayerDeadFlag",
+   "auStack_58": "nowTime",
+   "iVar3_2": "playerHealthArg",
+   "auVar14_2": "falseFlag",
+   "auVar14_part8": "falseFlagInited",
+   "dVar13": "elapsedMinutes",
+   "lVar4_5": "leaderboardClass",
+   "lVar4_8": "matchResultRef",
+   "piVar11": "interfaceMapPtr",
+   "uVar2_3": "enemyHealthDelta",
+   "uVar6": "flagOrCount",
+   "auVar14_x1": "unused1"
+  }
+ },
+ "30500cc": {
+  "summary": "Skips the tutorial if the current match is a tutorial, ending the battle as a win, recording and saving the result.",
+  "renames": {
+   "uStack_70": "scratch3",
+   "uStack_78": "scratch2",
+   "uStack_80": "scratch1",
+   "uStack_90": "scratch4",
+   "uStack_a8": "scratch5",
+   "uStack_c0": "enemyHealthFake",
+   "uStack_c8": "enemyHealthInited",
+   "uStack_d0_2": "enemyHealthValue",
+   "uStack_e0": "playerHealthFake",
+   "uStack_e8": "playerHealthInited",
+   "uStack_f0_2": "playerHealthValue",
+   "abStack_44": "isPlayerDeadFlag",
+   "auStack_58": "nowTime",
+   "iVar3_2": "playerHealthArg",
+   "auVar17": "falseFlag",
+   "auVar17_part8": "falseFlagInited",
+   "dVar16": "elapsedMinutes",
+   "lVar5_3": "leaderboardClass",
+   "lVar5_6": "matchResultRef",
+   "piVar14": "interfaceMapPtr",
+   "uVar2_3": "enemyHealthDelta",
+   "uVar8": "flagOrCount",
+   "iVar3_3": "enemySkullCount",
+   "uVar2": "unusedDevToolsFlag"
+  }
+ },
+ "304ff44": {
+  "summary": "Closes the settings window and resigns the player's battle, notifying the opponent, handling replays and tutorial/campaign resign rules.",
+  "renames": {
+   "auVar5_x1": "unused1",
+   "extraout_x1_00": "unused2"
+  }
+ },
+ "3050240": {
+  "summary": "Toggles combat auto-zoom and updates the combat camera's target zoom level accordingly.",
+  "renames": {
+   "fVar4": "clampedUpper"
+  }
+ },
+ "30502f0": {
+  "summary": "Opens the battle settings window, configuring the skip button, sliders, toggles, language selector and small-screen scaling.",
+  "renames": {
+   "bVar1": "isScaled",
+   "fVar10": "epsilonScaled",
+   "fVar8": "absScale",
+   "fVar9": "tolerance",
+   "lVar3_5": "existingController",
+   "lVar3_8": "newController",
+   "uVar4": "hasObject"
+  }
+ },
+ "3050670": {
+  "summary": "Constructor for the settings window; sets defaults and assigns cached open/close delegates.",
+  "renames": {
+   "iVar1": "staticInitFlag",
+   "puVar3": "windowStatics"
+  }
+ },
+ "3058d08": {
+  "summary": "Constructor for a battle log match entry with default season, loss, match type and replay version values.",
+  "renames": {
+   "uVar1": "defaultReplaysVersion"
+  }
+ },
+ "3058d80": {
+  "summary": "Constructor that copies match data (type, mode, rng numbers, decks, logs, mulligans) into a battle recording.",
+  "renames": {
+   "uVar1": "eventPlayMode"
+  }
+ },
+ "305acec": {
+  "summary": "Logs the contents of the match data including player ID, play mode, match type and both players' battle data.",
+  "renames": {
+   "uStack_60": "scratch1",
+   "uStack_78": "scratch2",
+   "uVar2": "enumText"
+  }
+ },
+ "305aea4": {
+  "summary": "Constructor for match data: sets defaults, determines match type, generates random numbers, sets player deck and optionally a bot opponent.",
+  "renames": {
+   "puVar6": "playerBattleDataRef",
+   "uStack_a0": "playerIdCopy"
+  }
+ },
+ "305b2e8": {
+  "summary": "Sets up a bot opponent: converts match type to its bot variant, picks or builds the bot deck, and applies random name, cosmetics and levels.",
+  "renames": {
+   "uVar2": "matchTypeOffset",
+   "uVar5": "flag",
+   "uVar7": "bitMask"
+  }
+ },
+ "305bce0": {
+  "summary": "Sets the bot's deck data from a prebuilt deck and shuffles its card list unless in a tutorial.",
+  "renames": {
+   "lVar1_4": "cardLibrary",
+   "lVar2": "enemyData",
+   "plVar3": "deckDataRef"
+  }
+ },
+ "305c32c": {
+  "summary": "Returns a deterministic pseudo-random int in a range from the stored random number array; decompiler also merged an unrelated block from the next function.",
+  "renames": {
+   "auVar17": "throwResult",
+   "auVar17_x1": "recordArg",
+   "iVar5": "rawValue",
+   "iVar6": "span",
+   "lVar13": "sourceRecord",
+   "lVar13_3": "eventData",
+   "lVar16": "deckSource",
+   "piVar15": "interfaceMapPtr",
+   "uVar11": "field50",
+   "uVar3": "field4c",
+   "uVar4": "wrappedIndex"
+  }
+ },
+ "305c3e4": {
+  "summary": "Loads a battle recording into the match data: rng numbers, decks, action logs, mulligans, and the gameplay data of the active event.",
+  "renames": {
+   "iVar2": "staticInitFlag",
+   "lVar4_3": "fallbackEventClass",
+   "lVar4_5": "playEventData",
+   "piVar9": "interfaceMapPtr",
+   "uVar8": "interfaceCount"
+  }
+ },
+ "305b26c": {
+  "summary": "Stores the player's id and forwards a copy of the player battle data to SetPlayerDeck.",
+  "renames": {
+   "auStack_98": "playerBattleDataCopy"
+  }
+ },
+ "305c6a4": {
+  "summary": "Creates the player's raw battle data from the deck, sets player data and hero, and shuffles the card library unless in a tutorial.",
+  "renames": {
+   "auStack_a8": "playerDataCopy",
+   "lVar2": "playerDataArg",
+   "lVar2_2": "cardLibrary",
+   "lVar3": "rawDeckData",
+   "plVar1": "rawBattleDataRef"
+  }
+ },
+ "305b190": {
+  "summary": "Fills an array of 100 random numbers (0 to 1000) for the match and resets the index; tail is a merged SetPlayerData fragment.",
+  "renames": {
+   "auStack_c8": "playerDataCopy",
+   "auVar6_x1": "matchTypeArg",
+   "lStack_38": "savedThis",
+   "lStack_48": "savedArray",
+   "lVar2_2": "randomArray",
+   "lVar3": "elementPtr",
+   "pcStack_60": "returnAddr",
+   "plStack_40": "savedFieldPtr",
+   "plVar4": "fieldPtr",
+   "uStack_50": "savedIndex"
+  }
+ },
+ "305b0dc": {
+  "summary": "Maps a play mode to its match type using a lookup table, logging an error for unknown modes.",
+  "renames": {
+   "iStack_28": "savedPlayMode",
+   "uStack_30": "scratch1",
+   "uVar2": "playModeText"
+  }
+ },
+ "305bf24": {
+  "summary": "Randomizes the bot enemy's avatar, title and cardback from the config.",
+  "renames": {
+   "lVar2": "randomValue"
+  }
+ },
+ "305c030": {
+  "summary": "Assigns random card tiers to bot deck cards (and warlord) that lack one, based on the bot's Elo rating.",
+  "renames": {
+   "puStack_68": "enumScratch2",
+   "puStack_80": "enumScratch3",
+   "uStack_60": "currentCard",
+   "uStack_70": "enumeratorCopy",
+   "uStack_78": "scratch1",
+   "uVar3_9": "warlordTier",
+   "uVar6": "currentCardKey"
+  }
+ },
+ "305beb4": {
+  "summary": "Returns whether a bot should get random cosmetics and levels for this match type (false for practice, tutorial, closed-deck bot, replay).",
+  "renames": {
+   "iVar2": "excludedMatchType"
+  }
+ },
+ "305bdbc": {
+  "summary": "Returns whether a bot should get a random name for this match type using a bitmask of excluded types.",
+  "renames": {
+   "uVar1": "typeOffset",
+   "uVar3": "bitMask"
+  }
+ },
+ "305b7f0": {
+  "summary": "Chooses a bot deck for the match type from tutorial, campaign or prebuilt collections, filtering hidden/banned decks and picking one at random.",
+  "renames": {
+   "auVar21_x1": "unused1",
+   "bVar3": "hasRestriction",
+   "iVar4": "eventResult",
+   "iVar5": "countOrInit",
+   "lStack_70": "currentDeck",
+   "lStack_88": "scratch1",
+   "lVar16": "classOrDeck",
+   "lVar9": "eventClass",
+   "lVar9_7": "displayClass",
+   "piVar18": "interfaceMapPtr",
+   "plVar20": "currentDeckRef",
+   "puStack_78": "enumScratch1",
+   "puStack_90": "enumScratch2",
+   "puVar12": "interfaceSlot",
+   "uStack_80": "enumeratorCopy"
+  }
+ },
+ "305cd80": {
+  "summary": "Picks a prebuilt ranked bot deck by difficulty derived from the player's ranked division, logging an error if none is found.",
+  "renames": {
+   "uVar7": "messageOrArg",
+   "uVar8": "deckFound"
+  }
+ },
+ "305d594": {
+  "summary": "Returns the bot skip chance from the FTUE or normal bot config.",
+  "renames": {
+   "pfVar3": "skipChancePtr"
+  }
+ },
+ "305d5d4": {
+  "summary": "Returns the bot's max skips from the FTUE or normal bot config.",
+  "renames": {
+   "piVar3": "maxSkipsPtr"
+  }
+ },
+ "305d614": {
+  "summary": "Returns the bot's min skips from the FTUE or normal bot config.",
+  "renames": {
+   "piVar3": "minSkipsPtr"
+  }
+ },
+ "305cba8": {
+  "summary": "Returns whether the player is still in the first-time-user experience, based on match type and current mode victories versus the FTUE list.",
+  "renames": {
+   "bVar1": "isInFtue",
+   "lStack_38": "currentFtueConfig",
+   "puStack_50": "enumeratorPtr",
+   "uStack_40": "scratch1",
+   "uStack_58": "scratch2",
+   "uVar4": "hasNext"
+  }
+ },
+ "305d0ac": {
+  "summary": "Finds the FTUE bot config matching the current mode victory count, falling back to the first entry.",
+  "renames": {
+   "lStack_58": "currentConfig",
+   "uStack_60": "scratch1",
+   "uVar3": "hasNext"
+  }
+ },
+ "305d290": {
+  "summary": "Finds the normal bot config whose loss-streak and score ranges match the player, falling back to the first entry.",
+  "renames": {
+   "iVar2": "currentScore",
+   "lStack_58": "currentBotConfig",
+   "uStack_60": "scratch1",
+   "uVar7": "hasNext"
+  }
+ },
+ "305c85c": {
+  "summary": "Finds the fast-mode bot config whose loss-streak and score ranges match the player, falling back to the first entry.",
+  "renames": {
+   "iVar2": "currentScore",
+   "lStack_58": "currentBotConfig",
+   "uStack_60": "scratch1",
+   "uVar7": "hasNext"
+  }
+ },
+ "305d6c0": {
+  "summary": "Returns the number of victories for the current play mode from the live-ops result counters.",
+  "renames": {
+   "plVar4": "modeNamePtr"
+  }
+ },
+ "305d958": {
+  "summary": "Returns health threshold milestones (20, 10, 0) for certain play modes, otherwise an empty array; decompiler merged in an unrelated fragment.",
+  "renames": {
+   "auVar7": "throwResult",
+   "auVar7_part8": "throwResultLow",
+   "lVar3": "emptyArrayMethod",
+   "lVar6": "arrayClass"
+  }
+ },
+ "305dbc4": {
+  "summary": "Constructor that builds match result data from a battle manager: rating or division, player and enemy results, location and elapsed time.",
+  "renames": {
+   "cVar2": "initFlag",
+   "lVar10_3": "rankedEventClass",
+   "lVar10_5": "fastModeEventClass",
+   "lVar7_3": "currentMillis",
+   "piVar11": "interfaceMapPtr",
+   "uVar1": "errorMessage",
+   "uVar6": "flagOrCount",
+   "uVar9": "unused1"
+  }
+ },
+ "305f834": {
+  "summary": "Constructor that creates empty score dictionaries, army stats and empty reward and rating boost arrays.",
+  "renames": {
+   "lVar2": "emptyArrayMethod",
+   "lVar3": "arrayClass"
+  }
+ },
+ "305fa48": {
+  "summary": "Constructor for a ranked match result that sets up online result data and stores starting rating and XP.",
+  "renames": {
+   "lVar1_2": "onlineResult",
+   "plVar3": "onlineResultRef"
+  }
+ },
+ "305fb90": {
+  "summary": "Returns the match score: 1 for player win, 0 for enemy win, 0.5 otherwise.",
+  "renames": {
+   "fVar1": "nonLossScore",
+   "fVar2": "winnerScore"
+  }
+ },
+ "3073ba4": {
+  "summary": "Callback after deck validation: on success starts a human opponent wait or bot battle match; on failure cancels the search and reports an error.",
+  "renames": {
+   "auVar11_3": "routineOwner",
+   "auVar11_x1": "coroutineHandle",
+   "lVar10": "runtimeHandle",
+   "lVar6_3": "eventClass",
+   "lVar6_6": "owner",
+   "piVar8": "interfaceMapPtr",
+   "puVar3": "interfaceSlot",
+   "unaff_x19": "unused1",
+   "unaff_x20": "unused2",
+   "unaff_x21": "unused3",
+   "unaff_x30": "unused4"
+  }
+ },
+ "307404c": {
+  "summary": "Coroutine Reset, which always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "methodRef"
+  }
+ },
+ "3074090": {
+  "summary": "Coroutine that waits for a human opponent, counting down each second and falling back to a bot battle or error when none is found.",
+  "renames": {
+   "lVar5": "playerDataObj",
+   "uStack_40": "initWaitFake",
+   "uStack_48": "initWaitHidden",
+   "uStack_50": "initWait",
+   "uStack_80": "decSrcWaitFake",
+   "uStack_88": "decSrcWaitHidden",
+   "uStack_90": "decSrcWait",
+   "uStack_98": "newWaitFake",
+   "uStack_a0": "newWaitHidden",
+   "uStack_a8": "newWait",
+   "uStack_b0": "currentWaitFake",
+   "uStack_b8": "currentWaitHidden",
+   "uStack_c0": "currentWait",
+   "uVar4": "waitObject"
+  }
+ },
+ "30744fc": {
+  "summary": "Coroutine Reset, which always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "methodRef"
+  }
+ },
+ "3070f74": {
+  "summary": "Photon view setup: removes and re-registers the view with the networking peer, checking for duplicate view IDs.",
+  "renames": {
+   "bVar2": "needsRegister",
+   "iVar1": "ownerIdValue",
+   "lStack_28": "existingView",
+   "puVar9": "logMethod"
+  }
+ },
+ "3070f90": {
+  "summary": "Returns whether the match type is a networked game type, using a bitmask lookup.",
+  "renames": {
+   "bVar1": "isNetworked"
+  }
+ }
+}

@@ -1,0 +1,163 @@
+{
+ "2f411c0": {
+  "summary": "Removes this card from the game: hides its UI, or if it is another card, clears its extrinsic effects, then applies pack bonuses and re-evaluates effects and combinations.",
+  "renames": {
+   "uStack_100": "dropPodHealthCopy",
+   "puStack_f8": "dropPodHealthInitedCopy",
+   "uStack_f0": "dropPodHealthFakeCopy",
+   "uStack_114": "newDropPodHealth",
+   "uStack_10c": "newDropPodHealthInited",
+   "uStack_104": "newDropPodHealthFake",
+   "uStack_130": "dropPodAttackCopy",
+   "puStack_128": "dropPodAttackInitedCopy",
+   "uStack_120": "dropPodAttackFakeCopy",
+   "uStack_144": "newDropPodAttack",
+   "uStack_13c": "newDropPodAttackInited",
+   "uStack_134": "newDropPodAttackFake",
+   "uStack_158": "resetDropPodAttack",
+   "uStack_150": "resetDropPodAttackInited",
+   "uStack_148": "resetDropPodAttackFake",
+   "uStack_d0": "healthCopy",
+   "puStack_c8": "healthInitedCopy",
+   "uStack_c0": "healthFakeCopy",
+   "uStack_e4": "clampedHealth",
+   "uStack_dc": "clampedHealthInited",
+   "uStack_d4": "clampedHealthFake",
+   "uStack_b4": "newHealth",
+   "uStack_ac": "newHealthInited",
+   "uStack_a4": "newHealthFake",
+   "uStack_a0": "healthCopyForHeal",
+   "puStack_98": "healthInitedCopyForHeal",
+   "uStack_90": "healthFakeCopyForHeal",
+   "uStack_70_2": "unknownBuffTypeArg",
+   "uVar10_2": "isSameCard",
+   "uVar13_5": "scratchFlag",
+   "uVar13_7": "hasEffectEnchantment",
+   "lVar11_13": "effectAtIndex",
+   "plVar17": "traitSlotPtr",
+   "auVar22_x1": "scratchContext",
+   "iVar7_7": "dropPodStatRead",
+   "iVar7_8": "clampedHealthValue",
+   "iVar7_9": "effectIndex",
+   "uStack_6c": "traitEnumeratorHighBits"
+  }
+ },
+ "2f41744": {
+  "summary": "Runs the card's while-in-play and once-only trigger updates, then recalculates pack troop bonuses and applies the resulting pack CardEffect.",
+  "renames": {
+   "uStack_100": "dropPodHealthCopy",
+   "uStack_f8": "dropPodHealthInitedCopy",
+   "uStack_f0": "dropPodHealthFakeCopy",
+   "uStack_114": "newDropPodHealth",
+   "uStack_10c": "newDropPodHealthInited",
+   "uStack_104": "newDropPodHealthFake",
+   "uStack_130": "dropPodAttackCopy",
+   "uStack_128": "dropPodAttackInitedCopy",
+   "uStack_120": "dropPodAttackFakeCopy",
+   "uStack_144": "newDropPodAttack",
+   "uStack_13c": "newDropPodAttackInited",
+   "uStack_134": "newDropPodAttackFake",
+   "uStack_158": "resetDropPodAttack",
+   "uStack_150": "resetDropPodAttackInited",
+   "uStack_148": "resetDropPodAttackFake",
+   "uStack_d0": "healthCopy",
+   "uStack_c8": "healthInitedCopy",
+   "uStack_c0": "healthFakeCopy",
+   "uStack_e4": "clampedHealth",
+   "uStack_dc": "clampedHealthInited",
+   "uStack_d4": "clampedHealthFake",
+   "uStack_b4": "newHealth",
+   "uStack_ac": "newHealthInited",
+   "uStack_a4": "newHealthFake",
+   "uStack_a0": "healthCopyForHeal",
+   "uStack_98": "healthInitedCopyForHeal",
+   "uStack_90": "healthFakeCopyForHeal",
+   "uStack_70_2": "unknownBuffTypeArg",
+   "uVar12_2": "isOwnEffect",
+   "uVar14_5": "scratchFlag",
+   "uVar14_7": "hasEffectAlternateArt",
+   "lVar11_11": "effectAtIndex",
+   "uVar8_2": "armourAmount",
+   "auVar19_x1": "scratchContext",
+   "iVar7_6": "dropPodStatRead",
+   "iVar7_7": "clampedHealthValue",
+   "iVar7_8": "effectIndex"
+  }
+ },
+ "2f41838": {
+  "summary": "Checks the number of friendly troops for the pack trait and applies an updated pack stat buff, or removes pack buffs when not applicable.",
+  "renames": {
+   "uStack_100": "dropPodHealthCopy",
+   "uStack_f8": "dropPodHealthInitedCopy",
+   "uStack_f0": "dropPodHealthFakeCopy",
+   "uStack_114": "newDropPodHealth",
+   "uStack_10c": "newDropPodHealthInited",
+   "uStack_104": "newDropPodHealthFake",
+   "uStack_130": "dropPodAttackCopy",
+   "uStack_128": "dropPodAttackInitedCopy",
+   "uStack_120": "dropPodAttackFakeCopy",
+   "uStack_144": "newDropPodAttack",
+   "uStack_13c": "newDropPodAttackInited",
+   "uStack_134": "newDropPodAttackFake",
+   "uStack_158": "resetDropPodAttack",
+   "uStack_150": "resetDropPodAttackInited",
+   "uStack_148": "resetDropPodAttackFake",
+   "uStack_d0": "healthCopy",
+   "uStack_c8": "healthInitedCopy",
+   "uStack_c0": "healthFakeCopy",
+   "uStack_e4": "clampedHealth",
+   "uStack_dc": "clampedHealthInited",
+   "uStack_d4": "clampedHealthFake",
+   "uStack_b4": "newHealth",
+   "uStack_ac": "newHealthInited",
+   "uStack_a4": "newHealthFake",
+   "uStack_a0": "healthCopyForHeal",
+   "uStack_98": "healthInitedCopyForHeal",
+   "uStack_90": "healthFakeCopyForHeal",
+   "uStack_70_2": "unknownBuffTypeArg",
+   "uVar12_2": "isOwnEffect",
+   "uVar14_5": "scratchFlag",
+   "uVar14_7": "hasEffectEnchantmentRef",
+   "lVar11_11": "effectAtIndex",
+   "uVar9_2": "armourAmount",
+   "auVar18_x1": "scratchContext",
+   "iVar7_5": "dropPodStatRead",
+   "iVar7_6": "clampedHealthValue",
+   "iVar7_7": "effectIndex"
+  }
+ },
+ "2f4198c": {
+  "summary": "Removes every pack addStats effect on this card that this card itself created.",
+  "renames": {
+   "uVar2": "isOwnEffect"
+  }
+ },
+ "2f420f4": {
+  "summary": "Sends remove-effect messages for extrinsic effects in the active list that this card itself owns.",
+  "renames": {
+   "uVar2": "isOwnEffect"
+  }
+ },
+ "2f33258": {
+  "summary": "Moves the card to the cemetery state, resets it, adds it to the cemetery list, parents it and positions it, or hides it if ephemeral.",
+  "renames": {
+   "plVar7": "listSlotPtr"
+  }
+ },
+ "2f42540": {
+  "summary": "Positions and scales a card in the cemetery using the sort order index, setting its UI layers and a tweened scale animation.",
+  "renames": {
+   "lVar1_3": "targetScalePtr"
+  }
+ },
+ "2f426e4": {
+  "summary": "Records the current battle turn counter as the turn this card was drawn.",
+  "renames": {
+   "auVar3_x1": "unused1",
+   "uStack_50": "turnCounterFakeCopy",
+   "uStack_58": "turnCounterInitedCopy",
+   "uStack_60": "turnCounterCopy",
+   "uVar1": "turnDrawnValue"
+  }
+ }
+}

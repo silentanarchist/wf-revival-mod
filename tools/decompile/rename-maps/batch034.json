@@ -1,0 +1,152 @@
+{
+ "3285b7c": {
+  "summary": "Resends the mulligan acknowledgment to the opponent over Photon if the enemy mulligan was received; decompiler output is merged with inlined Photon RPC and collection code.",
+  "renames": {
+   "apcStack_40": "savedReturnStack",
+   "auVar34": "networkingPeerSelf",
+   "auVar34_part8": "comparerExtra",
+   "auVar34_x1": "hashKeyArg",
+   "auVar35": "mulliganFlag",
+   "auVar35_x1": "eventOptionsArg",
+   "cVar3": "groupId",
+   "iVar19": "bucketCount",
+   "lVar17": "emptyArrayClass",
+   "lVar25_4": "rpcEventData",
+   "lVar28_4": "eventKey",
+   "piVar23": "interfaceMapPtr",
+   "piVar33": "entryPtr",
+   "plVar15": "rpcParameters",
+   "plVar9": "peerInstance",
+   "puVar13": "prefixOrVtable",
+   "puVar21": "messageSuffix",
+   "puVar31": "hashSetMethodA",
+   "puVar32": "hashSetMethodB",
+   "uVar22": "interfaceCount",
+   "uVar24": "bucketIndex",
+   "uVar30_2": "entryIndex",
+   "uVar6": "containsResult",
+   "uVar6_2": "comparisonResult",
+   "uVar8_2": "hashSetMethodHandle",
+   "unaff_x19": "unused1",
+   "unaff_x20": "unused2",
+   "unaff_x21": "unused3",
+   "unaff_x22": "unused4",
+   "unaff_x23": "unused5",
+   "unaff_x24": "unused6",
+   "unaff_x25": "unused7",
+   "unaff_x26": "unused8",
+   "unaff_x27": "unused9",
+   "unaff_x29": "unused10",
+   "unaff_x30": "unused11"
+  }
+ },
+ "3285c38": {
+  "summary": "Handles the opponent forfeiting: sets connection status, ends the battle, records a ranked match result with skull counts and playtime, and saves the winner.",
+  "renames": {
+   "abStack_44": "playerLost",
+   "auStack_58": "nowTime",
+   "auVar14": "falseObscured",
+   "auVar14_part8": "falseInitedFlag",
+   "auVar15": "trueObscured",
+   "dVar13": "matchMinutes",
+   "iVar3_2": "playerHealth",
+   "lVar10_4": "eventClassPtr",
+   "lVar10_7": "matchResultObj",
+   "piVar11": "interfaceEntryPtr",
+   "uStack_90": "unused1",
+   "uStack_a8": "unused2",
+   "uStack_c0": "enemyHeroFakeValueFlag",
+   "uStack_c8": "enemyHeroInitedFlag",
+   "uStack_d0_2": "enemyHeroHealthRaw",
+   "uStack_e0": "playerHeroFakeValueFlag",
+   "uStack_e8": "playerHeroInitedFlag",
+   "uStack_f0_2": "playerHeroHealthRaw",
+   "uVar2_2": "enemyHeroHealth",
+   "uVar6": "tempValue"
+  }
+ },
+ "3285ce8": {
+  "summary": "Marks the match as cancelled by desync and sends an onDesyncByEnemy cloud script request to PlayFab; the rest is merged unrelated PlayFab API stubs.",
+  "renames": {
+   "auVar14": "thrownResult",
+   "auVar14_x1": "requestCallback",
+   "cVar1": "staticInitFlag",
+   "lVar10": "playerDataManagerStatics",
+   "uVar7": "zeroArg",
+   "uVar8": "exceptionObject",
+   "uVar12_5": "exceptionObjectAlt"
+  }
+ },
+ "3286020": {
+  "summary": "Records that the opponent claims the match has finished by setting opponentClaimsMatchFinished to true.",
+  "renames": {
+   "auVar1": "trueValue"
+  }
+ },
+ "328625c": {
+  "summary": "Starts the timed campaign start sequence coroutine for landing warlords in a campaign match.",
+  "renames": {
+   "apcStack_20": "savedReturnStack",
+   "auVar5": "thrownResult",
+   "auVar5_x1": "coroutineArg",
+   "unaff_x19": "nullException",
+   "unaff_x20": "savedBattleManager",
+   "unaff_x21": "unused1",
+   "unaff_x30": "unused2"
+  }
+ },
+ "32862f0": {
+  "summary": "Returns true if the match type is Campaign or Scene.",
+  "renames": {
+   "bVar1": "isCampaign"
+  }
+ },
+ "3286538": {
+  "summary": "Shows the offensive card in the card display window, initializing card UI, lore, voiceover, tutorial objects and related cards; decompiler output merges other methods.",
+  "renames": {
+   "auStack_48": "cardTierNullable",
+   "auVar22": "thrownResult",
+   "auVar22_x1": "secondArg",
+   "bVar2": "skipMaterialUpdate",
+   "fVar20": "defaultRectX",
+   "fVar21": "defaultRectY",
+   "lVar11": "unused1",
+   "lVar8_3": "flavourText",
+   "lVar8_5": "displayClosure",
+   "lVar9_2": "currentSprite",
+   "lVar9_4": "spriteOrWindow",
+   "plVar18": "cardListRef",
+   "plVar19": "spritePtr",
+   "puVar15": "listSlot",
+   "uVar7": "hasValue"
+  }
+ },
+ "3286648": {
+  "summary": "Applies an environmental effect card for a player: triggers the hero ability, enables the effect, disables the previous one, and blends registered blendeables.",
+  "renames": {
+   "lVar9": "currentEnvironment",
+   "plStack_38": "currentBlendeable",
+   "puVar4": "logMethod",
+   "uStack_40": "unused1",
+   "uVar1": "logMessage",
+   "uVar5": "unused2"
+  }
+ },
+ "3286720": {
+  "summary": "Handles the mulligan Done click: stores player and AI mulligan cards, handles replay and network cases, then starts the first-phase mulligan finish coroutine.",
+  "renames": {
+   "auVar6": "matchDataObj",
+   "auVar6_x1": "savedMethodPtr",
+   "lVar4": "playerMulliganIds",
+   "lVar5": "enemyMulliganIds",
+   "uStack_40": "unused1",
+   "uVar2": "uiStateName"
+  }
+ },
+ "3286d08": {
+  "summary": "Builds a list of environmental effect cards for the hero's army, optionally adding the empty offensive card and the live-event environmental cards.",
+  "renames": {
+   "lVar2": "displayClass"
+  }
+ }
+}

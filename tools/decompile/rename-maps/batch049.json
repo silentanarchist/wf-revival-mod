@@ -1,0 +1,653 @@
+{
+ "32a2910": {
+  "summary": "Marks a hand card as tracked and, in networked games, sends a card-seen RPC; also contains merged Photon RPC and collection helper code.",
+  "renames": {
+   "uVar5": "groupBlocked",
+   "uVar8": "groupsToAdd",
+   "acStack_118": "addGroupByte",
+   "acStack_114": "removeGroupByte",
+   "lStack_f0": "savedStringArray",
+   "uStack_e8": "savedMethodName",
+   "lStack_d8": "savedOptions",
+   "plStack_b8": "savedPeer",
+   "uStack_b0": "boxedValue",
+   "uStack_98": "viewIdBuffer",
+   "uStack_24": "cardIdBoxed",
+   "lVar11_2": "emptyArrayHolder",
+   "puVar15": "rpcMsgPrefix",
+   "puVar21": "rpcMsgSuffix",
+   "unaff_x27": "unused1",
+   "uStack_98_part4": "viewIdBufferHigh",
+   "lVar25_4": "rpcEventData",
+   "lVar7_2": "dictKeyOrGroups",
+   "uStack_b0_part4": "boxedValueHigh",
+   "uStack_b0_part2": "boxedValueShort",
+   "uStack_b0_part1": "boxedValueByte",
+   "uStack_a8": "typeofExtra1",
+   "uStack_a0": "typeofExtra2",
+   "auVar30": "exceptionResult",
+   "auVar30_x1": "exceptionResultHigh",
+   "plVar9": "networkingPeerObj",
+   "pcStack_108": "savedFunctionPtr",
+   "uStack_e0": "scratch1",
+   "uStack_d0": "scratch2",
+   "uStack_c8": "scratch3",
+   "lStack_c0_2": "savedPhotonView",
+   "uVar16": "groupCount",
+   "uVar24": "bucketIndex",
+   "piVar29": "entryPtr",
+   "uVar22": "predicateResult",
+   "piVar23": "interfaceMapPtr",
+   "auVar30_part8": "exceptionResultUpper",
+   "iVar19": "bucketCount"
+  }
+ },
+ "32a29dc": {
+  "summary": "Begins dragging a hand card by recording the card and click position and switching the UI state to moving a hand card.",
+  "renames": {}
+ },
+ "32a2a14": {
+  "summary": "Shows deck and hand size indicators for both players during battle unless choosing a resolution card.",
+  "renames": {
+   "uVar2": "isInBattle"
+  }
+ },
+ "32a2b80": {
+  "summary": "Returns whether the cemetery can be shown, hiding it during battle only when the tutorial stage says so.",
+  "renames": {
+   "uVar4": "hasStage",
+   "auVar6": "inBattle",
+   "auVar6_x1": "inBattleHigh"
+  }
+ },
+ "32a2c04": {
+  "summary": "Adds a card to the cemetery list, parents it to the cemetery and assigns its cemetery index.",
+  "renames": {
+   "plVar7": "slotPtr"
+  }
+ },
+ "328bb58": {
+  "summary": "Returns whether a card is currently able to attack, checking tutorial rules, action permissions, stun, attack values and UI state.",
+  "renames": {
+   "iVar3": "attackValue",
+   "lVar1": "fieldOffset"
+  }
+ },
+ "329f3c8": {
+  "summary": "Checks whether a card can use its active ability, verifying turn permissions, mana, UI state, duty and oath limits, and shows tips.",
+  "renames": {
+   "uVar3": "canActValue",
+   "iStack_48": "currentUiState",
+   "plVar5": "tipTermPtr",
+   "uStack_50": "scratch1",
+   "puVar6": "messagePrefixPtr"
+  }
+ },
+ "329f8bc": {
+  "summary": "Checks whether a card can use its waystone, validating action permissions, in-play state, UI state and tutorial rules.",
+  "renames": {
+   "iStack_38": "currentUiState",
+   "uStack_40": "scratch1",
+   "puVar3": "messagePrefixPtr"
+  }
+ },
+ "32a2c1c": {
+  "summary": "Checks whether a card is attacking and ready to use its active ability with enough mana and correct UI state.",
+  "renames": {
+   "uVar3": "uiStateName",
+   "iStack_48": "currentUiState",
+   "plVar4": "logMessagePtr",
+   "uStack_50": "scratch1",
+   "lVar2_3": "logMessage"
+  }
+ },
+ "32a2e94": {
+  "summary": "Returns whether a card could attack after receiving a buff effect and is in play.",
+  "renames": {
+   "iVar3": "currentRangeAttack"
+  }
+ },
+ "32a2f18": {
+  "summary": "Converts the mouse screen position to world space on the canvas, or returns zero when off screen.",
+  "renames": {
+   "iVar1": "screenSize",
+   "auVar4": "resultPos",
+   "uVar3_2": "canvasPlaneDistance",
+   "uVar3_3": "defaultVec",
+   "uVar5": "defaultVecY",
+   "uVar6": "defaultVecZ",
+   "auVar4_part4": "resultPosY",
+   "auVar4_x1": "resultPosZ"
+  }
+ },
+ "32a2fe4": {
+  "summary": "Raycasts from the touch position through the board camera and returns the hit point on the board; includes merged neighbouring raycast helpers.",
+  "renames": {
+   "lVar2": "battleManagerRef",
+   "extraout_s0_00": "extraCameraY",
+   "uVar5": "rayDirectionSaved",
+   "uVar6": "touchInput",
+   "fVar7": "scaledRayZ",
+   "uVar8": "touchPosPacked",
+   "uVar9": "touchPosY",
+   "uStack_294": "canvasPlaneDistance",
+   "lStack_278": "stringArraySlot1",
+   "uStack_248": "cameraSlot1",
+   "uStack_244": "rayDirection3",
+   "uStack_240": "colorSlot1",
+   "fStack_238": "rayDirY3",
+   "uStack_230": "raycastHitSlot1",
+   "uStack_1f0": "vectorSlot1",
+   "uStack_1e8": "raySlot1",
+   "uStack_1e0": "colorSlot2",
+   "uStack_168": "raySlot2",
+   "uStack_164": "rayDirection2",
+   "uStack_160": "colorSlot3",
+   "fStack_158": "rayDirY2",
+   "uStack_150": "raycastHitSlot2",
+   "uStack_110": "vectorSlot2",
+   "uStack_108": "raySlot3",
+   "uStack_100": "colorSlot4",
+   "lStack_c8": "stringArraySlot2",
+   "uStack_a4": "rayDirection",
+   "uStack_a0": "colorSlot5",
+   "fStack_98": "rayDirY",
+   "uStack_90": "raycastHitSlot3",
+   "uStack_6c": "scratch1",
+   "uStack_70": "scratch2",
+   "uStack_88": "scratch3",
+   "uStack_78": "scratch4",
+   "uStack_74": "scratch5",
+   "uStack_80": "scratch6",
+   "fVar10": "scaledRayX",
+   "fStack_9c": "rayDirX",
+   "fVar11": "scaledRayY",
+   "fStack_94": "rayDirZ",
+   "uStack_b0": "scratch7",
+   "uStack_c0": "scratch8",
+   "uStack_b8": "scratch9",
+   "pcStack_e0": "scratch10",
+   "uStack_120": "scratch11",
+   "uStack_118": "scratch12",
+   "uStack_f8": "scratch13",
+   "uStack_f0": "scratch14",
+   "uStack_e8": "scratch15",
+   "uStack_12c": "scratch16",
+   "uStack_130": "scratch17",
+   "uStack_148": "scratch18",
+   "uStack_138": "scratch19",
+   "uStack_134": "scratch20",
+   "uStack_140": "scratch21",
+   "extraout_s0": "extraYOffset",
+   "fStack_15c": "rayDirX2",
+   "fStack_154": "rayDirZ2",
+   "pcStack_1c0": "scratch22",
+   "uStack_200": "scratch23",
+   "uStack_1f8": "scratch24",
+   "uStack_1d8": "scratch25",
+   "uStack_1d0": "scratch26",
+   "uStack_1c8": "scratch27",
+   "uStack_20c": "scratch28",
+   "uStack_210": "scratch29",
+   "uStack_228": "scratch30",
+   "uStack_218": "scratch31",
+   "uStack_214": "scratch32",
+   "uStack_220": "scratch33",
+   "fStack_24c": "rayDirXCopy",
+   "fStack_23c": "rayDirX3",
+   "uStack_260": "scratch34",
+   "uStack_270": "scratch35",
+   "uStack_268": "scratch36",
+   "pcStack_280": "scratch37",
+   "pcStack_290": "scratch38",
+   "puStack_288": "scratch39",
+   "fStack_234": "rayDirZ3",
+   "auStack_29c": "screenPosBuf",
+   "uStack_2a0": "scratch40",
+   "uStack_2a8": "worldPosResult"
+  }
+ },
+ "32a34b8": {
+  "summary": "Raycasts from the touch position on the BoardCardLimit layer and returns the hit point; includes merged neighbouring helpers.",
+  "renames": {
+   "lVar3": "battleManagerRef",
+   "extraout_s0": "extraYOffset",
+   "fVar6": "scaledRayZ",
+   "uVar7": "rayDirectionSaved",
+   "uVar8": "touchPosPacked",
+   "uStack_1d4": "canvasPlaneDistance",
+   "lStack_1b8": "stringArraySlot1",
+   "uStack_188": "cameraSlot1",
+   "uStack_184": "rayDirection3",
+   "uStack_180": "colorSlot1",
+   "fStack_178": "rayDirY3",
+   "uStack_170": "raycastHitSlot1",
+   "uStack_130": "vectorSlot1",
+   "uStack_128": "raySlot1",
+   "uStack_120": "colorSlot2",
+   "uStack_a8": "raySlot2",
+   "uStack_a4": "rayDirection",
+   "uStack_a0": "colorSlot3",
+   "fStack_98": "rayDirY",
+   "uStack_90": "raycastHitSlot2",
+   "uStack_6c": "scratch1",
+   "uStack_70": "scratch2",
+   "uStack_88": "scratch3",
+   "uStack_78": "scratch4",
+   "uStack_74": "scratch5",
+   "uStack_80": "scratch6",
+   "fVar9": "scaledRayX",
+   "fStack_9c": "rayDirX",
+   "fVar10": "scaledRayY",
+   "fStack_94": "rayDirZ",
+   "pcStack_100": "scratch7",
+   "uStack_140": "scratch8",
+   "uStack_138": "scratch9",
+   "uStack_118": "scratch10",
+   "uStack_110": "scratch11",
+   "uStack_108": "scratch12",
+   "uStack_14c": "scratch13",
+   "uStack_150": "scratch14",
+   "uStack_168": "scratch15",
+   "uStack_158": "scratch16",
+   "uStack_154": "scratch17",
+   "uStack_160": "scratch18",
+   "fStack_18c": "rayDirXCopy",
+   "fStack_17c": "rayDirX3",
+   "uStack_1a0": "scratch19",
+   "uStack_1b0": "scratch20",
+   "uStack_1a8": "scratch21",
+   "pcStack_1c0": "scratch22",
+   "pcStack_1d0": "scratch23",
+   "puStack_1c8": "scratch24",
+   "fStack_174": "rayDirZ3",
+   "auStack_1dc": "screenPosBuf",
+   "uStack_1e0": "scratch25",
+   "uStack_1e8": "worldPosResult"
+  }
+ },
+ "32a36fc": {
+  "summary": "Converts a 2D world position to a screen ray and returns where it hits the BoardCardLimit layer.",
+  "renames": {
+   "uStack_f4": "canvasPlaneDistance",
+   "lStack_d8": "stringArraySlot1",
+   "uStack_a8": "cameraSlot1",
+   "uStack_a4": "rayDirection",
+   "uStack_a0": "colorSlot1",
+   "fStack_98": "rayDirY",
+   "uStack_90": "raycastHitSlot1",
+   "uStack_6c": "scratch1",
+   "uStack_70": "scratch2",
+   "uStack_88": "scratch3",
+   "uStack_78": "scratch4",
+   "uStack_74": "scratch5",
+   "uStack_80": "scratch6",
+   "fStack_ac": "rayDirXCopy",
+   "fStack_9c": "rayDirX",
+   "uStack_c0": "scratch7",
+   "uStack_d0": "scratch8",
+   "uStack_c8": "scratch9",
+   "lVar2": "battleManagerRef",
+   "pcStack_e0": "scratch10",
+   "pcStack_f0": "scratch11",
+   "puStack_e8": "scratch12",
+   "fStack_94": "rayDirZ",
+   "auStack_fc": "screenPosBuf",
+   "uStack_100": "scratch13",
+   "uStack_108": "worldPosResult"
+  }
+ },
+ "32a32e0": {
+  "summary": "Raycasts from a given screen position through the board camera and returns the board hit point; includes merged helpers.",
+  "renames": {
+   "lVar3": "battleManagerRef",
+   "extraout_s0_00": "extraCameraY",
+   "uVar6": "rayDirectionSaved",
+   "fVar7": "scaledRayZ",
+   "uVar8": "touchPosPacked",
+   "uStack_294": "canvasPlaneDistance",
+   "lStack_278": "stringArraySlot1",
+   "uStack_248": "cameraSlot1",
+   "uStack_244": "rayDirection3",
+   "uStack_240": "colorSlot1",
+   "fStack_238": "rayDirY3",
+   "uStack_230": "raycastHitSlot1",
+   "uStack_1f0": "vectorSlot1",
+   "uStack_1e8": "raySlot1",
+   "uStack_1e0": "colorSlot2",
+   "uStack_168": "raySlot2",
+   "uStack_164": "rayDirection2",
+   "uStack_160": "colorSlot3",
+   "fStack_158": "rayDirY2",
+   "uStack_150": "raycastHitSlot2",
+   "uStack_110": "vectorSlot2",
+   "uStack_108": "raySlot3",
+   "uStack_100": "colorSlot4",
+   "lStack_c8": "stringArraySlot2",
+   "uStack_a4": "rayDirection",
+   "uStack_a0": "colorSlot5",
+   "fStack_98": "rayDirY",
+   "uStack_90": "raycastHitSlot3",
+   "uStack_6c": "scratch1",
+   "uStack_70": "scratch2",
+   "uStack_88": "scratch3",
+   "uStack_78": "scratch4",
+   "uStack_74": "scratch5",
+   "uStack_80": "scratch6",
+   "fVar9": "scaledRayX",
+   "fStack_9c": "rayDirX",
+   "fVar10": "scaledRayY",
+   "fStack_94": "rayDirZ",
+   "uStack_b0": "scratch7",
+   "uStack_c0": "scratch8",
+   "uStack_b8": "scratch9",
+   "pcStack_e0": "scratch10",
+   "uStack_120": "scratch11",
+   "uStack_118": "scratch12",
+   "uStack_f8": "scratch13",
+   "uStack_f0": "scratch14",
+   "uStack_e8": "scratch15",
+   "uStack_12c": "scratch16",
+   "uStack_130": "scratch17",
+   "uStack_148": "scratch18",
+   "uStack_138": "scratch19",
+   "uStack_134": "scratch20",
+   "uStack_140": "scratch21",
+   "extraout_s0": "extraYOffset",
+   "fStack_15c": "rayDirX2",
+   "fStack_154": "rayDirZ2",
+   "pcStack_1c0": "scratch22",
+   "uStack_200": "scratch23",
+   "uStack_1f8": "scratch24",
+   "uStack_1d8": "scratch25",
+   "uStack_1d0": "scratch26",
+   "uStack_1c8": "scratch27",
+   "uStack_20c": "scratch28",
+   "uStack_210": "scratch29",
+   "uStack_228": "scratch30",
+   "uStack_218": "scratch31",
+   "uStack_214": "scratch32",
+   "uStack_220": "scratch33",
+   "fStack_24c": "rayDirXCopy",
+   "fStack_23c": "rayDirX3",
+   "uStack_260": "scratch34",
+   "uStack_270": "scratch35",
+   "uStack_268": "scratch36",
+   "pcStack_280": "scratch37",
+   "pcStack_290": "scratch38",
+   "puStack_288": "scratch39",
+   "fStack_234": "rayDirZ3",
+   "auStack_29c": "screenPosBuf",
+   "uStack_2a0": "scratch40",
+   "uStack_2a8": "worldPosResult"
+  }
+ },
+ "32a38e8": {
+  "summary": "Converts a board position to a screen position then to a 2D world position on the canvas camera.",
+  "renames": {
+   "uStack_28": "selfCopy",
+   "uStack_24": "canvasPlaneDistance",
+   "uStack_2c": "screenPosBuf",
+   "lVar1": "canvasCamera",
+   "uStack_30": "scratch1",
+   "uStack_38": "worldPosResult",
+   "lVar2": "cameraNative"
+  }
+ },
+ "32a3950": {
+  "summary": "Converts a board world position to a viewport point using the board camera.",
+  "renames": {
+   "uStack_2c": "selfCopy",
+   "uStack_28": "inputPos",
+   "uStack_24": "methodInfoCopy",
+   "lVar1": "cameraObj",
+   "param_4": "methodInfoParam",
+   "uStack_30": "scratch1",
+   "uStack_38": "resultVec",
+   "lVar2": "cameraNative"
+  }
+ },
+ "32a3968": {
+  "summary": "Converts a 2D world position to a viewport point using the 2D camera.",
+  "renames": {
+   "uStack_2c": "selfCopy",
+   "uStack_28": "inputPos",
+   "uStack_24": "methodInfoCopy",
+   "lVar1": "cameraObj",
+   "param_4": "methodInfoParam",
+   "uStack_30": "scratch1",
+   "uStack_38": "resultVec",
+   "lVar2": "cameraNative"
+  }
+ },
+ "32a3938": {
+  "summary": "Converts a board world position to a screen position using the board camera.",
+  "renames": {
+   "uStack_2c": "selfCopy",
+   "uStack_28": "inputPos",
+   "uStack_24": "methodInfoCopy",
+   "lVar1": "cameraObj",
+   "param_4": "methodInfoParam",
+   "uStack_30": "scratch1",
+   "uStack_38": "resultVec",
+   "lVar2": "cameraNative"
+  }
+ },
+ "32a3980": {
+  "summary": "Converts the current touch position to a world position at the perspective camera's distance, or zero when off screen.",
+  "renames": {
+   "uVar4": "defaultPos",
+   "auVar5": "resultPos",
+   "fVar8": "mouseX",
+   "fVar9": "mouseY",
+   "uVar6": "defaultPosY",
+   "uVar7": "defaultPosZ",
+   "auVar5_part4": "resultPosY",
+   "auVar5_x1": "resultPosZ"
+  }
+ },
+ "328b78c": {
+  "summary": "Returns the 2D world position of a card, using its effect anchor for units in play and its transform otherwise.",
+  "renames": {
+   "bVar1": "isInPlay",
+   "uStack_28": "selfCopy",
+   "uStack_30_part4": "screenPosHigh",
+   "uStack_30": "screenPosBuf",
+   "uStack_38": "worldPosResult"
+  }
+ },
+ "329e394": {
+  "summary": "Returns the 2D world position of a specific part of a card (selected by position reference), or its transform position.",
+  "renames": {
+   "bVar2": "isInPlay",
+   "uStack_28": "selfCopy",
+   "uVar1": "positionBit",
+   "uStack_30_part4": "screenPosHigh",
+   "uStack_30": "screenPosBuf",
+   "uStack_38": "worldPosResult"
+  }
+ },
+ "32a3a84": {
+  "summary": "Returns a card's world position from its transform, or a zero vector when the card is missing.",
+  "renames": {
+   "uVar1": "cardExists",
+   "uStack_28": "positionPad",
+   "uStack_30": "positionBuf"
+  }
+ },
+ "32a304c": {
+  "summary": "Draws debug lines around the screen edges and the matching world-space rectangle for the board camera.",
+  "renames": {
+   "fVar13": "screenRight2",
+   "fVar14": "screenTop2",
+   "fVar15": "screenTop",
+   "fVar16": "screenRight"
+  }
+ },
+ "328c9f8": {
+  "summary": "Increments the obscured counter of player actions taken this turn.",
+  "renames": {
+   "uStack_70": "counterCopy",
+   "uStack_68": "initedCopy",
+   "uStack_60": "fakeActiveCopy",
+   "uStack_4c": "incrementedInited",
+   "uStack_44": "incrementedFakeActive"
+  }
+ },
+ "32a3b78": {
+  "summary": "Decrements the obscured counter of player actions taken this turn after a cancelled action.",
+  "renames": {
+   "uStack_70": "counterCopy",
+   "uStack_68": "initedCopy",
+   "uStack_60": "fakeActiveCopy",
+   "uStack_4c": "decrementedInited",
+   "uStack_44": "decrementedFakeActive"
+  }
+ },
+ "32a3c14": {
+  "summary": "Plays the first queued sound at the effects volume and removes it from the queue; trailing code is merged array helpers.",
+  "renames": {
+   "uVar13": "hasItems",
+   "uVar19": "matchFound",
+   "unaff_x23": "unused1",
+   "unaff_x24": "unused2",
+   "pcVar26": "savedFuncPtr",
+   "auVar29": "exceptionResult",
+   "auVar29_part8": "exceptionResultUpper",
+   "puVar3": "stackFrame",
+   "unaff_x21": "unused3",
+   "puVar17": "errorMessage",
+   "puVar14_2": "arrayPtr",
+   "puVar2": "stackFrameLower",
+   "puVar1": "stackFrame2",
+   "uVar25": "savedValue",
+   "auVar28_x1": "searchValue",
+   "unaff_x22": "unused4",
+   "uVar10": "startOffset",
+   "plVar18_3": "elementPtr",
+   "puVar4": "stackFrame3",
+   "puVar5": "stackFrame4",
+   "lVar22": "searchValue2",
+   "lVar12_5": "objectArray",
+   "lVar24_4": "scanIndex"
+  }
+ },
+ "32a3e40": {
+  "summary": "Per-frame battle update: tracks mouse and targets, handles card dragging, targeting, attacks, abilities and spells by UI state, and runs the action queue.",
+  "renames": {
+   "puVar15": "autoActionPtr",
+   "uVar18": "previousTarget",
+   "in_s1": "mouseCanvasPosY",
+   "in_s2": "mouseCanvasPosZ",
+   "auStack_788": "autoActionCopy4",
+   "abStack_384": "boolBuf",
+   "auStack_168": "matchDeckCopy",
+   "uStack_100": "deckScratch",
+   "uStack_78": "scratch1",
+   "uStack_80": "scratch2",
+   "uStack_180": "actionStruct1",
+   "uStack_280": "actionStruct2",
+   "uStack_380": "actionStruct3",
+   "uVar9_2": "mouseDownOrEscape",
+   "uStack_88": "scratch3",
+   "uStack_90": "scratch4",
+   "auStack_f8": "tutorialMatchData",
+   "lVar8_4": "matchMakerManager",
+   "puVar1": "targetCardRef",
+   "auVar25_x1": "unusedReg",
+   "uVar9_3": "targetCardValue",
+   "uVar9_4": "cardPresentFlag",
+   "auVar26_part1": "zeroByte",
+   "lVar8_10": "soundManager",
+   "auStack_178": "actionStruct1Card",
+   "uStack_17c": "actionStruct1Flag",
+   "uStack_144": "scratch5",
+   "uStack_c0": "scratch6",
+   "uStack_90_part0": "blockActionsPacked",
+   "auStack_488": "actionBufMain",
+   "auStack_588": "actionBuf2",
+   "auStack_278": "actionStruct2Card",
+   "uStack_27c": "actionStruct2Flag",
+   "uStack_244": "scratch7",
+   "uStack_1c0": "scratch8",
+   "auStack_688": "actionBuf3",
+   "uVar9_5": "targetCardValue2",
+   "uVar9_6": "targetNotNull",
+   "uVar9_7": "targetCardValue3",
+   "uVar9_8": "targetNotNull2",
+   "uStack_37c": "actionStruct3Flag",
+   "auStack_370": "actionStruct3Target",
+   "uStack_2c0": "scratch9",
+   "bStack_344": "isEnemyCaster",
+   "uVar9_9": "playerTurnActive",
+   "uVar9_10": "targetCardValue4",
+   "uVar9_11": "targetNotNull3",
+   "uVar9_13": "targetCardValue5",
+   "uVar9_14": "targetNotNull4",
+   "uVar9_16": "targetCardValue6",
+   "puVar2": "targetedUnitTargetRef",
+   "uVar12_3": "currentTargetPtr",
+   "uVar12_4": "targetsDiffer",
+   "plVar13": "targetedUnitVtable",
+   "uVar9_17": "hasTarget",
+   "uVar9_18": "inBattleOrScripted",
+   "auVar25_2": "resolvingAction"
+  }
+ },
+ "329fc80": {
+  "summary": "Resets the tilt tracking by storing the current canvas mouse position as the last mouse position.",
+  "renames": {
+   "uVar1": "mousePos",
+   "in_s1": "mousePosY"
+  }
+ },
+ "3283338": {
+  "summary": "Leaves the battle: leaves the room, releases card backs, then loads the main menu or starts the tutorial match.",
+  "renames": {
+   "bVar1": "tutorialCompleted",
+   "auStack_168": "matchDeckCopy",
+   "uStack_100": "deckScratch",
+   "auVar3_x1": "methodArg",
+   "uStack_30": "scratch1",
+   "uStack_88": "scratch2",
+   "uStack_90": "matchDataBuf",
+   "uStack_78": "scratch3",
+   "uStack_80": "scratch4",
+   "uStack_68": "scratch5",
+   "uStack_70": "scratch6",
+   "uStack_58": "scratch7",
+   "uStack_60": "scratch8",
+   "uStack_48": "scratch9",
+   "uStack_50": "scratch10",
+   "uStack_38": "scratch11",
+   "uStack_40": "scratch12",
+   "auStack_f8": "tutorialMatchData",
+   "lVar2_4": "matchMakerManager"
+  }
+ },
+ "32a56f8": {
+  "summary": "Picks the first non-empty action queue by priority and resolves its first action.",
+  "renames": {
+   "auVar9": "resolvingFlagTrue",
+   "auStack_330": "actionCopy",
+   "auVar8_x1": "methodArg",
+   "auStack_130": "dequeuedAction",
+   "uVar1": "emptyQueueMessage",
+   "auStack_230": "actionTemp",
+   "uVar3": "logArg",
+   "puVar2": "logMethodPtr"
+  }
+ },
+ "32a57b0": {
+  "summary": "Dequeues the first action from the given queue and resolves it, logging if the queue is empty.",
+  "renames": {
+   "auVar8": "resolvingFlagTrue",
+   "auStack_330": "actionCopy",
+   "auStack_130": "dequeuedAction",
+   "uVar1": "emptyQueueMessage",
+   "auStack_230": "actionTemp",
+   "uVar3": "logArg",
+   "puVar2": "logMethodPtr"
+  }
+ }
+}

@@ -1,0 +1,779 @@
+{
+ "3299a68": {
+  "summary": "Builds a Requiem trigger battle action for the target card and queues it as an automatic action with the given priority.",
+  "renames": {
+   "auStack_140": "action",
+   "auStack_240": "queuedAction",
+   "alStack_130": "actionTarget"
+  }
+ },
+ "3299b08": {
+  "summary": "Builds a Synapse trigger battle action for the target card and queues it as an automatic action with the given priority.",
+  "renames": {
+   "auStack_140": "action",
+   "auStack_240": "queuedAction",
+   "alStack_130": "actionTarget",
+   "lStack_138": "actionActingCard"
+  }
+ },
+ "3299bb8": {
+  "summary": "Builds a Pray trigger battle action for the target card and queues it as an automatic action with the given priority.",
+  "renames": {
+   "auStack_140": "action",
+   "auStack_240": "queuedAction",
+   "alStack_130": "actionTarget",
+   "lStack_138": "actionActingCard"
+  }
+ },
+ "3299c68": {
+  "summary": "Queues a Mob trigger action, switching to the additional-mob action type when flagged.",
+  "renames": {
+   "auStack_150": "action",
+   "auStack_250": "queuedAction",
+   "alStack_140": "actionTarget",
+   "lStack_148": "actionActingCard"
+  }
+ },
+ "3299d44": {
+  "summary": "Builds a Courtesy trigger battle action for the target card and queues it as an automatic action with the given priority.",
+  "renames": {
+   "auStack_140": "action",
+   "auStack_240": "queuedAction",
+   "alStack_130": "actionTarget"
+  }
+ },
+ "3299de4": {
+  "summary": "Builds a Sacrifice trigger battle action for the target card and queues it as an automatic action with the given priority.",
+  "renames": {
+   "auStack_140": "action",
+   "auStack_240": "queuedAction",
+   "alStack_130": "actionTarget"
+  }
+ },
+ "3299e84": {
+  "summary": "Builds a Codex trigger battle action for the target card and queues it as an automatic action with the given priority.",
+  "renames": {
+   "auStack_140": "action",
+   "auStack_240": "queuedAction",
+   "alStack_130": "actionTarget"
+  }
+ },
+ "3299f24": {
+  "summary": "Builds a Regiment trigger battle action for the target card and queues it as an automatic action with the given priority.",
+  "renames": {
+   "auStack_140": "action",
+   "auStack_240": "queuedAction",
+   "alStack_130": "actionTarget"
+  }
+ },
+ "3299fc4": {
+  "summary": "Builds a Ambush trigger battle action for the target card and queues it as an automatic action with the given priority.",
+  "renames": {
+   "auStack_140": "action",
+   "auStack_240": "queuedAction",
+   "alStack_130": "actionTarget"
+  }
+ },
+ "329a064": {
+  "summary": "Builds a Uprising trigger battle action for the target card and queues it as an automatic action with the given priority.",
+  "renames": {
+   "auStack_140": "action",
+   "auStack_240": "queuedAction",
+   "alStack_130": "actionTarget"
+  }
+ },
+ "329a104": {
+  "summary": "Builds a Slay trigger battle action for the target card and queues it as an automatic action with the given priority.",
+  "renames": {
+   "auStack_140": "action",
+   "auStack_240": "queuedAction",
+   "alStack_130": "actionTarget"
+  }
+ },
+ "329a1a4": {
+  "summary": "Builds a Teleport trigger battle action for the target card and queues it as an automatic action with the given priority.",
+  "renames": {
+   "auStack_140": "action",
+   "auStack_240": "queuedAction",
+   "alStack_130": "actionTarget"
+  }
+ },
+ "329a244": {
+  "summary": "Builds a SpiritStone trigger battle action for the target card and queues it as an automatic action with the given priority.",
+  "renames": {
+   "auStack_140": "action",
+   "auStack_240": "queuedAction",
+   "alStack_130": "actionTarget"
+  }
+ },
+ "329a2e4": {
+  "summary": "Builds a PlayerCodex trigger battle action for the target card and queues it as an automatic action with the given priority.",
+  "renames": {
+   "auStack_140": "action",
+   "auStack_240": "queuedAction",
+   "alStack_130": "actionTarget"
+  }
+ },
+ "329a384": {
+  "summary": "Queues an action that sets the target card on top of its owner's deck.",
+  "renames": {
+   "auStack_140": "action",
+   "auStack_240": "queuedAction",
+   "alStack_130": "actionTarget"
+  }
+ },
+ "329a434": {
+  "summary": "Queues a reveal-orders action for the acting card and an enchantment.",
+  "renames": {
+   "auStack_140": "action",
+   "auStack_240": "queuedAction",
+   "alStack_130": "actionTarget",
+   "alStack_b8": "actionEnchantment",
+   "lStack_138": "actionActingCard"
+  }
+ },
+ "329a4f4": {
+  "summary": "Finds a matching single-use or choice enchantment effect on the card and marks it as spent, logging it in dev mode.",
+  "renames": {
+   "lVar2_3": "loggerClass",
+   "piVar7": "interfaceEntry",
+   "puVar6": "logMethod",
+   "uVar1": "staticsFlag",
+   "uVar3": "isMatchingEnchantment",
+   "uVar3_2": "isDevToolsActive",
+   "uVar3_3": "isSecondMatch"
+  }
+ },
+ "329a574": {
+  "summary": "Queues an action that exchanges two minions by packing them into a list on the action.",
+  "renames": {
+   "auStack_160": "action",
+   "auStack_260": "queuedAction",
+   "alStack_148": "minionList",
+   "alStack_158": "actionActingCard",
+   "lVar3": "listItems",
+   "plVar4": "slotPtr",
+   "uVar1": "listSize"
+  }
+ },
+ "329a768": {
+  "summary": "Queues a summon-unit action with the summoned card, position, caster, effect and enchantment, logging it.",
+  "renames": {
+   "auStack_160": "action",
+   "auStack_260": "queuedAction",
+   "alStack_d0": "actionEnchantment",
+   "alStack_f0": "actionCardEffect",
+   "auStack_80": "actionCasterRawData",
+   "iStack_120": "actionSummonPos",
+   "lStack_d8": "actionSummonedCard",
+   "uStack_15c": "actionIsPlayer",
+   "uVar2": "hasCaster"
+  }
+ },
+ "329a928": {
+  "summary": "Queues an auto-play-from-hand action if the target card is in hand or being drawn, otherwise logs a warning.",
+  "renames": {
+   "auStack_150": "action",
+   "auStack_268": "queuedAction",
+   "alStack_140": "actionTarget",
+   "auStack_70": "actionCasterRawData",
+   "uStack_14c": "actionIsPlayer",
+   "uStack_160": "unused1",
+   "uVar2": "hasCaster",
+   "uVar4_2": "cardStateName"
+  }
+ },
+ "329ab34": {
+  "summary": "Creates a new card object in a player's hand, hides it, and queues a create-hand-card action.",
+  "renames": {
+   "auStack_180": "action",
+   "auStack_280": "queuedAction",
+   "alStack_170": "actionNewCard",
+   "alStack_f8": "actionMoveToPos",
+   "auStack_110": "actionMethod",
+   "bStack_17c": "actionBlockPlayerActions",
+   "param_11": "blockActionsArg",
+   "uStack_14c": "unusedFlag",
+   "uStack_150": "actionIsPlayer",
+   "uStack_154": "actionActingCard",
+   "uVar2": "hasCreator"
+  }
+ },
+ "329adf0": {
+  "summary": "Creates a new card object for a deck, records its creator, and queues a create-deck-card action.",
+  "renames": {
+   "uStack_190": "action",
+   "auStack_290": "queuedAction",
+   "alStack_108": "actionRawCard",
+   "alStack_180": "actionNewCard",
+   "bStack_18c": "actionIsPlayerFlag",
+   "param_10": "isPlayerArg",
+   "param_11": "priorityArg",
+   "param_12": "blockActionsArg",
+   "uStack_15c": "actionMoveToPos",
+   "uStack_160": "actionCreateAtPos",
+   "uStack_164": "actionIsPlayer",
+   "uVar3": "hasCreator"
+  }
+ },
+ "329b0e8": {
+  "summary": "Queues an action that copies the target unit in the cemetery.",
+  "renames": {
+   "auStack_140": "action",
+   "auStack_240": "queuedAction",
+   "alStack_130": "actionTarget"
+  }
+ },
+ "329b184": {
+  "summary": "Copies the target card list and queues an action to show it in a cards window.",
+  "renames": {
+   "auStack_150": "action",
+   "auStack_250": "queuedAction",
+   "alStack_138": "actionCardList",
+   "alStack_e0": "actionBuffEffect",
+   "lVar2": "addMethod"
+  }
+ },
+ "329b354": {
+  "summary": "Queues an action that transforms the target card into another card.",
+  "renames": {
+   "auStack_160": "action",
+   "auStack_260": "queuedAction",
+   "alStack_150": "actionTarget",
+   "alStack_d8": "actionTransformedInto",
+   "uStack_74": "actionKeepEffects",
+   "uVar1": "hasCaster"
+  }
+ },
+ "329b494": {
+  "summary": "Queues an action that transforms the target card into another card, applying a buff effect.",
+  "renames": {
+   "auStack_160": "action",
+   "auStack_260": "queuedAction",
+   "alStack_150": "actionTarget",
+   "alStack_d8": "actionTransformedInto",
+   "alStack_f0": "actionBuffEffect",
+   "uStack_74": "actionKeepEffects",
+   "uVar1": "hasCaster"
+  }
+ },
+ "3295320": {
+  "summary": "Queues an action that transforms the target card into a remnant.",
+  "renames": {
+   "auStack_150": "action",
+   "auStack_250": "queuedAction",
+   "alStack_140": "actionTarget",
+   "auStack_70": "actionCasterRawData",
+   "uStack_5a": "actionToRemnantFlag",
+   "uVar1": "hasCaster"
+  }
+ },
+ "329b5e8": {
+  "summary": "Marks the card as leaving remnant state and queues a remnant transform action.",
+  "renames": {
+   "auStack_160": "action",
+   "auStack_260": "queuedAction",
+   "alStack_150": "actionTarget",
+   "auStack_80": "actionCasterRawData",
+   "uStack_6a": "actionToRemnantFlag",
+   "uStack_c8": "actionWaitToTransform",
+   "uVar1": "hasCaster"
+  }
+ },
+ "329b728": {
+  "summary": "Queues an action that replaces a player's hero power with a new one.",
+  "renames": {
+   "uStack_140": "action",
+   "auStack_240": "queuedAction",
+   "alStack_b8": "actionNewPower",
+   "uStack_13c": "actionIsPlayer"
+  }
+ },
+ "329b7b4": {
+  "summary": "Queues an action that jams the given unit.",
+  "renames": {
+   "auStack_140": "action",
+   "auStack_240": "queuedAction",
+   "alStack_130": "actionTarget"
+  }
+ },
+ "329b850": {
+  "summary": "Queues a mana buff action for a player.",
+  "renames": {
+   "auStack_150": "action",
+   "auStack_250": "queuedAction",
+   "alStack_d8": "actionManaBuff",
+   "uStack_14c": "actionIsPlayer"
+  }
+ },
+ "329b900": {
+  "summary": "Logs and queues a psychic mana buff of the given amount for the player's hero.",
+  "renames": {
+   "abStack_34": "isPlayerBuf",
+   "iStack_38": "manaAmountValue"
+  }
+ },
+ "329ba34": {
+  "summary": "Logs and queues a plasma mana buff of the given amount for the player's hero.",
+  "renames": {
+   "abStack_34": "isPlayerBuf",
+   "iStack_38": "manaAmountValue"
+  }
+ },
+ "329bb68": {
+  "summary": "Queues a stun action on the target card with a new stun card effect.",
+  "renames": {
+   "auStack_150": "action",
+   "auStack_250": "queuedAction",
+   "alStack_140": "actionTarget",
+   "alStack_e0": "actionCardEffect"
+  }
+ },
+ "329bc84": {
+  "summary": "Queues a reset-actions action for the target card.",
+  "renames": {
+   "auStack_150": "action",
+   "auStack_250": "queuedAction",
+   "alStack_140": "actionTarget"
+  }
+ },
+ "329bd30": {
+  "summary": "Queues a miss action for the target card.",
+  "renames": {
+   "auStack_150": "action",
+   "auStack_250": "queuedAction",
+   "alStack_140": "actionTarget"
+  }
+ },
+ "329bddc": {
+  "summary": "Queues a force-attack action on the target card, optionally not counting the attack.",
+  "renames": {
+   "auStack_160": "action",
+   "auStack_260": "queuedAction",
+   "alStack_150": "actionTarget",
+   "uStack_69": "actionResetAttackFlag"
+  }
+ },
+ "329bf10": {
+  "summary": "Queues a scripted forced attack between acting and target cards, recording pending damage.",
+  "renames": {
+   "auStack_160": "action",
+   "auStack_260": "queuedAction",
+   "alStack_150": "actionTarget",
+   "lStack_158": "actionActingCard",
+   "uStack_69": "actionResetAttackFlag"
+  }
+ },
+ "329c090": {
+  "summary": "Queues a force-attack-on-friendly-units action for the target card.",
+  "renames": {
+   "auStack_150": "action",
+   "auStack_250": "queuedAction",
+   "alStack_140": "actionTarget"
+  }
+ },
+ "32967f8": {
+  "summary": "Queues a berzerk attack and plays the berzerk trait frame animations on the acting card's UI.",
+  "renames": {
+   "lVar6": "closure",
+   "lVar8_3": "effectEntry",
+   "plVar11": "closureRef",
+   "plVar12": "effectEntryRef"
+  }
+ },
+ "329c194": {
+  "summary": "Queues a scripted attack, picking melee or ranged by damage, unless the unit is out of play or stunned.",
+  "renames": {
+   "auStack_140": "action",
+   "auStack_240": "queuedAction",
+   "alStack_130": "actionTarget",
+   "iStack_108": "actionAttackType",
+   "lStack_138": "actionActingCard",
+   "puVar9": "logMessageRef",
+   "uStack_80": "actionFlag",
+   "uVar1": "staticsFlag",
+   "uVar5": "blockActionsCopy",
+   "uVar5_2": "isDevToolsActive",
+   "uVar7": "messageClass"
+  }
+ },
+ "329c3a0": {
+  "summary": "Queues a redirected attack from the acting card to the target if the attacker is still in play.",
+  "renames": {
+   "auStack_150": "action",
+   "auStack_250": "queuedAction",
+   "alStack_140": "actionTarget",
+   "iStack_118": "actionAttackType",
+   "lStack_148": "actionActingCard",
+   "puVar6": "logMethod",
+   "uStack_90": "actionFlag",
+   "uVar1": "staticsFlag",
+   "uVar3": "isDevToolsActive"
+  }
+ },
+ "329c568": {
+  "summary": "Queues a disappear-unit action for the target card and logs it.",
+  "renames": {
+   "auStack_150": "action",
+   "auStack_250": "queuedAction",
+   "alStack_140": "actionTarget"
+  }
+ },
+ "329c66c": {
+  "summary": "Queues a remove-from-cemetery action for the target card and logs it.",
+  "renames": {
+   "auStack_150": "action",
+   "auStack_250": "queuedAction",
+   "alStack_140": "actionTarget"
+  }
+ },
+ "3281b0c": {
+  "summary": "Queues a draw-card action for a player after flagging the next deck card as drawing.",
+  "renames": {
+   "auStack_140": "action",
+   "auStack_240": "queuedAction",
+   "uStack_13c": "actionIsPlayer"
+  }
+ },
+ "329c854": {
+  "summary": "Queues a draw action for a specific card, marking it as deck-drawing.",
+  "renames": {
+   "auStack_150": "action",
+   "auStack_250": "queuedAction",
+   "alStack_140": "actionTarget",
+   "uStack_14c": "actionIsPlayer"
+  }
+ },
+ "329c91c": {
+  "summary": "Queues a play-animation action with start, end and rotation transforms.",
+  "renames": {
+   "auStack_160": "action",
+   "auStack_260": "queuedAction",
+   "alStack_150": "actionTarget",
+   "alStack_a8": "actionRotateTowards",
+   "lStack_158": "actionCaster",
+   "lStack_b0": "actionEndPos",
+   "lStack_b8": "actionStartPos",
+   "lStack_c0": "actionAnimInfo",
+   "uStack_c8": "actionWaitForAnim"
+  }
+ },
+ "329ca38": {
+  "summary": "Queues an ability-icon animation action for the card and trigger.",
+  "renames": {
+   "auStack_150": "action",
+   "auStack_250": "queuedAction",
+   "alStack_148": "actionCard",
+   "iStack_68": "actionTrigger",
+   "uStack_80": "actionFlag",
+   "uStack_b8": "actionWaitForAnim"
+  }
+ },
+ "329cb0c": {
+  "summary": "Queues a trait-trigger animation action for the card and trigger.",
+  "renames": {
+   "auStack_150": "action",
+   "auStack_250": "queuedAction",
+   "alStack_148": "actionCard",
+   "iStack_68": "actionTrigger",
+   "uStack_80": "actionFlag",
+   "uStack_b8": "actionWaitForAnim"
+  }
+ },
+ "329cbe0": {
+  "summary": "Queues an active-ability animation action for the card.",
+  "renames": {
+   "auStack_140": "action",
+   "auStack_240": "queuedAction",
+   "alStack_138": "actionCard",
+   "uStack_a8": "actionWaitForAnim"
+  }
+ },
+ "329cc84": {
+  "summary": "Queues a multi-damage action over a copied target list and records pending damage on each target.",
+  "renames": {
+   "auStack_160": "action",
+   "auStack_260": "queuedAction",
+   "alStack_110": "actionDamageInfo",
+   "alStack_148": "actionTargetList",
+   "uStack_69": "actionDamageFast",
+   "uStack_6c": "actionBlockPlayerActions"
+  }
+ },
+ "329ce40": {
+  "summary": "Queues a multi-damage action with per-target damage info over a copied target list.",
+  "renames": {
+   "auStack_160": "action",
+   "auStack_260": "queuedAction",
+   "alStack_108": "actionDamageInfoList",
+   "alStack_148": "actionTargetList",
+   "uStack_6c": "actionBlockPlayerActions"
+  }
+ },
+ "329cf8c": {
+  "summary": "Queues a multi-damage action that also destroys the caster, recording pending damage on targets.",
+  "renames": {
+   "auStack_160": "action",
+   "auStack_260": "queuedAction",
+   "alStack_110": "actionDamageInfo",
+   "alStack_148": "actionTargetList",
+   "uStack_6c": "actionBlockPlayerActions"
+  }
+ },
+ "329d14c": {
+  "summary": "Queues a destroy-unit action and marks the target unit as destroyed.",
+  "renames": {
+   "auStack_150": "action",
+   "auStack_250": "queuedAction",
+   "alStack_140": "actionTarget",
+   "iStack_60": "actionDeathType",
+   "lStack_148": "actionActingCard"
+  }
+ },
+ "329d220": {
+  "summary": "Queues a follow-after-resolution battle action linking the acting card and target card.",
+  "renames": {
+   "auStack_140": "action",
+   "auStack_240": "queuedAction",
+   "alStack_130": "actionTarget",
+   "lStack_138": "actionActingCard"
+  }
+ },
+ "329d2d0": {
+  "summary": "Queues an action that removes an enchantment effect from the target card.",
+  "renames": {
+   "auStack_140": "action",
+   "auStack_240": "queuedAction",
+   "alStack_130": "actionTarget",
+   "alStack_d0": "actionCardEffect"
+  }
+ },
+ "329d380": {
+  "summary": "Queues an execute-swarm battle action for the acting card and target card.",
+  "renames": {
+   "auStack_140": "action",
+   "auStack_240": "queuedAction",
+   "alStack_130": "actionTarget",
+   "lStack_138": "actionActingCard"
+  }
+ },
+ "329d430": {
+  "summary": "Returns a new list of the first numCards cards from the player's or enemy's shuffled deck.",
+  "renames": {
+   "lVar2": "addMethod",
+   "lVar6": "shuffledDeck"
+  }
+ },
+ "329d594": {
+  "summary": "Computes the AI value of a card in play, scaled down by damage taken and by stun or pindown.",
+  "renames": {
+   "iVar2": "healthValue",
+   "this_00": "aiForEnchantments",
+   "this_01": "aiInstance",
+   "uStack_60": "healthFake1",
+   "uStack_68": "healthInited1",
+   "uStack_70": "healthValue1",
+   "uStack_80": "healthFake2",
+   "uStack_88": "healthInited2",
+   "uStack_90": "healthValue2"
+  }
+ },
+ "329d5b8": {
+  "summary": "Adds a sound asset with a valid clip to the list of sounds to play.",
+  "renames": {
+   "extraout_x1": "unused1",
+   "lVar4": "addMethod",
+   "plVar3": "slotPtr",
+   "uVar2": "hasNoClip"
+  }
+ },
+ "329d6b0": {
+  "summary": "Plays an audio clip once on the audio source if sound volume is above zero.",
+  "renames": {
+   "puVar3": "logMethod",
+   "uVar1": "logMessage",
+   "uVar2": "isClipNull",
+   "uVar4": "unused1"
+  }
+ },
+ "329d7f4": {
+  "summary": "Returns whether every card in the list is currently in play.",
+  "renames": {
+   "bVar3": "allInPlay"
+  }
+ },
+ "329d980": {
+  "summary": "Creates a new list and fills it with units in play matching the include flags.",
+  "renames": {
+   "lStack_68": "listHolder"
+  }
+ },
+ "329556c": {
+  "summary": "Gathers all cards in both hands (current player's first), filters and orders them with LINQ, and returns them as a list.",
+  "renames": {
+   "alStackY_250": "stackFrame",
+   "auStackY_1fc": "flagBytes",
+   "auStackY_70": "savedPair1",
+   "auStackY_90": "savedPair2",
+   "auStackY_b0": "savedPair3",
+   "auStackY_d0": "savedPair4",
+   "auVar33": "exceptionResult1",
+   "auVar33_x1": "exceptionResult1Aux",
+   "auVar34": "exceptionResult2",
+   "auVar34_x1": "exceptionResult2Aux",
+   "auVar35": "unwindResult",
+   "auVar35_part8": "unwindResultPart",
+   "lStackY_128_2": "savedLookup",
+   "lStackY_140": "savedKeySelector",
+   "lStackY_150": "savedGrouping",
+   "lStackY_1e8": "stackCanary",
+   "lStackY_220": "caughtException",
+   "lStackY_228": "lookupResult",
+   "lStackY_230": "tempElementBuf",
+   "lVar16_6": "typeInfo2",
+   "lVar16_8": "typeInfo3",
+   "lVar18": "typeInfo",
+   "lVar19": "sourceClass",
+   "lVar28": "genericMethodInfo",
+   "lVar28_3": "typeInfo4",
+   "lVar6_3": "sourceClass2",
+   "pcStackY_100": "savedMethod1",
+   "pcStackY_160": "savedMethod2",
+   "pcStackY_80": "savedMethod3",
+   "pcStackY_a0": "savedMethod4",
+   "pcStackY_c0": "savedMethod5",
+   "pcStackY_e0": "savedMethod6",
+   "pcVar26": "methodPtr",
+   "piVar22": "interfaceEntry",
+   "plStackY_108": "sourceEnumerator",
+   "plStackY_118": "caughtException2",
+   "plStackY_138": "savedEnumerator",
+   "plStackY_148": "savedSource",
+   "plStackY_168": "sourceEnumerator2",
+   "plStackY_178": "caughtException3",
+   "plStackY_208": "lookupGroup",
+   "plStackY_210": "sourceEnumerator3",
+   "plStackY_238": "keySelectorCopy",
+   "plStackY_240": "elementSelectorCopy",
+   "plVar11": "resultPtr",
+   "plVar14": "elementSelectorFunc",
+   "plVar15": "lookupClassInfo",
+   "plVar15_3": "elementClassInfo",
+   "plVar24": "lookupClassInfo2",
+   "plVar25": "lookupClassInfo3",
+   "plVar25_3": "elementClassInfo2",
+   "plVar5": "sourceSeq",
+   "plVar7": "sourceSeq2",
+   "pplStackY_110": "enumeratorRef",
+   "pplStackY_170": "enumeratorRef2",
+   "pplStackY_218": "enumeratorRef3",
+   "pplVar20": "enumeratorRefCursor",
+   "puStackY_1f0": "argBuf",
+   "puStackY_1f8": "argPtr",
+   "puStackY_1f8_2": "argPtr2",
+   "puVar10": "errorParamName",
+   "puVar17": "interfaceMethodTable",
+   "puVar29": "tempBuf2",
+   "puVar30": "tempBuf3",
+   "puVar31": "tempBuf4",
+   "puVar32": "tempBuf5",
+   "puVar9": "interfaceMethodTable2",
+   "uStackY_130": "exceptionObject",
+   "uVar2": "classInitDone",
+   "uVar21": "interfaceCount",
+   "uVar27_4": "ctorArg",
+   "uVar4": "keyFromSelector",
+   "uVar8": "keyFromSelector2",
+   "plVar12_3": "currentEnumerator"
+  }
+ },
+ "329dacc": {
+  "summary": "Gathers hand cards for the chosen sides and types, filters and orders them with LINQ, and returns them as a list.",
+  "renames": {
+   "alStackY_250": "stackFrame",
+   "auStackY_1fc": "flagBytes",
+   "auStackY_70": "savedPair1",
+   "auStackY_90": "savedPair2",
+   "auStackY_b0": "savedPair3",
+   "auStackY_d0": "savedPair4",
+   "auVar33": "exceptionResult1",
+   "auVar33_x1": "exceptionResult1Aux",
+   "auVar34": "exceptionResult2",
+   "auVar34_x1": "exceptionResult2Aux",
+   "auVar35": "unwindResult",
+   "auVar35_part8": "unwindResultPart",
+   "lStackY_128_2": "savedLookup",
+   "lStackY_140": "savedKeySelector",
+   "lStackY_150": "savedGrouping",
+   "lStackY_1e8": "stackCanary",
+   "lStackY_220": "caughtException",
+   "lStackY_228": "lookupResult",
+   "lStackY_230": "tempElementBuf",
+   "lVar16_6": "typeInfo2",
+   "lVar16_8": "typeInfo3",
+   "lVar18": "typeInfo",
+   "lVar19": "sourceClass",
+   "lVar28": "genericMethodInfo",
+   "lVar28_3": "typeInfo4",
+   "lVar6_3": "sourceClass2",
+   "pcStackY_100": "savedMethod1",
+   "pcStackY_160": "savedMethod2",
+   "pcStackY_80": "savedMethod3",
+   "pcStackY_a0": "savedMethod4",
+   "pcStackY_c0": "savedMethod5",
+   "pcStackY_e0": "savedMethod6",
+   "pcVar26": "methodPtr",
+   "piVar22": "interfaceEntry",
+   "plStackY_108": "sourceEnumerator",
+   "plStackY_118": "caughtException2",
+   "plStackY_138": "savedEnumerator",
+   "plStackY_148": "savedSource",
+   "plStackY_168": "sourceEnumerator2",
+   "plStackY_178": "caughtException3",
+   "plStackY_208": "lookupGroup",
+   "plStackY_210": "sourceEnumerator3",
+   "plStackY_238": "keySelectorCopy",
+   "plStackY_240": "elementSelectorCopy",
+   "plVar11": "resultPtr",
+   "plVar14": "elementSelectorFunc",
+   "plVar15": "lookupClassInfo",
+   "plVar15_3": "elementClassInfo",
+   "plVar24": "lookupClassInfo2",
+   "plVar25": "lookupClassInfo3",
+   "plVar25_3": "elementClassInfo2",
+   "plVar5": "sourceSeq",
+   "plVar7": "sourceSeq2",
+   "pplStackY_110": "enumeratorRef",
+   "pplStackY_170": "enumeratorRef2",
+   "pplStackY_218": "enumeratorRef3",
+   "pplVar20": "enumeratorRefCursor",
+   "puStackY_1f0": "argBuf",
+   "puStackY_1f8": "argPtr",
+   "puStackY_1f8_2": "argPtr2",
+   "puVar10": "errorParamName",
+   "puVar17": "interfaceMethodTable",
+   "puVar29": "tempBuf2",
+   "puVar30": "tempBuf3",
+   "puVar31": "tempBuf4",
+   "puVar32": "tempBuf5",
+   "puVar9": "interfaceMethodTable2",
+   "uStackY_130": "exceptionObject",
+   "uVar2": "classInitDone",
+   "uVar21": "interfaceCount",
+   "uVar27_4": "ctorArg",
+   "uVar4": "keyFromSelector",
+   "uVar8": "keyFromSelector2",
+   "plVar13_3": "currentEnumerator"
+  }
+ },
+ "329de60": {
+  "summary": "Adds cards from the player's or enemy hand that pass the include filters to the result list.",
+  "renames": {
+   "lVar3": "handCards",
+   "lVar5": "resultItems",
+   "lVar7": "resultListRef",
+   "lVar8": "handObject",
+   "uVar1": "resultCount"
+  }
+ }
+}

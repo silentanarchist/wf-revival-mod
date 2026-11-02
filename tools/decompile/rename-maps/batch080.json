@@ -1,0 +1,342 @@
+{
+ "3038e3c": {
+  "summary": "Click handler in the alternate-art popup that swaps the deck's card for the selected alternate-art version, saves the choice, and refreshes the deck editor UI.",
+  "renames": {
+   "uVar7": "newCardId",
+   "iStack_34": "deckCardCount",
+   "piVar11": "interfaceEntry"
+  }
+ },
+ "3039028": {
+  "summary": "Predicate returning true when a card's original ID string equals the captured card original ID (inlined string comparison).",
+  "renames": {
+   "lVar1": "originalIdChars",
+   "uVar6_2": "charsDiffer",
+   "bVar2": "charsEqual"
+  }
+ },
+ "3035da0": {
+  "summary": "Start: hooks up drag, toggle, button, deck-edited and card/cosmetic click listeners for the deck editing window.",
+  "renames": {
+   "lVar5": "dragRelay",
+   "plVar6": "onDeckEditedField",
+   "lVar5_4": "deckEditedHandler",
+   "lVar5_6": "cardClickHandler",
+   "uVar1": "handlerType",
+   "lVar5_8": "cosmeticClickHandler"
+  }
+ },
+ "3036288": {
+  "summary": "Opens the deck editor: copies the passed deck, removes invalid cards, initializes card and cosmetic displays, editing panel, and done button.",
+  "renames": {
+   "lVar3_3": "eventInfo",
+   "uVar6": "interfaceCount",
+   "piVar7": "interfaceEntry"
+  }
+ },
+ "30371d4": {
+  "summary": "Refreshes the card list and the editing panel: deck counter text, custom game mode limit, deck lists, cost and cosmetic drawers, name and empty warning.",
+  "renames": {
+   "aiStack_34": "deckCardCountBuf",
+   "bVar1": "hasCustomGameMode",
+   "uVar8": "interfaceCount",
+   "piVar9": "interfaceEntry",
+   "uVar5": "limitText"
+  }
+ },
+ "3037244": {
+  "summary": "Handles clicking a cosmetic cardback: on right-click of an owned one, sets it as the deck's cardback and updates the counter and drawers.",
+  "renames": {
+   "lVar7": "setTextMethod",
+   "lVar10_3": "eventClass",
+   "piVar8": "interfaceEntry",
+   "uVar3": "limitText"
+  }
+ },
+ "3037320": {
+  "summary": "Handles a card click: right-click adds the card to the deck or shows an error; otherwise opens the card detail window with a close callback.",
+  "renames": {
+   "uVar8": "interfaceCount",
+   "lVar4": "displayClass",
+   "lVar12_3": "cardToShow",
+   "alStack_48": "cardTierNullable",
+   "lVar5_3": "eventConfig",
+   "piVar9": "interfaceEntry",
+   "plVar10": "cardHolder",
+   "plVar11": "onCloseField"
+  }
+ },
+ "3037444": {
+  "summary": "Opens the card detail window for a card, passing wildcard and tier info, and registers a close callback for alternate art selection.",
+  "renames": {
+   "lVar2": "displayClass",
+   "plVar12": "cardHolder",
+   "lVar10": "cardToShow",
+   "lStack_48": "cardTierNullable",
+   "lVar4_3": "eventConfig",
+   "uVar8": "interfaceCount",
+   "piVar9": "interfaceEntry",
+   "plVar11": "onCloseField"
+  }
+ },
+ "30377a8": {
+  "summary": "Handles the Escape key: closes if nothing unsaved, otherwise offers to save (uploading if valid) or discard deck changes via a popup.",
+  "renames": {
+   "plVar4": "cachedDelegateField"
+  }
+ },
+ "3037acc": {
+  "summary": "Closes the deck editing window, restores the window manager, and returns to the collection screen if it is current.",
+  "renames": {
+   "lStack_28": "gameModeNullable"
+  }
+ },
+ "30368c0": {
+  "summary": "Builds the sorted list of deck-editable cards (all or owned only) with several LINQ filters and ordering, plus decompiler junk from inlined LINQ helpers.",
+  "renames": {
+   "lVar26": "orderByMethod",
+   "auVar31": "thrownResultA",
+   "auVar32": "thrownResultB",
+   "pcStack_100": "savedMethodPtr",
+   "plStack_108": "sourceEnumerator",
+   "pplStack_110": "enumeratorRef",
+   "plStack_118": "caughtException",
+   "uStack_130": "unwindException",
+   "pcStack_160": "lookupCreateMethod",
+   "lStack_150": "savedGrouping",
+   "plStack_148": "savedInventory",
+   "lStack_140": "savedKeySelector",
+   "plStack_138": "savedEnumeratorB",
+   "plStack_168": "sourceEnumeratorB",
+   "pplStack_170": "enumeratorRefB",
+   "plStack_178": "caughtExceptionB",
+   "plStack_238": "keySelectorC",
+   "alStack_250": "stackFrame",
+   "lStack_1e8": "stackCanary",
+   "plStack_240": "elementSelectorC",
+   "plStack_210": "sourceEnumeratorC",
+   "lStack_230": "tempBuf1Copy",
+   "lStack_228": "resultList",
+   "pplStack_218": "enumeratorRefC",
+   "lStack_220": "caughtExceptionC",
+   "puStack_1f8": "callArgs",
+   "puStack_1f8_2": "callArgs2",
+   "puStack_1f0": "callArgsOut",
+   "auStack_1fc": "flagBuf",
+   "plStack_208": "groupResult",
+   "puVar27": "tempBuf2",
+   "puVar28": "tempBuf3",
+   "puVar29": "tempBuf4",
+   "puVar30": "tempBuf5",
+   "uVar1": "classInitialized",
+   "pcStack_60": "toListVector2Method",
+   "pcStack_80": "toListVector3Method",
+   "auStack_70": "savedResultA",
+   "pcStack_a0": "toListVector4Method",
+   "auStack_90": "savedResultB",
+   "pcStack_c0": "toListGenericMethod",
+   "auStack_b0": "savedResultC",
+   "pcStack_e0": "toLookupMethod",
+   "auStack_d0": "savedResultD",
+   "plVar16": "lookupTypeArgs",
+   "plVar15": "elementSelectorFn",
+   "plVar24": "lookupGenericClass",
+   "puVar11": "argNameString",
+   "lVar17": "currentClass",
+   "uVar21": "interfaceCount",
+   "piVar22": "interfaceEntry",
+   "plVar23": "lookupClassCopy",
+   "pplVar19": "enumeratorRefPtr",
+   "uVar2": "keyA",
+   "auVar33": "unwindResult",
+   "plVar14_3": "enumeratorToDispose",
+   "plVar8": "sourceB",
+   "plVar16_3": "elementSelectorB",
+   "lStack_128_2": "savedLookup",
+   "lVar3_18": "currentClassB",
+   "uVar9": "keyB",
+   "pcVar25": "invokeFnC",
+   "plVar4_3": "sourceC",
+   "lVar3_20": "stackBufferBase",
+   "plVar24_3": "scratchClass",
+   "lVar7_3": "currentClassC",
+   "puVar10": "interfaceMethodPtr",
+   "plVar12": "catchResult",
+   "puVar20": "interfaceMethodTable"
+  }
+ },
+ "3037c30": {
+  "summary": "Sets the show-only-owned-cards flag if changed and refreshes the card display collection.",
+  "renames": {
+   "uVar1": "updateMethodRef"
+  }
+ },
+ "3037cb0": {
+  "summary": "Sets the show-only-owned-cosmetics flag if changed and refreshes the cosmetic display collection.",
+  "renames": {
+   "uVar1": "updateMethodRef"
+  }
+ },
+ "3036634": {
+  "summary": "Builds the list of cardback cosmetics (all or owned only), filtered and ordered by army, plus decompiler junk from inlined LINQ helpers.",
+  "renames": {
+   "lVar26": "orderByMethod",
+   "auVar31": "thrownResultA",
+   "auVar32": "thrownResultB",
+   "pcStack_100": "savedMethodPtr",
+   "plStack_108": "sourceEnumerator",
+   "pplStack_110": "enumeratorRef",
+   "plStack_118": "caughtException",
+   "uStack_130": "unwindException",
+   "pcStack_160": "lookupCreateMethod",
+   "lStack_150": "savedGrouping",
+   "plStack_148": "savedInventory",
+   "lStack_140": "savedKeySelector",
+   "plStack_138": "savedEnumeratorB",
+   "plStack_168": "sourceEnumeratorB",
+   "pplStack_170": "enumeratorRefB",
+   "plStack_178": "caughtExceptionB",
+   "plStack_238": "keySelectorC",
+   "alStack_250": "stackFrame",
+   "lStack_1e8": "stackCanary",
+   "plStack_240": "elementSelectorC",
+   "plStack_210": "sourceEnumeratorC",
+   "lStack_230": "tempBuf1Copy",
+   "lStack_228": "resultList",
+   "pplStack_218": "enumeratorRefC",
+   "lStack_220": "caughtExceptionC",
+   "puStack_1f8": "callArgs",
+   "puStack_1f8_2": "callArgs2",
+   "puStack_1f0": "callArgsOut",
+   "auStack_1fc": "flagBuf",
+   "plStack_208": "groupResult",
+   "puVar27": "tempBuf2",
+   "puVar28": "tempBuf3",
+   "puVar29": "tempBuf4",
+   "puVar30": "tempBuf5",
+   "uVar1": "classInitialized",
+   "lVar19": "currentClass",
+   "plVar14": "lookupTypeArgs",
+   "plVar15": "elementSelectorFn",
+   "plVar23": "lookupGenericClass",
+   "puVar10": "argNameString",
+   "uVar20": "interfaceCount",
+   "piVar21": "interfaceEntry",
+   "puVar16": "interfaceMethodTable",
+   "plVar22": "lookupClassCopy",
+   "pplVar18": "enumeratorRefPtr",
+   "uVar2": "keyA",
+   "plVar13_3": "enumeratorToDispose",
+   "plVar7": "sourceB",
+   "plVar15_3": "elementSelectorB",
+   "lStack_128": "savedLookup",
+   "lVar26_3": "currentClassB",
+   "uVar8": "keyB",
+   "pcVar24": "invokeFnC",
+   "plVar4_3": "sourceC",
+   "lVar26_5": "currentClassC",
+   "lVar3_7": "stackBufferBase",
+   "plVar23_3": "scratchClass",
+   "puVar9": "interfaceMethodPtr",
+   "plVar11": "catchResult"
+  }
+ },
+ "3037d30": {
+  "summary": "Checks a card drag: if allowed and not a scroll gesture, starts a card drag relay; otherwise shows an error and resets the relay.",
+  "renames": {
+   "lStack_58": "errorCode"
+  }
+ },
+ "3038034": {
+  "summary": "Checks a cosmetic drag: starts dragging an owned cardback or resets the relay, registering begin/drag/end handlers via EventRelay (with decompiler noise).",
+  "renames": {
+   "plVar5": "classPtr",
+   "uVar15": "methodClass",
+   "lStack_60": "enumeratorState",
+   "uStack_58": "savedStackPtrA",
+   "uStack_50": "savedStackPtrB",
+   "uVar17_5": "handlerComponents",
+   "plStack_68": "stackSlotA",
+   "plStack_70": "enumeratorPtr",
+   "uVar7_2": "hasNext",
+   "plVar14": "stackPtrCopy",
+   "auVar21": "unwindResult",
+   "lVar3_4": "threadLocalBase",
+   "lStack_78_2": "caughtException",
+   "lStack_e8": "stackCanary",
+   "uStack_f8": "methodClassSaved",
+   "uStack_100": "scratchBuf1",
+   "auStack_130": "frameBuf",
+   "puVar16": "scratchBuf2",
+   "lVar18": "scratchBuf3",
+   "uVar15_2": "sizeAlign",
+   "lStack_108": "scratchBuf4",
+   "lVar8": "displayClass",
+   "lVar9": "handlerValueA",
+   "lVar10": "handlerEventB",
+   "puVar13": "methodPtr",
+   "puStack_120": "methodClassRef",
+   "puStack_118": "scratchBuf1Ref",
+   "plStack_110": "scratchBuf4Ref",
+   "uVar11": "moveNextResult",
+   "puStack_f0": "callArgs",
+   "uVar15_3": "methodClassB",
+   "uVar7_3": "caughtExceptionB"
+  }
+ },
+ "3038210": {
+  "summary": "Refreshes the filtered card display and updates the done button text, color and animation depending on whether the deck is valid.",
+  "renames": {
+   "uStack_24": "errorOut",
+   "uStack_50": "colorX",
+   "uStack_48": "colorY",
+   "uStack_40": "colorZ",
+   "uStack_70": "colorCopyX",
+   "uStack_68": "colorCopyY",
+   "uStack_60": "colorCopyZ",
+   "lVar2": "fieldOffset",
+   "puVar1": "colorFieldPtr",
+   "uVar4": "colorString",
+   "fVar6": "punchScale"
+  }
+ },
+ "3036fd0": {
+  "summary": "Updates the done button's text color and toggle effect based on deck validity, with a sound and punch animation when it becomes valid.",
+  "renames": {
+   "uStack_24": "errorOut",
+   "uStack_50": "colorX",
+   "uStack_48": "colorY",
+   "uStack_40": "colorZ",
+   "uStack_70": "colorCopyX",
+   "uStack_68": "colorCopyY",
+   "uStack_60": "colorCopyZ",
+   "lVar2": "fieldOffset",
+   "puVar1": "colorFieldPtr",
+   "uVar3": "colorString",
+   "fVar5": "tweenValue"
+  }
+ },
+ "3036f18": {
+  "summary": "Filters the card display to the deck and updates the wildcard display's army icon and per-rarity wildcard counts.",
+  "renames": {
+   "auStack_44": "countBuffer",
+   "puVar8": "interfaceMethodPtr"
+  }
+ },
+ "3038244": {
+  "summary": "Tries to close the editor; if there are unsaved changes, shows a discard-changes confirmation popup with Cancel and Discard buttons.",
+  "renames": {
+   "plVar6": "cachedDelegateField",
+   "unaff_x19": "unused1",
+   "unaff_x20": "unused2",
+   "unaff_x30": "unused3",
+   "unaff_x21": "unused4"
+  }
+ },
+ "30377ac": {
+  "summary": "Saves the deck: uploads it if valid, otherwise shows an error popup with Cancel and Discard buttons.",
+  "renames": {
+   "plVar4": "cachedDelegateField"
+  }
+ }
+}

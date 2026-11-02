@@ -1,0 +1,533 @@
+{
+ "2f61eb4": {
+  "summary": "Caches the lens flare component from this object if it is not already set.",
+  "renames": {
+   "puVar2": "lensFlareFieldPtr",
+   "uVar3": "lensFlareValue",
+   "uVar1": "hasLensFlare"
+  }
+ },
+ "2f61f8c": {
+  "summary": "Registers this animation blender in the environment manager list of scenario blendeables.",
+  "renames": {
+   "extraout_x1_02": "unused1",
+   "lVar3": "addMethod",
+   "lVar4_3": "blendeableList",
+   "plVar2": "slotPtr",
+   "plVar6": "listFieldPtr"
+  }
+ },
+ "2f6202c": {
+  "summary": "Looks up animation clips matching the filter code for the default scenario and adds them to the animation component, warning on duplicates.",
+  "renames": {
+   "auVar9": "errorResult",
+   "auVar9_x1": "errorResultAux",
+   "lStack_38": "foundClip"
+  }
+ },
+ "2f62274": {
+  "summary": "Adds an animation clip to the Animation component and optionally cross-fades to it over the blend time.",
+  "renames": {
+   "uStack_38": "emptySpanLength",
+   "uStack_40": "emptySpan",
+   "uStack_58": "nameSpanLength",
+   "uStack_60": "nameSpan"
+  }
+ },
+ "2f62338": {
+  "summary": "Sets the blend direction and the matching target value (1 for on, 0 for off).",
+  "renames": {
+   "uVar1": "targetValue"
+  }
+ },
+ "2f62384": {
+  "summary": "Constructs blend options with time, direction, completion callback and filter, deriving the target value from direction.",
+  "renames": {
+   "uVar2": "targetValue"
+  }
+ },
+ "2f62434": {
+  "summary": "Applies the default environment as current, disabling the previous one and enabling the new one.",
+  "renames": {
+   "lVar8": "currentEnvValue",
+   "puVar3": "logMethodPtr",
+   "uVar1": "errorMessage",
+   "uVar5": "unused1"
+  }
+ },
+ "2f62450": {
+  "summary": "Switches the current environment to the given one, disabling the old and enabling the new, optionally instantly.",
+  "renames": {
+   "lVar5": "currentEnvValue",
+   "puVar3": "logMethodPtr",
+   "uVar1": "errorMessage",
+   "uVar4": "unused1"
+  }
+ },
+ "2f62440": {
+  "summary": "Applies the default environment, optionally instantly, replacing the current environment.",
+  "renames": {
+   "lVar8": "currentEnvValue",
+   "puVar3": "logMethodPtr",
+   "uVar1": "errorMessage",
+   "uVar4": "unused1"
+  }
+ },
+ "2f62d6c": {
+  "summary": "Disables the current environment by switching to the default one and blending all registered blendeables.",
+  "renames": {
+   "lVar11": "currentEnvValue",
+   "plStack_38": "currentBlendeable",
+   "puVar4": "logMethodPtr",
+   "uStack_40": "enumeratorPad",
+   "uVar3": "flag",
+   "uVar7": "scratchFlag"
+  }
+ },
+ "2f61db4": {
+  "summary": "Adds a blendeable to the manager cached list, creating the list if needed.",
+  "renames": {
+   "extraout_x1": "unused1",
+   "lVar3": "addMethod",
+   "lVar4": "blendeableList",
+   "lVar5": "itemsArray",
+   "plVar2": "slotPtr",
+   "plVar6": "listFieldPtr",
+   "uVar1": "count"
+  }
+ },
+ "2f62bcc": {
+  "summary": "Passes the given blend options to every registered blendeable.",
+  "renames": {
+   "plStack_38": "currentBlendeable",
+   "plVar1": "blendeableCopy",
+   "uStack_40": "enumeratorPad",
+   "uVar2": "hasNext"
+  }
+ },
+ "2f621d0": {
+  "summary": "Returns true and loads the clip if the filter code matches.",
+  "renames": {
+   "bVar1": "filterMatches"
+  }
+ },
+ "2f638cc": {
+  "summary": "Static constructor creating the singleton compiler-generated closure instance.",
+  "renames": {
+   "uVar1": "instance"
+  }
+ },
+ "2f6393c": {
+  "summary": "Lambda getter returning the current ambient light color.",
+  "renames": {
+   "uStack_18": "colorBufferHigh",
+   "uStack_20": "colorBuffer"
+  }
+ },
+ "2f63944": {
+  "summary": "Lambda setter applying a color to the ambient light.",
+  "renames": {
+   "uStack_14": "extraArg",
+   "uStack_18": "methodArg",
+   "uStack_1c": "colorArg",
+   "uStack_20": "selfArg",
+   "param_4": "extraParam"
+  }
+ },
+ "2f6394c": {
+  "summary": "Lambda getter returning the current fog color.",
+  "renames": {
+   "uStack_18": "colorBufferHigh",
+   "uStack_20": "colorBuffer"
+  }
+ },
+ "2f63954": {
+  "summary": "Lambda setter applying a color to the fog.",
+  "renames": {
+   "uStack_14": "extraArg",
+   "uStack_18": "methodArg",
+   "uStack_1c": "colorArg",
+   "uStack_20": "selfArg",
+   "param_4": "extraParam"
+  }
+ },
+ "2f6395c": {
+  "summary": "Lambda getter returning the current fog density.",
+  "renames": {
+   "auVar2": "scratchValue",
+   "auVar2_x1": "methodCopy",
+   "fVar1": "fogValue",
+   "pcRam0000000006b68320": "fogAccessor"
+  }
+ },
+ "2f63964": {
+  "summary": "Lambda setter for the fog density value.",
+  "renames": {
+   "auVar1": "scratchValue",
+   "auVar1_x1": "methodCopy",
+   "pcRam0000000006b68328": "fogAccessor"
+  }
+ },
+ "2f6288c": {
+  "summary": "Enables this environment: applies ambient and fog, spawns scenario objects at the battle center, and returns the blend options for blendeables.",
+  "renames": {
+   "auVar18": "thrownResult",
+   "auVar18_x1": "thrownAux",
+   "in_s1": "rotationArg1",
+   "in_s2": "rotationArg2",
+   "lStack_78": "savedBlendIn",
+   "lStack_80": "savedBlendOut",
+   "lStack_88": "savedChildren",
+   "lVar6_4": "childBlendeables",
+   "pcStack_a0": "managerMethodPtr",
+   "plStack_90": "savedLoad",
+   "plStack_a8": "currentBlendeable",
+   "plVar10": "instancedFieldPtr",
+   "puVar7": "quaternionStatics",
+   "uStack_b0": "enumeratorPad",
+   "uVar15": "rotationY",
+   "uVar16": "rotationZ",
+   "uVar17": "rotationW",
+   "uVar4": "flag"
+  }
+ },
+ "2f6360c": {
+  "summary": "Test helper that makes this environment the manager current one and blends all registered blendeables on.",
+  "renames": {
+   "lVar10": "currentEnvValue",
+   "lVar5": "scratchValue",
+   "plStack_38": "currentBlendeable",
+   "plVar9": "currentEnvFieldPtr",
+   "puVar3": "logMethodPtr",
+   "uStack_40": "enumeratorPad",
+   "uVar1": "errorMessage",
+   "uVar4": "unused1"
+  }
+ },
+ "2f636b0": {
+  "summary": "Test helper that resets the manager to its default environment and blends all registered blendeables.",
+  "renames": {
+   "lVar9": "currentEnvValue",
+   "plStack_38": "currentBlendeable",
+   "puVar3": "logMethodPtr",
+   "this_00": "defaultEnv",
+   "uStack_40": "enumeratorPad",
+   "uVar1": "errorMessage",
+   "uVar4": "unused1"
+  }
+ },
+ "2f625a0": {
+  "summary": "Disables this environment: reapplies the manager default if needed and blends scenario objects out, then applies the new state.",
+  "renames": {
+   "auVar22": "thrownResult",
+   "auVar22_x1": "thrownAux",
+   "fVar17": "unusedBlend",
+   "in_s1": "rotationArg1",
+   "in_s2": "rotationArg2",
+   "lStack_e8": "savedBlendIn",
+   "lStack_f0": "savedBlendOut",
+   "lStack_f8": "savedChildren",
+   "lVar7_3": "existingChildren",
+   "lVar7_7": "newInstanceChildren",
+   "lVar7_8": "loopChildren",
+   "pcStack_110": "managerMethodPtr",
+   "piVar10": "interfaceMapPtr",
+   "plStack_100": "savedObject",
+   "plStack_118": "currentBlendeable",
+   "plVar12": "instancedFieldPtr",
+   "puVar9": "quaternionStatics",
+   "uStack_120": "enumeratorPad",
+   "uVar19": "rotationY",
+   "uVar20": "rotationZ",
+   "uVar21": "rotationW",
+   "uVar6": "flag"
+  }
+ },
+ "2f63770": {
+  "summary": "Counts down finished disable blends and, when all are done, destroys the instanced scenario objects and releases the asset.",
+  "renames": {
+   "iVar1": "remainingCount",
+   "uVar3": "found"
+  }
+ },
+ "2f62e4c": {
+  "summary": "Applies the ambient color, instantly or through DOTween tweens over the blend time.",
+  "renames": {
+   "lVar1": "applyToMethod",
+   "lVar2": "displayClass"
+  }
+ },
+ "2f63838": {
+  "summary": "Constructor setting default blend time, ambient blend, fog density and shader property id.",
+  "renames": {
+   "uVar1": "shaderPropertyName"
+  }
+ },
+ "2f63b34": {
+  "summary": "Blends material float properties toward a target by a step, or sets them instantly; remainder is misdecoded neighbouring code.",
+  "renames": {
+   "auVar16": "hasCustomMaterial",
+   "auVar16_x1": "thrownAux",
+   "auVar17": "thrownResult",
+   "auVar17_part8": "toggleFlag",
+   "cVar2": "directionFlag",
+   "extraout_s0": "unused1",
+   "extraout_s0_00": "unused2",
+   "fVar11": "currentValue",
+   "fVar12": "newValue",
+   "fVar14": "step",
+   "lVar3_2": "blender",
+   "plVar8": "optionsFieldPtr",
+   "uVar13": "targetValueBits",
+   "uVar15": "savedTarget"
+  }
+ },
+ "2f63ed8": {
+  "summary": "Assigns the custom material to the renderer, resets blend properties to the start value and marks initialized.",
+  "renames": {
+   "extraout_s0": "unused1",
+   "in_s1": "unused2"
+  }
+ },
+ "2f639a0": {
+  "summary": "Registers this material blender in the manager list if it belongs to the default scenario.",
+  "renames": {
+   "extraout_x1_02": "unused1",
+   "lVar3": "addMethod",
+   "lVar4_3": "blendeableList",
+   "plVar2": "slotPtr",
+   "plVar6": "listFieldPtr"
+  }
+ },
+ "2f63a54": {
+  "summary": "Per-frame fade of renderer materials toward the target, finishing and invoking completion callback; tail is misdecoded neighbouring code.",
+  "renames": {
+   "auVar17": "thrownResult",
+   "auVar17_part8": "toggleFlag",
+   "auVar18": "thrownResult2",
+   "auVar18_x1": "thrownAux",
+   "cVar2": "directionFlag",
+   "extraout_s0": "unused1",
+   "extraout_s0_00": "unused2",
+   "extraout_s0_01": "unused3",
+   "extraout_x1": "unused4",
+   "fVar12": "currentValue",
+   "lVar4_5": "blendComponent",
+   "lVar6": "optionsClass",
+   "plVar9": "optionsFieldPtr"
+  }
+ },
+ "2f63c84": {
+  "summary": "Starts a material blend if the filter code matches, storing blend options and setting fade state; tail is misdecoded neighbouring code.",
+  "renames": {
+   "auVar13": "thrownResult",
+   "auVar13_part8": "toggleFlag",
+   "cVar2": "directionFlag",
+   "extraout_s0": "unused1",
+   "extraout_s0_00": "unused2",
+   "in_s1": "unused3",
+   "lVar6": "optionsClass",
+   "plVar9": "optionsFieldPtr"
+  }
+ },
+ "2f63e60": {
+  "summary": "Enables or disables all blended renderers; tail is misdecoded neighbouring code.",
+  "renames": {
+   "extraout_s0": "unused1",
+   "extraout_s0_00": "unused2",
+   "in_s1": "unused3",
+   "lVar3": "rendererPtr"
+  }
+ },
+ "2f63ffc": {
+  "summary": "Registers this object toggler in the manager list if it belongs to the default scenario.",
+  "renames": {
+   "extraout_x1_02": "unused1",
+   "lVar3": "addMethod",
+   "lVar4_3": "blendeableList",
+   "plVar2": "slotPtr",
+   "plVar6": "listFieldPtr"
+  }
+ },
+ "2f640b0": {
+  "summary": "Counts down the fade timer and, when done, sets game objects active per blend direction and fires completion callback.",
+  "renames": {
+   "auVar8_2": "hasObject",
+   "auVar8_x1": "methodArg",
+   "fVar6": "frameDelta",
+   "plVar2": "optionsFieldPtr"
+  }
+ },
+ "2f64240": {
+  "summary": "Registers this material fader in the manager list if it belongs to the default scenario.",
+  "renames": {
+   "extraout_x1_02": "unused1",
+   "lVar3": "addMethod",
+   "lVar4_3": "blendeableList",
+   "plVar2": "slotPtr",
+   "plVar6": "listFieldPtr"
+  }
+ },
+ "2f642f4": {
+  "summary": "Per-frame fade of renderer material colors toward the target alpha, restoring materials and firing completion when done; tail is misdecoded neighbouring code.",
+  "renames": {
+   "auVar18": "thrownResult",
+   "auVar18_x1": "thrownAux",
+   "auVar19": "thrownResult2",
+   "auVar19_part8": "toggleFlag",
+   "extraout_s0": "unused1",
+   "fVar15": "currentAlpha",
+   "fVar17": "newAlpha",
+   "in_d3": "colorAlphaBits",
+   "in_x2": "unused2",
+   "plVar10": "materialsArray",
+   "puVar6": "materialsFieldPtr",
+   "uVar14": "targetValueBits"
+  }
+ },
+ "2f645cc": {
+  "summary": "Starts a material fade from blend options, caching original materials and setting fade time and target; tail is misdecoded.",
+  "renames": {
+   "extraout_s0": "unused1",
+   "in_s1": "unused2",
+   "lVar4": "isInstResult",
+   "plVar9": "materialsArray",
+   "puVar5": "materialsFieldPtr",
+   "uVar3": "newArray"
+  }
+ },
+ "2f646e0": {
+  "summary": "Caches each renderer shared material into the originalMaterials array.",
+  "renames": {
+   "auVar8_2": "rendererCopy",
+   "auVar8_x1": "methodArg",
+   "extraout_s0": "unused1",
+   "in_s1": "unused2",
+   "lVar6": "indexLong",
+   "plVar7": "materialsArray",
+   "puVar4": "materialsFieldPtr"
+  }
+ },
+ "2f64460": {
+  "summary": "Destroys faded materials and restores each renderer original shared material; tail is misdecoded.",
+  "renames": {
+   "auVar13": "thrownResult",
+   "auVar13_part8": "toggleFlag",
+   "auVar14_x1": "methodArg",
+   "extraout_s0": "unused1",
+   "in_s1": "unused2",
+   "in_x2": "unused3",
+   "plVar10": "materialsArray",
+   "puVar6": "materialsFieldPtr",
+   "uVar12": "targetValueBits"
+  }
+ },
+ "2f6455c": {
+  "summary": "Enables or disables all renderers; tail is misdecoded neighbouring code.",
+  "renames": {
+   "auVar13": "thrownResult",
+   "auVar13_x1": "thrownAux",
+   "extraout_s0": "unused1",
+   "in_s1": "unused2",
+   "plVar10": "materialsArray",
+   "puVar6": "materialsFieldPtr",
+   "uVar12": "targetValueBits",
+   "uVar4": "newArray"
+  }
+ },
+ "2f64814": {
+  "summary": "Toggles all particle controllers and area spawners by blend direction; tail checks if any are still active.",
+  "renames": {
+   "auVar8": "thrownResult"
+  }
+ },
+ "2f64e0c": {
+  "summary": "Coroutine state machine that waits for the blend time and then invokes the completion callback.",
+  "renames": {}
+ },
+ "2f64ef4": {
+  "summary": "Throws NotSupportedException because IEnumerator.Reset is not supported.",
+  "renames": {
+   "uVar2": "methodRef"
+  }
+ },
+ "2f64b50": {
+  "summary": "Per-frame check that finishes the blend once all particle systems have no particles; tail is misdecoded blend code.",
+  "renames": {
+   "auVar11_3": "hasParticleSystem",
+   "auVar11_x1": "methodArg",
+   "pcStack_70": "doBlendMethodPtr",
+   "plVar6": "blendOptionsFieldPtr"
+  }
+ },
+ "2f64c2c": {
+  "summary": "Stores blend options, toggles particle emission by direction, and either starts a wait coroutine or enables Update polling.",
+  "renames": {
+   "auVar7": "hasParticleSystem",
+   "auVar7_x1": "coroutineAux"
+  }
+ },
+ "2f64d6c": {
+  "summary": "Creates the wait-for-blend-time coroutine state machine.",
+  "renames": {
+   "lVar1": "stateMachine"
+  }
+ },
+ "2f64f34": {
+  "summary": "Sets emission of each particle system to the blend direction; tail is misdecoded registration code.",
+  "renames": {
+   "extraout_x1": "unused1",
+   "lVar5": "itemsArray",
+   "lVar8_4": "blendeableList",
+   "plVar6": "listFieldPtr",
+   "puVar2": "slotPtr",
+   "uVar3": "thrownResult"
+  }
+ },
+ "2f65018": {
+  "summary": "Registers this particle toggler in the manager list of blendeables.",
+  "renames": {
+   "extraout_x1_02": "unused1",
+   "lVar3": "addMethod",
+   "lVar4_3": "blendeableList",
+   "plVar2": "slotPtr",
+   "plVar6": "listFieldPtr"
+  }
+ },
+ "2f650c0": {
+  "summary": "Registers this tau cannon stopper in the manager list of blendeables.",
+  "renames": {
+   "extraout_x1_02": "unused1",
+   "lVar3": "addMethod",
+   "lVar4_3": "blendeableList",
+   "plVar2": "slotPtr",
+   "plVar6": "listFieldPtr"
+  }
+ },
+ "2f65160": {
+  "summary": "Enables or disables look-at constraints, particles and anim controller of the tau cannon, tweening it to final rotation when off.",
+  "renames": {
+   "auVar8": "thrownResult",
+   "auVar8_x1": "thrownAux",
+   "fVar7": "amplitude",
+   "uVar4": "optionFlag",
+   "unaff_x19": "unused1",
+   "unaff_x20": "unused2",
+   "unaff_x22": "loopIndex",
+   "unaff_x23": "arrayBase",
+   "unaff_x30": "unused3"
+  }
+ },
+ "2f652e4": {
+  "summary": "On blend-out, disables cannon look-at constraints, stops particles and animation, and tweens the cannon to its final rotation.",
+  "renames": {
+   "auVar7_x1": "blendOptionsArg",
+   "fVar6": "amplitude",
+   "unaff_x19": "unused1",
+   "unaff_x20": "unused2",
+   "unaff_x22": "loopIndex",
+   "unaff_x23": "arrayBase",
+   "unaff_x30": "unused3"
+  }
+ }
+}

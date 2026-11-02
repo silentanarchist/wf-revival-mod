@@ -1,0 +1,307 @@
+{
+ "2f33a40": {
+  "summary": "Handles a pointer entering a card: in hand it raises and enlarges the card with description; on the board it highlights it and previews combat outcome.",
+  "renames": {
+   "uVar9": "errorMessage",
+   "uVar21": "devToolsStatic",
+   "uVar7_2": "devToolsEnabled",
+   "lVar16": "loggerClass",
+   "piVar17": "interfaceEntry",
+   "uVar7_3": "previousState",
+   "puVar3": "stackFrame",
+   "unaff_x30": "savedLinkReg",
+   "unaff_x20": "savedReg20",
+   "unaff_x19": "savedReg19",
+   "auVar26": "castCheckResult",
+   "auVar26_x1": "castCheckArg",
+   "lVar16_8": "layoutStates",
+   "uVar7_4": "hasTrackedCard",
+   "uVar9_3": "eulerAnglesRad",
+   "fVar24": "oneVectorY",
+   "fVar25": "oneVectorZ",
+   "in_s2": "zPosition",
+   "in_s3": "rotationW",
+   "register0x00000008": "stackBase"
+  }
+ },
+ "2f34200": {
+  "summary": "Handles a pointer leaving a card: stops description display, lowers it from hand, and resets highlight state, frame colors and scale.",
+  "renames": {
+   "uVar11": "colorBlueAlpha",
+   "puVar3": "tweenFieldPtr",
+   "puVar3_2": "remnantColorResult",
+   "puVar3_3": "hasRemnantFrame",
+   "fVar15": "scaleZ",
+   "extraout_x0": "extraReturn"
+  }
+ },
+ "2f344d4": {
+  "summary": "Handles touch-down on a card: shows deck sizes for enemy hand or deck cards, selects in-play cards, or logs unrecognized states.",
+  "renames": {
+   "uVar4": "logMessage",
+   "uVar5": "devToolsEnabled",
+   "puVar6": "loggerMethod",
+   "uStack_30": "scratchStack"
+  }
+ },
+ "2f3474c": {
+  "summary": "Handles touch release on a card: uses a waystone on remnants, returns a shown hand card, or displays the large card with effects.",
+  "renames": {
+   "uVar2": "devToolsStatic",
+   "uVar6_2": "devToolsEnabled",
+   "puVar8": "callbackSlot",
+   "lStack_48": "cardTierNullable",
+   "bVar12": "canShowLargeCard",
+   "fVar18": "currentTime",
+   "uVar6_3": "isJustClickedTarget",
+   "iVar5": "textureHeight",
+   "lVar7_4": "cardDisplay",
+   "auVar19_x1": "displayedCard"
+  }
+ },
+ "2f34930": {
+  "summary": "Handles dragging a card by touch: starts moving a hand card or begins an attack from a board card once movement passes a threshold.",
+  "renames": {
+   "auVar25": "touchPosCopy",
+   "auVar25_x1": "methodCopy",
+   "iVar1": "cardStateValue",
+   "uVar4": "uiState",
+   "puVar6_4": "returnValue",
+   "uVar9": "hitObject",
+   "puVar11": "battleMgrRef",
+   "fVar15": "deltaX",
+   "fVar19": "deltaY",
+   "fVar24": "axisZ",
+   "fVar22": "sqrDistance",
+   "fVar21": "angleDegrees",
+   "fVar17": "cosAngle",
+   "dVar18": "angleRadians",
+   "uVar20": "zDistance",
+   "cVar2": "soundInitFlag",
+   "lVar7_4": "camera",
+   "lVar7_6": "soundManager",
+   "uVar9_4": "zeroVectorXY"
+  }
+ },
+ "2f34a38": {
+  "summary": "Starts dragging a card out of the hand when the drag angle and distance qualify, playing a sound and scaling the card.",
+  "renames": {
+   "param_7": "cardInstance",
+   "param_5": "originalTouchPos",
+   "bVar2": "canMoveHandCard",
+   "cVar1": "soundInitFlag",
+   "lVar3": "cameraTransform",
+   "lVar3_3": "soundManager",
+   "fVar10": "viewportDeltaX",
+   "fVar12": "cosAngle",
+   "fVar15": "angleDegrees",
+   "fVar16": "sqrDistance",
+   "fVar17": "scratchFloat",
+   "fVar18": "axisY",
+   "dVar14": "angleRadians",
+   "uVar7": "zDistance",
+   "uVar9": "cardUiRef",
+   "uVar5_4": "zeroVectorXY"
+  }
+ },
+ "2f34d58": {
+  "summary": "Starts dragging a card on the board: if far enough and allowed, sets up an attack or ability use.",
+  "renames": {
+   "auVar10": "touchPosCopy",
+   "auVar10_x1": "methodCopy",
+   "puVar3": "returnValue",
+   "uVar4": "isSameCard",
+   "puVar6": "battleMgrRef",
+   "uVar1": "uiStateValue"
+  }
+ },
+ "2f34008": {
+  "summary": "Highlights a card the pointer is over and, when targeting, previews whether the tracked attacker would kill this minion.",
+  "renames": {
+   "uVar6": "hasTrackedCard"
+  }
+ },
+ "2f33b64": {
+  "summary": "Raises and enlarges a hand card for display, shows its description and switches card text layout.",
+  "renames": {
+   "in_s2": "zPosition",
+   "in_s3": "rotationW",
+   "uVar6_3": "eulerAnglesRad",
+   "fVar14": "oneVectorY",
+   "fVar15": "oneVectorZ",
+   "lVar10_4": "scaleSource",
+   "bVar3": "useBaseLayout",
+   "puVar2": "stackFrame",
+   "auVar16": "castCheckResult",
+   "auVar16_x1": "castCheckArg",
+   "lVar4_8": "layoutList",
+   "unaff_x30": "savedLinkReg",
+   "unaff_x20": "savedReg20",
+   "unaff_x19": "savedReg19",
+   "register0x00000008": "stackBase"
+  }
+ },
+ "2f3526c": {
+  "summary": "Builds a ShowDescription debug message and logs it if dev tools are active.",
+  "renames": {
+   "uVar4": "devToolsEnabled",
+   "uVar1": "devToolsStatic",
+   "puVar5": "loggerMethod"
+  }
+ },
+ "2f35344": {
+  "summary": "Brightens the card's highlight-and-shadow material color with a short color transition.",
+  "renames": {
+   "in_s1": "colorG",
+   "in_s2": "colorB",
+   "uVar7": "originalG",
+   "uVar8": "originalB",
+   "uVar9": "alphaBits",
+   "auVar10": "hasMaterial"
+  }
+ },
+ "2f31c20": {
+  "summary": "Returns the card's scale in hand, logging an error if the horizontal layout is missing.",
+  "renames": {
+   "uVar1": "isLayoutMissing",
+   "uStack_40": "scratchStack",
+   "uVar3_2": "stateName"
+  }
+ },
+ "2f32fe4": {
+  "summary": "Returns the in-hand scale multiplied by the global moving-scale factor.",
+  "renames": {
+   "fVar2": "handScale"
+  }
+ },
+ "2f34360": {
+  "summary": "Returns a shown hand card to its original position, rotation and scale, optionally reordering the hand, and restores click handling.",
+  "renames": {
+   "puVar7": "callbackSlot"
+  }
+ },
+ "2f3432c": {
+  "summary": "Stops showing the card description and hides the large card display when appropriate.",
+  "renames": {
+   "bVar3": "canDisplayLarge"
+  }
+ },
+ "2f35854": {
+  "summary": "Forces display of the large card view with its effects, ambush trait overlay and effect icons.",
+  "renames": {
+   "uVar8": "isJustClickedTarget",
+   "lVar9_3": "cardDisplay",
+   "iVar4": "textureWidth",
+   "iVar5": "textureHeight",
+   "auVar12_x1": "displayedCard"
+  }
+ },
+ "2f34ec0": {
+  "summary": "Begins moving a card out of the hand: plays a sound, scales the card and hides its description.",
+  "renames": {
+   "cVar1": "soundInitFlag",
+   "param_4": "cardInstance",
+   "uVar6": "cardUiRef",
+   "uVar3_4": "zeroVectorXY"
+  }
+ },
+ "2f35880": {
+  "summary": "Moves the card toward a target point with smoothed tilt rotation, snapping when close, then applies the rotation.",
+  "renames": {
+   "uVar11": "targetCopy",
+   "fVar9": "targetX",
+   "fVar5": "currentX",
+   "fVar6": "canvasZ",
+   "fVar12": "deltaX",
+   "fVar13": "deltaY",
+   "fVar16": "deltaZ",
+   "fVar7": "sqrDistance",
+   "bVar1": "isLess",
+   "bVar2": "isEqual",
+   "bVar3": "isUnordered",
+   "param_7": "cardInstance",
+   "iVar14": "negXMask",
+   "iVar15": "negYMask",
+   "uVar8": "clampedVec",
+   "uVar10": "zeroVectorZ"
+  }
+ },
+ "2f35ac0": {
+  "summary": "Logs a 'not implemented' message for ShowManaCostAura when dev tools are active.",
+  "renames": {
+   "uVar2": "logMessage",
+   "uVar1": "devToolsStatic",
+   "uVar3": "devToolsEnabled",
+   "puVar4": "loggerMethod"
+  }
+ },
+ "2f35fa4": {
+  "summary": "Flashes or pulses the board icon for the given trait on the card UI using tweens.",
+  "renames": {
+   "in_s1": "fadeDuration",
+   "plVar5": "tweenFieldPtr"
+  }
+ },
+ "2f35fbc": {
+  "summary": "Resets the card to its hand state: clears effects and enchantments, restores base stats, removes status traits and refreshes the card.",
+  "renames": {
+   "uStack_34": "maxHealthValue",
+   "uStack_2c": "maxHealthInited",
+   "uStack_24": "maxHealthFake",
+   "uStack_48": "meleeValue",
+   "uStack_40": "meleeInited",
+   "uStack_38": "meleeFake",
+   "uStack_5c": "rangedValue",
+   "uStack_54": "rangedInited",
+   "uStack_4c": "rangedFake",
+   "uStack_70": "armourValue",
+   "uStack_68": "armourInited",
+   "uStack_60": "armourFake",
+   "uStack_84": "dropPodHealthValue",
+   "uStack_7c": "dropPodHealthInited",
+   "uStack_74": "dropPodHealthFake",
+   "uStack_98": "dropPodAttackValue",
+   "uStack_90": "dropPodAttackInited",
+   "uStack_88": "dropPodAttackFake"
+  }
+ },
+ "2f2d944": {
+  "summary": "Rebuilds the card's current trait list and showing-traits list from the raw card data.",
+  "renames": {
+   "uStack_80": "traitEnumerator",
+   "puStack_78": "enumeratorExtra",
+   "puStack_90": "enumeratorPtr",
+   "lStack_70": "currentTraitEntry",
+   "lStack_88": "savedTraitEntry",
+   "uVar7": "hasNext",
+   "cVar2": "isFlagByte",
+   "plVar10": "listSlot"
+  }
+ },
+ "2f363f4": {
+  "summary": "Moves a card back into the hand: undissolves or dissolves it, reparents it to the hand and updates its state and text.",
+  "renames": {
+   "extraout_x1_01": "extraReturn",
+   "uVar7": "scratchFlag",
+   "puVar6": "loggerMethod"
+  }
+ },
+ "2f366b0": {
+  "summary": "Moves a card from hand into play: sets the playing state, handles spell targeting, tints highlight and scales spells.",
+  "renames": {
+   "uVar7": "hasReflectedFrame",
+   "uVar14": "alphaBits",
+   "fVar15": "secondChannel",
+   "fVar12_2": "thirdChannel",
+   "auVar16": "hasMaterial",
+   "lVar4_10": "scaleSource"
+  }
+ },
+ "2f364bc": {
+  "summary": "Dissolves or restores a minion card over the global dissolve time and toggles its 3D body.",
+  "renames": {
+   "uVar6": "dissolveAmount",
+   "uVar3": "hasBody3D"
+  }
+ }
+}

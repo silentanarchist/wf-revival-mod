@@ -1,0 +1,418 @@
+{
+ "3163490": {
+  "summary": "Computes a numeric value (attack, health, damage, bastion, etc.) of a card for healing criteria based on the chosen value option, else a rounded average of min and max.",
+  "renames": {
+   "iVar5": "bonusSum",
+   "dStack_d0": "targetHealthCopy",
+   "uStack_c8": "targetHealthInited",
+   "uStack_c0": "targetHealthFake",
+   "dStack_b0": "thisHealthCopy",
+   "uStack_a8": "thisHealthInited",
+   "uStack_a0": "thisHealthFake",
+   "dStack_90": "targetHealthCopy2",
+   "uStack_88": "targetHealthInited2",
+   "uStack_80": "targetHealthFake2",
+   "uStack_60_part4": "scratchPart4",
+   "iVar4_2": "baseMeleeValue",
+   "iVar4_4": "statValue",
+   "pdVar7": "healthPtr",
+   "iVar4_6": "computedValue",
+   "fVar13": "halfAverage",
+   "dVar12": "halfAverageDouble"
+  }
+ },
+ "3163544": {
+  "summary": "Makes a shallow clone of a SummonCriteria and casts it to the right type.",
+  "renames": {}
+ },
+ "3163790": {
+  "summary": "Caches the transform and records its initial position as the last position.",
+  "renames": {
+   "uVar3": "startPosition",
+   "in_s1": "positionY",
+   "in_s2": "positionZ",
+   "plVar2": "cachedTransformPtr"
+  }
+ },
+ "31637e0": {
+  "summary": "Each frame, tilts the card toward its movement direction using position change, then lerps local rotation to the target until motion settles.",
+  "renames": {
+   "auVar2": "vecTemp2",
+   "auVar3": "vecTemp3",
+   "auVar4": "vecTemp4",
+   "fVar8": "currentPosition",
+   "in_s2": "positionZ",
+   "auVar15": "vecTemp15",
+   "auVar11_x1": "unused1",
+   "fVar17": "downScalar",
+   "fVar18": "rightScalar",
+   "extraout_s0": "unused2",
+   "auVar19": "vecTemp19",
+   "auVar14": "vecTemp14",
+   "auVar16": "vecTemp16",
+   "auVar1": "vecTemp1",
+   "auVar19_part4": "vecTemp19Part4",
+   "auVar19_part8": "vecTemp19Part8",
+   "auVar19_part12": "vecTemp19Part12",
+   "auVar14_part4": "vecTemp14Part4",
+   "auVar16_part4": "vecTemp16Part4",
+   "auVar16_part8": "vecTemp16Part8",
+   "auVar1_part4": "vecTemp1Part4",
+   "auVar1_part8": "vecTemp1Part8",
+   "auVar2_part4": "vecTemp2Part4",
+   "auVar2_part8": "vecTemp2Part8",
+   "auVar2_part12": "vecTemp2Part12",
+   "auVar3_part4": "vecTemp3Part4",
+   "auVar3_part8": "vecTemp3Part8",
+   "auVar3_part12": "vecTemp3Part12",
+   "auVar15_part4": "vecTemp15Part4",
+   "auVar15_part8": "vecTemp15Part8",
+   "auVar15_part12": "vecTemp15Part12",
+   "auVar14_part12": "vecTemp14Part12",
+   "auVar4_part4": "vecTemp4Part4",
+   "auVar4_part8": "vecTemp4Part8",
+   "auVar4_part12": "vecTemp4Part12",
+   "auVar11_part12": "vecTemp11Part12",
+   "auVar16_part12": "vecTemp16Part12",
+   "auVar11_part8": "vecTemp11Part8",
+   "auVar11_part4": "vecTemp11Part4"
+  }
+ },
+ "3163a94": {
+  "summary": "Builds a clamped rotation quaternion from a translation amount, max angle and axis, multiplied with identity and written to an output.",
+  "renames": {
+   "pfVar1": "identityQuatPtr",
+   "fVar2": "clampedAngle",
+   "fVar3": "translationCopy",
+   "fVar5": "identityY",
+   "fVar6": "identityZ",
+   "fVar7": "identityW",
+   "param_6": "outQuaternion"
+  }
+ },
+ "3256cb8": {
+  "summary": "Coroutine step that yields once for WaitForEndOfFrame and then finishes.",
+  "renames": {
+   "uVar3": "nextState"
+  }
+ },
+ "3256d54": {
+  "summary": "Enumerator Reset that always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "methodInfo"
+  }
+ },
+ "3163d8c": {
+  "summary": "On enable, removes then re-adds the CardClicked listener on the UI click event if card display on touch is allowed.",
+  "renames": {
+   "lVar3": "addMethod",
+   "uVar2": "callCount",
+   "puVar7": "callSlotPtr"
+  }
+ },
+ "3163e94": {
+  "summary": "Opens the card display window showing this card's raw data and tier.",
+  "renames": {
+   "lStack_28": "tierNullable"
+  }
+ },
+ "3163f28": {
+  "summary": "On disable, removes the CardClicked listener from the click event by filtering and rebuilding its call lists.",
+  "renames": {
+   "plVar4": "matchingCalls",
+   "uVar6": "isMatch",
+   "lVar9": "matchingCallsItems",
+   "uVar2": "matchingCallsSize",
+   "iVar1": "runtimeCallCount"
+  }
+ },
+ "3163fb8": {
+  "summary": "Assigns raw card data and tier, fills stat counters (armour, health, attack, cost), toggles their visibility, and sets image and rarity stars.",
+  "renames": {
+   "bVar1": "showCost",
+   "lStack_38": "tierNullable",
+   "lVar6": "scratch1"
+  }
+ },
+ "31645f4": {
+  "summary": "Shows or hides all stat counters (health, armour, attacks, cost) on the card UI.",
+  "renames": {
+   "uVar2": "hasController",
+   "plVar1": "textElement"
+  }
+ },
+ "3164524": {
+  "summary": "Sets the card art sprite from the raw card data: adjusts image position, scale and mask, creates an instanced material, and assigns the sprite to the image.",
+  "renames": {
+   "bVar1": "skipMaterialUpdate",
+   "uVar6": "hasSprite",
+   "fVar12": "scaleY",
+   "fVar18": "rectX",
+   "fVar16": "epsilonThreshold",
+   "uVar6_2": "cardTypeCopy",
+   "fVar16_2": "comparisonThreshold",
+   "uVar19_3": "offsetX",
+   "puVar10": "materialSlotPtr",
+   "uVar6_3": "conditionFlag",
+   "plVar11": "imageFieldPtr",
+   "lVar4_3": "currentSprite",
+   "fVar18_4": "deltaX",
+   "lVar4_5": "existingSprite",
+   "fVar16_3": "rectXCopy",
+   "fVar16_4": "newRectX",
+   "auVar20": "hasSpriteCopy",
+   "auVar20_x1": "unused1",
+   "uVar14_3": "materialValue"
+  }
+ },
+ "316489c": {
+  "summary": "Sets the card art to the given sprite: adjusts image position, scale and mask, creates an instanced material, and assigns the sprite.",
+  "renames": {
+   "bVar1": "skipMaterialUpdate",
+   "uVar4": "hasSprite",
+   "fVar11": "scaleY",
+   "fVar17": "rectX",
+   "fVar15": "epsilonThreshold",
+   "uVar16": "positionZ",
+   "uVar4_2": "cardTypeCopy",
+   "fVar15_2": "comparisonThreshold",
+   "uVar18_3": "offsetX",
+   "puVar9": "materialSlotPtr",
+   "uVar4_3": "conditionFlag",
+   "plVar10": "imageFieldPtr",
+   "lVar5_2": "currentSprite",
+   "fVar17_4": "deltaX",
+   "lVar5_4": "existingSprite",
+   "fVar15_3": "rectXCopy",
+   "fVar15_4": "newRectX"
+  }
+ },
+ "3164490": {
+  "summary": "Checks whether a banned icon exists and toggles its visibility.",
+  "renames": {
+   "uVar1": "hasBannedIcon"
+  }
+ },
+ "3164938": {
+  "summary": "Refreshes the card's localized name, description, race and army texts and re-selects the proper name/description layout state after a language change.",
+  "renames": {
+   "ppcVar2": "stackFramePtr",
+   "bVar3": "isNormalSpell",
+   "unaff_x20": "textElement",
+   "unaff_x19": "savedDescription",
+   "lStack_e0": "savedControllerA",
+   "lStack_d8": "savedRawCardA",
+   "lStack_b8": "savedArmy",
+   "lStack_a8": "savedRawCardB",
+   "uStack_a0": "savedFlag",
+   "lStack_98": "savedDescription2",
+   "lStack_80": "savedDescription3",
+   "lStack_78": "savedControllerB",
+   "uStack_70": "savedCardType",
+   "uStack_68": "savedSpellType",
+   "auVar20_x1": "descriptionText",
+   "pcVar18": "nextFuncPtr",
+   "pcStack_60": "stackFuncPtr",
+   "apcStack_90": "funcPtrStackA",
+   "auVar21": "controllerFromStack",
+   "pcStack_c0": "stackFuncPtr2",
+   "auVar21_x1": "descriptionArg",
+   "lStack_b0": "savedRaceTexts",
+   "register0x00000008": "stackPointer",
+   "apcStack_f0": "funcPtrStackB",
+   "auStack_d0": "savedVector",
+   "lVar10": "raceCopy",
+   "lVar12": "armyCopy",
+   "puVar16": "stackSlotPtr",
+   "lVar8_3": "textArray",
+   "uVar15": "savedArg2",
+   "uVar19": "savedFuncPtr",
+   "puVar1": "stackBase",
+   "uVar6_4": "savedState"
+  }
+ },
+ "31643c0": {
+  "summary": "Sets the card's localized name, description, race and army texts and selects the matching name/description layout state.",
+  "renames": {
+   "ppcVar2": "stackFramePtr",
+   "bVar3": "isNormalSpell",
+   "unaff_x20": "textElement",
+   "unaff_x19": "savedDescription",
+   "lStack_e0": "savedControllerA",
+   "lStack_d8": "savedRawCardA",
+   "lStack_b8": "savedArmy",
+   "lStack_a8": "savedRawCardB",
+   "uStack_a0": "savedFlag",
+   "lStack_98": "savedDescription2",
+   "lStack_80": "savedDescription3",
+   "lStack_78": "savedControllerB",
+   "uStack_70": "savedCardType",
+   "uStack_68": "savedSpellType",
+   "auVar20_x1": "descriptionText",
+   "pcVar18": "nextFuncPtr",
+   "pcStack_60": "stackFuncPtr",
+   "apcStack_90": "funcPtrStackA",
+   "auVar21": "controllerFromStack",
+   "pcStack_c0": "stackFuncPtr2",
+   "auVar21_x1": "descriptionArg",
+   "lStack_b0": "savedRaceTexts",
+   "register0x00000008": "stackPointer",
+   "apcStack_f0": "funcPtrStackB",
+   "auStack_d0": "savedVector",
+   "lVar9": "raceCopy",
+   "lVar11": "armyCopy",
+   "puVar15": "stackSlotPtr",
+   "lVar13_2": "textArray",
+   "uVar14": "savedArg2",
+   "uVar19": "savedFuncPtr",
+   "puVar1": "stackBase"
+  }
+ },
+ "31649a4": {
+  "summary": "Looks up the clan frame sprite for the card's army, tier and type and assigns it to the card frame and highlight image.",
+  "renames": {
+   "bVar1": "skipMaterialUpdate",
+   "uVar7": "conditionFlag",
+   "extraout_x1": "frameSprite",
+   "in_s2": "rectX",
+   "fVar12": "newRectX",
+   "plVar10": "imageFieldPtr",
+   "lVar4_3": "currentSprite",
+   "in_s3": "rectY",
+   "lVar4_5": "existingSprite",
+   "fVar13": "newRectY"
+  }
+ },
+ "3164a38": {
+  "summary": "Sets the card art to the given sprite for the given card type: adjusts position, scale, mask and material, and assigns the sprite.",
+  "renames": {
+   "bVar1": "skipMaterialUpdate",
+   "uVar7": "conditionFlag",
+   "fVar11": "scaleY",
+   "fVar17": "rectX",
+   "fVar15": "epsilonThreshold",
+   "uVar16": "positionZ",
+   "fVar15_2": "comparisonThreshold",
+   "uVar18_3": "offsetX",
+   "puVar9": "materialSlotPtr",
+   "plVar10": "imageFieldPtr",
+   "lVar4_2": "currentSprite",
+   "fVar17_4": "deltaX",
+   "lVar4_4": "existingSprite",
+   "fVar15_3": "rectXCopy",
+   "fVar15_4": "newRectX"
+  }
+ },
+ "31645c4": {
+  "summary": "Sets the rarity star image to the sprite matching the card's rarity level, with an error if max rarity mismatches the sprite count.",
+  "renames": {
+   "bVar5": "skipMaterialUpdate",
+   "uVar9": "conditionFlag",
+   "in_s2": "rectX",
+   "fVar15": "newRectX",
+   "uVar4": "rarityIndexRaw",
+   "uVar1": "clampedMax",
+   "uVar2": "spriteIndex",
+   "plVar13": "imageFieldPtr",
+   "lVar12_3": "currentSprite",
+   "in_s3": "rectY",
+   "fVar16": "newRectY"
+  }
+ },
+ "3164a50": {
+  "summary": "Sets the rarity star image to the first (empty) rarity sprite.",
+  "renames": {
+   "bVar1": "skipMaterialUpdate",
+   "uVar6": "conditionFlag",
+   "in_s2": "rectX",
+   "fVar11": "newRectX",
+   "plVar9": "imageFieldPtr",
+   "lVar8_3": "currentSprite",
+   "in_s3": "rectY",
+   "fVar12": "newRectY"
+  }
+ },
+ "3164a8c": {
+  "summary": "Sets the card's description text on all description labels and updates the name/description layout state.",
+  "renames": {
+   "bVar2": "isNormalSpell",
+   "unaff_x20": "textElement",
+   "unaff_x19": "savedController",
+   "lStack_50": "savedToggleIndex",
+   "lStack_48": "savedTexts",
+   "lStack_40": "savedController2",
+   "lStack_38": "savedDescription",
+   "auVar12": "controllerFromStack",
+   "uVar8": "descriptionArg",
+   "auVar12_x1": "descriptionArg2",
+   "apcStack_60": "funcPtrStack",
+   "in_w3": "cardTypeArg",
+   "in_w4": "hasDescriptionArg",
+   "register0x00000008": "stackPointer",
+   "pcVar11": "nextFuncPtr",
+   "unaff_x30": "savedLinkRegister"
+  }
+ },
+ "3164aa4": {
+  "summary": "Switches the card text layout state for in-hand display based on card type and the configured hand text format.",
+  "renames": {
+   "unaff_x20": "savedFlag",
+   "register0x00000008": "stackPointer",
+   "unaff_x30": "savedLinkRegister",
+   "unaff_x19": "savedController",
+   "auVar8": "controllerFromStack",
+   "bVar1": "isNormalSpell",
+   "auVar8_x1": "descriptionArg",
+   "lVar2_2": "unusedPtr"
+  }
+ },
+ "3164b14": {
+  "summary": "Switches to a simplified card text layout (name only or description only) when enabled, otherwise changes to the current state.",
+  "renames": {
+   "iVar4": "targetState",
+   "unaff_x20": "savedFlag",
+   "register0x00000008": "stackPointer",
+   "unaff_x30": "savedLinkRegister",
+   "unaff_x19": "savedController",
+   "auVar8": "controllerFromStack",
+   "bVar1": "isNormalSpell",
+   "auVar8_x1": "descriptionArg",
+   "lVar2_2": "unusedPtr",
+   "uVar3_4": "pendingState"
+  }
+ },
+ "3164b30": {
+  "summary": "Switches the card text to the simplified layout matching its initial state.",
+  "renames": {
+   "iVar4": "targetState",
+   "unaff_x20": "savedFlag",
+   "register0x00000008": "stackPointer",
+   "unaff_x30": "savedLinkRegister",
+   "unaff_x19": "savedController",
+   "auVar8": "controllerFromStack",
+   "bVar1": "isNormalSpell",
+   "auVar8_x1": "descriptionArg",
+   "lVar2_2": "unusedPtr"
+  }
+ },
+ "3164b50": {
+  "summary": "Restores the card text layout to its initial state, turning simplified view off.",
+  "renames": {
+   "puVar2": "stackPtr",
+   "unaff_x20": "savedState",
+   "register0x00000008": "stackPointer",
+   "unaff_x30": "savedLinkRegister",
+   "unaff_x19": "savedController",
+   "auVar9": "controllerFromStack",
+   "bVar3": "isNormalSpell",
+   "auVar9_x1": "descriptionArg",
+   "lVar4_2": "unusedPtr"
+  }
+ },
+ "3164bd4": {
+  "summary": "Returns whether this card can be upgraded by asking CardServices to check for an upgrade.",
+  "renames": {
+   "uStack_28": "upgradeOut"
+  }
+ }
+}

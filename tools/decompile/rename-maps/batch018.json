@@ -1,0 +1,537 @@
+{
+ "3272420": {
+  "summary": "Sets the layer on a GameObject and its children recursively, with merged sorting-layer setting code for child objects and renderers.",
+  "renames": {
+   "alStack_48": "slotA",
+   "auVar14": "handlerResult",
+   "auVar14_x1": "sortingLayerName",
+   "auVar15": "unwindResult",
+   "auVar15_part8": "unwindFlag",
+   "lStack_60": "caughtExceptionA",
+   "lStack_a8": "slotB",
+   "lStack_c0": "caughtExceptionB",
+   "lVar10": "targetObject",
+   "lVar8_4": "exceptionObjA",
+   "lVar8_6": "exceptionObjB",
+   "lVar8_7": "sortingGameObject",
+   "pcStack_110": "layerNameSpan",
+   "pcStack_a0": "scratch1",
+   "pcStack_e0": "scratch2",
+   "pcStack_f0": "scratch3",
+   "plStack_38": "enumeratorA",
+   "plStack_50": "slotPtrA",
+   "plStack_70": "savedDisposableA",
+   "plStack_78": "savedCurrentA",
+   "plStack_98": "enumeratorB",
+   "plStack_b0": "slotPtrB",
+   "plStack_d0": "savedDisposableB",
+   "plStack_d8": "savedCurrentB",
+   "plVar5_3": "currentChildA",
+   "plVar5_5": "currentChildB",
+   "pplStack_58": "enumeratorRefA",
+   "pplStack_b8": "enumeratorRefB",
+   "pplVar12": "enumeratorRef",
+   "puStack_108": "spanLengthHigh",
+   "puStack_e8": "scratch4",
+   "uStack_68": "unwindStateA",
+   "uStack_c8": "unwindStateB",
+   "uVar2": "isNull"
+  }
+ },
+ "32720c8": {
+  "summary": "Creates a copy of the TargetCriteria with its card-script filter lists duplicated.",
+  "renames": {}
+ },
+ "32724ac": {
+  "summary": "Clears the tooltip dictionary and registers tooltip builders for every trait name plus spirit stone, faith, quest points, sabotage, ranged and melee.",
+  "renames": {
+   "auVar21_3": "ctorResult",
+   "auVar21_x1": "methodInfo",
+   "lVar10": "comparerClassB",
+   "lVar9": "comparerClassA",
+   "piVar11": "interfaceMapPtrB",
+   "piVar20": "bucketPtr",
+   "plVar2": "keyString",
+   "puVar6": "compareFuncPtr",
+   "uVar1": "bucketIndex",
+   "uVar3": "hashCode",
+   "uVar5": "traitTypeHandle"
+  }
+ },
+ "3272894": {
+  "summary": "Enables or disables tooltip event handling and text raycasting, hiding any shown tooltip when disabled.",
+  "renames": {
+   "uVar3": "hasManager"
+  }
+ },
+ "32729c4": {
+  "summary": "On pointer down, finds the text link under the mouse and shows its tooltip, or hides the tooltip if none.",
+  "renames": {
+   "puVar1": "stackPtr",
+   "uVar6_4": "linkId",
+   "unaff_d10": "unused1",
+   "unaff_d8": "savedMousePos",
+   "unaff_d9": "unused2",
+   "unaff_x19": "savedController",
+   "unaff_x20": "savedLinkIndex",
+   "unaff_x22": "unused3",
+   "unaff_x30": "savedReturnAddr"
+  }
+ },
+ "3272b44": {
+  "summary": "On selection, finds the text link under the mouse and shows its tooltip, or hides the tooltip if none.",
+  "renames": {
+   "auVar7_x1": "eventDataArg",
+   "lVar1_2": "textLinkInfo",
+   "uVar5_3": "linkId",
+   "unaff_d10": "unused1",
+   "unaff_d8": "savedMousePos",
+   "unaff_d9": "unused2",
+   "unaff_x19": "savedController",
+   "unaff_x20": "savedLinkIndex",
+   "unaff_x22": "unused3",
+   "unaff_x30": "savedReturnAddr"
+  }
+ },
+ "3272b5c": {
+  "summary": "Clears hover state, hides the tooltip and resets the current link ID when events are registered.",
+  "renames": {
+   "uVar2": "hasManager"
+  }
+ },
+ "3272b70": {
+  "summary": "Clears hover state, hides the tooltip and resets the current link ID when events are registered.",
+  "renames": {
+   "uVar2": "hasManager"
+  }
+ },
+ "32728f8": {
+  "summary": "Hides the tooltip manager's tooltip and clears the current link ID.",
+  "renames": {
+   "uVar2": "hasManager"
+  }
+ },
+ "3272a34": {
+  "summary": "Checks which text link is under the mouse and shows its tooltip, or hides the tooltip if none.",
+  "renames": {
+   "auVar7_x1": "methodInfo",
+   "uVar5_4": "linkId",
+   "unaff_d10": "unused1",
+   "unaff_d8": "savedMousePos",
+   "unaff_d9": "unused2",
+   "unaff_x19": "savedController",
+   "unaff_x20": "savedLinkIndex",
+   "unaff_x22": "unused3",
+   "unaff_x30": "savedReturnAddr"
+  }
+ },
+ "32724b0": {
+  "summary": "Clears the tooltip dictionary and registers tooltip builders for every trait name plus spirit stone, faith, quest points, sabotage, ranged and melee.",
+  "renames": {
+   "auVar21_3": "ctorResult",
+   "auVar21_x1": "methodInfo",
+   "lVar10": "comparerClassB",
+   "lVar9": "comparerClassA",
+   "piVar11": "interfaceMapPtrB",
+   "piVar20": "bucketPtr",
+   "plVar2": "keyString",
+   "puVar6": "compareFuncPtr",
+   "uVar1": "bucketIndex",
+   "uVar3": "hashCode",
+   "uVar5": "traitTypeHandle"
+  }
+ },
+ "3272b8c": {
+  "summary": "If the link ID changed, looks up its tooltip builder, builds the data and shows it.",
+  "renames": {
+   "lStack_28": "tooltipFunc"
+  }
+ },
+ "3272d5c": {
+  "summary": "Builds an EverguildTraitTooltipData from tooltip data and shows it through the tooltip manager at the text position.",
+  "renames": {
+   "in_s1": "unused1",
+   "in_s2": "unused2",
+   "uStack_68": "scratch1",
+   "uStack_70": "scratch2"
+  }
+ },
+ "3272ebc": {
+  "summary": "Converts the mouse position to a world point using the UI camera with a z offset.",
+  "renames": {
+   "fStack_28": "screenZ",
+   "uStack_24": "controllerRef",
+   "uStack_2c": "screenPoint",
+   "uStack_30": "scratch1",
+   "uStack_38": "worldPoint"
+  }
+ },
+ "3272f18": {
+  "summary": "Builds tooltip data (title, description, icon) for a trait named by the link ID.",
+  "renames": {
+   "cVar1": "altTextEnabled"
+  }
+ },
+ "3273238": {
+  "summary": "Builds tooltip data for faith using localized title and description and the matching sprite.",
+  "renames": {
+   "cVar2": "altTextEnabled",
+   "lVar4": "descriptionKey",
+   "plVar1": "descriptionKeyPtr"
+  }
+ },
+ "32733c8": {
+  "summary": "Builds tooltip data for quest points using localized title and description and the matching sprite.",
+  "renames": {
+   "cVar2": "altTextEnabled",
+   "lVar4": "descriptionKey",
+   "plVar1": "descriptionKeyPtr"
+  }
+ },
+ "32738d0": {
+  "summary": "In the editor validate callback, fetches the text component if it is not already assigned.",
+  "renames": {
+   "puVar2": "textFieldPtr",
+   "uVar1": "hasText",
+   "uVar3": "textValue"
+  }
+ },
+ "327409c": {
+  "summary": "Assigns the instanced material to the image and updates the greyscale value on it.",
+  "renames": {
+   "auVar5_x1": "methodInfo"
+  }
+ },
+ "32743f0": {
+  "summary": "Cleans up the instanced material of the image/material pair.",
+  "renames": {
+   "uVar1": "scratch1"
+  }
+ },
+ "3273a74": {
+  "summary": "Turns greyscale on or off for all images, initializing pairs first, either instantly or by starting a timed fade.",
+  "renames": {
+   "fVar1": "epsilon",
+   "fVar4": "absValue",
+   "fVar5": "scaledMathfEpsilon",
+   "lStack_40": "currentPair",
+   "lStack_58": "pairScratch",
+   "puStack_48": "enumeratorState",
+   "puStack_60": "enumeratorRef",
+   "uStack_50": "listEnumerator",
+   "uVar2": "moveNextResult"
+  }
+ },
+ "3273e90": {
+  "summary": "Advances the greyscale value over time, updates all image pairs, and disables itself once the target is reached.",
+  "renames": {
+   "fVar2": "clampedValue",
+   "fVar3": "scaledEpsilon",
+   "lStack_38": "currentPair",
+   "uStack_40": "scratch1"
+  }
+ },
+ "3274138": {
+  "summary": "Sets each image pair's material to either the greyscale or original non-instanced material.",
+  "renames": {
+   "lStack_30": "currentPair",
+   "lStack_48": "pairScratch",
+   "plVar2": "pairImage",
+   "puStack_50": "enumeratorRef",
+   "uStack_38": "scratch1",
+   "uStack_40": "listEnumerator"
+  }
+ },
+ "32742c4": {
+  "summary": "Cleans up every image/material pair when destroyed.",
+  "renames": {
+   "lStack_28": "currentPair",
+   "uStack_30": "scratch1"
+  }
+ },
+ "327468c": {
+  "summary": "Sets up the active skill display from a card: cost, name, description with target availability text, and usable-light state.",
+  "renames": {
+   "auVar13_2": "manaIconResult",
+   "bVar1": "canUseAbility",
+   "lVar10": "setTextSlot",
+   "puVar8": "logMethod",
+   "uVar9": "scratch1"
+  }
+ },
+ "3274af0": {
+  "summary": "Shows the skill display, fades it in, and plays the ability box enter sound.",
+  "renames": {
+   "alStack_78": "audioSourceSlot",
+   "auVar16": "audioCueFlag",
+   "auVar16_x1": "audioClipArg",
+   "lStack_98": "savedSoundManager",
+   "lStack_a0": "savedAudioSource",
+   "lVar5_2": "soundManager2",
+   "lVar6_3": "soundManager",
+   "pcStack_b0": "scratch1",
+   "pcStack_c0": "scratch2",
+   "puStack_a8": "savedAudioCue",
+   "puVar7": "zeroVectorPtr",
+   "puVar8": "zeroVectorPtr2",
+   "uStack_88": "scratch3",
+   "uStack_90": "scratch4",
+   "uStack_c8": "scratch5",
+   "uStack_d0": "savedPosition",
+   "uStack_d8": "savedParent",
+   "uStack_e0": "savedZeroVector",
+   "uStack_e8": "scratch6",
+   "uStack_f0": "scratch7",
+   "uVar14": "playPosition",
+   "uVar15": "playPosition2",
+   "uVar3": "hasAudioSource"
+  }
+ },
+ "3274f34": {
+  "summary": "Hides the skill display, fades it out, turns off the pressing light and plays the ability box exit sound.",
+  "renames": {
+   "alStack_78": "audioSourceSlot",
+   "auVar17": "audioCueFlag",
+   "auVar17_x1": "audioClipArg",
+   "lStack_98": "savedSoundManager",
+   "lStack_a0": "savedAudioSource",
+   "lVar4_2": "soundManager2",
+   "lVar5_3": "soundManager",
+   "pcStack_b0": "scratch1",
+   "pcStack_c0": "scratch2",
+   "puStack_a8": "savedAudioCue",
+   "puVar7": "zeroVectorPtr",
+   "puVar8": "zeroVectorPtr2",
+   "uStack_88": "scratch3",
+   "uStack_90": "scratch4",
+   "uStack_c8": "scratch5",
+   "uStack_d0": "savedPosition",
+   "uStack_d8": "savedParent",
+   "uStack_e0": "savedZeroVector",
+   "uStack_e8": "scratch6",
+   "uStack_f0": "scratch7",
+   "uVar15": "playPosition",
+   "uVar16": "playPosition2",
+   "uVar3": "hasAudioSource"
+  }
+ },
+ "3275100": {
+  "summary": "Fades out the active skill description and resets the selected card's highlight to its regular state.",
+  "renames": {
+   "puVar5": "colorTweenPtr"
+  }
+ },
+ "327511c": {
+  "summary": "Fades the acting light out with an ease tween.",
+  "renames": {
+   "uVar1": "hasActingLight"
+  }
+ },
+ "3274d70": {
+  "summary": "Kills existing tweens and fades the frame, icon, light and texts to a target alpha.",
+  "renames": {
+   "plVar3": "descTextTweenPtr"
+  }
+ },
+ "3274c34": {
+  "summary": "Kills existing tweens and instantly sets the alpha of all skill display graphics and texts.",
+  "renames": {
+   "uVar1": "noCostText"
+  }
+ },
+ "32751d4": {
+  "summary": "Resets the usable-light image color.",
+  "renames": {
+   "uVar1": "noBgLight"
+  }
+ },
+ "3275234": {
+  "summary": "Handles touch down on the skill display: records touch position, shows a light and plays the click sound.",
+  "renames": {
+   "auVar1": "emptyResult",
+   "auVar19": "displayRef",
+   "auVar19_2": "audioCueFlag",
+   "auVar19_4": "audioClipFlag",
+   "auVar19_x1": "methodInfoArg",
+   "auVar1_x1": "emptyResultHigh",
+   "auVar2": "emptyResult2",
+   "auVar2_x1": "emptyResult2High",
+   "extraout_s0": "worldCanvasY",
+   "lStack_78": "audioSourceSlot",
+   "lStack_98": "savedSoundManager",
+   "lStack_a0": "savedAudioSource",
+   "lVar5_3": "soundManager2",
+   "lVar8_3": "soundManager",
+   "pcStack_b0": "scratch1",
+   "pcStack_c0": "scratch2",
+   "puStack_a8": "savedAudioCue",
+   "puVar10": "zeroVectorPtr2",
+   "puVar9": "zeroVectorPtr",
+   "uStack_68": "scratch3",
+   "uStack_70": "scratch4",
+   "uStack_88": "scratch5",
+   "uStack_90": "scratch6",
+   "uStack_c8": "scratch7",
+   "uStack_d0": "savedPosition",
+   "uStack_d8": "savedParent",
+   "uStack_e0": "savedZeroVector",
+   "uStack_e8": "scratch8",
+   "uStack_f0": "scratch9",
+   "uVar17": "playPosition",
+   "uVar18": "playPosition2",
+   "uVar4": "hasAudioSource",
+   "uVar7": "hasMethodInfo"
+  }
+ },
+ "3275458": {
+  "summary": "While dragging, starts a targeted active ability if the card is the player's, usable and idle, and shows the acting light.",
+  "renames": {
+   "abStack_24": "boolBuffer",
+   "auVar10": "noManager",
+   "auVar10_3": "noParentCard",
+   "auVar9_x1": "methodInfo",
+   "uVar6": "hasActingLight"
+  }
+ },
+ "327579c": {
+  "summary": "Handles click down: stores click position, shows the pressing light and plays the ability box click sound.",
+  "renames": {
+   "alStack_78": "audioSourceSlot",
+   "auVar17": "audioCueFlag",
+   "auVar17_x1": "audioClipArg",
+   "in_s1": "clickY",
+   "lStack_98": "savedSoundManager",
+   "lStack_a0": "savedAudioSource",
+   "lVar3_2": "soundManager2",
+   "lVar6_3": "soundManager",
+   "pcStack_b0": "scratch1",
+   "pcStack_c0": "scratch2",
+   "puStack_a8": "savedAudioCue",
+   "puVar7": "zeroVectorPtr",
+   "puVar8": "zeroVectorPtr2",
+   "uStack_88": "scratch3",
+   "uStack_90": "scratch4",
+   "uStack_c8": "scratch5",
+   "uStack_d0": "savedPosition",
+   "uStack_d8": "savedParent",
+   "uStack_e0": "savedZeroVector",
+   "uStack_e8": "scratch6",
+   "uStack_f0": "scratch7",
+   "uVar15": "playPosition",
+   "uVar16": "playPosition2",
+   "uVar2": "hasAudioSource",
+   "uVar5": "hasPressingLight"
+  }
+ },
+ "32757d8": {
+  "summary": "While dragging, starts a targeted active ability if the card is the player's, usable and idle, and shows the acting light.",
+  "renames": {
+   "abStack_24": "boolBuffer",
+   "auVar9_2": "noManager",
+   "uVar6": "hasActingLight"
+  }
+ },
+ "3275814": {
+  "summary": "Hides the pressing light, tries to use the active ability and, on success, shows the acting light.",
+  "renames": {
+   "uVar4": "hasActingLight"
+  }
+ },
+ "32759f4": {
+  "summary": "Hides the pressing light, tries to use the active ability and, on success, shows the acting light.",
+  "renames": {
+   "uVar3": "hasActingLight"
+  }
+ },
+ "3275850": {
+  "summary": "Hides the pressing light, tries to use the active ability and, on success, shows the acting light.",
+  "renames": {
+   "uVar4": "hasActingLight"
+  }
+ },
+ "32756c0": {
+  "summary": "Activates the acting light and fades it in with an ease tween.",
+  "renames": {
+   "uVar1": "hasActingLight"
+  }
+ },
+ "32745d0": {
+  "summary": "Kills the acting light tween and resets the acting light color.",
+  "renames": {
+   "uVar1": "hasActingLight"
+  }
+ },
+ "327ae2c": {
+  "summary": "Static constructor creating the singleton compiler-generated lambda holder instance.",
+  "renames": {
+   "uVar1": "newInstance"
+  }
+ },
+ "327aecc": {
+  "summary": "Lambda comparing an action's acting card with the acting card of the indexed available action.",
+  "renames": {
+   "bVar1": "isMatch"
+  }
+ },
+ "3276724": {
+  "summary": "Returns whether AI action tweaking should be disabled for the current match mode.",
+  "renames": {}
+ },
+ "3275e2c": {
+  "summary": "Sorts available actions and randomly removes some non-end-turn actions according to bot skip settings.",
+  "renames": {
+   "uStack_80": "scratch1",
+   "uStack_88": "boxedActionType"
+  }
+ },
+ "3276390": {
+  "summary": "Executes an AI action by queuing the matching attack, play card, or ability action and playing an AI voice line.",
+  "renames": {
+   "auStack_120": "actionArgs",
+   "auStack_330": "actionBuffer2",
+   "auStack_430": "actionBuffer3",
+   "auStack_530": "actionBuffer4",
+   "iStack_220": "loggedActionType",
+   "puVar6": "actionBufferPtr",
+   "uStack_12c": "scratch1",
+   "uStack_130": "battleActionType",
+   "uStack_228": "scratch2",
+   "uStack_70": "scratch3",
+   "uStack_f4": "scratch4",
+   "uStack_fc": "scratch5",
+   "uVar5": "actionTypeName"
+  }
+ },
+ "32767d4": {
+  "summary": "Scores the available attack actions for an attacker and returns the best one.",
+  "renames": {
+   "uVar7": "isAttacker"
+  }
+ },
+ "3276a58": {
+  "summary": "Picks the unique IDs of mulligan cards costing more than 4 mana for the AI to discard.",
+  "renames": {
+   "auStack_54": "discardFlag"
+  }
+ },
+ "3276ccc": {
+  "summary": "Computes a card's in-play value from reference and enchantment values, scaled down for damage and stun or pindown.",
+  "renames": {
+   "iVar2": "currentHealthValue",
+   "uStack_60": "fakeActive1",
+   "uStack_68": "inited1",
+   "uStack_70": "healthCopy1",
+   "uStack_80": "fakeActive2",
+   "uStack_88": "inited2",
+   "uStack_90": "healthCopy2"
+  }
+ },
+ "3277168": {
+  "summary": "Builds and logs a debug string describing each available action with its cards and value.",
+  "renames": {
+   "uStack_70": "scratch1",
+   "uVar2": "hasCard",
+   "uVar5": "cardPtr"
+  }
+ }
+}

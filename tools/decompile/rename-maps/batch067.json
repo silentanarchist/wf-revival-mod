@@ -1,0 +1,449 @@
+{
+ "2f68420": {
+  "summary": "Builds an array of slot world positions on one side of the hero; decompiler merged in gizmo drawing and neighbouring slot lookup code.",
+  "renames": {
+   "auVar36": "exceptionResult",
+   "auVar36_part8": "exceptionSelector",
+   "auVar37": "unwindState",
+   "auVar37_part12": "unwindPad",
+   "auVar37_part8": "unwindSlotNum",
+   "auVar37_x1": "unwindExtra",
+   "auVar38_part1": "scratch1",
+   "auVar38_x1": "scratch2",
+   "extraout_s0": "unused1",
+   "fVar27": "worldX",
+   "fVar29": "slotOffset",
+   "fVar32": "worldZ",
+   "fVar33": "distanceY",
+   "fVar34": "hitDistance",
+   "fVar35": "offsetX",
+   "iVar1": "slotMultiplier",
+   "iVar12": "negativeIndex",
+   "lVar5": "slotArray",
+   "lVar5_2": "caughtException",
+   "lVar6_3": "enumeratorClass",
+   "lVar7_3": "classRef2",
+   "lVar7_5": "classRef3",
+   "lStack_128": "savedException",
+   "lStack_f8": "pendingException",
+   "pcStack_150": "savedFuncPtr",
+   "pcVar25": "funcPtr",
+   "piVar18": "interfaceTableCursor",
+   "plStack_130": "savedEnumerator",
+   "plStack_138": "savedConcat",
+   "plStack_e8": "enumerator",
+   "plVar19": "enumeratorRef",
+   "plVar19_2": "slotIndexCopy",
+   "plVar21": "classRefA",
+   "ppcVar3": "stackFrame",
+   "pplStack_f0": "enumeratorPtr",
+   "pplVar14": "enumeratorPtrCopy",
+   "puVar10": "interfaceMethod",
+   "puVar13": "slotWritePtr",
+   "uStack_118": "colorBits2",
+   "uStack_120": "colorBits1",
+   "uStack_144": "savedSlotNum",
+   "uVar16": "nextIndex",
+   "uVar17": "interfaceCount",
+   "uVar2": "bestIndex",
+   "uVar22": "unwindArg",
+   "uVar23": "loopIndex",
+   "uVar24_2": "slotNumCopy",
+   "uVar26": "slotPosition",
+   "uVar28": "slotPosY",
+   "uVar31": "slotPosZ"
+  }
+ },
+ "2f68534": {
+  "summary": "Gizmo drawing for the minion manager: draws debug rays and wire spheres at each left and right slot position.",
+  "renames": {
+   "auVar31": "unwindState",
+   "auVar31_part12": "unwindPad",
+   "auVar31_part8": "unwindSlotNum",
+   "auVar31_x1": "unwindExtra",
+   "auVar32_part1": "scratch1",
+   "auVar32_x1": "scratch2",
+   "auVar33": "exceptionResult",
+   "auVar33_part8": "exceptionSelector",
+   "extraout_s0": "unused1",
+   "fVar23": "worldX",
+   "fVar24": "worldY",
+   "fVar26": "worldZ",
+   "iVar10": "slotEnd",
+   "lStack_a8": "pendingException",
+   "lStack_d8": "savedException",
+   "lVar13": "enumeratorClass",
+   "lVar3_3": "caughtException",
+   "pcStack_100": "savedFuncPtr",
+   "pcVar22": "funcPtr",
+   "piVar18": "interfaceTableCursor",
+   "plStack_98": "enumerator",
+   "plStack_e0": "savedEnumerator",
+   "plStack_e8": "savedConcat",
+   "plVar19": "enumeratorRef",
+   "plVar19_2": "slotIndexCopy",
+   "plVar21": "classRefA",
+   "ppcVar1": "stackFrame",
+   "pplStack_a0": "enumeratorPtr",
+   "pplVar12": "enumeratorPtrCopy",
+   "puVar11": "slotReadPtr",
+   "puVar7": "interfaceMethod",
+   "uStack_c8": "colorBits2",
+   "uStack_d0": "colorBits1",
+   "uStack_f4": "savedSlotNum",
+   "uVar15": "savedWorldY",
+   "uVar16": "interfaceCount",
+   "uVar17": "savedY",
+   "uVar20": "slotIndex",
+   "uVar20_2": "startIndex",
+   "uVar27": "savedWorldZ",
+   "uVar8": "unwindArg"
+  }
+ },
+ "2f68308": {
+  "summary": "Allocates and fills the left and right normal slot offset arrays using minion separation and extra distance from hero.",
+  "renames": {
+   "lVar1": "slotArray",
+   "lVar2": "byteOffset",
+   "plVar4": "leftSlotsRef",
+   "plVar5": "rightSlotsRef"
+  }
+ },
+ "2f68a44": {
+  "summary": "Decompiler-mangled GetSlotPos; contains slot position lookups and closest available slot search merged together.",
+  "renames": {
+   "BADSPACEBASE": "stackBase",
+   "auVar23_part1": "scratch1",
+   "auVar23_x1": "scratch2",
+   "extraout_s0": "unused1",
+   "fVar15": "bestDistance",
+   "fVar21": "screenX",
+   "fVar22": "posY",
+   "iVar12": "endIndex",
+   "lVar10": "slotArray",
+   "lVar19": "remaining",
+   "param_5": "unused2",
+   "plVar1": "leftSlotsRef",
+   "plVar13": "rightSlotsRef",
+   "plVar14": "selectedSlotsRef",
+   "puVar20": "slotReadPtr",
+   "register0x00000008": "stackPtr",
+   "uStack_24": "slotNumCopy",
+   "uVar11": "slotArg",
+   "uVar16": "clampedLeftSlot",
+   "uVar18": "bestIndex",
+   "uVar2": "candidateIndex",
+   "uVar4": "returnSlot",
+   "uVar4_2": "leftSlotPosResult",
+   "uVar7": "leftReturn",
+   "unaff_d10": "unused3",
+   "unaff_d11": "unused4",
+   "unaff_d12": "unused5",
+   "unaff_d8": "unused6",
+   "unaff_d9": "unused7",
+   "unaff_x19": "savedThis",
+   "unaff_x20": "savedSlotIndex",
+   "unaff_x21": "savedRightSlotsRef",
+   "unaff_x22": "savedLeftSlotsRef",
+   "unaff_x23": "unused8",
+   "unaff_x24": "unused9",
+   "unaff_x25": "unused10",
+   "unaff_x26": "unused11",
+   "unaff_x27": "unused12",
+   "unaff_x30": "returnAddress"
+  }
+ },
+ "2f68b6c": {
+  "summary": "Returns the screen-space position of a left slot, clamping the slot number and logging an error if too high.",
+  "renames": {
+   "auVar18_part1": "scratch1",
+   "auVar18_x1": "scratch2",
+   "extraout_s0": "unused1",
+   "fVar11": "bestDistance",
+   "fVar16": "screenX",
+   "fVar17": "posY",
+   "iVar9": "endIndex",
+   "lVar14": "remaining",
+   "lVar8": "slotArray",
+   "param_5": "unused2",
+   "plVar10": "selectedSlotsRef",
+   "puVar15": "slotReadPtr",
+   "uStack_24": "slotNumCopy",
+   "uVar1": "candidateIndex",
+   "uVar13": "bestIndex",
+   "uVar3": "returnSlot"
+  }
+ },
+ "2f68a68": {
+  "summary": "Returns the position of a right slot, clamping the slot number and logging an error if too high.",
+  "renames": {
+   "auVar21": "slotPosResult",
+   "auVar21_part8": "leftSlotNum",
+   "auVar22_part1": "scratch1",
+   "auVar22_x1": "scratch2",
+   "extraout_s0": "unused1",
+   "fVar13": "bestDistance",
+   "fVar19": "screenX",
+   "fVar20": "posY",
+   "iVar10": "endIndex",
+   "lVar17": "remaining",
+   "lVar9": "thisRef",
+   "lVar9_2": "slotArray",
+   "param_5": "unused2",
+   "plStack_48": "savedRightSlotsRef",
+   "plStack_50": "savedLeftSlotsRef",
+   "plVar1": "rightNormalRef",
+   "plVar11": "selectedRightRef",
+   "plVar12": "selectedLeftRef",
+   "puVar18": "slotReadPtr",
+   "uStack_24": "slotNumCopy",
+   "uStack_38": "savedThis",
+   "uStack_40": "savedMethodInfo",
+   "uStack_54": "savedLeftSlotNum",
+   "uVar16": "bestIndex",
+   "uVar2": "candidateIndex",
+   "uVar4": "returnSlot"
+  }
+ },
+ "2f68c70": {
+  "summary": "Finds the slot index whose screen position is closest to a given position among all left and right slots.",
+  "renames": {
+   "auVar15_part1": "scratch1",
+   "auVar15_x1": "scratch2",
+   "fVar13": "screenX",
+   "fVar14": "posY",
+   "fVar8": "bestDistance",
+   "iVar7": "endIndex",
+   "lVar11": "remaining",
+   "lVar6": "slotArray",
+   "puVar12": "slotReadPtr",
+   "uVar1": "candidateIndex",
+   "uVar10": "bestIndex"
+  }
+ },
+ "2f68f68": {
+  "summary": "Logs and inserts a minion into the left or right minion list at the adjusted slot, then refreshes occupation.",
+  "renames": {
+   "auVar5_part12": "unwindPad",
+   "auVar5_part8": "unwindIndex",
+   "auVar5_x1": "scratch1",
+   "lVar4": "logParts",
+   "uVar1": "listIndex"
+  }
+ },
+ "2f692e8": {
+  "summary": "Rebuilds the left and right occupation lists with one true entry per minion present.",
+  "renames": {
+   "auVar10_x1": "scratch1",
+   "lVar6_2": "staticsRef",
+   "uVar2_3": "isPlayerManager"
+  }
+ },
+ "2f69530": {
+  "summary": "Adds an occupied entry to the left or right occupation list depending on which side the card is on.",
+  "renames": {
+   "auVar9_x1": "scratch1",
+   "extraout_x1_00": "scratch2",
+   "extraout_x1_01": "scratch3",
+   "extraout_x1_02": "scratch4",
+   "lVar7": "addMethod"
+  }
+ },
+ "2f69178": {
+  "summary": "Converts a desired slot number into a valid slot, falling back to the next free left or right slot if needed.",
+  "renames": {}
+ },
+ "2f68ef8": {
+  "summary": "Returns whether the right side has a free slot compared to the slot count of the normal or weapon layout.",
+  "renames": {
+   "auVar2_x1": "scratch1",
+   "lVar1": "fieldOffset"
+  }
+ },
+ "2f68e88": {
+  "summary": "Returns whether the left side has a free slot compared to the slot count of the normal or weapon layout.",
+  "renames": {
+   "auVar2_x1": "scratch1",
+   "lVar1": "fieldOffset"
+  }
+ },
+ "2f68a5c": {
+  "summary": "Converts a signed slot number into a zero-based list index (positive minus one, negative bitwise inverted).",
+  "renames": {
+   "uVar1": "index"
+  }
+ },
+ "2f698f0": {
+  "summary": "Plays a minion from hand: parents it to the board, inserts it, animates it to the conversion point and repositions all minions.",
+  "renames": {
+   "in_s1": "unused1",
+   "in_s2": "unused2",
+   "uVar2": "unusedFlag1",
+   "uVar5": "hasLeftMinion",
+   "uVar8": "unused3",
+   "uVar9": "unused4"
+  }
+ },
+ "2f69a18": {
+  "summary": "Moves a minion card to the conversion point above its slot, tweening or teleporting it and setting its rotation and scale.",
+  "renames": {
+   "fVar10": "zOffset",
+   "in_s1": "unused1",
+   "lVar7": "vector3Statics",
+   "puVar6": "quaternionStatics",
+   "puVar6_2": "quaternionStatics2"
+  }
+ },
+ "2f69db8": {
+  "summary": "Summons a minion into a slot, optionally animating its scale with an InOutCubic ease tween.",
+  "renames": {
+   "fVar7": "unitSize",
+   "in_s1": "unused1",
+   "uVar1": "setEaseMethod"
+  }
+ },
+ "2f69960": {
+  "summary": "Inserts a card into a slot on the board, optionally animating to the conversion point, then repositions all other minions.",
+  "renames": {
+   "in_s1": "unused1",
+   "uVar2": "unusedFlag1",
+   "uVar6": "hasMinion",
+   "uVar8": "unused2",
+   "uVar9": "unused3"
+  }
+ },
+ "2f6a264": {
+  "summary": "Replaces an original card with a new card in the left or right minion list, logging an error if not found.",
+  "renames": {
+   "auVar12": "indexError",
+   "auVar12_x1": "scratch1",
+   "lVar1_4": "loggerClass",
+   "piVar9": "interfaceTableCursor",
+   "plVar5": "itemSlotPtr",
+   "puVar6": "interfaceMethod",
+   "uVar3": "isMatch",
+   "uVar7": "unused1"
+  }
+ },
+ "2f696cc": {
+  "summary": "Returns the next free occupation slot, left (negative) if left is shorter else right (positive).",
+  "renames": {
+   "auVar3_x1": "scratch1"
+  }
+ },
+ "2f69754": {
+  "summary": "Returns the next free minion slot, left (negative) if left is shorter else right (positive).",
+  "renames": {
+   "auVar3_x1": "scratch1"
+  }
+ },
+ "2f6a658": {
+  "summary": "Gets the position for a next slot, choosing left or right based on direction and availability; decompiler merged several routines.",
+  "renames": {
+   "extraout_s0": "unused1",
+   "extraout_x1_00": "scratch1",
+   "iVar12": "negativeCounter",
+   "iVar3": "zeroBasedIndex",
+   "in_s1": "unused2",
+   "lVar1": "fieldOffset",
+   "uStack_a0": "packedPos",
+   "uVar14": "foundSlot"
+  }
+ },
+ "2f69858": {
+  "summary": "Returns the next right slot number (right occupation count plus one).",
+  "renames": {
+   "auVar1_x1": "scratch1"
+  }
+ },
+ "2f698a4": {
+  "summary": "Returns the next left slot number (negative of left occupation count plus one).",
+  "renames": {
+   "auVar1_x1": "scratch1"
+  }
+ },
+ "2f6980c": {
+  "summary": "Returns the next right minion slot number (right minion count plus one).",
+  "renames": {
+   "auVar1_x1": "scratch1"
+  }
+ },
+ "2f697c0": {
+  "summary": "Returns the next left minion slot number (negative of left minion count plus one).",
+  "renames": {
+   "auVar1_x1": "scratch1"
+  }
+ },
+ "2f6a8f8": {
+  "summary": "Gets the board position of the leftmost slot; decompiler merged in next-slot position code.",
+  "renames": {
+   "auVar16": "isPlayerFlag",
+   "extraout_s0": "unused1",
+   "extraout_x1": "scratch1",
+   "iVar10": "negativeCounter",
+   "iVar4": "zeroBasedIndex",
+   "lVar1": "fieldOffset",
+   "lVar11": "fieldOffset2",
+   "uStack_60": "packedPos",
+   "uVar14": "foundSlot"
+  }
+ },
+ "2f6a980": {
+  "summary": "Gets the board position of the rightmost slot; decompiler merged in next-slot position code.",
+  "renames": {
+   "auVar16": "isPlayerFlag",
+   "extraout_s0": "unused1",
+   "extraout_x1": "scratch1",
+   "iVar10": "negativeCounter",
+   "iVar4": "zeroBasedIndex",
+   "lVar1": "fieldOffset",
+   "lVar11": "fieldOffset2",
+   "uStack_50": "packedPos",
+   "uVar14": "foundSlot"
+  }
+ },
+ "2f6aa08": {
+  "summary": "Finds the position of the slot a given number of steps away from a position, using left or right slot lookups.",
+  "renames": {
+   "auVar16": "isPlayerFlag",
+   "iVar10": "negativeCounter",
+   "iVar3": "requiredSlots",
+   "iVar4": "zeroBasedIndex",
+   "lVar1": "fieldOffset",
+   "lVar9": "fieldOffset2",
+   "uStack_40": "packedPos",
+   "uStack_44": "countValue",
+   "uVar14": "rightSlotCount",
+   "uVar2": "maxSlotCount"
+  }
+ },
+ "2f6a568": {
+  "summary": "Returns whether enough free slots remain on the left side for the number needed.",
+  "renames": {
+   "lVar1": "fieldOffset"
+  }
+ },
+ "2f6a5e0": {
+  "summary": "Returns whether enough free slots remain on the right side for the number needed.",
+  "renames": {
+   "lVar1": "fieldOffset"
+  }
+ },
+ "2f6af20": {
+  "summary": "Returns the total number of free slots remaining across the left and right sides.",
+  "renames": {
+   "auVar3_x1": "scratch1",
+   "lVar1": "rightFieldOffset",
+   "lVar2": "leftFieldOffset"
+  }
+ },
+ "2f6afbc": {
+  "summary": "Returns a list of the units adjacent to a reference minion, using the hero as the neighbour at the board edge.",
+  "renames": {
+   "auVar11_2": "newListResult",
+   "iVar1": "nextIndex",
+   "plVar8": "itemPtr",
+   "uVar5": "isMatch"
+  }
+ }
+}

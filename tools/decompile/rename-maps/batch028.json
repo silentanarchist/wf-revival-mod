@@ -1,0 +1,314 @@
+{
+ "32b95d8": {
+  "summary": "Closure callback that ends the battle sequence and starts the basic or complete battle-finished coroutine on the battle manager.",
+  "renames": {
+   "apcStack_20": "savedRegs",
+   "auVar6": "outerRef",
+   "auVar6_x1": "routineResult",
+   "lVar5_3": "closureRef",
+   "unaff_x19": "exception",
+   "unaff_x20": "unused1",
+   "unaff_x21": "unused2",
+   "unaff_x30": "returnAddress"
+  }
+ },
+ "32b9660": {
+  "summary": "Predicate returning true if a card's unique ID equals the ID of the unit at index i in unitsInPlay.",
+  "renames": {
+   "bVar1": "bytesEqual",
+   "uVar5_2": "hasMismatch"
+  }
+ },
+ "32b9714": {
+  "summary": "Callback that updates a spawned trait animation's value and then invokes the stored callback.",
+  "renames": {
+   "uVar2": "hasController"
+  }
+ },
+ "32b9864": {
+  "summary": "Predicate returning true if a raw card's unique ID equals the randomly chosen card's ID.",
+  "renames": {
+   "bVar1": "bytesEqual",
+   "uVar5_2": "hasMismatch"
+  }
+ },
+ "32b9894": {
+  "summary": "Finishes reanimating the target card as a unit in play, then completes action resolution: queue checks, hero death and match end handling, or re-enables turn controls.",
+  "renames": {
+   "abStack_44": "isPlayerHeroDead",
+   "auStack_58": "nowTime",
+   "auVar19": "obscuredFalse",
+   "auVar20": "obscuredFlag",
+   "dVar18": "matchMinutes",
+   "iVar5_2": "playerHeroState",
+   "iVar5_4": "playerHeroHealth",
+   "lVar16_5": "eventClass",
+   "lVar16_8": "matchResultRef",
+   "piVar15": "interfaceMapEntry",
+   "uStack_70": "typeScratch3",
+   "uStack_78": "typeScratch2",
+   "uStack_80": "typeScratch1",
+   "uStack_90": "typeScratch4",
+   "uStack_a8": "typeScratch5",
+   "uStack_c0": "enemyHealthRaw3",
+   "uStack_c8": "enemyHealthRaw2",
+   "uStack_d0_2": "enemyHealthRaw1",
+   "uStack_e0": "playerHealthFake",
+   "uStack_e8": "playerHealthInited",
+   "uStack_f0_2": "playerHealthValue",
+   "uVar11": "actionCopy",
+   "uVar11_2": "disconnectFlag",
+   "uVar4_3": "deltaHealth"
+  }
+ },
+ "32b99b8": {
+  "summary": "Completes action resolution after execute swarm: queue checks, hero death and match end handling, or re-enables turn controls.",
+  "renames": {
+   "abStack_44": "isPlayerHeroDead",
+   "auStack_58": "nowTime",
+   "auVar19": "obscuredFalse",
+   "auVar20": "obscuredFlag",
+   "dVar18": "matchMinutes",
+   "iVar5_2": "playerHeroState",
+   "iVar5_4": "playerHeroHealth",
+   "lVar16_5": "eventClass",
+   "lVar16_8": "matchResultRef",
+   "piVar15": "interfaceMapEntry",
+   "uStack_70": "typeScratch3",
+   "uStack_78": "typeScratch2",
+   "uStack_80": "typeScratch1",
+   "uStack_90": "typeScratch4",
+   "uStack_a8": "typeScratch5",
+   "uStack_c0": "enemyHealthRaw3",
+   "uStack_c8": "enemyHealthRaw2",
+   "uStack_d0_2": "enemyHealthRaw1",
+   "uStack_e0": "playerHealthFake",
+   "uStack_e8": "playerHealthInited",
+   "uStack_f0_2": "playerHealthValue",
+   "uVar11": "actionCopy",
+   "uVar11_2": "disconnectFlag",
+   "uVar4_3": "deltaHealth"
+  }
+ },
+ "32b99e4": {
+  "summary": "Completes action resolution after mana buff: queue checks, hero death and match end handling, or re-enables turn controls.",
+  "renames": {
+   "abStack_44": "isPlayerHeroDead",
+   "auStack_58": "nowTime",
+   "auVar19": "obscuredFalse",
+   "auVar20": "obscuredFlag",
+   "dVar18": "matchMinutes",
+   "iVar5_2": "playerHeroState",
+   "iVar5_4": "playerHeroHealth",
+   "lVar16_5": "eventClass",
+   "lVar16_8": "matchResultRef",
+   "piVar15": "interfaceMapEntry",
+   "uStack_70": "typeScratch3",
+   "uStack_78": "typeScratch2",
+   "uStack_80": "typeScratch1",
+   "uStack_90": "typeScratch4",
+   "uStack_a8": "typeScratch5",
+   "uStack_c0": "enemyHealthRaw3",
+   "uStack_c8": "enemyHealthRaw2",
+   "uStack_d0_2": "enemyHealthRaw1",
+   "uStack_e0": "playerHealthFake",
+   "uStack_e8": "playerHealthInited",
+   "uStack_f0_2": "playerHealthValue",
+   "uVar11": "actionCopy",
+   "uVar11_2": "disconnectFlag",
+   "uVar4_3": "deltaHealth"
+  }
+ },
+ "32b9a08": {
+  "summary": "Completes action resolution after mana buff: queue checks, hero death and match end handling, or re-enables turn controls.",
+  "renames": {
+   "abStack_44": "isPlayerHeroDead",
+   "auStack_58": "nowTime",
+   "auVar19": "obscuredFalse",
+   "auVar20": "obscuredFlag",
+   "dVar18": "matchMinutes",
+   "iVar5_2": "playerHeroState",
+   "iVar5_4": "playerHeroHealth",
+   "lVar16_5": "eventClass",
+   "lVar16_8": "matchResultRef",
+   "piVar15": "interfaceMapEntry",
+   "uStack_70": "typeScratch3",
+   "uStack_78": "typeScratch2",
+   "uStack_80": "typeScratch1",
+   "uStack_90": "typeScratch4",
+   "uStack_a8": "typeScratch5",
+   "uStack_c0": "enemyHealthRaw3",
+   "uStack_c8": "enemyHealthRaw2",
+   "uStack_d0_2": "enemyHealthRaw1",
+   "uStack_e0": "playerHealthFake",
+   "uStack_e8": "playerHealthInited",
+   "uStack_f0_2": "playerHealthValue",
+   "uVar11": "actionCopy",
+   "uVar11_2": "disconnectFlag",
+   "uVar4_3": "deltaHealth"
+  }
+ },
+ "32b9e2c": {
+  "summary": "Iterator Reset that always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "methodInfo"
+  }
+ },
+ "32ba484": {
+  "summary": "Iterator Reset that always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "methodInfo"
+  }
+ },
+ "32baae4": {
+  "summary": "Iterator Reset that always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "methodInfo"
+  }
+ },
+ "32bb0a4": {
+  "summary": "Iterator Reset that always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "methodInfo"
+  }
+ },
+ "32bb258": {
+  "summary": "Iterator Reset that always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "methodInfo"
+  }
+ },
+ "32bb548": {
+  "summary": "Iterator Reset that always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "methodInfo"
+  }
+ },
+ "32bb7d4": {
+  "summary": "Iterator Reset that always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "methodInfo"
+  }
+ },
+ "32bba2c": {
+  "summary": "Iterator Reset that always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "methodInfo"
+  }
+ },
+ "32bbc6c": {
+  "summary": "Iterator Reset that always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "methodInfo"
+  }
+ },
+ "32bbe60": {
+  "summary": "Iterator Reset that always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "methodInfo"
+  }
+ },
+ "32b9a58": {
+  "summary": "Coroutine that repeatedly executes the next queued replay action for the current player's turn, waiting between steps and restoring time scale.",
+  "renames": {
+   "fVar9": "currentTimeScale",
+   "piVar1": "replayQueueRef",
+   "uVar3": "isOuterNull",
+   "uVar8": "nextState"
+  }
+ },
+ "32b9e98": {
+  "summary": "Coroutine that spawns defensive and offensive environmental cards, shows the offensive card, applies its effect, and waits between steps.",
+  "renames": {
+   "in_x4": "unused1",
+   "lVar8": "displayClass",
+   "lVar8_2": "displayClassRef",
+   "plVar10": "displayClassSlot",
+   "puVar1": "cardIdPtr",
+   "uVar13": "nextState"
+  }
+ },
+ "32ba4f0": {
+  "summary": "Coroutine that counts down seconds attempting to reconnect to the battle server, logging and reporting success or failure.",
+  "renames": {
+   "iVar2": "disconnectCount",
+   "iVar4": "newSecLeft",
+   "iVar4_3": "currentDisconnects",
+   "puVar1": "disconnectsPtr",
+   "this_00": "networkManager",
+   "uStack_50": "disconnectsAfter",
+   "uStack_60": "disconnectsFakeCopy",
+   "uStack_68": "disconnectsInitedCopy",
+   "uStack_70": "disconnectsValueCopy",
+   "uStack_74": "incrementFake",
+   "uStack_7c": "incrementInited",
+   "uStack_a0": "incrementInput",
+   "uStack_b0": "currentFakeCopy",
+   "uStack_b8": "currentInitedCopy",
+   "uStack_c0": "currentValueCopy",
+   "uStack_d0_3": "statusScratch",
+   "uStack_e0": "disconnectsValue",
+   "uVar6": "networkManagerCheck",
+   "uVar6_5": "networkManagerCheck2",
+   "uVar7": "isNull"
+  }
+ },
+ "32bab50": {
+  "summary": "Coroutine for the basic end-of-battle sequence: logs result, hides UI, destroys losing units with death delays, or finishes the battle.",
+  "renames": {
+   "auVar11": "isManagerNull",
+   "auVar11_x1": "unusedMethod",
+   "uStack_50": "typeScratch1",
+   "uStack_68": "typeScratch2",
+   "uVar3": "isNull",
+   "uVar5": "resultString",
+   "uVar7_3": "winnerString",
+   "uVar8": "nextState"
+  }
+ },
+ "32bb110": {
+  "summary": "Coroutine that gets the card choice pool, prompts player or enemy to choose a card, waits for selection, and calls back with the index.",
+  "renames": {}
+ },
+ "32bb2c4": {
+  "summary": "Coroutine that shows a targeting tooltip above the acting card and highlights potential targets until a unit target is chosen.",
+  "renames": {
+   "fVar4": "cardScreenX",
+   "fVar6": "upVectorOffsetX",
+   "fVar7": "upVectorOffsetY",
+   "in_s1": "cardScreenY",
+   "in_s2": "cardScreenZ",
+   "lVar1_4": "upVectorPtr",
+   "uVar3": "isNull"
+  }
+ },
+ "32bb5f4": {
+  "summary": "Coroutine that closes the end-of-battle doors, hides the HUD, sets up the result display and waits before marking the match finished.",
+  "renames": {}
+ },
+ "32bb840": {
+  "summary": "Coroutine that waits for the match result to finish processing, then leaves the battle room and shows the share button.",
+  "renames": {
+   "uVar3": "hasShareButton"
+  }
+ },
+ "32bba98": {
+  "summary": "Coroutine that waits a clip's delay then plays a body animation on the target unit, optionally awaiting completion.",
+  "renames": {
+   "plVar4": "displayClassSlot"
+  }
+ },
+ "32bbcd8": {
+  "summary": "Coroutine that waits a VFX delay, resolves start and end transforms, and creates the animation.",
+  "renames": {
+   "uVar2": "hasStartParent"
+  }
+ },
+ "32bbecc": {
+  "summary": "Coroutine that kills the warlord and then all minions in sequence after battle end, waiting between deaths.",
+  "renames": {
+   "iVar1": "index",
+   "plVar7": "minionListSlot"
+  }
+ }
+}

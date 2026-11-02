@@ -1,0 +1,292 @@
+{
+ "3270298": {
+  "summary": "Collects all of the card's chat and combat audio references into a list and returns those that pass a filter (non-empty), via LINQ.",
+  "renames": {
+   "alStack_250": "stackFrameSlots",
+   "auStack_1fc": "flagBuffer",
+   "auVar31": "thrownResult",
+   "auVar31_x1": "thrownResultAux",
+   "auVar32": "unwindResult",
+   "auVar32_part8": "unwindState",
+   "lStack_128": "savedLookupKey",
+   "lStack_140": "savedKeySelector",
+   "lStack_150": "savedGrouping",
+   "lStack_1e8": "stackCanary",
+   "lStack_220": "pendingException",
+   "lStack_228": "resultLookup",
+   "lStack_230": "tempKeyBuffer",
+   "lVar17": "sourceClass",
+   "lVar19": "keySelectorClass",
+   "lVar25_3": "tempValueBuffer",
+   "lVar4": "whereMethod",
+   "lVar4_3": "interfaceClassB",
+   "lVar4_5": "interfaceClassC",
+   "lVar6_3": "sourceClassB",
+   "pcStack_100": "createMethodA",
+   "pcStack_160": "createMethodB",
+   "pcVar24": "methodPtr",
+   "piVar21": "interfaceMapPtr",
+   "plStack_108": "enumeratorA",
+   "plStack_118": "exceptionA",
+   "plStack_138": "savedEnumeratorB",
+   "plStack_148": "savedSourceB",
+   "plStack_168": "enumeratorB",
+   "plStack_178": "exceptionB",
+   "plStack_208": "groupingResult",
+   "plStack_210": "enumeratorC",
+   "plStack_238": "keySelectorC",
+   "plStack_240": "elementSelectorC",
+   "plVar12": "catchResult",
+   "plVar14_3": "enumeratorObj",
+   "plVar15": "lookupClassA",
+   "plVar15_3": "elementSelectorB",
+   "plVar22": "lookupClassC",
+   "plVar23": "lookupClassB",
+   "plVar23_3": "scratchClassD",
+   "plVar3": "soundArrayOrSource",
+   "plVar5": "elementSelectorA",
+   "plVar8": "sourceB",
+   "pplStack_110": "enumeratorRefA",
+   "pplStack_170": "enumeratorRefB",
+   "pplStack_218": "enumeratorRefC",
+   "pplVar18": "enumeratorRefPtr",
+   "puStack_1f0": "argBufB",
+   "puStack_1f8": "argBufA",
+   "puStack_1f8_2": "argBufC",
+   "puVar10": "interfaceMethodTable",
+   "puVar11": "argumentName",
+   "puVar16": "interfaceSlot",
+   "puVar27": "tempSlotB",
+   "puVar28": "tempSlotC",
+   "puVar29": "tempSlotD",
+   "puVar30": "tempSlotE",
+   "uStack_130": "unwindPtrA",
+   "uVar1": "classInitFlag",
+   "uVar2": "keyA",
+   "uVar20": "interfaceCount",
+   "uVar7": "valueA",
+   "uVar7_3": "valueB",
+   "uVar9": "keyB"
+  }
+ },
+ "3270734": {
+  "summary": "Returns the audio clip for a given chat message type from the card (or its chat reference card), falling back to the default chat sound.",
+  "renames": {
+   "iStack_58": "loggedMessage",
+   "uStack_60": "stackScratch1",
+   "uVar1": "hasReferenceCard",
+   "uVar4_2": "messageTypeName"
+  }
+ },
+ "3270998": {
+  "summary": "Loads and returns the card's summon audio clip, using the addressables reference counter; returns null if missing or fails to load.",
+  "renames": {
+   "auVar10": "hasReferenceCard",
+   "auVar10_x1": "unused1",
+   "lStack_48": "opHandleHigh",
+   "lStack_50": "opHandleLow",
+   "lVar8": "loadMethodInfo",
+   "uStack_60": "loadResultC",
+   "uStack_68": "loadResultB",
+   "uStack_70": "loadResultA",
+   "uStack_78": "opResultC",
+   "uStack_80": "opResultB",
+   "uStack_88": "opResultA",
+   "uVar6": "assetKey"
+  }
+ },
+ "3270a6c": {
+  "summary": "Loads and returns the card's attack audio clip, using the addressables reference counter; returns null if missing or fails to load.",
+  "renames": {
+   "auVar10": "hasReferenceCard",
+   "auVar10_x1": "unused1",
+   "lStack_48": "opHandleHigh",
+   "lStack_50": "opHandleLow",
+   "lVar8": "loadMethodInfo",
+   "uStack_60": "loadResultC",
+   "uStack_68": "loadResultB",
+   "uStack_70": "loadResultA",
+   "uStack_78": "opResultC",
+   "uStack_80": "opResultB",
+   "uStack_88": "opResultA",
+   "uVar6": "assetKey"
+  }
+ },
+ "3270b40": {
+  "summary": "Loads and returns the card's death audio clip, using the addressables reference counter; returns null if missing or fails to load.",
+  "renames": {
+   "auVar10": "hasReferenceCard",
+   "auVar10_x1": "unused1",
+   "lStack_48": "opHandleHigh",
+   "lStack_50": "opHandleLow",
+   "lVar8": "loadMethodInfo",
+   "uStack_60": "loadResultC",
+   "uStack_68": "loadResultB",
+   "uStack_70": "loadResultA",
+   "uStack_78": "opResultC",
+   "uStack_80": "opResultB",
+   "uStack_88": "opResultA",
+   "uVar6": "assetKey"
+  }
+ },
+ "3270c34": {
+  "summary": "Loads the custom ranged attack particle animation asset and returns its AnimInfo, or null if none is set.",
+  "renames": {
+   "auVar3": "isReferenceValid",
+   "auVar3_x1": "unused1"
+  }
+ },
+ "3270d00": {
+  "summary": "Checks whether a target card is a valid target for this card, applying ward, camouflage, stealth and then the full target criteria filter.",
+  "renames": {
+   "bVar3": "meetsCriteria",
+   "iVar6": "targetRangedAttack",
+   "iVar7_3": "targetMeleeAttack",
+   "iVar7_4": "targetHealth",
+   "iVar7_5": "targetCostOrRarity",
+   "lVar13_2": "selfCriteriaCheck",
+   "lVar13_3": "battleManagerRef",
+   "lVar13_5": "referencedCriteriaA",
+   "lVar13_7": "referencedCriteriaB",
+   "lVar14_2": "targetRefCard",
+   "lVar18": "candidateCard",
+   "lVar8": "filterClosure",
+   "lVar8_2": "evaluatedCardRef",
+   "plVar16": "closureFieldPtr",
+   "puVar15": "failureSuffix",
+   "uStack_60": "healthPartC",
+   "uStack_68": "healthPartB",
+   "uStack_70": "healthPartA",
+   "uStack_80": "healthCopyC",
+   "uStack_88": "healthCopyB",
+   "uStack_90": "healthCopyA",
+   "uVar9": "hasCandidate",
+   "uVar9_3": "hasReferencedCard",
+   "uVar9_5": "bytesDiffer"
+  }
+ },
+ "3270e58": {
+  "summary": "Checks whether a target is valid for this card's active ability, applying ward, stealth, tainted rules and then the ability's target criteria.",
+  "renames": {
+   "bVar3": "meetsCriteria",
+   "cVar2": "friendlyOrEnemyFlag",
+   "iVar1": "attackFilterOption",
+   "iVar6": "targetRangedAttack",
+   "iVar7_2": "targetMeleeAttack",
+   "iVar7_3": "targetHealth",
+   "iVar7_4": "targetCostOrRarity",
+   "lVar10_3": "selfCriteriaCheck",
+   "lVar10_4": "battleManagerRef",
+   "lVar10_6": "referencedCriteriaA",
+   "lVar10_8": "referencedCriteriaB",
+   "lVar10_9": "talentConditions",
+   "lVar11_4": "targetRefCard",
+   "lVar18": "candidateCard",
+   "lVar8": "filterClosure",
+   "lVar8_2": "evaluatedCardRef",
+   "plVar17": "closureFieldPtr",
+   "puVar16": "failureSuffix",
+   "uStack_48": "stackScratch1",
+   "uStack_60": "healthPartC",
+   "uStack_68": "healthPartB",
+   "uStack_70": "healthPartA",
+   "uStack_80": "healthCopyC",
+   "uStack_88": "healthCopyB",
+   "uStack_90": "healthCopyA",
+   "uVar9": "hasCandidate",
+   "uVar9_2": "statFilterValue",
+   "uVar9_3": "hasReferencedCard",
+   "uVar9_5": "bytesDiffer"
+  }
+ },
+ "32713d0": {
+  "summary": "Returns a list of units in play that are valid targets for this card, or null if no target criteria are defined.",
+  "renames": {
+   "lVar2": "addMethodInfo",
+   "uVar5": "isValid"
+  }
+ },
+ "3271584": {
+  "summary": "Returns a list of units in play that meet the given target criteria relative to this card and target.",
+  "renames": {
+   "lVar2": "addMethodInfo"
+  }
+ },
+ "32718d4": {
+  "summary": "Returns whether any of the card's abilities is a trigger-once ability.",
+  "renames": {
+   "auVar4_x1": "unused1"
+  }
+ },
+ "3271974": {
+  "summary": "Returns whether any ability on this card (following enchantment chains) is the play-third-card-in-turn type.",
+  "renames": {
+   "auVar6_x1": "unused1",
+   "uVar3": "hasEnchantment"
+  }
+ },
+ "3271ae8": {
+  "summary": "Returns true if the card is a Whispers type with a spell type in a specific set requiring a special mini description.",
+  "renames": {
+   "uVar1": "spellTypeOffset"
+  }
+ },
+ "3271b40": {
+  "summary": "Looks up the knight criteria matching the given pilot id and returns its transformed knight id, or an empty string.",
+  "renames": {
+   "auVar6": "errorResult",
+   "auVar6_part8": "errorResultPart",
+   "plVar3": "resultIdPtr",
+   "uVar1": "idMatches",
+   "uVar5": "criteriaIndex"
+  }
+ },
+ "3271e40": {
+  "summary": "Creates a copy of the active ability with deep-copied target criteria, counter and ability logic list.",
+  "renames": {
+   "auVar10_x1": "unused1",
+   "lVar6": "itemsArray",
+   "lVar9": "logicListCopy",
+   "plVar7": "logicListField",
+   "uVar1": "listSize"
+  }
+ },
+ "3271ec0": {
+  "summary": "Creates a deep copy of the active ability, deep-copying its target criteria, targets counter and ability logic list.",
+  "renames": {
+   "auVar9_x1": "unused1",
+   "lVar5": "itemsArray",
+   "lVar8": "logicListCopy",
+   "plVar2": "copiedAbility",
+   "plVar6": "logicListField",
+   "uVar1": "listSize"
+  }
+ },
+ "32723a4": {
+  "summary": "Sets the sorting layer on the Spoil of War UI object and recursively on all its child transforms, plus renderers.",
+  "renames": {
+   "alStack_48": "stackScratchArr",
+   "auVar14": "catchResult",
+   "auVar14_x1": "catchResultAux",
+   "auVar15": "unwindResult",
+   "auVar15_part8": "unwindState",
+   "lStack_60": "pendingException",
+   "lVar3_3": "caughtException",
+   "lVar3_4": "catchTarget",
+   "pcStack_80": "savedMethodB",
+   "pcStack_90": "savedMethodA",
+   "pcStack_b0": "spanWrapperPtr",
+   "plStack_38": "enumeratorSlot",
+   "plStack_50": "scratchArrRef",
+   "plStack_70": "savedDisposable",
+   "plStack_78": "savedChildObj",
+   "plVar6_3": "childObject",
+   "pplStack_58": "enumeratorSlotRef",
+   "pplVar11": "enumeratorSlotPtr",
+   "puStack_88": "savedTypeEnumerator",
+   "puStack_a8": "spanLength",
+   "uStack_68": "unwindPtr",
+   "uVar2": "hasValue"
+  }
+ }
+}

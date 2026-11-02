@@ -1,0 +1,244 @@
+{
+ "3269058": {
+  "summary": "Checks whether a card's army matches a filter army under the given criteria (any, only chosen, chosen or neutral, excluding chosen); the rest is decompiler LINQ noise.",
+  "renames": {
+   "alStack_3e8": "frameScratch",
+   "auVar3": "unused1",
+   "auVar35": "exceptionObj",
+   "auVar36": "enumerableArg",
+   "auVar37": "unused2",
+   "auVar38": "unused3",
+   "bVar5": "allMatch",
+   "cStack_10c": "unused4",
+   "lStack_108": "stackCanary",
+   "lVar15": "typeInfo",
+   "lVar15_2": "genericContext2",
+   "lVar15_3": "collectionTypeInfo2",
+   "lVar15_4": "genericContext4",
+   "lVar15_5": "collectionTypeInfo4",
+   "lVar15_6": "genericContext6",
+   "lVar15_7": "collectionTypeInfo6",
+   "lVar15_8": "genericContext8",
+   "lVar15_9": "collectionTypeInfo8",
+   "lVar15_10": "collectionTypeInfo9",
+   "lVar16": "genericArgInfo",
+   "lVar16_2": "genericArgInfo2",
+   "lVar16_3": "genericArgInfo3",
+   "lVar16_4": "genericArgInfo4",
+   "lVar19": "sourceTypeInfo",
+   "lVar19_2": "sourceTypeInfo2",
+   "lVar20": "unused5",
+   "pcStack_90": "savedMethod",
+   "pcVar23": "unused6",
+   "piVar25": "interfaceMapPtr",
+   "plStack_120": "elementArgPtr",
+   "plStack_130": "enumeratorField3",
+   "plStack_38": "enumeratorField1",
+   "plStack_60": "savedEnumerator",
+   "plStack_68": "savedComparer",
+   "plStack_88": "enumeratorField2",
+   "plVar11": "comparer",
+   "plVar11_2": "comparer2",
+   "plVar11_3": "comparer3",
+   "plVar11_4": "comparer4",
+   "plVar11_5": "comparer5",
+   "plVar26": "currentEnumerator",
+   "plVar26_2": "currentEnumerator2",
+   "plVar26_3": "currentEnumerator3",
+   "plVar26_4": "currentEnumerator4",
+   "plVar26_5": "currentEnumerator5",
+   "plVar26_6": "currentEnumerator6",
+   "plVar26_7": "currentEnumerator7",
+   "plVar26_8": "currentEnumerator8",
+   "plVar30": "sourceCollection",
+   "plVar30_2": "sourceCollection2",
+   "plVar32": "bufferB",
+   "plVar33": "bufferA",
+   "plVar34": "frameBase",
+   "plVar7_2": "disposableEnumerator",
+   "plVar7_4": "disposableEnumerator4",
+   "plVar7_5": "disposableEnumerator5",
+   "plVar7_6": "disposableEnumerator6",
+   "plVar9": "containsFastPath",
+   "plVar9_3": "sourceEnumerable",
+   "plVar9_4": "sourceEnumerable2",
+   "pplStack_138": "enumeratorRef3",
+   "pplStack_140": "pendingException3",
+   "pplStack_48": "enumeratorRef1",
+   "pplStack_50": "pendingException1",
+   "pplStack_98": "enumeratorRef2",
+   "pplStack_a0": "pendingException2",
+   "pplVar14": "genericClass",
+   "pplVar17": "enumeratorRefPtr",
+   "pplVar27": "genericClass2",
+   "ppppplVar24": "unused7",
+   "pppppplVar18": "unused8",
+   "ppppppplStack_128": "savedGenericCtx",
+   "ppppppplVar1": "unused9",
+   "ppppppplVar29_2": "genericCtx2",
+   "ppppppplVar29_3": "genericCtx3",
+   "puVar10": "interfaceMethodSlot",
+   "puVar13": "interfaceMethodSlot2",
+   "puVar31": "maxCount",
+   "uStack_40": "unused10",
+   "uStack_58": "exceptionObj1",
+   "uStack_70": "savedResult",
+   "uVar12": "moveNextResult",
+   "uVar2": "unused11",
+   "uVar21": "result",
+   "uVar22": "unused12",
+   "uVar6": "unused13",
+   "uVar8": "sourceParamName",
+   "uVar8_5": "unused14",
+   "unaff_x23": "currentValue",
+   "unaff_x25": "unused15",
+   "unaff_x27_2": "unused16",
+   "unaff_x27_3": "unused17"
+  }
+ },
+ "3269918": {
+  "summary": "Returns whether this reference matches the given army and, if its background asset is valid, the loaded flavour background sprite.",
+  "renames": {
+   "alStack_30": "resultTuple",
+   "uVar2": "isValid",
+   "uVar4": "found"
+  }
+ },
+ "3269ac8": {
+  "summary": "Releases the flavour background asset if this reference matches the given army and is loaded; returns whether it released.",
+  "renames": {
+   "uVar2": "isValid"
+  }
+ },
+ "3269804": {
+  "summary": "Finds the flavour background sprite for an army from the list of backgrounds, falling back to the default with a warning.",
+  "renames": {
+   "alStack_70": "resultTuple",
+   "auVar9": "exceptionResult",
+   "extraout_x1": "foundSprite",
+   "iStack_34": "armyCopy",
+   "lStack_48": "savedThis",
+   "lStack_58": "savedBackgrounds",
+   "pcStack_60": "savedMethod",
+   "plVar5": "assetReference",
+   "uStack_50": "savedArmy",
+   "uVar6": "found"
+  }
+ },
+ "32699ec": {
+  "summary": "Releases the flavour background asset for the given army, logging a warning if no matching background is found.",
+  "renames": {
+   "auVar8": "exceptionResult",
+   "iStack_24": "armyCopy",
+   "uVar3": "armyBoxed",
+   "uVar5": "isValid"
+  }
+ },
+ "3269c74": {
+  "summary": "Computes a minion's scale from its position by evaluating the scale curve, normalised by the curve's last key value.",
+  "renames": {
+   "auVar6": "resultScale",
+   "auVar7": "resultVector",
+   "extraout_s0": "unused1",
+   "fVar4": "curveValue",
+   "fVar5": "lastKeyValue",
+   "iVar1": "keyCount"
+  }
+ },
+ "3269da0": {
+  "summary": "Returns the time of the scale curve's last keyframe plus the given Z, used to invert a position.",
+  "renames": {
+   "auVar6_2": "curveLength",
+   "fVar5": "lastKeyTime",
+   "lVar2_2": "scratch1",
+   "lVar3": "keyframeArray",
+   "uVar1": "lastIndex"
+  }
+ },
+ "326a620": {
+  "summary": "Predicate that returns true when a card script's unique id equals the library id at the closure's current index.",
+  "renames": {
+   "bVar1": "charsEqual",
+   "lVar2_3": "libraryId",
+   "uVar5_2": "blockDiffers"
+  }
+ },
+ "3259740": {
+  "summary": "Returns the deck's hero card script, using the runtime hero or searching loaded assets for the referenced hero id.",
+  "renames": {
+   "acStack_ac": "predicateResult",
+   "alStack_e0": "frameScratch",
+   "auVar22": "exceptionObj",
+   "iVar17": "exitState",
+   "lStack_40": "pendingException",
+   "lStack_a8": "stackCanary",
+   "lVar10": "genericMethodInfo",
+   "lVar12": "enumeratorTypeInfo",
+   "lVar2_3": "tempInfo",
+   "lVar8": "typeInfo",
+   "lVar9": "genericContext",
+   "pbVar18": "stateFlag",
+   "piVar16": "interfaceMapPtr",
+   "plStack_28": "enumeratorField",
+   "plStack_c0": "enumeratorField2",
+   "plVar11": "genericClassInfo",
+   "plVar11_3": "disposableEnumerator",
+   "plVar11_5": "disposableEnumerator2",
+   "pplStack_38": "enumeratorRef",
+   "pplStack_c8": "enumeratorRef2",
+   "pplVar13": "enumeratorRefPtr",
+   "puStack_b8": "elementArg",
+   "puVar21": "bufferC",
+   "puVar3": "slotOrBufferA",
+   "puVar4": "methodSlot2",
+   "puVar5": "argNameStr",
+   "uVar14": "vtableCount",
+   "uVar19": "elementSize",
+   "uVar20": "alignedSize"
+  }
+ },
+ "32597a4": {
+  "summary": "Builds and caches the deck's card library by looking up each stored card id in the full collection, dropping ids not found.",
+  "renames": {
+   "bVar3": "isIncomplete",
+   "iVar2": "index",
+   "lVar4": "closure",
+   "lVar7": "libraryList",
+   "lVar8": "backingArray",
+   "plVar10": "localLibraryRef",
+   "puVar9": "slotPtr",
+   "uVar1": "count",
+   "uVar6": "notFound"
+  }
+ },
+ "3269ffc": {
+  "summary": "Returns true if the deck hero or any card in the deck's library is hidden.",
+  "renames": {
+   "iVar4": "index"
+  }
+ },
+ "326a1d0": {
+  "summary": "Returns true if any card in the deck's library is banned by the given play event.",
+  "renames": {
+   "bVar1": "hasMore",
+   "lVar5": "eventObject",
+   "piVar7": "interfaceMapPtr",
+   "uVar6": "interfaceCount"
+  }
+ },
+ "326a0d8": {
+  "summary": "Builds and caches the deck's card library from the player's full card collection, logging an error if no player data manager exists.",
+  "renames": {
+   "bVar3": "isIncomplete",
+   "iVar2": "index",
+   "lVar4": "closure",
+   "lVar5": "libraryList",
+   "lVar8": "backingArray",
+   "plVar11": "localLibraryRef",
+   "puVar9": "slotPtr",
+   "uVar1": "count",
+   "uVar10": "playerDataManager",
+   "uVar6": "notFound"
+  }
+ }
+}

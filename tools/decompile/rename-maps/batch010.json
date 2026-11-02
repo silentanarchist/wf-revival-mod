@@ -1,0 +1,346 @@
+{
+ "32652bc": {
+  "summary": "Sums the damage values of a card's active ability logic, or of its abilities if it has none, falling back to ThisCardPlayed damage.",
+  "renames": {
+   "iVar7": "totalDamage",
+   "lStack_c8": "exceptionHandle",
+   "uStack_a0": "outerEnumState",
+   "lStack_90": "currentAbility",
+   "uStack_80": "innerEnumState",
+   "lStack_70": "currentLogic",
+   "auVar11_x1": "methodArg",
+   "puStack_78": "innerEnumSavedPtr",
+   "puStack_98": "outerEnumSavedPtr",
+   "puStack_b0": "savedEnumPtr",
+   "uStack_a0_2": "abilityEnumerator",
+   "lStack_a8": "savedCurrent",
+   "puStack_c0": "outerEnumRef",
+   "lVar2_3": "pendingException",
+   "uStack_80_2": "logicEnumerator",
+   "auVar10": "unwindResult",
+   "auVar10_part8": "unwindKind",
+   "lVar2_4": "caughtObject",
+   "lStack_c8_2": "caughtException"
+  }
+ },
+ "32656c8": {
+  "summary": "Totals the friendly-unit counts of this card's ThisCardPlayed abilities whose target criteria match the given target card.",
+  "renames": {
+   "uVar3": "hasTarget",
+   "iVar5": "totalCount"
+  }
+ },
+ "3265c90": {
+  "summary": "Returns whether this entity has an active enchantment matching the given enchantment's unique ID.",
+  "renames": {
+   "uVar3": "idMatches"
+  }
+ },
+ "3265df8": {
+  "summary": "Finds and returns the active card effect for the given secret enchantment if the entity has secret orders, else null.",
+  "renames": {
+   "uVar4": "isSameEnchantment",
+   "auVar10": "thrownResult",
+   "auVar10_part8": "thrownKind",
+   "auVar11": "thrownResult2",
+   "auVar11_x1": "thrownContext",
+   "puVar5": "itemSlot"
+  }
+ },
+ "3265fd8": {
+  "summary": "Returns true if the card is not the jam trait, is a quest card, and has no quests remaining.",
+  "renames": {
+   "iVar2": "questCount"
+  }
+ },
+ "3266024": {
+  "summary": "Finds the matching secret enchantment effect and clears its secret flag, logging a message if none is found.",
+  "renames": {
+   "uVar4": "matchOrCount",
+   "method_00": "enchantmentArg",
+   "uVar6": "unused1",
+   "lVar3_2": "loggerClass",
+   "piVar7": "interfaceEntry",
+   "puVar5": "logMethod"
+  }
+ },
+ "32661ac": {
+  "summary": "Builds the list of card effects to display, merging Mark of Chaos effects per god and skipping hidden ones.",
+  "renames": {
+   "method_00": "getItemMethod",
+   "plVar6": "listSlot"
+  }
+ },
+ "3266848": {
+  "summary": "Marks a matching single-use or choice enchantment effect as spent, optionally logging it in dev mode.",
+  "renames": {
+   "uVar3": "isSameEnchantment",
+   "uVar1": "devToolsStatic",
+   "uVar3_2": "loggerFlag",
+   "lVar2_3": "loggerClass",
+   "piVar6": "interfaceEntry",
+   "uVar3_3": "matchesEnchantment",
+   "puVar5": "logMethod"
+  }
+ },
+ "3266a4c": {
+  "summary": "Returns whether the given enchantment's effect has already been used up on this entity.",
+  "renames": {
+   "uVar3": "isSameEnchantment"
+  }
+ },
+ "3266b4c": {
+  "summary": "Increments a quest card's counter and returns whether the quest's required number of times has been reached.",
+  "renames": {
+   "iVar1": "newCounter",
+   "iVar2": "requiredTimes"
+  }
+ },
+ "3266e64": {
+  "summary": "Returns a list of all mutation enchantments currently applied through active effects.",
+  "renames": {
+   "uVar4": "hasEnchantment"
+  }
+ },
+ "326712c": {
+  "summary": "Returns whether the given damage, reduced by armour (minimum 1), is enough to kill the target card.",
+  "renames": {
+   "iVar1": "armourValue",
+   "iVar2": "healthValue",
+   "uStack_60": "armourCopy",
+   "uStack_58": "armourInitedCopy",
+   "uStack_50": "armourFakeActiveCopy"
+  }
+ },
+ "32673bc": {
+  "summary": "Returns true if this entity is a Tactic card of the PlasmaPower spell type.",
+  "renames": {
+   "bVar1": "usesPlasma"
+  }
+ },
+ "32673f8": {
+  "summary": "Returns the card holding the active ability: the referenced active ability card if set, otherwise the raw card data.",
+  "renames": {
+   "uVar2": "hasActiveAbilityRef",
+   "lVar1": "fieldOffset"
+  }
+ },
+ "3267470": {
+  "summary": "Returns whether the entity's active ability costs psychic energy.",
+  "renames": {
+   "uVar2": "hasCard"
+  }
+ },
+ "3267508": {
+  "summary": "Returns whether the entity's active ability costs plasma energy.",
+  "renames": {
+   "uVar2": "hasCard"
+  }
+ },
+ "32676b0": {
+  "summary": "Returns whether any currently showing trait matches the given trait (a LINQ Any with decompiler noise).",
+  "renames": {
+   "lVar3": "closure",
+   "puVar5": "interfaceMethod",
+   "uVar6": "currentItem",
+   "plVar10": "classScratch",
+   "lVar11": "classA",
+   "lVar12": "classB",
+   "pplVar14": "enumeratorRef",
+   "plVar18": "anyMethodInfo",
+   "plStack_130": "savedException3",
+   "plStack_118": "callArgs",
+   "plStack_98": "savedException2",
+   "plStack_68": "savedTraits",
+   "plStack_60": "savedElement",
+   "plStack_48": "savedException",
+   "plStack_38": "traitEnumerator",
+   "puVar8": "argName",
+   "uVar16": "loopCount",
+   "piVar17": "interfaceEntry",
+   "pplStack_40": "enumeratorPtr",
+   "lVar3_2": "classC",
+   "unaff_x22": "currentTrait",
+   "plVar13": "sourceList",
+   "auVar24": "unwindResult",
+   "uStack_58": "unwindResultCopy",
+   "auVar24_part8": "unwindKind",
+   "puVar7": "caughtPtr",
+   "plVar4_2": "enumeratorObj",
+   "auVar25": "catchResult",
+   "auVar25_x1": "catchPredicate",
+   "pcStack_80": "anyMethodRef",
+   "plStack_88": "traitEnumerator2",
+   "pplStack_90": "enumeratorPtr2",
+   "bVar2": "anyMatched",
+   "lVar3_4": "tlsBase",
+   "lStack_108": "stackCanary",
+   "uVar20": "elementSize",
+   "plVar21": "tempBuffer1",
+   "plVar22": "tempBuffer2",
+   "plStack_120": "traitEnumerator3",
+   "pplStack_128": "enumeratorPtr3",
+   "auVar26_x1": "unused1",
+   "uVar23": "resultFlag",
+   "acStack_10c": "predicateResult",
+   "auVar25_x1_2": "disposeTarget",
+   "auVar27": "appendResult",
+   "auVar27_x1": "appendElement",
+   "uVar1": "genericFlags",
+   "puVar9": "classMethodTable",
+   "uVar6_3": "methodTarget",
+   "pcVar15": "invokeFn"
+  }
+ },
+ "326778c": {
+  "summary": "Returns the value of the first current trait matching the given trait, or 0 if none.",
+  "renames": {
+   "lVar1": "closure"
+  }
+ },
+ "3267878": {
+  "summary": "Returns the current trait data matching the given trait, or a hidden empty trait if none is found.",
+  "renames": {
+   "lVar1": "closure"
+  }
+ },
+ "32649a4": {
+  "summary": "Sums the extrinsic melee or ranged attack changes from addStats effects for the given attack type.",
+  "renames": {
+   "iVar4": "totalChange",
+   "piVar3": "changePtr"
+  }
+ },
+ "3264ff0": {
+  "summary": "Returns the current trait value plus added-trait effect values for the trait, clamped to be non-negative.",
+  "renames": {
+   "method_00": "traitRaw",
+   "iVar4": "addedValue"
+  }
+ },
+ "3267bb8": {
+  "summary": "Coroutine that animates a fatigue card appearing, moving and rotating from the deck, then waits and scales it away.",
+  "renames": {
+   "bVar4": "hasMore",
+   "method_00": "unusedMethod1",
+   "puVar7": "vectorData",
+   "auVar3_x1": "unused2",
+   "auVar2_x1": "unused3",
+   "auVar14_2": "damageString",
+   "auVar14_3": "cardBackHolder",
+   "lVar5_4": "vectorStatic",
+   "auVar14_x1": "unused4"
+  }
+ },
+ "3268074": {
+  "summary": "Throws NotSupportedException because Reset is not supported on this iterator.",
+  "renames": {
+   "uVar2": "methodRef"
+  }
+ },
+ "3267a10": {
+  "summary": "Creates and returns the DrawFatigue coroutine iterator initialised with its arguments.",
+  "renames": {
+   "lVar1": "iterator",
+   "param_7": "extraParam"
+  }
+ },
+ "3267af0": {
+  "summary": "Shows or hides the fatigue card's front elements and inverts visibility for the card back.",
+  "renames": {
+   "bVar1": "backVisible"
+  }
+ },
+ "32696a4": {
+  "summary": "Static constructor that creates the singleton instance of the compiler-generated FilterMethods closure holder.",
+  "renames": {
+   "uVar1": "instance"
+  }
+ },
+ "326974c": {
+  "summary": "Predicate that returns whether the given card is the same Unity object as the captured evaluated card.",
+  "renames": {
+   "bVar1": "result"
+  }
+ },
+ "3257878": {
+  "summary": "Decides whether an evaluated card meets a TargetCriteria relative to this card, checking targets, ownership, stats, traits and more.",
+  "renames": {
+   "bVar4": "result",
+   "lVar8": "closure",
+   "lVar17": "otherCard",
+   "lVar8_2": "selfCard",
+   "plVar15": "evaluatedCardRef",
+   "uVar9_2": "hasEvaluatedCard",
+   "lVar14_2": "compareCard",
+   "lVar8_3": "previousTargets",
+   "puVar13": "failReason",
+   "iVar7_2": "targetMeleeAttack",
+   "iVar6_2": "targetRangeAttack",
+   "uStack_68": "healthRaw2",
+   "uStack_70": "healthRaw1",
+   "uStack_60": "healthRaw3",
+   "uStack_88": "healthCopy2",
+   "uStack_90": "healthCopy1",
+   "uStack_80": "healthCopy3",
+   "iVar7_3": "targetHealth",
+   "iVar7_4": "scratchValue",
+   "lVar8_5": "referencedTarget",
+   "uVar9_4": "hasReferencedTarget",
+   "lVar8_7": "talentTarget",
+   "uVar9_6": "traitsDiffer"
+  }
+ },
+ "3268df0": {
+  "summary": "Compares a card stat against a filter value using the given comparison option, optionally using this unit's attack or an alternate value.",
+  "renames": {
+   "bVar3": "overflowOrSign",
+   "bVar4": "equalFlag",
+   "iVar1": "difference",
+   "bVar2": "overflowFlag"
+  }
+ },
+ "326815c": {
+  "summary": "Checks whether a card meets a UnitConditions filter (damaged, flying, armour, quests and so on), honouring the exclude flag.",
+  "renames": {
+   "method_00": "conditionsFilterRaw",
+   "uStack_50": "armourCopy",
+   "uStack_48": "armourInitedCopy",
+   "uStack_40": "armourFakeActiveCopy",
+   "abStack_34": "questCheckResult",
+   "lVar10": "addMethodInfo",
+   "bVar3_2": "canActValue",
+   "iVar4_2": "armourValue"
+  }
+ },
+ "3268c24": {
+  "summary": "Checks whether a card has the filtered trait (or none), honouring exclusion and special-case trait handling.",
+  "renames": {
+   "lVar2": "closure"
+  }
+ },
+ "3269540": {
+  "summary": "Returns true if the card meets the trait criteria for any trait in the given list.",
+  "renames": {
+   "bVar1": "wasUnmet",
+   "uVar3": "hasNext",
+   "uStack_40": "scratch1",
+   "uStack_38": "currentTrait"
+  }
+ },
+ "326930c": {
+  "summary": "Checks whether a raw card's traits satisfy the trait filter in the given TargetCriteria, honouring exclusion.",
+  "renames": {
+   "lVar2": "closure",
+   "lVar2_4": "criteriaRef",
+   "plVar7": "criteriaPtr"
+  }
+ },
+ "3268ec0": {
+  "summary": "Returns true if the criteria has no specific-card filter or the raw card's ID is in that list.",
+  "renames": {
+   "uVar3": "idMatches",
+   "bVar5": "passes"
+  }
+ }
+}

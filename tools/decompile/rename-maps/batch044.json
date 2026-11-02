@@ -1,0 +1,238 @@
+{
+ "329144c": {
+  "summary": "Resolves an end-turn action: auto-attacks pending berserkers, finishes the action, handles hero death and match end, broadcasts turn end, and starts the next turn.",
+  "renames": {
+   "auStack_160": "actionCopy",
+   "auVar20": "resolvingFlagValue",
+   "auVar21": "duringBattleFlagValue",
+   "auVar21_part8": "duringBattleInitedValue",
+   "auVar21_x1": "unused1",
+   "dVar19": "matchDurationMinutes",
+   "extraout_x0": "unused2",
+   "extraout_x0_00": "unused3",
+   "iVar5_2": "playerHeroHealth",
+   "lVar11_10": "matchResultRef",
+   "lVar11_7": "eventClass",
+   "param_4": "unused4",
+   "piVar17": "interfaceMapPtr",
+   "puVar15": "actionRef",
+   "register0x00000008": "stackBase",
+   "uStack_90": "scratch1",
+   "uStack_a8": "scratch2",
+   "uStack_c0": "enemyHeroFakeActive",
+   "uStack_c8": "enemyHeroInited",
+   "uStack_d0_2": "enemyHeroHealthValue",
+   "uStack_e0": "playerHeroFakeActive",
+   "uStack_e8": "playerHeroInited",
+   "uStack_f0_2": "playerHeroHealthValue",
+   "uVar14_2": "hasNoTarget",
+   "uVar14_3": "actionTypeCopy",
+   "uVar14_4": "shouldLoseFlag",
+   "uVar14_7": "autoActionsRemaining",
+   "uVar4_2": "enemyHeroHealthDelta",
+   "unaff_x19": "thrownException",
+   "unaff_x20": "unused5",
+   "unaff_x21": "unused6",
+   "unaff_x30": "unused7"
+  }
+ },
+ "328db3c": {
+  "summary": "Finishes resolving an action: reassembles minions, checks for dead heroes and ends the battle, then updates hero abilities or the player's available actions.",
+  "renames": {
+   "abStack_44": "playerHeroDead",
+   "auStack_58": "nowTime",
+   "auVar17": "duringBattleFlagValue",
+   "auVar17_part8": "duringBattleInitedValue",
+   "auVar18": "boolFlagValue",
+   "dVar16": "matchDurationMinutes",
+   "iVar4_2": "playerHeroState",
+   "iVar4_4": "playerHeroHealth",
+   "lVar15_5": "eventClass",
+   "lVar15_8": "matchResultRef",
+   "lVar6_2": "cardUiRef",
+   "piVar14": "interfaceMapPtr",
+   "uStack_70": "scratchC",
+   "uStack_78": "scratchB",
+   "uStack_80": "scratchA",
+   "uStack_90": "scratchD",
+   "uStack_a8": "scratchE",
+   "uStack_c0": "enemyHeroFakeActive",
+   "uStack_c8": "enemyHeroInited",
+   "uStack_d0_2": "enemyHeroHealthValue",
+   "uStack_e0": "playerHeroFakeActive",
+   "uStack_e8": "playerHeroInited",
+   "uStack_f0_2": "playerHeroHealthValue",
+   "uVar10": "flagValue",
+   "uVar3_2": "enemyHeroHealthDelta"
+  }
+ },
+ "3297658": {
+  "summary": "Dissolves a hero card at battle start and clears its trait frame effects and quest frame.",
+  "renames": {
+   "auVar8": "hasActiveQuestFrame",
+   "auVar8_x1": "unused1",
+   "lVar3": "displayClass",
+   "puStack_78": "savedEnumeratorPtr",
+   "puStack_90": "enumeratorPtr",
+   "uStack_70": "enumeratorCurrent",
+   "uStack_80": "enumeratorCopy",
+   "uStack_88": "savedCurrent",
+   "uVar1": "currentTrait",
+   "uVar6": "flag"
+  }
+ },
+ "328b04c": {
+  "summary": "Checks whether the player's attempted action is allowed by the current scripted tutorial turn.",
+  "renames": {
+   "iVar2": "turnNumber",
+   "uStack_70": "turnFakeActive",
+   "uStack_78": "turnInited",
+   "uStack_80": "turnCopy"
+  }
+ },
+ "3297534": {
+  "summary": "Continues a scripted player turn in the tutorial by stopping the pointer, advancing the AI script and starting the scripted turn coroutine.",
+  "renames": {
+   "auVar5": "thrownResult",
+   "auVar5_x1": "unused1",
+   "register0x00000008": "stackBase",
+   "unaff_x19": "exceptionObj",
+   "unaff_x20": "savedThis",
+   "unaff_x21": "unused2",
+   "unaff_x30": "unused3"
+  }
+ },
+ "32968ec": {
+  "summary": "At end of turn in campaign, triggers the stage's turn-end enchantment card abilities on the hero.",
+  "renames": {
+   "plVar4": "enchantmentSlotPtr",
+   "this_00": "enchantmentCard"
+  }
+ },
+ "329779c": {
+  "summary": "Logs and clears the waitingForTutorialTipFlag.",
+  "renames": {
+   "auStack_14": "falseValue"
+  }
+ },
+ "32977a4": {
+  "summary": "Returns false if a tutorial stage hides the cards-left-in-deck display, otherwise true.",
+  "renames": {
+   "uVar3": "hasTutorialStage"
+  }
+ },
+ "32978cc": {
+  "summary": "Returns false if a tutorial stage hides the cemetery, otherwise true.",
+  "renames": {
+   "uVar3": "hasTutorialStage"
+  }
+ },
+ "32979f4": {
+  "summary": "Returns false if a tutorial stage hides the large card display, otherwise true.",
+  "renames": {
+   "uVar3": "hasTutorialStage"
+  }
+ },
+ "3297b1c": {
+  "summary": "Returns false if a tutorial stage hides the chat, otherwise true.",
+  "renames": {
+   "uVar3": "hasTutorialStage"
+  }
+ },
+ "328c5f0": {
+  "summary": "Returns whether a scripted tutorial or campaign stage has scripted data for the current turn.",
+  "renames": {
+   "iVar2": "turnNumber",
+   "uStack_70": "firstTurnFakeActive",
+   "uStack_68": "firstTurnInited",
+   "uStack_60": "firstTurnCopy",
+   "uStack_90": "secondTurnFakeActive",
+   "uStack_88": "secondTurnInited",
+   "uStack_80": "secondTurnCopy",
+   "uVar4": "hasCampaignStage"
+  }
+ },
+ "3297c44": {
+  "summary": "Returns whether the tutorial stage has scripted turn data covering the current turn.",
+  "renames": {
+   "iVar2": "turnNumber",
+   "uStack_70": "firstTurnFakeActive",
+   "uStack_68": "firstTurnInited",
+   "uStack_60": "firstTurnCopy",
+   "uStack_90": "secondTurnFakeActive",
+   "uStack_88": "secondTurnInited",
+   "uStack_80": "secondTurnCopy",
+   "uVar4": "hasTutorialStage"
+  }
+ },
+ "3297e80": {
+  "summary": "Returns whether the campaign stage has scripted turn data covering the current turn.",
+  "renames": {
+   "auVar5_x1": "unused1",
+   "iVar2": "turnNumber",
+   "uStack_70": "firstTurnFakeActive",
+   "uStack_68": "firstTurnInited",
+   "uStack_60": "firstTurnCopy",
+   "uStack_90": "secondTurnFakeActive",
+   "uStack_88": "secondTurnInited",
+   "uStack_80": "secondTurnCopy",
+   "uVar4": "hasCampaignStage"
+  }
+ },
+ "32823d0": {
+  "summary": "Returns the scripted turn data for the current turn from the tutorial or campaign stage, or null if none.",
+  "renames": {
+   "auVar5_x1": "unused1",
+   "iVar2": "turnNumber",
+   "uStack_80": "firstTurnFakeActive",
+   "uStack_78": "firstTurnInited",
+   "uStack_70": "firstTurnCopy",
+   "uStack_a0": "secondTurnFakeActive",
+   "uStack_98": "secondTurnInited",
+   "uStack_90": "secondTurnCopy",
+   "uStack_c0": "thirdTurnFakeActive",
+   "uStack_b8": "thirdTurnInited",
+   "uStack_b0": "thirdTurnCopy",
+   "uStack_e0": "fourthTurnFakeActive",
+   "uStack_d8": "fourthTurnInited",
+   "uStack_d0": "fourthTurnCopy"
+  }
+ },
+ "32980b8": {
+  "summary": "Returns whether the current tutorial stage has scripted pre-mulligan actions.",
+  "renames": {
+   "auVar5_x1": "unused1",
+   "bVar1": "hasActions",
+   "uVar3": "hasTutorialStage"
+  }
+ },
+ "3298140": {
+  "summary": "Returns whether the given tutorial stage has scripted pre-mulligan actions.",
+  "renames": {
+   "bVar1": "hasActions"
+  }
+ },
+ "328a05c": {
+  "summary": "Returns whether the current tutorial stage has scripted post-battle actions for victory or defeat.",
+  "renames": {
+   "bVar1": "hasActions",
+   "lVar4": "scriptedActionsRef",
+   "plVar5": "scriptedActionsSlot",
+   "uVar3": "hasTutorialStage"
+  }
+ },
+ "32981b4": {
+  "summary": "Returns whether the tutorial stage has scripted actions for the victory or defeat battle end.",
+  "renames": {
+   "bVar1": "hasActions",
+   "lVar2": "scriptedActionsRef",
+   "plVar3": "scriptedActionsSlot"
+  }
+ },
+ "3298154": {
+  "summary": "Returns whether the turn data is a scripted turn with at least one scripted action.",
+  "renames": {
+   "bVar1": "hasActions"
+  }
+ }
+}

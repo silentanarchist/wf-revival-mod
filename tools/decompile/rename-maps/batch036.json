@@ -1,0 +1,342 @@
+{
+ "328bccc": {
+  "summary": "Shows a random 'bored' hurry-up voice line chat bubble for the player if chat and voice lines are allowed.",
+  "renames": {
+   "unaff_x19": "thrownException",
+   "unaff_x20": "unused1",
+   "auVar7_x1": "showChatCoroutine",
+   "unaff_x30": "unused2",
+   "unaff_x21": "unused3"
+  }
+ },
+ "328bd00": {
+  "summary": "Handles the chat button click: toggles the voice-line popup during battle, or logs a message if chat is unavailable.",
+  "renames": {
+   "uVar3": "devToolsEnabled",
+   "uVar4": "uiStateText",
+   "uStack_30": "unused1",
+   "uVar1": "devToolsRaw",
+   "puVar7": "loggerMethod"
+  }
+ },
+ "328bdf8": {
+  "summary": "Queues one more replay action and starts the AddNextReplayAction coroutine if none is already pending.",
+  "renames": {
+   "uVar1": "queueCountText",
+   "pcStack_60": "methodNameSpan",
+   "pcStack_40": "emptySpan",
+   "uStack_58": "methodNameSpanExtra",
+   "uStack_38": "emptySpanExtra"
+  }
+ },
+ "328bf34": {
+  "summary": "Starts auto-replay by clearing the pause flag and starting the ReplayPlayAction coroutine.",
+  "renames": {
+   "pcStack_60": "methodNameSpan",
+   "pcStack_40": "emptySpan",
+   "uStack_58": "methodNameSpanExtra",
+   "uStack_38": "emptySpanExtra"
+  }
+ },
+ "328bfac": {
+  "summary": "Pauses auto-replay by setting the flag, clearing the queued actions and stopping the ReplayPlayAction coroutine.",
+  "renames": {
+   "uStack_50": "methodNameSpan",
+   "uStack_48": "methodNameSpanExtra"
+  }
+ },
+ "328c02c": {
+  "summary": "Restarts the replay by copying match data in PlayerDataManager and reloading the active scene.",
+  "renames": {
+   "lVar2": "playerDataStatics",
+   "lVar3": "matchDataPtr",
+   "iVar1": "classInitFlag"
+  }
+ },
+ "328c138": {
+  "summary": "Speeds up time scale and queues a single next-step replay action, starting the AddNextReplayAction coroutine if idle.",
+  "renames": {
+   "uVar1": "queueCountText",
+   "lStack_30": "savedMethodName",
+   "uStack_28": "savedException",
+   "pcStack_60": "methodNameSpan",
+   "pcStack_40": "emptySpan",
+   "uStack_58": "methodNameSpanExtra",
+   "uStack_38": "emptySpanExtra"
+  }
+ },
+ "328c1d0": {
+  "summary": "Logs and executes the next recorded replay action from the list at the given index, creating a remote action for it.",
+  "renames": {
+   "piVar4": "boxedIndex",
+   "abStack_34": "isPlayerFlag"
+  }
+ },
+ "328c438": {
+  "summary": "Handles the player resigning: informs the opponent in PvP, adds a resign action and ends the battle unless tutorial rules prevent it.",
+  "renames": {
+   "auStack_14": "isNetworkedFlag",
+   "auVar4_x1": "unused1",
+   "extraout_x1": "unused2"
+  }
+ },
+ "328c618": {
+  "summary": "Debug cheat that ends a non-networked battle immediately as a win button result, building the match result and saving it.",
+  "renames": {
+   "uVar4": "flagOrCount",
+   "uVar5": "cheaterMessage",
+   "uStack_e8": "playerHealthCopyB",
+   "uStack_e0": "playerHealthCopyC",
+   "uStack_c8": "enemyHealthCopyB",
+   "uStack_c0": "enemyHealthCopyC",
+   "uStack_80": "battleResultType",
+   "uStack_78": "typeScratch1",
+   "uStack_70": "typeScratch2",
+   "uStack_d0_2": "enemyHealthCopyA",
+   "uVar2_2": "enemyHealthObscured",
+   "uStack_f0_2": "playerHealthCopyA",
+   "iVar3_2": "playerHealthObscured",
+   "uStack_90": "uiStateTypeScratch",
+   "uStack_a8": "battleStageTypeScratch",
+   "auStack_58": "nowBuffer",
+   "abStack_44": "isPlayerFlag",
+   "auVar15_x1": "unused1",
+   "auVar15_2": "falseFlag",
+   "auVar15_part8": "falseFlagPart",
+   "lVar10_3": "eventObject",
+   "piVar11": "interfaceMapCursor",
+   "lVar10_6": "matchResultPtr",
+   "dVar14": "elapsedMinutes"
+  }
+ },
+ "328c6a4": {
+  "summary": "Debug cheat that ends a non-networked battle immediately as a draw button result, building the match result and saving it.",
+  "renames": {
+   "uVar4": "flagOrCount",
+   "uVar5": "cheaterMessage",
+   "uStack_e8": "playerHealthCopyB",
+   "uStack_e0": "playerHealthCopyC",
+   "uStack_c8": "enemyHealthCopyB",
+   "uStack_c0": "enemyHealthCopyC",
+   "uStack_80": "battleResultType",
+   "uStack_78": "typeScratch1",
+   "uStack_70": "typeScratch2",
+   "uStack_d0_2": "enemyHealthCopyA",
+   "uVar2_2": "enemyHealthObscured",
+   "uStack_f0_2": "playerHealthCopyA",
+   "iVar3_2": "playerHealthObscured",
+   "uStack_90": "uiStateTypeScratch",
+   "uStack_a8": "battleStageTypeScratch",
+   "auStack_58": "nowBuffer",
+   "abStack_44": "isPlayerFlag",
+   "auVar15_x1": "unused1",
+   "auVar15_2": "falseFlag",
+   "auVar15_part8": "falseFlagPart",
+   "lVar10_3": "eventObject",
+   "piVar11": "interfaceMapCursor",
+   "lVar10_6": "matchResultPtr",
+   "dVar14": "elapsedMinutes"
+  }
+ },
+ "328c718": {
+  "summary": "Skips a tutorial battle by running the dead-hero battle end logic as a win; logs an error for other match types.",
+  "renames": {
+   "uVar6": "flagOrCount",
+   "uStack_e8": "playerHealthCopyB",
+   "uStack_e0": "playerHealthCopyC",
+   "uStack_c8": "enemyHealthCopyB",
+   "uStack_c0": "enemyHealthCopyC",
+   "uStack_80": "battleResultType",
+   "uStack_78": "typeScratch1",
+   "uStack_70": "typeScratch2",
+   "uStack_d0_2": "enemyHealthCopyA",
+   "uVar2_2": "enemyHealthObscured",
+   "uStack_f0_2": "playerHealthCopyA",
+   "iVar3_2": "playerHealthObscured",
+   "uStack_90": "uiStateTypeScratch",
+   "uStack_a8": "battleStageTypeScratch",
+   "auStack_58": "nowBuffer",
+   "abStack_44": "isPlayerFlag",
+   "auVar14_x1": "unused1",
+   "auVar14_2": "falseFlag",
+   "auVar14_part8": "falseFlagPart",
+   "lVar4_3": "eventObject",
+   "piVar11": "interfaceMapCursor",
+   "lVar4_6": "matchResultPtr",
+   "dVar13": "elapsedMinutes"
+  }
+ },
+ "328c7ec": {
+  "summary": "Broadcasts the 'ChangedLanguage' message to the parent transform's hierarchy.",
+  "renames": {
+   "uStack_60": "messageSpan",
+   "uStack_40": "emptySpan",
+   "uStack_58": "messageSpanExtra",
+   "uStack_38": "emptySpanExtra"
+  }
+ },
+ "328c854": {
+  "summary": "Validates chat text and speaker card, then loads the speaker's full hero sprite addressable for a big chat display.",
+  "renames": {
+   "uVar11": "logMessage",
+   "lStack_50": "handleCopyA",
+   "lStack_48": "handleCopyB",
+   "lStack_40": "handleCopyC",
+   "uVar1": "devToolsRaw",
+   "uVar3_2": "devToolsEnabled",
+   "puVar7": "loggerMethod",
+   "uStack_70": "loadHandleA",
+   "uStack_68": "loadHandleB",
+   "uStack_60": "loadHandleC",
+   "uStack_88": "loadResultA",
+   "uStack_80": "loadResultB",
+   "uStack_78": "loadResultC"
+  }
+ },
+ "328c930": {
+  "summary": "Validates chat text and sprite for a big chat display, logging a warning (dev tools) when either is missing.",
+  "renames": {
+   "uVar2": "logMessage",
+   "puVar4": "loggerMethod",
+   "uVar1": "devToolsRaw",
+   "uVar3_2": "devToolsEnabled"
+  }
+ },
+ "3284c1c": {
+  "summary": "Adds a battle action to the queue matching its priority (normal, instant, interrupt, delayed), logging player actions.",
+  "renames": {
+   "lVar5": "actionCopy",
+   "auStack_338": "logActionBuffer",
+   "iStack_234": "priorityCopy",
+   "auStack_130": "resizeActionBuffer",
+   "auStack_230": "actionBuffer",
+   "lVar2": "addMethodInfo"
+  }
+ },
+ "328ca94": {
+  "summary": "Dispatches a battle action to its type-specific resolver, handles simple actions inline, and finalizes the action, battle end and turn state.",
+  "renames": {
+   "uVar12": "actionTypeScratch",
+   "puVar14": "mobActionBuffer",
+   "unaff_x19": "thrownException",
+   "unaff_x20": "unused1",
+   "auVar22": "obscuredFalse",
+   "auVar23": "obscuredResult",
+   "uStack_e8": "playerHealthCopyB",
+   "iStack_e0": "playerHealthCopyC",
+   "uStack_c8": "enemyHealthCopyB",
+   "iStack_c0": "enemyHealthCopyC",
+   "abStack_44": "isPlayerFlag",
+   "uVar9_2": "isNoAttackType",
+   "uStack_50": "actionTypeTypeScratch",
+   "extraout_x0_01": "unused2",
+   "extraout_x0_02": "unused3",
+   "param_4": "unused4",
+   "extraout_x0_05": "unused5",
+   "extraout_x0_04": "unused6",
+   "uVar9_4": "hasCardArg",
+   "param_6": "unused7",
+   "uStack_90": "uiStateTypeScratch",
+   "uStack_a8": "battleStageTypeScratch",
+   "uVar9_7": "flagOrCount",
+   "extraout_x0": "unused8",
+   "auVar22_part8": "obscuredFalsePart",
+   "uStack_d0_2": "enemyHealthCopyA",
+   "uVar3_2": "enemyHealthObscured",
+   "lVar13_10": "eventObject",
+   "piVar19": "interfaceMapCursor",
+   "uStack_f0_2": "playerHealthCopyA",
+   "iVar4_2": "playerHealthObscured",
+   "iVar4_3": "enemySkullCount",
+   "lVar13_13": "matchResultPtr",
+   "dVar21": "elapsedMinutes",
+   "extraout_x0_00": "unused9",
+   "uVar12_2": "isPlayerTurnFlag",
+   "uVar12_3": "actionsLeftResult",
+   "uVar12_4": "scriptedStageAvailable",
+   "unaff_x30": "unused10",
+   "auVar22_x1": "unused11",
+   "unaff_x21": "unused12",
+   "auStack_3f58": "actionCopy3f58",
+   "auStack_1b58": "actionCopy1b58",
+   "auStack_2d58": "actionCopy2d58",
+   "auStack_2758": "actionCopy2758",
+   "auStack_2658": "actionCopy2658",
+   "auStack_2358": "actionCopy2358",
+   "auStack_1658": "actionCopy1658",
+   "auStack_1f58": "actionCopy1f58",
+   "auStack_558": "actionCopy558",
+   "auStack_1258": "actionCopy1258",
+   "auStack_458": "actionCopy458",
+   "auStack_158": "actionCopy158",
+   "auStack_2458": "actionCopy2458",
+   "auStack_3658": "actionCopy3658",
+   "auStack_2858": "actionCopy2858",
+   "auStack_1958": "actionCopy1958",
+   "auStack_2058": "actionCopy2058",
+   "auStack_3958": "actionCopy3958",
+   "auStack_2b58": "actionCopy2b58",
+   "auStack_1858": "actionCopy1858",
+   "auStack_a58": "actionCopya58",
+   "auStack_3b58": "actionCopy3b58",
+   "auStack_3258": "actionCopy3258",
+   "auStack_1558": "actionCopy1558",
+   "auStack_c58": "actionCopyc58",
+   "auStack_2c58": "actionCopy2c58",
+   "auStack_758": "actionCopy758",
+   "auStack_2f58": "actionCopy2f58",
+   "auStack_d58": "actionCopyd58",
+   "auStack_1c58": "actionCopy1c58",
+   "auStack_3358": "actionCopy3358",
+   "auStack_2958": "actionCopy2958",
+   "auStack_3e58": "actionCopy3e58",
+   "auStack_3458": "actionCopy3458",
+   "auStack_3058": "actionCopy3058",
+   "auStack_1758": "actionCopy1758",
+   "auStack_2558": "actionCopy2558",
+   "auStack_3d58": "actionCopy3d58",
+   "auStack_2e58": "actionCopy2e58",
+   "auStack_3c58": "actionCopy3c58",
+   "auStack_3a58": "actionCopy3a58",
+   "auStack_1e58": "actionCopy1e58",
+   "auStack_1a58": "actionCopy1a58",
+   "auStack_b58": "actionCopyb58",
+   "auStack_858": "actionCopy858",
+   "auStack_1158": "actionCopy1158",
+   "auStack_658": "actionCopy658",
+   "auStack_2258": "actionCopy2258",
+   "auStack_3858": "actionCopy3858",
+   "auStack_3558": "actionCopy3558",
+   "auStack_1358": "actionCopy1358",
+   "auStack_4258": "actionCopy4258",
+   "auStack_2158": "actionCopy2158",
+   "auStack_358": "actionCopy358",
+   "auStack_4058": "actionCopy4058",
+   "auStack_1058": "actionCopy1058",
+   "auStack_f58": "actionCopyf58",
+   "auStack_258": "actionCopy258",
+   "auStack_3758": "actionCopy3758",
+   "auStack_1458": "actionCopy1458",
+   "auStack_2a58": "actionCopy2a58",
+   "auStack_e58": "actionCopye58",
+   "auStack_3158": "actionCopy3158",
+   "auStack_1d58": "actionCopy1d58",
+   "auStack_958": "actionCopy958",
+   "auStack_4358": "actionCopy4358",
+   "auStack_4158": "actionCopy4158"
+  }
+ },
+ "32918a4": {
+  "summary": "Returns the top card of the player or enemy shuffled deck, activating the target or next card for drawing.",
+  "renames": {
+   "iVar1": "targetIndex",
+   "uVar3": "checkResult"
+  }
+ },
+ "3291a84": {
+  "summary": "Removes the given drawn card from the player or enemy shuffled deck if present.",
+  "renames": {
+   "lVar2": "shuffledDeck"
+  }
+ }
+}

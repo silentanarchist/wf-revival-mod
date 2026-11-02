@@ -1,0 +1,482 @@
+{
+ "32ad5e8": {
+  "summary": "Sets the race text on the card's race labels, with decompiler-mangled trailing code from adjacent CardTextsController methods.",
+  "renames": {
+   "ppcVar2": "stackFramePtr",
+   "plVar4": "textComponent",
+   "auVar15": "castCheckResult",
+   "pcStack_60": "savedFuncPtr",
+   "puVar12": "stackSlotPtr",
+   "auVar15_x1": "textValue",
+   "auVar16": "castCheckResult2",
+   "auVar16_x1": "textValue2",
+   "apcStack_90": "stackFuncSlots",
+   "uVar9": "carriedTextValue",
+   "auStack_70": "savedStack",
+   "in_w3": "stateArg3",
+   "in_w4": "stateArg4",
+   "uVar10_2": "textArray",
+   "uVar1": "stateCount",
+   "pcVar14": "nextFuncPtr",
+   "auStack_30": "scratchStack",
+   "lStack_80": "savedItemLoreKey",
+   "lStack_78": "savedRawCardData"
+  }
+ },
+ "32adc58": {
+  "summary": "Logs a language change, refreshes card texts, and switches an in-hand card's name/description display state to match the text format setting.",
+  "renames": {
+   "bVar1": "layoutFlag",
+   "lVar2_2": "controllerCopy",
+   "auVar9": "castCheckResult",
+   "auVar9_x1": "textValue",
+   "unaff_x30": "unused1",
+   "unaff_x19": "unused2",
+   "unaff_x20": "unused3"
+  }
+ },
+ "32add00": {
+  "summary": "Returns the sorting order of the card's canvas.",
+  "renames": {
+   "iVar1": "sortingOrder"
+  }
+ },
+ "32ade70": {
+  "summary": "Shows or hides card visuals, body, highlight, trait icons and created-by text depending on the new card state.",
+  "renames": {
+   "bVar1": "isHighState",
+   "uVar2": "stateMask",
+   "bVar3": "bodyFlag"
+  }
+ },
+ "32ae428": {
+  "summary": "Toggles all board trait icons, then (via merged code) cleans up status animation frames and quest frames.",
+  "renames": {
+   "pcStack_90": "savedFunc",
+   "uStack_b0": "enumeratorCopy",
+   "puStack_a8": "prevFramePtr",
+   "uStack_a0": "currentTrait",
+   "uVar6": "hasNext",
+   "uVar2": "currentKey",
+   "extraout_w1": "clearAllArg",
+   "puStack_c0": "framePtr",
+   "uStack_b8": "enumeratorState",
+   "auVar9": "hasQuestFrame",
+   "auVar9_x1": "unused1",
+   "iVar3": "questCount"
+  }
+ },
+ "32aed34": {
+  "summary": "Shows the card's description with available-target text appended and updates the card text state.",
+  "renames": {
+   "unaff_x20": "textComponent",
+   "unaff_x20_2": "unused1",
+   "unaff_x19": "unused2",
+   "unaff_x30": "unused3",
+   "pcVar17": "nextFuncPtr",
+   "auVar2_x1": "concatCopy",
+   "auVar18_x1": "concatText",
+   "bVar3": "condition",
+   "uVar13": "stateFlag",
+   "uVar11": "italicTag",
+   "iVar12": "stateFlagInt",
+   "apcStackY_60": "stackFuncSlots",
+   "lStackY_50": "savedCardImage",
+   "lStackY_48": "savedParentEntity"
+  }
+ },
+ "32ad68c": {
+  "summary": "Sets the 2D card to front view and toggles the 3D body and 2D object visibility.",
+  "renames": {
+   "uVar3": "hasBody3D",
+   "bVar1": "hide"
+  }
+ },
+ "32ad780": {
+  "summary": "Applies the card art texture and mat-cap texture to the 3D minion renderer's material.",
+  "renames": {
+   "uVar5": "hasCardSprite"
+  }
+ },
+ "32af194": {
+  "summary": "Switches a card to or from remnant form, toggling the remnant body and hiding lights, anims and counters.",
+  "renames": {
+   "auVar5": "hasRemnantBody"
+  }
+ },
+ "32adfc8": {
+  "summary": "Toggles the 3D body and the effects anchor (hidden for ambush cards).",
+  "renames": {
+   "auStack_24": "nullableBoolStack"
+  }
+ },
+ "32af2e0": {
+  "summary": "Creates and returns the DestroyCard coroutine state machine.",
+  "renames": {
+   "lVar1": "stateMachine"
+  }
+ },
+ "32af388": {
+  "summary": "Plays trigger-type trait effect animations for a trait on the card and returns whether any was started.",
+  "renames": {
+   "lVar3": "closure",
+   "lVar8_3": "innerClosure",
+   "bVar12": "anyPlayed",
+   "plVar11": "traitEffectPtr",
+   "plVar10": "innerClosurePtr"
+  }
+ },
+ "32af730": {
+  "summary": "Plays or updates the status animation and frame effects for a trait, and toggles flying for flying/vanguard.",
+  "renames": {
+   "lVar3": "closure",
+   "puVar10": "zeroVectorPtr",
+   "uStack_80": "enumeratorCopy",
+   "puStack_78": "prevFramePtr",
+   "lStack_70": "currentEffect",
+   "uStack_a0": "enumeratorCopy2",
+   "puStack_98": "prevFramePtr2",
+   "lStack_90": "currentEffect2",
+   "puStack_c0": "framePtr",
+   "lStack_c8": "pendingException",
+   "puStack_b0": "framePtr2",
+   "lStack_a8": "enumeratorState",
+   "auVar13": "exceptionInfo",
+   "auVar13_part8": "exceptionSelector",
+   "lVar12_4": "caughtException"
+  }
+ },
+ "32b000c": {
+  "summary": "Sets the flying controller state to flying, landed or in transition based on the option, with merged inlined controller code.",
+  "renames": {
+   "plVar1": "controllerFieldPtr",
+   "uVar5": "hasController",
+   "lVar6_3": "controller",
+   "fVar12": "transitionTime",
+   "puVar3": "stackPtr",
+   "unaff_d8": "unused1",
+   "unaff_x30": "unused2",
+   "unaff_x21": "unused3",
+   "unaff_x20": "unused4",
+   "unaff_x19": "unusedException",
+   "iVar2": "currentState",
+   "in_s1": "positionY",
+   "in_s2": "positionZ",
+   "uVar8": "unusedA",
+   "uVar7": "unusedB"
+  }
+ },
+ "32b00d0": {
+  "summary": "Updates the bastion text on the card, showing the current bastion value or hiding it when zero.",
+  "renames": {
+   "uVar2": "hasNoBastionText"
+  }
+ },
+ "32b01f4": {
+  "summary": "Removes summon sickness visuals: shows can-attack anim and fades in the minion light.",
+  "renames": {
+   "fVar6": "easeValue",
+   "uVar3_2": "canActFlag",
+   "uVar3_4": "canUseAbilityFlag",
+   "uVar1": "setEaseMethod"
+  }
+ },
+ "32b02c0": {
+  "summary": "Destroys the can-ability animation object and clears the reference.",
+  "renames": {
+   "puVar1": "canAbilityAnimFieldPtr"
+  }
+ },
+ "32b0330": {
+  "summary": "Creates and returns the SetVanguardStealth coroutine state machine.",
+  "renames": {
+   "lVar1": "stateMachine"
+  }
+ },
+ "32b03e4": {
+  "summary": "Removes status frame effects for a trait, plays exit trait effects, and updates flying state for flying/vanguard.",
+  "renames": {
+   "uStack_70": "enumeratorCopy",
+   "puStack_68": "prevFramePtr",
+   "lStack_60": "currentEffect",
+   "puStack_80": "framePtr",
+   "lStack_78": "enumeratorState"
+  }
+ },
+ "32ae498": {
+  "summary": "Destroys trait frame effects and the quest frame for the card, optionally clearing all, and stops showing the codex.",
+  "renames": {
+   "uStack_80": "enumeratorCopy",
+   "puStack_78": "prevFramePtr",
+   "uStack_70": "currentTrait",
+   "lVar3": "closure",
+   "uVar6": "hasNext",
+   "auVar7": "hasActiveQuestFrame",
+   "auVar7_x1": "unused1",
+   "puStack_90": "framePtr",
+   "uStack_88": "enumeratorState",
+   "uVar1": "currentKey"
+  }
+ },
+ "32b09d8": {
+  "summary": "Spawns the summon sickness frame effect over the card if not already present.",
+  "renames": {
+   "uVar1": "hasFrame",
+   "puVar5": "identityQuatPtr",
+   "uVar10": "quatY",
+   "uVar11": "quatZ",
+   "uVar12": "quatW",
+   "in_s1": "positionY",
+   "in_s2": "positionZ"
+  }
+ },
+ "32b0c0c": {
+  "summary": "Destroys the summon sickness frame object if present.",
+  "renames": {
+   "uVar1": "hasFrame"
+  }
+ },
+ "32b0c9c": {
+  "summary": "Resets a teleported card: re-enables parent, resets alpha on children, and spawns the codex effect object.",
+  "renames": {
+   "puVar6": "zeroVectorPtr",
+   "uVar10": "zeroVecY",
+   "uVar11": "zeroVecZ",
+   "lVar2_4": "childComponents",
+   "uVar5": "hasEffect",
+   "puVar6_2": "zeroVectorPtr2",
+   "uVar13": "zeroVecY2",
+   "uVar14": "zeroVecZ2",
+   "lVar3_3": "childItem"
+  }
+ },
+ "32b0df4": {
+  "summary": "Instantiates the codex trait frame effect and parents it to the 2D card controller.",
+  "renames": {
+   "uVar2": "hasValue",
+   "puVar5": "identityQuatPtr",
+   "lVar6": "oneVectorPtr",
+   "uVar10": "quatY",
+   "uVar11": "quatZ",
+   "uVar12": "quatW",
+   "in_s1": "positionY",
+   "in_s2": "positionZ"
+  }
+ },
+ "32b10e0": {
+  "summary": "Instantiates the oath trait frame effect and parents it to the 2D card controller.",
+  "renames": {
+   "uVar3": "hasValue",
+   "lVar5": "oneVectorPtr",
+   "puVar6": "identityQuatPtr",
+   "uVar10": "quatY",
+   "uVar11": "quatZ",
+   "uVar12": "quatW",
+   "in_s1": "positionY",
+   "in_s2": "positionZ"
+  }
+ },
+ "32b0948": {
+  "summary": "Destroys the codex frame object if present.",
+  "renames": {
+   "uVar1": "hasFrame"
+  }
+ },
+ "32b12c0": {
+  "summary": "Destroys the oath frame object if present.",
+  "renames": {
+   "uVar1": "hasFrame"
+  }
+ },
+ "32b1350": {
+  "summary": "Instantiates the ephemeral (reflected) frame effect and parents it to the 2D card controller.",
+  "renames": {
+   "uVar2": "flag",
+   "lVar3": "oneVectorPtr",
+   "puVar5": "identityQuatPtr",
+   "uVar9": "quatY",
+   "uVar10": "quatZ",
+   "uVar11": "quatW",
+   "in_s1": "positionY",
+   "in_s2": "positionZ"
+  }
+ },
+ "32b1520": {
+  "summary": "Destroys the reflected frame object if present.",
+  "renames": {
+   "uVar1": "hasFrame"
+  }
+ },
+ "32b15b0": {
+  "summary": "Spawns the stealth frame effect and starts the vanguard stealth coroutine.",
+  "renames": {
+   "puVar4": "identityQuatPtr",
+   "unaff_x19": "exception",
+   "unaff_x20": "savedSelf",
+   "uVar8": "quatY",
+   "uVar9": "quatZ",
+   "uVar10": "quatW",
+   "in_s1": "positionY",
+   "in_s2": "positionZ",
+   "unaff_x30": "unused1",
+   "unaff_x21": "unused2",
+   "auVar11": "throwResult",
+   "auVar11_x1": "coroutineResult"
+  }
+ },
+ "32b17a0": {
+  "summary": "Destroys the stealth frame and starts the vanguard stealth-off coroutine.",
+  "renames": {
+   "unaff_x19": "exception",
+   "unaff_x20": "savedSelf",
+   "unaff_x30": "unused1",
+   "unaff_x21": "unused2",
+   "auVar5": "throwResult",
+   "auVar5_x1": "coroutineResult"
+  }
+ },
+ "32ae120": {
+  "summary": "Updates the board trait icons for a unit card, setting icons and counters for each in-play trait; merged with neighbouring methods.",
+  "renames": {
+   "lVar5": "closure",
+   "uVar9": "hasNext",
+   "auVar15": "castCheckResult",
+   "auVar15_x1": "toggleArg",
+   "uStack_110": "enumeratorCopy",
+   "plStack_b8": "savedDelegate",
+   "lStack_b0": "savedClosure",
+   "lStack_a8": "savedIcon",
+   "lStack_a0": "savedList",
+   "uStack_98": "savedTraitValue",
+   "uStack_80": "savedTraitValue2",
+   "plStack_78": "savedIcons",
+   "lStack_70": "savedClosure2",
+   "lStack_68": "savedSelf",
+   "unaff_x26": "unusedMethod1",
+   "unaff_x27": "unusedMethod2",
+   "unaff_x28": "unusedMethod3",
+   "uVar12_3": "traitValue",
+   "lVar10_5": "iconArray",
+   "bVar2": "iconFlag",
+   "pcStack_90": "savedFunc",
+   "pcStack_f0": "savedFunc2",
+   "lVar5_2": "closure2",
+   "puStack_108": "prevFramePtr",
+   "uStack_100": "currentTrait",
+   "puStack_120": "framePtr",
+   "uStack_118": "enumeratorState",
+   "extraout_w1": "clearAllArg",
+   "iVar4": "iconIndex"
+  }
+ },
+ "32b18f8": {
+  "summary": "Finds the board trait icon for a trait and plays a scale-punch tween on it (with merged fade code).",
+  "renames": {
+   "plVar4": "tweenFieldPtr",
+   "in_s1": "fadeDuration"
+  }
+ },
+ "32b19e0": {
+  "summary": "Fades all trait icons to a target alpha over a time, with merged blood-thirst flash code.",
+  "renames": {
+   "fVar7": "easeValue"
+  }
+ },
+ "32b1a58": {
+  "summary": "Makes the blood thirst frame sprite flash with a yoyo fade tween.",
+  "renames": {
+   "fVar5": "easeValue"
+  }
+ },
+ "32b1b7c": {
+  "summary": "Shows or removes the mulligan-selected frame and plays the toggle sound cue.",
+  "renames": {
+   "puVar7": "zeroVectorPtr",
+   "puVar8": "identityQuatPtr",
+   "uVar2": "hasAudioSource",
+   "uVar14": "zeroVecZ",
+   "uVar16": "quatY",
+   "uVar17": "quatZ",
+   "uVar18": "quatW",
+   "auVar19": "hasAudioCue",
+   "auVar19_x1": "audioClip",
+   "uStack_e0": "savedZeroVector",
+   "uStack_d8": "savedAudioSource2",
+   "uStack_d0": "savedVecZ",
+   "lVar5_3": "soundManager",
+   "lVar3_2": "soundManagerCopy",
+   "pcStack_b0": "savedFunc",
+   "pcStack_c0": "savedFunc2",
+   "puStack_a8": "savedCue",
+   "lStack_a0": "savedAudioSource",
+   "lStack_98": "savedSoundManager",
+   "lStack_78": "audioSourceRef",
+   "uStack_90": "savedFlag",
+   "uStack_88": "savedZero",
+   "uStack_c8": "savedZero2",
+   "puVar8_2": "identityQuatPtr2",
+   "uStack_f0": "scratch1",
+   "uStack_e8": "scratch2",
+   "in_s1": "positionY",
+   "in_s2": "positionZ"
+  }
+ },
+ "32b1e10": {
+  "summary": "Destroys the mulligan selected frame and button frame objects if present.",
+  "renames": {
+   "uVar1": "hasFrame"
+  }
+ },
+ "32b1f04": {
+  "summary": "Creates and returns the DelayedResetMaterial coroutine state machine.",
+  "renames": {
+   "lVar1": "stateMachine"
+  }
+ },
+ "32b1fa8": {
+  "summary": "Applies the dissolve material, plays the invoke animation forward, and starts the delayed material reset coroutine.",
+  "renames": {
+   "unaff_x19": "exception",
+   "unaff_x20": "savedSelf",
+   "unaff_x30": "unused1",
+   "unaff_x21": "unused2",
+   "auVar5": "throwResult",
+   "auVar5_x1": "coroutineResult"
+  }
+ },
+ "32b21c0": {
+  "summary": "Applies the dissolve material, plays the animation in reverse (back to hand), and starts the delayed material reset coroutine.",
+  "renames": {
+   "unaff_x19": "exception",
+   "unaff_x20": "savedSelf",
+   "unaff_x30": "unused1",
+   "unaff_x21": "unused2",
+   "auVar6": "throwResult",
+   "auVar6_x1": "coroutineResult"
+  }
+ },
+ "32b20c0": {
+  "summary": "Returns the legendary or normal dissolve material depending on whether the card uses a legendary summon effect.",
+  "renames": {
+   "lVar1": "fieldOffset"
+  }
+ },
+ "32b2308": {
+  "summary": "Shows the damage counter on the card with the damage value and plays its animation.",
+  "renames": {
+   "iStack_14": "damageCopy"
+  }
+ },
+ "32b20f8": {
+  "summary": "Sets the card's 3D renderer material (saving the original) and returns the renderer's resulting material.",
+  "renames": {
+   "lVar5_3": "marshalledPtr"
+  }
+ },
+ "32b2320": {
+  "summary": "Restores the original 3D renderer material and returns the renderer's resulting material.",
+  "renames": {
+   "lVar5_3": "marshalledPtr"
+  }
+ }
+}

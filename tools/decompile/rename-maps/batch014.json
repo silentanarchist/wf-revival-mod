@@ -1,0 +1,5 @@
+{
+"326e910": {"summary": "Fires death-related ability triggers for a dying minion (this-unit or other-unit death, unstable), then triggers extra abilities depending on how it died.", "renames": {"uVar1": "isSameCard", "method_00": "skipBacklashCopy"}},
+"326ea70": {"summary": "Picks the normal or alternative active ability based on board criteria, then plays each of its ability logics with pooled ability data.", "renames": {"plVar2": "abilitySlot", "lVar5": "abilityRef"}},
+"326eb68": {"summary": "Returns the card's alternative active ability or its normal one, depending on whether the board criteria are met.", "renames": {"bVar1": "meetsCriteria", "plVar2": "abilitySlot"}}
+}

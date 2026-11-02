@@ -1,0 +1,558 @@
+{
+ "2f81038": {
+  "summary": "Fades in the left and right tutorial arrows, enabling each according to the flags.",
+  "renames": {
+   "lVar3_3": "tweenClosure",
+   "puVar4": "closureFieldPtr",
+   "uVar2": "hasLeftArrow"
+  }
+ },
+ "2f812d0": {
+  "summary": "Skips the current tutorial tip when the player clicks after the minimum delay.",
+  "renames": {
+   "fVar8": "currentTime",
+   "puVar3": "logResult",
+   "uVar1": "logMessage",
+   "uVar2": "mouseClicked",
+   "uVar4": "logType"
+  }
+ },
+ "2f817e0": {
+  "summary": "Initializes player, opponent and radio voice line boxes and clears their text.",
+  "renames": {
+   "uVar3": "textVtableSlot"
+  }
+ },
+ "2f81804": {
+  "summary": "Initializes a voice line box, hides it and clears its chat text.",
+  "renames": {
+   "uVar3": "textVtableSlot"
+  }
+ },
+ "2f818bc": {
+  "summary": "Shows a chat box of the given type by starting its ShowChat coroutine.",
+  "renames": {
+   "auVar5": "thrownResult",
+   "auVar5_x1": "unusedArg",
+   "unaff_x19": "nullRefException",
+   "unaff_x20": "savedOwner",
+   "unaff_x21": "unused1",
+   "unaff_x30": "unused2"
+  }
+ },
+ "2f818f8": {
+  "summary": "Returns the voice line box matching the scene type, throwing for invalid types.",
+  "renames": {
+   "auVar6_x1": "unusedArg",
+   "iStack_14": "typeValue",
+   "lVar4": "stateMachine",
+   "plVar5": "boxFieldPtr",
+   "uVar3": "enumTypeName"
+  }
+ },
+ "2f81a84": {
+  "summary": "Stops audio and hides the chat box of the given type, clearing its text.",
+  "renames": {
+   "uVar4": "textVtableSlot"
+  }
+ },
+ "2f81e2c": {
+  "summary": "Coroutine step that reveals chat text one character at a time like a typewriter.",
+  "renames": {
+   "auVar7": "self",
+   "auVar7_part12": "scratch1",
+   "auVar7_part8": "nextVisibleCount",
+   "auVar7_x1": "methodInfo",
+   "bVar2": "hasMore"
+  }
+ },
+ "2f81ff8": {
+  "summary": "Coroutine Reset that always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "resetMethodInfo"
+  }
+ },
+ "2f82118": {
+  "summary": "Coroutine Reset that always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "resetMethodInfo"
+  }
+ },
+ "2f821ec": {
+  "summary": "Coroutine Reset that always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "resetMethodInfo"
+  }
+ },
+ "2f823e8": {
+  "summary": "Coroutine Reset that always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "resetMethodInfo"
+  }
+ },
+ "2f848cc": {
+  "summary": "Coroutine Reset that always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "resetMethodInfo"
+  }
+ },
+ "2f849ac": {
+  "summary": "Coroutine Reset that always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "resetMethodInfo"
+  }
+ },
+ "2f84acc": {
+  "summary": "Coroutine Reset that always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "resetMethodInfo"
+  }
+ },
+ "2f84c20": {
+  "summary": "Coroutine Reset that always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "resetMethodInfo"
+  }
+ },
+ "2f8215c": {
+  "summary": "Coroutine step that stores the voice line data, marks playing and runs the ShowChat routine.",
+  "renames": {
+   "uVar4": "nextState"
+  }
+ },
+ "2f819b8": {
+  "summary": "Creates and returns the coroutine state machine for this routine.",
+  "renames": {
+   "lVar1": "stateMachine"
+  }
+ },
+ "2f81b74": {
+  "summary": "Creates and returns the coroutine state machine for this routine.",
+  "renames": {
+   "lVar1": "stateMachine"
+  }
+ },
+ "2f81cc4": {
+  "summary": "Creates and returns the coroutine state machine for this routine.",
+  "renames": {
+   "lVar1": "stateMachine"
+  }
+ },
+ "2f81d68": {
+  "summary": "Creates and returns the coroutine state machine for this routine.",
+  "renames": {
+   "lVar1": "stateMachine"
+  }
+ },
+ "2f832e8": {
+  "summary": "Creates and returns the coroutine state machine for this routine.",
+  "renames": {
+   "lVar1": "stateMachine"
+  }
+ },
+ "2f845f4": {
+  "summary": "Creates and returns the coroutine state machine for this routine.",
+  "renames": {
+   "lVar1": "stateMachine"
+  }
+ },
+ "2f83bb4": {
+  "summary": "Creates and returns the coroutine state machine for this routine.",
+  "renames": {
+   "lVar1": "stateMachine"
+  }
+ },
+ "2f8473c": {
+  "summary": "Creates and returns the coroutine state machine for this routine.",
+  "renames": {
+   "lVar1": "stateMachine"
+  }
+ },
+ "2f81c08": {
+  "summary": "Enables the audio wave equalizer and assigns the voice line clip to the audio source.",
+  "renames": {
+   "uVar1": "hasNoClip"
+  }
+ },
+ "2f81854": {
+  "summary": "Hides the voice line box object and clears its chat text.",
+  "renames": {
+   "uVar3": "textVtableSlot"
+  }
+ },
+ "2f81a9c": {
+  "summary": "Stops the voice line audio, hides the box and clears its chat text.",
+  "renames": {
+   "uVar3": "textVtableSlot"
+  }
+ },
+ "2f847f0": {
+  "summary": "Coroutine that waits for the chat duration then displays a random AI warlord chat message.",
+  "renames": {
+   "auVar4": "self",
+   "auVar4_x1": "methodInfo"
+  }
+ },
+ "2f849f0": {
+  "summary": "Coroutine that shows a hero intro chat message and waits for the clip length.",
+  "renames": {
+   "auVar5": "self",
+   "auVar5_x1": "methodInfo",
+   "uVar3": "nextState"
+  }
+ },
+ "2f824cc": {
+  "summary": "Thread-safe event add for OnPopUpShow (decompiler merged in neighboring event code).",
+  "renames": {
+   "lVar5_2": "currentHandler",
+   "bVar1": "exchanged",
+   "auVar6_x1": "unusedValue"
+  }
+ },
+ "2f82568": {
+  "summary": "Thread-safe event remove for OnPopUpShow (decompiler merged in neighboring event code).",
+  "renames": {
+   "lVar5_2": "currentHandler",
+   "bVar1": "exchanged",
+   "auVar6_x1": "unusedValue"
+  }
+ },
+ "2f82604": {
+  "summary": "Thread-safe event add for OnPopUpHide (decompiler merged in neighboring code).",
+  "renames": {
+   "lVar5_2": "currentHandler",
+   "bVar1": "exchanged",
+   "auVar6_x1": "unusedValue"
+  }
+ },
+ "2f826a0": {
+  "summary": "Thread-safe event remove for OnPopUpHide.",
+  "renames": {
+   "bVar1": "exchanged"
+  }
+ },
+ "2f827e4": {
+  "summary": "Unsubscribes popup show, hide and voice line pressed handlers when destroyed.",
+  "renames": {
+   "bVar2": "exchanged",
+   "plVar9": "handlerFieldPtr"
+  }
+ },
+ "2f82afc": {
+  "summary": "Configures chat popup buttons with localized warlord chat messages and interactability.",
+  "renames": {
+   "puVar6": "logResult",
+   "uVar4": "hasDeckWarlord",
+   "uVar7": "logType"
+  }
+ },
+ "2f82db8": {
+  "summary": "Shows the local player chat message in the player voice line box.",
+  "renames": {
+   "auVar7_x1": "coroutineHandle",
+   "unaff_x19": "nullRefException",
+   "unaff_x20": "savedPanel",
+   "unaff_x21": "unused1",
+   "unaff_x30": "unused2"
+  }
+ },
+ "2f82ef8": {
+  "summary": "Displays a warlord chat message, forwards it to network and AI, logs it and may show a mute tip.",
+  "renames": {
+   "abStack_54": "isPlayerBuf",
+   "iStack_60": "chatMsgBuf",
+   "uStack_68": "scratch1",
+   "uVar3": "chatMsgTypeName",
+   "iVar1": "chatsReceived",
+   "lVar7_4": "heroCard",
+   "uVar8": "vectorStaticLow",
+   "uVar9": "vectorStaticHigh"
+  }
+ },
+ "2f837a8": {
+  "summary": "Displays a chat box for a talking unit with the given text and audio.",
+  "renames": {
+   "auVar8_x1": "coroutineHandle",
+   "unaff_x19": "nullRefException",
+   "unaff_x20": "savedPanel",
+   "unaff_x21": "unused1",
+   "unaff_x30": "unused2"
+  }
+ },
+ "2f8354c": {
+  "summary": "Shows a radio tip message with a speaker sprite in the radio voice line box.",
+  "renames": {
+   "auVar7_x1": "coroutineHandle",
+   "unaff_x19": "nullRefException",
+   "unaff_x20": "savedPanel",
+   "unaff_x21": "unused1",
+   "unaff_x30": "unused2"
+  }
+ },
+ "2f83a38": {
+  "summary": "Displays a unit summon voice line in its chat box if none is playing.",
+  "renames": {
+   "auVar14_x1": "coroutineHandle",
+   "puVar8": "logResult",
+   "uVar9": "logType",
+   "unaff_x19": "nullRefException",
+   "unaff_x20": "savedCardScript",
+   "unaff_x21": "unused1",
+   "unaff_x30": "unused2"
+  }
+ },
+ "2f83c5c": {
+  "summary": "Toggles the chat popup open or closed, or logs that chat is unavailable.",
+  "renames": {
+   "puVar6": "logResult",
+   "uVar1": "devToolsStatic",
+   "uVar2": "logMessage",
+   "uVar5": "devToolsEnabled"
+  }
+ },
+ "2f829cc": {
+  "summary": "Subscribes popup show, hide and voice line pressed handlers (merged with neighboring code).",
+  "renames": {
+   "auVar11_x1": "unusedValue",
+   "bVar2": "exchanged",
+   "lVar9_2": "currentPressedHandler",
+   "lVar9_4": "currentHideHandler",
+   "plVar10": "handlerFieldPtr"
+  }
+ },
+ "2f827e8": {
+  "summary": "Unsubscribes popup show, hide and voice line pressed handlers.",
+  "renames": {
+   "bVar2": "exchanged",
+   "plVar9": "handlerFieldPtr"
+  }
+ },
+ "2f8433c": {
+  "summary": "Handles a chat button press: shows the message, sends it to network and AI and logs it.",
+  "renames": {
+   "abStack_54": "isPlayerBuf",
+   "iStack_60": "chatMsgBuf",
+   "uStack_68": "scratch1",
+   "uVar4": "chatMsgTypeName",
+   "iVar1": "chatsReceived",
+   "lVar8_4": "heroCard",
+   "uVar9": "vectorStaticLow",
+   "uVar10": "vectorStaticHigh"
+  }
+ },
+ "2f82ecc": {
+  "summary": "Displays a warlord chat message in the correct voice line box.",
+  "renames": {
+   "auVar7_x1": "coroutineHandle",
+   "unaff_x19": "nullRefException",
+   "unaff_x20": "savedPanel",
+   "unaff_x21": "unused1",
+   "unaff_x30": "unused2"
+  }
+ },
+ "2f838f0": {
+  "summary": "Displays voice line data in the player or opponent chat box.",
+  "renames": {
+   "auVar7_x1": "coroutineHandle",
+   "unaff_x19": "nullRefException",
+   "unaff_x20": "savedPanel",
+   "unaff_x21": "unused1",
+   "unaff_x30": "unused2"
+  }
+ },
+ "2f84458": {
+  "summary": "Stops audio and hides the chat box for the player or opponent, clearing its text.",
+  "renames": {
+   "uVar4": "textVtableSlot"
+  }
+ },
+ "2f84474": {
+  "summary": "Stops audio and hides the radio chat box, clearing its text.",
+  "renames": {
+   "uVar4": "textVtableSlot"
+  }
+ },
+ "2f84348": {
+  "summary": "Builds voice line data for a chat message using the warlord hero card.",
+  "renames": {
+   "lVar2_3": "audioClip",
+   "plVar3": "audioClipPtr"
+  }
+ },
+ "2f8383c": {
+  "summary": "Builds voice line data from an audio clip, message, sprite and card type.",
+  "renames": {
+   "plVar1": "audioClipPtr"
+  }
+ },
+ "2f82e10": {
+  "summary": "Returns whether chatting is currently allowed, logging if not.",
+  "renames": {
+   "plVar3": "logMessagePtr"
+  }
+ },
+ "2f8448c": {
+  "summary": "Loads the audio clip for a chat message from the current warlords, with custom intro and fallback.",
+  "renames": {
+   "iStack_58": "chatMsgBuf",
+   "lStack_50": "operationHandle",
+   "lVar3": "chatManagerStatics",
+   "lVar3_4": "chatManagerStaticsAlt",
+   "lVar6": "audioReference",
+   "uStack_60": "scratch1",
+   "uStack_68": "typeHandle",
+   "uStack_70": "handleWord0",
+   "uStack_78": "scratch2",
+   "uStack_80": "scratch3",
+   "uStack_88": "handleOut0",
+   "uVar8": "addressableKey"
+  }
+ },
+ "2f83354": {
+  "summary": "Returns the current clip length plus padding, at least two seconds.",
+  "renames": {
+   "fVar3": "clipLength",
+   "fVar4": "resultLength",
+   "uVar1": "hasNoClip"
+  }
+ },
+ "2f8449c": {
+  "summary": "Returns the chat sound length plus 0.3 seconds.",
+  "renames": {
+   "fVar1": "clipLength"
+  }
+ },
+ "2f83244": {
+  "summary": "Sends chat message to the network via Photon RPC (decompiler merged unrelated Photon and collection code).",
+  "renames": {
+   "acStack_144": "removeGroupBuf",
+   "acStack_148": "addGroupBuf",
+   "auVar31": "thrownException",
+   "auVar31_part8": "cardSeenValue",
+   "auVar32": "groupsResult",
+   "auVar32_part8": "scratch1",
+   "auVar32_x1": "groupsArg",
+   "iStack_24": "chatMsgBuf",
+   "iVar20": "bucketCount",
+   "lStack_108": "savedEventOptions",
+   "lStack_120": "savedStringArray",
+   "lStack_38": "savedPhotonView",
+   "lStack_48": "savedCommsManager",
+   "lStack_f0_2": "savedPhotonView2",
+   "lVar12_2": "emptyArrayClass",
+   "lVar26_4": "rpcParameters",
+   "lVar8_2": "groupsToRemove",
+   "pcStack_138": "savedMethod",
+   "piVar24": "typeSlotPtr",
+   "piVar30": "entryPtr",
+   "plStack_40": "savedObjectArray",
+   "plStack_e8": "savedPeer",
+   "plVar10": "peerSelf",
+   "puVar16": "logPrefix",
+   "puVar22": "logSuffix",
+   "uStack_100": "scratch2",
+   "uStack_110": "scratch3",
+   "uStack_118": "savedMethodName",
+   "uStack_50": "scratch4",
+   "uStack_54": "cardSeenBuf",
+   "uStack_c8": "viewIdBuf",
+   "uStack_c8_part4": "viewIdBufHigh",
+   "uStack_d0": "scratch5",
+   "uStack_d8": "scratch6",
+   "uStack_e0": "boxedValueBuf",
+   "uStack_e0_part1": "boxedByteBuf",
+   "uStack_e0_part2": "boxedShortBuf",
+   "uStack_e0_part4": "boxedIntBuf",
+   "uStack_f8": "scratch7",
+   "uVar17": "groupsLength",
+   "uVar23": "slotCount",
+   "uVar25": "bucketIndex",
+   "uVar6": "containsResult",
+   "uVar9": "groupsToAdd",
+   "unaff_x27": "unused1"
+  }
+ },
+ "2f833ec": {
+  "summary": "Starts a delayed AI chat response coroutine when playing against AI and config allows.",
+  "renames": {
+   "auVar6_x1": "coroutineHandle",
+   "unaff_x19": "nullRefException",
+   "unaff_x20": "savedController",
+   "unaff_x21": "unused1",
+   "unaff_x30": "unused2"
+  }
+ },
+ "2f84698": {
+  "summary": "Seems to pick a random ChatMessage enum value.",
+  "renames": {
+   "iVar2": "randomMessage"
+  }
+ },
+ "2f8351c": {
+  "summary": "Returns whether an enemy chat should trigger the mute-chat tip.",
+  "renames": {
+   "bVar1": "shouldShowTip"
+  }
+ },
+ "2f835e8": {
+  "summary": "Adds a chat action to the player or enemy action log for replays.",
+  "renames": {
+   "extraout_x1": "unused1",
+   "lVar7": "addMethodInfo",
+   "plVar6": "itemSlotPtr"
+  }
+ },
+ "2f83f68": {
+  "summary": "Thread-safe event add for OnHide (decompiler merged in neighboring event code).",
+  "renames": {
+   "auVar8_x1": "unusedValue",
+   "bVar2": "exchanged",
+   "lVar7_3": "currentHandler",
+   "uVar1": "actionChatMsgType",
+   "lVar7_5": "currentPressedHandler"
+  }
+ },
+ "2f84150": {
+  "summary": "Thread-safe event remove for OnHide (merged with neighboring code).",
+  "renames": {
+   "auVar7_x1": "unusedValue",
+   "bVar2": "exchanged"
+  }
+ },
+ "2f83ecc": {
+  "summary": "Thread-safe event add for OnShow (decompiler merged in neighboring event code).",
+  "renames": {
+   "auVar8_x1": "unusedValue",
+   "bVar2": "exchanged",
+   "lVar7_3": "currentHandler",
+   "uVar1": "actionChatMsgType",
+   "lVar7_5": "currentHideHandler",
+   "lVar7_7": "currentPressedHandler"
+  }
+ },
+ "2f840b4": {
+  "summary": "Thread-safe event remove for OnShow (merged with neighboring code).",
+  "renames": {
+   "auVar8_x1": "unusedValue",
+   "bVar2": "exchanged",
+   "lVar7_3": "currentHandler"
+  }
+ },
+ "2f84004": {
+  "summary": "Thread-safe event add for OnVoiceLinePressed (merged with neighboring code).",
+  "renames": {
+   "auVar8_x1": "unusedValue",
+   "bVar2": "exchanged",
+   "lVar6_2": "currentShowHandler",
+   "lVar6_4": "currentHideHandler",
+   "plVar7": "handlerFieldPtr",
+   "uVar1": "actionChatMsgType"
+  }
+ },
+ "2f841ec": {
+  "summary": "Thread-safe event remove for OnVoiceLinePressed.",
+  "renames": {
+   "bVar2": "exchanged"
+  }
+ }
+}

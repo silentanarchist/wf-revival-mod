@@ -1,0 +1,71 @@
+{
+ "315dbf0": {
+  "summary": "Returns whether any ability in the list has a chosenAbility matching the given trigger.",
+  "renames": {
+   "bVar2": "result"
+  }
+ },
+ "315d3d4": {
+  "summary": "Builds the list of valid target cards for an ability based on its criteria, target mode, filters and max-target selection rules.",
+  "renames": {
+   "auVar24": "unused1",
+   "auVar24_x1": "unused2",
+   "cVar3": "sideFlagA",
+   "cVar4": "sideFlagB",
+   "iVar1_TargetSelectMethod": "scratch1",
+   "lVar13_12": "candidateList2",
+   "lVar13_14": "candidateList3",
+   "lVar13_16": "warlordTargetList",
+   "lVar13_20": "referencedTargetList",
+   "lVar13_6": "filterList",
+   "lVar13_8": "candidateList",
+   "lVar15": "staticsPtr",
+   "lVar15_6": "handTargetList",
+   "lVar18": "scratchPtr",
+   "lVar20_13": "heroTargetList",
+   "lVar20_2": "targetListStatics",
+   "lVar20_4": "ownerCard",
+   "lVar22_2": "targetCardRef",
+   "plVar14": "listSlotPtr",
+   "plVar17": "fieldRefPtr",
+   "uStack_64": "countValue"
+  }
+ },
+ "315fa34": {
+  "summary": "Overload of GetTargets taking the cards directly; builds the valid target list from criteria, target mode, filters and max-target selection.",
+  "renames": {
+   "auVar21": "unused1",
+   "auVar21_x1": "unused2",
+   "cVar3": "sideFlagA",
+   "cVar4": "sideFlagB",
+   "lVar14": "scratchPtr",
+   "lVar14_10": "filterList",
+   "lVar14_12": "candidateList",
+   "lVar14_16": "candidateList2",
+   "lVar14_18": "candidateList3",
+   "lVar14_21": "referencedTargetList",
+   "lVar14_5": "heroTargetList",
+   "lVar14_7": "targetListB",
+   "lVar14_8": "previousTargetsList",
+   "lVar19": "targetListObj",
+   "plVar13": "listSlotPtr",
+   "plVar16": "fieldRefPtr",
+   "puVar17": "logMessage",
+   "uStack_64": "countValue"
+  }
+ },
+ "315d468": {
+  "summary": "Plays each of the ability's card animations, checking minion slot availability and resolving positions, then queues them on the battle manager.",
+  "renames": {
+   "lVar12": "friendlyMinionManager",
+   "this_00": "enemyMinionManager",
+   "plStack_70": "enumeratorCurrent",
+   "plStack_88": "unused1",
+   "plVar10": "enemyMinionManagerRef",
+   "plVar9": "animOrManagerRef",
+   "puStack_90": "unused2",
+   "uStack_78": "unused3",
+   "uStack_80": "animEnumerator"
+  }
+ }
+}

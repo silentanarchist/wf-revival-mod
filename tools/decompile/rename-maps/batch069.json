@@ -1,0 +1,449 @@
+{
+ "2f6e10c": {
+  "summary": "Plays every animation effect in the effects array, either immediately or via a delayed coroutine, and inlines the per-type effect handling (fade, sound, prefab, screen shake).",
+  "renames": {
+   "auVar25_x1": "effectDataArg",
+   "in_s1": "scratchFloat1",
+   "in_s2": "scratchFloat2",
+   "in_x2": "unused2",
+   "pcVar16": "savedMethod",
+   "puVar10": "identityQuatPtr",
+   "puVar2": "stackFrame",
+   "puVar7": "loggerMethod",
+   "uStack_78": "spanLength",
+   "uStack_80": "spanPtr",
+   "uVar12_2": "savedFlag",
+   "uVar12_3": "prefabIsNull",
+   "uVar19": "scratchValue",
+   "uVar21": "quatY",
+   "uVar23": "quatZ",
+   "uVar24": "quatW",
+   "uVar4": "hasSprite",
+   "uVar5": "elementIndex",
+   "unaff_d10": "unusedD10",
+   "unaff_d11": "unusedD11",
+   "unaff_d12": "unusedD12",
+   "unaff_d13": "unusedD13",
+   "unaff_d14": "unusedD14",
+   "unaff_d8": "unusedD8",
+   "unaff_d9": "unusedD9",
+   "unaff_x21": "unused1",
+   "unaff_x23": "unused3"
+  }
+ },
+ "2f6e1ac": {
+  "summary": "Plays a single animation effect by type: fades sprites/texts, spawns an animation prefab, plays a sound, or starts a screen shake.",
+  "renames": {
+   "auVar22_x1": "effectDataArg",
+   "in_s2": "scratchFloat2",
+   "lVar4": "spriteArray",
+   "puVar6": "loggerMethod",
+   "puVar8": "identityQuatPtr",
+   "register0x00000008": "stackBase",
+   "uStack_58": "spanLength",
+   "uStack_60": "spanPtr",
+   "uVar18": "quatY",
+   "uVar2": "hasElement",
+   "uVar20": "quatZ",
+   "uVar21": "quatW",
+   "uVar5_2": "devToolsEnabled",
+   "uVar5_3": "prefabIsNull",
+   "unaff_d10": "unusedD10",
+   "unaff_d11": "unusedD11",
+   "unaff_d12": "unusedD12",
+   "unaff_d13": "unusedD13",
+   "unaff_d14": "unusedD14",
+   "unaff_d8": "unusedD8",
+   "unaff_d9": "unusedD9",
+   "unaff_x19": "savedEffectData",
+   "unaff_x20": "currentElement",
+   "unaff_x21": "unused1",
+   "unaff_x23": "unused3",
+   "unaff_x30": "returnAddr"
+  }
+ },
+ "2f6e1f4": {
+  "summary": "Creates and returns the coroutine state object for delaying an animation effect.",
+  "renames": {
+   "lVar1": "enumerator"
+  }
+ },
+ "2f6e27c": {
+  "summary": "Resolves a fade effect by setting start alpha and tweening sprites and texts to the end alpha with delay.",
+  "renames": {
+   "auVar20_x1": "effectDataArg",
+   "fVar15": "posOffsetY",
+   "in_s2": "scratchFloat2",
+   "lVar4": "spriteArray",
+   "puVar2": "loggerMethod",
+   "puVar5": "identityQuatPtr",
+   "uVar1": "hasElement",
+   "uVar11": "elementIndex",
+   "uVar11_2": "devToolsOrIndex",
+   "uVar14": "devToolsStatics",
+   "uVar16": "quatY",
+   "uVar18": "quatZ",
+   "uVar19": "quatW"
+  }
+ },
+ "2f6e494": {
+  "summary": "Instantiates the effect's animation prefab at the object's position plus offset and parents it, warning if no prefab is set.",
+  "renames": {
+   "fVar10": "posX",
+   "in_s1": "scratchFloat1",
+   "in_s2": "scratchFloat2",
+   "puVar2": "loggerMethod",
+   "puVar4": "identityQuatPtr",
+   "uVar1": "prefabIsNull",
+   "uVar1_2": "devToolsEnabled",
+   "uVar12": "devToolsStatics",
+   "uVar14": "quatY",
+   "uVar16": "quatZ",
+   "uVar17": "quatW"
+  }
+ },
+ "2f6e6dc": {
+  "summary": "Plays the effect's sound clip once through the audio source at sound-effect volume, logging warnings when missing.",
+  "renames": {
+   "puVar3": "loggerMethod",
+   "uVar1": "devToolsStatics",
+   "uVar2": "noAudioSource",
+   "uVar2_2": "devToolsEnabled",
+   "uVar2_3": "clipValid"
+  }
+ },
+ "2f6e8bc": {
+  "summary": "Finds a CameraShake object and starts its ResolveScreenShake coroutine with the effect's shake info.",
+  "renames": {
+   "uStack_28": "savedPinnable",
+   "uStack_38": "innerSpanLength",
+   "uStack_58": "spanLength"
+  }
+ },
+ "2f6eac4": {
+  "summary": "Sets the effect name to the manual description if present, otherwise to the effect type's string name.",
+  "renames": {
+   "uStack_30": "scratch1",
+   "uVar2": "effectTypeName"
+  }
+ },
+ "2f6eb7c": {
+  "summary": "Initializes the overtime UI by making the icon and splash group transparent and deactivating them.",
+  "renames": {
+   "auVar4_x1": "methodInfo"
+  }
+ },
+ "2f6ec20": {
+  "summary": "Shows the overtime splash, runs a fade in/out tween sequence, and plays the entering-overtime sound.",
+  "renames": {
+   "auVar17_6": "audioCueFlag",
+   "auVar17_x1": "sequenceOrMethod",
+   "lVar2_3": "soundManager",
+   "puVar10": "zeroVectorPtr2",
+   "puVar9": "zeroVectorPtr",
+   "uStack_88": "scratch3",
+   "uStack_90": "scratch1",
+   "uStack_c8": "zeroScratch",
+   "uStack_d0": "savedPosY",
+   "uStack_d8": "savedPosX",
+   "uStack_e0": "savedZeroVector",
+   "uStack_e8": "ctorSpan2",
+   "uStack_f0": "ctorSpan1",
+   "uVar15": "posY1",
+   "uVar16": "posY2",
+   "uVar6": "hasAudioSource"
+  }
+ },
+ "2f6edf0": {
+  "summary": "Tween callback that deactivates the overtime splash canvas group's game object.",
+  "renames": {
+   "auVar3_x1": "methodInfo"
+  }
+ },
+ "2f731b0": {
+  "summary": "Coroutine that draws an active trap card to the hand position, waits, then adds it to the current hand and sets it up.",
+  "renames": {
+   "fVar12": "scaleX",
+   "fVar13": "scaleY",
+   "in_s1": "scratchFloat1",
+   "in_s2": "scratchFloat2",
+   "in_x2": "unused2",
+   "lVar3": "vector3Statics",
+   "puVar7": "slotPtr"
+  }
+ },
+ "2f73434": {
+  "summary": "IEnumerator.Reset implementation that throws NotSupportedException.",
+  "renames": {
+   "uVar2": "methodInfo"
+  }
+ },
+ "2f73478": {
+  "summary": "Coroutine that adds a non-drawn card to the hand if there is room (else sends it to the cemetery), repositions cards, and waits.",
+  "renames": {
+   "auVar12": "thisEnumerator",
+   "auVar12_x1": "methodInfo",
+   "in_x2": "unused2",
+   "lVar3": "listAddMethod",
+   "puVar9": "slotPtr"
+  }
+ },
+ "2f736d4": {
+  "summary": "IEnumerator.Reset implementation that throws NotSupportedException (AddCardNotDrawnToHand).",
+  "renames": {
+   "uVar2": "methodInfo"
+  }
+ },
+ "2f73718": {
+  "summary": "Coroutine that inserts a non-drawn card into the hand at an index if there is room, repositions cards, and waits.",
+  "renames": {
+   "auVar7": "thisEnumerator",
+   "auVar7_x1": "methodInfo"
+  }
+ },
+ "2f7392c": {
+  "summary": "IEnumerator.Reset implementation that throws NotSupportedException (AddCardNotDrawnToHandAtIndex).",
+  "renames": {
+   "uVar2": "methodInfo"
+  }
+ },
+ "2f73970": {
+  "summary": "Coroutine that draws the mulligan cards one by one, assigning mulligan options by card category and positioning each with a delay.",
+  "renames": {
+   "auVar12": "thisEnumerator",
+   "auVar12_x1": "methodInfo",
+   "iVar1": "warlordPlusWhispers",
+   "lVar2": "listAddMethod",
+   "plVar10": "slotPtr",
+   "uVar7": "mulliganCardMissing"
+  }
+ },
+ "2f73c7c": {
+  "summary": "IEnumerator.Reset implementation that throws NotSupportedException (AddCardsToMulligan).",
+  "renames": {
+   "uVar2": "methodInfo"
+  }
+ },
+ "2f73cc0": {
+  "summary": "Coroutine that draws a card to the hand position, then adds it to the hand if there is room, otherwise sends it to the cemetery.",
+  "renames": {
+   "auVar17": "thisEnumerator",
+   "auVar17_x1": "methodInfo",
+   "fVar14": "scaleX",
+   "fVar15": "scaleY",
+   "in_s1": "scratchFloat1",
+   "in_s2": "scratchFloat2",
+   "in_x2": "unused2",
+   "lVar6_3": "vector3Statics",
+   "puVar8": "slotPtr"
+  }
+ },
+ "2f740fc": {
+  "summary": "IEnumerator.Reset implementation that throws NotSupportedException (AddDrawnCardToHand).",
+  "renames": {
+   "uVar2": "methodInfo"
+  }
+ },
+ "2f74140": {
+  "summary": "Coroutine that repositions all hand cards except one excluded card, then waits and clears the animation flag.",
+  "renames": {
+   "auVar8": "isNotExcluded",
+   "auVar8_x1": "methodInfo"
+  }
+ },
+ "2f7434c": {
+  "summary": "IEnumerator.Reset implementation that throws NotSupportedException (DisplayHandMinusCard).",
+  "renames": {
+   "uVar2": "methodInfo"
+  }
+ },
+ "2f74390": {
+  "summary": "Coroutine that finishes the mulligan: replaces discarded cards with new ones, animates returns to deck, finalizes UI and fades cards.",
+  "renames": {
+   "bVar2": "shouldContinue",
+   "lVar5_2": "cardToReplace",
+   "lVar7_6": "keptCard",
+   "uVar1": "nextIndex",
+   "uVar4_3": "noReplacementCard",
+   "uVar4_4": "cardIndex",
+   "uVar9": "nextState"
+  }
+ },
+ "2f7478c": {
+  "summary": "IEnumerator.Reset implementation that throws NotSupportedException (FinishMulligan).",
+  "renames": {
+   "uVar2": "methodInfo"
+  }
+ },
+ "2f747d0": {
+  "summary": "Coroutine that repositions every card in the hand with sorting orders, waits, then restores colliders and clears the animation flag.",
+  "renames": {
+   "auVar11_x1": "methodInfo",
+   "iVar9": "sortingOffset",
+   "lVar2": "cardListLocal",
+   "lVar2_3": "cardListAfter",
+   "lVar4": "cardListCopy",
+   "plVar8": "cardListFieldPtr"
+  }
+ },
+ "2f74ac0": {
+  "summary": "IEnumerator.Reset implementation that throws NotSupportedException (MoveCardsInHandToPosition).",
+  "renames": {
+   "uVar2": "methodInfo"
+  }
+ },
+ "2f6eee4": {
+  "summary": "Returns the time to draw a card: the player or enemy draw time from global vars depending on isPlayer.",
+  "renames": {
+   "lVar1": "fieldOffset"
+  }
+ },
+ "2f6f060": {
+  "summary": "Scales the hand transform by an interpolated small-screen multiplier based on screen diagonal, remembering the original scale.",
+  "renames": {
+   "fVar4": "originalScaleValue",
+   "fVar5": "clampedUpper",
+   "fVar6": "clampedRatio",
+   "in_s1": "scratchFloat1",
+   "pcVar2": "originalScalePtr",
+   "uStack_48": "scaleZ",
+   "uStack_50": "scaleXY"
+  }
+ },
+ "2f6f1cc": {
+  "summary": "Creates and returns the coroutine state object for adding a drawn card to the hand.",
+  "renames": {
+   "lVar1": "enumerator"
+  }
+ },
+ "2f6f27c": {
+  "summary": "Creates and returns the coroutine state object for adding an active trap to the hand.",
+  "renames": {
+   "lVar1": "enumerator"
+  }
+ },
+ "2f6f32c": {
+  "summary": "Creates and returns the coroutine state object for adding a not-drawn card to the hand.",
+  "renames": {
+   "lVar1": "enumerator"
+  }
+ },
+ "2f6f3dc": {
+  "summary": "Creates and returns the coroutine state object for adding a not-drawn card to the hand at an index.",
+  "renames": {
+   "lVar1": "enumerator"
+  }
+ },
+ "2f6f494": {
+  "summary": "Creates and returns the coroutine state object for adding cards to the mulligan.",
+  "renames": {
+   "lVar1": "enumerator"
+  }
+ },
+ "2f6f544": {
+  "summary": "Returns the starting hand size plus any warlord bonus cards for the given side.",
+  "renames": {
+   "uVar2": "warlordExtraCards"
+  }
+ },
+ "2f6f784": {
+  "summary": "Builds an array of unique card IDs for mulligan cards to discard (decompiler merged in discard-setting code).",
+  "renames": {
+   "auVar9": "thisHand",
+   "auVar9_x1": "idsArg",
+   "lVar3": "idArray",
+   "lVar6_2": "mulliganList",
+   "lVar6_4": "mulliganListNext",
+   "uVar5": "playerString"
+  }
+ },
+ "2f6f868": {
+  "summary": "Validates the discard IDs and marks each mulligan card as discarded or kept; returns whether it was valid.",
+  "renames": {
+   "uVar2": "playerString"
+  }
+ },
+ "2f6fb9c": {
+  "summary": "Validates the discard IDs and clicks-select each matching mulligan card at start; returns whether it was valid.",
+  "renames": {
+   "uVar2": "playerString"
+  }
+ },
+ "2f6f9fc": {
+  "summary": "Checks that every given card ID exists in the current mulligan, logging an error otherwise (with merged discard-setting code).",
+  "renames": {
+   "auVar13": "thisHand",
+   "auVar13_x1": "idsArg",
+   "bVar3": "foundCard",
+   "uVar11": "idCount"
+  }
+ },
+ "2f6fd2c": {
+  "summary": "Creates and returns the coroutine state object for finishing the mulligan.",
+  "renames": {
+   "lVar1": "enumerator"
+  }
+ },
+ "2f6fe78": {
+  "summary": "Returns a discarded mulligan card to its deck, reparents it, cleans up mulligan frames and re-enables sorting.",
+  "renames": {
+   "auVar10_x1": "cardArg",
+   "plVar7": "slotPtr",
+   "uVar8": "frameExists"
+  }
+ },
+ "2f6ffb0": {
+  "summary": "Moves all mulligan cards into the hand, sets their state and sorting, clears the mulligan list and starts repositioning the hand.",
+  "renames": {
+   "auVar10": "thisHand",
+   "auVar10_x1": "coroutineArg",
+   "lVar2": "mulliganListLocal",
+   "lVar2_4": "mulliganListNext",
+   "plVar7": "mulliganListFieldPtr",
+   "register0x00000008": "stackBase",
+   "unaff_x19": "exceptionToThrow",
+   "unaff_x20": "savedHand",
+   "unaff_x21": "unused1",
+   "unaff_x30": "returnAddr"
+  }
+ },
+ "2f70318": {
+  "summary": "Positions a newly drawn mulligan card at its anchor slot, scaling and drawing it, and sets up its collider.",
+  "renames": {
+   "auVar12_x1": "cardArg",
+   "auVar13": "handCopy",
+   "auVar13_x1": "savedTransform",
+   "fVar10": "scaleX",
+   "fVar11": "scaleY",
+   "in_s1": "scratchFloat1",
+   "in_s2": "scratchFloat2",
+   "lVar4_3": "anchorOrStatics",
+   "this_00": "cardInHandScale"
+  }
+ },
+ "2f70510": {
+  "summary": "Prepares a card for the hand: hides board objects, sets sorting, parents to hand anchor and shows its back for the enemy.",
+  "renames": {
+   "puVar3": "loggerMethod",
+   "uVar1": "cardIsNull",
+   "uVar4": "scratch1"
+  }
+ },
+ "2f70794": {
+  "summary": "Logs and registers a hand effect, then applies it to every card in hand that meets its target criteria (merged with a cleanup loop).",
+  "renames": {
+   "auVar11": "thisHand",
+   "auVar11_x1": "containerArg",
+   "lVar4_4": "effectAtIndex",
+   "lVar8_2": "activeEffectsList",
+   "plVar9": "slotPtr",
+   "uStack_50": "scratch1"
+  }
+ },
+ "2f70e58": {
+  "summary": "Removes extrinsic hand effects whose enchanting card is the removed card.",
+  "renames": {
+   "uVar2": "isRemovedCard"
+  }
+ }
+}

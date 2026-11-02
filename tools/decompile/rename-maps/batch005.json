@@ -1,0 +1,409 @@
+{
+ "3164c48": {
+  "summary": "Shows or hides the card front and back container based on the option flag.",
+  "renames": {
+   "uVar2": "backVisible"
+  }
+ },
+ "3164c64": {
+  "summary": "Invokes the pending description-show completion callback, then clears it.",
+  "renames": {}
+ },
+ "3164c9c": {
+  "summary": "Enables the card's box collider, stores the touch callback, and records collider size and description trigger flag.",
+  "renames": {
+   "lVar1": "callbackFieldAddr"
+  }
+ },
+ "3164ec4": {
+  "summary": "Invokes the touch-down callback and flags an in-play click if description display is enabled.",
+  "renames": {}
+ },
+ "3164f1c": {
+  "summary": "Tells each attack-type highlight to refresh for the new attack type, then (mis-decompiled) tweens the card image size/mask.",
+  "renames": {
+   "auVar21": "indexCheckResult",
+   "auVar21_part8": "targetImageState",
+   "bVar7": "shouldFinishCallback",
+   "iVar2": "newImageState",
+   "puVar12": "maskPropertyName",
+   "uVar14_2": "clampRangeLow",
+   "uVar14_3": "clampRangeBase",
+   "uVar15": "clampRangeHigh",
+   "uVar16": "targetScale",
+   "uVar17": "clampRangeBaseHi",
+   "uVar18": "clampRangeHighHi",
+   "uVar8": "isInstant",
+   "uVar9": "hasProperty"
+  }
+ },
+ "3164f8c": {
+  "summary": "Changes the card image size state (big or small), either instantly or by tweening scale, clamp color and mask strength.",
+  "renames": {
+   "bVar7": "shouldFinishCallback",
+   "puVar9": "tweenTargetFields",
+   "uVar11_2": "clampRangeLow",
+   "uVar11_3": "clampRangeBase",
+   "uVar12": "clampRangeHigh",
+   "uVar14": "clampRangeBaseHi",
+   "uVar15": "clampRangeHighHi",
+   "uVar8": "hasProperty"
+  }
+ },
+ "3163d94": {
+  "summary": "Sets whether touching opens the card display and adds or removes the card click listener on the event catcher.",
+  "renames": {
+   "lVar2": "addMethod",
+   "puVar6": "callSlot",
+   "uVar1": "callIndex"
+  }
+ },
+ "31642d8": {
+  "summary": "Shows or hides the new-card badge and optionally pops it with a scale tween.",
+  "renames": {
+   "fVar4": "amplitude"
+  }
+ },
+ "3164fa8": {
+  "summary": "Sets the layer on the card object and children, then sets sorting layer on renderers (decompiler merged several helpers).",
+  "renames": {
+   "alStack_48": "enumeratorFrame",
+   "auVar14": "sortingLayerResult",
+   "auVar14_x1": "sortingLayerName",
+   "auVar15": "unwindResult",
+   "auVar15_part8": "unwindKind",
+   "lStack_60": "caughtException",
+   "lStack_a8": "enumeratorFrame2",
+   "lStack_c0": "caughtException3",
+   "lVar10": "sortingTarget",
+   "lVar2_4": "caughtExceptionObj",
+   "lVar2_6": "caughtExceptionObj2",
+   "lVar2_7": "layerTarget",
+   "pcStack_110": "sortingNameSpan",
+   "pcStack_a0": "methodRef1",
+   "pcStack_e0": "typeRefDisposable",
+   "pcStack_f0": "methodRef2",
+   "plStack_38": "enumeratorSlot",
+   "plStack_50": "frameRef",
+   "plStack_70": "savedDisposable",
+   "plStack_78": "savedCurrent",
+   "plStack_98": "enumeratorSlot2",
+   "plStack_b0": "frameRef2",
+   "plStack_d0": "savedDisposable2",
+   "plStack_d8": "savedCurrent2",
+   "plVar6_3": "childTransform",
+   "plVar6_5": "childTransform2",
+   "pplStack_58": "enumeratorSlotRef",
+   "pplStack_b8": "enumeratorSlotRef2",
+   "pplVar12": "enumeratorSlotPtr",
+   "puStack_108": "spanLengthHigh",
+   "puStack_e8": "typeRefEnumerator",
+   "uStack_68": "unwindState",
+   "uStack_c8": "unwindState2",
+   "uVar3": "isNullObject"
+  }
+ },
+ "316502c": {
+  "summary": "Sets the card's fade canvas group alpha if a fade group exists.",
+  "renames": {
+   "uVar1": "hasFadeGroup"
+  }
+ },
+ "31650c0": {
+  "summary": "Tints the card color via its group tint component, either instantly or with a DOTween color tween.",
+  "renames": {
+   "param_5": "tintDuration",
+   "param_6": "cardUi",
+   "uVar1": "hasTintGroup",
+   "uVar1_2": "enabledFlag"
+  }
+ },
+ "316518c": {
+  "summary": "Tweens the card's alpha to a target value over a duration with an optional start delay.",
+  "renames": {}
+ },
+ "31652c4": {
+  "summary": "Starts the coroutine that animates the changed gem amount text when origPosition is true.",
+  "renames": {
+   "apcStack_20": "savedRegisters",
+   "auVar5": "throwResult",
+   "auVar5_x1": "coroutineArg",
+   "unaff_x19": "exceptionObj",
+   "unaff_x20": "savedThis",
+   "unaff_x21": "savedReg21",
+   "unaff_x30": "returnAddress"
+  }
+ },
+ "31653c4": {
+  "summary": "Getter returning the card fade canvas group's alpha for tweening.",
+  "renames": {
+   "fVar3": "alpha"
+  }
+ },
+ "3256d94": {
+  "summary": "Creates a copy of this BoardCriteria with a deep-copied countCriteria.",
+  "renames": {}
+ },
+ "3256ed0": {
+  "summary": "Shows card front or back by toggling the front object and the back container.",
+  "renames": {
+   "uVar2": "backActive"
+  }
+ },
+ "3256f40": {
+  "summary": "Fades the card highlight color alpha on or off, instantly or via a color changer tween.",
+  "renames": {
+   "auVar11": "hasMaterial",
+   "uVar10": "targetAlpha",
+   "uVar7": "originalRed",
+   "uVar8": "originalGreen",
+   "uVar9": "originalAlpha"
+  }
+ },
+ "3256ff0": {
+  "summary": "Changes the highlight color of the card or card back, instantly or via a timed color changer.",
+  "renames": {
+   "auVar8": "hasMaterial",
+   "param_6": "isCardbackFlag",
+   "param_7": "instantFlag",
+   "uVar5": "originalGreen",
+   "uVar6": "originalBlue",
+   "uVar7": "originalAlpha"
+  }
+ },
+ "325702c": {
+  "summary": "Changes the shadow color of the card or card back, instantly or via a timed color changer.",
+  "renames": {
+   "auVar8": "hasMaterial",
+   "param_6": "isCardbackFlag",
+   "param_7": "instantFlag",
+   "uVar5": "originalGreen",
+   "uVar6": "originalBlue",
+   "uVar7": "originalAlpha"
+  }
+ },
+ "3257068": {
+  "summary": "Fades the card shadow alpha on or off, instantly or via a color changer tween.",
+  "renames": {
+   "auVar11": "hasMaterial",
+   "uVar10": "targetAlpha",
+   "uVar7": "originalRed",
+   "uVar8": "originalGreen",
+   "uVar9": "originalAlpha"
+  }
+ },
+ "32570e0": {
+  "summary": "Assigns the frame sprite to the frame image and inlined-sets the highlight sprite on the highlight image.",
+  "renames": {
+   "bVar1": "skipMaterialUpdate",
+   "fVar10": "newRectX",
+   "fVar11": "newRectY",
+   "lVar8": "currentHighlightSprite",
+   "lVar8_3": "currentHighlightSprite2",
+   "plVar7": "spriteFieldAddr",
+   "uVar5": "spriteCheck"
+  }
+ },
+ "3257120": {
+  "summary": "Toggles the glitch effect on the card frame (mostly stubbed in decompile).",
+  "renames": {
+   "lVar1": "glitchOffset"
+  }
+ },
+ "3257158": {
+  "summary": "Assigns the card back sprite and inlined-sets the card back shadow sprite.",
+  "renames": {
+   "bVar1": "skipMaterialUpdate",
+   "fVar10": "newRectX",
+   "fVar11": "newRectY",
+   "lVar8": "currentShadowSprite",
+   "lVar8_3": "currentShadowSprite2",
+   "plVar7": "spriteFieldAddr",
+   "uVar4": "spriteCheck"
+  }
+ },
+ "3257200": {
+  "summary": "Toggles all tooltip triggers on the card and text tooltips (with ctor code mis-merged).",
+  "renames": {
+   "uVar2": "outlinePropertyName"
+  }
+ },
+ "32572bc": {
+  "summary": "Constructor caching shader property IDs for card shadow and highlight.",
+  "renames": {
+   "uVar1": "outlinePropertyName"
+  }
+ },
+ "3257348": {
+  "summary": "Decides whether an ability's trigger fires for the given card context, checking trigger type, context, faith, and criteria.",
+  "renames": {
+   "uStack_58": "scratch1",
+   "uStack_60": "scratch2",
+   "uStack_78": "scratch3",
+   "uVar4": "typeName",
+   "uVar6": "isSameCard"
+  }
+ },
+ "32576ec": {
+  "summary": "Checks whether the card is in the zone required by the ability's context (play, hand, deck, cemetery, etc.).",
+  "renames": {
+   "uStack_30": "scratch1",
+   "uVar2": "contextName"
+  }
+ },
+ "3258260": {
+  "summary": "Clones the ability and deep-copies its criteria and ability logic list.",
+  "renames": {
+   "lVar6": "listItems",
+   "lVar9": "newLogicList",
+   "plVar7": "logicListField",
+   "uVar1": "listSize"
+  }
+ },
+ "32582e0": {
+  "summary": "Clones the ability and deep-copies its acting and target criteria and ability logic list.",
+  "renames": {
+   "lVar5": "listItems",
+   "lVar8": "newLogicList",
+   "plVar6": "logicListField",
+   "uVar1": "listSize"
+  }
+ },
+ "3258524": {
+  "summary": "Sets up animation parents and info, optionally rotates toward a target, starts movement tracking, and passes cards to the VFX component.",
+  "renames": {
+   "plVar3": "orientCheck"
+  }
+ },
+ "3258728": {
+  "summary": "Rotates the animated card toward the board center or a target transform, with a tweened rotation.",
+  "renames": {
+   "fVar12": "deltaX",
+   "fVar6": "leftMostPos",
+   "fVar7": "rightMostPos",
+   "fVar8": "currentX",
+   "lVar1_3": "eulerAngles"
+  }
+ },
+ "3258a48": {
+  "summary": "Per-frame update that moves the animation along its ease curve between start and end parents, applying offsets and orientation.",
+  "renames": {
+   "auVar16_x1": "methodInfo",
+   "extraout_s0": "endPositionX",
+   "extraout_s0_00": "offsetCurveValueX",
+   "extraout_s0_01": "offsetCurveValueY",
+   "fVar10": "clampedProgress",
+   "fVar11": "deltaZSquaredPart",
+   "fVar13": "positionZ",
+   "fVar15": "deltaX",
+   "fVar5": "deltaXPart",
+   "fVar8": "endPositionY",
+   "fVar8_3": "lookDirZ",
+   "fVar9": "progress",
+   "lVar1_7": "offsetAxisParam",
+   "pfVar3": "zeroVectorAddr"
+  }
+ },
+ "325d1d4": {
+  "summary": "Static constructor creating the singleton instance of the compiler-generated closure class.",
+  "renames": {
+   "uVar1": "instance"
+  }
+ },
+ "325d244": {
+  "summary": "Lambda returning true if the card is not a hero and has Legendary rarity.",
+  "renames": {
+   "bVar1": "isLegendary"
+  }
+ },
+ "325d280": {
+  "summary": "Lambda returning true if the card's original ID equals the captured card's original ID (inlined string compare).",
+  "renames": {
+   "bVar3": "bytesEqual",
+   "lVar1": "charsA",
+   "lVar2": "charsB",
+   "uVar8_2": "wordsDiffer"
+  }
+ },
+ "325d2c8": {
+  "summary": "Lambda returning true if the card's ID string equals the captured card's ID (inlined string compare).",
+  "renames": {
+   "bVar1": "bytesEqual",
+   "lVar2": "idA",
+   "lVar3": "idB",
+   "uVar6_2": "wordsDiffer"
+  }
+ },
+ "3258d1c": {
+  "summary": "Finds the highest-priority active live-ops event for this deck's play mode using LINQ Where, OrderByDescending and FirstOrDefault.",
+  "renames": {
+   "iVar2": "loopState",
+   "lVar10_3": "eventsClass2",
+   "lVar3": "filterClosure",
+   "lVar9": "listClass",
+   "lVar9_3": "listClass3",
+   "piVar13": "interfaceMapEntry",
+   "plVar7": "orderedList",
+   "puVar11": "interfaceMethodTable",
+   "uVar1": "modeValue",
+   "uVar12": "interfaceCount"
+  }
+ },
+ "3258dc0": {
+  "summary": "Getter returning the deck's play mode.",
+  "renames": {}
+ },
+ "3258e38": {
+  "summary": "Returns the army of the deck hero, or of the first card in the library, or the stored deck army.",
+  "renames": {
+   "piVar3": "armyFieldAddr",
+   "uVar1": "hasDeckHero"
+  }
+ },
+ "3258ee8": {
+  "summary": "Looks up the PrebuiltDeck asset matching the prebuilt deck ID using LINQ (mis-decompiled with exception handlers).",
+  "renames": {
+   "acStack_ac": "moveNextResult",
+   "alStack_e0": "stackFrame",
+   "auVar22_x1": "sourceArg",
+   "auVar23": "unwindResult",
+   "auVar23_part8": "unwindKind",
+   "lStack_40": "caughtException",
+   "lVar11_2": "caughtException3",
+   "lVar13": "sourceClass",
+   "lVar3_2": "threadLocalBase",
+   "lVar4_3": "tempBuffer1",
+   "lVar9": "interfaceClass",
+   "piVar16": "interfaceMapEntry",
+   "plStack_28": "enumerator",
+   "plStack_c0": "enumerator2",
+   "plVar12": "assetLocatorClass",
+   "plVar12_4": "disposableTarget",
+   "plVar12_6": "disposableTarget2",
+   "pplStack_38": "enumeratorRef",
+   "pplStack_c8": "enumeratorRef2",
+   "pplVar14": "enumeratorPtr",
+   "puStack_b8": "elementPtr",
+   "puVar21": "tempBuffer2",
+   "puVar5": "tempBuffer0",
+   "puVar7": "enumeratorMethodTable",
+   "puVar8": "argumentName",
+   "uVar19": "elementSize",
+   "uVar20_2": "scratchArg"
+  }
+ },
+ "3258f50": {
+  "summary": "Returns the max deck size from the custom game mode event's settings.",
+  "renames": {
+   "lVar3": "eventSettings",
+   "piVar5": "interfaceMapEntry",
+   "uVar4": "interfaceCount"
+  }
+ },
+ "325906c": {
+  "summary": "Hash code getter (decompile shows only an uninitialized return).",
+  "renames": {
+   "iVar1": "hashCode"
+  }
+ }
+}

@@ -1,0 +1,268 @@
+{
+ "2f42858": {
+  "summary": "Handles end of turn for a card: cancels attacks, fires end-of-turn triggers, applies regeneration, poison and remnant destruction, and clears temporary stun, blind and markerlight statuses.",
+  "renames": {
+   "iVar3": "regenAmount",
+   "iVar3_2": "healthValue",
+   "uStack_60": "healthFakeActiveCopy",
+   "uStack_68": "healthInitedCopy",
+   "uStack_70": "healthCopy",
+   "uVar5": "canActValue"
+  }
+ },
+ "2f42d40": {
+  "summary": "Plays the in-play animation or frame effect for a trait on the card UI, handling flying and vanguard toggling afterward.",
+  "renames": {
+   "auVar13": "exceptionInfo",
+   "auVar13_part8": "exceptionKind",
+   "lStack_70": "effectIterCurrent",
+   "lStack_90": "effectIterCurrent2",
+   "lStack_a8": "iterState1",
+   "lStack_c8": "pendingException",
+   "lVar12": "currentTraitEffect",
+   "lVar12_5": "caughtException",
+   "lVar5": "displayClass",
+   "puStack_78": "iterPtr1",
+   "puStack_98": "iterPtr2",
+   "puStack_b0": "iterPtr3",
+   "puStack_c0": "enumeratorDisposable",
+   "puVar10": "zeroVectorData",
+   "uStack_80": "effectEnumerator",
+   "uStack_a0": "effectEnumerator2"
+  }
+ },
+ "2f372a4": {
+  "summary": "Logs and plays the from-code trait particle effect for a trait, using this card as source and the target card as target.",
+  "renames": {
+   "iStack_48": "traitCopy",
+   "uStack_50": "minusOne",
+   "uVar1_2": "traitTypeName",
+   "uVar3": "traitFound"
+  }
+ },
+ "2f409fc": {
+  "summary": "Logs and plays the from-code trait particle effect for a trait with the target card as the source, caster and target.",
+  "renames": {
+   "iStack_48": "traitCopy",
+   "uStack_50": "minusOne",
+   "uVar1_2": "traitTypeName",
+   "uVar3": "traitFound"
+  }
+ },
+ "2f42dfc": {
+  "summary": "Highlights the trait icon for an ability trigger and plays matching trigger-frame animations, returning whether any animation started.",
+  "renames": {
+   "bVar13": "startedAnim",
+   "lVar10_3": "effectClosure",
+   "lVar5": "displayClass",
+   "plVar11": "effectClosureRef",
+   "plVar12": "effectRef"
+  }
+ },
+ "2f42e60": {
+  "summary": "Highlights the trait icon for an ability trigger and plays matching trigger-frame animations for it.",
+  "renames": {
+   "lVar10_3": "effectClosure",
+   "lVar5": "displayClass",
+   "plVar11": "effectClosureRef",
+   "plVar12": "effectRef"
+  }
+ },
+ "2f3e664": {
+  "summary": "Returns the card's active ability, choosing the alternative ability when its board criteria are not met.",
+  "renames": {
+   "bVar1": "meetsCriteria",
+   "plVar3": "abilityRef"
+  }
+ },
+ "2f42eb8": {
+  "summary": "Returns whether the card's active ability (or its loading ability while unloaded) requires a target.",
+  "renames": {
+   "pcVar4": "targetedRef",
+   "uVar3": "hasLoadingLogic"
+  }
+ },
+ "2f42f74": {
+  "summary": "Checks whether a target card satisfies the card's choice-from-pool criteria (targeting filters, stats, army, etc.) and whether the oath permits playing.",
+  "renames": {
+   "bVar4": "result",
+   "cVar2": "sideFlag",
+   "iVar5_3": "targetMeleeAttack",
+   "iVar5_4": "targetHealthValue",
+   "iVar5_5": "abilityIndex",
+   "iVar7": "targetRangeAttack",
+   "lVar10": "abilityRef",
+   "lVar10_2": "filterClosure",
+   "lVar14_15": "evaluatedTarget",
+   "lVar14_16": "cardArray",
+   "lVar14_18": "evaluatedTarget2",
+   "lVar14_20": "evaluatedTarget3",
+   "lVar18": "targetCardRef",
+   "lVar9_3": "compareCard",
+   "plVar16": "targetRef",
+   "puVar15": "failureSuffix",
+   "uStack_60": "healthFakeActive",
+   "uStack_68": "healthInitedValue",
+   "uStack_70": "healthValueRaw",
+   "uStack_80": "healthFakeActiveCopy",
+   "uStack_88": "healthInitedCopy",
+   "uStack_90": "healthValueCopy",
+   "uVar8": "hasTarget",
+   "uVar8_2": "statFilterCopy",
+   "uVar8_4": "hasReferencedTarget",
+   "uVar8_6": "bytesDiffer"
+  }
+ },
+ "2f43258": {
+  "summary": "Builds the localized ability description for the active ability, substituting modular terms, card names, trait names, sprite tags and mana icons.",
+  "renames": {
+   "alStack_a8": "traitEnumBox",
+   "auVar16": "playerDataFound",
+   "auVar17": "exceptionInfo",
+   "auVar17_part8": "exceptionKind",
+   "iStack_74": "manaIndex",
+   "iStack_98": "traitValueCopy",
+   "iVar13": "partCountOrTrait",
+   "lStack_70": "disposableSlot",
+   "lStack_90": "pendingException",
+   "lVar2_4": "nameClosure",
+   "lVar5_3": "disposableClass",
+   "lVar5_7": "disposableClass2",
+   "lVar5_9": "disposableClass3",
+   "plStack_80": "disposableSlotRef",
+   "plVar7_10": "cardMatch",
+   "plVar7_4": "modularMatch",
+   "plVar7_7": "traitBox",
+   "pplStack_88": "enumeratorRef",
+   "puVar6": "cardIdRef",
+   "uVar9": "modularPattern",
+   "uVar9_5": "playerDataManager"
+  }
+ },
+ "2f43454": {
+  "summary": "Instantiates a trigger animation prefab under the card UI, sets its data and value, and returns the new object.",
+  "renames": {
+   "uVar1": "hasComponent"
+  }
+ },
+ "2f2dc50": {
+  "summary": "Refreshes card texts and icons, then checks whether a unit is dead and handles drop pod, survivor, remnant transformation or dying state.",
+  "renames": {
+   "auStack_34": "damageInfoText",
+   "iVar2": "healthValue",
+   "uStack_70": "dropPodFakeActive",
+   "uStack_78": "dropPodInited",
+   "uStack_80": "dropPodHealthCopy",
+   "uStack_90": "healthFakeActive",
+   "uStack_98": "healthInited",
+   "uStack_a0": "healthCopy"
+  }
+ },
+ "2f4386c": {
+  "summary": "Removes the card's intrinsic attack-adding effects and sets its base melee attack to the new value.",
+  "renames": {
+   "uStack_34": "fakeActiveFlag",
+   "uStack_3c": "initedFlag",
+   "uStack_44": "newAttackValue"
+  }
+ },
+ "2f439c8": {
+  "summary": "Adds an armour amount to the card's current armour, clamps it at zero, and updates the health text.",
+  "renames": {
+   "iVar1": "armourValue",
+   "uStack_60": "armourFakeActive",
+   "uStack_68": "armourInited",
+   "uStack_70": "armourCopy",
+   "uStack_74": "newArmourFakeActive",
+   "uStack_7c": "newArmourInited",
+   "uStack_84": "newArmour",
+   "uStack_90": "checkFakeActive",
+   "uStack_98": "checkInited",
+   "uStack_a0": "checkArmour",
+   "uStack_a4": "zeroFakeActive",
+   "uStack_ac": "zeroInited",
+   "uStack_b4": "zeroArmour"
+  }
+ },
+ "2f43acc": {
+  "summary": "Recomputes the card's max health from a new base plus extrinsic bonuses, removes intrinsic health effects, and clamps current health.",
+  "renames": {
+   "iVar1_3": "clampedHealth",
+   "iVar2": "extrinsicHealthBonus",
+   "uStack_44": "maxFakeActive",
+   "uStack_4c": "maxInited",
+   "uStack_54": "newMaxHealth2",
+   "uStack_94": "healthFakeActive",
+   "uStack_9c": "healthInited",
+   "uStack_a4": "clampedHealthValue"
+  }
+ },
+ "2f43d64": {
+  "summary": "Forces the card's max health and current health to a new value and updates the health text.",
+  "renames": {
+   "uStack_34": "maxFakeActive",
+   "uStack_3c": "maxInited",
+   "uStack_44": "maxHealthValue",
+   "uStack_48": "healthFakeActive",
+   "uStack_50": "healthInited",
+   "uStack_58": "healthValue"
+  }
+ },
+ "2f43e18": {
+  "summary": "Sets the card's current health to zero.",
+  "renames": {
+   "uStack_24": "fakeActive",
+   "uStack_2c": "initedFlag",
+   "uStack_34": "zeroHealth"
+  }
+ },
+ "2f3c664": {
+  "summary": "Applies a card effect to this card by buff type, updating health, attack, armour, traits, drop pod stats and active effects; returns whether it succeeded.",
+  "renames": {
+   "auVar17_x1": "unused1",
+   "iVar5_4": "statValue",
+   "iVar5_5": "clampedHealthValue",
+   "iVar5_6": "healthValue",
+   "lVar14_8": "effectAtIndex",
+   "uStack_100": "dropHealthCopy",
+   "uStack_104": "dropHealthFakeActive",
+   "uStack_10c": "dropHealthInited",
+   "uStack_114": "newDropHealth",
+   "uStack_120": "dropAttackFakeActiveCopy",
+   "uStack_128": "dropAttackInitedCopy",
+   "uStack_130": "dropAttackCopy",
+   "uStack_134": "newDropAttackFakeActive",
+   "uStack_13c": "newDropAttackInited",
+   "uStack_144": "newDropAttack",
+   "uStack_148": "resetAttackFakeActive",
+   "uStack_150": "resetAttackInited",
+   "uStack_158": "resetDropAttack",
+   "uStack_70_2": "buffTypeCopy",
+   "uStack_90": "healAddFakeActive",
+   "uStack_98": "healAddInited",
+   "uStack_a0": "healAddCopy",
+   "uStack_a4": "newHealthFakeActive",
+   "uStack_ac": "newHealthInited",
+   "uStack_b4": "newHealthValue",
+   "uStack_c0": "damageFakeActive",
+   "uStack_c8": "damageInited",
+   "uStack_d0": "damageCopy",
+   "uStack_d4": "clampFakeActive",
+   "uStack_dc": "clampInited",
+   "uStack_e4": "clampedHealth",
+   "uStack_f0": "dropHealthFakeActiveCopy",
+   "uStack_f8": "dropHealthInitedCopy",
+   "uVar10": "armourChangeCopy",
+   "uVar12_4": "scratch1",
+   "uVar12_6": "hasFakeValue"
+  }
+ },
+ "2f44638": {
+  "summary": "Checks each of the card's trait combinations to see whether the combination is met.",
+  "renames": {
+   "lStack_38": "currentCombination",
+   "uStack_40": "unused1",
+   "uVar2": "hasNext"
+  }
+ }
+}

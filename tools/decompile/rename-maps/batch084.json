@@ -1,0 +1,244 @@
+{
+ "3045494": {
+  "summary": "Chooses which tab to open: with multiple deck events shows the game-mode deck selection list, otherwise opens the deck collection for the single event.",
+  "renames": {
+   "auVar16_x1": "methodArg",
+   "uVar7": "interfaceCount",
+   "uVar11": "currentEvent",
+   "puVar2": "stackPtr",
+   "lVar6_3": "klass",
+   "piVar13": "interfaceOffsetPtr",
+   "plVar8_6": "enumeratorObj",
+   "pcVar15": "returnTarget",
+   "auVar17_x1": "firstEvent",
+   "auVar18": "unwindResult",
+   "auVar18_part8": "unwindState",
+   "unaff_x30": "linkReg",
+   "unaff_x21": "savedReg21",
+   "unaff_x20": "savedReg20",
+   "unaff_x22": "parentTransform",
+   "unaff_x29": "savedReg29",
+   "unaff_x26": "savedReg26",
+   "unaff_x24": "savedReg24"
+  }
+ },
+ "30455f0": {
+  "summary": "Switches to the game-mode deck selection tab and fills it with a container for each supplied deck event, hiding deck-collection buttons.",
+  "renames": {
+   "uVar12": "interfaceCount",
+   "lVar4_6": "klass",
+   "piVar13": "interfaceOffsetPtr",
+   "uVar8": "currentEvent",
+   "auVar17_x1": "firstEvent",
+   "auVar16": "unwindResult",
+   "auVar16_part8": "unwindState",
+   "pcVar15": "returnTarget",
+   "puVar2": "stackPtr",
+   "unaff_x30": "linkReg",
+   "unaff_x22": "parentTransform",
+   "unaff_x21": "savedReg21",
+   "unaff_x20": "savedReg20",
+   "unaff_x19": "savedReg19",
+   "unaff_x29": "savedReg29",
+   "unaff_x26": "savedReg26",
+   "unaff_x24": "savedReg24"
+  }
+ },
+ "3045330": {
+  "summary": "Opens the deck collection tab for a given deck play event, or falls back to game-mode deck selection when several events exist.",
+  "renames": {
+   "auVar14_x1": "eventArg",
+   "uVar7": "interfaceCount",
+   "lVar12_4": "klass",
+   "piVar11": "interfaceOffsetPtr",
+   "uVar9": "currentEvent",
+   "auVar15": "unwindResult",
+   "auVar15_part8": "unwindState",
+   "auVar14_2": "restoredThis",
+   "unaff_x30": "linkReg",
+   "unaff_x21": "savedReg21",
+   "unaff_x20": "savedReg20",
+   "unaff_x19": "savedReg19",
+   "unaff_x22": "parentTransform",
+   "unaff_x29": "savedReg29",
+   "unaff_x28": "savedReg28",
+   "unaff_x27": "savedReg27",
+   "unaff_x26": "savedReg26",
+   "unaff_x24": "savedReg24"
+  }
+ },
+ "30328e0": {
+  "summary": "Returns from the import screen by finding the active live-ops event for the play mode and reopening the deck selection for it.",
+  "renames": {
+   "lStack_28": "gameModeCopy"
+  }
+ },
+ "3045bb0": {
+  "summary": "Handles clicking a deck collection by opening the deck tab for that event, or the game-mode deck list when multiple events exist.",
+  "renames": {
+   "auVar15_x1": "eventArg",
+   "uVar7": "interfaceCount",
+   "lVar12_4": "klass",
+   "piVar11": "interfaceOffsetPtr",
+   "uVar9": "currentEvent",
+   "auVar14": "unwindResult",
+   "auVar14_part8": "unwindState",
+   "auVar15_2": "restoredThis",
+   "unaff_x30": "linkReg",
+   "unaff_x21": "savedReg21",
+   "unaff_x20": "savedReg20",
+   "unaff_x19": "savedReg19",
+   "unaff_x22": "parentTransform",
+   "unaff_x29": "savedReg29",
+   "unaff_x28": "savedReg28",
+   "unaff_x27": "savedReg27",
+   "unaff_x26": "savedReg26",
+   "unaff_x24": "savedReg24"
+  }
+ },
+ "3045bb4": {
+  "summary": "Opens the ImportDeckPopup window via the WindowsManager, logging an error if no window of that type is found.",
+  "renames": {
+   "plVar5": "methodKlass",
+   "lVar4": "methodClass",
+   "lVar2": "scratchPtr",
+   "uVar8": "funcMethodPtr"
+  }
+ },
+ "3045c1c": {
+  "summary": "Debug QA helper that grants one copy of every owned-less Ultramarines card locally and calls a cloud script to unlock all cards.",
+  "renames": {
+   "lVar2": "playerDataManager",
+   "this_00": "displayClass",
+   "uVar3_3": "armyName",
+   "lVar5_4": "anonParams",
+   "uStack_70": "unusedStack"
+  }
+ },
+ "3045c80": {
+  "summary": "Creates an empty deck for the current deck-collection event's play mode and opens the deck editor window with it.",
+  "renames": {
+   "uVar2": "eventPlayMode",
+   "uStack_28": "nullablePlayMode",
+   "uVar1": "getInstanceMethod",
+   "lVar5": "windowsManager"
+  }
+ },
+ "3045778": {
+  "summary": "Resets the game-mode deck tab and instantiates a clickable deck container for every deck play event supplied.",
+  "renames": {
+   "auVar17_x1": "eventsArg",
+   "unaff_x29": "savedReg29",
+   "unaff_x30": "linkReg",
+   "unaff_x26": "savedReg26",
+   "unaff_x24": "savedReg24",
+   "unaff_x21": "savedReg21",
+   "unaff_x20": "savedReg20",
+   "unaff_x19": "savedReg19",
+   "uVar7": "currentEvent",
+   "uVar12": "hasNext",
+   "lVar9": "addMethod",
+   "puVar5": "enumeratorSlot",
+   "plVar6_4": "enumeratorObj",
+   "auVar19": "unwindResult",
+   "auVar19_part8": "unwindState",
+   "pcVar16": "returnTarget",
+   "puVar2": "stackPtr",
+   "auVar18_x1": "firstEvent",
+   "auVar18_2": "restoredThis"
+  }
+ },
+ "3045ea8": {
+  "summary": "Invokes the deck-click callback with the clicked event and stores the event's associated value into PlayerDataManager.",
+  "renames": {
+   "lVar8": "playerDataManager",
+   "lVar2_2": "klass",
+   "uVar5": "interfaceCount",
+   "piVar6": "interfaceOffsetPtr",
+   "puVar4": "interfaceMethodPtr"
+  }
+ },
+ "3045e04": {
+  "summary": "Destroys all child objects of the content anchor and clears the list of deck containers (decompiler also pulled in Array helper code).",
+  "renames": {
+   "iVar6": "interfaceOffset",
+   "puVar14": "messageStr",
+   "unaff_x30": "linkReg",
+   "unaff_x21": "savedReg21",
+   "unaff_x20": "savedReg20",
+   "unaff_x19": "savedReg19",
+   "unaff_x20_2": "itemsBackup",
+   "uVar17": "resultFlag",
+   "uVar9": "startIndex",
+   "uVar23": "savedIndex",
+   "unaff_x24": "arrayAsObjects",
+   "unaff_x23": "savedReg23",
+   "unaff_x22": "savedReg22",
+   "auVar25_x1": "searchValue",
+   "puVar1": "stackFrame",
+   "puVar2": "stackFrame0",
+   "puVar3": "stackFrame2",
+   "puVar4": "stackFrame3",
+   "plVar16_3": "element",
+   "lVar20": "searchValueCopy",
+   "lVar21_3": "objectArray",
+   "lVar22_2": "reverseIndex",
+   "pcVar24": "methodPtr"
+  }
+ },
+ "304f244": {
+  "summary": "Initializes the battle settings window by hiding debug buttons and wiring up button, toggle and slider event listeners.",
+  "renames": {
+   "auVar8_x1": "methodArg",
+   "lVar2": "addMethod",
+   "lVar5": "callList",
+   "lVar6": "itemsArray",
+   "uVar1": "callCount",
+   "puVar7": "slotPtr"
+  }
+ },
+ "304f6b0": {
+  "summary": "Removes the battle settings window's button, toggle and slider listeners when destroyed and clears the auto-zoom toggle's call lists.",
+  "renames": {
+   "auVar6_x1": "unusedArg"
+  }
+ },
+ "304fb58": {
+  "summary": "Handles the console button: logs dev-tools status and, if dev tools are enabled, flags the Reporter object as opened externally.",
+  "renames": {
+   "bVar1": "showDevTools",
+   "auStack_34": "boolBuffer",
+   "uVar4": "reporterMissing"
+  }
+ },
+ "304fdbc": {
+  "summary": "Handles the draw button: closes the window and, offline, ends the battle as a draw, recording the match result and saving it.",
+  "renames": {
+   "auVar16_x1": "unusedArg",
+   "uVar2": "obscuredStat",
+   "uVar5_2": "battleManagerRef",
+   "uVar7": "obscuredFlag",
+   "uVar2_3": "obscuredHealthDelta",
+   "iVar3_2": "obscuredHeroHealth",
+   "dVar15": "matchMinutes",
+   "lVar4_5": "klass",
+   "lVar4_8": "matchResultOrType",
+   "piVar12": "interfaceOffsetPtr",
+   "uStack_e8": "healthInitedCopy",
+   "uStack_e0": "healthFakeActiveCopy",
+   "uStack_f0_2": "healthValueCopy",
+   "uStack_c8": "healthFieldB",
+   "uStack_d0_2": "healthFieldA",
+   "uStack_c0": "healthFieldC",
+   "uStack_80": "stringScratchA",
+   "uStack_78": "stringScratchB",
+   "uStack_70": "stringScratchC",
+   "uStack_90": "unused1",
+   "uStack_a8": "unused2",
+   "auStack_58": "nowTime",
+   "abStack_44": "isPlayerBuf",
+   "auVar16_2": "falseObscured",
+   "auVar16_part8": "falseObscuredInited"
+  }
+ }
+}

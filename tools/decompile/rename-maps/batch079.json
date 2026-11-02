@@ -1,0 +1,401 @@
+{
+ "3013e1c": {
+  "summary": "Sets the sorting layer on this list item's game object, its child objects recursively, and its renderers.",
+  "renames": {
+   "alStack_48": "disposeScratch",
+   "auVar14": "unwindResult",
+   "auVar14_part8": "unwindResultPart8",
+   "auVar15": "isTargetNull",
+   "auVar15_x1": "catchExtra",
+   "lStack_60": "caughtException",
+   "lVar4_3": "caughtExceptionValue",
+   "lVar4_4": "targetObject",
+   "pcStack_80": "savedSpan",
+   "pcStack_90": "spanScratch",
+   "pcStack_b0": "layerNameSpan",
+   "plStack_38": "enumeratorSlot",
+   "plStack_50": "savedScratchPtr",
+   "plStack_70": "savedDisposable",
+   "plStack_78": "savedObject",
+   "plVar7_3": "currentChild",
+   "pplStack_58": "savedEnumeratorSlotPtr",
+   "pplVar11": "enumeratorSlotPtr",
+   "puStack_88": "spanScratchHigh",
+   "puStack_a8": "layerNameSpanLength",
+   "uStack_68": "unwindState",
+   "uVar3": "flag"
+  }
+ },
+ "3013e98": {
+  "summary": "Applies the given alpha to the item's image and sets its colors to the new color to show it is being deleted.",
+  "renames": {
+   "param_5": "selfItem",
+   "uVar2": "isRendererNull"
+  }
+ },
+ "3014018": {
+  "summary": "Updates the card name, mana cost and copy count text for a deck list item, or shows a select-warlord prompt if no card.",
+  "renames": {
+   "bVar1": "showCopies",
+   "iStack_24": "copyCount",
+   "uVar2": "isCardNull"
+  }
+ },
+ "30142cc": {
+  "summary": "On click, toggles showing the card preview for this list item through the card list holder.",
+  "renames": {
+   "lVar2_3": "holderClass",
+   "piVar4": "interfaceOffsetPtr",
+   "puVar1": "interfaceMethod",
+   "uVar3": "interfaceCount"
+  }
+ },
+ "3014488": {
+  "summary": "On right mouse click, removes this card from the list unless it is the hero or being dragged.",
+  "renames": {
+   "lVar3": "holderClass",
+   "piVar4": "interfaceOffsetPtr",
+   "puVar2": "interfaceMethod"
+  }
+ },
+ "3014648": {
+  "summary": "While dragging, notifies the list holder that this item is being dragged and hides the card preview.",
+  "renames": {
+   "bVar1": "dragStarted",
+   "in_s1": "mouseX",
+   "in_s2": "mouseY",
+   "lVar4": "holderClass",
+   "piVar5": "interfaceOffsetPtr",
+   "puVar3": "interfaceMethod",
+   "uVar2": "flagOrCount"
+  }
+ },
+ "3014808": {
+  "summary": "On mouse down, records click time and height and notifies the list holder of the press.",
+  "renames": {
+   "in_s1": "positionY",
+   "puVar2": "interfaceMethod"
+  }
+ },
+ "30144b4": {
+  "summary": "Removes this card from the deck list unless it is the hero or being dragged, and hides the preview.",
+  "renames": {
+   "lVar3": "holderClass",
+   "piVar4": "interfaceOffsetPtr",
+   "puVar2": "interfaceMethod",
+   "uVar1": "flagOrCount"
+  }
+ },
+ "3013eb4": {
+  "summary": "Sets alpha on the item's image and applies a new color to the image and sprite renderer.",
+  "renames": {
+   "param_6": "selfItem",
+   "uVar2": "isRendererNull"
+  }
+ },
+ "3014924": {
+  "summary": "Per-frame: shows or hides the card preview after a long press and enables or disables the collider based on height thresholds.",
+  "renames": {
+   "bVar1": "mouseHeld",
+   "in_s1": "currentHeight",
+   "lVar3_3": "holderClass",
+   "piVar5": "interfaceOffsetPtr",
+   "puVar4": "interfaceMethod"
+  }
+ },
+ "3033dcc": {
+  "summary": "Initializes the deck cosmetic drawer, picks the deck's cardback and sets it as the cosmetic image sprite.",
+  "renames": {
+   "bVar1": "skipMaterialUpdate",
+   "fVar12": "zeroX",
+   "fVar13": "zeroY",
+   "in_s2": "spriteWidth",
+   "in_s3": "spriteHeight",
+   "lVar4": "closure",
+   "lVar4_3": "currentSprite",
+   "lVar4_5": "existingSprite",
+   "plVar11": "spriteFieldPtr"
+  }
+ },
+ "3035a5c": {
+  "summary": "Static constructor creating the singleton instance of the compiler-generated closure class.",
+  "renames": {
+   "uVar1": "instance"
+  }
+ },
+ "303402c": {
+  "summary": "Thread-safely adds a handler to the OnCardSelected event, then runs panel setup code the decompiler merged in.",
+  "renames": {
+   "auVar11_x1": "removeArg",
+   "bVar2": "exchangeSucceeded",
+   "plVar10": "onDeckEditedPtr",
+   "puVar8": "callSlotPtr"
+  }
+ },
+ "30340dc": {
+  "summary": "Thread-safely removes a handler from the OnCardSelected event, with merged panel setup code.",
+  "renames": {
+   "bVar2": "exchangeSucceeded",
+   "lVar5_2": "previousValue",
+   "plVar10": "onDeckEditedPtr",
+   "puVar9": "callSlotPtr"
+  }
+ },
+ "303418c": {
+  "summary": "Registers UpdateDrawers on OnDeckEdited, drag listener on the event relay, card selection on deck list, and ChangeName on the name field.",
+  "renames": {
+   "lVar2": "addMethod",
+   "lVar9": "currentHandler",
+   "plVar8": "onDeckEditedPtr",
+   "puVar7": "callSlotPtr",
+   "uVar1": "callCount"
+  }
+ },
+ "3034404": {
+  "summary": "Sets the editing deck and refreshes the deck counter, deck list, drawers, name field and empty-deck warning.",
+  "renames": {
+   "bVar1": "hasCustomGameMode",
+   "iStack_34": "deckCardCount",
+   "lVar6": "unusedZero",
+   "lVar7": "playEventClass",
+   "piVar9": "interfaceOffsetPtr",
+   "uVar5": "modeSuffix",
+   "uVar8": "flagOrCount"
+  }
+ },
+ "3034a84": {
+  "summary": "Adds a dropped card to the editing deck and marks the deck as unsynced.",
+  "renames": {
+   "uVar1": "isCardNull"
+  }
+ },
+ "3034a8c": {
+  "summary": "Adds a dropped card to the editing deck, optionally animated, and marks the deck as unsynced.",
+  "renames": {
+   "uVar1": "isCardNull"
+  }
+ },
+ "3034d14": {
+  "summary": "Sets the deck's cardback from a dropped cosmetic item and refreshes the deck counter and drawers.",
+  "renames": {
+   "lVar5": "unusedScratch",
+   "lVar9_2": "playEventClass",
+   "piVar6": "interfaceOffsetPtr",
+   "uVar2": "flag",
+   "uVar4": "modeSuffix"
+  }
+ },
+ "3034b20": {
+  "summary": "Tries to add a card to the editing deck, replacing the existing hero or defensive card, updating the list and empty warning.",
+  "renames": {
+   "lStack_28": "errorMessage",
+   "plVar4": "cardToRemovePtr"
+  }
+ },
+ "3034ff8": {
+  "summary": "Removes a card from the editing deck and deck list, fires OnDeckEdited and updates the empty warning.",
+  "renames": {
+   "uVar3": "hasEmptyWarning"
+  }
+ },
+ "3035494": {
+  "summary": "Handles dragging a card slot: either starts dragging the card out of the deck or forwards the drag to the scroll view.",
+  "renames": {
+   "auStack_130": "frameScratch",
+   "auVar21_x1": "callbackArg",
+   "auVar22": "unwindResult",
+   "auVar22_part8": "unwindResultPart8",
+   "lStack_108": "stackCanary",
+   "lStack_60": "listEnumerator",
+   "lStack_78_2": "caughtException",
+   "lVar10": "handlerEvent2",
+   "lVar18": "elementBuffer2",
+   "lVar3_8": "threadLocalBase",
+   "lVar8": "listenerWrapper",
+   "lVar9": "handlerList",
+   "plStack_110": "savedBuffer2Ptr",
+   "plStack_70": "savedEnumPtr",
+   "plVar6": "genericContext",
+   "puStack_118": "savedBuffer1Ptr",
+   "puStack_120": "savedMethodInfoPtr",
+   "puStack_68": "savedFramePtr",
+   "puStack_f0": "argBufferPtr",
+   "puVar13": "cachedMethodPtr",
+   "puVar17": "framePtr",
+   "uStack_100": "elementBuffer1",
+   "uStack_38": "registerMethodSlot",
+   "uStack_58": "listEnumeratorHigh",
+   "uStack_f8": "savedMethodInfo",
+   "uVar11": "hasNext",
+   "uVar12": "elementSize",
+   "uVar14": "registerMethodInfo",
+   "uVar14_2": "methodInfo2",
+   "uVar14_3": "methodInfo3",
+   "uVar15": "handlerSizeClass"
+  }
+ },
+ "3034dd4": {
+  "summary": "Refreshes the deck counter text and the counter, cost and cosmetic drawers for the editing deck.",
+  "renames": {
+   "lVar5": "unusedScratch",
+   "lVar6": "playEventClass",
+   "piVar8": "interfaceOffsetPtr",
+   "uVar4": "modeSuffix",
+   "uVar7": "interfaceCount"
+  }
+ },
+ "3035714": {
+  "summary": "Shows the deck list and hides the cost, counter and cosmetic drawers.",
+  "renames": {
+   "auVar3_x1": "unused1"
+  }
+ },
+ "30357a4": {
+  "summary": "Hides the deck list and shows the cost and counter drawers (cosmetic drawer too).",
+  "renames": {
+   "auVar3_x1": "unused1"
+  }
+ },
+ "3035834": {
+  "summary": "Hides the deck list, cost and counter drawers (cosmetics view).",
+  "renames": {
+   "auVar3_x1": "unused1"
+  }
+ },
+ "3038b28": {
+  "summary": "Static constructor creating the singleton instance of the compiler-generated closure class.",
+  "renames": {
+   "uVar1": "instance"
+  }
+ },
+ "3038b98": {
+  "summary": "Predicate returning true if a card is always shown in the collection, or if owned (inventory has it) when marked OnlyIfOwned.",
+  "renames": {
+   "acStack_10c": "predicateResultBuf",
+   "aplStack_38": "itemList",
+   "aplStack_382": "currentElement",
+   "aplStack_383": "genericMethodClass",
+   "auVar26": "unwindResult",
+   "auVar26_part8": "unwindResultPart8",
+   "auVar27": "catchResult",
+   "auVar27_x1": "catchResultExtra",
+   "auVar28": "returnValueA",
+   "auVar28_x1": "returnValueB",
+   "auVar29": "appendSource",
+   "auVar29_x1": "appendElement",
+   "bVar2": "anyMatched",
+   "bVar3": "isOwned",
+   "iVar4": "itemCount",
+   "lStack_108": "stackCanary",
+   "pcStack_80": "savedMethodPtr",
+   "piVar20": "interfaceOffsetPtr",
+   "plStack_118": "argBufPtr",
+   "plStack_120": "enumeratorB",
+   "plStack_130": "finallyStateB",
+   "plStack_48": "finallyStateA",
+   "plStack_60": "savedEnumerator",
+   "plStack_68": "savedList",
+   "plStack_88": "enumeratorA",
+   "plStack_98": "finallyStateC",
+   "plVar23": "buffer1",
+   "plVar24": "buffer2",
+   "pplStack_128": "enumeratorBPtr",
+   "pplStack_40": "enumeratorPtr",
+   "pplStack_90": "enumeratorCPtr",
+   "uStack_58": "savedArgName",
+   "uVar1": "stackFlags",
+   "uVar22": "elementSize",
+   "uVar25": "resultFlag",
+   "lVar12": "genericClass",
+   "lVar12_2": "predicateFunc",
+   "lVar12_3": "objectClass3",
+   "lVar13": "elementClass",
+   "lVar17": "interfaceClass",
+   "pcVar16": "iteratorMethod",
+   "plVar11": "genericMethodInfo",
+   "plVar11_2": "genericMethodInfo2",
+   "plVar14": "itemSource",
+   "plVar9_2": "enumeratorObj",
+   "pplVar15": "disposeTargetPtr",
+   "puVar10": "delegateInfo",
+   "puVar5": "caughtObjPtr",
+   "puVar6": "errorParamName",
+   "puVar7": "interfaceMethod",
+   "uVar8": "itemId",
+   "uVar8_3": "delegateTarget"
+  }
+ },
+ "3038cd4": {
+  "summary": "Predicate returning true if a cardback cosmetic is visible in the collection: not hidden and shown, or owned when OnlyIfOwned.",
+  "renames": {
+   "acStack_10c": "predicateResultBuf",
+   "aplStack_38": "itemList",
+   "aplStack_382": "currentElement",
+   "aplStack_383": "genericMethodClass",
+   "auVar26": "unwindResult",
+   "auVar26_part8": "unwindResultPart8",
+   "auVar27": "catchResult",
+   "auVar27_x1": "catchResultExtra",
+   "auVar28": "returnValueA",
+   "auVar28_x1": "returnValueB",
+   "auVar29": "appendSource",
+   "auVar29_x1": "appendElement",
+   "bVar2": "anyMatched",
+   "bVar3": "isOwned",
+   "iVar4": "itemCount",
+   "lStack_108": "stackCanary",
+   "pcStack_80": "savedMethodPtr",
+   "piVar20": "interfaceOffsetPtr",
+   "plStack_118": "argBufPtr",
+   "plStack_120": "enumeratorB",
+   "plStack_130": "finallyStateB",
+   "plStack_48": "finallyStateA",
+   "plStack_60": "savedEnumerator",
+   "plStack_68": "savedList",
+   "plStack_88": "enumeratorA",
+   "plStack_98": "finallyStateC",
+   "plVar23": "buffer1",
+   "plVar24": "buffer2",
+   "pplStack_128": "enumeratorBPtr",
+   "pplStack_40": "enumeratorPtr",
+   "pplStack_90": "enumeratorCPtr",
+   "uStack_58": "savedArgName",
+   "uVar1": "stackFlags",
+   "uVar22": "elementSize",
+   "uVar25": "resultFlag",
+   "lVar13": "genericClass",
+   "lVar13_2": "predicateFunc",
+   "lVar13_3": "objectClass3",
+   "lVar14": "elementClass",
+   "lVar18": "interfaceClass",
+   "pcVar17": "iteratorMethod",
+   "plVar12": "genericMethodInfo",
+   "plVar12_2": "genericMethodInfo2",
+   "plVar15": "itemSource",
+   "plVar10_2": "enumeratorObj",
+   "pplVar16": "disposeTargetPtr",
+   "puVar11": "delegateInfo",
+   "puVar6": "caughtObjPtr",
+   "puVar7": "errorParamName",
+   "puVar8": "interfaceMethod",
+   "uVar9": "itemId",
+   "uVar9_3": "delegateTarget"
+  }
+ },
+ "3038d9c": {
+  "summary": "Closes and destroys the current pop-up window (save deck callback) and restores the previous or main window.",
+  "renames": {
+   "alStack_38": "loadedHandleKey",
+   "auVar5_x1": "unused1",
+   "uVar2": "isPopUpCurrent"
+  }
+ },
+ "3038dec": {
+  "summary": "Closes and destroys the current pop-up window (discard confirmation callback) and restores the previous or main window.",
+  "renames": {
+   "alStack_38": "loadedHandleKey",
+   "auVar5_x1": "unused1",
+   "uVar2": "isPopUpCurrent"
+  }
+ }
+}

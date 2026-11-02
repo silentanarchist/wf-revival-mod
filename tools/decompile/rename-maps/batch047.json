@@ -1,0 +1,299 @@
+{
+ "329e204": {
+  "summary": "Collects the units adjacent to a card on its side's board; a hero gets the first minion, others get neighbours and hero if leftmost.",
+  "renames": {
+   "auVar12_2": "ctorResult",
+   "iVar1": "nextIndex",
+   "lVar9": "minionManager",
+   "plVar8": "slotPtr",
+   "uVar5": "isHero"
+  }
+ },
+ "329e238": {
+  "summary": "Returns the unit immediately to the right of the reference card on its side's board.",
+  "renames": {
+   "auVar10": "excResult1",
+   "auVar10_part8": "excIndex1",
+   "auVar9": "castObject",
+   "auVar9_x1": "castArg",
+   "lVar1": "unitList",
+   "lVar4": "minionManager",
+   "puVar5": "slotPtr",
+   "uVar3": "isReferenceCard"
+  }
+ },
+ "329e26c": {
+  "summary": "Picks a random card from the list of available attack targets for the attacker, or null if none.",
+  "renames": {
+   "auVar7": "castObject",
+   "auVar7_x1": "castArg",
+   "auVar8": "excResult",
+   "auVar8_part8": "excIndex",
+   "lVar6": "itemsPtr",
+   "puVar3": "slotPtr",
+   "uVar4": "getItemMethod"
+  }
+ },
+ "328b614": {
+  "summary": "Builds a list of all units in play that are valid attack targets for the attacker.",
+  "renames": {
+   "lVar2": "addMethod"
+  }
+ },
+ "329e314": {
+  "summary": "Returns how many free battlefield slots remain for the player or enemy side.",
+  "renames": {
+   "lVar1": "slotsOffsetA",
+   "lVar2": "slotsOffsetB",
+   "lVar3": "minionManager"
+  }
+ },
+ "329e33c": {
+  "summary": "Computes the world position of a hero's card or anchor for the given side, converting board to screen to world coordinates.",
+  "renames": {
+   "bVar1": "isInPlayOrDying",
+   "uStack_24": "planeDistanceValue",
+   "uStack_28": "scratch1",
+   "uStack_30": "screenPosVec",
+   "uStack_30_part4": "screenPosY",
+   "uStack_38": "worldPos"
+  }
+ },
+ "329e368": {
+  "summary": "Computes the world position of a hero or one of its position reference points (e.g. anchors) for the given side.",
+  "renames": {
+   "bVar2": "isInPlayOrDying",
+   "uStack_24": "planeDistanceValue",
+   "uStack_28": "scratch1",
+   "uStack_30": "screenPosVec",
+   "uStack_30_part4": "screenPosY",
+   "uStack_38": "worldPos",
+   "uVar1": "referenceBit"
+  }
+ },
+ "329e560": {
+  "summary": "Compares the two heroes' obscured values and returns the warlord with the higher value, or null if tied.",
+  "renames": {
+   "iVar1": "playerValue",
+   "iVar2": "enemyValue",
+   "uStack_50": "scratchHidden1",
+   "uStack_58": "scratchFake1",
+   "uStack_60": "scratchInited1",
+   "uStack_90": "scratchHidden2",
+   "uStack_98": "scratchFake2",
+   "uStack_a0": "scratchInited2"
+  }
+ },
+ "329e6cc": {
+  "summary": "Finds the in-play unit of a side with the lowest current health that will not die from pending damage, defaulting to the hero.",
+  "renames": {
+   "iVar2": "unitHealth",
+   "iVar3": "bestHealth",
+   "uStack_70": "scratchFake",
+   "uStack_78": "scratchInited",
+   "uStack_80": "scratchHealth"
+  }
+ },
+ "32936e8": {
+  "summary": "Returns the player or enemy deck manager depending on the flag.",
+  "renames": {
+   "lVar1": "fieldOffset"
+  }
+ },
+ "329c83c": {
+  "summary": "Returns the player's or enemy's shuffled deck list.",
+  "renames": {
+   "lVar1": "fieldOffset"
+  }
+ },
+ "329e888": {
+  "summary": "Returns whether the player or enemy has already played a card this turn.",
+  "renames": {
+   "lVar1": "fieldOffset"
+  }
+ },
+ "329e89c": {
+  "summary": "Returns whether the player or enemy has already played a troop this turn.",
+  "renames": {
+   "lVar1": "fieldOffset"
+  }
+ },
+ "329497c": {
+  "summary": "Returns a deterministic pseudo-random int in a range from the match's predefined random number array, advancing its index.",
+  "renames": {
+   "auVar17": "excResult",
+   "auVar17_x1": "excArg",
+   "iVar1_3": "quotient",
+   "iVar5": "randomValue",
+   "iVar6": "rangeSize",
+   "lVar13": "sourceData",
+   "lVar13_3": "eventObject",
+   "lVar16": "deckData",
+   "piVar14": "interfaceMapPtr",
+   "uVar11": "scratchString",
+   "uVar3": "scratch1",
+   "uVar4": "arrayIndex"
+  }
+ },
+ "3284a5c": {
+  "summary": "Returns true if the current match type is one of the networked match types.",
+  "renames": {
+   "bVar2": "isNetworked",
+   "uVar4": "secondMatchType"
+  }
+ },
+ "32805c0": {
+  "summary": "Returns whether a match type is one that changes the player's ELO rating.",
+  "renames": {
+   "bVar1": "altersElo"
+  }
+ },
+ "3296b9c": {
+  "summary": "Returns true if the current match is a tutorial or campaign match.",
+  "renames": {
+   "iVar3": "matchTypeA",
+   "iVar4": "matchTypeB"
+  }
+ },
+ "329e9b0": {
+  "summary": "Returns whether the match type is one of those played against the expected AI opponent, using a bitmask lookup.",
+  "renames": {
+   "uVar2": "bitIndex",
+   "uVar4": "bitMask"
+  }
+ },
+ "329ea3c": {
+  "summary": "Returns true if the current match type is played against an AI opponent.",
+  "renames": {
+   "bVar2": "isAgainstAi"
+  }
+ },
+ "329eadc": {
+  "summary": "Returns true if the match (or replayed match) type is one where defence mode is not selected, e.g. practice or closed deck.",
+  "renames": {
+   "bVar1": "isMatch",
+   "iVar4": "secondMatchType"
+  }
+ },
+ "329eb3c": {
+  "summary": "On application quit in a networked game, sends a forfeit RPC to the opponent through Photon (with inlined Photon helper code).",
+  "renames": {
+   "acStack_e4": "groupByteA",
+   "acStack_e8": "groupByteB",
+   "auVar30": "scratchResult",
+   "auVar30_part8": "scratchPart",
+   "auVar30_x1": "scratchArg",
+   "iVar18": "capacity",
+   "lStack_90_2": "savedPhotonView",
+   "lStack_a8": "savedRaiseOptions",
+   "lStack_c0": "savedStringArray",
+   "lVar13_2": "cachedArrayData",
+   "pcStack_d8": "savedFuncPtr",
+   "piVar22": "typeMapPtrA",
+   "piVar29": "typeMapPtrB",
+   "plStack_88": "savedPeer",
+   "plVar8": "networkingPeerPtr",
+   "puVar14": "messagePrefixPtr",
+   "puVar20": "messageSuffixPtr",
+   "uStack_68": "scratchInt",
+   "uStack_68_part4": "scratchIntHigh",
+   "uStack_70": "scratch1",
+   "uStack_78": "scratch2",
+   "uStack_80": "scratchObject",
+   "uStack_80_part1": "scratchObjectPart1",
+   "uStack_80_part2": "scratchObjectPart2",
+   "uStack_80_part4": "scratchObjectPart4",
+   "uStack_98": "scratch3",
+   "uStack_a0": "scratch4",
+   "uStack_b0": "scratch5",
+   "uStack_b8": "savedConcat",
+   "uVar15": "groupCount",
+   "uVar21": "interfaceCount",
+   "uVar23": "bucketIndex",
+   "unaff_x27": "unused1"
+  }
+ },
+ "3296be0": {
+  "summary": "Builds the list of all legal actions for a side: playing cards, attacks, active abilities, waystone clicks and ending the turn.",
+  "renames": {
+   "in_x5": "unused1",
+   "plVar13": "slotPtr"
+  }
+ },
+ "329efe4": {
+  "summary": "Builds the list of melee and ranged attack actions the acting card can perform against enemy units.",
+  "renames": {
+   "iVar4": "attackValue",
+   "plVar9": "slotPtr"
+  }
+ },
+ "329fae8": {
+  "summary": "Starts target tracking from a board position with an attack type (crosshair, reticle colors), mixed with inlined DOTween code.",
+  "renames": {
+   "auVar30": "scratchResult",
+   "auVar30_part8": "scratchPart",
+   "bVar1": "isLockTaken",
+   "bVar2": "scratchBool",
+   "bVar3": "tweenCountByte",
+   "bVar4": "isTypeMatch",
+   "bVar5": "anyCompleted",
+   "fVar25": "scaleX",
+   "fVar26": "scaleY",
+   "fVar27": "scaleMultiplier",
+   "fVar28": "scaleZ",
+   "iVar7_3": "shaderPropertyId",
+   "iVar7_4": "monitorValue",
+   "lVar12_4": "currentTween",
+   "lVar12_5": "displayClass",
+   "param_5": "attackTypeParam",
+   "plVar11_6": "scratchObject",
+   "puVar15": "scratchPtr",
+   "uStack_78": "tweenedCount",
+   "uVar14": "debugText"
+  }
+ },
+ "329fb64": {
+  "summary": "Sets the player's card currently being tracked by the mouse, stopping display of the previous tracked card.",
+  "renames": {
+   "in_s1": "mouseY",
+   "lVar7": "previousTrackedCard",
+   "puVar2": "logMethodPtr",
+   "uVar1": "hadTrackedCard",
+   "uVar3": "logArg"
+  }
+ },
+ "329fc9c": {
+  "summary": "Begins a spell from a card, tracking it and highlighting units that are valid spell targets.",
+  "renames": {
+   "lVar3": "unitList"
+  }
+ },
+ "329fe74": {
+  "summary": "Begins an attack or ability from a card, tracks it and highlights valid targets on the board.",
+  "renames": {
+   "param_6": "isPlayerInitiated"
+  }
+ },
+ "32a01e8": {
+  "summary": "Queues an active ability action for a unit, unless it is no longer in play or blocked by another action.",
+  "renames": {
+   "alStack_130": "actionTargetSlot",
+   "auStack_240": "actionCopyA",
+   "auStack_340": "actionCopyB",
+   "lStack_138": "actionActingCard",
+   "uStack_13c": "actionIsPlayer",
+   "uStack_140": "actionType",
+   "uVar3": "hasActingLight"
+  }
+ },
+ "32a0440": {
+  "summary": "Queues a use-waystone action for a unit if allowed; otherwise logs a warning and clears the waiting flag.",
+  "renames": {
+   "alStack_120": "actionTargetSlot",
+   "auStack_230": "actionCopyA",
+   "auStack_330": "actionCopyB",
+   "lStack_128": "actionActingCard",
+   "uStack_130": "actionType"
+  }
+ }
+}

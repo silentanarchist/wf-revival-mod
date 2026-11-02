@@ -1,0 +1,376 @@
+{
+ "2f9d08c": {
+  "summary": "Returns the collider transform matching the given battle collider type, or null if the type is unknown.",
+  "renames": {
+   "plVar1": "colliderField"
+  }
+ },
+ "2fa702c": {
+  "summary": "Toggles the swarm icon on or off, killing tweens and fading or moving it with sound and animation.",
+  "renames": {
+   "uVar1": "killTarget"
+  }
+ },
+ "2fa767c": {
+  "summary": "Iterator Reset method that always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "methodInfo"
+  }
+ },
+ "2fa7304": {
+  "summary": "Sets up the swarm VFX card material, hides the card body, plays a 3D sound and starts the safe-exit coroutine.",
+  "renames": {
+   "auStack_34": "toggleOptions",
+   "lVar3": "soundManager"
+  }
+ },
+ "2fa74dc": {
+  "summary": "Invokes the finish callback, stops all coroutines and destroys or deactivates the game object.",
+  "renames": {}
+ },
+ "2fa7470": {
+  "summary": "Creates and returns the SafeExit coroutine iterator object.",
+  "renames": {
+   "lVar1": "iterator"
+  }
+ },
+ "2fa8640": {
+  "summary": "If the preset matches the attack type, applies its color to the crosshair sprite and line material.",
+  "renames": {
+   "iVar1_3": "colorPropertyId"
+  }
+ },
+ "2fa789c": {
+  "summary": "Caches the crosshair sprite original local scale on startup.",
+  "renames": {
+   "auVar3_x1": "unused1",
+   "in_s1": "scaleY",
+   "in_s2": "scaleZ"
+  }
+ },
+ "2fa78d4": {
+  "summary": "Each frame fades the crosshair and line colors in or out, disabling and hiding them when fully faded out.",
+  "renames": {
+   "fVar8": "frameDelta",
+   "fVar9": "fadeDelta",
+   "in_s3": "alpha",
+   "iVar2_3": "colorPropertyId",
+   "uVar3": "isMissing"
+  }
+ },
+ "2fa7d54": {
+  "summary": "Initializes the line effect material and computes the floor, player minion and enemy minion planes from reference transforms.",
+  "renames": {
+   "auVar15_x1": "unused1",
+   "auVar16_x1": "unused2",
+   "cVar1": "staticInitFlag",
+   "fVar10": "vectorLength",
+   "fVar11": "vectorLength2",
+   "fVar13": "normalY",
+   "fVar14": "normalZ",
+   "fVar8": "floorPosX",
+   "fVar9": "minionPosX",
+   "in_s1": "floorPosY",
+   "in_s2": "floorPosZ",
+   "lVar2_4": "tempObject",
+   "pfVar6": "zeroVectorStatic",
+   "uVar4": "hasFloorReference"
+  }
+ },
+ "2fa81d4": {
+  "summary": "Moves the crosshair to the raycast world position and updates the curved line renderer points between origin and target.",
+  "renames": {
+   "extraout_s0": "colorKeyCtor",
+   "fStack_64": "targetZ",
+   "fStack_68": "heightFactor",
+   "fStack_6c": "maxHeight",
+   "fVar10": "clampedRatio",
+   "fVar11": "curveT",
+   "fVar12": "deltaX",
+   "fVar13": "heightBlend",
+   "fVar16": "reticleX",
+   "fVar17": "minHeight",
+   "fVar18": "pointDistance",
+   "fVar19": "distance",
+   "fVar9": "distanceRatio",
+   "iStack_70": "curvePointCount",
+   "iVar3": "pointLimit",
+   "lStack_78": "savedLineEffect",
+   "param_5": "deltaY",
+   "param_6": "deltaZ",
+   "param_7": "controller",
+   "pcStack_90": "methodRef",
+   "pfVar4": "zeroVectorStatic",
+   "uStack_80": "savedIndex",
+   "uStack_88": "frameSize",
+   "uStack_98": "savedPointDistance",
+   "uStack_a0": "savedOrigin",
+   "uStack_a8": "savedController",
+   "uStack_b0": "savedDirection",
+   "uStack_b8": "colorKeyData2",
+   "uStack_c0": "colorKeyData1",
+   "uStack_c8": "colorKeyData0",
+   "uVar14": "prevZBits",
+   "uVar15": "lastZBits",
+   "uVar6": "pointIndex",
+   "uVar7": "nextIndex"
+  }
+ },
+ "2fa7b4c": {
+  "summary": "Shows or hides the crosshair and line effect, instantly or with a fade, toggling the cursor visibility.",
+  "renames": {
+   "bVar1": "shouldSkip",
+   "bVar2": "isCurrentlyOff",
+   "iVar3_3": "colorPropertyId"
+  }
+ },
+ "2fa8420": {
+  "summary": "Positions the crosshair at a board position, sets the attack type and color preset, and punches its scale (with inlined DOTween code).",
+  "renames": {
+   "auVar28": "exceptionResult",
+   "auVar28_part8": "exceptionAux",
+   "bVar1": "isMonitorLock",
+   "bVar2": "isLastIndex",
+   "bVar3": "tweenFlag",
+   "bVar4": "isObjectTarget",
+   "bVar5": "anyTweenAffected",
+   "fVar24": "scaleX",
+   "fVar25": "scaleY",
+   "fVar26": "punchModifier",
+   "fVar27": "scaleZ",
+   "iVar7_3": "tweenIndex",
+   "iVar7_4": "scratchInt",
+   "lVar18": "listItems",
+   "lVar20_4": "activeTween",
+   "param_5": "attackTypeArg",
+   "param_6": "crosshairSpriteArg",
+   "param_7": "lineMaterial",
+   "plVar12_6": "tweenTarget",
+   "puVar15": "slotPtr",
+   "uStack_78": "affectedCount",
+   "uVar14": "tweenName"
+  }
+ },
+ "2fa84d0": {
+  "summary": "Sets the reticle attack type, applies matching color presets, and resets or punches the crosshair scale (with inlined DOTween code).",
+  "renames": {
+   "auVar27": "exceptionResult",
+   "auVar27_part8": "exceptionAux",
+   "auVar28": "exceptionResult2",
+   "bVar1": "isMonitorLock",
+   "bVar2": "isLastIndex",
+   "bVar4": "isObjectTarget",
+   "bVar5": "anyTweenAffected",
+   "cVar3": "staticInitFlag",
+   "iVar6_3": "propertyId",
+   "iVar6_4": "scratchInt",
+   "lVar21_7": "activeTween",
+   "lVar22_4": "tweenRef",
+   "plVar10_4": "tweenOwner",
+   "plVar19": "tweenTarget",
+   "puVar14": "slotPtr",
+   "uVar12": "unusedBits",
+   "uVar9_3": "activeIndex"
+  }
+ },
+ "2fa86a4": {
+  "summary": "Hides the crosshair and line effect, restores the cursor and resets their colors.",
+  "renames": {
+   "iVar1_3": "colorPropertyId"
+  }
+ },
+ "2fa8260": {
+  "summary": "Updates the curved trail line positions from the origin to the target, raycasting to world space unless already in world space.",
+  "renames": {
+   "extraout_s0": "colorKeyCtor",
+   "fStack_64": "targetZ",
+   "fStack_68": "heightFactor",
+   "fStack_6c": "maxHeight",
+   "fVar10": "clampedRatio",
+   "fVar11": "curveT",
+   "fVar12": "deltaX",
+   "fVar16": "minHeight",
+   "fVar17": "pointDistance",
+   "fVar18": "distance",
+   "fVar9": "distanceRatio",
+   "iStack_70": "curvePointCount",
+   "iVar3": "pointLimit",
+   "lStack_78": "savedLineEffect",
+   "param_6": "deltaZ",
+   "param_7": "controller",
+   "pcStack_90": "methodRef",
+   "pfVar4": "zeroVectorStatic",
+   "uStack_80": "savedIndex",
+   "uStack_88": "frameSize",
+   "uStack_98": "savedPointDistance",
+   "uStack_a0": "savedOrigin",
+   "uStack_a8": "savedController",
+   "uStack_b0": "savedDirection",
+   "uStack_b8": "colorKeyData2",
+   "uStack_c0": "colorKeyData1",
+   "uStack_c8": "colorKeyData0",
+   "uVar14": "lastZBits",
+   "uVar6": "pointIndex",
+   "uVar7": "nextIndex",
+   "fVar15": "reticleX",
+   "param_8": "useWorldSpace",
+   "uStack_28": "pointCount",
+   "uVar13": "prevZBits"
+  }
+ },
+ "2fa86b0": {
+  "summary": "Casts a ray from the canvas position through the board camera and returns the nearer hit on the floor or minion plane.",
+  "renames": {
+   "extraout_s0": "boardCameraRef",
+   "fVar11": "floorNormalX",
+   "fVar12": "rayValueA",
+   "fVar13": "floorNormalY",
+   "fVar14": "floorNormalZ",
+   "fVar15": "rayValueB",
+   "fVar16": "floorDistance",
+   "fVar17": "rayValueC",
+   "fVar18": "floorEnter",
+   "fVar6": "minionEnter",
+   "fVar7": "floorTolerance",
+   "fVar8": "floorEpsilon",
+   "fVar9": "minionEpsilon",
+   "param_5": "isPlayerSide",
+   "pfVar2": "planeNormalYPtr",
+   "pfVar3": "planeNormalXPtr",
+   "pfVar4": "planeNormalZPtr",
+   "pfVar5": "planeDistancePtr",
+   "uStack_34": "floorHitPoint",
+   "uStack_34_3": "hitPoint",
+   "uStack_90": "rayDirData",
+   "uStack_90_part4": "rayDirZ",
+   "uStack_98": "rayDirXY",
+   "uStack_98_part4": "rayDirY",
+   "uStack_a0": "rayOriginData",
+   "uStack_a0_part4": "rayOriginY",
+   "uStack_a8": "rayTemp2",
+   "uStack_b0": "rayTemp1",
+   "uVar10": "vector3Statics"
+  }
+ },
+ "2fa8a3c": {
+  "summary": "Moves the crosshair automatically: computes the world position from the crosshair and updates the curved line renderer points.",
+  "renames": {
+   "extraout_s0": "colorKeyCtor",
+   "fStack_64": "startZ",
+   "fStack_68": "heightFactor",
+   "fVar10": "clampedRatio",
+   "fVar11": "curveT",
+   "fVar12": "deltaX",
+   "fVar15_2": "desiredX",
+   "fVar17": "pointDistance",
+   "fVar21": "distance",
+   "fVar9": "distanceRatio",
+   "in_s1": "deltaY",
+   "in_s2": "deltaZ",
+   "lStack_78": "savedLineEffect",
+   "pcStack_90": "methodRef",
+   "pfVar4": "zeroVectorStatic",
+   "uStack_28": "pointCount",
+   "uStack_80": "savedIndex",
+   "uStack_88": "frameSize",
+   "uStack_98": "savedPointDistance",
+   "uStack_a0": "savedOrigin",
+   "uStack_a8": "savedStart",
+   "uStack_b0": "savedDirection",
+   "uStack_b8": "colorKeyData2",
+   "uStack_c0": "colorKeyData1",
+   "uStack_c8": "colorKeyData0",
+   "uVar14": "prevZBits",
+   "uVar6": "pointIndex",
+   "uVar7": "nextIndex"
+  }
+ },
+ "2fa8a98": {
+  "summary": "On validate, finds the floor position reference by tag if unset and logs an error if missing.",
+  "renames": {
+   "puVar5": "floorReferenceField",
+   "uVar1": "hasFloorReference",
+   "uVar3": "logType",
+   "uVar6": "floorTransform"
+  }
+ },
+ "2fa9414": {
+  "summary": "Static constructor that creates the singleton closure-class instance.",
+  "renames": {
+   "uVar1": "instance"
+  }
+ },
+ "2fa9484": {
+  "summary": "Predicate returning whether the style item has a non-null asset reference.",
+  "renames": {}
+ },
+ "2fa900c": {
+  "summary": "Finds the style icon entry for the given art style and loads its sprite, or returns null.",
+  "renames": {
+   "alStack_50": "enumeratorState",
+   "uVar1": "hasNext",
+   "uVar2": "foundItem"
+  }
+ },
+ "2fa91b4": {
+  "summary": "Releases the loaded icon for the given art style across all style icon entries.",
+  "renames": {
+   "lStack_38": "currentItem",
+   "uStack_40": "enumeratorPad"
+  }
+ },
+ "2fa9308": {
+  "summary": "Returns a new list of style items that have an asset reference, using a cached predicate (inlined List helpers).",
+  "renames": {
+   "auVar20": "exceptionResult",
+   "auVar20_x1": "exceptionAux",
+   "extraout_x8": "enumeratorOut",
+   "uVar18": "indexCopy",
+   "uVar8": "matchResult"
+  }
+ },
+ "2fa94d0": {
+  "summary": "Finds the medium background sprite for the given army and loads it, or returns null.",
+  "renames": {
+   "auVar8": "exceptionResult",
+   "auVar8_x1": "armyArg",
+   "lStack_38": "foundSprite",
+   "lVar2": "armyItem",
+   "uStack_78": "releasedSprite"
+  }
+ },
+ "2fa95b0": {
+  "summary": "Finds the army entry for the given army and releases its medium background.",
+  "renames": {
+   "lVar4": "armyItem",
+   "uStack_38": "foundSprite"
+  }
+ },
+ "2fa9694": {
+  "summary": "Looks up the icon sprite for the given army in the army icon list.",
+  "renames": {
+   "alStack_50": "enumeratorState",
+   "lStack_38": "currentItem"
+  }
+ },
+ "2fa9800": {
+  "summary": "Releases the icon for the given army across all army icon entries.",
+  "renames": {
+   "lStack_38": "currentItem",
+   "uStack_40": "enumeratorPad"
+  }
+ },
+ "2fa9a60": {
+  "summary": "Static constructor that creates the singleton closure-class instance.",
+  "renames": {
+   "uVar1": "instance"
+  }
+ },
+ "2fa9ad0": {
+  "summary": "Returns the cached card id for a loadable reference, fetching it from the identifiable asset if needed.",
+  "renames": {
+   "plVar6": "loadableAsset",
+   "uVar2": "cardId"
+  }
+ }
+}

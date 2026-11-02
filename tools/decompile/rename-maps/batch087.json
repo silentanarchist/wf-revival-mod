@@ -1,0 +1,378 @@
+{
+ "30714cc": {
+  "summary": "Sends the local player's serialized deck to the opponent via a Photon RPC, validating the deck first (garbled with inlined Photon RPC and HashSet code).",
+  "renames": {
+   "acStackY_e4": "removedGroup",
+   "acStackY_e8": "addedGroup",
+   "auVar33": "throwResult",
+   "auVar33_part8": "throwResultPart",
+   "auVar33_x1": "throwResultHigh",
+   "iVar23": "capacityValue",
+   "in_x3": "inSyncMode",
+   "in_x4": "inSerializedData",
+   "in_x5": "inEvent",
+   "lStackY_90": "spillView",
+   "lStackY_c0": "spillClass",
+   "lVar14": "displayClass",
+   "lVar14_4": "playerDataStatics",
+   "lVar14_7": "groupArray",
+   "lVar19": "eventHandlerObj",
+   "lVar21": "classInfoA",
+   "lVar22": "classInfoB",
+   "pcStackY_d8": "spillMethodPtr",
+   "pcStack_78": "typeHandle",
+   "piVar27": "interfaceMapPtrB",
+   "piVar32": "interfaceMapPtr",
+   "plStackY_88": "spillPeer",
+   "plStackY_a8": "spillLogger",
+   "plVar10": "playEventObj",
+   "plVar9": "peerPtr",
+   "puVar25": "messageSuffix",
+   "uStackY_98": "spillType",
+   "uStackY_a0": "spillId",
+   "uStackY_b0": "spillZero",
+   "uStackY_b8": "spillString",
+   "uVar1": "savedByte",
+   "uVar26": "interfaceCount",
+   "uVar28": "bucketIndex",
+   "uVar31": "warlordId",
+   "unaff_x27": "unused1"
+  }
+ },
+ "30715e8": {
+  "summary": "Starts an opponent search: stores callbacks and match data, validates the player's deck (via cloud script when cards must be owned), then proceeds.",
+  "renames": {
+   "iVar2": "cardCount",
+   "lVar13": "deckData",
+   "lVar13_2": "playerDataStatics",
+   "lVar3": "displayClass",
+   "lVar8": "classInfo",
+   "piVar10": "interfaceMapPtr",
+   "plVar11": "callbackHolder",
+   "plVar16": "playEventObj",
+   "plVar18": "eventSource",
+   "uStackY_68": "spillPlayMode",
+   "uStackY_70": "spillMinusOne",
+   "uVar12": "playerId",
+   "uVar17": "warlordId"
+  }
+ },
+ "3071d44": {
+  "summary": "Creates and returns the coroutine enumerator that waits for a delay and then starts a match against a bot.",
+  "renames": {
+   "lVar1": "coroutine"
+  }
+ },
+ "3071df0": {
+  "summary": "Handles a found opponent: logs it, records the opponent name, sets who is first player, and starts syncing match data or received data.",
+  "renames": {
+   "acStack_34": "firstPlayerFlag",
+   "lVar1_2": "playerData",
+   "uStack_48": "spillMinusOne"
+  }
+ },
+ "30720b4": {
+  "summary": "Builds the enemy deck data from a received blob, marks it in the room properties, notifies listeners and schedules the CheckStartProp invoke.",
+  "renames": {
+   "lVar5_2": "networkManager",
+   "uStack_38": "spanHigh",
+   "uStack_40": "spanTemp",
+   "uStack_58": "spanLengthFlag",
+   "uStack_60": "nameSpan"
+  }
+ },
+ "30722dc": {
+  "summary": "Polls the room's ready flag; when set, picks who goes first and loads the battle scene, else retries and eventually shows a sync error.",
+  "renames": {
+   "lVar11": "networkManager",
+   "lVar11_6": "networkManagerRetry",
+   "lVar11_8": "eventClassInfo",
+   "lVar5_3": "playerData",
+   "lVar8": "scratchPtr",
+   "piVar10": "interfaceMapPtr",
+   "uStack_28": "sceneHandleSpan",
+   "uStack_30": "spanTemp",
+   "uStack_48": "spanLengthFlag",
+   "uStack_50": "nameSpan",
+   "uVar9": "interfaceCount"
+  }
+ },
+ "3072514": {
+  "summary": "Randomly decides who goes first, picks the battle arena for the army and loads the battle scene.",
+  "renames": {
+   "lVar3": "playerData",
+   "lVar4_4": "enemyPlayMode"
+  }
+ },
+ "3072248": {
+  "summary": "Returns the room-property key string ('FirstPlayer' or 'SecondPlayer') for the local or enemy side depending on who is first in the room.",
+  "renames": {
+   "plVar3": "primaryKey",
+   "plVar4": "chosenKey"
+  }
+ },
+ "30719f8": {
+  "summary": "Validates a deck by counting cards by id and sending them to a cloud script, or skips validation when ownership is not required.",
+  "renames": {
+   "iVar2": "cardCount",
+   "lVar4": "deckPayload",
+   "lVar5_4": "playerDataStatics",
+   "lVar7": "closureObj",
+   "uStack_70": "spillMinusOne",
+   "uVar3_2": "playModeName",
+   "uVar6": "hasKey"
+  }
+ },
+ "3072700": {
+  "summary": "Logs that the enemy deck failed validation and cancels the battle search.",
+  "renames": {
+   "auVar1_x1": "methodInfo"
+  }
+ },
+ "30727b8": {
+  "summary": "Returns how long to wait for a human opponent before falling back to a bot, based on mode, config and games lost.",
+  "renames": {}
+ },
+ "30728fc": {
+  "summary": "Creates and returns the coroutine enumerator that waits for a human opponent.",
+  "renames": {
+   "lVar1": "coroutine"
+  }
+ },
+ "30729a0": {
+  "summary": "Notifies the battle-connected callback, marks matchmaking inactive, cancels the search and starts a delayed bot battle coroutine.",
+  "renames": {
+   "auVar6_x1": "coroutineCopy",
+   "unaff_x19": "unused1",
+   "unaff_x20": "unused2",
+   "unaff_x21": "unused3",
+   "unaff_x30": "unused4"
+  }
+ },
+ "3072a0c": {
+  "summary": "Handles a start-game RPC: logs it, begins the battle if addressed to this player in the right mode, otherwise reports a wrong play mode.",
+  "renames": {
+   "auVar9": "throwResult",
+   "auVar9_x1": "throwResultHigh",
+   "lStack_78": "spillManager",
+   "lStack_88": "spillView",
+   "lStack_90": "spillSender",
+   "lVar7": "messageInfo",
+   "pcStack_a0": "spillMethodPtr",
+   "plStack_80": "spillParameters",
+   "uStack_50": "spillMinusOne",
+   "uStack_58": "typeHandle",
+   "uStack_68": "spillMinusOneB",
+   "uStack_b0": "spillMinusOneC",
+   "uVar4": "isNotForThisPlayer",
+   "uVar6": "stageName"
+  }
+ },
+ "3072ed0": {
+  "summary": "Handles the acknowledgement of a start-game RPC and sends random numbers if addressed to this player while loading the opponent.",
+  "renames": {
+   "uStack_40": "spillMinusOne",
+   "uVar3": "stageName",
+   "uVar4": "isNotForThisPlayer"
+  }
+ },
+ "3073158": {
+  "summary": "Handles a wrong-play-mode RPC: logs it and, if for this player, leaves the battle and cancels the search.",
+  "renames": {
+   "uStack_50": "spillMinusOne",
+   "uStack_68": "spillMinusOneB",
+   "uVar3": "stageText",
+   "uVar4": "isNotForThisPlayer"
+  }
+ },
+ "30734cc": {
+  "summary": "Receives random numbers from the opponent, stores them in match data, then triggers number handling and sends player data.",
+  "renames": {
+   "uStack_50": "spillMinusOne",
+   "uVar2": "stageName",
+   "uVar3": "isNotFromOpponent"
+  }
+ },
+ "30736e8": {
+  "summary": "Handles confirmation that the opponent received the random numbers, then sends player data.",
+  "renames": {
+   "auVar3": "isNotFromOpponent",
+   "uStack_40": "spillMinusOne",
+   "uVar2": "stageName"
+  }
+ },
+ "30738d4": {
+  "summary": "Receives the opponent's deck data and processes it if it comes from the expected opponent while loading.",
+  "renames": {
+   "uStack_50": "spillMinusOne",
+   "uVar2": "stageName",
+   "uVar4": "isNotFromOpponent"
+  }
+ },
+ "3073ad0": {
+  "summary": "Shows an internet-unreachable popup, resets matchmaking state and cancels the battle search.",
+  "renames": {
+   "lVar1_3": "matchMaker"
+  }
+ },
+ "3087468": {
+  "summary": "Static constructor creating the singleton compiler-generated closure instance.",
+  "renames": {
+   "uVar1": "instance"
+  }
+ },
+ "30b5e34": {
+  "summary": "Searches the loaded asset bundles for a sound clip by name and returns it, or null if not found.",
+  "renames": {
+   "lStack_58": "currentBundle",
+   "lStack_70": "enumerator",
+   "lStack_80": "enumFieldA",
+   "lStack_98": "enumeratorSource",
+   "puStack_90": "enumeratorRef",
+   "uStack_50": "enumFieldD",
+   "uStack_60": "enumFieldB",
+   "uStack_68": "enumFieldC",
+   "uStack_78": "enumFieldE",
+   "uStack_88": "enumFieldF"
+  }
+ },
+ "30d32f4": {
+  "summary": "Draws a prebuilt deck item and then shows its cardback in the card back drawer.",
+  "renames": {
+   "uVar1": "hasCardBackDrawer"
+  }
+ },
+ "30d35a8": {
+  "summary": "Constructor that enables ownership checking for the deck-and-cardback drawer.",
+  "renames": {
+   "uVar2": "baseCtor"
+  }
+ },
+ "30d35fc": {
+  "summary": "On click, opens the deck info popup in view mode for this deck, finding the window via the temporary window dictionary.",
+  "renames": {
+   "lVar3": "genericClass",
+   "lVar5": "openWindowMethod",
+   "uVar8": "delegateTarget"
+  }
+ },
+ "30d33d4": {
+  "summary": "Draws a prebuilt deck: sets the army icon, hero image and game mode icon.",
+  "renames": {
+   "lStack_38": "gameModeNullable",
+   "uVar1": "hasSprite"
+  }
+ },
+ "30d36f0": {
+  "summary": "Returns the localized name of a prebuilt deck, or an empty string if the item is missing.",
+  "renames": {
+   "uVar1": "itemExists"
+  }
+ },
+ "30d35ac": {
+  "summary": "Constructor that enables ownership checking for the deck drawer.",
+  "renames": {
+   "uVar2": "baseCtor"
+  }
+ },
+ "30f1d24": {
+  "summary": "Test routine that scans all card collections and logs a warning for any empty animation pointer in ability logic.",
+  "renames": {
+   "iVar7": "collectionIndex",
+   "lVar1_2": "collectionsList",
+   "piVar6": "interfaceMapPtr",
+   "puVar3": "loggerMethod",
+   "uVar4": "unused1",
+   "uVar5": "interfaceCount"
+  }
+ },
+ "30f1d28": {
+  "summary": "Test routine that scans all card collections and logs a warning for any empty animation pointer in ability logic.",
+  "renames": {
+   "iVar7": "collectionIndex",
+   "lVar1_2": "collectionsList",
+   "piVar6": "interfaceMapPtr",
+   "puVar3": "loggerMethod",
+   "uVar4": "unused1",
+   "uVar5": "interfaceCount"
+  }
+ },
+ "30fccd0": {
+  "summary": "Hides all change markers on a rebalanced card and then shows the ones matching each changed stat type.",
+  "renames": {
+   "uStack_60": "spillMinusOne"
+  }
+ },
+ "30ffe00": {
+  "summary": "Static constructor creating the singleton compiler-generated closure instance.",
+  "renames": {
+   "uVar1": "instance"
+  }
+ },
+ "30ffe88": {
+  "summary": "Coroutine step: tries to reconnect to Photon and, while still disconnected, waits before retrying.",
+  "renames": {
+   "uVar2": "managerExists"
+  }
+ },
+ "30fffa8": {
+  "summary": "Throws NotSupportedException because the enumerator cannot be reset.",
+  "renames": {
+   "uVar2": "methodInfo"
+  }
+ },
+ "30fffec": {
+  "summary": "Coroutine step: leaves the Photon room and waits in half-second steps up to a countdown, then calls the onLeft callback.",
+  "renames": {
+   "iVar3": "remainingCountdown"
+  }
+ },
+ "310014c": {
+  "summary": "Throws NotSupportedException because the enumerator cannot be reset.",
+  "renames": {
+   "uVar2": "methodInfo"
+  }
+ },
+ "30fd310": {
+  "summary": "Singleton setup: destroys this manager if another exists, otherwise registers itself as the instance.",
+  "renames": {
+   "auVar3": "duplicateExists",
+   "uVar2": "existingInstance"
+  }
+ },
+ "30fd40c": {
+  "summary": "Starts a Photon connection: logs and applies connection settings, sets auth values with the user id and connects.",
+  "renames": {
+   "auStack_48": "disconnectFlagBox",
+   "lVar5": "authValues"
+  }
+ },
+ "30fda58": {
+  "summary": "On app pause, if connected and set to disconnect on pause, drops the Photon connection and manually reconnects or signals disconnect.",
+  "renames": {
+   "in_x3": "unusedArg",
+   "lVar5": "emptyArgs",
+   "uStack_58": "spillCode",
+   "uStack_60": "spillMinusOne",
+   "uVar4": "isNullThis"
+  }
+ },
+ "30fd7b8": {
+  "summary": "Connects to the Photon cloud using the configured protocol, region and game version.",
+  "renames": {
+   "uVar1": "networkLoggingBox"
+  }
+ },
+ "30fdb14": {
+  "summary": "Leaves the current Photon room depending on connection status, reconnecting if disconnected and logging unusual states.",
+  "renames": {
+   "bVar2": "retainPlayer",
+   "lVar7_4": "photonNetworkType",
+   "puVar5": "loggerMethod",
+   "uStack_30": "spillMinusOne",
+   "uStack_38": "typeHandle",
+   "uVar1": "devToolsRaw",
+   "uVar9": "devToolsEnabled"
+  }
+ }
+}

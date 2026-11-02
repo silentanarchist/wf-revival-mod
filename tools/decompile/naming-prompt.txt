@@ -1,0 +1,11 @@
+You are making decompiled game code readable. Read the file BATCHFILE in full (use Read with offsets if it is long). It holds functions from a Unity card game (Warhammer 40,000: Warpforge), each starting with a line `=== FUNCTION <addr>  <Class>::<Method>` followed by C#-like pseudo-code. Real type, method, field and parameter names are already correct. What is still unreadable are the decompiler's own variable names: `uVar3`, `lVar8`, `iVar2`, `bVar1`, `puVar4`, `plVar5`, `auVar6`, `uStack_48`, `auStack_70`, `local_28`, `this_00`, `param_3`, `unaff_x19`, `extraout_x1`, and versions like `lVar6_2`.
+
+For every function, work out from the code what each such variable holds and give it a short, clear camelCase name (for example `card`, `enemyHand`, `turnCount`, `isPlayerTurn`, `targetIndex`, `effectList`, `i` for a loop counter). Rules:
+- Rename ONLY variables with those decompiler-made names. Never rename parameters, fields, methods, types or anything else.
+- Each new name must be a valid C# identifier, unique within its function, and must not already appear anywhere in that function.
+- When two versions exist (`lVar6` and `lVar6_2`) they hold different things; name each after what it holds.
+- Variables that are pure noise (`unaff_x19`, `extraout_x1`, stack frame scratch) can be named `unused1`, `scratch2` etc.
+- Also write a one-sentence summary of what the function does (plain English, under 25 words), based on the code; if it is unclear say what it seems to do.
+- A very long function: still name every variable you can; do not skip it.
+
+Write the result to OUTFILE as JSON: {"<addr>": {"summary": "...", "renames": {"old": "new", ...}}, ...} with one entry per function in the file (use the addr exactly as in the `=== FUNCTION` line). Do not modify any other file. Reply with only the number of functions and renames you wrote.

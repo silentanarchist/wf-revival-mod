@@ -1,0 +1,531 @@
+{
+ "32cf5f8": {
+  "summary": "Throws NotSupportedException because Reset is not supported on this compiler-generated coroutine iterator.",
+  "renames": {
+   "uVar2": "exceptionMethod"
+  }
+ },
+ "32cfe64": {
+  "summary": "Throws NotSupportedException because Reset is not supported on this compiler-generated coroutine iterator.",
+  "renames": {
+   "uVar2": "exceptionMethod"
+  }
+ },
+ "32d004c": {
+  "summary": "Throws NotSupportedException because Reset is not supported on this compiler-generated coroutine iterator.",
+  "renames": {
+   "uVar2": "exceptionMethod"
+  }
+ },
+ "32d0154": {
+  "summary": "Throws NotSupportedException because Reset is not supported on this compiler-generated coroutine iterator.",
+  "renames": {
+   "uVar2": "exceptionMethod"
+  }
+ },
+ "32d04b0": {
+  "summary": "Throws NotSupportedException because Reset is not supported on this compiler-generated coroutine iterator.",
+  "renames": {
+   "uVar2": "exceptionMethod"
+  }
+ },
+ "32d0804": {
+  "summary": "Throws NotSupportedException because Reset is not supported on this compiler-generated coroutine iterator.",
+  "renames": {
+   "uVar2": "exceptionMethod"
+  }
+ },
+ "32d0d0c": {
+  "summary": "Throws NotSupportedException because Reset is not supported on this compiler-generated coroutine iterator.",
+  "renames": {
+   "uVar2": "exceptionMethod"
+  }
+ },
+ "32d1204": {
+  "summary": "Throws NotSupportedException because Reset is not supported on this compiler-generated coroutine iterator.",
+  "renames": {
+   "uVar2": "exceptionMethod"
+  }
+ },
+ "32d15f0": {
+  "summary": "Throws NotSupportedException because Reset is not supported on this compiler-generated coroutine iterator.",
+  "renames": {
+   "uVar2": "exceptionMethod"
+  }
+ },
+ "32d17f4": {
+  "summary": "Throws NotSupportedException because Reset is not supported on this compiler-generated coroutine iterator.",
+  "renames": {
+   "uVar2": "exceptionMethod"
+  }
+ },
+ "32d20b8": {
+  "summary": "Throws NotSupportedException because Reset is not supported on this compiler-generated coroutine iterator.",
+  "renames": {
+   "uVar2": "exceptionMethod"
+  }
+ },
+ "32d2390": {
+  "summary": "Throws NotSupportedException because Reset is not supported on this compiler-generated coroutine iterator.",
+  "renames": {
+   "uVar2": "exceptionMethod"
+  }
+ },
+ "32d2500": {
+  "summary": "Throws NotSupportedException because Reset is not supported on this compiler-generated coroutine iterator.",
+  "renames": {
+   "uVar2": "exceptionMethod"
+  }
+ },
+ "32d285c": {
+  "summary": "Throws NotSupportedException because Reset is not supported on this compiler-generated coroutine iterator.",
+  "renames": {
+   "uVar2": "exceptionMethod"
+  }
+ },
+ "32d314c": {
+  "summary": "Throws NotSupportedException because Reset is not supported on this compiler-generated coroutine iterator.",
+  "renames": {
+   "uVar2": "exceptionMethod"
+  }
+ },
+ "32d336c": {
+  "summary": "Throws NotSupportedException because Reset is not supported on this compiler-generated coroutine iterator.",
+  "renames": {
+   "uVar2": "exceptionMethod"
+  }
+ },
+ "32ced8c": {
+  "summary": "Coroutine that creates and places a summoned unit on the board, plays its animation, registers it as in play and finishes the action.",
+  "renames": {
+   "uVar7": "isNotNull",
+   "auStack_1c0": "actionCopy",
+   "uStack_c0": "counterBefore",
+   "uStack_b8": "counterBeforeInited",
+   "uStack_b0": "counterBeforeFake",
+   "uStack_9c": "incrementedInited",
+   "uStack_94": "incrementedFake",
+   "uStack_90": "counterSnapshot",
+   "uStack_88": "counterSnapshotInited",
+   "uStack_80": "counterSnapshotFake",
+   "puVar10": "fieldPtr",
+   "iVar3_4": "counterArg"
+  }
+ },
+ "32cf664": {
+  "summary": "Coroutine that plays a trait animation: VFX, screen shake, unit shakes, tweens, clip and movement animations, waiting between steps.",
+  "renames": {
+   "uVar2": "isManagerNull",
+   "lVar4_8": "tweenClosure",
+   "lVar4_9": "vfxClosure",
+   "lVar10_11": "closureObj",
+   "plVar7": "ptrScratch",
+   "lVar4_11": "logMessage"
+  }
+ },
+ "32d01c0": {
+  "summary": "Coroutine that waits an optional delay then shakes a unit, pushing it away from another unit or doing a size-based shake.",
+  "renames": {
+   "uVar3": "isNull",
+   "fStack_48": "scratchFloat",
+   "uStack_50": "directionVector",
+   "fVar10": "firstPosY",
+   "in_s1": "deltaY",
+   "fVar11": "firstPosZ",
+   "in_s2": "deltaZ",
+   "fVar8": "otherPosX",
+   "uVar9": "pushDirection"
+  }
+ },
+ "32d051c": {
+  "summary": "Coroutine that resolves using a waystone: grants spirit stone mana, destroys the waystone unit and logs it, or cancels if not ready.",
+  "renames": {
+   "uVar3": "matchTypeText",
+   "auStack_258": "cemeteryActionCopy",
+   "auStack_158": "broadcastActionCopy",
+   "uStack_50": "scratch1"
+  }
+ },
+ "32d0870": {
+  "summary": "Coroutine that sets up the environmental effect selection phase after mulligan, choosing or presenting environment effect cards.",
+  "renames": {
+   "uVar6": "isManagerNull",
+   "auVar9": "obscuredTrue",
+   "plVar1": "phaseNamePtr"
+  }
+ },
+ "32d0d78": {
+  "summary": "Coroutine for the mulligan phase: shows mulligan UI, deals mulligan cards to both hands, waits and starts the mulligan countdown.",
+  "renames": {
+   "bVar1": "isWaitingDisconnected",
+   "uVar4": "isManagerNull"
+  }
+ },
+ "32d1270": {
+  "summary": "Coroutine that builds match result data, updates ratings, then waits and closes battle doors to show the finish screen.",
+  "renames": {
+   "uVar6": "nextState",
+   "lVar7_3": "ratingHolder",
+   "plVar10": "resultFieldPtr",
+   "lVar8": "playerRatingData",
+   "lVar7_4": "playerDataManager"
+  }
+ },
+ "32d165c": {
+  "summary": "Coroutine that shows the campaign hero intro: disables popups, runs post-mulligan scripted turn, waits, re-enables popups.",
+  "renames": {
+   "uVar4": "isManagerNull"
+  }
+ },
+ "32d1860": {
+  "summary": "Coroutine that starts the battle phase: boss/skull/campaign animations, intro messages, initial enchantments, extra hands cards, then first turn.",
+  "renames": {
+   "uVar7": "hasCardToAdd",
+   "uVar9": "nextState",
+   "auVar11": "obscuredTrue"
+  }
+ },
+ "32d2124": {
+  "summary": "Coroutine that starts the battle sequence: fades loading, plays camera, sets up troops, runs pre-mulligan scripts and starts mulligan or tutorial.",
+  "renames": {
+   "uVar3": "isManagerNull"
+  }
+ },
+ "32d23fc": {
+  "summary": "Coroutine that waits a delay then stops the tutorial pointer hand animation.",
+  "renames": {
+   "uVar2": "hasOuter"
+  }
+ },
+ "32d28c4": {
+  "summary": "Dispose for the tutorial start iterator that resets state to finished if in a state needing cleanup.",
+  "renames": {
+   "uVar1": "shiftedState"
+  }
+ },
+ "32d28f0": {
+  "summary": "Coroutine for the tutorial start sequence: lands heroes, sets up camera and zoom, runs scripted actions with waits, then starts battle phase.",
+  "renames": {
+   "bVar1": "result",
+   "uVar6": "nextState",
+   "auVar9": "hasNext",
+   "uStack_60": "enumeratorCopy",
+   "lStack_28": "thisCopy",
+   "plStack_38": "unwindFrame",
+   "lStack_40": "exceptionState",
+   "uStack_58": "enumeratorWord1",
+   "uStack_70": "enumeratorLow",
+   "uStack_50": "enumeratorWord2",
+   "uStack_68": "enumeratorHigh",
+   "auVar9_x1": "unused1"
+  }
+ },
+ "32d31b8": {
+  "summary": "Coroutine that waits for opponent's last actions while disconnected, then clears the claimed finish flag and shows the disconnection popup.",
+  "renames": {
+   "uVar2": "isManagerNotNull",
+   "auVar4": "obscuredFalse"
+  }
+ },
+ "327e9bc": {
+  "summary": "Returns the scenario variables set for tutorial, default or editor depending on the match and platform.",
+  "renames": {
+   "plVar3": "scenarioVarsFieldPtr"
+  }
+ },
+ "327ea68": {
+  "summary": "Returns the global variables object from the player data manager, or null.",
+  "renames": {
+   "uVar1": "hasPlayerData",
+   "uVar3": "playerDataManager"
+  }
+ },
+ "327ec14": {
+  "summary": "Logs that the instruction to pause the tutorial is ignored when dev tools are active.",
+  "renames": {
+   "uVar3": "devToolsEnabled",
+   "uVar2": "warningMessage",
+   "uVar1": "devToolsRaw",
+   "puVar4": "logMethod"
+  }
+ },
+ "327ed60": {
+  "summary": "Repositions the friendly hand anchor by converting the player hand's position between cameras, then returns the anchor.",
+  "renames": {
+   "fVar6": "handPosition",
+   "auVar7_x1": "unused1",
+   "in_s2": "cameraPosZ",
+   "in_s1": "cameraPosX"
+  }
+ },
+ "327ee44": {
+  "summary": "Repositions the enemy hand anchor by converting the player hand's position between cameras, then returns the anchor.",
+  "renames": {
+   "fVar6": "handPosition",
+   "auVar7_x1": "unused1",
+   "in_s2": "cameraPosZ",
+   "in_s1": "cameraPosX"
+  }
+ },
+ "327ef78": {
+  "summary": "Sets the connection status and fires the status-changed event when the value changes.",
+  "renames": {}
+ },
+ "327eff0": {
+  "summary": "Sets the battle stage and logs the change from the old stage to the new one.",
+  "renames": {
+   "uVar1": "oldStageText",
+   "uVar2": "newStageText",
+   "iStack_60": "newStageCopy",
+   "uStack_50": "scratch1",
+   "uStack_68": "scratch2"
+  }
+ },
+ "327f0d8": {
+  "summary": "Getter that copies the obscured player fatigue value out of the battle manager.",
+  "renames": {
+   "uVar2": "secondWord",
+   "uVar1": "firstWord"
+  }
+ },
+ "327f108": {
+  "summary": "Getter that copies the obscured enemy fatigue value out of the battle manager.",
+  "renames": {
+   "uVar2": "secondWord",
+   "uVar1": "firstWord"
+  }
+ },
+ "327f138": {
+  "summary": "Getter that copies the obscured turn counter value out of the battle manager.",
+  "renames": {
+   "uVar2": "secondWord",
+   "uVar1": "firstWord"
+  }
+ },
+ "327f0f0": {
+  "summary": "Setter that stores an obscured player fatigue value into the battle manager.",
+  "renames": {}
+ },
+ "327f120": {
+  "summary": "Setter that stores an obscured enemy fatigue value into the battle manager.",
+  "renames": {}
+ },
+ "327f150": {
+  "summary": "Setter that stores an obscured turn counter value into the battle manager.",
+  "renames": {}
+ },
+ "327f170": {
+  "summary": "Sets the waiting-for-tutorial-tip flag and logs the new value.",
+  "renames": {
+   "auStack_14": "flagValue"
+  }
+ },
+ "327f21c": {
+  "summary": "Returns the Z position of the 2D elements canvas.",
+  "renames": {
+   "fVar3": "zPosition"
+  }
+ },
+ "327f364": {
+  "summary": "Returns the blocking overlay from the player data manager, or null.",
+  "renames": {
+   "uVar1": "hasPlayerData",
+   "uVar3": "playerDataManager"
+  }
+ },
+ "327f550": {
+  "summary": "Singleton setup: assigns this as the instance, or destroys this object if another instance already exists.",
+  "renames": {
+   "uVar1": "hasInstance"
+  }
+ },
+ "327f554": {
+  "summary": "Singleton setup: assigns this as the instance, or destroys this object if another instance already exists.",
+  "renames": {
+   "uVar1": "hasInstance"
+  }
+ },
+ "327f798": {
+  "summary": "Initializes the battle manager: singleton, initial state, HUD, DOTween capacity, online status, board phase and action pool.",
+  "renames": {
+   "auVar8": "isInstanceNull",
+   "uStack_40": "logBehaviour",
+   "auVar8_x1": "unused1",
+   "auStack_34": "recycleAllByDefault",
+   "auStack_38": "useSafeMode"
+  }
+ },
+ "327fbe4": {
+  "summary": "Starts the battle manager: sets up data-dependent elements, HUD, DOTween, online status, board phase and action pool.",
+  "renames": {
+   "uStack_40": "logBehaviour",
+   "auStack_34": "recycleAllByDefault",
+   "auStack_38": "useSafeMode"
+  }
+ },
+ "327f874": {
+  "summary": "Sets up initial battle state: copies replay data, hides UI objects, resets counters, creates AI script manager and challenge log.",
+  "renames": {
+   "lVar3": "playerDataManager",
+   "uStack_6c": "zeroActionCounter",
+   "uStack_64": "actionCounterInited",
+   "uStack_5c": "actionCounterFake",
+   "uStack_58": "zeroCardsPlayedCounter",
+   "uStack_50": "cardsPlayedInited",
+   "uStack_48": "cardsPlayedFake",
+   "uStack_44": "zeroTurnCounter",
+   "uStack_3c": "turnCounterInited",
+   "uStack_34": "turnCounterFake",
+   "auVar5_x1": "unused1",
+   "plVar4": "matchDataFieldPtr"
+  }
+ },
+ "327fefc": {
+  "summary": "Sets up match-data dependent elements: trait collection, network manager link, chat options, deck sizes and army-specific cursor sprites.",
+  "renames": {
+   "uVar2": "hasChatButton",
+   "uStack_38": "hotspotCursorSprite",
+   "uStack_28": "cursorSprite",
+   "plVar4": "battleManagerFieldPtr",
+   "lVar3_4": "currentMillis"
+  }
+ },
+ "32804f4": {
+  "summary": "Stub that only logs a not-implemented warning when dev tools are enabled.",
+  "renames": {
+   "uVar3": "devToolsEnabled",
+   "uVar2": "warningMessage",
+   "uVar1": "devToolsRaw",
+   "puVar4": "logMethod"
+  }
+ },
+ "3280538": {
+  "summary": "Stub that only logs a not-implemented warning when dev tools are enabled.",
+  "renames": {
+   "uVar3": "devToolsEnabled",
+   "uVar2": "warningMessage",
+   "uVar1": "devToolsRaw",
+   "puVar4": "logMethod"
+  }
+ },
+ "328057c": {
+  "summary": "Stub that only logs a not-implemented warning when dev tools are enabled.",
+  "renames": {
+   "uVar3": "devToolsEnabled",
+   "uVar2": "warningMessage",
+   "uVar1": "devToolsRaw",
+   "puVar4": "logMethod"
+  }
+ },
+ "32800c8": {
+  "summary": "Sets up the board: determines who goes first, assigns player and enemy data and warlords, decks, mana accumulation and tutorial hero hiding.",
+  "renames": {
+   "uVar2": "eloOrFlag",
+   "method_09": "unused1",
+   "lVar7": "playerDataManager",
+   "auVar8": "eloCopy",
+   "auVar8_part4": "unused2",
+   "plVar4": "otherBattleDataPtr"
+  }
+ },
+ "3280d68": {
+  "summary": "On initialization complete, blocks live-ops and achievement updates, stops menu music, starts battle music and the battle sequence coroutines.",
+  "renames": {
+   "unaff_x19": "routineException",
+   "unaff_x20": "unused1",
+   "unaff_x30": "unused2",
+   "auVar5": "unused3",
+   "auVar5_x1": "unused4",
+   "register0x00000008": "stackPointer",
+   "unaff_x21": "unused5"
+  }
+ },
+ "3280f28": {
+  "summary": "Returns the board position of the player or enemy hero by checking that minion manager exists.",
+  "renames": {
+   "lVar1": "fieldOffset"
+  }
+ },
+ "3280600": {
+  "summary": "Swaps a hero for a transformed hero when the deck meets criteria, storing the original warlord and updating chat messages.",
+  "renames": {
+   "lVar2": "closure",
+   "uVar3": "isPredicateNull",
+   "lVar6": "transformRule",
+   "lVar7": "transformRuleForOriginal",
+   "auVar11": "foundHero",
+   "auStack_44": "isNullFlag",
+   "plVar9": "dataPtr"
+  }
+ },
+ "3280fc4": {
+  "summary": "Randomly decides to make the AI opponent emote with a chat voice line after an action, if configured.",
+  "renames": {
+   "unaff_x19": "routineException",
+   "unaff_x20": "unused1",
+   "auVar8_part8": "unused2",
+   "auVar8_part12": "unused3",
+   "auVar9_x1": "unused4",
+   "unaff_x30": "unused5",
+   "register0x00000008": "stackPointer",
+   "unaff_x21": "unused6"
+  }
+ },
+ "32809a0": {
+  "summary": "Sets up a player's deck, mana and starting troops, then repositions the left and right minions in play.",
+  "renames": {
+   "uVar1": "isMinionValid",
+   "uVar3": "hasLeftMinion",
+   "uVar10": "slotPosZ",
+   "in_s1": "slotPosX",
+   "uVar9": "savedSlotPosX"
+  }
+ },
+ "3280a04": {
+  "summary": "Applies warlord life changes and match-specific max life overrides to the player and enemy heroes.",
+  "renames": {
+   "method_00": "unused1",
+   "method_01": "unused2",
+   "uStack_60": "maxHealthSnapshot",
+   "uStack_58": "snapshotInited",
+   "uStack_50": "snapshotFake",
+   "auVar4_x1": "unused3",
+   "auVar4_2": "maxHealthRef",
+   "lVar2": "unused4"
+  }
+ },
+ "3281110": {
+  "summary": "Creates a player's or enemy's deck, optionally shuffles it, adds tutorial initial cards, sets up display and draws tutorial hand cards.",
+  "renames": {
+   "uVar3": "isPlayerCopy",
+   "this_00": "shouldShuffle",
+   "method_01": "deckArg",
+   "method_02": "unused1",
+   "lVar5": "deckObject",
+   "lVar8": "deckData",
+   "auVar9": "hasTutorialStage",
+   "uStack_78": "enumeratorTemp",
+   "uStack_60": "deckEnumerator",
+   "lStack_50": "currentCard",
+   "uStack_48": "deckList",
+   "puStack_58": "enumeratorWord1",
+   "plVar4": "deckDataFieldPtr",
+   "this_00_2": "shuffledDeck",
+   "uVar3_3": "flagOrDeck",
+   "puStack_70": "enumeratorWord2",
+   "lStack_68": "enumeratorWord3"
+  }
+ },
+ "3281900": {
+  "summary": "Returns the tutorial stage's starting hand troop list for the player or enemy.",
+  "renames": {
+   "plVar1": "handListFieldPtr"
+  }
+ },
+ "32808c8": {
+  "summary": "Logs and sets up a player's deck and warlord, then activates the warlord's traits on summon.",
+  "renames": {
+   "abStack_24": "isPlayerBox"
+  }
+ }
+}

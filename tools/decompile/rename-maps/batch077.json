@@ -1,0 +1,294 @@
+{
+ "2fa995c": {
+  "summary": "Returns the banned card IDs by projecting each banned-card reference to its string ID with LINQ Select; decompiled output is mostly inlined LINQ type-check noise.",
+  "renames": {
+   "auVar15_x1": "unused1",
+   "bVar1": "typeDepth",
+   "lVar10": "genericContext",
+   "lVar3": "targetClass",
+   "lVar9": "sourceClass",
+   "pcVar14": "ctorFunc",
+   "puVar6": "argName",
+   "unaff_x23": "unused2"
+  }
+ },
+ "2fa9b20": {
+  "summary": "Finds the battle arena configured for the given army, falling back to the default arena if none matches.",
+  "renames": {
+   "auVar6": "errorResult",
+   "auVar6_part8": "errorResultPart",
+   "lStack_48": "arenaValue",
+   "lVar5": "armyEntry",
+   "plVar4": "resultPtr"
+  }
+ },
+ "2faa2e4": {
+  "summary": "Builds a dictionary mapping each card tier to its frame reference, logging an error on duplicates, then clears a temporary army dictionary.",
+  "renames": {
+   "lVar7": "tierFrame",
+   "lVar8_2": "armyDictionary",
+   "uStack_68": "tierKey",
+   "uVar6": "tierKeyBoxed"
+  }
+ },
+ "2fa9f48": {
+  "summary": "Loads and returns the frame and highlight sprites for the given card type.",
+  "renames": {
+   "alStack_30": "spritePair",
+   "lStack_38": "frameReference",
+   "lStack_40": "highlightReference"
+  }
+ },
+ "2faa1fc": {
+  "summary": "Releases the frame and highlight addressable references for the given card type.",
+  "renames": {
+   "lStack_28": "frameReference",
+   "lStack_30": "highlightReference"
+  }
+ },
+ "2faa548": {
+  "summary": "Outputs the frame and highlight asset references matching the card type (troop for minion/hero, stratagem for tactic).",
+  "renames": {
+   "puVar1": "highlightFramePtr"
+  }
+ },
+ "2fa9c0c": {
+  "summary": "Returns the frame and highlight sprites for an army, tier and card type, building the cache first if empty.",
+  "renames": {
+   "alStack_50": "spritePair",
+   "extraout_x1": "highlightSprite",
+   "lVar2_2": "tierFrame",
+   "uStack_38": "unused1"
+  }
+ },
+ "2faa028": {
+  "summary": "Releases the cached card frame sprites for an army, tier and card type if the cache is populated.",
+  "renames": {
+   "lVar2_2": "tierFrame"
+  }
+ },
+ "2fa9df4": {
+  "summary": "Clears and rebuilds the per-army card frame cache from the clan frames, logging errors on duplicate keys.",
+  "renames": {
+   "alStack_88": "frameReferenceBuffer",
+   "auVar7_part8": "tierFramePart",
+   "auVar8_x1": "extraReturn",
+   "lStack_58": "savedThis",
+   "lStack_60_2": "savedClanFrameEntry",
+   "lStack_68": "savedClanFrames",
+   "lStack_90": "highlightReference",
+   "pcStack_70": "getSpriteMethod",
+   "this_00": "clanFrame",
+   "uStack_44": "armyKey"
+  }
+ },
+ "2faa7f8": {
+  "summary": "Releases the cursor and highlight assets for this entry if its army matches, warning if the asset was not loaded.",
+  "renames": {
+   "uVar2": "highlightKey",
+   "uVar3": "cacheGroupOrFound"
+  }
+ },
+ "2faa5f8": {
+  "summary": "Looks up the cursor and highlight sprites for an army, loading them from the matching entry, or returns false with nulls.",
+  "renames": {
+   "auVar10": "errorResult",
+   "auVar10_part8": "errorResultPart",
+   "bVar7": "found",
+   "iVar1": "entryArmy"
+  }
+ },
+ "2faa788": {
+  "summary": "Releases the cursor assets of the entry matching the given army, warning if the highlight asset was not loaded.",
+  "renames": {
+   "auVar8": "errorResult",
+   "auVar8_part8": "errorResultPart",
+   "uVar3": "highlightKey",
+   "uVar5": "cacheGroupOrFound"
+  }
+ },
+ "2faa8a4": {
+  "summary": "Finds the default cardback cosmetic item for an army by iterating the cardback entries.",
+  "renames": {
+   "alStack_50": "enumeratorAndResult",
+   "lStack_38": "currentEntry"
+  }
+ },
+ "2faaa10": {
+  "summary": "Returns the cardback sprite pair for an army, or two nulls if no default cardback exists.",
+  "renames": {
+   "alStack_40": "spritePair",
+   "uVar1": "hasCardback"
+  }
+ },
+ "2faaae8": {
+  "summary": "Releases the default cardback image and SDF assets for an army, warning if the SDF asset was not loaded.",
+  "renames": {
+   "uVar2": "foundOrFlag",
+   "uVar3": "sdfKey"
+  }
+ },
+ "2faab94": {
+  "summary": "Finds the environmental effect scenario condition for a card by matching army and card ID, then loads its addressable asset.",
+  "renames": {
+   "auVar19": "errorResult",
+   "auVar19_part8": "errorResultPart",
+   "in_w4": "unusedArg2",
+   "in_x3": "unusedArg1",
+   "lStack_48": "unused1",
+   "lStack_58": "savedCard",
+   "lStack_60": "loadResultPart",
+   "lStack_60_2": "savedThis",
+   "lStack_70": "loadOperation",
+   "lVar14": "cardEntry",
+   "puStack_68": "loadMethod",
+   "uStack_78": "operationResultHigh",
+   "uStack_80": "operationResultLow",
+   "uVar7": "assetName",
+   "uVar8": "useOffensiveInt",
+   "uVar9": "useOffensiveRaw",
+   "unaff_x22": "effectIndex"
+  }
+ },
+ "2faad58": {
+  "summary": "Returns the empty offensive card for the given army from the environmental effects data (decompiler merged in following functions).",
+  "renames": {
+   "auVar14": "errorResult",
+   "auVar14_part8": "errorResultPart",
+   "in_w3": "unusedArg1",
+   "in_w4": "unusedArg2",
+   "lVar8": "cardEntry"
+  }
+ },
+ "2faadc0": {
+  "summary": "Builds a list of environmental effect cards for an army, choosing offensive or defensive cards depending on flags and owned-card rules.",
+  "renames": {
+   "auVar15": "errorResult",
+   "auVar15_part8": "errorResultPart",
+   "lVar11": "cardArray",
+   "lVar8": "itemsArray",
+   "uVar4": "shouldUseOffensiveFlag",
+   "uVar5": "justOwnedInt",
+   "uVar6": "justOwnedFlag"
+  }
+ },
+ "2fab05c": {
+  "summary": "Builds a draft list of environmental effect cards for an army, adding offensive, defensive or empty cards depending on flags.",
+  "renames": {
+   "uVar4": "cardItem"
+  }
+ },
+ "2fab4c8": {
+  "summary": "Finds the sprite for an army among the army icon entries and loads it, returning null if none match.",
+  "renames": {
+   "alStack_50": "enumeratorAndEntry",
+   "uVar1": "hasNext",
+   "uVar2": "foundEntry"
+  }
+ },
+ "2fab670": {
+  "summary": "Finds the army icon entry matching the army and releases its addressable sprite.",
+  "renames": {
+   "lStack_38": "currentEntry",
+   "lVar1": "foundEntry",
+   "uStack_40": "unused1",
+   "uStack_50": "outSprite"
+  }
+ },
+ "2fabd18": {
+  "summary": "Copies the icon name localized string fields out into the return value.",
+  "renames": {
+   "uVar1": "thirdField",
+   "uVar2": "firstField"
+  }
+ },
+ "2fabc2c": {
+  "summary": "Finds the scoring icon matching a scoring item type using LINQ FirstOrDefault; most of the body is decompiler noise from inlined enumerator and exception handling.",
+  "renames": {
+   "acStack_ac": "moveNextResult",
+   "alStack_e0": "frameScratch",
+   "auVar22": "exceptionInfo",
+   "auVar22_part8": "exceptionInfoPart",
+   "auVar23_x1": "predicateArg",
+   "iVar16": "exitState",
+   "lStack_40": "caughtException",
+   "lStack_a8": "stackGuard",
+   "lVar1": "displayClass",
+   "lVar10": "genericMethodClass",
+   "lVar11": "sourceTypeInfo",
+   "lVar1_2": "threadLocalBase",
+   "lVar2_2": "interfaceTypeInfo",
+   "lVar8": "typeInfo",
+   "pbVar17": "stateFlag",
+   "piVar15": "interfaceMapPtr",
+   "plStack_c0": "enumeratorObject",
+   "plVar18_2": "enumeratorToDispose",
+   "plVar18_4": "exceptionObject",
+   "pplStack_c8": "enumeratorSlot",
+   "pplVar12": "enumeratorSlotPtr",
+   "puStack_38": "enumeratorSlotRef",
+   "puStack_b8": "elementBuffer",
+   "puVar21": "elementTemp",
+   "puVar3": "interfaceSlot",
+   "puVar5": "interfaceSlot2",
+   "puVar6": "argName",
+   "uVar13": "interfaceCount",
+   "uVar19": "elementSize",
+   "uVar20": "scratchValue"
+  }
+ },
+ "2fc6974": {
+  "summary": "Initializes a starter deck selection container with deck info, glow color, click listener, army objects, hero image and description.",
+  "renames": {
+   "lVar1": "displayClass",
+   "plVar7": "deckInfoPtr",
+   "uVar3_5": "descriptionText",
+   "uVar4": "hasComponent"
+  }
+ },
+ "2fc6c50": {
+  "summary": "Toggles the selected visual state of the deck container: scales hero image, fades glow, shows highlights and sets button interactable.",
+  "renames": {
+   "fVar11": "tolerance",
+   "fVar12": "epsilonScaled",
+   "fVar13": "currentAlpha",
+   "fVar14": "scaleOrMagnitude",
+   "lStack_58": "savedThis",
+   "lStack_68": "savedHighlights",
+   "lStack_78": "referenceCounter",
+   "lVar1": "highlightItems",
+   "pcStack_70": "savedIndex",
+   "uStack_48": "unused1",
+   "uStack_60": "savedOption"
+  }
+ },
+ "2fc6ee8": {
+  "summary": "On disable, releases the loaded full hero sprite of the current deck's hero, warning if it was not loaded.",
+  "renames": {
+   "uVar1": "hasDeck"
+  }
+ },
+ "2fc798c": {
+  "summary": "Copies the deck info localized string fields into the return value.",
+  "renames": {
+   "uVar1": "thirdField",
+   "uVar2": "firstField"
+  }
+ },
+ "2fc79b4": {
+  "summary": "Predicate returning whether a campaign's army matches the army of the currently selected deck's hero.",
+  "renames": {
+   "iVar1": "campaignArmy",
+   "plVar2": "campaignData"
+  }
+ },
+ "2fc7a38": {
+  "summary": "After starter deck is granted, collects rewards, saves selected army, records first campaign node progress, sets default deck and closes the window.",
+  "renames": {
+   "lVar8": "campaignData",
+   "lVar9": "visitedNodesArray",
+   "puVar10": "nodeSlot",
+   "uVar1": "nodeCount"
+  }
+ }
+}

@@ -1,0 +1,202 @@
+{
+ "315e7c4": {
+  "summary": "Builds the list of cards to summon: from the chosen card, matching target criteria, a fixed unit list, or random pick; then a mangled position-lookup tail.",
+  "renames": {
+   "bVar4": "isEnemy",
+   "cVar3": "isPlayerFlag",
+   "uVar5": "playerFlag",
+   "uVar10_2": "hasChosenCard",
+   "puVar12": "chosenCardPtr",
+   "uVar20_2": "chosenCardValue",
+   "plVar23": "anchorEntryPtr",
+   "plVar1": "selectedEntryPtr",
+   "lVar19_9": "anchorEntry",
+   "iStack_b4": "positionValue",
+   "uVar24_2": "nextSlotTransform",
+   "lVar15_7": "minionManagerRef",
+   "lVar22_7": "unmarshalledHandle",
+   "uVar25": "nextSlotPos",
+   "uStack_64": "unused1",
+   "auVar28_x1": "unused2",
+   "auVar29_x1": "unused3",
+   "in_d2": "unused4",
+   "in_s1": "unused5"
+  }
+ },
+ "315f5e8": {
+  "summary": "Returns the list of CardScripts to summon, either the chosen pool card or the valid targets (optionally removing them from the cemetery).",
+  "renames": {
+   "uVar4": "hasPoolCard"
+  }
+ },
+ "315efa4": {
+  "summary": "Returns the Transform for a PositionOption anchor (mana displays, decks, hands, hero, minion slots, HUD anchors) relative to the acting card.",
+  "renames": {
+   "bVar12": "flipSide",
+   "bVar5": "isEnemy",
+   "uVar14": "anchorCount",
+   "uVar20": "nextSlotPos",
+   "uVar19_2": "nextSlotTransform",
+   "uVar11_2": "needsComponent",
+   "plVar18": "anchorEntryPtr",
+   "plVar1": "selectedEntryPtr",
+   "lVar15_4": "anchorEntry",
+   "lVar17_2": "unmarshalledHandle",
+   "iStack_44": "positionValue",
+   "auVar22_x1": "unused1",
+   "auVar23_x1": "unused2",
+   "in_s1": "unused3",
+   "in_s2": "unused4"
+  }
+ },
+ "316255c": {
+  "summary": "Creates a temporary GameObject parented to a minion manager at the next free slot position and returns its Transform for ability effects.",
+  "renames": {
+   "uVar6": "nextSlotTransform",
+   "uVar7": "nextSlotPos",
+   "lVar2_3": "minionManagerRef"
+  }
+ },
+ "315dca0": {
+  "summary": "Computes an ability's numeric value from a ChooseValueOptions setting, using stats such as attack, health, damage, bastion, marks of chaos, or reference card values.",
+  "renames": {
+   "auVar20": "unused1",
+   "auVar20_x1": "unused2",
+   "uVar10": "scratchValue",
+   "uVar19": "resultValue",
+   "pppcVar11": "obscuredIntPtr",
+   "lVar14": "sourceCardData",
+   "lVar14_3": "eventClass",
+   "lVar18": "warlordSource",
+   "lVar12_4": "pendingFault",
+   "piVar15": "interfaceEntryPtr",
+   "uVar2": "copiedField",
+   "uVar3": "randomIndex",
+   "iVar5_4": "baseMeleeAttack",
+   "iVar5_6": "currentHealthValue",
+   "iVar5_8": "baseRangedAttack",
+   "iVar5_10": "valueResult",
+   "iVar5_12": "targetHealth",
+   "iVar5_14": "obscuredResult",
+   "iVar5_15": "costModifier",
+   "pcStack_80_part4": "fakeValueHigh",
+   "puStack_a0_part4": "fakeValueHigh2",
+   "ppcStack_78_2": "savedHealth",
+   "pcStack_80_2": "effectEnumerator",
+   "puStack_a0": "enumeratorOrFake",
+   "lStack_a8_2": "enumeratorFault",
+   "ppcStack_1d0": "excessBValue",
+   "uStack_1c8": "excessBInited",
+   "uStack_1c0": "excessBFake",
+   "ppcStack_1b0": "excessAValue",
+   "uStack_1a8": "excessAInited",
+   "uStack_1a0": "excessAFake",
+   "ppcStack_190": "refHealthValue",
+   "uStack_188": "refHealthInited",
+   "uStack_180": "refHealthFake",
+   "ppcStack_170": "refAttackValue",
+   "uStack_168": "refAttackInited",
+   "uStack_160": "refAttackFake",
+   "ppcStack_150": "hpAtkAValue",
+   "uStack_148": "hpAtkAInited",
+   "uStack_140": "hpAtkAFake",
+   "ppcStack_130": "hpAtkBValue",
+   "uStack_128": "hpAtkBInited",
+   "uStack_120": "hpAtkBFake",
+   "ppcStack_110": "thisHpAValue",
+   "uStack_108": "thisHpAInited",
+   "uStack_100": "thisHpAFake",
+   "ppcStack_f0": "thisHpBValue",
+   "lStack_e8": "thisHpBInited",
+   "uStack_e0": "thisHpBFake",
+   "ppcStack_d0": "targetHpAValue",
+   "uStack_c8": "targetHpAInited",
+   "uStack_c0": "targetHpAFake",
+   "ppcStack_b0": "targetHpBValue",
+   "lStack_a8": "targetHpBInited"
+  }
+ },
+ "315e5c0": {
+  "summary": "Scales the stat-change fields of a CardEffect by running each through NewBuffStat when the buff type is a stat-affecting one.",
+  "renames": {
+   "lVar3": "effectBlockA",
+   "lVar4": "effectBlockB"
+  }
+ },
+ "315f994": {
+  "summary": "Multiplies a ManaBuff's value by the given multiplier.",
+  "renames": {
+   "lVar1": "manaBuffData"
+  }
+ },
+ "31627a0": {
+  "summary": "Calculates a buff stat amount from a ChooseValueOptions source (attack, health, damage, marks of chaos, faith, random) times the multiplier.",
+  "renames": {
+   "uStack_d0": "enumTypeRef",
+   "iStack_c0": "valueOptionCopy",
+   "uStack_b0": "hpAtkValue",
+   "uStack_a8": "hpAtkInited",
+   "uStack_a0": "hpAtkFake",
+   "uStack_90": "thisHpValue",
+   "uStack_88": "thisHpInited",
+   "uStack_80": "thisHpFake",
+   "uStack_70": "targetHpValue",
+   "uStack_68": "targetHpInited",
+   "uStack_60": "targetHpFake",
+   "uStack_60_part4": "fakeValueHigh",
+   "uStack_50": "faithFake",
+   "uStack_50_part4": "faithFakeHigh",
+   "lStack_48": "currentUnit",
+   "uStack_d0_3": "enumeratorDisposeState",
+   "uVar1": "faithFakeFlag",
+   "iVar2_2": "faithValue",
+   "iVar4_2": "statValue",
+   "puVar8": "healthSnapshotPtr"
+  }
+ },
+ "3162d4c": {
+  "summary": "Estimates the average value for a ChooseValueOptions source (stat, health, damage, bastion) or the rounded mean of min and max.",
+  "renames": {
+   "dStack_90": "targetHpValue",
+   "uStack_88": "targetHpInited",
+   "uStack_80": "targetHpFake",
+   "dStack_b0": "thisHpValue",
+   "uStack_a8": "thisHpInited",
+   "uStack_a0": "thisHpFake",
+   "dStack_d0": "hpAtkValue",
+   "uStack_c8": "hpAtkInited",
+   "uStack_c0": "hpAtkFake",
+   "uStack_60_part4": "fakeValueHigh",
+   "iVar3_3": "baseMelee",
+   "iVar3_5": "healthOrRanged",
+   "iVar3_7": "resultValue",
+   "pdVar6": "healthSnapshotPtr",
+   "dVar11": "averageDouble",
+   "fVar12": "averageFloat",
+   "iVar4": "effectBonus",
+   "uVar5": "rangedAttack"
+  }
+ },
+ "31633f4": {
+  "summary": "Estimates the average damage of a DamageCriteria from its value option (stat, health, damage, bastion) or the rounded mean of min and max.",
+  "renames": {
+   "dStack_90": "targetHpValue",
+   "uStack_88": "targetHpInited",
+   "uStack_80": "targetHpFake",
+   "dStack_b0": "thisHpValue",
+   "uStack_a8": "thisHpInited",
+   "uStack_a0": "thisHpFake",
+   "dStack_d0": "hpAtkValue",
+   "uStack_c8": "hpAtkInited",
+   "uStack_c0": "hpAtkFake",
+   "uStack_60_part4": "fakeValueHigh",
+   "iVar4_2": "baseMelee",
+   "iVar4_4": "healthOrRanged",
+   "iVar4_6": "resultValue",
+   "pdVar7": "healthSnapshotPtr",
+   "dVar12": "averageDouble",
+   "fVar13": "averageFloat",
+   "iVar5": "effectBonus"
+  }
+ }
+}

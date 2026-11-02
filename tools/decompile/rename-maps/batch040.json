@@ -1,0 +1,274 @@
+{
+ "328f33c": {
+  "summary": "Hides the disappearing unit's object, then finishes action resolution, checks for hero death/battle end, and refreshes turn state.",
+  "renames": {
+   "uStack_80": "typeScratchA",
+   "uStack_78": "typeScratchB",
+   "uStack_70": "typeScratchC",
+   "uStack_90": "unused1",
+   "uStack_a8": "unused2",
+   "uStack_c8": "enemyHealthFakeValue",
+   "uStack_d0_2": "enemyHealthValue",
+   "uStack_c0": "enemyHealthFlag",
+   "uStack_e8": "playerHealthInited",
+   "uStack_e0": "playerHealthFlag",
+   "uStack_f0_2": "playerHealthValue",
+   "auStack_58": "matchEndTime",
+   "abStack_44": "isPlayerHeroDead",
+   "param_4": "unused3",
+   "extraout_x0": "unused4",
+   "extraout_x0_00": "unused5",
+   "dVar17": "matchDurationMinutes",
+   "piVar14": "interfaceMapPtr",
+   "uVar11_2": "hasNoTarget",
+   "uVar11_3": "actionTypeCopy",
+   "uVar11_4": "shouldLoseValue",
+   "uVar11_6": "isPlayerTurn",
+   "uVar11_7": "heroCardUiRef",
+   "uVar11_8": "autoActionsResult",
+   "uVar11_9": "scriptedStageAvailable",
+   "iVar5_2": "playerHeroState",
+   "iVar5_4": "playerHeroHealth",
+   "uVar4_2": "enemyHeroHealth",
+   "lVar15_6": "eventClassPtr",
+   "lVar15_9": "matchResultPtr",
+   "auVar18": "obscuredFlag",
+   "auVar19": "duringBattleFlagValue",
+   "auVar19_part8": "duringBattleFlagInited"
+  }
+ },
+ "328f424": {
+  "summary": "Removes the target card from the cemetery, then finishes action resolution, checks for hero death/battle end, and refreshes turn state.",
+  "renames": {
+   "uStack_80": "typeScratchA",
+   "uStack_78": "typeScratchB",
+   "uStack_70": "typeScratchC",
+   "uStack_90": "unused1",
+   "uStack_a8": "unused2",
+   "uStack_c8": "enemyHealthFakeValue",
+   "uStack_d0_2": "enemyHealthValue",
+   "uStack_c0": "enemyHealthFlag",
+   "uStack_e8": "playerHealthInited",
+   "uStack_e0": "playerHealthFlag",
+   "uStack_f0_2": "playerHealthValue",
+   "auStack_58": "matchEndTime",
+   "abStack_44": "isPlayerHeroDead",
+   "param_4": "unused3",
+   "extraout_x0": "unused4",
+   "extraout_x0_00": "unused5",
+   "dVar17": "matchDurationMinutes",
+   "piVar14": "interfaceMapPtr",
+   "uVar11_2": "hasNoTarget",
+   "uVar11_3": "actionTypeCopy",
+   "uVar11_4": "shouldLoseValue",
+   "uVar11_6": "isPlayerTurn",
+   "uVar11_7": "heroCardUiRef",
+   "uVar11_8": "autoActionsResult",
+   "uVar11_9": "scriptedStageAvailable",
+   "iVar5_2": "playerHeroState",
+   "iVar5_4": "playerHeroHealth",
+   "uVar4_2": "enemyHeroHealth",
+   "lVar15_5": "eventClassPtr",
+   "lVar15_8": "matchResultPtr",
+   "auVar19": "obscuredFlag",
+   "auVar18": "duringBattleFlagValue",
+   "auVar18_part8": "duringBattleFlagInited"
+  }
+ },
+ "3295588": {
+  "summary": "Notifies all in-play units and cards in hand that a trap card was resolved.",
+  "renames": {
+   "uVar5": "isOtherCard"
+  }
+ },
+ "329570c": {
+  "summary": "Notifies all in-play units and cards in hand that a quest card was resolved.",
+  "renames": {
+   "uVar5": "isOtherCard"
+  }
+ },
+ "329595c": {
+  "summary": "Notifies other units in play and both players' hands that a unit used sacrifice.",
+  "renames": {
+   "uVar3": "isOtherUnit"
+  }
+ },
+ "3295964": {
+  "summary": "Notifies the unit itself, other units in play and both hands that a unit was marked.",
+  "renames": {
+   "uVar3": "isOtherUnit"
+  }
+ },
+ "329596c": {
+  "summary": "Notifies the unit itself, other units in play and both hands that a unit was hunt-marked.",
+  "renames": {
+   "uVar3": "isOtherUnit"
+  }
+ },
+ "3295974": {
+  "summary": "Notifies the unit itself, other units in play and both hands that a unit was markerlighted.",
+  "renames": {
+   "uVar3": "isOtherUnit"
+  }
+ },
+ "329597c": {
+  "summary": "Notifies the unit and other units in play that a spirit stone was collected.",
+  "renames": {
+   "uVar2": "isOtherUnit"
+  }
+ },
+ "3295984": {
+  "summary": "Notifies the unit and other units in play that faith was collected.",
+  "renames": {
+   "uVar2": "isOtherUnit"
+  }
+ },
+ "329598c": {
+  "summary": "Notifies the unit and other units in play that quest points was collected.",
+  "renames": {
+   "uVar2": "isOtherUnit"
+  }
+ },
+ "329599c": {
+  "summary": "Notifies the unit and other units in play that a sabotage was created.",
+  "renames": {
+   "uVar2": "isOtherUnit"
+  }
+ },
+ "3295994": {
+  "summary": "Notifies units that a secret was created, then raises a CreateSecretSignal through the signal broker.",
+  "renames": {
+   "uVar2": "isOtherUnit",
+   "lVar3_3": "brokerClassPtr",
+   "piVar5": "interfaceMapPtr"
+  }
+ },
+ "32959b4": {
+  "summary": "Triggers the other-card requiem reaction on in-play units (except the caster) and on both players' hands.",
+  "renames": {
+   "uVar4": "isNotCaster"
+  }
+ },
+ "32959bc": {
+  "summary": "Triggers the other-card mob reaction on in-play units (except the caster) and on both players' hands.",
+  "renames": {
+   "uVar4": "isNotCaster"
+  }
+ },
+ "32959cc": {
+  "summary": "Triggers the other-card regiment reaction on in-play units (except the caster) and on both players' hands.",
+  "renames": {
+   "uVar4": "isNotCaster"
+  }
+ },
+ "32959d4": {
+  "summary": "Triggers the other-card codex reaction on in-play units (except the codex unit) and on both hands.",
+  "renames": {
+   "uVar4": "isOtherUnit"
+  }
+ },
+ "32959f4": {
+  "summary": "Raises a swarm signal and triggers swarm reactions on in-play units and both players' hands.",
+  "renames": {
+   "uVar5": "isNotPlayedUnit"
+  }
+ },
+ "3295a2c": {
+  "summary": "Builds a remove-enchantment battle action for a card and adds it to the auto action queue.",
+  "renames": {
+   "auStack_140": "rawActionData",
+   "alStack_130": "actionCardSlot",
+   "alStack_d0": "actionEffectSlot",
+   "auStack_240": "queuedAction"
+  }
+ },
+ "3290a80": {
+  "summary": "Transforms a unit into new card data, re-initializing it in play or hand, then finishes action resolution and battle-end checks.",
+  "renames": {
+   "uVar11_2": "hasNoTarget",
+   "uVar11_4": "shouldLoseValue",
+   "uVar11_7": "autoActionsResult",
+   "uVar11_8": "scriptedStageAvailable",
+   "auVar19": "obscuredFlag",
+   "auVar20": "duringBattleFlagValue",
+   "auVar20_part8": "duringBattleFlagInited",
+   "uStack_e8": "playerHealthInited",
+   "uStack_e0": "playerHealthFlag",
+   "uStack_c8": "enemyHealthInited",
+   "uStack_c0": "enemyHealthFlag",
+   "uStack_d0_2": "enemyHealthValue",
+   "uStack_f0_2": "playerHealthValue",
+   "uStack_90": "unused1",
+   "uStack_a8": "unused2",
+   "uVar3_2": "enemyHeroHealth",
+   "iVar4_2": "playerHeroHealth",
+   "lVar15_5": "eventClassPtr",
+   "lVar15_8": "matchResultPtr",
+   "piVar14": "interfaceMapPtr",
+   "dVar18": "matchDurationMinutes",
+   "auStack_58": "matchEndTime",
+   "abStack_44": "isPlayerHeroDead",
+   "param_4": "unused3",
+   "extraout_x0": "unused4",
+   "extraout_x0_00": "unused5"
+  }
+ },
+ "3291020": {
+  "summary": "Transforms a unit from a remnant via a closure callback, then finishes action resolution, battle-end checks and turn state refresh.",
+  "renames": {
+   "uStack_80": "typeScratchA",
+   "uStack_78": "typeScratchB",
+   "uStack_70": "typeScratchC",
+   "uStack_90": "unused1",
+   "uStack_a8": "unused2",
+   "uStack_c8": "enemyHealthFakeValue",
+   "uStack_d0_2": "enemyHealthValue",
+   "uStack_c0": "enemyHealthFlag",
+   "uStack_e8": "playerHealthInited",
+   "uStack_e0": "playerHealthFlag",
+   "uStack_f0_2": "playerHealthValue",
+   "auStack_58": "matchEndTime",
+   "abStack_44": "isPlayerHeroDead",
+   "param_4": "unused3",
+   "extraout_x0": "unused4",
+   "extraout_x0_00": "unused5",
+   "lVar11": "closureObj",
+   "uVar13_2": "actionCopy",
+   "uVar13_3": "shouldLoseValue",
+   "uVar13_5": "isPlayerTurn",
+   "uVar13_6": "heroCardUiRef",
+   "uVar13_7": "autoActionsResult",
+   "uVar13_8": "scriptedStageAvailable",
+   "iVar5_2": "playerHeroState",
+   "iVar5_4": "playerHeroHealth",
+   "uVar4_2": "enemyHeroHealth",
+   "lVar16_5": "eventClassPtr",
+   "lVar16_8": "matchResultPtr",
+   "piVar15": "interfaceMapPtr",
+   "dVar17": "matchDurationMinutes",
+   "auVar18": "duringBattleFlagValue",
+   "auVar19": "obscuredFlag",
+   "auVar18_part8": "duringBattleFlagInited",
+   "extraout_x0_02": "unused6",
+   "method_12": "unused7"
+  }
+ },
+ "3295b58": {
+  "summary": "Cancels queued actions and effects originating from a card, removing its self-buff actions from the action queues.",
+  "renames": {
+   "uVar2": "checkResult",
+   "uStack_88": "actionCardRef",
+   "uStack_14c": "targetCardHigh",
+   "uStack_150": "targetCardLow",
+   "uStack_158": "unused1",
+   "iStack_70": "subActionType"
+  }
+ },
+ "3295ac4": {
+  "summary": "Fades out the active skill description and restores the selected card's highlight frames and tween colors.",
+  "renames": {
+   "auVar13": "hasSelectedCard",
+   "puVar4": "tweenPtr"
+  }
+ }
+}

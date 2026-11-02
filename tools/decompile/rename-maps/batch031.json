@@ -1,0 +1,254 @@
+{
+ "32c8098": {
+  "summary": "Always throws NotSupportedException because resetting this coroutine enumerator is not supported.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "32c8364": {
+  "summary": "Always throws NotSupportedException because resetting this coroutine enumerator is not supported.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "32c87c8": {
+  "summary": "Always throws NotSupportedException because resetting this coroutine enumerator is not supported.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "32c9018": {
+  "summary": "Always throws NotSupportedException because resetting this coroutine enumerator is not supported.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "32c98bc": {
+  "summary": "Always throws NotSupportedException because resetting this coroutine enumerator is not supported.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "32cb448": {
+  "summary": "Always throws NotSupportedException because resetting this coroutine enumerator is not supported.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "32cb5e0": {
+  "summary": "Always throws NotSupportedException because resetting this coroutine enumerator is not supported.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "32cc3e0": {
+  "summary": "Always throws NotSupportedException because resetting this coroutine enumerator is not supported.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "32cce04": {
+  "summary": "Always throws NotSupportedException because resetting this coroutine enumerator is not supported.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "32cd098": {
+  "summary": "Always throws NotSupportedException because resetting this coroutine enumerator is not supported.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "32cd36c": {
+  "summary": "Always throws NotSupportedException because resetting this coroutine enumerator is not supported.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "32cdb20": {
+  "summary": "Always throws NotSupportedException because resetting this coroutine enumerator is not supported.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "32ce188": {
+  "summary": "Always throws NotSupportedException because resetting this coroutine enumerator is not supported.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "32ced20": {
+  "summary": "Always throws NotSupportedException because resetting this coroutine enumerator is not supported.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "32c7cf8": {
+  "summary": "Coroutine that resolves a heal action: heals single or multiple targets, fires UnitHealed triggers on units in play, then finishes the action.",
+  "renames": {
+   "auStack_140": "battleActionCopy"
+  }
+ },
+ "32c8104": {
+  "summary": "Coroutine that resolves a minion death: removes the dying unit from play, logs the kill, plays death animation, updates hands, finishes action.",
+  "renames": {
+   "uVar3": "cardStateName",
+   "auStack_148": "battleActionCopy",
+   "uStack_40": "scratch1"
+  }
+ },
+ "32c83d0": {
+  "summary": "Coroutine that deals damage to each multi-target card in turn, broadcasting damage, playing sound, and finishing the action.",
+  "renames": {
+   "uVar3": "isManagerNull",
+   "auStack_160": "battleActionCopy",
+   "lVar7_7": "soundManager",
+   "uStack_170": "scratch1",
+   "uVar6_2": "cardStateName"
+  }
+ },
+ "32c8834": {
+  "summary": "Coroutine that damages multiple targets then destroys the casting card itself, triggering death actions and cemetery handling.",
+  "renames": {
+   "uVar7": "cardStateName",
+   "auStack_378": "broadcastCopy",
+   "auStack_278": "resolveDeadCopy",
+   "auStack_178": "deathTypeCopy",
+   "uStack_70": "scratch1",
+   "lVar3_9": "soundManager"
+  }
+ },
+ "32c9084": {
+  "summary": "Coroutine that resolves playing an active ability: validates targets, handles choices, cancels if invalid, plays animations, and finishes the action.",
+  "renames": {
+   "uVar4": "isManagerNull",
+   "lVar7": "closure",
+   "uVar8": "actionValueText",
+   "puVar10": "cancelActionPtr",
+   "uVar11": "nextState",
+   "auStack_640": "cemeteryCopy",
+   "auStack_540": "communicateCopy",
+   "auStack_440": "chooseCardCopy",
+   "auStack_240": "invalidTargetCancelCopy",
+   "auStack_140": "cancelCopy",
+   "uStack_338": "scratch1",
+   "uVar3_6": "matchTypeName",
+   "auStack_34": "boolBuffer"
+  }
+ },
+ "32c9928": {
+  "summary": "Large coroutine that resolves playing a card from hand: pays cost, picks targets, animates minions or spells, triggers effects, logs and finishes action.",
+  "renames": {
+   "auStack_af0": "addPlayCardCopy",
+   "uStack_9d0": "turnCountArg",
+   "uStack_9c8": "turnCountInited",
+   "uStack_9c0": "turnCountFakeActive",
+   "auStack_9b0": "communicateCopy",
+   "auStack_8b0": "logTacticCopy",
+   "auStack_7b0": "chooseCardCopy",
+   "auStack_6b0": "chooseCardCopy3",
+   "auStack_5b0": "logTroopCopy",
+   "auStack_4b0": "chooseCardCopy2",
+   "auStack_2b0": "cancelledCopy",
+   "uStack_1b0": "counterArg",
+   "uStack_1a8": "counterArgInited",
+   "uStack_1a0": "counterArgFake",
+   "uStack_18c": "incrementedInited",
+   "uStack_184": "incrementedFake",
+   "uStack_180": "playedCounterArg",
+   "uStack_178": "playedCounterInited",
+   "uStack_170": "playedCounterFake",
+   "uStack_160": "teleportCounterArg",
+   "uStack_158": "teleportCounterInited",
+   "uStack_150": "teleportCounterFake",
+   "auStack_148": "cancelCopy",
+   "auStack_44": "boolBuffer",
+   "auVar18": "throwResult",
+   "auVar18_x1": "throwResultX1",
+   "uVar6": "nullCheck",
+   "puVar11": "managerFieldPtr",
+   "lVar5_5": "soundMgrEnemy",
+   "lVar5_7": "soundMgrReplay",
+   "lVar5_16": "soundMgrPool",
+   "lVar5_19": "soundMgrSpell",
+   "lVar5_21": "soundMgrMinion",
+   "lVar10": "nullTarget",
+   "iVar4_7": "counterRef",
+   "iVar4_11": "turnCardsCounterRef",
+   "in_x3": "unusedArg3"
+  }
+ },
+ "32cb4b4": {
+  "summary": "Coroutine that reassembles a player's minions, waits for the animation time, then finishes the reorder action.",
+  "renames": {
+   "uVar2": "isManagerNull"
+  }
+ },
+ "32cb64c": {
+  "summary": "Coroutine that recalls a card to the deck from battle, hand or cemetery, animating it and notifying listeners before finishing.",
+  "renames": {
+   "uVar5": "isNotRecalledCard",
+   "uVar7": "isNotRecalledCard2",
+   "uVar8": "nextState",
+   "uStack_88": "cardStateType",
+   "uStack_80": "scratch1",
+   "auStack_34": "boolBuffer",
+   "auVar13": "throwResult",
+   "auVar13_x1": "throwResultX1",
+   "plVar9": "minionManagerFieldPtr",
+   "in_s1": "unusedFloat1",
+   "in_s2": "unusedFloat2"
+  }
+ },
+ "32cc44c": {
+  "summary": "Coroutine that recalls a card to hand from battle or cemetery, re-adding it to the hand and notifying cards and UI.",
+  "renames": {
+   "plVar8": "fieldPtr",
+   "uVar5": "isNotReturnedCard",
+   "uVar6": "isNotReturnedCard2",
+   "uVar7": "nextState",
+   "uStack_90": "cardStateType",
+   "uStack_88": "scratch1",
+   "auStack_74": "boolBuffer",
+   "auVar13": "throwResult",
+   "auVar13_x1": "throwResultX1",
+   "in_x2": "unusedArg2",
+   "fVar12": "cardScale",
+   "in_s1": "unusedFloat1",
+   "in_s2": "unusedFloat2"
+  }
+ },
+ "32cd104": {
+  "summary": "Coroutine that makes a card perform a scripted attack on a target, queuing attack and reset actions and showing berzerk animation.",
+  "renames": {
+   "uVar2": "isTargetNull"
+  }
+ },
+ "32cd3d8": {
+  "summary": "Coroutine that steals a card from a deck into the other player's hand, with scale and wait animations.",
+  "renames": {
+   "uVar6": "hasTargetCard",
+   "lVar8": "vector3Statics",
+   "fVar12": "scaleY",
+   "fVar13": "scaleZ",
+   "uStack_60": "cardStateType",
+   "uStack_58": "scratch1",
+   "auStack_44": "boolBuffer"
+  }
+ },
+ "32cdb8c": {
+  "summary": "Coroutine that steals a card from a player's hand into the other hand, showing it in the center first.",
+  "renames": {
+   "puVar7": "handFieldPtr",
+   "uStack_50": "cardStateType",
+   "uStack_48": "scratch1",
+   "auStack_34": "boolBuffer"
+  }
+ },
+ "32ce1f4": {
+  "summary": "Coroutine that steals an enemy minion, moving it to the other side's board slot and refreshing hands and minion order.",
+  "renames": {
+   "iVar3_2": "nextSlotIndex"
+  }
+ }
+}

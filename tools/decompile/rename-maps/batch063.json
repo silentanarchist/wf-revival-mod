@@ -1,0 +1,395 @@
+{
+ "2f5939c": {
+  "summary": "Builds the first parameter text (a clickable link string or localized trait name) for a cemetery log action; decompiler output also mixes in link-click and card display code.",
+  "renames": {
+   "auStackY_138": "actionCopyBuffer",
+   "auVar27": "throwResult",
+   "auVar27_x1": "throwResultAux",
+   "bVar1": "skipMaterialUpdate",
+   "extraout_s0": "unusedFloat1",
+   "fVar24": "floatTemp1",
+   "fVar24_2": "spriteRectX",
+   "fVar26": "floatTemp2",
+   "iStack_30": "unusedStack1",
+   "iVar5": "actionType",
+   "lStackY_110": "cardRefAlt",
+   "lStackY_128": "displayCardArg",
+   "lStackY_f0": "createdByTextAlt",
+   "lStackY_f8": "createdByTextArg",
+   "lVar13_2": "unusedObj1",
+   "lVar14": "managerObj",
+   "lVar14_4": "currentSprite",
+   "lVar14_6": "existingSprite",
+   "lVar20": "sliderIndex",
+   "lVar7_2": "sliderSlot",
+   "lVar7_5": "sliderSlot2",
+   "lVar7_7": "linkInfoArray",
+   "param_6": "actionIndexParam",
+   "plVar15": "locKeyPtr",
+   "plVar18": "spriteFieldPtr",
+   "puVar17": "materialFieldPtr",
+   "puVar9": "errorMessage",
+   "uStackY_b0": "linkInfoWordInfo",
+   "uStackY_b8": "linkInfoCharInfo",
+   "uStackY_c0": "linkInfoPageCount",
+   "uStackY_c8": "linkInfoLinkCount",
+   "uStackY_d0": "linkInfoSpaceCount",
+   "uStack_24": "actionIndexValue",
+   "uStack_38": "unusedStack2",
+   "uVar16": "exceptionObj",
+   "uVar16_5": "materialRef",
+   "uVar25": "savedCemeteryAction",
+   "uVar6": "isNullFlag",
+   "uVar6_2": "cardTypeCopy",
+   "uVar6_3": "condFlag"
+  }
+ },
+ "2f5981c": {
+  "summary": "Checks whether the mouse is over a card link in the cemetery log and displays that card; decompiler output also includes DisplayCard inlined code.",
+  "renames": {
+   "auStack_e8": "actionBuffer",
+   "auVar23_8": "throwResult",
+   "auVar23_x1": "methodArg",
+   "auVar24": "isHeroMatch",
+   "bVar1": "skipMaterialUpdate",
+   "extraout_s0": "unusedFloat1",
+   "fVar20": "floatTemp1",
+   "fVar20_3": "rectXCopy",
+   "fVar20_4": "spriteRectX",
+   "fVar22": "floatTemp2",
+   "fVar22_3": "offsetX",
+   "in_d1": "mouseX",
+   "in_d2": "mouseY",
+   "in_x2": "extraArg",
+   "lStack_a0": "createdByAlt",
+   "lStack_a8": "createdByText",
+   "lStack_c0": "cardAlt",
+   "lStack_d8": "rawCardArg",
+   "lVar10_13": "currentSprite",
+   "lVar10_15": "existingSprite",
+   "lVar10_7": "linkInfoArray",
+   "plVar14": "spriteFieldPtr",
+   "puVar13": "materialFieldPtr",
+   "uStack_60": "linkInfoField4",
+   "uStack_68": "linkInfoField3",
+   "uStack_70": "linkInfoField2",
+   "uStack_78": "linkInfoField1",
+   "uStack_80": "linkInfoStruct",
+   "uVar11_5": "materialRef",
+   "uVar12_3": "positionOffsetX",
+   "uVar21": "savedMouseY",
+   "uVar7": "isTypeOne",
+   "uVar7_2": "cardTypeCopy",
+   "uVar7_3": "condFlag"
+  }
+ },
+ "2f59c78": {
+  "summary": "On click, finds the cemetery log link under the mouse and displays the linked card in battle, then hides the cemetery log button.",
+  "renames": {
+   "aiStack_e0": "altActionData",
+   "auStack_e8": "actionBuffer",
+   "auVar12_7": "isTypeZero",
+   "auVar12_x1": "methodArg",
+   "bVar6": "newShowingState",
+   "extraout_s0": "unusedFloat1",
+   "iStack_e4": "actionCardId",
+   "in_d1": "mouseX",
+   "in_s2": "unusedFloat2",
+   "lVar7_5": "linkInfoArray",
+   "piVar1": "cardIdPtr",
+   "uStack_60": "linkInfoField4",
+   "uStack_68": "linkInfoField3",
+   "uStack_70": "linkInfoField2",
+   "uStack_78": "linkInfoField1",
+   "uStack_80": "linkInfoStruct",
+   "uVar5": "isTypeOne"
+  }
+ },
+ "2f59ae4": {
+  "summary": "Shows a raw card in the cemetery's card viewer with the right max health, created-by text, scale, texture and sprite setup.",
+  "renames": {
+   "auVar20": "isPlayerHero",
+   "bVar1": "skipMaterialUpdate",
+   "fVar17": "floatTemp1",
+   "fVar17_3": "offsetXCopy",
+   "fVar17_4": "spriteRectX",
+   "fVar18": "floatTemp2",
+   "fVar18_4": "offsetX",
+   "lVar6_6": "currentSprite",
+   "lVar6_8": "existingSprite",
+   "plVar11": "spriteFieldPtr",
+   "puVar10": "materialFieldPtr",
+   "uVar15_3": "materialRef",
+   "uVar19_3": "positionOffsetX",
+   "uVar9": "cardTypeCopy",
+   "uVar9_2": "condFlag"
+  }
+ },
+ "2f5a02c": {
+  "summary": "Returns the list of cards played (from the cemetery action log) that meet the given criteria.",
+  "renames": {
+   "iStack_b4": "actionCardId",
+   "iStack_b8": "actionType"
+  }
+ },
+ "2f5a21c": {
+  "summary": "Toggles the cemetery log slider: slides it in or out, shows or hides the shade and card UI, and logs the first open for analytics.",
+  "renames": {
+   "plVar4": "tweenFieldPtr",
+   "uVar1": "isPlaying"
+  }
+ },
+ "2f59f80": {
+  "summary": "Hides the cemetery log slider by tweening it back, deactivating the shade and card UI, and flipping the showing state.",
+  "renames": {
+   "bVar3": "newShowingState"
+  }
+ },
+ "2f5a398": {
+  "summary": "Per-frame update while the cemetery log is open: checks for a hovered card link and displays that card (decompiler also inlines DisplayCard).",
+  "renames": {
+   "auStack_e8": "actionBuffer",
+   "auVar23_8": "throwResult",
+   "auVar23_x1": "methodArg",
+   "auVar24": "isHeroMatch",
+   "bVar1": "skipMaterialUpdate",
+   "extraout_s0": "unusedFloat1",
+   "fVar20": "floatTemp1",
+   "fVar20_3": "rectXCopy",
+   "fVar20_4": "spriteRectX",
+   "fVar22": "floatTemp2",
+   "fVar22_3": "offsetX",
+   "in_d1": "mouseX",
+   "in_d2": "mouseY",
+   "in_x2": "extraArg",
+   "lStack_a0": "createdByAlt",
+   "lStack_a8": "createdByText",
+   "lStack_c0": "cardAlt",
+   "lStack_d8": "rawCardArg",
+   "lVar10_13": "currentSprite",
+   "lVar10_15": "existingSprite",
+   "lVar10_7": "linkInfoArray",
+   "plVar14": "spriteFieldPtr",
+   "puVar13": "materialFieldPtr",
+   "uStack_60": "linkInfoField4",
+   "uStack_68": "linkInfoField3",
+   "uStack_70": "linkInfoField2",
+   "uStack_78": "linkInfoField1",
+   "uStack_80": "linkInfoStruct",
+   "uVar11_5": "materialRef",
+   "uVar12_3": "positionOffsetX",
+   "uVar21": "savedMouseY",
+   "uVar7": "isTypeOne",
+   "uVar7_2": "cardTypeCopy",
+   "uVar7_3": "condFlag"
+  }
+ },
+ "2f5a458": {
+  "summary": "Logs a troop being played by raising a CardPlayedSignal with the card, acting card, player flag and mana cost.",
+  "renames": {
+   "bVar1": "isPlayerFlag",
+   "lVar6": "brokerClass",
+   "piVar7": "handlerEntryPtr",
+   "plVar5": "cardFieldPtr",
+   "uVar2": "condFlag"
+  }
+ },
+ "2f5a610": {
+  "summary": "Raises a TriggerAbilitySignal for an ability trigger, ignoring while-in-play and synapse triggers.",
+  "renames": {
+   "lVar2": "brokerClass",
+   "lVar5": "signalMethod",
+   "piVar4": "handlerEntryPtr",
+   "uVar3": "handlerCount"
+  }
+ },
+ "2f5a6b0": {
+  "summary": "Logs a tactic being played by raising a CardPlayedSignal and incrementing the relevant side's tactics-played stat.",
+  "renames": {
+   "bVar1": "isPlayerFlag",
+   "lStack_58": "cardInfoCurrentCard",
+   "lStack_60": "cardInfoRawCard",
+   "lVar3": "currentCardObj",
+   "lVar4": "rawCardObj",
+   "uStack_50": "cardInfoCost"
+  }
+ },
+ "2f5a814": {
+  "summary": "Logs a heal by raising a HealUnitSignal, wrapping the single target in a list when no multi-target list exists.",
+  "renames": {
+   "lVar7": "brokerClass",
+   "piVar9": "handlerEntryPtr",
+   "uVar8": "handlerCount"
+  }
+ },
+ "2f5a96c": {
+  "summary": "Logs a troop kill by raising a TroopKilledSignal and incrementing the kill stat, or logs an error if no target.",
+  "renames": {
+   "lVar4": "statsRef",
+   "puVar2": "logMethodPtr",
+   "uVar1": "isTargetNull",
+   "uVar3": "logArg"
+  }
+ },
+ "2f5aad0": {
+  "summary": "Logs damage by raising a DamageSignal, or logs a debug error if damage info or units are missing.",
+  "renames": {
+   "lVar4": "brokerClass",
+   "lVar5": "signalMethod",
+   "piVar6": "handlerEntryPtr",
+   "puVar2": "logMethodPtr",
+   "uVar1": "condFlag",
+   "uVar3": "logArg"
+  }
+ },
+ "2f5abe4": {
+  "summary": "Logs an attack by raising an AttackSignal, or logs a debug error if either card is null.",
+  "renames": {
+   "lVar5": "brokerClass",
+   "lVar6": "signalMethod",
+   "piVar7": "handlerEntryPtr",
+   "puVar3": "logMethodPtr",
+   "uVar1": "logMessage",
+   "uVar2": "condFlag",
+   "uVar4": "logArg"
+  }
+ },
+ "2f5acf0": {
+  "summary": "Logs match end by raising a BattleEndSignal with match data, game mode, skull count and winner flag.",
+  "renames": {
+   "lVar4": "brokerClass",
+   "piVar6": "handlerEntryPtr",
+   "uVar5": "handlerCount"
+  }
+ },
+ "2f5ae00": {
+  "summary": "Logs a card effect being added by raising an AddCardEffectSignal.",
+  "renames": {
+   "lVar2": "brokerClass",
+   "lVar5": "signalMethod",
+   "piVar4": "handlerEntryPtr",
+   "uVar3": "handlerCount"
+  }
+ },
+ "2f5af9c": {
+  "summary": "Returns the localized chat message for a warlord, using custom intros (specific or by army) or a mirror-match or default line.",
+  "renames": {
+   "auStack_44": "hasCustomIntroBuf",
+   "lVar2": "chatManagerInstance",
+   "lVar2_3": "chatManagerInstance2",
+   "lVar2_5": "chatManagerInstance3"
+  }
+ },
+ "2f5b7dc": {
+  "summary": "Returns whether the player talks first in the intro, based on custom intro data, defaulting to true.",
+  "renames": {
+   "bVar1": "introFirstFlag"
+  }
+ },
+ "2f5b848": {
+  "summary": "Loads and returns the chat sound AudioClip for a chat message type, handling custom intros and falling back to a default clip.",
+  "renames": {
+   "iStack_58": "chatMsgCopy",
+   "lStack_50": "operationHandle",
+   "lVar3": "chatManagerInstance",
+   "lVar3_4": "chatManagerInstance2",
+   "lVar6": "assetReference",
+   "uStack_60": "scratch60",
+   "uStack_68": "scratch68",
+   "uStack_70": "scratch70",
+   "uStack_78": "scratch78",
+   "uStack_80": "scratch80",
+   "uStack_88": "scratch88",
+   "uVar9": "addressableKey"
+  }
+ },
+ "2f5b430": {
+  "summary": "Compares the player's and opponent's warlord chat IDs and returns whether they are the same.",
+  "renames": {
+   "bVar2": "charsEqual",
+   "lVar1": "otherChars",
+   "lVar3": "playerChatId",
+   "uVar7_2": "wordsDiffer"
+  }
+ },
+ "2f5b4bc": {
+  "summary": "Finds the custom intro chat data on the player's warlord that matches the enemy warlord's chat ID.",
+  "renames": {
+   "lStack_38": "currentIntro",
+   "uStack_40": "enumeratorIndex",
+   "uVar3": "introChatId"
+  }
+ },
+ "2f5b6ec": {
+  "summary": "Finds the custom intro chat data for an enemy army using a list Find predicate; decompiler output includes inlined list helper code.",
+  "renames": {
+   "auVar18": "throwResult",
+   "auVar18_x1": "throwArg",
+   "extraout_x8": "returnStructPtr",
+   "iVar1": "listCount",
+   "iVar2": "currentVersion",
+   "lVar5_3": "itemsArray",
+   "uVar10": "itemValue",
+   "uVar17": "reverseIndex",
+   "uVar3": "exceptionArgument",
+   "uVar8": "matchResult"
+  }
+ },
+ "2f5b9d0": {
+  "summary": "Creates a shallow copy of this CustomIntroChatData via MemberwiseClone and casts it.",
+  "renames": {}
+ },
+ "2f5d73c": {
+  "summary": "Reset for the AutoProcessDone iterator; always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "2f5d838": {
+  "summary": "Reset for the EndSelectionWithDelay iterator; always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "2f5d894": {
+  "summary": "Coroutine that clears and builds the choose-card UIs with short delays, optionally animating each in for environmental choices.",
+  "renames": {
+   "auVar13": "thisCopy",
+   "auVar13_2": "hasNext",
+   "auVar13_x1": "methodArg",
+   "bVar2": "result",
+   "lStack_38": "stateMachine",
+   "lStack_48": "exceptionFrame",
+   "plStack_40": "frameLinkPtr",
+   "plVar10": "itemSlotPtr",
+   "uStack_50": "enumeratorCopyCurrent",
+   "uStack_58": "enumeratorCopyIndex",
+   "uStack_60": "enumeratorCopy",
+   "uStack_68": "enumeratorVersionB",
+   "uStack_70": "enumeratorVersionA",
+   "uVar3": "stateMachineCopy"
+  }
+ },
+ "2f5dd94": {
+  "summary": "Reset for the SetupChooseCardsUi iterator; always throws NotSupportedException.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "2f5bfc0": {
+  "summary": "Registers the menu's click handler on the choose button's onClick event.",
+  "renames": {
+   "lVar2": "addMethod",
+   "puVar6": "callSlotPtr",
+   "uVar1": "callCount"
+  }
+ },
+ "2f5c050": {
+  "summary": "Removes/registers the OnDisable click handler on the choose button's onClick event (decompiled as an add).",
+  "renames": {
+   "lVar2": "addMethod",
+   "puVar6": "callSlotPtr",
+   "uVar1": "callCount"
+  }
+ }
+}

@@ -1,0 +1,453 @@
+{
+ "328180c": {
+  "summary": "Returns the current tutorial stage for a tutorial match from saved player data; the body is cluttered with inlined LINQ helper code (ToArray, ToDictionary, ToList, ToHashSet, ToLookup).",
+  "renames": {
+   "alStack_728": "frameArray",
+   "auStack_b0": "frameBlockb0",
+   "auStack_b0_x1": "frameBlockb0Vx1",
+   "auStack_f0": "frameBlockf0",
+   "auStack_f0_x1": "frameBlockf0Vx1",
+   "auVar40": "linqResultA",
+   "auVar40_x1": "linqResultAAux",
+   "auVar41": "linqResultB",
+   "auVar41_x1": "linqResultBAux",
+   "auVar42": "unwindState",
+   "auVar42_part8": "unwindStatus",
+   "lStack_178": "savedLong178",
+   "lStack_188": "savedLong188",
+   "lStack_1a0_2": "savedLong1a0V2",
+   "lStack_1d8": "savedLong1d8",
+   "lStack_1d8_2": "savedLong1d8V2",
+   "lStack_1e8": "savedLong1e8",
+   "lStack_200": "savedLong200",
+   "lStack_238": "savedLong238",
+   "lStack_248": "savedLong248",
+   "lStack_260": "savedLong260",
+   "lStack_298": "savedLong298",
+   "lStack_298_2": "savedLong298V2",
+   "lStack_2a8": "savedLong2a8",
+   "lStack_2c0": "savedLong2c0",
+   "lStack_2f8": "savedLong2f8",
+   "lStack_368": "stackCanary",
+   "lStack_390": "savedLong390",
+   "lStack_390_2": "savedLong390V2",
+   "lStack_398": "catchKeySelector",
+   "lStack_98": "savedLong98",
+   "lVar19": "classPtr",
+   "lVar19_3": "classPtrV3",
+   "lVar19_5": "classPtrV5",
+   "lVar19_7": "classPtrV7",
+   "lVar24": "scenarioList",
+   "lVar24_11": "listPtrV11",
+   "lVar24_12": "listPtrV12",
+   "lVar24_5": "listPtrV5",
+   "lVar24_7": "listPtrV7",
+   "lVar24_9": "toDictClassPtr",
+   "lVar25_2": "stageRefV2",
+   "lVar25_3": "stageRefV3",
+   "lVar25_5": "stageRefV5",
+   "lVar25_6": "stageRefV6",
+   "lVar25_8": "stageRefV8",
+   "lVar26": "runtimeClass",
+   "lVar6": "currentScenario",
+   "lVar8_4": "scratchPtrV4",
+   "lVar9": "playerDataStatics",
+   "lVar9_10": "playerDataV10",
+   "lVar9_9": "playerDataV9",
+   "pcStack_100": "genericMethodSlot100",
+   "pcStack_160": "genericMethodSlot160",
+   "pcStack_1c0": "genericMethodSlot1c0",
+   "pcStack_220": "genericMethodSlot220",
+   "pcStack_280": "genericMethodSlot280",
+   "pcStack_2e0": "genericMethodSlot2e0",
+   "pcStack_c0": "genericMethodSlotc0",
+   "pcVar32": "methodPtr",
+   "piVar31": "interfaceEntry",
+   "plStack_168": "enumeratorSlot168",
+   "plStack_198": "enumeratorSlot198",
+   "plStack_1a8": "enumeratorSlot1a8",
+   "plStack_1c8": "enumeratorSlot1c8",
+   "plStack_1f8": "enumeratorSlot1f8",
+   "plStack_208": "enumeratorSlot208",
+   "plStack_228": "enumeratorSlot228",
+   "plStack_258": "enumeratorSlot258",
+   "plStack_268": "enumeratorSlot268",
+   "plStack_288": "enumeratorSlot288",
+   "plStack_2b8": "enumeratorSlot2b8",
+   "plStack_2c8": "enumeratorSlot2c8",
+   "plStack_2e8": "enumeratorSlot2e8",
+   "plStack_380": "enumeratorSlot380",
+   "plStack_3a0": "catchElementSelector",
+   "plVar10": "staticsPtr",
+   "plVar12": "tempPtr",
+   "plVar13_3": "enumeratorPtrV3",
+   "plVar13_5": "enumeratorPtrV5",
+   "plVar17": "enumerablePtr",
+   "plVar17_3": "enumerablePtrV3",
+   "plVar17_4": "enumerablePtrV4",
+   "plVar17_5": "enumerablePtrV5",
+   "plVar17_6": "toLookupSource",
+   "plVar17_7": "enumerablePtrV7",
+   "plVar20_2": "keySourcePtrV2",
+   "plVar20_3": "keySourcePtrV3",
+   "plVar20_4": "keySourcePtrV4",
+   "plVar21": "enumeratorObj",
+   "plVar21_2": "enumeratorObjV2",
+   "plVar21_5": "enumeratorObjV5",
+   "plVar23": "genericClassPtr",
+   "plVar23_2": "genericClassPtrV2",
+   "plVar38": "framePtr",
+   "plVar5_2": "sourceSequenceV2",
+   "plVar5_3": "sourceSequenceV3",
+   "plVar5_5": "sourceSequenceV5",
+   "plVar5_6": "sourceSequenceV6",
+   "plVar5_7": "sourceSequenceV7",
+   "pplStack_170": "enumeratorSlotRef170",
+   "pplStack_1d0": "enumeratorSlotRef1d0",
+   "pplStack_230": "enumeratorSlotRef230",
+   "pplStack_290": "enumeratorSlotRef290",
+   "pplStack_2f0": "enumeratorSlotRef2f0",
+   "pplStack_388": "enumeratorSlotRef388",
+   "pplVar27": "enumeratorRef",
+   "puStack_370": "bufferSlot370",
+   "puStack_378": "bufferSlot378",
+   "puStack_378_2": "bufferSlot378V2",
+   "puStack_d0": "bufferSlotd0",
+   "puVar11": "errorParamName",
+   "puVar33": "stackBufA",
+   "puVar35": "stackBufB",
+   "puVar36": "stackBufC",
+   "puVar37": "stackBufD",
+   "puVar39": "stackBufE",
+   "uStack_108": "savedValue108",
+   "uStack_110": "savedValue110",
+   "uStack_118": "savedValue118",
+   "uStack_120": "savedValue120",
+   "uStack_190": "savedValue190",
+   "uStack_1b0": "savedValue1b0",
+   "uStack_1f0": "savedValue1f0",
+   "uStack_210": "savedValue210",
+   "uStack_250": "savedValue250",
+   "uStack_270": "savedValue270",
+   "uStack_2b0": "savedValue2b0",
+   "uStack_2d0": "savedValue2d0",
+   "uStack_88": "savedValue88",
+   "uStack_90": "savedValue90",
+   "uStack_a0": "savedValuea0",
+   "uStack_a8": "toArrayEnumerable",
+   "uStack_b8": "savedValueb8",
+   "uStack_c8": "savedValuec8",
+   "uStack_d8": "savedValued8",
+   "uStack_e0": "savedValuee0",
+   "uStack_e0_part4": "savedValuee0Vpart4",
+   "uVar1": "flag",
+   "uVar15": "cachedStage",
+   "uVar15_9": "cachedStageV9",
+   "uVar16": "interfaceCount",
+   "uVar2": "keyValue",
+   "uVar22": "paramNameCopy",
+   "uVar22_5": "paramNameCopyV5",
+   "uVar28": "tempValue",
+   "uVar3": "selectedIndex",
+   "uVar30": "scenarioCount",
+   "uVar34": "elementSize",
+   "unaff_x25": "unused1"
+  }
+ },
+ "328a0e4": {
+  "summary": "Returns the victory or defeat scripted actions of the current tutorial stage if a post-battle script is available, otherwise null.",
+  "renames": {
+   "plVar3": "scriptedActionsRef",
+   "lVar2_3": "scriptedData"
+  }
+ },
+ "329820c": {
+  "summary": "Returns whether the normal battle end sequence should run, false if the tutorial stage skips it for victory or defeat.",
+  "renames": {
+   "bVar1": "doNormalEnd",
+   "pcVar3": "skipFlagRef",
+   "uVar2": "isStageNull"
+  }
+ },
+ "32982ac": {
+  "summary": "Shows a tutorial tip, setting the wait flag if required, and starts its coroutine; inlined Unity coroutine error handling follows.",
+  "renames": {
+   "auVar6": "coroutineResult",
+   "auVar6_x1": "coroutineResultAux",
+   "unaff_x19": "thrownException",
+   "unaff_x20": "unused1",
+   "unaff_x21": "unused2",
+   "unaff_x30": "unused3"
+  }
+ },
+ "3298308": {
+  "summary": "Queues a heal battle action for one target card and records the pending healing on it.",
+  "renames": {
+   "auStack_160": "healAction",
+   "auStack_270": "healActionCopy",
+   "auStack_80": "casterRawDataSlot",
+   "iStack_120": "healAmountSlot",
+   "uStack_100": "healInfoCopy",
+   "uStack_168": "healInfoHigh",
+   "uStack_170": "healInfo",
+   "uStack_f8": "healInfoHighCopy",
+   "alStack_150": "targetCardSlot",
+   "lStack_158": "actingCardSlot",
+   "uVar1": "hasActingCard"
+  }
+ },
+ "3298488": {
+  "summary": "Queues a heal battle action for a list of target cards and records pending healing on each one.",
+  "renames": {
+   "auStack_160": "healAction",
+   "auStack_270": "healActionCopy",
+   "auStack_80": "casterRawDataSlot",
+   "iStack_120": "healAmountSlot",
+   "uStack_100": "healInfoCopy",
+   "uStack_168": "healInfoHigh",
+   "uStack_170": "healInfo",
+   "uStack_f8": "healInfoHighCopy",
+   "alStack_148": "targetListSlot",
+   "alStack_158": "actingCardSlot",
+   "uVar2": "hasActingCard"
+  }
+ },
+ "3295b64": {
+  "summary": "Queues an add-effect battle action on a target card, first filling in choice or last-mark-of-chaos enchantments.",
+  "renames": {
+   "alStack_140": "targetCardSlot",
+   "alStack_e0": "newEffectSlot",
+   "auStack_150": "addEffectAction",
+   "auStack_250": "addEffectActionCopy",
+   "auStack_70": "casterRawDataSlot",
+   "uVar1": "hasValue"
+  }
+ },
+ "32986bc": {
+  "summary": "Sets up an attack between two cards, records pending damage, and queues the attack battle action.",
+  "renames": {
+   "auStack_140": "attackAction",
+   "auStack_240": "attackActionCopy"
+  }
+ },
+ "328dfd0": {
+  "summary": "Re-queues an attack continuation action for the acting card if it is still in play, then falls into an inlined coroutine constructor.",
+  "renames": {
+   "auStack_13c": "attackActionBytes",
+   "auStack_204": "newActionBytes",
+   "auStack_304": "queuedActionBytes",
+   "auVar8_x1": "unusedAux",
+   "bStack_249": "extraValueFlag",
+   "lStack_48": "stackCanary",
+   "lVar4": "threadLocalBase",
+   "uStack_148": "newActionTail",
+   "uStack_248": "queuedActionTail",
+   "uStack_308": "queuedAttackType",
+   "uStack_340": "queuedActionKind",
+   "uVar7_2": "wasInPlay",
+   "uVar7_4": "coroutineObject",
+   "uStack_20c": "newActionPart20c",
+   "uStack_214": "newActionPart214",
+   "uStack_21c": "newActionPart21c",
+   "uStack_224": "newActionPart224",
+   "uStack_22c": "newActionPart22c",
+   "uStack_234": "newActionPart234",
+   "uStack_23c": "newActionPart23c",
+   "uStack_50": "actionPart50",
+   "uStack_58": "actionPart58",
+   "uStack_60": "actionPart60",
+   "uStack_68": "actionPart68",
+   "uStack_70": "actionPart70",
+   "uStack_78": "actionPart78",
+   "uStack_80": "actionPart80",
+   "uStack_30c": "queuedPart30c",
+   "uStack_314": "queuedPart314",
+   "uStack_31c": "queuedPart31c",
+   "uStack_324": "queuedPart324",
+   "uStack_32c": "queuedPart32c",
+   "uStack_334": "queuedPart334",
+   "uStack_33c": "queuedPart33c"
+  }
+ },
+ "3298ce4": {
+  "summary": "Queues a follow-resolution attack action, then (merged code) queues a remove-extrinsic-effects action for a card if any unit or hand card has such effects.",
+  "renames": {
+   "auStack_13c": "attackActionBytes",
+   "auStack_204": "newActionBytes",
+   "auStack_304": "queuedActionBytes",
+   "uStack_148": "newActionTail",
+   "uStack_248": "queuedActionTail",
+   "uStack_20c": "newActionPart20c",
+   "uStack_214": "newActionPart214",
+   "uStack_21c": "newActionPart21c",
+   "uStack_224": "newActionPart224",
+   "uStack_22c": "newActionPart22c",
+   "uStack_234": "newActionPart234",
+   "uStack_23c": "newActionPart23c",
+   "uStack_50": "actionPart50",
+   "uStack_58": "actionPart58",
+   "uStack_60": "actionPart60",
+   "uStack_68": "actionPart68",
+   "uStack_70": "actionPart70",
+   "uStack_78": "actionPart78",
+   "uStack_80": "actionPart80",
+   "uStack_30c": "queuedPart30c",
+   "uStack_314": "queuedPart314",
+   "uStack_31c": "queuedPart31c",
+   "uStack_324": "queuedPart324",
+   "uStack_32c": "queuedPart32c",
+   "uStack_334": "queuedPart334",
+   "uStack_33c": "queuedPart33c",
+   "alStack_478": "removeActionCardSlot",
+   "auStack_480": "removeAction",
+   "auStack_580": "removeActionCopy",
+   "auVar9_x1": "nextActingCard",
+   "iStack_308": "queuedActionType",
+   "uStack_249": "queuedFlag",
+   "uStack_340": "queuedActionKind"
+  }
+ },
+ "3298c28": {
+  "summary": "Builds and returns an attack BattleAction for the given cards, copying player and attack type info.",
+  "renames": {
+   "auStack_130": "blockActionsSlot",
+   "auStack_140": "attackAction",
+   "lStack_138": "actingCardSlot",
+   "uStack_80": "attackFlag"
+  }
+ },
+ "3298798": {
+  "summary": "Logs and records pending damage for an attack, handling shuriken, markerlight, return damage and blast damage to adjacent units.",
+  "renames": {
+   "alStack_180": "attackedCardSlot",
+   "auStack_190": "attackAction",
+   "extraout_x8": "unused1",
+   "iStack_44": "priorityCopy",
+   "lStack_188": "casterCardSlot",
+   "uStack_158": "casterField120",
+   "uStack_18c": "casterField40",
+   "uStack_d0": "attackFlag"
+  }
+ },
+ "3298e1c": {
+  "summary": "Queues an action removing extrinsic effects from a card if any unit or hand card contains effects from it.",
+  "renames": {
+   "alStack_138": "actingCardSlot",
+   "auStack_140": "removeAction",
+   "auStack_240": "removeActionCopy"
+  }
+ },
+ "3299058": {
+  "summary": "Queues an add-hand-effect battle action for a player's hand.",
+  "renames": {
+   "alStack_e0": "newEffectSlot",
+   "auStack_160": "handAction",
+   "auStack_260": "handActionCopy",
+   "auStack_80": "casterRawDataSlot",
+   "uStack_15c": "isPlayerSlot",
+   "uVar1": "hasCaster"
+  }
+ },
+ "3299180": {
+  "summary": "Queues a recall-to-hand action for a card, marking minions as destroyed.",
+  "renames": {
+   "alStack_150": "recalledCardSlot",
+   "auStack_160": "recallAction",
+   "auStack_260": "recallActionCopy",
+   "auStack_80": "casterRawDataSlot",
+   "uStack_15c": "targetPlayerSlot",
+   "uVar2": "hasCaster"
+  }
+ },
+ "32992c8": {
+  "summary": "Queues a recall-to-deck action for a card, marking minions as destroyed.",
+  "renames": {
+   "alStack_150": "recalledCardSlot",
+   "auStack_160": "recallAction",
+   "auStack_260": "recallActionCopy",
+   "auStack_80": "casterRawDataSlot",
+   "uStack_15c": "targetPlayerSlot",
+   "uStack_69": "setOnTopSlot",
+   "uStack_c8": "shouldCheckDeadSlot",
+   "uVar2": "hasCaster"
+  }
+ },
+ "3299424": {
+  "summary": "Queues a reset-duty battle action for a card.",
+  "renames": {
+   "alStack_150": "resetCardSlot",
+   "auStack_160": "resetAction",
+   "auStack_260": "resetActionCopy",
+   "auStack_80": "casterRawDataSlot",
+   "uStack_15c": "targetPlayerSlot",
+   "uVar1": "hasCaster"
+  }
+ },
+ "329954c": {
+  "summary": "Queues a discard-from-hand battle action.",
+  "renames": {
+   "alStack_130": "discardedCardSlot",
+   "auStack_140": "discardAction",
+   "auStack_240": "discardActionCopy"
+  }
+ },
+ "32995e8": {
+  "summary": "Queues a disappear-from-hand battle action.",
+  "renames": {
+   "alStack_130": "discardedCardSlot",
+   "auStack_140": "disappearAction",
+   "auStack_240": "disappearActionCopy"
+  }
+ },
+ "3299684": {
+  "summary": "Queues a display-from-hand battle action.",
+  "renames": {
+   "alStack_130": "discardedCardSlot",
+   "auStack_140": "displayAction",
+   "auStack_240": "displayActionCopy"
+  }
+ },
+ "3299880": {
+  "summary": "Queues a steal-minion battle action.",
+  "renames": {
+   "alStack_130": "stolenCardSlot",
+   "auStack_140": "stealMinionAction",
+   "auStack_240": "stealMinionActionCopy"
+  }
+ },
+ "3299720": {
+  "summary": "Queues a steal-from-hand battle action.",
+  "renames": {
+   "alStack_130": "stolenCardSlot",
+   "auStack_140": "stealHandAction",
+   "auStack_240": "stealHandActionCopy",
+   "lStack_138": "actingCardSlot"
+  }
+ },
+ "32997d0": {
+  "summary": "Queues a steal-from-deck battle action.",
+  "renames": {
+   "alStack_130": "stolenCardSlot",
+   "auStack_140": "stealDeckAction",
+   "auStack_240": "stealDeckActionCopy",
+   "lStack_138": "actingCardSlot"
+  }
+ },
+ "329991c": {
+  "summary": "Queues a trigger-relentless battle action.",
+  "renames": {
+   "alStack_130": "targetCardSlot",
+   "auStack_140": "relentlessAction",
+   "auStack_240": "relentlessActionCopy"
+  }
+ },
+ "32999bc": {
+  "summary": "Queues a trigger-card-played-by-stimulation battle action.",
+  "renames": {
+   "alStack_130": "targetCardSlot",
+   "auStack_140": "stimulationAction",
+   "auStack_240": "stimulationActionCopy",
+   "lStack_138": "thisCardSlot"
+  }
+ }
+}

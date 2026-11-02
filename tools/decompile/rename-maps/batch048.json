@@ -1,0 +1,412 @@
+{
+ "32a0194": {
+  "summary": "Enters ability-targeting UI state, shows potential targets, positions the crosshair at the acting card and sets spell colours; decompiler output is mostly mangled DOTween internals.",
+  "renames": {
+   "auVar31": "caughtError",
+   "auVar31_part8": "caughtErrorPart",
+   "bVar1": "hasLock",
+   "bVar2": "hasMoreIterations",
+   "bVar4": "isMonitorTarget",
+   "bVar5": "anyTweenKilled",
+   "cVar3": "isPlaying",
+   "iVar6_3": "zeroId",
+   "iVar6_4": "lockResult",
+   "in_s1": "posY",
+   "in_s2": "posZ",
+   "lVar11_12": "punchClosure",
+   "lVar11_8": "currentTween",
+   "plVar10_4": "punchTarget",
+   "plVar21": "activeSlot",
+   "puVar15": "errorMessagePtr",
+   "uVar13": "formatText",
+   "uVar9_3": "tweenIndex"
+  }
+ },
+ "32a0748": {
+  "summary": "Validates the clicked ability target; on success executes the active ability, otherwise shows an invalid-target tip and cancels, then hides the crosshair and attack selector.",
+  "renames": {
+   "bVar1": "isValidTarget",
+   "in_x5": "unused1",
+   "uVar4": "hasTarget"
+  }
+ },
+ "32a0714": {
+  "summary": "Cancels the pending active ability on the selected card and fades out the acting light on the skill display.",
+  "renames": {
+   "uVar1": "hasActingLight"
+  }
+ },
+ "32a0898": {
+  "summary": "Checks whether using an active ability on the target is allowed by the current tutorial script step.",
+  "renames": {
+   "auVar6": "hasTarget",
+   "iVar2": "turnCounterValue",
+   "uStack_70": "fakeValueActiveCopy",
+   "uStack_78": "initedCopy",
+   "uStack_80": "turnCounterCopy"
+  }
+ },
+ "32a0954": {
+  "summary": "Checks whether potential attack targets may be shown for the card, respecting tutorial scripted actions.",
+  "renames": {
+   "iVar2": "turnCounterValue",
+   "uStack_70": "fakeValueActiveCopy",
+   "uStack_78": "initedCopy",
+   "uStack_80": "turnCounterCopy"
+  }
+ },
+ "32a0c18": {
+  "summary": "Starts a targeted active ability for the selected card and highlights all valid ability targets on the board.",
+  "renames": {
+   "auVar5_x1": "unused1"
+  }
+ },
+ "3293e28": {
+  "summary": "Hides the target reticle crosshair and the attack type selector.",
+  "renames": {
+   "uVar1": "alwaysFalse"
+  }
+ },
+ "32a0d18": {
+  "summary": "Shows or hides the attack type mark selector for a card and moves it to the card position.",
+  "renames": {
+   "plVar4": "cardRef"
+  }
+ },
+ "32a0d40": {
+  "summary": "Returns true if any actions are queued or an action is currently being resolved.",
+  "renames": {
+   "uStack_28": "initedCopy",
+   "uStack_30": "resolvingFlagCopy"
+  }
+ },
+ "32a0dc4": {
+  "summary": "Logs all pending actions in the action, instant, interrupt and delayed instant queues.",
+  "renames": {
+   "plStack_158": "actingCardObj",
+   "uStack_150": "actionTypeInfo",
+   "uStack_168": "actionTypeInfo2",
+   "uStack_170": "actionTypeSlot",
+   "uVar1": "actingCardLabel",
+   "uVar3": "hasActingCard",
+   "uVar4": "actionTypeName",
+   "uVar5": "actingCardName",
+   "uVar6": "pendingPrefix"
+  }
+ },
+ "32a0df0": {
+  "summary": "Logs every pending action in the given battle action queue.",
+  "renames": {
+   "plStack_158": "actingCardObj",
+   "uStack_150": "actionTypeInfo",
+   "uStack_168": "actionTypeInfo2",
+   "uStack_170": "actionTypeSlot",
+   "uVar1": "actingCardLabel",
+   "uVar3": "hasActingCard",
+   "uVar4": "actionTypeName",
+   "uVar5": "actingCardName",
+   "uVar6": "pendingPrefix"
+  }
+ },
+ "32a0ff0": {
+  "summary": "Logs a compressed summary of the interrupt, instant, delayed instant and action queues, with the last logged only when dev tools are active.",
+  "renames": {
+   "in_x2": "unused1",
+   "puVar5": "loggerMethod",
+   "uVar1": "devToolsFlagRaw",
+   "uVar2": "devToolsEnabled"
+  }
+ },
+ "32a1154": {
+  "summary": "Builds a single string summarising each action in the queue by index, action type and acting card.",
+  "renames": {
+   "iStack_64": "queueIndex",
+   "plStack_160": "actingCardObj",
+   "uStack_158": "actionTypeInfoA",
+   "uStack_170": "actionTypeInfoB",
+   "uStack_178": "actionTypeSlot",
+   "uVar2": "hasActingCard"
+  }
+ },
+ "3296b34": {
+  "summary": "Returns the total count of actions in the interrupt, instant and delayed instant queues.",
+  "renames": {
+   "auVar1_x1": "unused1"
+  }
+ },
+ "32852cc": {
+  "summary": "Returns the total count of actions across the action, instant, interrupt and delayed instant queues.",
+  "renames": {
+   "auVar1_x1": "unused1"
+  }
+ },
+ "32a151c": {
+  "summary": "Spawns the hero's targeted spell animation prefab at the current hero position, if the hero has one.",
+  "renames": {
+   "auVar9": "hasAnim",
+   "fVar6": "eulerX",
+   "fVar8": "eulerZ",
+   "in_s1": "spawnY",
+   "uVar7": "eulerXY"
+  }
+ },
+ "3293e68": {
+  "summary": "Stops the targeted spell animation by destroying its GameObject.",
+  "renames": {
+   "uVar1": "scratch1"
+  }
+ },
+ "3285b14": {
+  "summary": "Returns whether it is the player's turn by decrypting the obscured player turn flag.",
+  "renames": {
+   "uStack_28": "initedCopy",
+   "uStack_30": "turnFlagCopy"
+  }
+ },
+ "328ada8": {
+  "summary": "Returns true if any queued action is a blocking action, notifying the player to wait if it is their turn.",
+  "renames": {
+   "aiStack_130": "queuedActionData",
+   "bStack_3c": "isBlockingFlag"
+  }
+ },
+ "329ebec": {
+  "summary": "Determines whether a card can be played, checking turn, queue state, tutorial, mana, board space and spell targets, showing tips on failure.",
+  "renames": {
+   "plVar5": "tipTermKey",
+   "uVar4": "showTipsCopy",
+   "uVar4_3": "usesPsychic"
+  }
+ },
+ "32a17b0": {
+  "summary": "Returns the unused mana of the player or enemy manager as a decrypted obscured int.",
+  "renames": {
+   "iVar1": "unusedMana",
+   "lVar2": "manager",
+   "uStack_30": "fakeValueRaw",
+   "uStack_38": "hiddenRaw",
+   "uStack_40": "currentRaw",
+   "uStack_50": "fakeValueCopy",
+   "uStack_58": "hiddenCopy",
+   "uStack_60": "currentCopy"
+  }
+ },
+ "32a17d8": {
+  "summary": "Returns the total mana of the player or enemy manager as a decrypted obscured int.",
+  "renames": {
+   "iVar1": "totalMana",
+   "lVar2": "manager",
+   "uStack_30": "fakeValueRaw",
+   "uStack_38": "hiddenRaw",
+   "uStack_40": "currentRaw",
+   "uStack_50": "fakeValueCopy",
+   "uStack_58": "hiddenCopy",
+   "uStack_60": "currentCopy"
+  }
+ },
+ "32a1800": {
+  "summary": "Spends mana for playing a card, checks codex trigger, and raises an energy spent signal.",
+  "renames": {
+   "lVar4": "brokerClass",
+   "piVar6": "signalSlotPtr",
+   "uVar5": "slotCount"
+  }
+ },
+ "32a1a10": {
+  "summary": "Spends oath mana for an active ability, checks codex trigger, and raises an energy spent signal.",
+  "renames": {
+   "lVar3": "brokerClass",
+   "piVar5": "signalSlotPtr",
+   "uVar4": "slotCount"
+  }
+ },
+ "32a1b28": {
+  "summary": "Spends oath mana when a card with oath is played and queues a codex trigger action if no mana remains.",
+  "renames": {
+   "auStack_130": "actionTargetField",
+   "auStack_140": "newAction",
+   "auStack_240": "actionCopy"
+  }
+ },
+ "32a1934": {
+  "summary": "Queues a trigger-player-codex action when mana left is zero and the card cost qualifies.",
+  "renames": {
+   "alStack_130": "actionTargetField",
+   "auStack_140": "newAction",
+   "auStack_240": "actionCopy"
+  }
+ },
+ "327ee2c": {
+  "summary": "Returns the player hand or enemy hand depending on the flag.",
+  "renames": {
+   "lVar1": "fieldOffset"
+  }
+ },
+ "3280fac": {
+  "summary": "Returns the player or enemy minion manager depending on the flag.",
+  "renames": {
+   "lVar1": "fieldOffset"
+  }
+ },
+ "32809ec": {
+  "summary": "Returns the player or enemy player manager depending on the flag.",
+  "renames": {
+   "lVar1": "fieldOffset"
+  }
+ },
+ "3291cc0": {
+  "summary": "Checks whether the attacker can legally attack the target given traits, tutorial, defenders and destroyers, showing tips on failure.",
+  "renames": {
+   "auVar11": "targetIsNull",
+   "bVar4": "playerTurnValue",
+   "lStack_70": "enumeratorCurrent",
+   "lStack_88": "enumeratorCurrentSaved",
+   "plVar8": "tipTermKey",
+   "puStack_78": "enumeratorListSlot",
+   "puStack_90": "enumeratorPrevPtr",
+   "uStack_80": "enumeratorCopy",
+   "uVar7": "showTipsCopy",
+   "uVar7_3": "hasNextUnit"
+  }
+ },
+ "32a1be4": {
+  "summary": "Simulates melee and ranged damage against the target, accounting for armour, shield, dodge, drop pod, survivor and bastion, to determine if the attack kills it.",
+  "renames": {
+   "bVar15": "armourBroken",
+   "iVar5_3": "vulnerableArmour",
+   "iVar5_5": "healthForCheck",
+   "iVar5_7": "healthForPending",
+   "iVar6": "armourValue",
+   "iVar6_2": "totalDamage",
+   "iVar7_2": "healthWithSurvivor",
+   "iVar7_5": "remainingDamage",
+   "iVar7_6": "unusedDropPodDamage",
+   "iVar9_2": "currentHealthValue",
+   "iVar9_3": "survivorValue",
+   "iVar9_4": "dropPodHealthValue",
+   "lVar2": "addMethod",
+   "uStack_110": "scratch1",
+   "uStack_118": "scratch2",
+   "uStack_120": "scratch3",
+   "uStack_130": "scratch4",
+   "uStack_138": "scratch5",
+   "uStack_140": "scratch6",
+   "uStack_150": "scratch7",
+   "uStack_158": "scratch8",
+   "uStack_160": "scratch9",
+   "uStack_170": "scratch10",
+   "uStack_178": "scratch11",
+   "uStack_180": "scratch12",
+   "uStack_190": "scratch13",
+   "uStack_198": "scratch14",
+   "uStack_1a0": "scratch15",
+   "uStack_1b0": "scratch16",
+   "uStack_1b8": "scratch17",
+   "uStack_1c0": "scratch18",
+   "uStack_b0": "scratch19",
+   "uStack_b8": "scratch20",
+   "uStack_c0": "scratch21",
+   "uStack_d0": "scratch22",
+   "uStack_d8": "scratch23",
+   "uStack_e0": "scratch24"
+  }
+ },
+ "32a0a2c": {
+  "summary": "Checks whether the target is a valid target for the given targeted spell, considering turn, tutorial, stealth, ward and camouflage.",
+  "renames": {
+   "bVar4": "playerTurnValue",
+   "uVar6": "targetIsNull"
+  }
+ },
+ "329f70c": {
+  "summary": "Checks whether the target is valid for the acting card's active ability, considering turn, tutorial, stealth, ward and summon rift.",
+  "renames": {
+   "bVar6": "playerTurnValue",
+   "uVar8": "targetIsNull"
+  }
+ },
+ "32a16f0": {
+  "summary": "Returns true if any unit in play is a valid target for the given targeted spell.",
+  "renames": {
+   "bVar4": "hasMoreUnits"
+  }
+ },
+ "32a1ebc": {
+  "summary": "Counts units of the given side in play that have the double oath trait.",
+  "renames": {
+   "iVar5": "doubleOathCount"
+  }
+ },
+ "32a00d4": {
+  "summary": "Returns true if any unit in play is a valid target for the acting card's active ability.",
+  "renames": {
+   "bVar4": "hasMoreUnits"
+  }
+ },
+ "32a1fa0": {
+  "summary": "Creates and displays a revealed card in the centre of the screen as an offensive card display.",
+  "renames": {
+   "puVar3": "vectorStatics"
+  }
+ },
+ "32a2178": {
+  "summary": "Shows the large card display with its effects for a card, with special handling for ambush cards and UI state checks.",
+  "renames": {
+   "auVar12_x1": "displayedCard",
+   "iVar4": "textureWidth",
+   "iVar5": "textureHeight",
+   "lStack_48": "cardTierNullable",
+   "lVar10_4": "cardDisplay",
+   "uVar7_2": "isJustClickedTarget"
+  }
+ },
+ "32a22d8": {
+  "summary": "On focus gain on Android, hides the system UI via the Android window view, or resets the screen resolution on old SDKs.",
+  "renames": {
+   "auVar13": "caughtException",
+   "auVar13_part8": "caughtExceptionKind",
+   "lStack_38": "unityPlayerClass",
+   "lStack_48": "disposeTarget",
+   "lStack_60": "savedActivity",
+   "lVar10": "activityObject",
+   "lVar12": "activityObjectCopy",
+   "lVar5_4": "caughtExceptionObj",
+   "pcStack_70": "returnAddress",
+   "plStack_40": "classHolder",
+   "plStack_68": "savedArgs",
+   "plVar7_2": "disposable",
+   "uStack_58": "exceptionHandle",
+   "uVar9": "isThisNull"
+  }
+ },
+ "32a2360": {
+  "summary": "Finds the card under the mouse position by raycasting the 2D board and then the 3D scene, returning the hit CardScript.",
+  "renames": {
+   "auVar14": "caughtError",
+   "auVar14_x1": "errorCard",
+   "fStack_84": "dirZ",
+   "fStack_90": "originZ",
+   "fStack_94": "originY",
+   "fStack_c8": "rayDirZ",
+   "fStack_cc": "rayDirY",
+   "fVar11": "mouseY",
+   "fVar8": "magnitude",
+   "param_4": "self",
+   "uStack_8c": "directionXY",
+   "uStack_98": "originXY",
+   "uStack_a0": "hitData5",
+   "uStack_a8": "hitData4",
+   "uStack_b0": "hitData3",
+   "uStack_b8": "hitData2",
+   "uStack_c0": "hitData1",
+   "uStack_d0": "rayColorData",
+   "uStack_d4": "rayOriginZ",
+   "uStack_d8": "rayOriginXY",
+   "uVar12": "hitPointXY",
+   "uVar4": "hasHit",
+   "uVar5": "directionNormXY",
+   "uVar6": "hitBuffer",
+   "uVar7_3": "hitPointFirst"
+  }
+ }
+}

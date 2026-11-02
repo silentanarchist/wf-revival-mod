@@ -1,0 +1,494 @@
+{
+ "32a8d70": {
+  "summary": "Coroutine that preloads every card of both decks into the battle cache, then preloads sounds and starts delayed operations.",
+  "renames": {
+   "auVar12": "catchResult",
+   "auVar12_x1": "catchResultX1",
+   "auVar13": "unwindResult",
+   "auVar13_part8": "unwindKind",
+   "lStack_78": "pendingException",
+   "lStack_88": "savedOuter",
+   "lStack_b8": "scratch1",
+   "lVar2_17": "caughtException",
+   "lVar2_2": "enumerableClass",
+   "lVar3_4": "currentCard",
+   "pcStack_b0": "preloadCardFn",
+   "piVar8": "interfaceMapCursor",
+   "plStack_68": "cardEnumerator",
+   "plStack_a0": "savedEnumerableClass",
+   "plVar4_4": "enumeratorRef",
+   "pplStack_70": "enumeratorSlotPtr",
+   "pplVar6": "enumeratorSlot",
+   "uStack_98": "savedUnwind",
+   "uStack_a8": "savedExitState",
+   "uStack_c0": "scratch2",
+   "uVar10": "exitState"
+  }
+ },
+ "32a9884": {
+  "summary": "Throws NotSupportedException because the compiler-generated iterator does not support Reset.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "32a8b20": {
+  "summary": "Creates the Initialize iterator state machine bound to this initializer.",
+  "renames": {
+   "lVar1": "stateMachine"
+  }
+ },
+ "32a8bb4": {
+  "summary": "Creates the DelayedOperations iterator state machine.",
+  "renames": {
+   "lVar1": "stateMachine"
+  }
+ },
+ "32a9d30": {
+  "summary": "If the addressable animation prefab is loaded, loads and instantiates it to preload it.",
+  "renames": {
+   "auVar5": "isLoadedResult",
+   "auVar5_x1": "isLoadedExtra",
+   "uVar3": "hasPrefab"
+  }
+ },
+ "32a9fe4": {
+  "summary": "On destroy, unsubscribes OnFlyingToggleFinish from the flying controller's toggle-finish event.",
+  "renames": {
+   "auVar6_x1": "methodInfo",
+   "lVar5": "currentHandler",
+   "plVar4": "handlerField"
+  }
+ },
+ "32aa0c8": {
+  "summary": "Per-frame countdown of the animation timer; when finished, restores flying state, invokes the end callback, clears clips and resets transform.",
+  "renames": {
+   "bVar2": "enableFlying",
+   "in_s2": "targetZ",
+   "in_x2": "extraArg",
+   "lVar10_3": "currentHandler",
+   "lVar9": "unused1",
+   "plVar11": "handlerField",
+   "puVar3": "stackFrame",
+   "register0x00000008": "stackPointer",
+   "uRam0000000006b720d8": "floatBoxClass",
+   "uVar14": "targetY",
+   "uVar7": "toggleArg",
+   "unaff_d8": "savedD8",
+   "unaff_x19": "invalidStateException",
+   "unaff_x20": "savedX20",
+   "unaff_x21": "savedX21",
+   "unaff_x30": "savedLinkRegister"
+  }
+ },
+ "32aa3a4": {
+  "summary": "Starts playing an animation clip, optionally toggling flying off first; returns whether a clip was supplied.",
+  "renames": {
+   "bVar2": "hasClip",
+   "lVar7_2": "currentHandler",
+   "lVar7_4": "currentHandler2",
+   "plVar6": "handlerField",
+   "uVar1": "actionType"
+  }
+ },
+ "32aa754": {
+  "summary": "Enables the controller and cross-fades to the current animation clip by name.",
+  "renames": {
+   "uStack_38": "emptySpanLength",
+   "uStack_40": "emptySpan",
+   "uStack_48": "nameLength",
+   "uStack_58": "nameSpanLength",
+   "uStack_60": "nameSpan"
+  }
+ },
+ "32aa1c8": {
+  "summary": "Finishes the animation: restores flying, invokes the end callback, clears clips, and optionally resets position, rotation and scale.",
+  "renames": {
+   "in_x2": "extraArg",
+   "lVar5": "currentHandler",
+   "plVar4": "handlerField"
+  }
+ },
+ "32aa7b0": {
+  "summary": "Removes all playing clips from the animation component and empties the playing clips list.",
+  "renames": {
+   "uStack_38": "clipToRemove",
+   "uStack_40": "scratch1",
+   "uVar2": "hasNext"
+  }
+ },
+ "32aa670": {
+  "summary": "Adds an animation clip to the playing clips list if it is not already present.",
+  "renames": {
+   "extraout_x1": "extraResult",
+   "lVar4": "addMethodInfo",
+   "plVar3": "itemSlot"
+  }
+ },
+ "32aa938": {
+  "summary": "When flying toggle finishes, either starts the current clip cross-fade or finalizes the animation and resets the transform.",
+  "renames": {
+   "lVar6_3": "currentHandler",
+   "plVar4": "handlerField",
+   "uStack_38": "emptySpanLength",
+   "uStack_40": "emptySpan",
+   "uStack_48": "nameLength",
+   "uStack_58": "nameSpanLength",
+   "uStack_60": "nameSpan"
+  }
+ },
+ "32ab218": {
+  "summary": "Static constructor creating the shared compiler-generated closure instance.",
+  "renames": {
+   "uVar1": "instance"
+  }
+ },
+ "32ab29c": {
+  "summary": "Lambda returning the type name of a tween info.",
+  "renames": {
+   "lVar1": "typeName"
+  }
+ },
+ "32aaac0": {
+  "summary": "Filters and selects the tweens to build the muted tween list and sets whether any are muted.",
+  "renames": {
+   "plVar1": "mutedListRef"
+  }
+ },
+ "32aacf4": {
+  "summary": "Builds a DOTween sequence from the tween infos, appending or joining each tween and inserting an optional callback.",
+  "renames": {
+   "auVar16": "unwindResult",
+   "auVar16_part8": "unwindKind",
+   "bVar1": "prevFlag",
+   "bVar2": "prevFlagWasUnset",
+   "bVar3": "currentFlag",
+   "bVar4": "noJoinPending",
+   "lStack_80": "pendingException",
+   "lVar5": "closure",
+   "lVar9": "caughtException",
+   "plStack_68": "tweenEnumerator",
+   "plVar14_2": "enumeratorToDispose",
+   "plVar14_3": "tweenInfo",
+   "pplStack_78": "enumeratorSlotPtr",
+   "pplVar10": "enumeratorSlot",
+   "uVar12": "hasNext"
+  }
+ },
+ "32ab348": {
+  "summary": "Creates a DOTween sequence consisting of a delay interval of the configured duration.",
+  "renames": {}
+ },
+ "32ab398": {
+  "summary": "Computes the normalized direction between source and target units, or the target card's forward vector.",
+  "renames": {
+   "auVar6": "directionResult",
+   "auVar6_part4": "directionYOut",
+   "auVar6_x1": "directionZOut",
+   "fVar4": "directionX",
+   "fVar5": "otherPosX",
+   "param_4": "tweenInfo",
+   "uVar2": "hasSource",
+   "uVar7": "directionY",
+   "uVar8": "directionZ"
+  }
+ },
+ "32ab6bc": {
+  "summary": "Creates a move tween (world or local) for the target unit, optionally relative, reversed or directed away from a unit.",
+  "renames": {
+   "fVar7": "scaleFactor",
+   "in_s1": "positionY",
+   "in_s2": "positionZ"
+  }
+ },
+ "32ab8bc": {
+  "summary": "Constructor setting default move tween values: relative, InExpo ease, self target, one loop, duration 1.",
+  "renames": {
+   "cRam0000000006b54894": "staticInitFlag",
+   "cVar1": "initFlag",
+   "uVar2": "defaultZ"
+  }
+ },
+ "32ab93c": {
+  "summary": "Creates a rotate tween (world or local) for the target unit, with optional direction-based rotation and from mode.",
+  "renames": {
+   "fVar6": "rotationScale",
+   "in_s1": "eulerY",
+   "in_s2": "eulerZ"
+  }
+ },
+ "32abb40": {
+  "summary": "Constructor setting default rotate tween values: InExpo ease, self target, one loop, duration 1.",
+  "renames": {
+   "uVar1": "defaultZ"
+  }
+ },
+ "32abcec": {
+  "summary": "Creates a punch tween for the target unit's position, rotation or scale, optionally directed away from a unit.",
+  "renames": {
+   "lVar3_4": "positionClosure",
+   "lVar4": "rotationClosure",
+   "lVar4_2": "scaleClosure",
+   "plVar10": "targetComponent",
+   "plVar8": "tweenTarget",
+   "puVar9": "positionTargetSlot"
+  }
+ },
+ "32abe7c": {
+  "summary": "Constructor setting default punch tween values: position type, self target, InExpo ease, vibrato, duration 1.",
+  "renames": {
+   "cRam0000000006b54894": "staticInitFlag",
+   "cVar1": "initFlag",
+   "uVar2": "defaultZ"
+  }
+ },
+ "32abf08": {
+  "summary": "Creates a shake tween for the target unit's position, rotation or scale from configured strength and vibrato.",
+  "renames": {
+   "lVar6": "rotationClosure",
+   "lVar6_3": "scaleClosure",
+   "lVar6_5": "positionClosure",
+   "puVar8": "targetSlot"
+  }
+ },
+ "32abfe8": {
+  "summary": "Constructor setting default shake tween values: position type, fade out, self target, InExpo ease, duration 1.",
+  "renames": {
+   "uVar1": "defaultZ"
+  }
+ },
+ "32ac2c4": {
+  "summary": "Instantiates a card prefab, sets its tier, raw data, summon message handler and trap or secret state, and registers it.",
+  "renames": {
+   "uVar5": "isPlayerCopy"
+  }
+ },
+ "32ac510": {
+  "summary": "Returns the alternate-art version of a card from the player's or enemy's deck if one matches the original id, else the card itself.",
+  "renames": {
+   "auVar10": "scratchObject",
+   "auVar10_x1": "scratchClass",
+   "auVar11": "scratchList",
+   "auVar11_part8": "scratchIndex",
+   "lVar4": "listCardId",
+   "puVar7": "itemSlot",
+   "uVar6": "idsMatch",
+   "uVar8": "getItemMethod"
+  }
+ },
+ "32a96f4": {
+  "summary": "Preloads a card's attack and summon sounds, sprite, trait effects and other assets.",
+  "renames": {
+   "lStack_38": "currentTrait",
+   "uStack_40": "scratch1"
+  }
+ },
+ "32ac90c": {
+  "summary": "Adds a card to a deck list at the given position (or end) and marks it as deck card.",
+  "renames": {
+   "plVar2": "itemSlot"
+  }
+ },
+ "32ac694": {
+  "summary": "Adds a card to the all-cards list and assigns it the next unique in-game id, incrementing the obscured counter.",
+  "renames": {
+   "lVar2": "addMethodInfo",
+   "plVar5": "itemSlot",
+   "uStack_50": "savedFakeValueActive",
+   "uStack_58": "savedInited",
+   "uStack_60": "savedCounter",
+   "uStack_64": "incrementedFakeValueActive",
+   "uStack_6c": "incrementedInited"
+  }
+ },
+ "32aca38": {
+  "summary": "Finds and returns the card in the all-cards list with the given unique in-game id.",
+  "renames": {
+   "auVar7": "scratchObject",
+   "auVar7_x1": "scratchClass",
+   "auVar8": "scratchList",
+   "auVar8_part8": "scratchIndex",
+   "puVar2": "itemSlot",
+   "uVar4": "setItemMethod"
+  }
+ },
+ "32acaf8": {
+  "summary": "Logs the index, name and in-game id of every card in the all-cards list.",
+  "renames": {
+   "iStack_44": "i"
+  }
+ },
+ "32acd14": {
+  "summary": "Constructor creating the all-cards list and zeroing the obscured unique id counter.",
+  "renames": {
+   "uStack_34": "fakeValueActiveFlag",
+   "uStack_3c": "initedFlag",
+   "uStack_44": "zeroCounter"
+  }
+ },
+ "32b2ac0": {
+  "summary": "Callback storing a trait animation object in the trigger-effects dictionary, destroying any previous one for trigger-on-play traits.",
+  "renames": {
+   "lVar12": "comparerClass",
+   "lVar13": "comparerClass2",
+   "piVar14": "interfaceCursor",
+   "piVar16": "slotPtr",
+   "plVar9": "valueSlot",
+   "puVar8": "comparerMethod",
+   "uStack_64": "traitKey",
+   "uVar1_3": "traitKeyCopy",
+   "uVar2": "entryKey",
+   "uVar3": "bucketIndex"
+  }
+ },
+ "32b2ecc": {
+  "summary": "Throws NotSupportedException because the compiler-generated iterator does not support Reset.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "32b2f10": {
+  "summary": "Coroutine that hides trait counters, scales up the card, waits for dissolve time, then stops animations and waits again.",
+  "renames": {
+   "auVar10_x1": "scratchGlobals",
+   "bVar2": "hasMore",
+   "fVar7": "scaledY",
+   "uVar4": "nextState"
+  }
+ },
+ "32b3124": {
+  "summary": "Throws NotSupportedException because the compiler-generated iterator does not support Reset.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "32b3168": {
+  "summary": "Coroutine that optionally waits, then fades the vanguard frame images to the stealth target alpha.",
+  "renames": {
+   "uVar4": "alphaValue"
+  }
+ },
+ "32b3330": {
+  "summary": "Throws NotSupportedException because the compiler-generated iterator does not support Reset.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "32ace5c": {
+  "summary": "Returns the global variables object from the player data manager if available.",
+  "renames": {
+   "uVar1": "hasManager",
+   "uVar3": "playerDataManager"
+  }
+ },
+ "32acea8": {
+  "summary": "Initializes the card UI from a card script: creates trait dictionaries, sets stats counters, remnant body, race and card image.",
+  "renames": {
+   "auVar7_x1": "extraResult",
+   "lStack_38": "nullableTier",
+   "lVar3": "nullableTierCopy",
+   "uVar4": "hasController"
+  }
+ },
+ "32ad2a4": {
+  "summary": "Creates and positions the remnant 3D body for the card, scaling it and applying the highlight colour.",
+  "renames": {
+   "lVar5_4": "highlightTarget",
+   "plVar2_3": "remnantInstance",
+   "uVar1": "hasNoRemnant"
+  }
+ },
+ "32ad8e0": {
+  "summary": "Toggles off and destroys the remnant 3D body and clears the reference.",
+  "renames": {
+   "puVar1": "remnantField",
+   "uVar3": "remnantObject"
+  }
+ },
+ "32ad9cc": {
+  "summary": "For enemy secrets, replaces the card's texts and clan frame sprite with trap or classified placeholders.",
+  "renames": {
+   "extraout_x1": "clanFrameSprite",
+   "fVar13": "emptyRectX",
+   "fVar14": "emptyRectY",
+   "in_s2": "rectWidth",
+   "in_s3": "rectHeight",
+   "lVar11_4": "currentSprite",
+   "lVar11_6": "currentSprite2",
+   "plVar1": "locKey",
+   "plVar10": "spriteSlot",
+   "uVar7": "flag"
+  }
+ },
+ "32adb80": {
+  "summary": "Clears the card's name, race, description and army texts and sets text layout state for an ambush card.",
+  "renames": {
+   "apcStack_90": "fnStack1",
+   "apcStack_f0": "fnStack2",
+   "auStack_d0": "savedUnwind2",
+   "auVar21_x1": "emptyText",
+   "auVar22": "nextController",
+   "auVar22_x1": "emptyText2",
+   "bVar3": "useShortLayout",
+   "lStack_78": "savedController",
+   "lStack_80": "savedText",
+   "lStack_98": "savedText2",
+   "lStack_a8": "savedController2",
+   "lStack_b0": "savedRaceTexts",
+   "lStack_b8": "savedText3",
+   "lStack_d8": "savedController3",
+   "lStack_e0": "savedNameTexts",
+   "lVar10": "emptyString",
+   "lVar11": "savedState1",
+   "lVar12": "savedState2",
+   "lVar9": "emptyDescription",
+   "pcStack_60": "savedFn",
+   "pcStack_c0": "setDescriptionFn",
+   "pcVar19": "currentFn",
+   "ppcVar2": "fnFramePtr",
+   "puVar1": "framePtr",
+   "puVar16": "frameSlot",
+   "register0x00000008": "stackPointer",
+   "uStack_68": "savedSpellType",
+   "uStack_70": "savedCardType",
+   "uStack_a0": "savedFlag",
+   "uVar14": "savedValue2",
+   "uVar20": "savedFn2",
+   "unaff_x19": "savedX19",
+   "unaff_x20": "textComponent"
+  }
+ },
+ "32ad730": {
+  "summary": "Shows the minion or tactic placeholder sprite in the card image, adjusting scale, mask, position and material.",
+  "renames": {
+   "fVar12": "scaleY",
+   "fVar16": "threshold",
+   "fVar16_2": "epsilon",
+   "fVar16_3": "rectWidthCopy",
+   "fVar16_4": "emptyRectX",
+   "fVar18": "rectWidthSeed",
+   "fVar18_4": "rectWidth",
+   "lVar7_2": "currentSprite",
+   "plVar11": "spriteSlot",
+   "puVar10": "materialSlot",
+   "uVar17": "imageZ",
+   "uVar19_3": "offsetXY",
+   "uVar9_2": "cardTypeCopy",
+   "uVar9_3": "flag"
+  }
+ },
+ "32adc0c": {
+  "summary": "Sets the card back sprite and its shadow image for the player or enemy based on the battle manager's cardback.",
+  "renames": {
+   "bVar1": "skipMaterialUpdate",
+   "extraout_x1": "cardbackShadowSprite",
+   "fVar11": "emptyRectX",
+   "fVar12": "emptyRectY",
+   "in_s2": "rectWidth",
+   "in_s3": "rectHeight",
+   "lVar6_4": "currentSprite",
+   "lVar6_6": "currentSprite2",
+   "plVar9": "spriteSlot",
+   "uVar4": "flag"
+  }
+ }
+}

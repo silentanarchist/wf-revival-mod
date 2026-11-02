@@ -1,0 +1,291 @@
+{
+ "2f7f464": {
+  "summary": "Handles clicking a remnant card: shows large card view or uses waystone depending on card state, with ambush and effect display handling.",
+  "renames": {
+   "auVar19_x1": "unused1",
+   "bVar13": "isMulliganHidden",
+   "fVar18": "currentTime",
+   "iVar5": "textureHeight",
+   "lStack_48": "tierNullable",
+   "lVar6_7": "cardDisplay",
+   "puVar10": "loggerMethod",
+   "uVar2": "devToolsStatic",
+   "uVar7": "hasCard",
+   "uVar7_2": "devToolsEnabled",
+   "uVar7_3": "isJustClicked"
+  }
+ },
+ "2f7f4e4": {
+  "summary": "Handles pointer entering a remnant card: raises hand card for display or highlights it on board and previews combat damage.",
+  "renames": {
+   "auVar26": "exceptionResult",
+   "auVar26_x1": "textArg",
+   "fVar23": "handScale",
+   "fVar24": "baseScaleX",
+   "fVar25": "baseScaleY",
+   "in_s2": "floatReg2",
+   "in_s3": "floatReg3",
+   "lVar10_2": "hoveredCard",
+   "lVar19_4": "toggleItem",
+   "piVar16": "interfaceMapPtr",
+   "puVar3": "stackPtr",
+   "uVar20_3": "eulerAngles",
+   "uVar21": "devToolsStaticValue",
+   "uVar9_2": "devToolsEnabled",
+   "uVar9_3": "prevCounter",
+   "uVar9_4": "hasTrackedCard",
+   "unaff_x19": "unused1",
+   "unaff_x20": "unused2",
+   "unaff_x30": "unused3"
+  }
+ },
+ "2f7f578": {
+  "summary": "Handles pointer leaving a remnant card: stops description display, clears combat preview, and animates highlight state back to normal.",
+  "renames": {
+   "puVar5": "tweenRef"
+  }
+ },
+ "2f7f6a4": {
+  "summary": "Toggles a Necron remnant between body and remnant form, playing death or reanimation animation, sounds and spawning death particles.",
+  "renames": {
+   "in_s1": "spawnArg1",
+   "in_s2": "spawnArg2",
+   "lStack_38": "savedThis",
+   "lStack_40": "savedAnimName",
+   "pcStack_50": "savedVatPlayer",
+   "uStack_48": "savedSound",
+   "uVar11": "positionArg",
+   "uVar12": "rotationArg",
+   "uVar3": "hasSound"
+  }
+ },
+ "2f7f824": {
+  "summary": "Plays the Necron remnant death sound and spawns the death particle effect, then destroys the object.",
+  "renames": {
+   "in_s1": "spawnArg1",
+   "in_s2": "spawnArg2",
+   "uVar1": "flag"
+  }
+ },
+ "2f7f828": {
+  "summary": "Returns the world position of this object's transform for placing death particles.",
+  "renames": {
+   "uStack_28": "positionHigh",
+   "uStack_30": "positionBuffer"
+  }
+ },
+ "2f7f848": {
+  "summary": "Shows the body again after resurrection animation ends and invokes the completion callback.",
+  "renames": {}
+ },
+ "2f7f9bc": {
+  "summary": "Each frame in a tutorial match, detects a click on empty space (not UI or ignored objects) and flags the scripted AI action to be skipped.",
+  "renames": {
+   "uStack_30": "touchPad1",
+   "uStack_38": "touchPad2",
+   "uStack_40": "touchPad3",
+   "uStack_48": "touchPad4",
+   "uStack_50": "touchPad5",
+   "uStack_58": "touchPad6",
+   "uStack_60": "touchPad7",
+   "uStack_68": "touchPad8",
+   "uStack_70": "touchCopy",
+   "uStack_a4": "rayDirectionB",
+   "uStack_ac": "rayDirectionA",
+   "uStack_c0": "rayPartC",
+   "uStack_c8": "rayPartB",
+   "uStack_d0": "rayBuffer"
+  }
+ },
+ "2f7f9d0": {
+  "summary": "Detects a click on empty space (not UI or ignored objects) during a tutorial match and flags the scripted AI action to be skipped.",
+  "renames": {
+   "uStack_30": "touchPad1",
+   "uStack_38": "touchPad2",
+   "uStack_40": "touchPad3",
+   "uStack_48": "touchPad4",
+   "uStack_50": "touchPad5",
+   "uStack_58": "touchPad6",
+   "uStack_60": "touchPad7",
+   "uStack_68": "touchPad8",
+   "uStack_70": "touchCopy",
+   "uStack_a4": "rayDirectionB",
+   "uStack_ac": "rayDirectionA",
+   "uStack_c0": "rayPartC",
+   "uStack_c8": "rayPartB",
+   "uStack_d0": "rayBuffer"
+  }
+ },
+ "2f7fce4": {
+  "summary": "Builds a turn name like 'Player 3' or 'AI 3' from who starts and the turn number.",
+  "renames": {
+   "iStack_44": "roundNumber",
+   "uVar1": "turnParity",
+   "uVar2": "prefix"
+  }
+ },
+ "2f7fe2c": {
+  "summary": "Gets the localized tutorial text and expands modular description, keyword, card name, trait and mana sprite placeholders in it.",
+  "renames": {
+   "alStack_a8": "traitEnumBuffer",
+   "auVar15": "exceptionValue",
+   "auVar15_part8": "exceptionPart",
+   "auVar16": "playerDataFound",
+   "iStack_74": "manaIndex",
+   "iStack_98": "traitValueBuffer",
+   "iVar12": "splitLength",
+   "lStack_70": "disposableSlot",
+   "lStack_90": "pendingException",
+   "lVar1_3": "displayClass",
+   "lVar4_3": "firstDisposableClass",
+   "lVar4_7": "secondDisposableClass",
+   "lVar4_9": "thirdDisposableClass",
+   "plStack_80": "disposableSlotPtr",
+   "plVar6_10": "cardMatchItem",
+   "plVar6_4": "matchItem",
+   "plVar6_7": "traitItem",
+   "pplStack_88": "enumeratorPtr",
+   "puVar5": "cardIdPtr",
+   "uVar8": "pattern",
+   "uVar8_5": "playerDataStatic"
+  }
+ },
+ "2f7ff20": {
+  "summary": "Returns the text reference key, appending a '-PC' suffix when this is a PC-specific tip.",
+  "renames": {
+   "iVar1": "refLength",
+   "lVar2": "suffix",
+   "lVar4": "combined"
+  }
+ },
+ "2f7ff80": {
+  "summary": "Updates the scripted action's display name from its first action data, appending localized text or unit labels where relevant.",
+  "renames": {
+   "auVar7_x1": "unused1",
+   "puVar5": "warlordLabel",
+   "puVar6": "actionTypePtr",
+   "uStack_40": "unused2",
+   "uVar4": "hasTargets"
+  }
+ },
+ "2f804fc": {
+  "summary": "Returns whether any scripted action data entry is of the activate-hand-cards type.",
+  "renames": {
+   "auVar4_x1": "unused1"
+  }
+ },
+ "2f805a4": {
+  "summary": "Checks whether a battle action by an acting card on a target card matches this scripted action's expected type, actor and target.",
+  "renames": {
+   "iStack_48": "savedCardType",
+   "iVar7": "excludedUnitType",
+   "uStack_50": "unused1",
+   "uVar4": "condition",
+   "uVar8_2": "unitTypeName"
+  }
+ },
+ "2f80ac8": {
+  "summary": "Gets the localized tip text and expands modular description, keyword, card name, trait and mana sprite placeholders in it.",
+  "renames": {
+   "alStack_a8": "traitEnumBuffer",
+   "auVar15": "exceptionValue",
+   "auVar15_part8": "exceptionPart",
+   "auVar16": "playerDataFound",
+   "iStack_74": "manaIndex",
+   "iStack_98": "traitValueBuffer",
+   "iVar12": "splitLength",
+   "lStack_70": "disposableSlot",
+   "lStack_90": "pendingException",
+   "lVar1_3": "displayClass",
+   "lVar4_3": "firstDisposableClass",
+   "lVar4_7": "secondDisposableClass",
+   "lVar4_9": "thirdDisposableClass",
+   "plStack_80": "disposableSlotPtr",
+   "plVar6_10": "cardMatchItem",
+   "plVar6_4": "matchItem",
+   "plVar6_7": "traitItem",
+   "pplStack_88": "enumeratorPtr",
+   "puVar5": "cardIdPtr",
+   "uVar8": "pattern",
+   "uVar8_5": "playerDataStatic"
+  }
+ },
+ "2f813c8": {
+  "summary": "Coroutine that sets up and positions a tutorial tip, waits for fade, then shows continue text or auto-stops the tip after its duration.",
+  "renames": {
+   "auVar8": "selfRef",
+   "auVar8_3": "currentPosition",
+   "auVar8_4": "textMeshRef",
+   "auVar8_x1": "unused1",
+   "lVar2": "tipTransform"
+  }
+ },
+ "2f81580": {
+  "summary": "Reset is not supported for this coroutine; throws NotSupportedException.",
+  "renames": {
+   "uVar2": "methodInfo"
+  }
+ },
+ "2f8163c": {
+  "summary": "Coroutine that waits a set time, then finishes the tutorial tip if the tip object is still active.",
+  "renames": {}
+ },
+ "2f817a0": {
+  "summary": "Reset is not supported for this coroutine; throws NotSupportedException.",
+  "renames": {
+   "uVar2": "methodInfo"
+  }
+ },
+ "2f80c58": {
+  "summary": "Creates the ShowTip coroutine enumerator for the given small tip data.",
+  "renames": {
+   "lVar1": "enumerator"
+  }
+ },
+ "2f80da0": {
+  "summary": "Hides the continue text, stops the tip, and resumes the player's scripted turn by running the next scripted turn coroutine.",
+  "renames": {
+   "auVar6_x1": "coroutineResult",
+   "pcStack_20": "unused1",
+   "unaff_x19": "thrownException",
+   "unaff_x20": "savedBattleManager",
+   "unaff_x21": "unused2"
+  }
+ },
+ "2f80df0": {
+  "summary": "Resets tip animations, sets up tip data, shows the tip object at full alpha and records click timing.",
+  "renames": {
+   "uVar2": "hasContinueText"
+  }
+ },
+ "2f80f18": {
+  "summary": "Fills the tip text, arrows and skip-prevention flag from tip data, fixes layout and logs the setup.",
+  "renames": {
+   "puVar3": "logMethod",
+   "uVar4": "logArg"
+  }
+ },
+ "2f811b8": {
+  "summary": "Tells the battle manager that waiting for the tutorial tip is finished.",
+  "renames": {
+   "auVar2_2": "hasBattleManager",
+   "auVar2_x1": "unused1"
+  }
+ },
+ "2f776f4": {
+  "summary": "Fades the tip canvas group and any active left or right arrow sprites to a target alpha.",
+  "renames": {
+   "lVar4_3": "fadeClosure",
+   "puVar5": "closureTargetPtr"
+  }
+ },
+ "2f7787c": {
+  "summary": "Kills the background fade tween, handling sequenced tweens and returning the tween to the pool.",
+  "renames": {
+   "bVar1": "hasMore",
+   "piVar10": "counterPtr",
+   "puVar7": "scratchPtr",
+   "uVar4": "extraMessage"
+  }
+ }
+}

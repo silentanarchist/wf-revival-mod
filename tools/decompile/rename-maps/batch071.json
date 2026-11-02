@@ -1,0 +1,513 @@
+{
+ "2f76964": {
+  "summary": "Destroys one mana slot: decrements total mana, clamps unused mana to total, updates the mana UI, and logs before and after.",
+  "renames": {
+   "iVar1": "manaA",
+   "iVar2": "manaB",
+   "uStack_130": "totalManaArg",
+   "uStack_128": "totalManaArgInited",
+   "uStack_120": "totalManaArgFake",
+   "uStack_d0": "decrementInput",
+   "uStack_c8": "decrementInputInited",
+   "uStack_c0": "decrementInputFake",
+   "uStack_ac": "decrementedInited",
+   "uStack_a4": "decrementedFake"
+  }
+ },
+ "2f76c0c": {
+  "summary": "At turn end, removes temporary mana from total, clamps unused mana, clears the until-end-of-turn pool, and refreshes the mana UI unless ambush minions block it.",
+  "renames": {
+   "iVar2": "manaValue",
+   "auVar5": "playerState",
+   "uStack_120": "setManaTotal",
+   "uStack_118": "setManaTotalInited",
+   "uStack_110": "setManaTotalFake",
+   "uStack_e0": "unusedSnapshot",
+   "uStack_d8": "unusedSnapshotInited",
+   "uStack_d0": "unusedSnapshotFake",
+   "uStack_c0": "eotSnapshot",
+   "uStack_b8": "eotSnapshotInited",
+   "uStack_b0": "eotSnapshotFake",
+   "uStack_a0": "decInput",
+   "uStack_98": "decInputInited",
+   "uStack_90": "decInputFake",
+   "uStack_7c": "decResultInited",
+   "uStack_74": "decResultFake",
+   "uStack_70": "totalSnapshot",
+   "uStack_68": "totalSnapshotInited",
+   "uStack_60": "totalSnapshotFake"
+  }
+ },
+ "2f76ea0": {
+  "summary": "Forwards a toggle request to the mana manager along with the current unused and total mana values.",
+  "renames": {
+   "uStack_70": "unusedManaCopy",
+   "uStack_68": "unusedManaCopyInited",
+   "uStack_60": "unusedManaCopyFake"
+  }
+ },
+ "2f76f90": {
+  "summary": "Constructor that initializes all of the player's obscured mana, quest and secret counters to zero.",
+  "renames": {
+   "uStack_34": "zeroTotalMana",
+   "uStack_2c": "zeroTotalManaInited",
+   "uStack_24": "zeroTotalManaFake",
+   "uStack_48": "zeroUnusedMana",
+   "uStack_40": "zeroUnusedManaInited",
+   "uStack_38": "zeroUnusedManaFake",
+   "uStack_5c": "zeroEotMana",
+   "uStack_54": "zeroEotManaInited",
+   "uStack_4c": "zeroEotManaFake",
+   "uStack_70": "zeroPsychic",
+   "uStack_68": "zeroPsychicInited",
+   "uStack_60": "zeroPsychicFake",
+   "uStack_84": "zeroPlasma",
+   "uStack_7c": "zeroPlasmaInited",
+   "uStack_74": "zeroPlasmaFake",
+   "uStack_98": "zeroSpiritStone",
+   "uStack_90": "zeroSpiritStoneInited",
+   "uStack_88": "zeroSpiritStoneFake",
+   "uStack_ac": "zeroFaith",
+   "uStack_a4": "zeroFaithInited",
+   "uStack_9c": "zeroFaithFake",
+   "uStack_c0": "zeroQuest",
+   "uStack_b8": "zeroQuestInited",
+   "uStack_b0": "zeroQuestFake",
+   "uStack_d4": "zeroSaved",
+   "uStack_cc": "zeroSavedInited",
+   "uStack_c4": "zeroSavedFake",
+   "uStack_e8": "zeroSecrets",
+   "uStack_e0": "zeroSecretsInited",
+   "uStack_d8": "zeroSecretsFake"
+  }
+ },
+ "2f77388": {
+  "summary": "Sets up a passive skill display: shows its name, description and icon, hides the cost text, and resets icon scale to one.",
+  "renames": {
+   "lVar3": "vectorStatics",
+   "uStack_28": "oneScaleA",
+   "uStack_24": "oneScaleB"
+  }
+ },
+ "2f779f8": {
+  "summary": "Coroutine step for typewriter text: reveals one more visible character each tick, waiting a fixed delay between characters until all are shown.",
+  "renames": {
+   "auVar7_x1": "methodArg",
+   "auVar7": "enumerator",
+   "auVar7_part8": "newVisibleCount",
+   "auVar7_part12": "zeroPad",
+   "bVar2": "hasMore"
+  }
+ },
+ "2f77bc4": {
+  "summary": "Throws NotSupportedException because IEnumerator.Reset is not supported on this coroutine.",
+  "renames": {
+   "uVar2": "methodRef"
+  }
+ },
+ "2f77db0": {
+  "summary": "Throws NotSupportedException because IEnumerator.Reset is not supported on this coroutine.",
+  "renames": {
+   "uVar2": "methodRef"
+  }
+ },
+ "2f774b0": {
+  "summary": "Creates and returns the ShowRadioMessage coroutine state machine with the tip data and speaker sprite.",
+  "renames": {
+   "lVar1": "stateMachine"
+  }
+ },
+ "2f77574": {
+  "summary": "Assigns the speaker sprite to the card image renderer and sets its color.",
+  "renames": {
+   "uVar1": "isImageNull"
+  }
+ },
+ "2f77644": {
+  "summary": "Calls base fade, then fades the card image sprite to the target alpha over the fade duration.",
+  "renames": {
+   "uVar1": "hasCardImage"
+  }
+ },
+ "2f77840": {
+  "summary": "Kills the background fade tween and the card image fade tween (inlined DOTween kill, despawn and pooling logic).",
+  "renames": {
+   "bVar1": "hasMore",
+   "uVar4": "extraArg",
+   "puVar7": "slotPtr",
+   "piVar10": "counterPtr"
+  }
+ },
+ "2f77894": {
+  "summary": "Sets the tip text, restarts the AnimateText coroutine (stopping any running one), with inlined Unity coroutine start checks.",
+  "renames": {
+   "pcStack_60": "nameSpan",
+   "uStack_58": "nameSpanExtra",
+   "pcStack_40": "emptySpan",
+   "uStack_38": "emptySpanExtra",
+   "lStack_30": "savedString",
+   "uStack_28": "savedException"
+  }
+ },
+ "2f77934": {
+  "summary": "Creates and returns the AnimateText coroutine state machine.",
+  "renames": {
+   "lVar1": "stateMachine"
+  }
+ },
+ "2f77fb8": {
+  "summary": "Sets up the replay HUD if a battle exists, reading match type and the holder object (mostly null checks).",
+  "renames": {
+   "iVar1": "matchTypeValue",
+   "uVar2": "hasInstance",
+   "uVar5_2": "playerDataStatics"
+  }
+ },
+ "2f781d4": {
+  "summary": "Replays the current match: copies stored match info in player data and reloads the active scene.",
+  "renames": {
+   "lVar2": "playerDataStatics",
+   "lVar3": "matchData",
+   "iVar1": "classInitFlag"
+  }
+ },
+ "2f78268": {
+  "summary": "Switches to the pause button, starts auto-replay by clearing the replay-paused flag and starting the ReplayPlayAction coroutine.",
+  "renames": {
+   "auVar7_x1": "methodArg",
+   "auVar7_x1_2": "savedOpExplicit",
+   "lStack_30_2": "savedMethodName",
+   "pcStack_60": "nameSpan",
+   "uStack_58": "nameSpanExtra",
+   "pcStack_40": "emptySpan",
+   "uStack_38": "emptySpanExtra",
+   "uStack_28": "savedException"
+  }
+ },
+ "2f78340": {
+  "summary": "Switches to the play button, pauses auto-replay, clears queued actions and stops the ReplayPlayAction coroutine.",
+  "renames": {
+   "auVar5_x1": "methodArg",
+   "auVar5_x1_2": "savedOpExplicit",
+   "uStack_50": "nameSpan",
+   "uStack_48": "nameSpanExtra",
+   "uStack_30": "emptySpan",
+   "uStack_28": "emptySpanExtra"
+  }
+ },
+ "2f78418": {
+  "summary": "Queues one more replay action at fast time scale and starts the AddNextReplayAction coroutine if it is the first queued.",
+  "renames": {
+   "uVar2": "queueCountText",
+   "pcStack_60": "nameSpan",
+   "uStack_58": "nameSpanExtra",
+   "pcStack_40": "emptySpan",
+   "uStack_38": "emptySpanExtra",
+   "lStack_30_2": "savedMethodName",
+   "uStack_28": "savedException"
+  }
+ },
+ "2f784ac": {
+  "summary": "On destroy, removes all click listeners from the replay, play, pause and step buttons.",
+  "renames": {
+   "lVar2_3": "replayClearResult",
+   "lVar2_5": "playClearResult",
+   "lVar2_7": "pauseClearResult",
+   "auVar7_x1": "methodArg",
+   "auVar7_3": "eventPtr",
+   "lVar5": "callList",
+   "iVar1": "callCount",
+   "uVar6": "capacity"
+  }
+ },
+ "2f78574": {
+  "summary": "Accumulates touch drag each frame and moves every attack-type button by the normalized drag, then updates background scale.",
+  "renames": {
+   "uVar2": "hasController",
+   "fVar9": "normalizedDrag",
+   "auVar13": "buttonState",
+   "auVar13_x1": "transformArg",
+   "uVar11": "localScaleZ"
+  }
+ },
+ "2f78648": {
+  "summary": "Clears and fills the attack-type button cache, initializes each button, and assigns the pointer-enter callback.",
+  "renames": {
+   "uVar2": "hasButton",
+   "auVar8": "buttonState",
+   "auVar8_x1": "transformArg",
+   "in_s1": "localScaleY",
+   "in_s2": "localScaleZ"
+  }
+ },
+ "2f78814": {
+  "summary": "Highlights the button matching the chosen attack type and scales it up, shows the tooltip for active ability, and clears others.",
+  "renames": {
+   "uVar6": "hasTooltip",
+   "lVar10": "buttonIdx",
+   "lVar10_5": "idxOrTooltip",
+   "auVar14": "hasPooledTrigger",
+   "auVar13": "buttonState",
+   "auVar13_part8": "attackTypeRaw",
+   "iVar7": "attackTypeValue",
+   "uStack_60": "savedLink",
+   "plVar9": "tooltipSlot",
+   "pcVar3": "savedLinkReg",
+   "lVar4_3": "buttonRef"
+  }
+ },
+ "2f78b38": {
+  "summary": "Shows or hides the attack-type selector, configures the active-ability button icon and value, resizes the background, and sets tooltip text.",
+  "renames": {
+   "ppcVar1": "stackFramePtr",
+   "uVar2": "hasAbilityCard",
+   "auVar13": "buttonState",
+   "auVar13_part8": "optionFlag",
+   "unaff_x30": "savedLinkRegister",
+   "pcStack_80": "toggleMethod",
+   "pcStack_80_2": "toggleMethod2",
+   "pcStack_70": "savedController",
+   "lStack_68": "savedCard",
+   "uStack_78": "savedHasCard",
+   "lVar3_5": "button",
+   "auVar13_x1": "routineArg",
+   "auVar13_3": "routineButton",
+   "pcVar10_2": "savedButton",
+   "lVar12_3": "currentTooltipRef",
+   "auVar13_4": "pooledTriggerRef",
+   "plVar9": "tooltipPtr",
+   "plVar8": "pooledTriggerPtr"
+  }
+ },
+ "2f791c8": {
+  "summary": "Shows or hides the selector with only one attack-type button, highlighting it and disabling the others temporarily.",
+  "renames": {
+   "unaff_x19": "routineError",
+   "unaff_x20": "savedButton",
+   "unaff_x21": "unused1",
+   "unaff_x30": "unused2",
+   "auVar9": "isDifferentButton",
+   "auVar10": "buttonState",
+   "auVar10_x1": "selectedButton",
+   "auVar10_3": "routineTarget",
+   "lVar8_3": "tooltipRef",
+   "plVar7": "tooltipPtr",
+   "lVar2_6": "coroutineTarget"
+  }
+ },
+ "2f792b4": {
+  "summary": "Temporarily disables every attack-type button except the one the drag exited.",
+  "renames": {
+   "auVar4": "isOtherButton"
+  }
+ },
+ "2f78578": {
+  "summary": "Accumulates touch drag each frame and moves every attack-type button by the normalized drag, then updates background scale.",
+  "renames": {
+   "uVar2": "hasController",
+   "fVar9": "normalizedDrag",
+   "auVar13": "buttonState",
+   "auVar13_x1": "transformArg",
+   "uVar11": "localScaleZ"
+  }
+ },
+ "2f798e0": {
+  "summary": "Throws NotSupportedException because IEnumerator.Reset is not supported on this coroutine.",
+  "renames": {
+   "uVar2": "methodRef"
+  }
+ },
+ "2f79648": {
+  "summary": "Each frame, when pointer is over the button, notifies the pointer-enter callback once and plays the select sound cue.",
+  "renames": {
+   "auVar17_x1": "methodArg",
+   "auVar17_4": "cueValid",
+   "lVar8_3": "soundManager",
+   "puVar9": "zeroVectorStatic",
+   "puVar10": "zeroVectorStatic2",
+   "uVar15": "positionZ",
+   "uVar16": "positionZ2",
+   "uVar4": "hasAudioSource",
+   "alStack_78": "audioSourceOut",
+   "uStack_e0": "spillPosX",
+   "uStack_d8": "spillPosY",
+   "uStack_d0": "spillPosZ",
+   "uStack_c8": "spillPad",
+   "pcStack_c0": "spillMethodC0",
+   "pcStack_b0": "spillFrameB0",
+   "puStack_a8": "spillCueA8",
+   "lStack_a0": "spillSourceA0",
+   "lStack_98": "spillManager98",
+   "uStack_90": "spillFlag90",
+   "uStack_88": "spillFlag88",
+   "uStack_f0": "errorObj",
+   "uStack_e8": "errorObjExtra"
+  }
+ },
+ "2f7873c": {
+  "summary": "Registers the controller, stores the button's original scale, and shows the icon value text object.",
+  "renames": {
+   "uVar2": "hasValueText",
+   "in_s1": "localScaleY",
+   "in_s2": "localScaleZ"
+  }
+ },
+ "2f78880": {
+  "summary": "Highlights this button if it matches the selected attack type, scaling it and showing an active-ability tooltip; otherwise resets scale and clears tooltip.",
+  "renames": {
+   "lVar6": "tooltipItemRef",
+   "uVar3": "hasTooltip",
+   "auVar9": "hasPooledTrigger",
+   "plVar5": "tooltipSlot",
+   "lVar4_4": "currentTooltipRef"
+  }
+ },
+ "2f78dd0": {
+  "summary": "Shows or hides the button; on hide it clears the active-ability tooltip, on show it restarts the safe-touch coroutine.",
+  "renames": {
+   "lVar6": "tooltipRef",
+   "plVar5": "tooltipPtr",
+   "unaff_x19": "routineError",
+   "unaff_x20": "savedButton",
+   "unaff_x21": "unused1",
+   "unaff_x30": "unused2",
+   "auVar7_x1": "routineArg"
+  }
+ },
+ "2f78e84": {
+  "summary": "Sets the button icon sprite.",
+  "renames": {
+   "uVar1": "hasSprite"
+  }
+ },
+ "2f78f18": {
+  "summary": "Sets the icon value text to the given number and shows its object.",
+  "renames": {
+   "uVar1": "hasValueText",
+   "iStack_24": "valueCopy"
+  }
+ },
+ "2f7937c": {
+  "summary": "Stops coroutines and, if active, restarts the safe-touch coroutine to temporarily disable the button.",
+  "renames": {
+   "unaff_x19": "routineError",
+   "unaff_x20": "savedButton",
+   "unaff_x21": "unused1",
+   "unaff_x30": "unused2",
+   "apcStack_20": "frameSlots",
+   "auVar5_x1": "routineArg"
+  }
+ },
+ "2f79658": {
+  "summary": "When pointer is over the button, notifies the pointer-enter callback once and plays the select sound cue.",
+  "renames": {
+   "auVar17_x1": "methodArg",
+   "auVar17_4": "cueValid",
+   "lVar8_3": "soundManager",
+   "puVar9": "zeroVectorStatic",
+   "puVar10": "zeroVectorStatic2",
+   "uVar15": "positionZ",
+   "uVar16": "positionZ2",
+   "uVar4": "hasAudioSource",
+   "alStack_78": "audioSourceOut",
+   "uStack_e0": "spillPosX",
+   "uStack_d8": "spillPosY",
+   "uStack_d0": "spillPosZ",
+   "uStack_c8": "spillPad",
+   "pcStack_c0": "spillMethodC0",
+   "pcStack_b0": "spillFrameB0",
+   "puStack_a8": "spillCueA8",
+   "lStack_a0": "spillSourceA0",
+   "lStack_98": "spillManager98",
+   "uStack_90": "spillFlag90",
+   "uStack_88": "spillFlag88",
+   "uStack_f0": "errorObj",
+   "uStack_e8": "errorObjExtra"
+  }
+ },
+ "2f79720": {
+  "summary": "Creates and returns the StartSafeTouch coroutine state machine.",
+  "renames": {
+   "lVar1": "stateMachine"
+  }
+ },
+ "2f793d0": {
+  "summary": "Moves the button's local position along its pivot direction scaled by the normalized distance.",
+  "renames": {
+   "fVar3": "directionX",
+   "fVar5": "directionY"
+  }
+ },
+ "2f7950c": {
+  "summary": "Scales the background between its element-based scale and original scale according to a clamped normalized value.",
+  "renames": {
+   "fStack_28": "scaleY",
+   "fStack_24": "scaleZ",
+   "fVar3": "clampedMax",
+   "fVar4": "clampedValue"
+  }
+ },
+ "2f78fdc": {
+  "summary": "Computes a horizontal background scale from the element count, logs it, and stores the new current scale.",
+  "renames": {
+   "fVar4": "elementsOffset",
+   "fVar5": "scaleFactor",
+   "fVar6": "lerpValue",
+   "uVar2": "lerpBoxed",
+   "uVar3": "scaleBoxed",
+   "fStack_38": "lerpCopy",
+   "fStack_54": "scaleCopy",
+   "iStack_34": "elementsCopy"
+  }
+ },
+ "2f79950": {
+  "summary": "Constructor that sets the input scale modifier to 1.",
+  "renames": {
+   "uVar1": "one"
+  }
+ },
+ "2f79960": {
+  "summary": "Creates the pointer-enter callback, initializes the buttons controller, hides the selector and clears the current card.",
+  "renames": {
+   "uVar2": "nullFlag"
+  }
+ },
+ "2f79a0c": {
+  "summary": "Shows or hides the attack-type selector for a unit, positions it at the card, and configures which attack buttons are available.",
+  "renames": {
+   "uVar8": "hasCard",
+   "bVar14": "canUseActive",
+   "plVar12": "cardObjectSlot",
+   "auVar19": "hasPooledTrigger",
+   "auVar18": "buttonState",
+   "auVar18_part8": "attackTypeRaw",
+   "lVar6_3": "buttonRef",
+   "lVar13_3": "tooltipRef",
+   "lVar13_8": "idxOrTooltip",
+   "plVar11": "tooltipSlot",
+   "unaff_x30": "unused1"
+  }
+ },
+ "2f79e48": {
+  "summary": "Shows the selector with just one attack type for a card and positions it at the card's board location.",
+  "renames": {
+   "plVar3": "cardObjectSlot"
+  }
+ },
+ "2f79f9c": {
+  "summary": "Handles an attack type button click: checks tutorial restrictions, changes the card's attack type, and highlights valid targets on the board.",
+  "renames": {
+   "uVar1": "devToolsFlag",
+   "uVar4": "hasCurrentCard",
+   "uVar4_2": "devToolsEnabled",
+   "puVar9": "logMethodPtr"
+  }
+ },
+ "2f7ae94": {
+  "summary": "Returns whether the particle collision definition has valid particles and audio assigned.",
+  "renames": {
+   "auVar3": "particlesValid",
+   "auVar3_x1": "methodArg"
+  }
+ }
+}

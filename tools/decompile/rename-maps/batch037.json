@@ -1,0 +1,301 @@
+{
+ "32908e0": {
+  "summary": "Moves a card to the top of the player's or enemy's shuffled deck, then finishes the action: checks hero death, re-enables turn UI and scripted turns.",
+  "renames": {
+   "auVar18": "resolvingFlagValue",
+   "auVar19": "duringBattleValue",
+   "uStack_e8": "playerHealthPart2",
+   "uStack_e0": "playerHealthPart3",
+   "uStack_f0_2": "playerHealthPart1",
+   "uStack_c8": "enemyHealthPart2",
+   "uStack_c0": "enemyHealthPart3",
+   "uStack_d0_2": "enemyHealthPart1",
+   "uStack_80": "scratch1",
+   "uStack_78": "scratch2",
+   "uStack_70": "scratch3",
+   "uStack_90": "scratch4",
+   "uStack_a8": "scratch5",
+   "uVar4_2": "enemyHealthDelta",
+   "dVar17": "matchMinutes",
+   "abStack_44": "isPlayerDead",
+   "auStack_58": "nowTime",
+   "param_4": "unused1",
+   "extraout_x0": "unused2",
+   "extraout_x0_00": "unused3",
+   "iVar6_2": "playerHeroState",
+   "iVar6_4": "playerHealthArg",
+   "lVar16_5": "leaderboardClass",
+   "piVar15": "interfaceMapPtr",
+   "lVar16_8": "resultOrType",
+   "lVar16": "deck",
+   "uVar12": "actionTypeCopy",
+   "uVar12_2": "shouldLoseValue",
+   "uVar12_4": "isPlayerTurn",
+   "uVar12_5": "heroAbilityButton",
+   "uVar12_6": "queueActionsLeft",
+   "uVar12_7": "isScriptedStage"
+  }
+ },
+ "3291af8": {
+  "summary": "Decides whether an attack may resolve, checking attacker and target validity and attack state; logs and stores a cancel reason when not allowed.",
+  "renames": {
+   "iVar2": "currentMatchType",
+   "uVar3": "stateName",
+   "uStack_38": "attackerState1",
+   "uStack_40": "scratch1",
+   "uStack_50": "attackerState2",
+   "uStack_58": "scratch2",
+   "plVar5": "warningMessagePtr",
+   "lVar4_3": "warningMessage"
+  }
+ },
+ "3292594": {
+  "summary": "Returns true if the acting card has stomp, there are adjacent units, and the target's health is negative (overkill).",
+  "renames": {
+   "iVar2": "targetHealth",
+   "uStack_70": "healthCopy",
+   "uStack_68": "initedCopy",
+   "uStack_60": "fakeActiveCopy"
+  }
+ },
+ "3292a78": {
+  "summary": "Builds a list of units in play that can cancel the given attack, excluding jam units and duplicates.",
+  "renames": {
+   "this_00": "closure",
+   "uVar6": "notAlreadyListed",
+   "iVar7": "index"
+  }
+ },
+ "3292d2c": {
+  "summary": "Returns whether a player-owned minion card has a targeted effect that requires choosing a target (unless match data flags otherwise).",
+  "renames": {
+   "iVar2": "actingCardType"
+  }
+ },
+ "3292d88": {
+  "summary": "Returns the decrypted count of cards played this turn.",
+  "renames": {
+   "iVar1": "cardsPlayed",
+   "uStack_60": "counterCopy",
+   "uStack_58": "initedCopy",
+   "uStack_50": "fakeActiveCopy"
+  }
+ },
+ "328e208": {
+  "summary": "Resolves a follow-up after a card resolution, then finishes the action: checks hero death, re-enables turn UI and scripted turns.",
+  "renames": {
+   "auVar18": "resolvingFlagValue",
+   "auVar19": "duringBattleValue",
+   "uStack_e8": "playerHealthPart2",
+   "uStack_e0": "playerHealthPart3",
+   "uStack_f0_2": "playerHealthPart1",
+   "uStack_c8": "enemyHealthPart2",
+   "uStack_c0": "enemyHealthPart3",
+   "uStack_d0_2": "enemyHealthPart1",
+   "uStack_80": "scratch1",
+   "uStack_78": "scratch2",
+   "uStack_70": "scratch3",
+   "uStack_90": "scratch4",
+   "uStack_a8": "scratch5",
+   "uVar4_2": "enemyHealthDelta",
+   "dVar17": "matchMinutes",
+   "abStack_44": "isPlayerDead",
+   "auStack_58": "nowTime",
+   "param_4": "unused1",
+   "extraout_x0": "unused2",
+   "extraout_x0_00": "unused3",
+   "iVar5_2": "playerHeroState",
+   "iVar5_4": "playerHealthArg",
+   "lVar15_5": "leaderboardClass",
+   "piVar14": "interfaceMapPtr",
+   "lVar15_8": "resultOrType",
+   "uVar11_2": "isActionCardMissing",
+   "uVar11_3": "actionTypeCopy",
+   "uVar11_4": "shouldLoseValue",
+   "uVar11_6": "isPlayerTurn",
+   "uVar11_7": "heroAbilityButton",
+   "uVar11_8": "queueActionsLeft",
+   "uVar11_9": "isScriptedStage"
+  }
+ },
+ "3292ebc": {
+  "summary": "Silently destroys a unit: removes it from play and minion manager, hides it, and strips hand effects tied to it as the enchanting card.",
+  "renames": {
+   "uVar10_2": "effectIndex",
+   "auVar12": "exceptionResult",
+   "auVar12_x1": "removeCard",
+   "uVar7": "idText",
+   "uStack_e8": "cardStateCopy",
+   "puStack_d0": "statusLabel",
+   "lStack_a0": "logParts",
+   "uStack_98": "indexCopy",
+   "lStack_90": "handCopy",
+   "pcStack_d8": "callerMethod",
+   "puStack_c8": "idLabel",
+   "puStack_c0": "getItemMethod",
+   "puStack_b8": "enchantingLabel",
+   "uStack_b0": "scratch1",
+   "uStack_88": "scratch2",
+   "uStack_70": "scratch3",
+   "uStack_f0": "scratch4",
+   "lVar9_6": "effectList",
+   "iVar1": "firstSkipIndex",
+   "uVar10_3": "isSameCard"
+  }
+ },
+ "3292fac": {
+  "summary": "Queues an automatic reassemble-minions action for the given side at instant priority.",
+  "renames": {
+   "uStack_120": "orderType",
+   "uStack_11c": "orderIsPlayer"
+  }
+ },
+ "3293018": {
+  "summary": "Determines the unit death type from the action's cards, damage type and whose turn it is.",
+  "renames": {
+   "uVar4": "hasObject",
+   "iVar3_2": "cardTypeValue",
+   "auVar6": "hasActingCard",
+   "cVar1": "actingIsPlayerByte"
+  }
+ },
+ "32927ac": {
+  "summary": "Broadcasts a unit-damaged event, logs the damage stat for the attacker, and raises a DamageSignal.",
+  "renames": {
+   "uVar1": "checkFlag",
+   "lVar4": "brokerClass",
+   "lVar5": "raiseMethod",
+   "piVar6": "interfaceMapPtr",
+   "uVar3": "unused1",
+   "puVar2": "logMethod"
+  }
+ },
+ "3293244": {
+  "summary": "Returns true when the match is a replay and replay playback is active, so animations can be skipped.",
+  "renames": {
+   "bVar1": "isReplaySkipping"
+  }
+ },
+ "32932bc": {
+  "summary": "Returns the time to play an enemy card: 0.2 seconds when skipping replay animations, otherwise 0.6.",
+  "renames": {
+   "fVar2": "delay"
+  }
+ },
+ "32933c8": {
+  "summary": "Returns the Transform anchor for an animation position option (hero, hand, deck, center, next minion slot) relative to the cards.",
+  "renames": {
+   "bVar1": "isEnemyCard",
+   "uVar9": "slotPos",
+   "uVar10": "slotOffset",
+   "iStack_44": "positionBoxed",
+   "lVar8_8": "componentObj",
+   "lVar7_4": "gcHandleTarget"
+  }
+ },
+ "32938ec": {
+  "summary": "Loads and instantiates an animation prefab at the start parent, sets its scale, runs the callback and initializes its CardAnimController.",
+  "renames": {
+   "uVar2": "checkFlag",
+   "uVar5": "scratch1",
+   "uVar6": "scratch2",
+   "in_s1": "unused1",
+   "in_s2": "unused2",
+   "extraout_s0": "unused3"
+  }
+ },
+ "3293b60": {
+  "summary": "Like CreateAnim but resolves start and end transforms from the animInfo position options, then instantiates and initializes the animation controller.",
+  "renames": {
+   "uVar2": "checkFlag",
+   "uVar5": "startPosition",
+   "uVar7": "scratch1",
+   "uVar8": "scratch2",
+   "in_s1": "unused1",
+   "in_s2": "unused2",
+   "startParent_00": "startAnchor",
+   "endParent_00": "endAnchor"
+  }
+ },
+ "328e838": {
+  "summary": "Activates and highlights the blood thirst effect on the action's card, then finishes the action: checks hero death, re-enables turn UI.",
+  "renames": {
+   "auVar18": "resolvingFlagValue",
+   "auVar19": "duringBattleValue",
+   "uStack_e8": "playerHealthPart2",
+   "uStack_e0": "playerHealthPart3",
+   "uStack_f0_2": "playerHealthPart1",
+   "uStack_c8": "enemyHealthPart2",
+   "uStack_c0": "enemyHealthPart3",
+   "uStack_d0_2": "enemyHealthPart1",
+   "uStack_80": "scratch1",
+   "uStack_78": "scratch2",
+   "uStack_70": "scratch3",
+   "uStack_90": "scratch4",
+   "uStack_a8": "scratch5",
+   "uVar4_2": "enemyHealthDelta",
+   "dVar17": "matchMinutes",
+   "abStack_44": "isPlayerDead",
+   "auStack_58": "nowTime",
+   "param_4": "unused1",
+   "extraout_x0": "unused2",
+   "extraout_x0_00": "unused3",
+   "iVar5_2": "playerHeroState",
+   "iVar5_4": "playerHealthArg",
+   "lVar16_5": "leaderboardClass",
+   "piVar15": "interfaceMapPtr",
+   "lVar16_8": "resultOrType",
+   "uVar12": "actionTypeCopy",
+   "uVar12_2": "shouldLoseValue",
+   "uVar12_4": "isPlayerTurn",
+   "uVar12_5": "heroAbilityButton",
+   "uVar12_6": "queueActionsLeft",
+   "uVar12_7": "isScriptedStage"
+  }
+ },
+ "3293e00": {
+  "summary": "Handles the choose-card countdown: auto-selects a random card if none chosen, and at low counts clears the choice UI and confirms the selection.",
+  "renames": {
+   "pplVar2": "currentChooseUi",
+   "plStack_70": "listEnumerator",
+   "pplStack_68": "enumListRef",
+   "pplStack_60": "enumCurrent",
+   "plStack_80": "disposableSlot",
+   "pplStack_90": "enumeratorPtr",
+   "pplStack_88": "disposablePtr",
+   "lVar5_3": "disposableClass",
+   "piVar9": "interfaceMapPtr",
+   "plVar7_4": "childTransform",
+   "puVar6": "disposableInterface",
+   "auVar11_2": "disposeResult"
+  }
+ },
+ "328b284": {
+  "summary": "Cancels any in-progress card play, attack or targeting state, restoring the card to hand and clearing highlights; returns whether anything was cancelled.",
+  "renames": {
+   "lVar4": "unused1",
+   "bVar2": "isInHand"
+  }
+ },
+ "3293f64": {
+  "summary": "Sets up and shows the choose-a-card menu for a resolution choice, handling replay auto-selection and the countdown timer.",
+  "renames": {
+   "unaff_x19": "exceptionObj",
+   "unaff_x20": "savedMenu",
+   "unaff_x21": "unused1",
+   "unaff_x30": "unused2",
+   "auVar11_x1": "coroutineResult",
+   "method_03": "scratch1"
+  }
+ },
+ "32940b8": {
+  "summary": "Builds the list of choice options for a card by randomly drawing from the full pool up to max targets, topping up and sorting for humans.",
+  "renames": {
+   "this_00": "closure",
+   "method_00": "isBotCopy",
+   "uVar8_2": "pickedCard",
+   "uVar8_3": "pickedCardValue",
+   "puVar11": "pickedCardPtr"
+  }
+ }
+}

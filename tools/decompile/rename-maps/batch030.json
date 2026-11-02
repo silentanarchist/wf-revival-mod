@@ -1,0 +1,258 @@
+{
+ "32c16fc": {
+  "summary": "Coroutine that resolves an attack: validates it, handles stealth/ambush/drop pod, sentry/shuriken, blast/stomp, counter-damage, markerlight and cleanup across many states.",
+  "renames": {
+   "auStack_54": "isPlayerTurnBox",
+   "auStack_158": "actionCopy1",
+   "auStack_258": "actionCopy2",
+   "auStack_358": "actionCopy3",
+   "auStack_458": "actionCopy4",
+   "auStack_558": "actionCopy5",
+   "auStack_658": "actionCopy6",
+   "auStack_758": "actionCopy7",
+   "auStack_858": "actionCopy8",
+   "auStack_9b0": "actionCopy9",
+   "iVar4": "absHealth",
+   "iVar5_4": "targetHealthValue",
+   "iVar5_8": "actionType",
+   "iVar5_10": "targetHealth",
+   "lVar2": "addMethod",
+   "lVar7_5": "soundManager",
+   "lVar7_9": "soundManager2",
+   "lVar7_11": "soundManager3",
+   "piVar16": "battleActionPtr",
+   "puVar11": "queuedAction",
+   "uVar12": "nextState",
+   "uStack_8b0": "healthCopy",
+   "uStack_8a8": "healthInitedCopy",
+   "uStack_8a0": "healthFakeActiveCopy",
+   "uStack_890": "targetHealthCopy",
+   "uStack_888": "targetHealthInitedCopy",
+   "uStack_880": "targetHealthFakeActiveCopy"
+  }
+ },
+ "32c38e0": {
+  "summary": "Throws NotSupportedException because resetting this compiler-generated coroutine is not supported.",
+  "renames": {
+   "uVar2": "methodName"
+  }
+ },
+ "32c394c": {
+  "summary": "Coroutine that resolves backlash: kills the target card if needed, broadcasts the dead unit, and finishes the action.",
+  "renames": {
+   "auStack_140": "actionCopy1",
+   "auStack_240": "actionCopy2",
+   "auStack_340": "actionCopy3"
+  }
+ },
+ "32c3b3c": {
+  "summary": "Throws NotSupportedException because resetting this compiler-generated coroutine is not supported.",
+  "renames": {
+   "uVar2": "methodName"
+  }
+ },
+ "32c3ba8": {
+  "summary": "Coroutine that plays an auto-summoned card: plays sounds, places the minion onto the field, updates the unit-in-play counter and list, and logs the play.",
+  "renames": {
+   "auStack_1d0": "actionCopy",
+   "auStack_44": "isPlayerBox",
+   "iVar3_3": "unitCounterValue",
+   "lVar12": "soundManager",
+   "lVar12_3": "soundManager2",
+   "lVar12_5": "soundManager3",
+   "puVar11": "tempPtr",
+   "uStack_70": "counterFakeActiveCopy",
+   "uStack_78": "counterInitedCopy",
+   "uStack_80_2": "counterCopy",
+   "uStack_a4": "newCounterFakeActive",
+   "uStack_ac": "newCounterInited",
+   "uStack_c0": "incrementedFakeActiveCopy",
+   "uStack_c8": "incrementedInitedCopy",
+   "uStack_d0": "incrementedCounterCopy",
+   "uVar8": "isTargetCardNull",
+   "uVar9": "nextState"
+  }
+ },
+ "32c4454": {
+  "summary": "Throws NotSupportedException because resetting this compiler-generated coroutine is not supported.",
+  "renames": {
+   "uVar2": "methodName"
+  }
+ },
+ "32c44c0": {
+  "summary": "Coroutine that copies a unit from the cemetery into play/hand, shrinking it then creating the card in game with a scale animation.",
+  "renames": {
+   "fVar8": "smallScale",
+   "fVar10": "oneY"
+  }
+ },
+ "32c4824": {
+  "summary": "Throws NotSupportedException because resetting this compiler-generated coroutine is not supported.",
+  "renames": {
+   "uVar2": "methodName"
+  }
+ },
+ "32c4890": {
+  "summary": "Coroutine that creates a card and animates it into the deck, scaling the position by the hidden value.",
+  "renames": {
+   "auStack_74": "isTrapCardBox",
+   "fVar9": "oneY",
+   "lVar5": "vectorStatics",
+   "uVar10": "extraArg2",
+   "uVar6": "extraArg1"
+  }
+ },
+ "32c4bf4": {
+  "summary": "Throws NotSupportedException because resetting this compiler-generated coroutine is not supported.",
+  "renames": {
+   "uVar2": "methodName"
+  }
+ },
+ "32c4c60": {
+  "summary": "Coroutine that creates a card in the player's or enemy's hand and animates it into position.",
+  "renames": {
+   "fVar10": "oneX",
+   "fVar11": "oneY",
+   "lVar5": "vectorStatics",
+   "puVar4": "handRef",
+   "uVar8": "extraArg"
+  }
+ },
+ "32c4fe4": {
+  "summary": "Throws NotSupportedException because resetting this compiler-generated coroutine is not supported.",
+  "renames": {
+   "uVar2": "methodName"
+  }
+ },
+ "32c5050": {
+  "summary": "Coroutine that makes a card disappear from hand with a dissolve effect, sound and animation, then removes it and finishes the action.",
+  "renames": {
+   "auStack_64": "isPlayerBox",
+   "lVar3_3": "soundManager",
+   "puVar5": "quaternionStatics",
+   "uStack_80": "cardStateValue",
+   "uVar10": "quatY",
+   "uVar11": "quatZ",
+   "uVar12": "quatW",
+   "uVar2": "hasReflectedAnim"
+  }
+ },
+ "32c54e4": {
+  "summary": "Throws NotSupportedException because resetting this compiler-generated coroutine is not supported.",
+  "renames": {
+   "uVar2": "methodName"
+  }
+ },
+ "32c5550": {
+  "summary": "Coroutine that discards a card from hand, logging state, waiting between steps and finishing the action.",
+  "renames": {
+   "auStack_24": "boolBox",
+   "uStack_40": "cardStateValue",
+   "uVar6": "nextState"
+  }
+ },
+ "32c5964": {
+  "summary": "Throws NotSupportedException because resetting this compiler-generated coroutine is not supported.",
+  "renames": {
+   "uVar2": "methodName"
+  }
+ },
+ "32c59d0": {
+  "summary": "Coroutine that displays a card from hand to the player, logging card state and adding the displayed card to the cemetery.",
+  "renames": {
+   "auStack_150": "actionCopy",
+   "auStack_34": "isPlayerBox",
+   "uStack_48": "cardStateValue",
+   "uStack_50": "cardStateType"
+  }
+ },
+ "32c5eac": {
+  "summary": "Throws NotSupportedException because resetting this compiler-generated coroutine is not supported.",
+  "renames": {
+   "uVar2": "methodName"
+  }
+ },
+ "32c5f18": {
+  "summary": "Coroutine that draws a card into the player's or enemy's hand, handling mulligan and animation timing across states.",
+  "renames": {
+   "puVar7": "handRef",
+   "uVar6": "nextState"
+  }
+ },
+ "32c672c": {
+  "summary": "Throws NotSupportedException because resetting this compiler-generated coroutine is not supported.",
+  "renames": {
+   "uVar2": "methodName"
+  }
+ },
+ "32c6798": {
+  "summary": "Coroutine that swaps two minions between players, validating targets and tweening their positions and scales.",
+  "renames": {
+   "lVar4_3": "errorMessage",
+   "plVar8": "errorMessagePtr",
+   "uVar13": "targetPosition1",
+   "uVar14": "targetPosition2"
+  }
+ },
+ "32c7040": {
+  "summary": "Throws NotSupportedException because resetting this compiler-generated coroutine is not supported.",
+  "renames": {
+   "uVar2": "methodName"
+  }
+ },
+ "32c70ac": {
+  "summary": "Coroutine that applies fatigue when a deck is empty: increments the fatigue counter, shows a tip message and deals damage to the hero.",
+  "renames": {
+   "iVar3_2": "fatigueAmount",
+   "lVar7": "uiMessageController",
+   "lVar8": "termKey",
+   "plVar1": "termKeyPtr",
+   "puVar4": "fatigueValuePtr",
+   "uStack_54": "newFakeActive",
+   "uStack_5c": "newInited",
+   "uStack_70": "playerFatigueFakeCopy",
+   "uStack_78": "playerFatigueInitedCopy",
+   "uStack_80": "playerFatigueCopy",
+   "uStack_90": "newPlayerFakeCopy",
+   "uStack_98": "newPlayerInitedCopy",
+   "uStack_a0": "newPlayerFatigue",
+   "uStack_b0": "enemyFatigueFakeCopy",
+   "uStack_b8": "enemyFatigueInitedCopy",
+   "uStack_c0": "enemyFatigueCopy",
+   "uStack_d0": "newEnemyFakeCopy",
+   "uStack_d8": "newEnemyInitedCopy",
+   "uStack_e0": "newEnemyFatigue",
+   "uStack_50_part4": "fatigueHighBits"
+  }
+ },
+ "32c7510": {
+  "summary": "Throws NotSupportedException because resetting this compiler-generated coroutine is not supported.",
+  "renames": {
+   "uVar2": "methodName"
+  }
+ },
+ "32c757c": {
+  "summary": "Coroutine that forces a card to attack a target, checking the target is valid and starting the attack.",
+  "renames": {
+   "uVar2": "isTargetNull"
+  }
+ },
+ "32c7890": {
+  "summary": "Throws NotSupportedException because resetting this compiler-generated coroutine is not supported.",
+  "renames": {
+   "uVar2": "methodName"
+  }
+ },
+ "32c78fc": {
+  "summary": "Coroutine that forces a card to attack a friendly target, choosing a random one and validating it.",
+  "renames": {
+   "uVar3": "isTargetNull"
+  }
+ },
+ "32c7c8c": {
+  "summary": "Throws NotSupportedException because resetting this compiler-generated coroutine is not supported.",
+  "renames": {
+   "uVar2": "methodName"
+  }
+ }
+}

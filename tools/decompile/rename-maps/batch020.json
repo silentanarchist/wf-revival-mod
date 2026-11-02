@@ -1,0 +1,434 @@
+{
+ "327b528": {
+  "summary": "Shows a tutorial animation for a scripted player action: positions a tip and starts a tutorial pointer between the acting card and its target depending on action type.",
+  "renames": {
+   "fVar15": "pointerEndX",
+   "fVar16": "targetCardX",
+   "fVar18": "actingCardX",
+   "fVar19": "offsetY2",
+   "fVar20_3": "scratchPos",
+   "fVar21": "offsetY",
+   "fVar23": "pointerEndY",
+   "in_s1": "unused1",
+   "in_s2": "unused2",
+   "in_x4": "unused3",
+   "pfVar11": "vector3Statics",
+   "puVar8": "unused4",
+   "uStack_b0": "unused5",
+   "uVar13_3": "actionTypeName",
+   "uVar4": "devToolsEnabled"
+  }
+ },
+ "327ccd8": {
+  "summary": "Executes a scripted campaign AI action by showing chat boxes, big chat, radio messages or landing warlords, and playing the associated sound.",
+  "renames": {
+   "auVar13_x1": "unused1",
+   "auVar14_x1": "unused2",
+   "iVar1": "actionType",
+   "lVar2": "closure",
+   "lVar8": "actionData",
+   "lVar8_3": "actionData2",
+   "plVar9": "actionRef",
+   "uStack_78": "unused3",
+   "uStack_80": "unused4",
+   "uVar10": "radioCardId",
+   "uVar11": "vector2Y",
+   "uVar12": "vector2X",
+   "uVar3_2": "actionTypeName"
+  }
+ },
+ "327c098": {
+  "summary": "Executes a scripted tutorial AI action: queues auto actions, attacks, draws, chat messages, radio messages, tips and highlights according to the position reference.",
+  "renames": {
+   "alStack_160": "targetCardSlot",
+   "auStack_270": "actionBufferA",
+   "auStack_370": "actionBufferB",
+   "auStack_470": "actionBufferC",
+   "in_s1": "unused1",
+   "in_s2": "unused2",
+   "puVar10": "actionBufferPtr",
+   "uStack_130": "closestSlot",
+   "uStack_134": "autoActionFlag",
+   "uStack_13c": "autoActionFlag2",
+   "uStack_144": "vector2Statics",
+   "uStack_144_part4": "vector2StaticsY",
+   "uStack_16c": "autoActionField",
+   "uStack_170": "autoActionType",
+   "uStack_b0": "autoActionFlag3",
+   "uVar13_3": "vector2X"
+  }
+ },
+ "327e384": {
+  "summary": "Enables the tutorial highlight overlay at a world position, converting it to viewport space and setting the highlight material color.",
+  "renames": {
+   "uVar2": "hasHudCamera"
+  }
+ },
+ "327d644": {
+  "summary": "Finds the CardScript matching a scripted action's acting or target unit within the relevant board or hand list.",
+  "renames": {
+   "auVar10": "exceptionResult2",
+   "auVar10_x1": "exceptionArg2",
+   "auVar11": "exceptionResult",
+   "auVar11_part8": "exceptionIndex",
+   "iVar6": "unitType",
+   "lStack_48": "unitTypeHandle",
+   "pcStack_40": "methodPtr",
+   "piVar8": "unitTypeField",
+   "puVar5": "itemSlot",
+   "uStack_34": "unitTypeValue",
+   "uVar3": "hasActingUnit"
+  }
+ },
+ "327dec4": {
+  "summary": "Computes the world position for a tutorial tip based on a position reference and relation, applying a horizontal offset.",
+  "renames": {
+   "fVar8": "tipPos",
+   "iVar1": "relationValue",
+   "uVar4": "referenceValue",
+   "uVar4_2": "isManagerNull",
+   "uVar6": "isPlayerSide"
+  }
+ },
+ "327e624": {
+  "summary": "Returns the tutorial tip horizontal offset for a position reference, scaled up on small-screen UI.",
+  "renames": {
+   "fVar4": "offset",
+   "pfVar3": "offsetField"
+  }
+ },
+ "327e4e0": {
+  "summary": "Finds the card in a list whose unique id matches the chosen minion, logging an error if the list is empty.",
+  "renames": {
+   "auVar8": "castResult",
+   "auVar8_x1": "castArg",
+   "auVar9": "exceptionResult",
+   "auVar9_part8": "exceptionIndex",
+   "lVar6": "listItems",
+   "puVar2": "itemSlot",
+   "uVar1": "hasChosenMinion",
+   "uVar4": "methodPtr"
+  }
+ },
+ "327e8bc": {
+  "summary": "Stops and hides the voice-line chat box associated with the current scripted action.",
+  "renames": {
+   "lRam0000000006b720f0": "emptyStringStatic",
+   "uVar5": "unused1"
+  }
+ },
+ "32a6c08": {
+  "summary": "Constructor for SmallTipData that fills tip position, text and display settings from a tip params object.",
+  "renames": {
+   "puVar5": "methodSlot",
+   "uVar1": "flagByte1",
+   "uVar2": "flagByte3",
+   "uVar3": "flagByte2",
+   "uVar4": "waitFlag",
+   "uVar6": "durationValue"
+  }
+ },
+ "32a6ca4": {
+  "summary": "Hides the alliance panel on awake and registers its background close button click handler.",
+  "renames": {
+   "lVar2": "addMethod",
+   "lVar5": "callList",
+   "lVar6": "callItems",
+   "puVar7": "callSlot",
+   "uVar1": "callCount"
+  }
+ },
+ "32a6d74": {
+  "summary": "Opens the battle alliance panel showing player name, title, score, avatar and alliance info, then fades and scales it in.",
+  "renames": {
+   "fVar10": "scaledScale",
+   "in_s1": "unused1",
+   "in_s2": "unused2",
+   "puVar7": "tweenTarget"
+  }
+ },
+ "32a71a4": {
+  "summary": "Constructor that preallocates a pool of AvailableAction objects.",
+  "renames": {
+   "iVar5": "poolSize",
+   "lVar6": "listItems",
+   "lVar8": "actionList",
+   "plVar4": "itemSlot",
+   "plVar7": "statics",
+   "uVar1": "initialCapacity",
+   "uVar2": "listSize"
+  }
+ },
+ "32a7380": {
+  "summary": "Returns the next pooled AvailableAction for the current frame, growing the pool if exhausted.",
+  "renames": {
+   "auVar13": "castResult",
+   "auVar13_x1": "castArg",
+   "auVar14": "exceptionResult",
+   "auVar14_part8": "exceptionIndex",
+   "iVar10": "poolGrowSize",
+   "plVar5": "itemSlot",
+   "puVar7": "setSlot",
+   "uVar9": "methodPtr"
+  }
+ },
+ "32a8860": {
+  "summary": "Static constructor that creates the singleton instance for the compiler-generated closure class.",
+  "renames": {
+   "uVar1": "newInstance"
+  }
+ },
+ "32a8924": {
+  "summary": "Predicate returning true if the card matches and its localized name contains the search text.",
+  "renames": {
+   "extraout_var": "indexResult",
+   "uVar2": "isSameCard"
+  }
+ },
+ "32a75b4": {
+  "summary": "Initializes the debug card picker: loads sorted playable cards, sets up search and army dropdown listeners.",
+  "renames": {
+   "alStack_70": "enumBox",
+   "auVar16": "catchResult",
+   "auVar16_x1": "catchArg",
+   "auVar17": "unwindResult",
+   "auVar17_part8": "unwindCode",
+   "lStack_58": "caughtException",
+   "lStack_78": "selfRef",
+   "lVar12_10": "caughtExceptionRef",
+   "lVar12_8": "enumeratorClass",
+   "lVar8": "disposableClass",
+   "pcStack_a0": "addOptionMethod",
+   "piVar11": "interfaceMapEntry",
+   "plStack_88": "stackCardUI",
+   "plVar4": "currentValue",
+   "puStack_48": "disposeSlotB",
+   "puStack_50": "disposeSlotA",
+   "puStack_90": "stackSlot",
+   "puVar15": "disposeSlotPtr",
+   "puVar9": "interfaceSlot",
+   "uStack_60": "armyIdStack",
+   "uStack_80": "unwindState",
+   "uStack_a4": "lastArmyId",
+   "uVar1": "dataHelper",
+   "uVar10": "interfaceCount",
+   "uVar7": "armyIdScratch"
+  }
+ },
+ "32a7980": {
+  "summary": "Fills the army dropdown with Current Deck, each CardArmy enum value and All, then hooks selection changes.",
+  "renames": {
+   "alStack_70": "enumBox",
+   "auVar14": "catchResult",
+   "auVar14_x1": "catchArg",
+   "auVar15": "unwindResult",
+   "auVar15_part8": "unwindCode",
+   "lStack_58": "caughtException",
+   "lStack_78": "selfRef",
+   "lVar10": "disposableClass",
+   "lVar2_3": "enumeratorClass",
+   "lVar2_5": "caughtExceptionRef",
+   "pcStack_a0": "addOptionMethod",
+   "piVar12": "interfaceMapEntry",
+   "plStack_88": "stackSlotObj",
+   "plVar13": "enumeratorTypeRef",
+   "plVar4_3": "currentValue",
+   "pplStack_50": "enumeratorPtrA",
+   "pplVar9": "enumeratorPtrB",
+   "puStack_48": "disposeSlotB",
+   "puStack_90": "stackSlot",
+   "puVar3": "interfaceSlot",
+   "puVar7": "disposeInterfaceSlot",
+   "uStack_40": "disposableHolder",
+   "uStack_60": "armyIdStack",
+   "uStack_80": "unwindState",
+   "uStack_a4": "lastArmyId",
+   "uVar11": "interfaceCount",
+   "uVar8": "armyIdScratch"
+  }
+ },
+ "32a7d74": {
+  "summary": "Adds an option with the given text and id to the dropdown and increases its visible item count.",
+  "renames": {
+   "iStack_34": "idCopy"
+  }
+ },
+ "32a7e3c": {
+  "summary": "Handles army dropdown selection by setting deck or army filter flags and rebuilding the card filter.",
+  "renames": {
+   "lVar8": "filterSetter",
+   "piVar10": "interfaceMapEntry",
+   "plVar5": "adapter",
+   "puVar7": "interfaceSlot",
+   "uVar6": "errorMessage",
+   "uVar9": "interfaceCount"
+  }
+ },
+ "32a80f0": {
+  "summary": "Updates a card option view holder with the card's localized name and cost.",
+  "renames": {
+   "uVar3": "costText"
+  }
+ },
+ "32a81d0": {
+  "summary": "Shows the debug card picker panel with callbacks and deck filter, then applies the current filter.",
+  "renames": {
+   "lVar6": "filterSetter",
+   "piVar8": "interfaceMapEntry",
+   "plVar3": "adapter",
+   "puVar5": "interfaceSlot",
+   "uVar1": "itemCount",
+   "uVar4": "errorMessage",
+   "uVar7": "interfaceCount"
+  }
+ },
+ "32a8280": {
+  "summary": "Shows the card picker panel in environment-effect mode with callbacks, then applies the filter.",
+  "renames": {
+   "lVar6": "filterSetter",
+   "piVar8": "interfaceMapEntry",
+   "plVar3": "adapter",
+   "puVar5": "interfaceSlot",
+   "uVar1": "itemCount",
+   "uVar4": "errorMessage",
+   "uVar7": "interfaceCount"
+  }
+ },
+ "32a8324": {
+  "summary": "Invokes the card-picked callback with the selected card and closes the picker panel.",
+  "renames": {}
+ },
+ "32a8364": {
+  "summary": "Invokes the card-summoned callback with the selected card and closes the picker panel.",
+  "renames": {}
+ },
+ "32a7f28": {
+  "summary": "Chooses the filtering predicate (environment effect, deck, army or name) and applies it to the card list.",
+  "renames": {
+   "lVar6": "filterSetter",
+   "piVar8": "interfaceMapEntry",
+   "plVar3": "adapter",
+   "puVar5": "interfaceSlot",
+   "uVar1": "itemCount",
+   "uVar4": "errorMessage",
+   "uVar7": "interfaceCount"
+  }
+ },
+ "32a8420": {
+  "summary": "Returns whether a card's localized name contains the current search text.",
+  "renames": {
+   "extraout_var": "indexResult"
+  }
+ },
+ "32a8460": {
+  "summary": "Creates a cell group views holder and hooks the card selection callback onto each cell.",
+  "renames": {
+   "lVar5": "cellItem",
+   "puVar6": "callbackSlot"
+  }
+ },
+ "32a857c": {
+  "summary": "Constructor that sets default callbacks and initializes lists and visibility params.",
+  "renames": {}
+ },
+ "32a86d4": {
+  "summary": "Search text changed handler: rebuilds the card filter predicate and refreshes the list.",
+  "renames": {
+   "lVar6": "filterSetter",
+   "piVar8": "interfaceMapEntry",
+   "plVar3": "adapter",
+   "puVar5": "interfaceSlot",
+   "uVar1": "itemCount",
+   "uVar4": "errorMessage",
+   "uVar7": "interfaceCount"
+  }
+ },
+ "32a86d8": {
+  "summary": "Predicate returning true if any card in the current deck filter matches the given card and search text.",
+  "renames": {
+   "acStack_10c": "anyResultFlag",
+   "auVar24": "catchResult",
+   "auVar24_x1": "catchArg",
+   "auVar24_x1_2": "catchArg2",
+   "auVar25_x1": "appendItem",
+   "auVar26": "appendSource",
+   "auVar26_x1": "appendValue",
+   "auVar27": "unwindResult",
+   "auVar27_part8": "unwindCode",
+   "bVar2": "moveNextResult",
+   "lStack_108": "stackGuard",
+   "lVar11": "interfaceClass",
+   "lVar12": "interfaceClass2",
+   "lVar3": "closure",
+   "lVar3_2": "enumeratorClass",
+   "lVar3_4": "threadLocal",
+   "pcStack_80": "anyMethod",
+   "pcVar15": "appendMethod",
+   "piVar17": "interfaceMapEntry",
+   "plStack_118": "argsPtr",
+   "plStack_120": "enumeratorStack2",
+   "plStack_130": "caughtExceptionC",
+   "plStack_38": "enumeratorStack",
+   "plStack_48": "caughtExceptionA",
+   "plStack_60": "funcStack",
+   "plStack_68": "deckStack",
+   "plStack_88": "enumeratorStackB",
+   "plStack_98": "caughtExceptionB",
+   "plVar10": "genericClass",
+   "plVar13": "deckEnumerable",
+   "plVar19": "anyGenericClass",
+   "plVar21": "valueBufferA",
+   "plVar22": "valueBufferB",
+   "plVar4_2": "enumerator",
+   "pplStack_128": "enumeratorPtrC",
+   "pplStack_90": "enumeratorPtrB",
+   "pplVar14": "enumeratorPtr",
+   "puVar5": "interfaceSlot",
+   "puVar7": "caughtObject",
+   "puVar8": "argumentName",
+   "puVar9": "appendClassData",
+   "uStack_58": "unwindStateA",
+   "uVar1": "appendFlags",
+   "uVar16": "interfaceCount",
+   "uVar20": "valueSize",
+   "uVar23": "resultValue",
+   "uVar6": "currentItem",
+   "uVar6_3": "invokeTarget",
+   "unaff_x22": "unusedEnumerator",
+   "unaff_x30": "enumeratorSlotPtr"
+  }
+ },
+ "32a87d8": {
+  "summary": "Predicate returning true if a card's localized name contains the search text.",
+  "renames": {
+   "extraout_var": "indexResult"
+  }
+ },
+ "32a87dc": {
+  "summary": "Predicate returning true if the card belongs to the selected army and its name contains the search text.",
+  "renames": {
+   "extraout_var": "indexResult"
+  }
+ },
+ "32a89b8": {
+  "summary": "Collects UI views for a card option row (name, cost, button) and registers its click handler.",
+  "renames": {
+   "lVar2": "addMethod",
+   "plVar8": "viewsRef",
+   "puVar7": "callSlot"
+  }
+ },
+ "32a8c40": {
+  "summary": "Coroutine MoveNext that waits one second then re-enables all camera shake sources.",
+  "renames": {
+   "cRam0000000006b55068": "initFlag",
+   "cVar2": "initFlagValue"
+  }
+ },
+ "32a8d2c": {
+  "summary": "Throws NotSupportedException because resetting this enumerator is not supported.",
+  "renames": {
+   "uVar2": "methodPtr"
+  }
+ }
+}

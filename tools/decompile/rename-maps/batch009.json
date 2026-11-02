@@ -1,0 +1,664 @@
+{
+ "325f72c": {
+  "summary": "Returns the loaded addressable custom object for the trait, loading it synchronously and ref-counting it if needed.",
+  "renames": {
+   "uStack_88": "newHandleA",
+   "uStack_80": "newHandleB",
+   "uStack_78": "newHandleC",
+   "uStack_70": "loadHandleA",
+   "uStack_68": "loadHandleB",
+   "uStack_60": "loadHandleC",
+   "lStack_50": "handleId",
+   "lStack_48": "handleVersion",
+   "lStack_40": "handleExtra",
+   "lVar9": "genericMethodInfo",
+   "uVar7": "assetLabel",
+   "auVar10": "isReferenceValid",
+   "auVar10_x1": "unused1"
+  }
+ },
+ "325f87c": {
+  "summary": "Returns true if the card has a visible (non-hidden) current trait matching the given trait.",
+  "renames": {
+   "bVar4": "isShowing"
+  }
+ },
+ "3260404": {
+  "summary": "Builds a dictionary mapping each defined trait to its ability trigger for the card type.",
+  "renames": {
+   "uStack_38": "currentEntry",
+   "uStack_38_part4": "currentEntryTrait",
+   "uStack_40": "unused1"
+  }
+ },
+ "32605a4": {
+  "summary": "Builds a dictionary mapping each ability trigger to its defined trait for the card type.",
+  "renames": {
+   "uStack_38": "currentEntry",
+   "uStack_38_part4": "currentEntryTrait",
+   "uStack_40": "unused1"
+  }
+ },
+ "3260744": {
+  "summary": "Maps an ability trigger to a defined trait, with special cases, otherwise by parsing the lowercase-first-letter trigger name as a trait.",
+  "renames": {
+   "auStack_28": "firstCharBuf",
+   "lVar2": "triggerName",
+   "uStack_38": "scratch1",
+   "iStack_30": "boxedTrigger"
+  }
+ },
+ "32608dc": {
+  "summary": "Returns the singleton CardTraitCollection, loading the unique asset on first access.",
+  "renames": {
+   "uVar1": "isNull"
+  }
+ },
+ "326099c": {
+  "summary": "Builds the static trait-to-CardTrait dictionary from the TraitCollection list.",
+  "renames": {
+   "lStack_38": "currentEntry",
+   "uStack_40": "unused1",
+   "uVar1": "traitDictionary"
+  }
+ },
+ "3260b74": {
+  "summary": "Looks up a CardTrait by defined trait in the static dictionary, returning null if absent (includes inlined dictionary insertion code).",
+  "renames": {
+   "lVar5": "traitDictionary",
+   "lVar9": "genericMethodInfo",
+   "auVar21_x1": "unused1",
+   "uVar8": "traitValue",
+   "lVar5_2": "insertDictionary",
+   "in_x3": "unused2",
+   "uStack_94": "keyTrait",
+   "auVar21_part8": "unused3",
+   "plVar16": "comparer",
+   "lVar20": "entries",
+   "lVar7": "buckets",
+   "lVar10": "comparerClass",
+   "lVar11": "comparerClass2",
+   "uVar12": "interfaceCount",
+   "piVar15": "interfaceMapPtr",
+   "piVar13": "interfaceMapPtr2",
+   "puVar6": "interfaceMethodPtr",
+   "uVar19": "entryIndex",
+   "uVar17": "entryCount",
+   "uVar18": "entryCount64",
+   "uVar3": "keyTrait2",
+   "uVar1": "storedKey",
+   "uVar2": "bucketIndex",
+   "iStack_24": "boxedTrait"
+  }
+ },
+ "3260c28": {
+  "summary": "Returns the list of trait effects for a defined trait, or null if the trait is not registered.",
+  "renames": {
+   "lVar1": "traitDictionary",
+   "auVar3": "dictionaryRef",
+   "auVar3_x1": "unused1",
+   "auVar3_3": "dictionaryRef2"
+  }
+ },
+ "3260ce0": {
+  "summary": "Finds the trait effect for a trait whose trigger type matches the given trigger type, or null.",
+  "renames": {
+   "lStack_38": "currentEffect",
+   "uStack_40": "unused1"
+  }
+ },
+ "3260e2c": {
+  "summary": "Gets the trait effect's army-specific CardAnim addressable and returns the loaded animation, loading it synchronously if needed.",
+  "renames": {
+   "uStack_88": "newHandleA",
+   "uStack_80": "newHandleB",
+   "uStack_78": "newHandleC",
+   "uStack_70": "loadHandleA",
+   "uStack_68": "loadHandleB",
+   "uStack_60": "loadHandleC",
+   "lStack_50": "handleId",
+   "lStack_48": "handleVersion",
+   "lStack_40": "handleExtra",
+   "lVar9": "genericMethodInfo",
+   "uVar7": "assetLabel"
+  }
+ },
+ "3260f30": {
+  "summary": "Creates and returns a list of the default traits to load (three fixed trait ids).",
+  "renames": {
+   "lVar4": "addMethodInfo"
+  }
+ },
+ "32610d4": {
+  "summary": "Builds a list of trait/config pairs for a raw card's visible traits that have icons.",
+  "renames": {
+   "uStack_80": "enumeratorCopy",
+   "uStack_78": "enumeratorScratch",
+   "lStack_70": "currentTraitData",
+   "lStack_88": "enumeratorCurrent",
+   "puStack_90": "enumeratorPtr",
+   "lVar3": "currentTraitDataCopy",
+   "plVar8": "itemSlot",
+   "uVar1": "traitId"
+  }
+ },
+ "3261460": {
+  "summary": "Builds the list of trait icons to show for a card in play, from its current traits and active enchantment ability triggers.",
+  "renames": {
+   "lStack_70": "currentTraitData",
+   "lStack_88": "enumeratorCurrent",
+   "puStack_90": "enumeratorPtr",
+   "puStack_78": "enumeratorScratch",
+   "uStack_80": "enumeratorCopy",
+   "lVar5_6": "lastAddedItem",
+   "lVar9_3": "displayClass",
+   "plVar7": "itemSlot"
+  }
+ },
+ "3261bc0": {
+  "summary": "Returns the sprite tag string for a trait's text icon.",
+  "renames": {
+   "uStack_40": "unused1",
+   "uVar1": "traitNameString",
+   "iStack_38": "boxedTrait"
+  }
+ },
+ "3261d80": {
+  "summary": "Returns whether the Duty trait is active: true if no card is given or the card has not used its active ability.",
+  "renames": {
+   "bVar1": "isActive",
+   "uVar2": "hasCard"
+  }
+ },
+ "3261e24": {
+  "summary": "Returns whether the Oath trait is active, based on same-turn play, oath trait variants and activation counts.",
+  "renames": {
+   "uVar2": "hasCard"
+  }
+ },
+ "3261ec4": {
+  "summary": "Returns a tuple of whether the army matches and the override effect animation reference.",
+  "renames": {
+   "bVar1": "armyMismatch",
+   "alStack_30": "resultTuple"
+  }
+ },
+ "3263de4": {
+  "summary": "Predicate: true if a card is a defensive tactic of the deck hero's army.",
+  "renames": {
+   "bVar1": "isDefensive"
+  }
+ },
+ "3262864": {
+  "summary": "Returns the localization key for a deck error's short message, falling back to the generic invalid-deck short term.",
+  "renames": {
+   "plVar3": "fallbackTermRef",
+   "uVar1": "boxedError",
+   "iStack_24": "errorCopy1",
+   "iStack_28": "errorCopy2",
+   "lRam0000000006b720f0": "unused1"
+  }
+ },
+ "32626c0": {
+  "summary": "Returns the localization key for a deck error message, falling back to the generic invalid-deck term.",
+  "renames": {
+   "plVar3": "fallbackTermRef",
+   "uVar1": "boxedError",
+   "iStack_24": "errorCopy1",
+   "iStack_28": "errorCopy2",
+   "lRam0000000006b720f0": "unused1"
+  }
+ },
+ "3262978": {
+  "summary": "Validates a deck (ownership, warlord, cards, card count, name) and writes a deck error code.",
+  "renames": {
+   "iVar12": "requiredCardCount",
+   "lVar9": "eventClass",
+   "pbVar6": "errorPtr",
+   "pbVar7": "unused1",
+   "piVar11": "interfaceMapPtr",
+   "plVar13": "deckNameRef",
+   "puVar5": "interfaceMethodPtr",
+   "uVar8": "errorCode"
+  }
+ },
+ "3263404": {
+  "summary": "Returns true if any card in the deck's library is banned by the custom game mode event.",
+  "renames": {
+   "auVar8_x1": "unused1",
+   "lStack_50": "currentCard",
+   "lStack_68": "enumeratorCurrent",
+   "lVar2_3": "playEvent",
+   "piVar7": "interfaceMapPtr",
+   "uStack_58": "enumeratorScratch",
+   "uStack_60": "enumeratorCopy",
+   "uVar6": "interfaceCount",
+   "puStack_70": "enumeratorPtr"
+  }
+ },
+ "326360c": {
+  "summary": "Checks whether the deck hero's army has defensive cards in the inventory, returning a tri-state result.",
+  "renames": {
+   "lVar2": "closure",
+   "plVar8": "deckField",
+   "uVar3": "hasCachedInstances"
+  }
+ },
+ "3262f20": {
+  "summary": "Validates the deck's warlord hero (exists, correct type and army, not banned) and writes an error code.",
+  "renames": {
+   "auVar10": "heroMissing",
+   "lVar6_2": "playEvent",
+   "piVar8": "interfaceMapPtr",
+   "uVar5": "errorCode",
+   "uVar7": "interfaceCount"
+  }
+ },
+ "3263088": {
+  "summary": "Validates deck cards against the custom event's bans and per-card copy limits, writing an error code.",
+  "renames": {
+   "iVar2": "maxCopies",
+   "lStack_60": "currentCard",
+   "lStack_78": "enumeratorCurrent",
+   "lVar10": "playEvent",
+   "piVar12": "interfaceMapPtr",
+   "puVar8": "errorPtr",
+   "uStack_68": "enumeratorScratch",
+   "uStack_70": "enumeratorCopy",
+   "uVar11": "interfaceCount",
+   "uVar9": "errorCode",
+   "puStack_80": "enumeratorPtr"
+  }
+ },
+ "3262d74": {
+  "summary": "Returns true if the player owns at least the required number of copies of every card in the deck library.",
+  "renames": {
+   "uStack_50": "enumeratorScratch2",
+   "uStack_58": "requiredCount",
+   "uStack_60": "currentKey",
+   "uStack_68": "enumeratorScratch",
+   "uStack_70": "dictEnumerator",
+   "uVar2": "requiredCountCopy"
+  }
+ },
+ "3262b34": {
+  "summary": "Counts each card in the deck's full library into a dictionary of card to copy count.",
+  "renames": {
+   "iVar2": "currentCount",
+   "uStack_44": "existingCount",
+   "uStack_58": "currentCard",
+   "uStack_60": "unused1",
+   "uVar1": "card"
+  }
+ },
+ "3263864": {
+  "summary": "Removes copies of cards the player does not own enough of from the deck, returning true if any were removed.",
+  "renames": {
+   "auVar8_part8": "requiredCount",
+   "auVar8_x1": "requiredCountFull",
+   "uVar6": "remaining",
+   "bVar1": "hasMoreEntries",
+   "bVar7": "removedAny",
+   "lStack_58": "removedCardsRef",
+   "lStack_68": "cardListRef",
+   "uVar2": "remainingMinusOne"
+  }
+ },
+ "32639c0": {
+  "summary": "Removes the deck's hero from the deck if it is not actually a Hero-type card, returning whether it did.",
+  "renames": {
+   "lStack_18": "removedCardsRef",
+   "lStack_28": "cardListRef",
+   "uVar1": "hasHero"
+  }
+ },
+ "3263a6c": {
+  "summary": "Removes invalid cards (wrong type, army, over copy limit, or hidden) from the deck and returns true if any were removed.",
+  "renames": {
+   "bVar1": "hasMore",
+   "bVar12": "removedAny",
+   "iVar11": "index",
+   "iVar3": "maxCopies",
+   "lStack_68": "removedCardsRef",
+   "lStack_70": "cardListRef",
+   "lVar7": "playEventClass",
+   "piVar9": "interfaceMapPtr"
+  }
+ },
+ "3263c78": {
+  "summary": "Removes a card from the deck, records it in the removed list, and decrements its count in the card dictionary (with inlined dictionary code).",
+  "renames": {
+   "auVar21": "cardDictionaryArg",
+   "auVar21_x1": "keyCard",
+   "iVar2_2": "countOrProbe",
+   "iVar2_3": "bucketValue",
+   "lVar10": "backingArray",
+   "lVar12": "comparerClass",
+   "lVar13": "comparerClass2",
+   "lVar15": "cardDictionary",
+   "lVar4": "removedListOrMeta",
+   "lVar8": "buckets",
+   "piVar14": "interfaceMapPtr2",
+   "piVar20": "bucketSlot",
+   "plVar11": "itemSlot",
+   "plVar7": "keyCardRef",
+   "puVar6": "interfaceMethodPtr",
+   "uVar1": "bucketIndex",
+   "uVar17": "entryCount",
+   "uVar18": "entryCount64",
+   "uVar19": "entryIndex",
+   "uVar3": "sizeOrHash",
+   "uVar5": "boolOrCount",
+   "uVar9": "newCount"
+  }
+ },
+ "3263e58": {
+  "summary": "Returns the card's name from its raw card data, or the string \"card\" if there is none.",
+  "renames": {
+   "plVar2": "nameRef",
+   "uVar1": "hasRawData"
+  }
+ },
+ "3263eec": {
+  "summary": "Returns the card type from raw card data, defaulting to Minion if none.",
+  "renames": {
+   "uVar2": "hasRawData"
+  }
+ },
+ "32642ec": {
+  "summary": "Computes the entity's current mana cost from base cost plus active effect modifiers, clamped to zero, or an overriding set-cost effect.",
+  "renames": {
+   "auVar6_x1": "unused1",
+   "iVar3": "costModifier",
+   "iVar5": "loopState",
+   "lStack_50": "currentEffect",
+   "lStack_70": "currentEffect2",
+   "lStack_88": "enumeratorCurrent",
+   "puStack_90": "enumeratorPtr",
+   "puStack_58": "enumeratorScratch1",
+   "puStack_78": "enumeratorScratch2",
+   "uStack_60": "enumeratorCopy",
+   "uStack_80": "enumeratorCopy2",
+   "uVar4": "overrideCost"
+  }
+ },
+ "3264584": {
+  "summary": "Computes current melee attack from base attack plus active effect bonuses (or a set-attack override), clamped to zero.",
+  "renames": {
+   "auVar6_x1": "unused1",
+   "iVar1_3": "baseAttack",
+   "iVar5": "attackBonus",
+   "uStack_60": "fakeActiveCopy",
+   "uStack_68": "initedCopy",
+   "uStack_70": "baseAttackCopy"
+  }
+ },
+ "32646ac": {
+  "summary": "Computes current ranged attack from base ranged attack plus effect bonuses, zero if blind, clamped to zero.",
+  "renames": {
+   "iVar3_3": "baseAttack",
+   "iVar6": "attackBonus",
+   "uStack_60": "fakeActiveCopy",
+   "uStack_68": "initedCopy",
+   "uStack_70": "baseAttackCopy",
+   "uVar2": "result"
+  }
+ },
+ "32647ec": {
+  "summary": "Computes the combat attack value: drop pod attack, zero for remnants, otherwise melee or ranged attack with effect bonuses.",
+  "renames": {
+   "iVar6": "attackBonus",
+   "uStack_2c": "unused1",
+   "uStack_30": "fakeFlags",
+   "_uStack_30": "packedFakeFlags",
+   "uStack_40_part4": "unused2",
+   "uStack_50_part4": "unused3",
+   "uStack_60_part4": "unused4",
+   "uStack_58": "dropPodInitedCopy",
+   "uStack_60": "dropPodCopy",
+   "uStack_68": "initedCopy",
+   "uStack_70": "baseAttackCopy",
+   "uVar2": "rangedResult",
+   "iVar3_2": "dropPodAttackValue",
+   "iVar3_4": "attackTypeOrDamage",
+   "iVar3_6": "meleeBase",
+   "iVar3_8": "rangedBase"
+  }
+ },
+ "3264abc": {
+  "summary": "Returns current health minus the total health bonuses from intrinsic active effects.",
+  "renames": {
+   "iVar1": "baseHealth",
+   "iVar3": "healthBuffTotal",
+   "lStack_48": "currentEffect",
+   "uStack_50": "enumeratorScratch",
+   "uStack_80": "fakeActiveCopy",
+   "uStack_88": "initedCopy",
+   "uStack_90": "healthCopy"
+  }
+ },
+ "3264c64": {
+  "summary": "Getter that copies the obscured currentHealth value out of the entity.",
+  "renames": {
+   "uVar2": "obscuredPart1",
+   "uVar1": "obscuredPart3"
+  }
+ },
+ "3264c8c": {
+  "summary": "Getter that copies the obscured currentBaseMeleeAttack value out of the entity.",
+  "renames": {
+   "uVar2": "obscuredPart1",
+   "uVar1": "obscuredPart3"
+  }
+ },
+ "3264cb4": {
+  "summary": "Getter that copies the obscured currentBaseRangedAttack value out of the entity.",
+  "renames": {
+   "uVar2": "obscuredPart1",
+   "uVar1": "obscuredPart3"
+  }
+ },
+ "3264cdc": {
+  "summary": "Getter that copies the obscured currentMaxHealth value out of the entity.",
+  "renames": {
+   "uVar2": "obscuredPart1",
+   "uVar1": "obscuredPart3"
+  }
+ },
+ "3264f70": {
+  "summary": "Getter that copies the obscured currentArmourValue value out of the entity.",
+  "renames": {
+   "uVar2": "obscuredPart1",
+   "uVar1": "obscuredPart3"
+  }
+ },
+ "3264f98": {
+  "summary": "Getter that copies the obscured currentDropPodHealth value out of the entity.",
+  "renames": {
+   "uVar2": "obscuredPart1",
+   "uVar1": "obscuredPart3"
+  }
+ },
+ "3264fc0": {
+  "summary": "Getter that copies the obscured currentDropPodAttack value out of the entity.",
+  "renames": {
+   "uVar2": "obscuredPart1",
+   "uVar1": "obscuredPart3"
+  }
+ },
+ "3264c78": {
+  "summary": "Setter that stores the obscured currentHealth value into the entity.",
+  "renames": {}
+ },
+ "3264ca0": {
+  "summary": "Setter that stores the obscured currentBaseMeleeAttack value into the entity.",
+  "renames": {}
+ },
+ "3264cc8": {
+  "summary": "Setter that stores the obscured currentBaseRangedAttack value into the entity.",
+  "renames": {}
+ },
+ "3264cf0": {
+  "summary": "Setter that stores the obscured currentMaxHealth value into the entity.",
+  "renames": {}
+ },
+ "3264f84": {
+  "summary": "Setter that stores the obscured currentArmourValue value into the entity.",
+  "renames": {}
+ },
+ "3264fac": {
+  "summary": "Setter that stores the obscured currentDropPodHealth value into the entity.",
+  "renames": {}
+ },
+ "3264fd4": {
+  "summary": "Setter that stores the obscured currentDropPodAttack value into the entity.",
+  "renames": {}
+ },
+ "3264d04": {
+  "summary": "Computes processed max health from base max health plus intrinsic and extrinsic health-change effects, honoring set-health effects.",
+  "renames": {
+   "iVar4": "extrinsicHealthTotal",
+   "uStack_60": "fakeActiveCopy",
+   "uStack_68": "initedCopy",
+   "uStack_70": "maxHealthCopy"
+  }
+ },
+ "3264fe8": {
+  "summary": "Returns the current Maintenance trait value: base trait value plus addTrait effect bonuses, clamped to zero.",
+  "renames": {
+   "iVar4": "traitBonus",
+   "in_x2": "unused1"
+  }
+ },
+ "32650d8": {
+  "summary": "Returns the current Psyker trait value: base trait value plus addTrait effect bonuses, clamped to zero.",
+  "renames": {
+   "iVar4": "traitBonus",
+   "in_x2": "unused1"
+  }
+ },
+ "32650e0": {
+  "summary": "Returns the current Reactor trait value: base trait value plus addTrait effect bonuses, clamped to zero.",
+  "renames": {
+   "iVar4": "traitBonus",
+   "in_x2": "unused1"
+  }
+ },
+ "32650e8": {
+  "summary": "Returns the current Blast trait value: base trait value plus addTrait effect bonuses, clamped to zero.",
+  "renames": {
+   "iVar4": "traitBonus",
+   "in_x2": "unused1"
+  }
+ },
+ "32650f0": {
+  "summary": "Returns the current Survivor trait value: base trait value plus addTrait effect bonuses, clamped to zero.",
+  "renames": {
+   "iVar4": "traitBonus",
+   "in_x2": "unused1"
+  }
+ },
+ "32650f8": {
+  "summary": "Returns the current Bastion trait value: base trait value plus addTrait effect bonuses, clamped to zero.",
+  "renames": {
+   "iVar4": "traitBonus",
+   "in_x2": "unused1"
+  }
+ },
+ "3265100": {
+  "summary": "Returns the current Vulnerable trait value: base trait value plus addTrait effect bonuses, clamped to zero.",
+  "renames": {
+   "iVar4": "traitBonus",
+   "in_x2": "unused1"
+  }
+ },
+ "3265108": {
+  "summary": "Returns the current Tide trait value: base trait value plus addTrait effect bonuses, clamped to zero.",
+  "renames": {
+   "iVar4": "traitBonus",
+   "in_x2": "unused1"
+  }
+ },
+ "3265110": {
+  "summary": "Returns the current Companion trait value: base trait value plus addTrait effect bonuses, clamped to zero.",
+  "renames": {
+   "iVar4": "traitBonus",
+   "in_x2": "unused1"
+  }
+ },
+ "3265118": {
+  "summary": "Returns the current MarksOfChaos trait value: base trait value plus addTrait effect bonuses, clamped to zero.",
+  "renames": {
+   "iVar4": "traitBonus",
+   "in_x2": "unused1"
+  }
+ },
+ "3265120": {
+  "summary": "Returns the current Shuriken trait value: base trait value plus addTrait effect bonuses, clamped to zero.",
+  "renames": {
+   "iVar4": "traitBonus",
+   "in_x2": "unused1"
+  }
+ },
+ "3265128": {
+  "summary": "Returns the current Sentry trait value: base trait value plus addTrait effect bonuses, clamped to zero.",
+  "renames": {
+   "iVar4": "traitBonus",
+   "in_x2": "unused1"
+  }
+ },
+ "3265130": {
+  "summary": "Returns the current Markerlight trait value: base trait value plus addTrait effect bonuses, clamped to zero.",
+  "renames": {
+   "iVar4": "traitBonus",
+   "in_x2": "unused1"
+  }
+ },
+ "3265138": {
+  "summary": "Returns the current HuntMark trait value: base trait value plus addTrait effect bonuses, clamped to zero.",
+  "renames": {
+   "iVar4": "traitBonus",
+   "in_x2": "unused1"
+  }
+ },
+ "3264898": {
+  "summary": "Returns the combat damage for an attack type, from drop pod attack, zero for remnants, or melee/ranged attack plus effect bonuses.",
+  "renames": {
+   "iVar6": "attackBonus",
+   "uStack_2c": "unused1",
+   "uStack_30": "fakeFlags",
+   "_uStack_30": "packedFakeFlags",
+   "uStack_40_part4": "unused2",
+   "uStack_50_part4": "unused3",
+   "uStack_60_part4": "unused4",
+   "uStack_58": "dropPodInitedCopy",
+   "uStack_60": "dropPodCopy",
+   "uStack_68": "initedCopy",
+   "uStack_70": "baseAttackCopy",
+   "uVar2": "rangedResult",
+   "iVar3": "dropPodAttack",
+   "iVar3_3": "meleeBase",
+   "iVar3_5": "rangedBase"
+  }
+ },
+ "32651d8": {
+  "summary": "Returns combat damage for an attack type using drop pod, ranged or melee attack with effect bonuses, zero for remnants.",
+  "renames": {
+   "iVar6": "attackBonus",
+   "uStack_2c": "unused1",
+   "uStack_30": "fakeFlags",
+   "_uStack_30": "packedFakeFlags",
+   "uStack_40_part4": "unused2",
+   "uStack_50_part4": "unused3",
+   "uStack_60_part4": "unused4",
+   "uStack_58": "dropPodInitedCopy",
+   "uStack_60": "dropPodCopy",
+   "uStack_68": "initedCopy",
+   "uStack_70": "baseAttackCopy",
+   "uVar2": "rangedResult",
+   "iVar3": "dropPodAttack",
+   "iVar3_3": "rangedBase",
+   "iVar3_5": "meleeBase"
+  }
+ }
+}

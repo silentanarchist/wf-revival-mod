@@ -1,0 +1,457 @@
+{
+ "2f3312c": {
+  "summary": "Shrinks the card to spell-played scale and disables its collider and UI highlights as it begins dissolving.",
+  "renames": {
+   "fVar8": "baseScaleY",
+   "fVar9": "baseScaleZ",
+   "lVar4": "vector3Class"
+  }
+ },
+ "2f36940": {
+  "summary": "Destroys or exits all trait frame effects and active quest frame visuals on the card UI.",
+  "renames": {
+   "auVar7": "hasActiveQuestFrame",
+   "auVar7_x1": "unusedExtra",
+   "lVar3": "closure",
+   "puStack_78": "scratch1",
+   "puStack_90": "scratch2",
+   "uStack_70": "enumeratorCurrent",
+   "uStack_80": "traitEnumerator",
+   "uStack_88": "scratch3",
+   "uVar1": "currentTrait",
+   "uVar6": "moveNextResult"
+  }
+ },
+ "2f36608": {
+  "summary": "Starts the async state machine that undissolves the whole card.",
+  "renames": {
+   "alStack_38": "stateMachineFields",
+   "uStack_40": "scratch1",
+   "uStack_48": "scratch2",
+   "uStack_50": "scratch3",
+   "uStack_58": "builderField",
+   "uStack_60": "stateField",
+   "uStack_60_part4": "scratch4",
+   "uStack_68": "scratch5",
+   "uStack_70": "scratch6",
+   "uStack_78": "scratch7"
+  }
+ },
+ "2f36b7c": {
+  "summary": "Plays status animations for each current trait on summon or enchantment and applies special trait effects like drop pod stats and ability to act.",
+  "renames": {
+   "auVar10": "obscuredBoolValue",
+   "iVar1": "traitId",
+   "lStack_70": "enumeratorCurrent",
+   "lVar7": "currentTraitEntry",
+   "puVar5": "unused1",
+   "uStack_78": "scratch1",
+   "uStack_80": "traitEnumerator",
+   "uStack_84": "scratch2",
+   "uStack_88": "fakeValueFlag",
+   "uStack_90": "initedFlag",
+   "uVar3": "warningMessage",
+   "uVar4": "hasNext",
+   "uVar6": "unused2"
+  }
+ },
+ "2f36f04": {
+  "summary": "Resets summon sickness and recomputes whether the unit can act or attack, updating the attack-ready indicator.",
+  "renames": {
+   "auVar5": "canActValue"
+  }
+ },
+ "2f37000": {
+  "summary": "Sets the card state to in play and updates card visuals, highlight and trait icons.",
+  "renames": {
+   "uVar2": "createdByIsNull"
+  }
+ },
+ "2f3702c": {
+  "summary": "Sets the card state to in hand and updates card visuals, highlight and trait icons.",
+  "renames": {
+   "uVar2": "createdByIsNull"
+  }
+ },
+ "2f37058": {
+  "summary": "Resolves a non-targeted spell: triggers its effect, broadcasts it, then sends it to the cemetery or deactivates it if ephemeral.",
+  "renames": {
+   "plVar8": "slotPtr"
+  }
+ },
+ "2f37110": {
+  "summary": "Returns whether the card was played on the current turn.",
+  "renames": {
+   "auVar4_x1": "methodInfo",
+   "iVar2": "turnCounterValue",
+   "uStack_50": "fakeValueCopy",
+   "uStack_58": "initedCopy",
+   "uStack_60": "turnCounterCopy"
+  }
+ },
+ "2f36a1c": {
+  "summary": "Returns whether the card was drawn on the current turn.",
+  "renames": {
+   "auVar4_x1": "methodInfo",
+   "iVar2": "turnCounterValue",
+   "uStack_50": "fakeValueCopy",
+   "uStack_58": "initedCopy",
+   "uStack_60": "turnCounterCopy"
+  }
+ },
+ "2f371b0": {
+  "summary": "Resolves a targeted spell: triggers effects, handles synapse on friendly targets, then sends the spell to the cemetery.",
+  "renames": {
+   "plVar9": "slotPtr"
+  }
+ },
+ "2f37548": {
+  "summary": "Runs the synapse card's effect against each unit adjacent to this card.",
+  "renames": {
+   "uVar1": "conditionResult"
+  }
+ },
+ "2f376d0": {
+  "summary": "Triggers draw-related abilities on this card when a card is drawn, including armed trap handling.",
+  "renames": {
+   "uVar2": "isSelf"
+  }
+ },
+ "2f37840": {
+  "summary": "Triggers the artifice ability when a friendly tactic is played.",
+  "renames": {
+   "bVar1": "hasArtifice"
+  }
+ },
+ "2f378c8": {
+  "summary": "Checks whether a target is valid for the card's active ability.",
+  "renames": {
+   "uVar2": "hasActiveAbilityRef"
+  }
+ },
+ "2f37964": {
+  "summary": "Cancels an active ability, returns the card to in-play state and recomputes can-act and can-attack flags.",
+  "renames": {
+   "auVar5": "canActValue"
+  }
+ },
+ "2f37d84": {
+  "summary": "Highlights blood thirst on the card UI and plays trigger animations for the blood thirst trait effects.",
+  "renames": {
+   "lVar4": "displayClass",
+   "lVar9_3": "innerClosure",
+   "plVar11": "closureFieldPtr",
+   "plVar12": "effectEntryPtr"
+  }
+ },
+ "2f37dbc": {
+  "summary": "Creates the swarm icon if needed and activates it with sound and tween resets.",
+  "renames": {
+   "lVar5_4": "swarmIcon",
+   "plVar1": "swarmInstanceRef",
+   "uVar2": "killAllArg",
+   "uVar3": "hasInstance"
+  }
+ },
+ "2f2dcf0": {
+  "summary": "Hides the swarm icon with a fade and move-back tween.",
+  "renames": {
+   "uVar1": "hasSwarmIcon"
+  }
+ },
+ "2f37cdc": {
+  "summary": "Builds a blood thirst highlight battle action and queues it as an instant action.",
+  "renames": {
+   "alStack_118": "actionCardRef",
+   "auStack_220": "actionCopy",
+   "auStack_320": "queuedAction",
+   "uStack_120": "actionHeader"
+  }
+ },
+ "2f37f5c": {
+  "summary": "Returns the card highlight to its regular color with an animated or immediate transition.",
+  "renames": {
+   "puVar5": "colorChangeAnimRef"
+  }
+ },
+ "2f35124": {
+  "summary": "Puts the card in attack-aiming state, starts attack targeting and launches the prepare-attack coroutine.",
+  "renames": {
+   "auVar6": "thrownResult",
+   "auVar6_x1": "thrownExtra",
+   "unaff_x19": "pendingException",
+   "unaff_x20": "savedThis",
+   "unaff_x21": "unused1",
+   "unaff_x30": "unusedReturnAddr"
+  }
+ },
+ "2f38198": {
+  "summary": "Cancels an attack in progress, clearing pending damage and restarting the prepare-attack coroutine, logging errors in dev mode.",
+  "renames": {
+   "auVar10": "thrownResult",
+   "auVar10_x1": "thrownExtra",
+   "puVar3": "unused2",
+   "uVar1": "unused3",
+   "uVar4": "playerInitiatedCopy",
+   "uVar4_2": "devToolsEnabled",
+   "unaff_x19": "pendingException",
+   "unaff_x20": "savedThis",
+   "unaff_x21": "unused1",
+   "unaff_x30": "unusedReturnAddr"
+  }
+ },
+ "2f38320": {
+  "summary": "Finishes an active ability, granting faith for pray under alternative trait logic, then runs the prepare-attack coroutine.",
+  "renames": {
+   "apcStack_20": "savedRegisters",
+   "auVar6": "thrownResult",
+   "auVar6_x1": "thrownExtra",
+   "unaff_x19": "pendingException",
+   "unaff_x20": "savedThis",
+   "unaff_x21": "unused1",
+   "unaff_x30": "unusedReturnAddr"
+  }
+ },
+ "2f383c4": {
+  "summary": "Plays landing shake, sound and spawns landing particles at the card position.",
+  "renames": {
+   "fVar6": "positionX",
+   "lVar4": "soundManager"
+  }
+ },
+ "2f38668": {
+  "summary": "Returns whether the card and its game object still exist so an animation can continue.",
+  "renames": {
+   "uVar2": "isValid"
+  }
+ },
+ "2f388a8": {
+  "summary": "Computes a rotation for the movement disappear animation by lerping toward an angle-axis rotation.",
+  "renames": {
+   "auVar2": "resultRotation",
+   "auVar2_part4": "resultPart4",
+   "auVar2_x1": "resultPart2",
+   "param_10": "animDef",
+   "param_8": "animCurve",
+   "uVar1": "identityQuat",
+   "uVar3": "zeroPart1",
+   "uVar4": "zeroPart2"
+  }
+ },
+ "2f38a4c": {
+  "summary": "Plays attack shake, sound and hit particle effects sized by unit size at the anchor.",
+  "renames": {
+   "param_5": "owner",
+   "param_6": "spawnAnchor",
+   "plVar5": "audioCuePtr",
+   "puVar6": "particlePtr",
+   "uVar11": "directionCopy",
+   "uVar2": "hasParticle",
+   "uVar7": "particlePrefab"
+  }
+ },
+ "2f37ee0": {
+  "summary": "Returns the transform where effects should be anchored depending on card state.",
+  "renames": {
+   "lVar6_3": "opExplicitValue"
+  }
+ },
+ "2f38f80": {
+  "summary": "Plays the sneak attack trigger animation and its sound cue through the sound manager.",
+  "renames": {
+   "alStack_78": "audioSourceBuf",
+   "auVar15": "audioFlag",
+   "auVar15_x1": "clipValue",
+   "lStack_98": "savedSoundManager",
+   "lStack_a0": "savedAudioSource",
+   "lVar5_2": "soundManager2",
+   "pcStack_b0": "savedFunc",
+   "pcStack_c0": "savedFunc2",
+   "puStack_a8": "savedAudioCue",
+   "puVar7": "zeroVectorStatics",
+   "puVar8": "zeroVectorStatics2",
+   "this_01": "soundManager",
+   "uStack_88": "scratch1",
+   "uStack_90": "scratch2",
+   "uStack_c8": "scratch3",
+   "uStack_d0": "savedOffsetZ",
+   "uStack_d8": "savedOffsetY",
+   "uStack_e0": "savedZeroVector",
+   "uStack_e8": "scratch4",
+   "uStack_f0": "scratch5",
+   "uVar13": "offsetZ",
+   "uVar14": "offsetZ2",
+   "uVar3": "hasAudioSource"
+  }
+ },
+ "2f390ec": {
+  "summary": "Restores the card's position, rotation and scale after an attack and triggers blood thirst if it survives.",
+  "renames": {
+   "auVar5": "isNull",
+   "iVar2": "healthValue",
+   "puVar4": "quaternionStatics",
+   "uStack_50": "fakeValueCopy",
+   "uStack_58": "initedCopy",
+   "uStack_60": "healthCopy"
+  }
+ },
+ "2f392b0": {
+  "summary": "Pushes the card back with a punch tween away from the attacker and returns it to position afterwards.",
+  "renames": {
+   "fVar6": "deltaX",
+   "fVar7": "directionY",
+   "pfVar4": "vector3Statics"
+  }
+ },
+ "2f39680": {
+  "summary": "Plays a body animation clip on the 3D animation controller, optionally disabling flying first.",
+  "renames": {
+   "bVar2": "hasClip",
+   "lVar8_3": "oldDelegate",
+   "lVar8_5": "currentDelegate",
+   "plVar7": "flyingEventPtr",
+   "uVar1": "actionTypeInfo"
+  }
+ },
+ "2f396a0": {
+  "summary": "Moves the card back to its original local position in play if it is not already there.",
+  "renames": {
+   "uVar1": "alreadyInPosition"
+  }
+ },
+ "2f397cc": {
+  "summary": "Grants the opponent a skull when the hero's health drops and it is not dying from pending damage.",
+  "renames": {
+   "iVar2_2": "healthValue",
+   "uStack_60": "fakeValueCopy",
+   "uStack_68": "initedCopy",
+   "uStack_70": "healthCopy"
+  }
+ },
+ "2f3996c": {
+  "summary": "Absorbs damage into bastion effects and trait value, returning the remaining bastion amount.",
+  "renames": {
+   "uVar4_2": "bastionCopy"
+  }
+ },
+ "2f3826c": {
+  "summary": "Clears the pending damage list (decompiler output is mostly inlined array helper noise).",
+  "renames": {
+   "auVar26_x1": "thrownExtra",
+   "iVar6": "interfaceOffset",
+   "lVar21": "searchValue",
+   "lVar22_3": "arrayObject",
+   "lVar23_2": "reverseIndex",
+   "pcVar25": "lastIndexOfFn",
+   "plVar17_3": "elementPtr",
+   "puVar1": "savedFramePtr",
+   "puVar15": "errorMessage",
+   "puVar2": "frameSlotPtr1",
+   "puVar3": "frameSlotPtr2",
+   "puVar4": "frameSlotPtr3",
+   "uVar18": "matchResult",
+   "uVar24": "savedSearchValue",
+   "uVar9": "startOffset",
+   "unaff_x19": "unused1",
+   "unaff_x20": "unused2",
+   "unaff_x20_2": "savedArray",
+   "unaff_x21": "unused3",
+   "unaff_x22": "unused4",
+   "unaff_x23": "unused5",
+   "unaff_x24": "unused6",
+   "unaff_x30": "unused7"
+  }
+ },
+ "2f39b3c": {
+  "summary": "Appends a damage entry to the pending damage list, creating the list if needed.",
+  "renames": {
+   "extraout_x1": "unused1",
+   "lVar4": "addMethod",
+   "lVar5": "existingList",
+   "lVar5_3": "targetList",
+   "lVar6": "itemsArray",
+   "plVar3": "slotPtr",
+   "plVar7": "pendingDamageRef",
+   "uVar1": "oldSize"
+  }
+ },
+ "2f2f848": {
+  "summary": "Returns whether the card's pending damage is enough to kill it, by collecting damage values and types.",
+  "renames": {
+   "iVar4": "healthValue",
+   "iVar4_2": "pendingIndex",
+   "uStack_70": "fakeValueCopy",
+   "uStack_78": "initedCopy",
+   "uStack_80": "healthCopy"
+  }
+ },
+ "2f39c84": {
+  "summary": "Simulates applying a list of pending damage values to the card, accounting for armour, dropPod, survivor, bastion and vulnerable, to see if it dies.",
+  "renames": {
+   "bVar1": "survivorAbsorbed",
+   "bVar12": "dropPodDestroyed",
+   "iVar3": "healthValue",
+   "iVar3_2": "survivorValue",
+   "iVar3_3": "dropPodHealthRemaining",
+   "iVar4_3": "armourForVulnerable",
+   "iVar4_5": "healthValue2",
+   "iVar4_7": "healthValue3",
+   "iVar5": "armourValue",
+   "iVar5_2": "effectiveDamage",
+   "iVar6_2": "healthValue4",
+   "iVar6_5": "remainingDamage",
+   "iVar6_6": "dropPodDamage",
+   "uStack_b0": "fakeFlag1",
+   "uStack_b8": "initedFlag1",
+   "uStack_c0": "valueCopy1",
+   "uStack_d0": "fakeFlag2",
+   "uStack_d8": "initedFlag2",
+   "uStack_e0": "valueCopy2",
+   "uStack_110": "fakeFlag3",
+   "uStack_118": "initedFlag3",
+   "uStack_120": "valueCopy3",
+   "uStack_130": "fakeFlag4",
+   "uStack_138": "initedFlag4",
+   "uStack_140": "valueCopy4",
+   "uStack_150": "fakeFlag5",
+   "uStack_158": "initedFlag5",
+   "uStack_160": "valueCopy5",
+   "uStack_170": "fakeFlag6",
+   "uStack_178": "initedFlag6",
+   "uStack_180": "valueCopy6",
+   "uStack_190": "fakeFlag7",
+   "uStack_198": "initedFlag7",
+   "uStack_1a0": "valueCopy7",
+   "uStack_1b0": "fakeFlag8",
+   "uStack_1b8": "initedFlag8",
+   "uStack_1c0": "valueCopy8"
+  }
+ },
+ "2f3a3c8": {
+  "summary": "Appends a heal entry to the pending healing list, creating the list if needed.",
+  "renames": {
+   "extraout_x1": "unused1",
+   "lVar5": "addMethod",
+   "puVar7": "slotPtr"
+  }
+ },
+ "2f3a51c": {
+  "summary": "Returns whether the total pending healing is enough to restore the card to full health.",
+  "renames": {
+   "bVar4": "hasMore",
+   "iVar5": "totalHealing"
+  }
+ },
+ "2f3a9f8": {
+  "summary": "Resolves triggers when a unit attacks: unit attack, mob, regiment, strike triggers, removes until-next-attack effects and clears ambush.",
+  "renames": {
+   "auVar13_x1": "unused1",
+   "iVar3": "textureHeight",
+   "uStack_48": "scratch1",
+   "uStack_b0": "savedEnemyManager",
+   "uStack_b8": "savedPlayerManager",
+   "uStack_c0": "savedBattleCards",
+   "uVar5": "conditionFlag"
+  }
+ }
+}

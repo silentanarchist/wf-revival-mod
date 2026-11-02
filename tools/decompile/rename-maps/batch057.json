@@ -1,0 +1,299 @@
+{
+ "2f3aeac": {
+  "summary": "Toggles a card's ambush state: shows hidden ambush visuals for the opponent, or reveals the card, restores stats and triggers its Ambush ability.",
+  "renames": {
+   "iVar2": "obscuredValue",
+   "iVar3": "textureHeight",
+   "uVar8": "hasCardSprite",
+   "uStack_70": "armourSnapshot",
+   "uStack_68": "armourInitedFlag",
+   "uStack_60": "armourFakeFlag"
+  }
+ },
+ "2f3b20c": {
+  "summary": "Handles reactions to damage dealt: syphon, poisonous, rage, cruelty, ecstasy, damage triggers, ambush reveal, low-life invulnerability and concussive stun.",
+  "renames": {
+   "iVar3": "obscuredValue",
+   "uVar4": "isSelfAttacker",
+   "auVar7": "isDamagedSelf",
+   "auVar7_x1": "unused1",
+   "extraout_x1": "unused2",
+   "uStack_c0": "healthSnapshot",
+   "uStack_b8": "healthInitedFlag",
+   "uStack_b0": "healthFakeFlag",
+   "uStack_80": "armourSnapshot",
+   "uStack_78": "armourInitedFlag",
+   "uStack_70": "armourFakeFlag",
+   "iVar2_5": "healthValue"
+  }
+ },
+ "2f3b858": {
+  "summary": "Returns whether this card's ecstasy trait should trigger given its current health and the health it would have after damage.",
+  "renames": {
+   "uVar4": "isOtherCard",
+   "iVar2": "currentHealthValue",
+   "uStack_70": "healthSnapshot",
+   "uStack_68": "healthInitedFlag",
+   "uStack_60": "healthFakeFlag"
+  }
+ },
+ "2f3bba0": {
+  "summary": "Resolves a card being played: fires play triggers, checks combo and summon effects, records turn played, and triggers swarm with a matching right neighbour.",
+  "renames": {
+   "uVar2": "turnCounterValue",
+   "uVar4": "isSelfPlayed",
+   "uStack_70": "turnSnapshot",
+   "uStack_68": "turnInitedFlag",
+   "uStack_60": "turnFakeFlag"
+  }
+ },
+ "2f3c08c": {
+  "summary": "Spawns the swarm visual effect at this card's position and wires a callback to finish the swarm buff on another unit.",
+  "renames": {
+   "this_00": "closure",
+   "uVar5": "isInstantiated",
+   "in_s1": "unused1",
+   "in_s2": "unused2"
+  }
+ },
+ "2f36870": {
+  "summary": "Destroys the reflected frame object on the card UI if one exists.",
+  "renames": {
+   "uVar2": "hasReflectedFrame"
+  }
+ },
+ "2f3c32c": {
+  "summary": "Processes the tide trait: plays an animation and spawns an ephemeral copy of this card in hand with copied effects and a decremented tide counter.",
+  "renames": {
+   "uVar4": "boolFlag",
+   "in_s1": "unused1",
+   "uVar12": "unused2",
+   "lVar7_3": "currentEffect",
+   "lVar5_2": "effectToAdd"
+  }
+ },
+ "2f3debc": {
+  "summary": "Processes the companion trait: plays an animation and adds an ephemeral companion copy to hand with a decremented companion counter.",
+  "renames": {
+   "uVar5": "hasMobileVariables",
+   "in_s1": "unused1",
+   "uVar11": "unused2"
+  }
+ },
+ "2f3e0c0": {
+  "summary": "Returns whether this card should spawn a companion, either via the companion trait with a related card or a positive counter.",
+  "renames": {
+   "uVar2": "hasRelatedCard"
+  }
+ },
+ "2f3bd94": {
+  "summary": "Fires unit-summoned triggers (other unit summoned, this unit summoned, faith, support, uprising) depending on who was played.",
+  "renames": {
+   "iVar3": "turnCounterValue",
+   "uVar4": "boolScratch",
+   "uStack_70": "turnSnapshot",
+   "uStack_68": "turnInitedFlag",
+   "uStack_60": "turnFakeFlag",
+   "iVar2_4": "playedCardType"
+  }
+ },
+ "2f3e1e0": {
+  "summary": "Resolves a card's active ability, handling loading, oath double-triggers, and then refreshes trait icons on the card UI (inlined helpers included).",
+  "renames": {
+   "uVar9": "devToolsEnabled",
+   "uVar1": "unused1",
+   "puVar14": "unused2",
+   "extraout_x1_00": "unused3",
+   "extraout_x1_01": "unused4",
+   "lVar7": "soundManager",
+   "lVar12_3": "displayClass",
+   "lVar15_4": "iconListPtr",
+   "uVar9_3": "valueScratch",
+   "bVar3": "iconFlag",
+   "unaff_x26": "unused5",
+   "unaff_x27": "unused6",
+   "unaff_x28": "unused7",
+   "uVar13": "boolResult",
+   "auVar21": "throwResult",
+   "auVar21_x1": "unused8",
+   "extraout_w1": "unused9",
+   "lVar7_3": "cleanDisplayClass",
+   "pcStack_90": "scratch1",
+   "pcStack_f0": "scratch2",
+   "uStack_80": "scratch3",
+   "plStack_78": "scratch4",
+   "lStack_70": "scratch5",
+   "lStack_68": "scratch6",
+   "plStack_b8": "scratch7",
+   "lStack_b0": "scratch8",
+   "lStack_a8": "scratch9",
+   "lStack_a0": "scratch10",
+   "uStack_98": "scratch11",
+   "uStack_110": "enumeratorCopy",
+   "puStack_108": "scratch12",
+   "uStack_100": "enumeratorKey",
+   "puStack_120": "scratch13",
+   "uStack_118": "scratch14"
+  }
+ },
+ "2f2f6b8": {
+  "summary": "Removes the drop pod trait with camera shake and UI refresh, then runs the death check on the unit.",
+  "renames": {
+   "iVar2": "obscuredValue",
+   "uStack_a0": "healthSnapshot",
+   "uStack_98": "healthInitedFlag",
+   "uStack_90": "healthFakeFlag",
+   "uStack_80": "dropPodSnapshot",
+   "uStack_78": "dropPodInitedFlag",
+   "uStack_70": "dropPodFakeFlag",
+   "auStack_34": "hasDamageInfoFlag"
+  }
+ },
+ "2f3eae8": {
+  "summary": "Removes the tainted (duplicitous) trait, refreshes UI text, then runs the death check on the unit.",
+  "renames": {
+   "iVar2": "obscuredValue",
+   "uStack_a0": "healthSnapshot",
+   "uStack_98": "healthInitedFlag",
+   "uStack_90": "healthFakeFlag",
+   "uStack_80": "dropPodSnapshot",
+   "uStack_78": "dropPodInitedFlag",
+   "uStack_70": "dropPodFakeFlag",
+   "auStack_34": "hasDamageInfoFlag"
+  }
+ },
+ "2f3eb10": {
+  "summary": "Activates the survivor trait: restores health, removes the trait, plays effects, fires the Survivor trigger and marks survivor spent.",
+  "renames": {
+   "this_00": "soundManager",
+   "uStack_44": "newHealth",
+   "uStack_3c": "healthInitedFlag",
+   "uStack_34": "healthFakeFlag"
+  }
+ },
+ "2f3ed70": {
+  "summary": "Turns the card into a remnant with fixed health and removes all its current traits.",
+  "renames": {
+   "uVar3": "traitName",
+   "uVar1": "remnantHealth",
+   "uStack_50": "flagScratch"
+  }
+ },
+ "2f3ef58": {
+  "summary": "Turns the card back from a remnant and refreshes the health and armour displays and ambush visibility.",
+  "renames": {
+   "iVar2": "obscuredValue",
+   "iVar3_2": "healthCopy",
+   "iVar3_4": "armourValue2",
+   "iVar4_2": "armourValue3",
+   "uStack_c0": "armourSnapshot",
+   "uStack_b8": "armourInitedFlag",
+   "uStack_b0": "armourFakeFlag",
+   "uStack_80": "healthSnapshot",
+   "uStack_78": "healthInitedFlag",
+   "uStack_70": "healthFakeFlag"
+  }
+ },
+ "2f3f34c": {
+  "summary": "Triggers the sacrifice trait: plays effects, fires Sacrifice, and notifies all other units and both hands.",
+  "renames": {
+   "uVar4": "isNotSelf",
+   "lVar6": "soundManager"
+  }
+ },
+ "2f3f4c4": {
+  "summary": "Triggers the codex ability of this card against a target, defaulting to itself.",
+  "renames": {
+   "uVar2": "hasTarget"
+  }
+ },
+ "2f3fa10": {
+  "summary": "Checks whether a unit is dead and handles drop pod destruction, survivor, remnant transformation or marking it waiting to die.",
+  "renames": {
+   "iVar2": "obscuredValue",
+   "uStack_a0": "healthSnapshot",
+   "uStack_98": "healthInitedFlag",
+   "uStack_90": "healthFakeFlag",
+   "uStack_80": "dropPodSnapshot",
+   "uStack_78": "dropPodInitedFlag",
+   "uStack_70": "dropPodFakeFlag",
+   "auStack_34": "hasDamageInfoFlag"
+  }
+ },
+ "2f3ffa0": {
+  "summary": "Queues a backlash death action for the unit, recording the turn it died.",
+  "renames": {
+   "auStack_150": "actionBuffer",
+   "alStack_140": "actionCardSlot",
+   "lStack_148": "actionActingCard",
+   "iStack_60": "actionDeathType",
+   "uStack_5b": "disableBacklashFlag",
+   "auStack_290": "actionCopy1",
+   "auStack_390": "actionCopy2",
+   "uStack_190": "turnSnapshot",
+   "uStack_188": "turnInitedFlag",
+   "uStack_180": "turnFakeFlag"
+  }
+ },
+ "2f401c4": {
+  "summary": "Queues an action that transforms this card into the warlord's starting weapon, logging an error if none is defined.",
+  "renames": {
+   "auStack_130": "actionBuffer",
+   "alStack_120": "actionCardSlot",
+   "auStack_a8": "actionWeaponSlot",
+   "auStack_230": "actionCopy1",
+   "auStack_330": "actionCopy2",
+   "uStack_44": "scratch1",
+   "uVar5": "unused1",
+   "puVar4": "unused2"
+  }
+ },
+ "2f40388": {
+  "summary": "Queues a unit death action for non-hero cards; for warlords it only logs that no death action is added.",
+  "renames": {
+   "auStack_140": "actionBuffer",
+   "alStack_130": "actionCardSlot",
+   "iStack_50": "actionDeathType",
+   "lStack_138": "actionActingCard",
+   "auStack_240": "actionCopy",
+   "uVar5": "devToolsEnabled",
+   "uVar1": "unused1",
+   "puVar6": "unused2"
+  }
+ },
+ "2f404bc": {
+  "summary": "Marks the unit as waiting to die if it is in play, otherwise logs a warning.",
+  "renames": {
+   "uStack_30": "scratch1",
+   "uVar6_2": "stateName",
+   "uVar1": "unused1",
+   "uVar4": "devToolsEnabled",
+   "puVar5": "unused2"
+  }
+ },
+ "2f405ec": {
+  "summary": "Sets the card state to transforming, logging warnings or errors depending on its current state.",
+  "renames": {
+   "uStack_38": "stateType",
+   "uStack_30": "scratch1"
+  }
+ },
+ "2f40778": {
+  "summary": "Handles a minion's death: hunt mark damage and healing, death/other-death triggers, unstable, and slay-style ability triggers by death type.",
+  "renames": {
+   "uVar4": "boolScratch",
+   "uVar8": "isSelfDead",
+   "lVar2": "unused1"
+  }
+ },
+ "2f40ca0": {
+  "summary": "Resolves a dead card action: triggers death effects, slay, requiem and sacrifice, or ends the battle if the warlord has died.",
+  "renames": {
+   "iVar4_3": "heroHealth",
+   "lVar6": "unused1",
+   "uStack_80": "healthSnapshot",
+   "uStack_78": "healthInitedFlag",
+   "uStack_70": "healthFakeFlag"
+  }
+ }
+}

@@ -1,0 +1,181 @@
+{
+ "326ebac": {
+  "summary": "Returns true if any ability in the list can be played with the given manager and ability data.",
+  "renames": {
+   "bVar3": "hasMoreOrFound"
+  }
+ },
+ "326ed2c": {
+  "summary": "Checks whether any alternate art card can be shown; the decompiled tail oddly builds a Card_Name/ localization term string.",
+  "renames": {
+   "iVar1": "prefixLength",
+   "lRam0000000006b720f0": "stringClassRef",
+   "lVar3_3": "nameId",
+   "lVar5_2": "termResult",
+   "plVar6": "idRef"
+  }
+ },
+ "326ee0c": {
+  "summary": "Builds the localization term 'Card_Name/' plus the card's reference name id or unique id.",
+  "renames": {
+   "iVar1": "prefixLength",
+   "lRam0000000006b720f0": "stringClassRef",
+   "lVar2": "prefix",
+   "lVar4": "termResult",
+   "lVar5": "nameId",
+   "plVar6": "idRef"
+  }
+ },
+ "326f184": {
+  "summary": "Returns the localized card description concatenated with the localized ability text for this card.",
+  "renames": {
+   "iVar1": "firstLength",
+   "lRam0000000006b720f0": "stringClassRef",
+   "lVar5": "combined",
+   "uVar2": "emptyString"
+  }
+ },
+ "326f360": {
+  "summary": "Gets the localized card description and expands modular, card-name, keyword, trait and mana-sprite placeholders in it.",
+  "renames": {
+   "alStack_a8": "traitBox",
+   "auVar15": "hasPlayerData",
+   "auVar16": "caughtException",
+   "iStack_74": "manaIndex",
+   "iStack_98": "traitValue",
+   "iVar12": "lengthOrTrait",
+   "lStack_70": "scratch1",
+   "lStack_90": "pendingException",
+   "lVar1_3": "disposableClass1",
+   "lVar1_7": "disposableClass2",
+   "lVar1_9": "disposableClass3",
+   "plStack_80": "disposableSlot",
+   "plVar3_4": "matchObj1",
+   "plVar3_7": "traitObj",
+   "plVar3_10": "matchObj3",
+   "pplStack_88": "enumeratorRef",
+   "puVar2": "cardIdRef",
+   "lVar10_3": "displayClass",
+   "uVar5": "regexPattern",
+   "uVar5_5": "playerDataManager"
+  }
+ },
+ "326f564": {
+  "summary": "Gets the localized ability name and expands modular, card-name, keyword, trait and mana placeholders in it.",
+  "renames": {
+   "alStack_a8": "traitBox",
+   "auVar15": "hasPlayerData",
+   "auVar16": "caughtException",
+   "iStack_74": "manaIndex",
+   "iStack_98": "traitValue",
+   "iVar12": "lengthOrTrait",
+   "lStack_70": "scratch1",
+   "lStack_90": "pendingException",
+   "lVar1_3": "disposableClass1",
+   "lVar1_7": "disposableClass2",
+   "lVar1_9": "disposableClass3",
+   "plStack_80": "disposableSlot",
+   "plVar3_4": "matchObj1",
+   "plVar3_7": "traitObj",
+   "plVar3_10": "matchObj3",
+   "pplStack_88": "enumeratorRef",
+   "puVar2": "cardIdRef",
+   "lVar9_3": "displayClass",
+   "uVar11_4": "playerDataManager"
+  }
+ },
+ "326f664": {
+  "summary": "Gets the localized ability description (with suffix) and expands modular, card-name, keyword, trait and mana placeholders.",
+  "renames": {
+   "alStack_a8": "traitBox",
+   "auVar15": "hasPlayerData",
+   "auVar16": "caughtException",
+   "iStack_74": "manaIndex",
+   "iStack_98": "traitValue",
+   "iVar12": "lengthOrTrait",
+   "lStack_70": "scratch1",
+   "lStack_90": "pendingException",
+   "lVar1_3": "disposableClass1",
+   "lVar1_7": "disposableClass2",
+   "lVar1_9": "disposableClass3",
+   "plStack_80": "disposableSlot",
+   "plVar3_4": "matchObj1",
+   "plVar3_7": "traitObj",
+   "plVar3_10": "matchObj3",
+   "pplStack_88": "enumeratorRef",
+   "puVar2": "cardIdRef",
+   "lVar10_3": "displayClass",
+   "uVar5": "regexPattern",
+   "uVar5_5": "playerDataManager"
+  }
+ },
+ "326f7ac": {
+  "summary": "Gets the localized ability description with the siege part removed and expands placeholder tokens in the text.",
+  "renames": {
+   "alStack_a8": "traitBox",
+   "auVar15": "hasPlayerData",
+   "auVar16": "caughtException",
+   "iStack_74": "manaIndex",
+   "iStack_98": "traitValue",
+   "iVar12": "lengthOrTrait",
+   "lStack_70": "scratch1",
+   "lStack_90": "pendingException",
+   "lVar1_3": "disposableClass1",
+   "lVar1_7": "disposableClass2",
+   "lVar1_9": "disposableClass3",
+   "plStack_80": "disposableSlot",
+   "plVar3_4": "matchObj1",
+   "plVar3_7": "traitObj",
+   "plVar3_10": "matchObj3",
+   "pplStack_88": "enumeratorRef",
+   "puVar2": "cardIdRef",
+   "lVar10_3": "displayClass",
+   "uVar5": "regexPattern",
+   "uVar5_5": "playerDataManager"
+  }
+ },
+ "326f998": {
+  "summary": "Gets the localized targeted-ability text and expands modular, card-name, keyword, trait and mana placeholders.",
+  "renames": {
+   "alStack_a8": "traitBox",
+   "auVar15": "hasPlayerData",
+   "auVar16": "caughtException",
+   "iStack_74": "manaIndex",
+   "iStack_98": "traitValue",
+   "iVar12": "lengthOrTrait",
+   "lStack_70": "scratch1",
+   "lStack_90": "pendingException",
+   "lVar1_3": "disposableClass1",
+   "lVar1_7": "disposableClass2",
+   "lVar1_9": "disposableClass3",
+   "plStack_80": "disposableSlot",
+   "plVar3_4": "matchObj1",
+   "plVar3_7": "traitObj",
+   "plVar3_10": "matchObj3",
+   "pplStack_88": "enumeratorRef",
+   "puVar2": "cardIdRef",
+   "lVar9_3": "displayClass",
+   "uVar11_4": "playerDataManager"
+  }
+ },
+ "326ff58": {
+  "summary": "Looks up the localized custom intro chat message for this card by message type and opponent army.",
+  "renames": {
+   "iStack_40": "armyScratch",
+   "uStack_48": "scratch1"
+  }
+ },
+ "3270170": {
+  "summary": "Returns true if any ability logic on this card's abilities has type 0x14 (cumulative mutation).",
+  "renames": {
+   "auVar6_x1": "methodScratch",
+   "auVar2_x1": "unused1"
+  }
+ },
+ "326fc00": {
+  "summary": "Returns the chat messages reference id, else custom intro reference id if allowed, else the card's unique id.",
+  "renames": {
+   "plVar2": "chatIdRef"
+  }
+ }
+}

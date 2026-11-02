@@ -1,0 +1,407 @@
+{
+ "2f6b570": {
+  "summary": "Finds the minion that sits immediately to the right of a given minion across the left and right minion lists.",
+  "renames": {
+   "auVar10": "checkFailResult",
+   "auVar10_part8": "checkFailIndex",
+   "auVar9": "castCheckResult",
+   "auVar9_x1": "castCheckObj",
+   "puVar4": "itemSlotPtr",
+   "uVar3": "isRefMinion"
+  }
+ },
+ "2f6b6fc": {
+  "summary": "Returns whether a minion's board position would be at the left of the given target position index.",
+  "renames": {
+   "bVar1": "isAtLeft",
+   "uVar4": "isRefMinionHero"
+  }
+ },
+ "2f6b91c": {
+  "summary": "Looks up a card in the left or right minion lists and returns its slot position on the board, logging an error if missing.",
+  "renames": {
+   "auVar7": "resultPos",
+   "auVar7_part4": "resultPosHigh",
+   "auVar7_x1": "resultExtra",
+   "uVar3": "isSameCard",
+   "uVar6": "zeroVector",
+   "uVar8": "zeroExtra"
+  }
+ },
+ "2f6bae8": {
+  "summary": "Hides the card shadow object by moving it to the zero position.",
+  "renames": {
+   "uVar1": "hasShadow",
+   "uVar5": "zeroVector2",
+   "uVar6": "zeroVector3"
+  }
+ },
+ "2f69f34": {
+  "summary": "Repositions all left and right minions to their slot positions and returns the longest resulting animation time.",
+  "renames": {
+   "fVar12": "maxAnimDuration",
+   "fVar1_2": "fakeValueLeft",
+   "fVar1_3": "leftAnimDuration",
+   "fVar1_4": "fakeValueRight",
+   "fVar1_5": "rightAnimDuration",
+   "in_s1": "slotPosY",
+   "uVar10": "slotPosZ",
+   "uVar5": "hasLeftMinion",
+   "uVar9": "nextSlotPosY"
+  }
+ },
+ "2f6bc7c": {
+  "summary": "Scales a Vector3 board position by a manager value to adjust minion board position.",
+  "renames": {}
+ },
+ "2f6bc9c": {
+  "summary": "Checks whether any left or right minion is more than a small distance away from its slot position.",
+  "renames": {
+   "fVar6": "slotX",
+   "fVar7": "minionX",
+   "fVar8": "yDiff",
+   "in_s1": "slotY",
+   "uVar3": "hasMinion"
+  }
+ },
+ "2f6bef0": {
+  "summary": "Shifts existing minions aside to leave a gap while a new unit is dragged, and positions the card shadow in the closest slot.",
+  "renames": {
+   "fVar12": "hudCameraScaled",
+   "iVar1": "slotIndex",
+   "uVar10": "hudCameraPosBits",
+   "uVar11": "slotPosZ",
+   "uVar2": "closestSlot",
+   "uVar3": "hudCameraValue",
+   "uVar3_2": "hasShadowObject"
+  }
+ },
+ "2f69d00": {
+  "summary": "Converts a slot position to a board position by adding a scaled up vector.",
+  "renames": {}
+ },
+ "2f6bb40": {
+  "summary": "Sets the card shadow's local position and optionally its rotation.",
+  "renames": {
+   "uVar1": "hasShadow"
+  }
+ },
+ "2f6c0ec": {
+  "summary": "Activates every left and right minion for the given turn and rebuilds the occupation lists.",
+  "renames": {
+   "auVar11_x1": "turnFlagCopy",
+   "lVar5_5": "staticsPtr",
+   "uVar2_3": "isPlayerManager",
+   "uVar6": "isPlayerTurnCopy"
+  }
+ },
+ "2f6c1d0": {
+  "summary": "Removes a dead minion from the left or right minion lists and rebuilds occupation lists.",
+  "renames": {
+   "auVar11_2": "isDeadLeft",
+   "auVar11_8": "isDeadRight",
+   "auVar11_x1": "savedCard",
+   "lVar6_3": "staticsPtr",
+   "uVar2_3": "isCurrentDropPod"
+  }
+ },
+ "2f6c344": {
+  "summary": "Collects all in-play left and right minions into a list ordered by a key, with large amounts of inlined LINQ generic code.",
+  "renames": {
+   "alStack_250": "stackFrame",
+   "auStack_1fc": "flagBuffer",
+   "auStack_70": "savedResult70",
+   "auStack_90": "savedResult90",
+   "auStack_b0": "savedResultB0",
+   "auStack_d0": "savedResultD0",
+   "auStack_d0_x1": "savedResultD0High",
+   "auVar34": "unwindResult",
+   "auVar34_part8": "unwindState",
+   "auVar35": "catchResultA",
+   "auVar35_x1": "catchResultAHigh",
+   "auVar36": "catchResultB",
+   "auVar36_x1": "catchResultBHigh",
+   "lStack_128": "savedOrderBy",
+   "lStack_140": "savedList",
+   "lStack_150": "savedItems",
+   "lStack_1e8": "stackCanary",
+   "lStack_220": "caughtException",
+   "lStack_228": "lookupResult",
+   "lStack_230": "tempBuffer",
+   "lVar19_5": "klassPtrA",
+   "lVar21": "klassPtrB",
+   "lVar22": "klassPtrC",
+   "lVar5_2": "klassPtrD",
+   "lVar5_4": "klassPtrE",
+   "lVar6_10": "klassPtrF",
+   "lVar6_4": "rightListOrKlass",
+   "pcStack_100": "savedMethod100",
+   "pcStack_160": "savedMethod160",
+   "pcStack_60": "savedMethod60",
+   "pcStack_80": "savedMethod80",
+   "pcStack_a0": "savedMethodA0",
+   "pcStack_c0": "savedMethodC0",
+   "pcStack_e0": "savedMethodE0",
+   "pcVar28": "methodPtr",
+   "piVar25": "interfaceMapPtr",
+   "plStack_108": "enumeratorA",
+   "plStack_118": "caughtExceptionA",
+   "plStack_138": "savedEnumerator",
+   "plStack_148": "savedSource",
+   "plStack_168": "enumeratorB",
+   "plStack_178": "caughtExceptionB",
+   "plStack_208": "groupingResult",
+   "plStack_210": "enumeratorC",
+   "plStack_238": "savedKeySelector",
+   "plStack_240": "savedElementSelector",
+   "plVar10": "sourceB",
+   "plVar14": "catchHandlerResult",
+   "plVar16": "funcA",
+   "plVar16_3": "enumeratorD",
+   "plVar17": "tempClassA",
+   "plVar18": "classArgA",
+   "plVar18_3": "classArgB",
+   "plVar26": "genericContextC",
+   "plVar27": "genericContextB",
+   "plVar27_3": "tempClassC",
+   "plVar8": "sourceA",
+   "pplStack_110": "enumeratorRefA",
+   "pplStack_170": "enumeratorRefB",
+   "pplStack_218": "enumeratorRefC",
+   "pplVar23": "enumeratorRefPtr",
+   "puStack_1f0": "argSlot2",
+   "puStack_1f8": "argSlot0",
+   "puStack_1f8_2": "argSlot1",
+   "puVar12": "interfaceMethodPtr",
+   "puVar13": "paramNameStr",
+   "puVar20": "interfaceEntryPtr",
+   "puVar30": "tempValueA",
+   "puVar31": "tempValueB",
+   "puVar32": "tempValueC",
+   "puVar33": "tempValueD",
+   "uStack_130": "exceptionObj",
+   "uVar1": "isClassInitialized",
+   "uVar11": "keyValue",
+   "uVar24": "interfaceCount",
+   "uVar4": "keyResult",
+   "uVar9": "keyOrName",
+   "uVar9_3": "keyOrNameB"
+  }
+ },
+ "2f6c640": {
+  "summary": "Calls RemoveSwarm on every in-play left and right minion except the given exception card.",
+  "renames": {
+   "uVar4": "isNotException"
+  }
+ },
+ "2f6ca0c": {
+  "summary": "Counts the minions on the board, excluding those with the summonRift trait.",
+  "renames": {
+   "iVar3": "interactiveCount"
+  }
+ },
+ "2f6b7d8": {
+  "summary": "Returns the one-based index of a card, negative for the left list and positive for the right list, or 0 if not found.",
+  "renames": {
+   "uVar3": "isMatch"
+  }
+ },
+ "2f6cd48": {
+  "summary": "Returns the minion at a signed play index from the left or right list, logging a warning if the index is out of range.",
+  "renames": {
+   "auVar11": "castCheckResult",
+   "auVar11_x1": "castCheckObj",
+   "auVar12": "indexCheckResult",
+   "auVar12_part8": "indexCheckIndex",
+   "puVar10": "textOrSlotPtr",
+   "uStack_28": "nullCard",
+   "uStack_28_3": "savedCard",
+   "uStack_28_part4": "indexSlot",
+   "uVar4": "indexText",
+   "uVar7": "listIndex",
+   "uVar8": "savedIndex"
+  }
+ },
+ "2f6d0c0": {
+  "summary": "Sets the tooltip transform's position and stores it as the initial position.",
+  "renames": {}
+ },
+ "2f6d108": {
+  "summary": "Shows a mini tooltip with the given text and title at a position and activates its game object.",
+  "renames": {
+   "plVar1": "titleComponent",
+   "uVar3": "hasObject"
+  }
+ },
+ "2f6d220": {
+  "summary": "Deactivates the tooltip game object.",
+  "renames": {
+   "uVar2": "zeroArg"
+  }
+ },
+ "2f6d2b4": {
+  "summary": "Hides the tooltip once enough time has passed since it was last hovered.",
+  "renames": {
+   "fVar3": "currentTime",
+   "uVar2": "zeroArg"
+  }
+ },
+ "2f6d308": {
+  "summary": "Stores the target card, hides the mulligan text, updates button text and registers the change-card click listener.",
+  "renames": {
+   "lVar2": "addMethod",
+   "puVar6": "slotPtr",
+   "uVar1": "callCount"
+  }
+ },
+ "2f6d448": {
+  "summary": "Removes the change-card click listener from the button when destroyed.",
+  "renames": {
+   "iVar1": "runtimeCallCount",
+   "lVar9": "itemsArray",
+   "plVar4": "matchingCalls",
+   "uVar2": "matchCount",
+   "uVar6": "isMatch"
+  }
+ },
+ "2f6d4d8": {
+  "summary": "Toggles the target card's mulligan selection and re-localizes the replace/undo text, mostly inlined localization code.",
+  "renames": {
+   "auVar16_x1": "unusedArg",
+   "bVar15": "applyRtl",
+   "in_x3": "unusedArg3",
+   "lVar9_3": "primaryTermValue",
+   "uVar6": "currentChar"
+  }
+ },
+ "2f6d3cc": {
+  "summary": "Updates the mulligan button text to Undo or Replace by re-running the inlined localization process.",
+  "renames": {
+   "auVar16_x1": "unusedArg",
+   "bVar15": "applyRtl",
+   "in_x3": "unusedArg3",
+   "lVar9_3": "primaryTermValue",
+   "uVar6": "currentChar",
+   "this_00_2": "localizeComponent"
+  }
+ },
+ "2f6d59c": {
+  "summary": "Hides the mulligan text object and checks the buttons group.",
+  "renames": {
+   "auVar3_x1": "unusedMethod"
+  }
+ },
+ "2f6d5e0": {
+  "summary": "Shows mulligan UI with instructions and first/second turn text, then sets up a mulligan button for each card.",
+  "renames": {
+   "lStack_38": "currentCard",
+   "plVar1": "turnTerm",
+   "uStack_40": "enumeratorPad",
+   "uVar4": "hasNext"
+  }
+ },
+ "2f6da50": {
+  "summary": "Finishes the mulligan when not disconnected: hides UI, notifies the battle manager, and destroys mulligan buttons.",
+  "renames": {
+   "auVar12_x1": "unusedMethod",
+   "lStack_38": "currentButton",
+   "puVar7": "logMethod",
+   "uStack_40": "enumeratorPad",
+   "uVar2": "devToolsKey",
+   "uVar6": "hasNext",
+   "uVar6_2": "devToolsActive"
+  }
+ },
+ "2f6dac0": {
+  "summary": "Hides mulligan UI, tells the battle manager the mulligan is done, and destroys and clears mulligan buttons.",
+  "renames": {
+   "lStack_38": "currentButton",
+   "uStack_40": "enumeratorPad",
+   "uVar3": "hasNext"
+  }
+ },
+ "2f6df80": {
+  "summary": "Sets the mulligan button text to the seconds left counter.",
+  "renames": {
+   "iStack_24": "secondsLeft"
+  }
+ },
+ "2f6e010": {
+  "summary": "Toggles visibility of mulligan UI elements and fades the shade accordingly.",
+  "renames": {
+   "auVar7_2": "hasShadeSprite",
+   "auVar7_x1": "unusedMethod"
+  }
+ },
+ "2f6e04c": {
+  "summary": "Shows the mulligan UI and restores the shade alpha after releasing the hide button.",
+  "renames": {
+   "auVar6": "hasShadeSprite",
+   "auVar6_x1": "unusedMethod"
+  }
+ },
+ "2f6dcb8": {
+  "summary": "Shows or hides mulligan text, button and cards and sets the shade alpha accordingly.",
+  "renames": {
+   "auVar6": "hasShadeSprite",
+   "auVar6_x1": "unusedMethod"
+  }
+ },
+ "2f6d7cc": {
+  "summary": "Instantiates a mulligan frame button over a card, registers it, and toggles the card's tooltips.",
+  "renames": {
+   "in_s1": "posY",
+   "in_s2": "posZ",
+   "plVar9": "slotPtr",
+   "puVar7": "identityQuatPtr",
+   "uVar13": "quatY",
+   "uVar14": "quatZ",
+   "uVar15": "quatW"
+  }
+ },
+ "2f6dd8c": {
+  "summary": "Activates or deactivates the cards in the player's mulligan hand and the mulligan frame buttons.",
+  "renames": {
+   "lStack_48": "currentButton",
+   "uStack_50": "enumeratorPad"
+  }
+ },
+ "2f6ea84": {
+  "summary": "Enumerator Reset that throws NotSupportedException.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "2f6e0fc": {
+  "summary": "Starts each configured animation effect, playing it immediately or via a delayed coroutine, plus inlined effect handling for fades, sounds, particles and shake.",
+  "renames": {
+   "auVar25_x1": "animEffectsArg",
+   "in_s1": "posY",
+   "in_s2": "posZ",
+   "in_x2": "unusedArg2",
+   "pcVar16": "savedMethod",
+   "puVar10": "identityQuatPtr",
+   "puVar2": "stackFramePtr",
+   "puVar7": "logMethod",
+   "uStack_78": "spanLengthPad",
+   "uStack_80": "methodNameSpan",
+   "uVar12_2": "savedDevToolsFlag",
+   "uVar12_3": "hasEntryOrFlag",
+   "uVar19": "stringLength",
+   "uVar21": "quatY",
+   "uVar23": "quatZ",
+   "uVar24": "quatW",
+   "uVar4": "hasTarget",
+   "uVar5": "indexOrFlag",
+   "unaff_d10": "unusedD10",
+   "unaff_d11": "unusedD11",
+   "unaff_d12": "unusedD12",
+   "unaff_d13": "unusedD13",
+   "unaff_d14": "unusedD14",
+   "unaff_d8": "unusedD8",
+   "unaff_d9": "unusedD9",
+   "unaff_x21": "unusedX21",
+   "unaff_x23": "unusedX23"
+  }
+ }
+}

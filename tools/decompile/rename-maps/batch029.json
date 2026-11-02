@@ -1,0 +1,319 @@
+{
+ "32bc41c": {
+  "summary": "Compiler-generated coroutine Reset that throws NotSupportedException.",
+  "renames": {
+   "uVar2": "exceptionMethod"
+  }
+ },
+ "32bc488": {
+  "summary": "Coroutine that plays a campaign scripted turn: resolves scripted actions with waits until none remain, then calls onComplete.",
+  "renames": {
+   "auStack_28": "nullFlagBuf",
+   "auVar9": "scriptedFlag",
+   "iStack_24": "coroutineCount",
+   "uVar5": "outerIsNull"
+  }
+ },
+ "32bc804": {
+  "summary": "Compiler-generated coroutine Reset that throws NotSupportedException.",
+  "renames": {
+   "uVar2": "exceptionMethod"
+  }
+ },
+ "32bc870": {
+  "summary": "Coroutine that runs a scripted (tutorial) turn: waits for action queue, plays scripted actions with delays, stops if turn changes.",
+  "renames": {
+   "auStack_44": "nullFlagBuf",
+   "auStack_b0": "playerActionFlagBuf",
+   "auVar16": "obscuredTrue",
+   "iVar4": "turnValue",
+   "lVar12": "boxedTypeCheck",
+   "uStack_70": "initialFakeActive",
+   "uStack_78": "initialInited",
+   "uStack_80": "initialTurnCopy",
+   "uStack_90": "checkFakeActive",
+   "uStack_98": "checkInited",
+   "uStack_a0": "checkTurnCopy",
+   "uVar5": "nextState",
+   "uVar6": "outerIsNull",
+   "uVar8": "initialTurnBoxed",
+   "uVar9": "internalCounterBoxed"
+  }
+ },
+ "32bd254": {
+  "summary": "Compiler-generated coroutine Reset that throws NotSupportedException.",
+  "renames": {
+   "uVar2": "exceptionMethod"
+  }
+ },
+ "32bd2c0": {
+  "summary": "Coroutine finishing the mulligan: waits for enemy mulligan and ack, applies enemy mulligan, environmental effects, then starts the battle phase.",
+  "renames": {
+   "iVar2_2": "stateOrMatchType",
+   "uVar4": "outerIsNull",
+   "uVar4_2": "receivedFlag",
+   "uVar4_3": "outerIsNull2"
+  }
+ },
+ "32bd9b0": {
+  "summary": "Compiler-generated coroutine Reset that throws NotSupportedException.",
+  "renames": {
+   "uVar2": "exceptionMethod"
+  }
+ },
+ "32bda1c": {
+  "summary": "Coroutine for the first mulligan phase: finishes player's mulligan, updates waiting UI, stops mulligan and starts environmental effect phase.",
+  "renames": {
+   "uVar5": "receivedEnemyMulliganFlag",
+   "uVar5_2": "outerIsNull"
+  }
+ },
+ "32bdd2c": {
+  "summary": "Compiler-generated coroutine Reset that throws NotSupportedException.",
+  "renames": {
+   "uVar2": "exceptionMethod"
+  }
+ },
+ "32bdd98": {
+  "summary": "Coroutine counting down seconds for a disconnected enemy, then forfeits the battle if the connection status is disconnected.",
+  "renames": {
+   "iVar2": "disconnectCount",
+   "iVar3": "newSecLeft",
+   "lVar7": "networkManagerStatics",
+   "piVar9": "secLeftPtr",
+   "puVar1": "enemyDisconnectsPtr",
+   "this_00": "networkManager",
+   "uStack_50": "disconnectsRaw3",
+   "uStack_60": "fakeActiveCopy1",
+   "uStack_68": "initedCopy1",
+   "uStack_70": "disconnectsCopy1",
+   "uStack_74": "fakeActiveOut",
+   "uStack_7c": "initedOut",
+   "uStack_a0": "disconnectsCopy2",
+   "uStack_c0": "scratchValue",
+   "uVar6": "outerIsNull"
+  }
+ },
+ "32be1a4": {
+  "summary": "Compiler-generated coroutine Reset that throws NotSupportedException.",
+  "renames": {
+   "uVar2": "exceptionMethod"
+  }
+ },
+ "32be210": {
+  "summary": "Coroutine that waits two seconds then runs garbage collection if no actions remain in the battle queue.",
+  "renames": {
+   "uVar3": "outerIsNull"
+  }
+ },
+ "32be338": {
+  "summary": "Compiler-generated coroutine Reset that throws NotSupportedException.",
+  "renames": {
+   "uVar2": "exceptionMethod"
+  }
+ },
+ "32be3a4": {
+  "summary": "Coroutine that waits, then repeatedly resends lost actions while it is still the same turn, cancelling the match with victory after 10 attempts.",
+  "renames": {
+   "iVar3": "turnValue",
+   "uStack_60": "startFakeActive",
+   "uStack_68": "startInited",
+   "uStack_70": "startTurnCopy",
+   "uStack_80": "failFakeActive",
+   "uStack_88": "failInited",
+   "uStack_90": "failTurnCopy",
+   "uStack_a0": "loopFakeActive",
+   "uStack_a8": "loopInited",
+   "uStack_b0": "loopTurnCopy",
+   "uVar2": "startTurnValue",
+   "uVar6": "outerNotNull"
+  }
+ },
+ "32be6f8": {
+  "summary": "Compiler-generated coroutine Reset that throws NotSupportedException.",
+  "renames": {
+   "uVar2": "exceptionMethod"
+  }
+ },
+ "32be764": {
+  "summary": "Coroutine for the mulligan countdown: ticks seconds, updates timer UI, and clicks mulligan done when time runs out.",
+  "renames": {
+   "bVar1": "isDisconnected",
+   "iVar4": "newSecondsLeft",
+   "this_01": "soundManager",
+   "uVar3": "outerIsNull"
+  }
+ },
+ "32be974": {
+  "summary": "Compiler-generated coroutine Reset that throws NotSupportedException.",
+  "renames": {
+   "uVar2": "exceptionMethod"
+  }
+ },
+ "32be9e0": {
+  "summary": "Coroutine fallback during mulligan: periodically requests mulligan resend or confirms enemy mulligan, cancelling the match with victory after too many attempts.",
+  "renames": {
+   "auVar10": "outerNotNull",
+   "auVar10_2": "receivedMulliganValue",
+   "auVar10_x1": "unused1",
+   "piVar9": "attemptsCountPtr",
+   "puVar8": "intervalDelayPtr",
+   "uStack_40": "scratch1",
+   "uVar3": "outerNotNull2",
+   "uVar3_2": "receivedEnemyMulliganFlag",
+   "uVar3_3": "outerIsNull",
+   "uVar3_4": "receivedEnemyMulliganFlag2",
+   "uVar7_3": "uiStateTypeName"
+  }
+ },
+ "32bedf4": {
+  "summary": "Compiler-generated coroutine Reset that throws NotSupportedException.",
+  "renames": {
+   "uVar2": "exceptionMethod"
+  }
+ },
+ "32bee60": {
+  "summary": "Coroutine that starts a new turn: updates counters, mana, overtime, UI, draws cards, broadcasts turn events, then starts AI or the player clock.",
+  "renames": {
+   "auVar15": "playerTurnFlagValue",
+   "iStack_4c": "newTurnNumber",
+   "iVar4_2": "turnValue",
+   "iVar4_3": "runningMinMana",
+   "iVar4_5": "stateOrTurn",
+   "lVar11": "remainingCount",
+   "lVar14_4": "soundManager",
+   "piVar12": "arrayPtr",
+   "puVar1": "turnCounterPtr",
+   "uStack_48": "overtimeTurnInfo",
+   "uVar10": "nextState",
+   "uVar5": "controllerIsNull",
+   "uVar6_2": "playerTurnString",
+   "uStack_60_2": "turnRaw1",
+   "uStack_78": "initedCopyA",
+   "uStack_70": "fakeCopyA",
+   "uStack_80_2": "turnCopyA",
+   "uStack_c8": "initedCopyB",
+   "uStack_d0_2": "turnCopyB",
+   "uStack_c0": "fakeCopyB",
+   "uStack_b0": "turnCounterRaw",
+   "uStack_8c": "initedOut",
+   "uStack_84": "fakeOut",
+   "uStack_60_3": "zeroActionCounter",
+   "uStack_60_4": "turnRaw2",
+   "uStack_108": "initedCopyC",
+   "uStack_110_2": "turnCopyC",
+   "uStack_100": "fakeCopyC",
+   "uStack_128": "initedCopyD",
+   "uStack_130_2": "turnCopyD",
+   "uStack_120": "fakeCopyD",
+   "uStack_148": "initedCopyE",
+   "uStack_150_2": "turnCopyE",
+   "uStack_140": "fakeCopyE",
+   "uStack_168": "initedCopyF",
+   "uStack_170_2": "turnCopyF",
+   "uStack_160": "fakeCopyF",
+   "uStack_188": "initedCopyG",
+   "uStack_190_2": "turnCopyG",
+   "uStack_180": "fakeCopyG"
+  }
+ },
+ "32bfc68": {
+  "summary": "Compiler-generated coroutine Reset that throws NotSupportedException.",
+  "renames": {
+   "uVar2": "exceptionMethod"
+  }
+ },
+ "32bfcd4": {
+  "summary": "Coroutine that plays the AI's turn: runs scripted or AI actions with delays, waits for the queue, then ends the turn.",
+  "renames": {
+   "plVar9": "turnScriptedDataPtr",
+   "uVar3": "outerIsNull",
+   "uVar7": "nextState"
+  }
+ },
+ "32c0338": {
+  "summary": "Compiler-generated coroutine Reset that throws NotSupportedException.",
+  "renames": {
+   "uVar2": "exceptionMethod"
+  }
+ },
+ "32c03a4": {
+  "summary": "Coroutine that waits for the action queue and delays, then triggers the next replay action if more actions remain.",
+  "renames": {
+   "uVar3": "outerIsNull"
+  }
+ },
+ "32c057c": {
+  "summary": "Compiler-generated coroutine Reset that throws NotSupportedException.",
+  "renames": {
+   "uVar2": "exceptionMethod"
+  }
+ },
+ "32c05e8": {
+  "summary": "Coroutine that plays an ability icon animation on the acting card with delays, then finishes resolving the action.",
+  "renames": {
+   "bVar2": "hasMoreSteps"
+  }
+ },
+ "32c06c0": {
+  "summary": "Compiler-generated coroutine Reset that throws NotSupportedException.",
+  "renames": {
+   "uVar2": "exceptionMethod"
+  }
+ },
+ "32c072c": {
+  "summary": "Coroutine that plays the default active-ability sound, waits briefly, then finishes resolving the battle action.",
+  "renames": {
+   "cRam0000000006b55065": "unused1",
+   "cVar2": "unused2",
+   "this_01": "soundManager"
+  }
+ },
+ "32c0818": {
+  "summary": "Compiler-generated coroutine Reset that throws NotSupportedException.",
+  "renames": {
+   "uVar2": "exceptionMethod"
+  }
+ },
+ "32c0884": {
+  "summary": "Coroutine that resolves a battle action animation: plays VFX, screen shake, unit shakes, tweens, clips and movement, then finishes the action.",
+  "renames": {
+   "plVar7": "logMessagePtr",
+   "uVar4": "outerIsNull"
+  }
+ },
+ "32c0eec": {
+  "summary": "Compiler-generated coroutine Reset that throws NotSupportedException.",
+  "renames": {
+   "uVar2": "exceptionMethod"
+  }
+ },
+ "32c0f58": {
+  "summary": "Coroutine that plays minion body animation clips after a delay and optionally waits until all animations finish.",
+  "renames": {
+   "auVar13_x1": "unused1",
+   "bVar3": "shouldContinue",
+   "lVar4_3": "displayClass",
+   "lVar9_3": "minionClips",
+   "uVar6": "clipHasValue"
+  }
+ },
+ "32c1278": {
+  "summary": "Compiler-generated coroutine Reset that throws NotSupportedException.",
+  "renames": {
+   "uVar2": "exceptionMethod"
+  }
+ },
+ "32c12e4": {
+  "summary": "Coroutine for a ranged-attack animation: waits start delay, plays VFX, screen shake, unit shakes, tween, animation clip, and waits for duration.",
+  "renames": {
+   "uVar2": "outerIsNull"
+  }
+ },
+ "32c1690": {
+  "summary": "Compiler-generated coroutine Reset that throws NotSupportedException.",
+  "renames": {
+   "uVar2": "exceptionMethod"
+  }
+ }
+}

@@ -1,0 +1,447 @@
+{
+ "328192c": {
+  "summary": "Creates the starting card for a side, parents it under the deck transform, and inserts it at the front of the deck list.",
+  "renames": {
+   "auVar8_2": "parentResult",
+   "lVar1_4": "deckList",
+   "lVar5": "insertMethod"
+  }
+ },
+ "32a590c": {
+  "summary": "Creates and queues a hand-card action for the go-second player's bonus card, using defensive card, AI inventory, or random environment effect card.",
+  "renames": {
+   "alStack_170": "createdCardSlot",
+   "alStack_f8": "rawCardSlot",
+   "auStack_110": "unusedActionData",
+   "auStack_180": "createCardAction",
+   "auStack_280": "queuedActionCopy",
+   "auVar14_2": "hasDefensiveCard",
+   "auVar14_x1": "unused1",
+   "auVar15": "hasPlayerDefensiveCard",
+   "auVar15_2": "scratch2",
+   "auVar15_part1": "scratch3",
+   "auVar15_x1": "scratch4",
+   "auVar16_x1": "scratch5",
+   "in_x3": "unused2",
+   "lVar4_3": "goSecondCardList",
+   "plVar10": "goSecondCardListRef",
+   "uStack_14c": "actionExtraFlag",
+   "uStack_150": "actionPositionZ",
+   "uStack_154": "actionPositionXY",
+   "uStack_17c": "actionIsPlayer",
+   "uVar12": "spawnPositionXY",
+   "uVar13": "spawnPositionZ",
+   "uVar8": "hasCardToCreate"
+  }
+ },
+ "32a5c60": {
+  "summary": "Puts a card in play back into the owner's shuffled deck at the top or a random position and updates its UI visibility.",
+  "renames": {
+   "iVar1": "randomIndex"
+  }
+ },
+ "32a5de0": {
+  "summary": "Adds or inserts a card into a deck list and parents it under the player or enemy deck transform.",
+  "renames": {
+   "plVar2": "itemSlot"
+  }
+ },
+ "32a5f5c": {
+  "summary": "Shuffles the player's or enemy's shuffled deck list and stores the result back.",
+  "renames": {
+   "plVar2": "shuffledDeckRef"
+  }
+ },
+ "3281688": {
+  "summary": "Shuffles a card list, activates the top card and deactivates the rest while setting them up in the deck.",
+  "renames": {
+   "auVar4_x1": "unused1"
+  }
+ },
+ "32a5cec": {
+  "summary": "Picks a random insertion index within the player's or enemy's shuffled deck and logs it.",
+  "renames": {
+   "lVar4": "shuffledDeckList",
+   "uStack_28": "deckSize"
+  }
+ },
+ "32a5fa8": {
+  "summary": "Raises a TriggerAbilitySignal for activated triggers, ignoring while-in-play and synapse triggers.",
+  "renames": {
+   "lVar2": "brokerClass",
+   "lVar5": "raiseMethod",
+   "piVar4": "interfaceEntry",
+   "uVar3": "interfaceCount"
+  }
+ },
+ "32a5fc4": {
+  "summary": "BattleManager constructor: initializes obscured counters and flags, wait delays, and the many card and action lists.",
+  "renames": {
+   "auVar4": "obscuredFalse",
+   "auVar4_part8": "obscuredFalseInited",
+   "cRam0000000006b545e2": "staticInitFlag",
+   "cVar1": "initFlag",
+   "this_00": "aiInstance",
+   "uStack_64": "unitCounterFakeActive",
+   "uStack_6c": "unitCounterInited",
+   "uStack_74": "unitCounterZero",
+   "uStack_78": "turnActionFakeActive",
+   "uStack_80": "turnActionInited",
+   "uStack_88": "turnActionZero",
+   "uStack_8c": "cardsPlayedFakeActive",
+   "uStack_94": "cardsPlayedInited",
+   "uStack_9c": "cardsPlayedZero",
+   "uStack_a0": "sentActionFakeActive",
+   "uStack_a8": "sentActionInited",
+   "uStack_b0": "sentActionZero",
+   "uStack_b4": "playerDisconnectFakeActive",
+   "uStack_bc": "playerDisconnectInited",
+   "uStack_c4": "playerDisconnectZero",
+   "uStack_c8": "enemyDisconnectFakeActive",
+   "uStack_d0": "enemyDisconnectInited",
+   "uStack_d8": "enemyDisconnectZero",
+   "uVar3": "cursorStartZ"
+  }
+ },
+ "32a6888": {
+  "summary": "Predicate: true if the card is a defensive tactic of the player's warlord army.",
+  "renames": {
+   "bVar2": "isMatch"
+  }
+ },
+ "2f46d9c": {
+  "summary": "Static constructor for the compiler-generated closure class; creates the singleton instance.",
+  "renames": {
+   "uVar1": "closureInstance"
+  }
+ },
+ "2f46e0c": {
+  "summary": "Predicate: true if a card is in play, transforming, attacking or aiming an attack.",
+  "renames": {
+   "bVar2": "isActive"
+  }
+ },
+ "32d36ec": {
+  "summary": "Notifies in-play units and both hands that a unit was stunned via ReactToUnitStunned.",
+  "renames": {
+   "lStack_70": "currentHandCard",
+   "lStack_88": "enumeratorCurrent",
+   "lVar9_4": "whereClass",
+   "lVar9_5": "currentUnit",
+   "piVar7": "interfaceEntry",
+   "plStack_68": "unitEnumerator",
+   "plStack_80": "handEnumerator",
+   "pplStack_78": "savedFramePtr",
+   "pplStack_90": "framePtr",
+   "puVar5": "enumerableInterface"
+  }
+ },
+ "32d3e40": {
+  "summary": "Resolves damage dealt to a unit, then notifies relevant in-play cards and both hands.",
+  "renames": {
+   "uVar4": "isDifferentUnit"
+  }
+ },
+ "32c8d48": {
+  "summary": "Notifies in-play units, both hands and the acting card that a unit died.",
+  "renames": {
+   "auStack_150": "actionCopyUnit",
+   "auStack_250": "actionCopyHand",
+   "auStack_350": "actionCopyOtherHand",
+   "auStack_450": "actionCopyActing",
+   "uVar4": "isDifferent"
+  }
+ },
+ "32cb25c": {
+  "summary": "Notifies all in-play cards and both hands that a card was played.",
+  "renames": {
+   "uVar3": "isNotActingCard"
+  }
+ },
+ "32d40d4": {
+  "summary": "Logs and notifies in-play units and both hands that a card was drawn.",
+  "renames": {
+   "uVar4": "isNotDrawnCard"
+  }
+ },
+ "32ccba8": {
+  "summary": "Logs and notifies in-play units and hands that a card returned to hand.",
+  "renames": {
+   "uVar4": "isNotReturnedCard"
+  }
+ },
+ "32cc184": {
+  "summary": "Logs and notifies in-play units and hands that a card returned to the deck.",
+  "renames": {
+   "uVar4": "isNotReturnedCard"
+  }
+ },
+ "32cf3d4": {
+  "summary": "Notifies the summoned unit, other in-play units and both hands that a unit was summoned.",
+  "renames": {
+   "uVar4": "isNotActingUnit"
+  }
+ },
+ "32ce990": {
+  "summary": "Updates while-in-play abilities on in-play cards and both hands, skipping two excluded units.",
+  "renames": {
+   "uVar4": "isNotExcluded"
+  }
+ },
+ "32d4328": {
+  "summary": "Logs and calls OnTurnSetup on in-play units and both hands for a turn start.",
+  "renames": {
+   "abStack_24": "isPlayerTurnBuf"
+  }
+ },
+ "32d49d8": {
+  "summary": "Notifies other in-play cards and both hands that a unit triggered Requiem.",
+  "renames": {
+   "uVar4": "isNotCaster"
+  }
+ },
+ "32d4bd0": {
+  "summary": "Notifies other in-play cards and both hands that a unit triggered Mob.",
+  "renames": {
+   "uVar4": "isNotCaster"
+  }
+ },
+ "32d4f5c": {
+  "summary": "Notifies other in-play cards and both hands that a unit triggered Regiment.",
+  "renames": {
+   "uVar4": "isNotCaster"
+  }
+ },
+ "32d5154": {
+  "summary": "Notifies other in-play cards and both hands that a unit triggered Codex.",
+  "renames": {
+   "uVar4": "isNotCodexUnit"
+  }
+ },
+ "32d58ac": {
+  "summary": "Raises a swarm signal and notifies other in-play cards and both hands of the Swarm trigger.",
+  "renames": {
+   "uVar5": "isNotPlayedUnit"
+  }
+ },
+ "32ce5a0": {
+  "summary": "Notifies in-play cards and both hands that one or two units were removed from the game.",
+  "renames": {
+   "uVar4": "isNotExcluded"
+  }
+ },
+ "32cbf40": {
+  "summary": "Notifies other in-play cards and both hands that a unit was jammed.",
+  "renames": {
+   "uVar3": "isNotJammedUnit"
+  }
+ },
+ "32d62cc": {
+  "summary": "Resolves unit-attacked on target and attacker, then on other in-play cards and both hands.",
+  "renames": {
+   "uVar2": "checkResult"
+  }
+ },
+ "32d6578": {
+  "summary": "Notifies other in-play cards and both hands that a unit used sacrifice.",
+  "renames": {
+   "uVar3": "isNotSacrificeUnit"
+  }
+ },
+ "32d67bc": {
+  "summary": "Raises a reanimated signal and notifies in-play cards and both hands of the reanimation.",
+  "renames": {
+   "uVar4": "isNotReanimatedUnit"
+  }
+ },
+ "32d6a10": {
+  "summary": "Notifies the marked unit, other in-play cards and both hands that a unit obtained a mark.",
+  "renames": {
+   "uVar3": "isNotMarkedUnit"
+  }
+ },
+ "32d6c68": {
+  "summary": "Notifies the unit, other in-play cards and both hands that a unit obtained a hunt mark.",
+  "renames": {
+   "uVar3": "isNotMarkedUnit"
+  }
+ },
+ "32d6ec0": {
+  "summary": "Notifies the unit, other in-play cards and both hands that a unit obtained markerlight.",
+  "renames": {
+   "uVar3": "isNotMarkedUnit"
+  }
+ },
+ "32d7118": {
+  "summary": "Notifies the collecting unit and other in-play units that a spirit stone was collected.",
+  "renames": {
+   "uVar2": "isNotCollector"
+  }
+ },
+ "32d722c": {
+  "summary": "Notifies the collecting unit and other in-play units that faith was collected.",
+  "renames": {
+   "uVar2": "isNotCollector"
+  }
+ },
+ "32d7340": {
+  "summary": "Notifies the collecting unit and other in-play units that quest points were collected.",
+  "renames": {
+   "uVar2": "isNotCollector"
+  }
+ },
+ "32d7454": {
+  "summary": "Notifies in-play units of a created secret, then raises a CreateSecretSignal through the signal broker.",
+  "renames": {
+   "lVar3_3": "brokerClass",
+   "piVar5": "interfaceEntry",
+   "uVar2": "flagOrCount"
+  }
+ },
+ "32d75b8": {
+  "summary": "Notifies the unit and other in-play units that a sabotage was created.",
+  "renames": {
+   "uVar2": "isNotCollector"
+  }
+ },
+ "2f46e74": {
+  "summary": "Unity Start: registers this as the singleton BattleNetworkManager (destroying duplicates) and links it to the network manager.",
+  "renames": {
+   "uVar1": "hasInstance",
+   "uVar3": "existingInstance"
+  }
+ },
+ "2f46f74": {
+  "summary": "Sets the connection status from the match type, prepares the battle room connection and connects if online.",
+  "renames": {
+   "uStack_40": "scratch1",
+   "uStack_48": "statusEnumType",
+   "uStack_58": "scratch2",
+   "uVar5": "matchTypeName"
+  }
+ },
+ "2f475f8": {
+  "summary": "Leaves the Photon battle room (or offline room), optionally keeping the room alive, and sets status to leavingBattle.",
+  "renames": {
+   "lVar7": "photonType",
+   "puVar5": "loggerMethod",
+   "uVar3": "hasBattleManager",
+   "uVar6": "scratch1"
+  }
+ },
+ "2f4771c": {
+  "summary": "Leaves the room and battle, cancelling search or returning to the main menu or starting the tutorial match.",
+  "renames": {
+   "auStack_168": "tutorialMatchCopy",
+   "auStack_f8": "tutorialMatchData",
+   "auVar7": "hasBattleManager2",
+   "bVar1": "tutorialsCompleted",
+   "lVar3_5": "matchMaker",
+   "uStack_100": "deckArg",
+   "uStack_38": "battleStageMisc",
+   "uStack_38_part4": "battleStageMiscHigh",
+   "uStack_40": "scratch1",
+   "uStack_48": "battleStageType",
+   "uStack_50": "uiStateValue",
+   "uStack_50_part4": "uiStateValueHigh",
+   "uStack_58": "scratch2",
+   "uStack_60": "uiStateType",
+   "uStack_68": "zeroFill1",
+   "uStack_70": "zeroFill2",
+   "uStack_78": "zeroFill3",
+   "uStack_80": "zeroFill4",
+   "uStack_88": "zeroFill5",
+   "uStack_90": "tutorialMatchBuffer",
+   "uVar2": "isManagerPresent"
+  }
+ },
+ "2f47824": {
+  "summary": "Cancels a battle search by leaving the Photon room or reconnecting to the region depending on connection status.",
+  "renames": {
+   "auStack_24": "networkLoggingBuf",
+   "lVar5_3": "photonType",
+   "puVar6": "loggerMethod",
+   "uStack_30": "scratch1",
+   "uStack_38": "statusEnumType",
+   "uVar1": "devToolsFlag",
+   "uVar10": "devToolsEnabled"
+  }
+ },
+ "2f47870": {
+  "summary": "Logs a reconnect attempt, asks the network manager to reconnect unless skipped, and increments the attempt counter.",
+  "renames": {
+   "acStack_24": "skipFlagBuf",
+   "uStack_40": "scratch1",
+   "uVar1": "attemptsString"
+  }
+ },
+ "2f479cc": {
+  "summary": "Builds the practice room name by concatenating the prefix 'Practice_' with the first player id.",
+  "renames": {
+   "iVar1": "prefixLength",
+   "lRam0000000006b720f0": "unusedStaticRef",
+   "lVar2": "prefix",
+   "lVar3": "roomName"
+  }
+ },
+ "2f47258": {
+  "summary": "Joins the right room for a match type: casual room for practice, random event room for ranked and event modes.",
+  "renames": {
+   "iStack_58": "matchTypeCopy",
+   "lVar5_3": "eventClass",
+   "piVar9": "interfaceEntry",
+   "puVar7": "interfaceMethod",
+   "uStack_60": "scratch1",
+   "uStack_68": "matchTypeBox",
+   "uStack_68_part4": "matchTypeBoxHigh",
+   "uVar1": "matchTypeByte",
+   "uVar3": "statusBoxed",
+   "uVar8": "interfaceCount"
+  }
+ },
+ "2f47a18": {
+  "summary": "Sets a custom integer property on the current Photon room; returns whether a room existed.",
+  "renames": {
+   "iStack_24": "valueBuf",
+   "uVar3": "boxedValue"
+  }
+ },
+ "2f47b44": {
+  "summary": "Reads an integer custom room property, returning -1 if missing (decompilation also contains merged hide-room code).",
+  "renames": {
+   "auStack_44": "falseBuf",
+   "iVar2": "unused1",
+   "lRam0000000006b720a8": "unusedStaticRef",
+   "puVar9": "loggerMethod",
+   "uVar10": "scratch1",
+   "uVar3_3": "setPropsResult",
+   "uVar4": "roomMessage"
+  }
+ },
+ "2f47c40": {
+  "summary": "Hides the current Photon room by setting its visible property to false.",
+  "renames": {
+   "auStack_24": "falseBuf",
+   "lVar1": "photonType",
+   "puVar6": "loggerMethod",
+   "uVar3": "roomMessage",
+   "uVar7": "scratch1"
+  }
+ },
+ "2f47c9c": {
+  "summary": "Handles joining a room event differently depending on battle connection status (search, practice, reconnect, leaving).",
+  "renames": {
+   "puVar8": "messagePrefix",
+   "uStack_58": "scratch1",
+   "uStack_60": "statusEnumType"
+  }
+ },
+ "2f48318": {
+  "summary": "Handles connecting to Photon master server depending on battle connection status: reconnect, connect to room, or finish leaving.",
+  "renames": {
+   "uStack_40": "scratch1",
+   "uStack_48": "statusEnumType",
+   "uVar4": "isObjectPresent"
+  }
+ }
+}

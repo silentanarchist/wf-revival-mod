@@ -1,0 +1,332 @@
+{
+ "3038478": {
+  "summary": "Uploads an unsynced custom deck to the cloud, building deck info and card counts, then deletes a deck by id via cloud script.",
+  "renames": {
+   "bVar1": "typeDepth",
+   "bVar2": "isDeckNull",
+   "iVar4": "tmpInt",
+   "iVar4_2": "gameModeInt",
+   "lVar5": "closure",
+   "lVar5_2": "unsyncedDeck",
+   "lVar5_5": "classInfo",
+   "lVar5_7": "pendingException",
+   "lVar7": "saveClosure",
+   "lVar7_2": "deleteClosure",
+   "lVar8_5": "deleteParams",
+   "lVar18": "deckToUpload",
+   "lVar19": "staticFields",
+   "auVar22": "unwindResult",
+   "auVar22_part8": "unwindState",
+   "auVar23": "catchResult",
+   "auVar23_x1": "catchSecond",
+   "lStackY_c8": "savedSaveClosure",
+   "lStackY_d8": "savedDeckInfo",
+   "lStack_78": "nullableGameMode",
+   "pcStackY_100": "savedFuncPtr",
+   "plStackY_d0": "savedLogger",
+   "plStackY_e8": "savedEnumerator",
+   "plStack_68": "currentEnumerator",
+   "pplStack_70": "enumeratorSlotPtr",
+   "pplVar14": "enumeratorSlot",
+   "piVar17": "interfaceOffsetPtr",
+   "plVar21": "originalDeckRef",
+   "plVar21_3": "enumeratorRef",
+   "plVar21_4": "disposableRef",
+   "puVar11": "interfaceSlot",
+   "uStackY_108": "eventPlayMode",
+   "uStackY_110": "scratchMinusOne",
+   "uStackY_e0": "exceptionPtr",
+   "uStackY_f0_2": "savedId",
+   "uVar12": "unused1",
+   "uVar12_3": "playModeText",
+   "uVar16": "scratchFlag"
+  }
+ },
+ "303826c": {
+  "summary": "Shows a confirmation popup with Cancel and Discard buttons for discarding deck changes.",
+  "renames": {
+   "auVar9_x1": "scratch1",
+   "plVar6": "cachedDelegateRef",
+   "unaff_x19": "thrownException",
+   "unaff_x20": "savedWindowsManager",
+   "unaff_x21": "unused1",
+   "unaff_x30": "unused2"
+  }
+ },
+ "3038644": {
+  "summary": "Constructor for DeckEditingWindow; initializes defaults, alternate art dictionary and open/close delegates.",
+  "renames": {
+   "iVar1": "classInitFlag",
+   "puVar4": "staticFieldsPtr",
+   "uVar2": "altArtDict"
+  }
+ },
+ "30386d4": {
+  "summary": "Filter predicate deciding whether a card can appear in the deck editor collection, handling defensive cards and event rules.",
+  "renames": {
+   "auStack_24": "isDefensiveBuf",
+   "bVar1": "result",
+   "lVar5": "eventData",
+   "piVar7": "interfaceOffsetPtr",
+   "uVar2": "logArg",
+   "uVar6": "interfaceCount"
+  }
+ },
+ "3038838": {
+  "summary": "Filter predicate for alternate-art cards, keeping only the selected art variant or the one already in the deck.",
+  "renames": {
+   "lVar14": "comparerClass",
+   "lVar16": "comparerObjClass",
+   "lVar5": "closure",
+   "piVar17": "interfaceOffsetPtr",
+   "plVar18": "defaultValueRef",
+   "plVar19": "comparer",
+   "puVar10": "comparerInterface",
+   "uVar11": "errorMessage",
+   "uVar2": "bucketIndex",
+   "uVar9_3": "blocksDiffer"
+  }
+ },
+ "3039aec": {
+  "summary": "Static constructor creating the compiler-generated lambda holder instance.",
+  "renames": {
+   "uVar1": "instance"
+  }
+ },
+ "3039b5c": {
+  "summary": "Lambda converting a cell to its RectTransform if it is a MonoBehaviour.",
+  "renames": {}
+ },
+ "3039c04": {
+  "summary": "Lambda checking whether a card script equals the display class's card (Unity null-aware comparison).",
+  "renames": {
+   "bVar1": "isMatch"
+  }
+ },
+ "303911c": {
+  "summary": "Registers a handler for the CardCollectionUpdatedSignal with the signal broker.",
+  "renames": {
+   "lVar4": "registerMethod",
+   "puVar3": "methodClass",
+   "uVar7": "genericClass"
+  }
+ },
+ "30391a0": {
+  "summary": "Unregisters the handler for the CardCollectionUpdatedSignal from the signal broker.",
+  "renames": {
+   "lVar4": "unregisterMethod",
+   "puVar3": "methodClass",
+   "uVar7": "genericClass"
+  }
+ },
+ "3036558": {
+  "summary": "Sets the editing deck and caches the custom game mode event data.",
+  "renames": {
+   "lVar3": "eventClass",
+   "piVar5": "interfaceOffsetPtr",
+   "uVar2": "eventData",
+   "uVar4": "interfaceCount"
+  }
+ },
+ "3039224": {
+  "summary": "Sets up a collection cell, updating the card's validity, banned state and owned/max copies text.",
+  "renames": {
+   "auStack_58": "reasonOut",
+   "iStack_60": "allowedCopiesBuf",
+   "iVar1": "allowedCopies",
+   "iVar3": "maxCopies",
+   "lVar12": "cardData",
+   "lVar5": "closure",
+   "lVar5_2": "collectionCardRef",
+   "lVar6_3": "eventData",
+   "piVar14": "interfaceOffsetPtr",
+   "plVar15": "closureCardSlot",
+   "uStack_5c": "countBuf",
+   "uVar11": "allowedCopiesBoxed",
+   "uVar13": "interfaceCount"
+  }
+ },
+ "30395fc": {
+  "summary": "Refreshes all cells, redrawing each collection card cell.",
+  "renames": {
+   "plStack_38": "currentCell",
+   "uStack_40": "unused1"
+  }
+ },
+ "30392d8": {
+  "summary": "Draws a collection card cell, updating validity, banned state and owned/max copies text.",
+  "renames": {
+   "iStack_60": "allowedCopiesBuf",
+   "iVar1": "allowedCopies",
+   "iVar3": "maxCopies",
+   "lVar12": "cardData",
+   "lVar5": "closure",
+   "lVar5_2": "collectionCardRef",
+   "lVar6_3": "eventData",
+   "piVar14": "interfaceOffsetPtr",
+   "plVar15": "closureCardSlot",
+   "uStack_58": "reasonOut",
+   "uStack_5c": "countBuf",
+   "uVar11": "allowedCopiesBoxed",
+   "uVar13": "interfaceCount"
+  }
+ },
+ "30397a8": {
+  "summary": "On list drag, finds the cell overlapping the reference point and initializes the wildcard display for its card.",
+  "renames": {
+   "alStack_48": "focusedRect"
+  }
+ },
+ "30399c4": {
+  "summary": "Refreshes the collection and schedules a delayed CheckFocusedArmy tween, killing any previous one.",
+  "renames": {
+   "puVar3": "filterCheckRef"
+  }
+ },
+ "3039810": {
+  "summary": "Finds the cell overlapping the reference point and initializes the wildcard display for its card.",
+  "renames": {
+   "lStack_48": "focusedRect"
+  }
+ },
+ "3039aa4": {
+  "summary": "Constructor creating the generic collection display's internal lists and a cached default value.",
+  "renames": {
+   "lVar2": "baseCtorMethod",
+   "lVar3": "typeInfo",
+   "lVar4": "genericArgs",
+   "lVar5": "genericArgsAfterInit",
+   "uVar1": "newObject"
+  }
+ },
+ "303a7d4": {
+  "summary": "Opens the share-deck popup with options to share on alliance or global chat, respecting chat bans; also contains inlined DeckInfoPopup.Open.",
+  "renames": {
+   "auStack_c4": "checkOwnershipBuf",
+   "auVar1": "savedThis",
+   "auVar16": "savedThis2",
+   "auVar16_x1": "savedMethod2",
+   "auVar1_x1": "savedMethod",
+   "bVar2": "isGlobalBanned",
+   "bVar3": "isAllianceBanned",
+   "lStack_98": "savedButtonTransform",
+   "lStack_a0": "savedContext",
+   "lStack_a8": "savedUtilities",
+   "lStack_d0": "nullableGameMode",
+   "lVar11": "buttonTransform",
+   "pcStack_c0": "savedFuncPtr",
+   "plStack_b0": "savedButtons",
+   "plVar15": "contextSlot",
+   "uStack_68": "allianceScratch3",
+   "uStack_70": "allianceScratch2",
+   "uStack_78": "allianceScratch1",
+   "uStack_80": "globalScratch3",
+   "uStack_88": "globalScratch2",
+   "uStack_90": "globalScratch1",
+   "uStack_b8": "savedGlobalBanned"
+  }
+ },
+ "3039cd0": {
+  "summary": "Initializes deck info buttons: toggles visibility by state, wires click listeners, and sets interactability for delete, duplicate and practice.",
+  "renames": {
+   "lVar3": "closure",
+   "lVar5_4": "popupRef",
+   "lVar5_6": "popupRef2",
+   "plVar10": "contextSlot",
+   "plVar9": "popupSlot",
+   "uStack_54": "validationErrors"
+  }
+ },
+ "303a69c": {
+  "summary": "Closes the popup and invokes the select button's press callback.",
+  "renames": {
+   "auVar3_x1": "scratch1"
+  }
+ },
+ "303a6fc": {
+  "summary": "Removes click listeners from all deck info buttons and the drawer toggle.",
+  "renames": {
+   "auVar2_x1": "scratch1"
+  }
+ },
+ "303cbc4": {
+  "summary": "Static constructor creating the compiler-generated lambda holder instance.",
+  "renames": {
+   "uVar1": "instance"
+  }
+ },
+ "303cc50": {
+  "summary": "Lambda that closes the current popup window, destroys and releases it, and shows the previous window or main menu.",
+  "renames": {
+   "alStack_38": "addressableKey",
+   "auVar5_x1": "scratch1",
+   "uVar2": "isPopUpCurrent"
+  }
+ },
+ "303ab5c": {
+  "summary": "Opens the deck info popup, populating deck name, warlord, army icon, card lists, close listeners and game mode icon.",
+  "renames": {
+   "auStack_34": "checkOwnershipBuf",
+   "lStack_40": "nullableGameMode",
+   "plVar8": "contextSlot"
+  }
+ },
+ "303b0ac": {
+  "summary": "Closes the deck info popup, releasing sprites, unsubscribing, playing the close sound and removing it from the windows manager.",
+  "renames": {
+   "auVar5_3": "scratch2",
+   "auVar5_x1": "scratch1",
+   "cRam0000000006b55065": "scratch3",
+   "lStack_38": "addressableKey",
+   "this_00": "windowType"
+  }
+ },
+ "303a3a4": {
+  "summary": "Returns whether a deck can be imported by checking the player's owned cards against the event's requirements.",
+  "renames": {
+   "lVar1": "closure",
+   "piVar8": "interfaceOffsetPtr"
+  }
+ },
+ "303b260": {
+  "summary": "Adds OnWarlordClick listeners to the warlord name and image buttons.",
+  "renames": {
+   "lVar2": "addMethod",
+   "puVar6": "callSlot",
+   "uVar1": "callCount"
+  }
+ },
+ "303b334": {
+  "summary": "Removes OnWarlordClick and close listeners from the popup buttons, rebuilding the persistent call list.",
+  "renames": {
+   "iVar1": "addedCount",
+   "lVar8": "listItems",
+   "plVar4": "keptCalls",
+   "uVar2": "count",
+   "uVar6": "isMatch"
+  }
+ },
+ "303b488": {
+  "summary": "Opens the card display window for the deck's warlord card, then (via inlined code) initializes card display, flavour text and voice-over.",
+  "renames": {
+   "auStack_48": "nullableTier",
+   "auVar22": "scratch1",
+   "auVar22_x1": "scratch2",
+   "bVar2": "rectChanged",
+   "fVar20": "rectX",
+   "fVar21": "rectY",
+   "iVar4": "deckGameMode",
+   "in_s2": "vecX",
+   "in_s3": "vecY",
+   "lVar5_5": "scratchObj",
+   "lVar9_3": "flavourText",
+   "lVar9_5": "displayClosure",
+   "piVar16": "interfaceOffsetPtr",
+   "plVar18": "availableSoundsSlot",
+   "plVar19": "spriteSlot",
+   "uVar14": "interfaceCount",
+   "uVar14_2": "tierValue",
+   "uVar14_3": "isNotNull"
+  }
+ }
+}

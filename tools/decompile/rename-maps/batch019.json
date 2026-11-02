@@ -1,0 +1,371 @@
+{
+ "3277414": {
+  "summary": "Builds a list of melee attack actions against valid enemy units that could attack the buffed card, boosting the score if only one such attack exists.",
+  "renames": {
+   "plVar8": "itemSlot",
+   "iVar12": "firstAttackIndex",
+   "iVar1": "candidateIndex"
+  }
+ },
+ "3275b5c": {
+  "summary": "Returns the AI score for an available action, depending on its type: playing a card, melee or ranged attack, active ability or waystone click.",
+  "renames": {
+   "uVar7": "hasTargetCard",
+   "manager_00": "managerArg",
+   "method_00": "modeArg"
+  }
+ },
+ "3278c94": {
+  "summary": "Returns a defensive value for a hero attacking, zeroing low scores against hero targets and returning zero for hero-versus-hero.",
+  "renames": {
+   "bVar1": "isLowScoreHeroTarget",
+   "fVar4": "resultScore"
+  }
+ },
+ "3278d10": {
+  "summary": "Returns whether a hero attacking another hero would be a suicide attack, by comparing the two heroes' current health.",
+  "renames": {
+   "iVar3": "targetHealth",
+   "iVar2_2": "actingHealth",
+   "uStack_60": "actingHealthCopy",
+   "uStack_58": "actingInitedCopy",
+   "uStack_50": "actingFakeActiveCopy"
+  }
+ },
+ "3277998": {
+  "summary": "Determines whether the combined best attacks of all units on the same target can kill the enemy warlord, logging if so.",
+  "renames": {
+   "lVar5": "closure",
+   "lVar7": "actionList",
+   "uVar8": "targetsDiffer",
+   "uStack_a0": "warlordHealthCopy",
+   "uStack_98": "warlordInitedCopy",
+   "uStack_90": "warlordFakeActiveCopy",
+   "plVar11": "closureActionsRef",
+   "iVar3_2": "warlordHealth"
+  }
+ },
+ "3277704": {
+  "summary": "Scores an attack by combining buffed attack score, special attack criteria, sacrifice, blast and markerlight bonuses.",
+  "renames": {
+   "iVar3": "actingHealth",
+   "uStack_90": "actingHealthCopy",
+   "uStack_88": "actingInitedCopy",
+   "uStack_80": "actingFakeActiveCopy",
+   "method_00": "attackTypeArg"
+  }
+ },
+ "32793fc": {
+  "summary": "Computes a card's effective attack value for a given attack type (ranged, melee or drop pod), including buffs, blind and remnant handling.",
+  "renames": {
+   "uVar3": "rangedAttack",
+   "iVar6": "attackBonus",
+   "iVar2_3": "baseRangedAttack",
+   "iVar2_5": "baseAttackValue",
+   "iVar2_7": "resultAttack",
+   "uStack_70": "baseAttackCopy",
+   "uStack_68": "baseAttackInitedCopy",
+   "uStack_60": "dropPodAttackCopy",
+   "uStack_58": "dropPodInitedCopy",
+   "uStack_40_part4": "padA",
+   "uStack_60_part4": "padB",
+   "uStack_50_part4": "padC",
+   "uStack_30": "dropPodLow",
+   "_uStack_30": "dropPodPair",
+   "uStack_2c": "dropPodHigh",
+   "method_00": "attackTypeArg"
+  }
+ },
+ "3278e04": {
+  "summary": "Computes a card's effective attack value for a given player action (ranged, melee or drop pod), including buffs, blind and remnant handling.",
+  "renames": {
+   "uVar3": "rangedAttack",
+   "iVar6": "attackBonus",
+   "iVar2_3": "baseRangedAttack",
+   "iVar2_5": "baseAttackValue",
+   "iVar2_7": "resultAttack",
+   "uStack_70": "baseAttackCopy",
+   "uStack_68": "baseAttackInitedCopy",
+   "uStack_60": "dropPodAttackCopy",
+   "uStack_58": "dropPodInitedCopy",
+   "uStack_40_part4": "padA",
+   "uStack_60_part4": "padB",
+   "uStack_50_part4": "padC",
+   "uStack_30": "dropPodLow",
+   "_uStack_30": "dropPodPair",
+   "uStack_2c": "dropPodHigh",
+   "method_00": "actionTypeArg"
+  }
+ },
+ "327900c": {
+  "summary": "Scores an attack taking temporary buffs on both attacker and target into account, including retaliation, ambush and poison bonuses.",
+  "renames": {
+   "fVar9": "totalScore",
+   "uStack_d0": "targetHealthCopy",
+   "uStack_c8": "targetInitedCopy",
+   "uStack_c0": "targetFakeActiveCopy",
+   "uStack_b0": "actingHealthCopy",
+   "uStack_a8": "actingInitedCopy",
+   "uStack_a0": "actingFakeActiveCopy",
+   "this_01": "hasAmbush",
+   "iVar2_3": "healthValue",
+   "method_00": "unused1"
+  }
+ },
+ "32798f0": {
+  "summary": "Scores the value of damaging a unit, based on traits, health, card type and extra score from damaging or killing it.",
+  "renames": {
+   "iStack_48": "currentMaxHealthLog",
+   "aiStack_44": "buffedMaxHealthLog",
+   "_iStack_48": "healthPairLog",
+   "uStack_80": "healthCopyValue",
+   "uStack_78": "healthCopyInited",
+   "uStack_70": "healthCopyFakeActive",
+   "iVar4_5": "currentHealthValue"
+  }
+ },
+ "3279450": {
+  "summary": "Scores the value of damaging a buffed unit, with options to ignore drop pod and to count bastion.",
+  "renames": {
+   "iStack_48": "currentMaxHealthLog",
+   "_iStack_48": "healthPairLog",
+   "uStack_80": "healthCopyValue",
+   "uStack_78": "healthCopyInited",
+   "uStack_70": "healthCopyFakeActive",
+   "iVar4_5": "currentHealthValue",
+   "iStack_44": "buffedMaxHealthLog"
+  }
+ },
+ "3279964": {
+  "summary": "Scores the value of healing a unit by a given amount, weighting heroes at low health and minions by their value in play.",
+  "renames": {
+   "uStack_70": "healthCopyValue",
+   "uStack_68": "healthCopyInited",
+   "uStack_60": "healthCopyFakeActive",
+   "iVar1_3": "heroHealth"
+  }
+ },
+ "3279ac4": {
+  "summary": "Returns the best buffed attack score across all potential buffed attack actions for a card.",
+  "renames": {
+   "lVar1": "selfAi",
+   "fVar5": "bestScore",
+   "method_00": "unused1"
+  }
+ },
+ "32797cc": {
+  "summary": "Scores applying poison to a target, scaled by its value in play and by whether it is stunned, low on health or unable to attack.",
+  "renames": {
+   "iVar2": "targetHealth",
+   "uStack_60": "healthCopyValue",
+   "uStack_58": "healthCopyInited",
+   "uStack_50": "healthCopyFakeActive",
+   "fVar4": "poisonFactor"
+  }
+ },
+ "327a170": {
+  "summary": "Scores returning a card to hand, based on its cost, value in play and rally or codex traits.",
+  "renames": {
+   "fVar5": "rallyBonus",
+   "fVar6": "traitBonus"
+  }
+ },
+ "327a218": {
+  "summary": "Scores giving charge to a card: its melee attack if it is summoning sick and cannot act yet.",
+  "renames": {
+   "fVar3": "chargeScore"
+  }
+ },
+ "327a25c": {
+  "summary": "Scores a mana buff by counting cards, hero ability and unit abilities that become affordable with the cost change.",
+  "renames": {
+   "iVar1": "manaAfterBuff",
+   "fVar6": "affordableCount"
+  }
+ },
+ "327a4dc": {
+  "summary": "Scores a buff applied to cards in hand by finding the best newly playable card and penalising already playable cards.",
+  "renames": {
+   "uVar10": "isNotThisCard",
+   "fVar15": "bestPlayScore",
+   "fVar16": "multiplyHigh",
+   "lVar8_7": "handEffectItems"
+  }
+ },
+ "327a950": {
+  "summary": "Scores drawing a card, accounting for an empty deck (fatigue) and the room left in hand.",
+  "renames": {
+   "iVar3": "fatigueValue",
+   "fVar6": "drawScore",
+   "uStack_70": "fatigueCopyValue",
+   "uStack_68": "fatigueCopyFlags",
+   "uStack_60": "fatigueCopyFakeActive",
+   "uStack_50": "fatigueRawValue",
+   "uStack_48": "fatigueRawFlags",
+   "puVar5": "fatiguePtr",
+   "iVar1": "deckCount",
+   "uVar2": "handCount"
+  }
+ },
+ "3276e70": {
+  "summary": "Sums a value for a card's active enchantment effects, adding half of stat changes and one for other qualifying effects.",
+  "renames": {
+   "uVar4": "hasSubObject",
+   "fVar7": "totalValue",
+   "uVar1": "effectType",
+   "iVar2": "statChangeA",
+   "iVar3": "statChangeB"
+  }
+ },
+ "3279c18": {
+  "summary": "Sums the AI score of every current trait on a card.",
+  "renames": {
+   "fVar3": "totalScore",
+   "uStack_40": "unused1",
+   "lStack_38": "enumeratorCurrent"
+  }
+ },
+ "3278e58": {
+  "summary": "Scores playing a card now by summing target-based and non-target scoring criteria on the card.",
+  "renames": {
+   "uVar2": "hasTarget",
+   "fVar7": "totalScore"
+  }
+ },
+ "327aa8c": {
+  "summary": "Decides whether the AI should play a combo card, based on the combo card being in hand, available mana and score.",
+  "renames": {
+   "uVar3": "noComboCard"
+  }
+ },
+ "327aba4": {
+  "summary": "Scores keeping a card in hand, scaling its extra keep score by turn number and hand size.",
+  "renames": {
+   "uStack_90": "turnCopyValue2",
+   "uStack_88": "turnCopyInited2",
+   "uStack_80": "turnCopyFakeActive2",
+   "uStack_70": "turnCopyValue",
+   "uStack_68": "turnCopyInited",
+   "uStack_60": "turnCopyFakeActive",
+   "iVar3": "turnBonus",
+   "iVar1": "handBonus"
+  }
+ },
+ "3277f0c": {
+  "summary": "Scores a scoring criteria for a card and optional target, with many scoring option cases such as damage, heal, buff, draw, stun and poison.",
+  "renames": {
+   "lVar4": "closure",
+   "uVar5": "hasTargetCard",
+   "lVar8": "sourceCard",
+   "lVar8_3": "sourceCard2",
+   "plVar10": "closureThisCardRef",
+   "pfVar9": "baseValuePtr",
+   "lVar13_3": "sourceCard3",
+   "lVar13_5": "sourceCard4",
+   "fVar17": "multiplier",
+   "uVar5_2": "unused2",
+   "score_2": "totalScore",
+   "lVar4_7": "sourceCardRef"
+  }
+ },
+ "327ad1c": {
+  "summary": "Returns the unique id of a randomly chosen environment effect card from a list, or an empty string if the list is empty.",
+  "renames": {
+   "plVar2": "resultPtr"
+  }
+ },
+ "32a6960": {
+  "summary": "Predicate that checks whether a card's uniqueId equals the action's radio speaker card string.",
+  "renames": {
+   "bVar1": "charsEqual",
+   "uVar5_2": "mismatchFound"
+  }
+ },
+ "32a6988": {
+  "summary": "Predicate that checks whether a card's uniqueId equals the action's radio speaker card string.",
+  "renames": {
+   "bVar1": "charsEqual",
+   "uVar5_2": "mismatchFound"
+  }
+ },
+ "32a69dc": {
+  "summary": "Coroutine that waits a set time for a scripted action, ending early if the action can be skipped and the player skips.",
+  "renames": {
+   "fVar7": "deltaTime",
+   "plVar5": "tutorialManagerRef"
+  }
+ },
+ "32a6bc0": {
+  "summary": "Throws NotSupportedException because resetting this enumerator is not supported.",
+  "renames": {
+   "uVar2": "methodInfo"
+  }
+ },
+ "327b388": {
+  "summary": "Returns whether the current scripted action can be skipped, based on its first action data type.",
+  "renames": {
+   "bVar1": "canSkip"
+  }
+ },
+ "327b398": {
+  "summary": "Returns the scripted action at the current action counter from the turn data, or null if out of range.",
+  "renames": {
+   "lVar8": "elementAtMethod",
+   "lVar7": "klassA",
+   "lVar9": "klassB",
+   "uVar10": "scratchFlag",
+   "plVar3": "listInterface",
+   "puVar4": "interfaceVtable",
+   "piVar11": "interfaceOffsetPtr",
+   "iVar1": "listCount"
+  }
+ },
+ "327b3f0": {
+  "summary": "Returns whether a scripted action can be skipped, based on its first action data type.",
+  "renames": {
+   "bVar1": "canSkip",
+   "auVar4_x1": "unused1"
+  }
+ },
+ "327d204": {
+  "summary": "Returns the before-delay or after-wait time of the current scripted action.",
+  "renames": {
+   "auVar4_x1": "unused1",
+   "auVar5_x1": "unused2",
+   "iVar1": "actionIndex"
+  }
+ },
+ "327d324": {
+  "summary": "Returns whether a scripted action has at least one action data entry.",
+  "renames": {
+   "bVar1": "hasData"
+  }
+ },
+ "327d388": {
+  "summary": "Returns whether all scripted actions in the turn have been processed.",
+  "renames": {
+   "auVar1_x1": "unused1"
+  }
+ },
+ "327d3f4": {
+  "summary": "Returns whether the current player scripted action is waiting for the given card to be clicked.",
+  "renames": {
+   "bVar1": "hasMoreData",
+   "uVar5": "cardCheck"
+  }
+ },
+ "327d808": {
+  "summary": "Returns whether the current player scripted action is waiting for the given card to use its ability.",
+  "renames": {
+   "bVar1": "hasMoreData",
+   "uVar5": "cardCheck"
+  }
+ },
+ "327da1c": {
+  "summary": "Returns whether the current player scripted action is waiting for the card to change its desired attack type.",
+  "renames": {
+   "bVar1": "hasMoreData",
+   "uVar5": "cardCheck"
+  }
+ }
+}

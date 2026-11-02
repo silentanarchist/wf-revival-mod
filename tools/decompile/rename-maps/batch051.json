@@ -1,0 +1,416 @@
+{
+ "2f4852c": {
+  "summary": "Handles another player joining the battle room, reacting by connection status: restarts a reconnect, starts the match, or sends a wrong-room message.",
+  "renames": {
+   "plVar7": "logMessageRef",
+   "uStack_40": "unused1",
+   "uStack_48": "statusType"
+  }
+ },
+ "2f48964": {
+  "summary": "Logs a failed server connection and reports an error for connection statuses it does not handle.",
+  "renames": {
+   "uStack_40": "unused1",
+   "uStack_48": "statusType"
+  }
+ },
+ "2f48aa4": {
+  "summary": "Handles failure to join a room: leaves practice rooms, or cancels the search/reconnect when a reconnect room no longer exists.",
+  "renames": {
+   "uStack_40": "unused1",
+   "uVar1_2": "statusText",
+   "uVar2": "hasBattleManager"
+  }
+ },
+ "2f48c44": {
+  "summary": "Reacts to a network disconnect depending on connection status: leaves battle, attempts reconnection, or cancels searching.",
+  "renames": {
+   "uStack_40": "unused1",
+   "uStack_48": "statusType"
+  }
+ },
+ "2f48ea8": {
+  "summary": "After a random matchmaking join fails, goes offline for bot modes or either joins another event room or creates one after enough attempts.",
+  "renames": {
+   "iVar11": "baseLimit",
+   "iVar4": "attemptLimit",
+   "uStack_50": "unused1",
+   "uStack_58": "statusType",
+   "uVar12": "hasAlliancesManager"
+  }
+ },
+ "2f492e8": {
+  "summary": "Returns whether enough matchmaking attempts have failed that the client should create a room instead of joining one.",
+  "renames": {
+   "iVar1": "attemptLimit",
+   "iVar3": "defaultLimit"
+  }
+ },
+ "2f49334": {
+  "summary": "Handles a player disconnect event, marking the opponent disconnected or cancelling a practice match depending on connection status.",
+  "renames": {
+   "auVar6": "isOpponent",
+   "uStack_50": "unused1",
+   "uStack_58": "statusType",
+   "uVar4": "hasBattleManager"
+  }
+ },
+ "2f48268": {
+  "summary": "Marks the opponent as disconnected, notifies the battle manager, and sets status to waiting for opponent reconnection.",
+  "renames": {
+   "uVar1": "hasBattleManager"
+  }
+ },
+ "2f49a0c": {
+  "summary": "Coroutine step that shows queued battle tips with background colour and alpha, waits the tip duration, then removes the tip or hides the panel.",
+  "renames": {
+   "auVar8_x1": "unused1",
+   "in_s1": "colorG",
+   "in_s2": "colorB",
+   "uVar4": "isOuterNull"
+  }
+ },
+ "2f49cec": {
+  "summary": "Enumerator Reset that throws NotSupportedException.",
+  "renames": {
+   "uVar2": "resetMethodInfo"
+  }
+ },
+ "2f49534": {
+  "summary": "Returns the global variables object from the player data manager, if available.",
+  "renames": {
+   "uVar1": "hasPlayerDataManager",
+   "uVar3": "playerDataManager"
+  }
+ },
+ "2f49644": {
+  "summary": "Shows a 'can't do that' voice line and queues a tip message, starting the tip display coroutine if the tip panel is hidden.",
+  "renames": {
+   "auVar11": "coroutineOwner",
+   "auVar11_x1": "coroutineHandle",
+   "lVar4": "addMethod",
+   "plVar10": "slotPtr",
+   "register0x00000008": "stackPtr",
+   "unaff_x19": "pendingException",
+   "unaff_x20": "unused1",
+   "unaff_x21": "unused2",
+   "unaff_x30": "unused3"
+  }
+ },
+ "2f496a4": {
+  "summary": "Queues a heads-up tip message (unless it is spam) and starts the tip display coroutine if the panel is hidden.",
+  "renames": {
+   "auVar10": "coroutineOwner",
+   "auVar10_x1": "coroutineHandle",
+   "lVar4": "addMethod",
+   "plVar9": "slotPtr",
+   "register0x00000008": "stackPtr",
+   "unaff_x19": "pendingException",
+   "unaff_x20": "unused1",
+   "unaff_x21": "unused2",
+   "unaff_x30": "unused3"
+  }
+ },
+ "2f497f0": {
+  "summary": "Returns true if the new tip text equals the most recently queued tip, via reference and string comparison.",
+  "renames": {
+   "lVar1": "tipTextChars",
+   "uVar6_2": "charsDiffer"
+  }
+ },
+ "2f49880": {
+  "summary": "Returns whether the tip queue has reached the configured maximum size and holds more than one tip.",
+  "renames": {
+   "auVar4_x1": "unused1",
+   "bVar2": "isTooMany"
+  }
+ },
+ "2f49984": {
+  "summary": "Returns whether the tip queue contains any tips.",
+  "renames": {
+   "auVar1_x1": "unused1"
+  }
+ },
+ "2f498f8": {
+  "summary": "Creates the DisplayTip coroutine enumerator with the given background options.",
+  "renames": {
+   "lVar1": "enumerator"
+  }
+ },
+ "2f49d2c": {
+  "summary": "Checks whether a board criteria is met (turn owner, random chance, or count of matching targets compared to a reference value).",
+  "renames": {
+   "bVar1": "isPlayerTurn",
+   "piVar8": "referenceValuePtr",
+   "uStack_58": "unused1"
+  }
+ },
+ "2f4a13c": {
+  "summary": "Checks whether a card library satisfies a warlord's deck criteria by counting cards that match and comparing to the required count.",
+  "renames": {
+   "uStack_40": "unused1",
+   "uVar4_2": "optionsName"
+  }
+ },
+ "2f4a3a4": {
+  "summary": "Returns the remaining mana (an obscured int) of the player or enemy manager.",
+  "renames": {
+   "iVar1": "manaLeft",
+   "lVar2": "sideManager",
+   "uStack_30": "obscuredC",
+   "uStack_38": "obscuredB",
+   "uStack_40": "obscuredA",
+   "uStack_50": "obscuredCopyC",
+   "uStack_58": "obscuredCopyB",
+   "uStack_60": "obscuredCopyA"
+  }
+ },
+ "2f4a3bc": {
+  "summary": "Returns the total mana (an obscured int) of the player or enemy manager.",
+  "renames": {
+   "iVar1": "totalMana",
+   "lVar2": "sideManager",
+   "uStack_30": "obscuredC",
+   "uStack_38": "obscuredB",
+   "uStack_40": "obscuredA",
+   "uStack_50": "obscuredCopyC",
+   "uStack_58": "obscuredCopyB",
+   "uStack_60": "obscuredCopyA"
+  }
+ },
+ "2f4a508": {
+  "summary": "Sets the trait icon sprite and material on all icon renderers, toggles the inactive icons, and updates the counter text.",
+  "renames": {
+   "auVar12_part8": "unused1",
+   "iStack_74": "counterValue",
+   "lStack_70": "savedThis",
+   "puVar1": "originalMaterialRef",
+   "puVar2": "activeMaterialRef",
+   "uStack_68": "savedCounter",
+   "uVar3": "scratch1",
+   "uVar5": "counterRaw",
+   "uVar9": "cachedMaterial"
+  }
+ },
+ "2f4a688": {
+  "summary": "Sets the counter text to the given number and shows the counter only when it is positive.",
+  "renames": {
+   "iStack_14": "counterCopy"
+  }
+ },
+ "2f4a6e8": {
+  "summary": "Toggles between the with-counter and without-counter game objects.",
+  "renames": {
+   "uVar2": "withoutCounterActive"
+  }
+ },
+ "2f4a744": {
+  "summary": "Creates and sets up a DOTween float tween that fades the icon to a target alpha over a time.",
+  "renames": {
+   "lVar1": "applyToMethod"
+  }
+ },
+ "2f4a850": {
+  "summary": "Plays a yoyo scale pulse animation on the icon, killing any previous highlight animation first.",
+  "renames": {
+   "plVar2": "highlightAnimRef"
+  }
+ },
+ "2f4a958": {
+  "summary": "Tween setter that sets the nested fade group's alpha and recalculates its total alpha from its parent.",
+  "renames": {
+   "fVar7": "extraAlpha",
+   "uVar1": "unused1",
+   "uVar3": "isFadeGroupNull"
+  }
+ },
+ "2f4d43c": {
+  "summary": "On pointer enter, forwards to the scroll rect, notifies the card, and starts a drag begin event if the mouse is held.",
+  "renames": {
+   "auStack_170": "stackFrame",
+   "auVar22_x1": "catchResult",
+   "lStack_80": "savedHandler",
+   "lStack_88": "savedEventData",
+   "lStack_90": "savedList",
+   "lStack_d8": "stackCanary",
+   "lVar11_2": "gcHandleValue",
+   "pcStack_c8": "unused1",
+   "ppuStack_78": "savedMethodPtr",
+   "ppuVar12": "executeMethod",
+   "ppuVar14": "executeMethodAlias",
+   "puStack_100": "savedThreadPtr",
+   "puStack_98": "getItemMethod",
+   "puStack_a0": "poolTypeRef",
+   "puStack_b0": "errorFormatStr",
+   "puStack_d0": "savedTypeInfo",
+   "puStack_e8_2": "argSlot",
+   "puStack_e8_3": "argValue",
+   "puVar10": "delegateInfo",
+   "puVar20": "threadLocalBase",
+   "uStack_a8": "savedSize",
+   "uStack_b8": "savedIndex",
+   "uStack_c0": "savedScrollRect",
+   "uStack_e0": "savedClass",
+   "uStack_f0": "scratch1",
+   "uVar1": "nextIndex",
+   "uVar15_4": "pointerDragRaw",
+   "uVar18": "dragTarget"
+  }
+ },
+ "2f4d6c8": {
+  "summary": "On pointer exit, ends any drag, stops card description display, clears combat preview highlights and restores the card highlight state and colours.",
+  "renames": {
+   "puVar8": "fieldRef",
+   "uVar7_4": "pointerDragValue"
+  }
+ },
+ "2f4d928": {
+  "summary": "Handles dragging a card: starts an attack for cards in play, or begins moving a hand card into play when dragged far enough.",
+  "renames": {
+   "cVar3": "touchFlag",
+   "dVar20": "angleRadians",
+   "fVar16": "deltaX",
+   "fVar18": "cosAngle",
+   "fVar24": "angleDegrees",
+   "fVar25": "deltaSqrMagnitude",
+   "fVar26": "scratchY",
+   "fVar27": "upY",
+   "lVar8_5": "upVectorPtr",
+   "lVar8_7": "soundManager",
+   "uVar14_7": "zeroVector",
+   "uVar23": "depthZ"
+  }
+ },
+ "2f4da8c": {
+  "summary": "On end drag, forwards the end-drag event to the scroll rect's handlers.",
+  "renames": {
+   "auStack_170": "stackFrame",
+   "auVar22_x1": "catchResult",
+   "lStack_80": "savedHandler",
+   "lStack_88": "savedEventData",
+   "lStack_90": "savedList",
+   "lStack_d8": "stackCanary",
+   "lVar13_2": "gcHandleValue",
+   "pcStack_c8": "unused1",
+   "ppuStack_78": "savedMethodPtr",
+   "ppuVar14": "executeMethod",
+   "ppuVar16": "executeMethodAlias",
+   "puStack_100": "savedThreadPtr",
+   "puStack_98": "getItemMethod",
+   "puStack_a0": "poolTypeRef",
+   "puStack_b0": "errorFormatStr",
+   "puStack_d0": "savedTypeInfo",
+   "puStack_e8_2": "argSlot",
+   "puStack_e8_3": "argValue",
+   "puVar12": "delegateInfo",
+   "puVar20": "threadLocalBase",
+   "uStack_a8": "savedSize",
+   "uStack_b8": "savedIndex",
+   "uStack_c0": "savedScrollRect",
+   "uStack_e0": "savedClass",
+   "uStack_f0": "scratch1",
+   "uVar1": "nextIndex",
+   "uVar10": "catchClass"
+  }
+ },
+ "2f4dba8": {
+  "summary": "On begin drag, forwards to the scroll rect and records the current frame count.",
+  "renames": {
+   "iVar1": "lastFrame",
+   "iVar2": "currentFrame",
+   "uVar4": "hasCurrentCard"
+  }
+ },
+ "2f4dd04": {
+  "summary": "On pointer down, forwards to scroll rect, records touch position/time, and shows deck size or selects the card depending on its state.",
+  "renames": {
+   "puVar6": "logMethod",
+   "uVar4": "hasCurrentCard",
+   "uVar4_2": "devToolsEnabled"
+  }
+ },
+ "2f4de78": {
+  "summary": "On pointer up, forwards the pointer-up event to the scroll rect's handlers.",
+  "renames": {
+   "auStack_170": "stackFrame",
+   "auVar22_x1": "catchResult",
+   "lStack_80": "savedHandler",
+   "lStack_88": "savedEventData",
+   "lStack_90": "savedList",
+   "lStack_d8": "stackCanary",
+   "lVar13_2": "gcHandleValue",
+   "pcStack_c8": "unused1",
+   "ppuStack_78": "savedMethodPtr",
+   "ppuVar14": "executeMethod",
+   "ppuVar16": "executeMethodAlias",
+   "puStack_100": "savedThreadPtr",
+   "puStack_98": "getItemMethod",
+   "puStack_a0": "poolTypeRef",
+   "puStack_b0": "errorFormatStr",
+   "puStack_d0": "savedTypeInfo",
+   "puStack_e8_2": "argSlot",
+   "puStack_e8_3": "argValue",
+   "puVar12": "delegateInfo",
+   "puVar20": "threadLocalBase",
+   "uStack_a8": "savedSize",
+   "uStack_b8": "savedIndex",
+   "uStack_c0": "savedScrollRect",
+   "uStack_e0": "savedClass",
+   "uStack_f0": "scratch1",
+   "uVar1": "nextIndex",
+   "uVar10": "catchClass"
+  }
+ },
+ "2f4df94": {
+  "summary": "On pointer click, handles clicking a card: uses waystone, shows the card in hand or displays the large card view with effects.",
+  "renames": {
+   "auVar19_x1": "clickedCard",
+   "bVar13": "canDisplayLarge",
+   "fVar18": "currentTime",
+   "iVar5": "textureHeight",
+   "lStack_48": "cardTierNullable",
+   "lVar6_7": "cardDisplay",
+   "puVar10": "logMethod",
+   "uVar2": "unused1",
+   "uVar7": "hasCurrentCard",
+   "uVar7_2": "devToolsEnabled",
+   "uVar7_3": "isJustClickedCard"
+  }
+ },
+ "2f4e100": {
+  "summary": "Returns the collider's original size, initializing it first if it is still zero.",
+  "renames": {
+   "fVar1": "deltaX",
+   "fVar2": "deltaY",
+   "uVar3": "unused1"
+  }
+ },
+ "2f4e1d4": {
+  "summary": "Setter for the original box collider size.",
+  "renames": {}
+ },
+ "2f4e1e4": {
+  "summary": "Setter for the original box collider offset.",
+  "renames": {}
+ },
+ "2f4e180": {
+  "summary": "Stores the box collider's original size and offset, disables the big collider, and sets the in-hand size and offset.",
+  "renames": {
+   "fVar3": "originalHeight",
+   "in_s1": "scaledHeight"
+  }
+ },
+ "2f4e24c": {
+  "summary": "Restores the collider's normal size and offset when the card is not in hand, unless it is in the cemetery or removed.",
+  "renames": {
+   "bVar1": "isCemeteryOrRemoved"
+  }
+ },
+ "2f4e314": {
+  "summary": "Sets the box collider size and offset for a card in hand using the height multiplier.",
+  "renames": {
+   "fVar3": "originalHeight",
+   "in_s1": "scaledHeight"
+  }
+ }
+}

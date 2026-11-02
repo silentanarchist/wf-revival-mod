@@ -1,0 +1,510 @@
+{
+ "317de74": {
+  "summary": "Constructor for the deck info popup: allocates the card library list and sets default scale, close sound and OnOpen/OnCloseWindow delegates.",
+  "renames": {
+   "iVar1": "classInitState",
+   "puVar5": "closureStatics"
+  }
+ },
+ "3187bb4": {
+  "summary": "Throws NotSupportedException because Reset is not supported on this coroutine.",
+  "renames": {
+   "uVar2": "methodInfo"
+  }
+ },
+ "3187bf8": {
+  "summary": "Coroutine state machine for a tutorial click-and-hold pointer: shows start pointer, waits, shows click pointer and click effects with delays.",
+  "renames": {
+   "uVar2": "hasClickAnim"
+  }
+ },
+ "3187fa8": {
+  "summary": "Throws NotSupportedException because Reset is not supported on this coroutine.",
+  "renames": {
+   "uVar2": "methodInfo"
+  }
+ },
+ "3187fec": {
+  "summary": "Coroutine state machine for a tutorial click: shows the starting pointer, waits, then shows the clicked pointer and waits again.",
+  "renames": {
+   "auVar5_x1": "methodArg",
+   "auVar5": "selfRef"
+  }
+ },
+ "3188160": {
+  "summary": "Throws NotSupportedException because Reset is not supported on this coroutine.",
+  "renames": {
+   "uVar2": "methodInfo"
+  }
+ },
+ "3186d40": {
+  "summary": "Stops the pointer animation by clearing the active flag, killing the move tween and checking the pointer object.",
+  "renames": {
+   "uVar1": "hasPointer"
+  }
+ },
+ "3186dec": {
+  "summary": "Shows the tutorial text background, sets the tutorial text, and toggles the pointer and glow objects.",
+  "renames": {
+   "uVar1": "hasObject"
+  }
+ },
+ "3186f7c": {
+  "summary": "Hides the tutorial text background and loads the cursor and background-light sprites for the given army onto the pointer.",
+  "renames": {
+   "uVar2": "hasBgText",
+   "uStack_38": "bgLightSprite",
+   "uStack_28": "pointerSprite"
+  }
+ },
+ "31870b0": {
+  "summary": "Activates the pointer, bumps the animation counter, and starts the click, hold or drag coroutine depending on pointer action type.",
+  "renames": {
+   "param_7": "orientationArg",
+   "unaff_x19": "thrownException",
+   "unaff_x20": "unused1",
+   "unaff_x21": "unused2",
+   "unaff_x30": "unused3",
+   "auVar5": "throwResult",
+   "auVar5_x1": "coroutineArg",
+   "lVar4": "coroutineHandle"
+  }
+ },
+ "31871c8": {
+  "summary": "Creates and returns the ClickInPosition coroutine state object with the given position and orientation.",
+  "renames": {
+   "lVar1": "stateMachine",
+   "param_5": "orientationArg"
+  }
+ },
+ "3187268": {
+  "summary": "Creates and returns the ClickAndHold coroutine state object with the given position and orientation.",
+  "renames": {
+   "lVar1": "stateMachine",
+   "param_5": "orientationArg"
+  }
+ },
+ "3187308": {
+  "summary": "Creates and returns the ClickAndDrag coroutine state object with start position, end position and orientation.",
+  "renames": {
+   "lVar1": "stateMachine",
+   "param_6": "outerPointer",
+   "param_7": "orientationArg"
+  }
+ },
+ "3187434": {
+  "summary": "Positions, scales, rotates and fades the tutorial pointer at the starting click position, flipped depending on orientation.",
+  "renames": {
+   "lVar3": "vector3Statics",
+   "uVar5": "scaleY",
+   "uVar6": "scaleZ",
+   "bVar1": "activeFlag"
+  }
+ },
+ "31876a4": {
+  "summary": "Moves the tutorial pointer to the click position, scales it, makes it opaque and spawns the click effect object.",
+  "renames": {
+   "lVar3": "vector3Statics",
+   "puVar4": "quaternionStatics",
+   "uVar2": "hasClickEffect",
+   "uVar9": "savedOrientation",
+   "uVar10": "savedClickPos",
+   "uVar11": "rotationY",
+   "uVar12": "rotationZ",
+   "extraout_s0_00": "unused1",
+   "extraout_s0": "unused2",
+   "param_5": "orientationFlag"
+  }
+ },
+ "3187610": {
+  "summary": "Computes the pointer position offset to the left or right of the given position depending on orientation.",
+  "renames": {
+   "fVar2": "offsetX"
+  }
+ },
+ "31881a8": {
+  "summary": "Finds the target GameObject by unique id, logging an error if it cannot be found.",
+  "renames": {
+   "uVar1": "found"
+  }
+ },
+ "3194360": {
+  "summary": "Updates the canvas group alpha from the scroll rect position, scaled and clamped between 0 and 1.",
+  "renames": {
+   "fVar3": "scaledValue",
+   "fVar4": "invertedValue",
+   "fVar5": "finalAlpha"
+  }
+ },
+ "31afbc4": {
+  "summary": "Initializes a BattleAction with its action type, caster card, raw card data and player-block flag.",
+  "renames": {
+   "uVar1": "hasCasterCard"
+  }
+ },
+ "31afde4": {
+  "summary": "Returns whether two card effects share the same duration and timing settings, taking player ownership into account.",
+  "renames": {
+   "bVar1": "sameOwner"
+  }
+ },
+ "31afec0": {
+  "summary": "Checks whether two effects have enchanting cards belonging to the same side (player or enemy).",
+  "renames": {
+   "uVar1": "hasEnchantingCard"
+  }
+ },
+ "31aff98": {
+  "summary": "Returns whether another effect is equivalent to this one, comparing buff type, enchanter, timing and stat changes.",
+  "renames": {
+   "bVar1": "sameTiming",
+   "uVar3": "differentEnchanter",
+   "method_00": "unused1"
+  }
+ },
+ "31b0230": {
+  "summary": "Returns true and outputs the color if its rarity matches the requested rarity, otherwise outputs white.",
+  "renames": {
+   "auVar3": "whiteColor",
+   "auVar3_x1": "whiteColorExtra"
+  }
+ },
+ "31b0260": {
+  "summary": "Constructor setting the rarity color default to white.",
+  "renames": {
+   "auVar1": "whiteColor",
+   "auVar1_x1": "whiteColorExtra"
+  }
+ },
+ "31b0174": {
+  "summary": "Looks up the color configured for a card rarity, logging an error if none is found.",
+  "renames": {
+   "auVar9": "thrownResult",
+   "auVar9_part8": "thrownResultPart",
+   "auVar8": "whiteColor",
+   "auVar8_x1": "whiteColorExtra",
+   "iVar2": "storedRarity",
+   "uVar3": "storedColor",
+   "lVar7": "colorEntry",
+   "extraout_x0": "unused1"
+  }
+ },
+ "31b0e64": {
+  "summary": "Returns whether the acting card of this damage info belongs to the player, defaulting to true with an error if missing.",
+  "renames": {
+   "bVar1": "result",
+   "uVar2": "hasActingCard"
+  }
+ },
+ "31b0f30": {
+  "summary": "Searches the mark of chaos list for the card matching the given type and returns it.",
+  "renames": {
+   "lVar2": "markEntry",
+   "lStack_38": "foundCard"
+  }
+ },
+ "31b6ff0": {
+  "summary": "Makes a deep copy of a HandEffect, copying its target criteria and card effect.",
+  "renames": {}
+ },
+ "31d2e68": {
+  "summary": "Static constructor creating the singleton closure class instance.",
+  "renames": {
+   "uVar1": "newInstance"
+  }
+ },
+ "31d2fac": {
+  "summary": "Throws NotSupportedException because Reset is not supported on this coroutine.",
+  "renames": {
+   "uVar2": "methodInfo"
+  }
+ },
+ "31d17e0": {
+  "summary": "Thread-safe event add accessor for OnSearchCancelled using compare-exchange, with a fallback remove path.",
+  "renames": {
+   "lVar5_2": "currentHandler",
+   "auVar6_x1": "removeValue"
+  }
+ },
+ "31d187c": {
+  "summary": "Thread-safe event remove accessor for OnSearchCancelled.",
+  "renames": {}
+ },
+ "31d19c8": {
+  "summary": "Sets up the MatchMakerManager singleton and initializes or reconnects the Photon network connection with player name and auth values.",
+  "renames": {
+   "uVar1": "disconnectOnPause",
+   "uVar5": "hasInstance",
+   "this_00": "photonHelper",
+   "lVar6": "playerName",
+   "lVar11": "authValues",
+   "uVar12": "matchMakerStatic",
+   "lVar9_3": "playerData",
+   "auStack_48": "boolBuffer",
+   "uStack_60": "unused1",
+   "uStack_58": "unused2",
+   "in_x3": "unused3"
+  }
+ },
+ "31d1c04": {
+  "summary": "Overload of FindMatch that reads the play mode from the event and forwards to the main FindMatch.",
+  "renames": {
+   "uVar1": "playMode",
+   "auStack_b8": "battleDataCopy"
+  }
+ },
+ "31d20a4": {
+  "summary": "Overload of FindMatch that reorders arguments and forwards to the main FindMatch.",
+  "renames": {
+   "auStack_b8": "battleDataCopy"
+  }
+ },
+ "31d1d1c": {
+  "summary": "Builds match data for a matchmaking search, sets gameplay data and draft victories, stores it and starts searching for an opponent.",
+  "renames": {
+   "uVar1": "draftStage",
+   "lVar2_3": "eventInfo",
+   "piVar5": "interfaceOffsetPtr",
+   "auStack_c8": "battleDataCopy"
+  }
+ },
+ "31d2130": {
+  "summary": "Starts a practice or bot match: builds match data, sets gameplay data and room name, moves to battle room and starts battle after delay.",
+  "renames": {
+   "lVar6": "eventClass",
+   "lVar6_3": "gameplayEventInfo",
+   "lVar6_4": "battleNetworkManager",
+   "uVar7": "interfaceCount",
+   "piVar8": "interfaceOffsetPtr",
+   "auStack_c8": "battleDataCopy"
+  }
+ },
+ "31d2550": {
+  "summary": "Starts a replay match by creating match data from a battle recording and launching the battle after a delay.",
+  "renames": {
+   "uStack_50": "emptyData1",
+   "uStack_a8": "emptyData2",
+   "uStack_b0": "emptyData3",
+   "uStack_98": "emptyData4",
+   "uStack_a0": "emptyData5",
+   "uStack_88": "emptyData6",
+   "uStack_90": "emptyData7",
+   "uStack_78": "emptyData8",
+   "uStack_80": "emptyData9",
+   "uStack_68": "emptyData10",
+   "uStack_70": "emptyData11",
+   "uStack_58": "emptyData12",
+   "uStack_60": "emptyData13",
+   "plVar2": "matchDataSlot"
+  }
+ },
+ "31d26ac": {
+  "summary": "Switches a matchmaking battle to a bot opponent, if allowed, and connects to the battle room with the new match data.",
+  "renames": {
+   "uVar5": "devToolsFlag",
+   "uVar10": "connectionStatus",
+   "lVar12": "battleNetworkManager",
+   "uStack_48": "statusType",
+   "uStack_38": "statusValue",
+   "uStack_40": "unused1",
+   "uStack_50": "matchTypeValue",
+   "uStack_58": "unused2",
+   "plVar3": "matchDataSlot",
+   "lVar11": "currentMatchData",
+   "uVar1": "matchTypeId",
+   "uVar8_3": "matchTypeString",
+   "puVar7": "loggerMethod"
+  }
+ },
+ "31d293c": {
+  "summary": "Starts a bot battle: cancels the opponent search and begins the delayed battle start coroutine.",
+  "renames": {
+   "unaff_x19": "thrownException",
+   "unaff_x20": "savedSelf",
+   "unaff_x21": "unused1",
+   "unaff_x30": "unused2",
+   "auVar5": "throwResult",
+   "auVar5_x1": "coroutineArg"
+  }
+ },
+ "31d24d4": {
+  "summary": "Creates the delayed battle start coroutine object with the given wait time.",
+  "renames": {}
+ },
+ "31d29e0": {
+  "summary": "Handles a matchmaking error by notifying listeners and showing an error popup with a close button.",
+  "renames": {
+   "uVar1": "submitButtonText"
+  }
+ },
+ "31d2b88": {
+  "summary": "Handles a found match by notifying listeners, logging, showing a Match Found popup and playing the sound.",
+  "renames": {
+   "iVar1": "debugClassInit"
+  }
+ },
+ "31d2cd0": {
+  "summary": "Closes the matchmaking error popup and fades the loading menu overlay.",
+  "renames": {
+   "uVar1": "getInstanceMethod",
+   "lVar2": "displayClass",
+   "lVar7": "loadingMenu",
+   "plVar4": "loadingGraphic"
+  }
+ },
+ "31d2d70": {
+  "summary": "Constructor setting firstExecution and a default empty OnSearchCancelled delegate.",
+  "renames": {
+   "lVar1": "closureClass",
+   "puVar3": "closureStatics"
+  }
+ },
+ "31d3f40": {
+  "summary": "Static constructor creating the singleton closure class instance.",
+  "renames": {
+   "uVar1": "newInstance"
+  }
+ },
+ "31d4020": {
+  "summary": "Handles an opponent desync: leaves the battle or ends it as cancelled, setting results, saving the match and finishing the battle.",
+  "renames": {
+   "lVar6_3": "networkManager",
+   "lVar6_6": "activeBattle",
+   "uStack_100": "tutorialEnemyDeck",
+   "auStack_168": "battleDataCopy",
+   "auStack_f8": "tutorialBattleData",
+   "uStack_90": "battleDataBuf",
+   "uStack_88": "uiStateBuf",
+   "uStack_88_part4": "uiStateBufPart",
+   "uStack_78": "scratch2",
+   "uStack_80": "typeInfo",
+   "uStack_68": "zero1",
+   "uStack_70": "scratch3",
+   "uStack_70_part4": "scratch3Part",
+   "uStack_a8": "logTemp1",
+   "uStack_a0": "battleStageValue",
+   "uStack_50": "uiStateValue",
+   "uStack_50_part4": "uiStateValuePart",
+   "uStack_e8": "enemyCopyC",
+   "uStack_c8": "playerCopyC",
+   "uStack_d0_2": "playerCopyA",
+   "uStack_c0": "playerCopyB",
+   "uStack_f0_2": "enemyCopyA",
+   "uStack_e0": "enemyCopyB",
+   "auStack_48": "typeInfoBuf",
+   "abStack_44": "isPlayerSide",
+   "uVar3": "obscuredValue",
+   "uVar5_2": "obscuredFlag",
+   "iVar4": "eloRating",
+   "iVar4_2": "enemySkullArg",
+   "lVar8_2": "resultOrClass",
+   "piVar13": "interfaceOffsetPtr",
+   "lVar12": "enemyData",
+   "lVar15": "rankedResultRef",
+   "dVar16": "minutesElapsed",
+   "auVar17": "isBattleValid",
+   "auVar17_2": "zeroObscuredBool",
+   "auVar17_part8": "zeroObscuredBoolPart"
+  }
+ },
+ "31d3044": {
+  "summary": "Subscribes error-handling callbacks to battle manager events such as connection status, reconnect, desync and save failure.",
+  "renames": {
+   "lVar6_2": "eventOwner"
+  }
+ },
+ "31d3048": {
+  "summary": "Subscribes error-handling callbacks to battle manager events such as connection status, reconnect, desync and save failure.",
+  "renames": {
+   "lVar6_2": "eventOwner"
+  }
+ },
+ "31d3408": {
+  "summary": "Shows a popup warning that saving the match result failed, with a submit button invoking the provided action.",
+  "renames": {
+   "uVar1": "failText"
+  }
+ },
+ "31d3518": {
+  "summary": "Unsubscribes the GameBlocked handler from the player data manager when destroyed.",
+  "renames": {
+   "uVar2": "hasPlayerData",
+   "uVar4": "playerDataStatic",
+   "lVar6": "playerData"
+  }
+ },
+ "31d38a4": {
+  "summary": "Shows a popup about opponent sync error that cancels the match when submitted.",
+  "renames": {
+   "lVar2": "closure",
+   "uVar1": "getInstanceMethod",
+   "this_00": "windowsManager"
+  }
+ },
+ "31d3a08": {
+  "summary": "Reacts to battle connection status changes by showing reconnecting or waiting popups, or clearing windows on disconnect or forfeit; decompilation is garbled by inlined array helpers.",
+  "renames": {
+   "uVar13": "hasWindow",
+   "uVar13_2": "compareResult",
+   "unaff_x19": "unused1",
+   "unaff_x20": "unused2",
+   "unaff_x20_2": "unused3",
+   "unaff_x21": "unused4",
+   "unaff_x22": "unused5",
+   "unaff_x23": "unused6",
+   "unaff_x24": "objectArray",
+   "uStack_70": "textBuf1",
+   "uStack_68": "textBuf2",
+   "uStack_60": "textBuf3",
+   "uStack_50": "textCopy1",
+   "uStack_48": "textCopy2",
+   "uStack_40": "textCopy3",
+   "iStack_38": "newStatusValue",
+   "iVar7": "interfaceOffset",
+   "uVar10": "startOffset",
+   "uVar25": "savedArg",
+   "puVar20": "errorMessage",
+   "puVar2": "stackPtr1",
+   "puVar3": "stackPtr2",
+   "puVar4": "stackPtr3",
+   "puVar5": "stackPtr4",
+   "pcVar26": "methodPtr",
+   "plVar21_3": "element",
+   "lVar23": "searchValue",
+   "lVar24_5": "objArray",
+   "lVar12_3": "reverseIndex",
+   "auVar27_x1": "searchTarget"
+  }
+ },
+ "31d3cfc": {
+  "summary": "Updates or shows the reconnect popup with a waiting or lost-connection message plus a mm:ss countdown.",
+  "renames": {
+   "puVar1": "messageLabelPtr",
+   "uStack_40": "textZero3",
+   "uStack_50": "textCopy1",
+   "uStack_48": "textCopy2",
+   "uStack_70": "textBuf1",
+   "uStack_68": "textBuf2",
+   "uStack_60": "textBuf3"
+  }
+ },
+ "31d3bb0": {
+  "summary": "Shows a disconnection popup naming the local or opponent player, adding a wait-for-connection line for the local player.",
+  "renames": {
+   "uVar3": "stringValue",
+   "puVar1": "labelPtr",
+   "uStack_50": "textCopy1",
+   "uStack_48": "textCopy2",
+   "uStack_40": "textCopy3",
+   "uStack_70": "textBuf1",
+   "uStack_68": "textBuf2",
+   "uStack_60": "textBuf3"
+  }
+ },
+ "3186d44": {
+  "summary": "Stops the pointer animation by clearing the active flag, killing the move tween and checking the pointer object.",
+  "renames": {
+   "uVar1": "hasPointer"
+  }
+ }
+}

@@ -1,0 +1,408 @@
+{
+ "3281dc4": {
+  "summary": "Sets up tutorial starting troops for player and enemy, spawning them and repositioning minions on the board.",
+  "renames": {
+   "auVar12_x1": "unused1",
+   "in_s1": "floatArg",
+   "uVar1": "hasLeftMinionCopy",
+   "uVar10": "zeroFlag",
+   "uVar4": "hasTutorialStage",
+   "uVar9": "nextFloatArg"
+  }
+ },
+ "3281e90": {
+  "summary": "Creates each starting troop for a side, hides card shadow and repositions all minions on that side of the board.",
+  "renames": {
+   "in_s1": "floatArg",
+   "uVar1": "hasLeftMinionCopy",
+   "uVar10": "zeroFlag",
+   "uVar3": "hasLeftMinion",
+   "uVar9": "nextFloatArg"
+  }
+ },
+ "3281f54": {
+  "summary": "Instantiates a starting troop card for a side, sets it up as a unit in play, places it in a slot and adds it to unitsInPlay.",
+  "renames": {
+   "extraout_x1": "unused1",
+   "method_00": "isPlayerCopy",
+   "plVar5": "itemSlot"
+  }
+ },
+ "328102c": {
+  "summary": "Assigns the next unit-in-play order counter to a card, increments the counter and registers the card as in play.",
+  "renames": {
+   "puVar1": "counterPtr",
+   "uStack_50": "counterValue",
+   "uStack_60": "counterFakeActive",
+   "uStack_68": "counterInited",
+   "uStack_70": "counterCopy",
+   "uStack_74": "incFakeActive",
+   "uStack_7c": "incInited",
+   "uStack_a0": "counterCopy2",
+   "uVar2": "orderValue"
+  }
+ },
+ "3282148": {
+  "summary": "Selects a minion manager or global vars based on card type and side to get the unit size on board.",
+  "renames": {
+   "iVar1": "cardTypeValue",
+   "uVar2": "cardTypeHigh"
+  }
+ },
+ "3281448": {
+  "summary": "Sets starting mana, psychic, plasma and spirit stone values for a side from the hero data and updates the mana UI holders.",
+  "renames": {
+   "cVar4": "scenarioFlag",
+   "iVar6_3": "manaArgB",
+   "iVar7_3": "tutorialBonusMana",
+   "iVar7_4": "manaArgA",
+   "iVar7_5": "questPointsValue",
+   "lVar11_2": "vfxSettings",
+   "method_04": "unused1",
+   "piVar10": "valuePtr",
+   "uStack_100": "scratch100",
+   "uStack_108": "scratch108",
+   "uStack_110": "scratch110",
+   "uStack_54": "scratch54",
+   "uStack_5c": "scratch5C",
+   "uStack_64": "scratch64",
+   "uStack_68": "scratch68",
+   "uStack_70": "scratch70",
+   "uStack_78": "scratch78",
+   "uStack_7c": "scratch7C",
+   "uStack_84": "scratch84",
+   "uStack_8c": "scratch8C",
+   "uStack_90": "scratch90",
+   "uStack_98": "scratch98",
+   "uStack_a0": "scratchA0",
+   "uStack_a4": "scratchA4",
+   "uStack_ac": "scratchAC",
+   "uStack_b4": "scratchB4",
+   "uStack_e0": "scratchE0",
+   "uStack_e8": "scratchE8",
+   "uStack_f0": "scratchF0"
+  }
+ },
+ "32822b4": {
+  "summary": "Returns the starting mana for a side depending on whether the player goes first.",
+  "renames": {
+   "piVar3": "startingManaPtr"
+  }
+ },
+ "328230c": {
+  "summary": "Shows the tutorial pointer animation or tip for the current scripted action, positioning it by action type.",
+  "renames": {
+   "fVar17": "pointerEndX",
+   "fVar18": "targetCardPosX",
+   "fVar20": "staticVectorX",
+   "fVar21": "baseOffsetY",
+   "fVar22_3": "pointerStartPos",
+   "fVar23": "startY",
+   "fVar25": "endY",
+   "in_s1": "floatArg1",
+   "in_s2": "floatArg2",
+   "in_x4": "unused1",
+   "pfVar13": "zeroVectorPtr",
+   "puVar10": "loggerMethod",
+   "uStack_b0": "scratchB0",
+   "uVar15_2": "actionTypeName",
+   "uVar3": "devToolsActive"
+  }
+ },
+ "32815cc": {
+  "summary": "Creates the warlord starting troops in play for a side and repositions that side minions on the board.",
+  "renames": {
+   "in_s1": "floatArg",
+   "uVar1": "hasLeftMinionCopy",
+   "uVar10": "zeroFlag",
+   "uVar3": "hasLeftMinion",
+   "uVar9": "nextFloatArg"
+  }
+ },
+ "3282720": {
+  "summary": "Returns the localized warcry text for a side from its selected cosmetic item or the default.",
+  "renames": {
+   "this_00": "playerDataManager",
+   "uVar2": "hasCosmetic"
+  }
+ },
+ "3282904": {
+  "summary": "Returns the cardback sprites for a side from its selected cardback cosmetic, or an empty pair.",
+  "renames": {
+   "alStack_30": "resultSprites",
+   "this_01": "playerDataManager",
+   "uVar2": "hasCardback"
+  }
+ },
+ "3282ac8": {
+  "summary": "Unloads the cardback asset references of both player and enemy cosmetic items.",
+  "renames": {
+   "lVar6": "playerDataManager",
+   "method_00": "unused1",
+   "uVar1": "cacheKey",
+   "uVar5": "hasItem"
+  }
+ },
+ "3281bac": {
+  "summary": "Instantiates the full hero (daimyo) card for a side, registers it in unitsInPlay and sets up the player manager.",
+  "renames": {
+   "plVar7": "itemSlot",
+   "uVar4": "hasSecretIdentity"
+  }
+ },
+ "3282e1c": {
+  "summary": "Loads and returns the card animation for a trait effect given trait, trigger and army, using addressables.",
+  "renames": {
+   "lStack_40": "handlePart3",
+   "lStack_48": "handlePart2",
+   "lStack_50": "handlePart1",
+   "lVar9": "methodInfoPtr",
+   "uStack_60": "waitOpPart3",
+   "uStack_68": "waitOpPart2",
+   "uStack_70": "waitOpPart1",
+   "uStack_78": "loadOpPart3",
+   "uStack_80": "loadOpPart2",
+   "uStack_88": "loadOpPart1",
+   "uVar6": "addressKey"
+  }
+ },
+ "3282e30": {
+  "summary": "Preloads the animation assets of every trait effect for a trait and army.",
+  "renames": {
+   "lStack_40": "currentTraitEffect",
+   "lStack_58": "enumeratorPart",
+   "puStack_60": "enumeratorRef",
+   "uStack_48": "enumeratorPart2",
+   "uStack_50": "enumeratorState",
+   "uVar2": "hasNext"
+  }
+ },
+ "3282fdc": {
+  "summary": "Releases addressable assets, removes voice line listeners and clears the BattleManager instance on destroy.",
+  "renames": {
+   "auVar3": "managerExists",
+   "auVar3_x1": "unused1",
+   "method_00": "unused2"
+  }
+ },
+ "32831c8": {
+  "summary": "Handles finishing leaving a battle: either sets post-battle UI state or loads main menu or starts a tutorial match.",
+  "renames": {
+   "auStack_168": "matchParamsCopy",
+   "auStack_f8": "tutorialMatchData",
+   "auVar6": "thisNotNull",
+   "bVar1": "tutorialsDone",
+   "lVar2_4": "matchMaker",
+   "uStack_100": "scratch100",
+   "uStack_38": "scratch38",
+   "uStack_38_part4": "scratch38Part4",
+   "uStack_40": "scratch40",
+   "uStack_48": "scratch48",
+   "uStack_50": "scratch50",
+   "uStack_50_part4": "scratch50Part4",
+   "uStack_58": "scratch58",
+   "uStack_60": "scratch60",
+   "uStack_68": "scratch68",
+   "uStack_70": "scratch70",
+   "uStack_78": "scratch78",
+   "uStack_80": "scratch80",
+   "uStack_88": "scratch88",
+   "uStack_90": "scratch90"
+  }
+ },
+ "3283564": {
+  "summary": "Receives the enemy mulligan choices and environment card, stores them, confirms receipt and hides the mulligan wait text.",
+  "renames": {
+   "auVar11": "trueFlag",
+   "puVar4": "loggerMethod",
+   "uVar1": "warnMessage",
+   "uVar5": "zeroArg"
+  }
+ },
+ "3283690": {
+  "summary": "Marks the mulligan ack as received and logs whether the enemy mulligan was received.",
+  "renames": {
+   "auVar2": "trueFlag"
+  }
+ },
+ "3283754": {
+  "summary": "Converts a BattleAction into a PlayerAction for network sending, filling type, ids, position, counter and timestamp.",
+  "renames": {
+   "lVar2": "objectType",
+   "uStack_64": "incFakeActive",
+   "uStack_6c": "incInited",
+   "uStack_80": "counterFakeActive",
+   "uStack_88": "counterInited",
+   "uStack_90": "counterCopy",
+   "uStack_a0": "counterFakeActive2",
+   "uStack_a8": "counterInited2",
+   "uStack_b0": "counterCopy2",
+   "uVar3": "actionNumber",
+   "uVar5": "hasActor",
+   "uVar6": "hasTarget"
+  }
+ },
+ "32839e0": {
+  "summary": "Converts a received PlayerAction into a BattleAction for the local game, resolving cards by id and positions.",
+  "renames": {
+   "alStack_138": "targetCardSlot",
+   "auStack_44": "boolSlot",
+   "iStack_104": "posRow",
+   "iStack_108": "posColumn",
+   "iVar1": "packedPos",
+   "lStack_140": "actingCard",
+   "puVar6": "isPlayerRef",
+   "uStack_10c": "hasPositionFlag",
+   "uStack_110": "attackTypeCopy",
+   "uStack_148": "actionType",
+   "uStack_150": "actionTypeCopy",
+   "uStack_158": "scratchLen",
+   "uStack_88": "hasTargetFlag",
+   "uVar4": "hasCard",
+   "uVar5": "actionTypeName"
+  }
+ },
+ "3284884": {
+  "summary": "Logs a battle action in the proper action list and, in networked games, sends it to the opponent via a Photon RPC.",
+  "renames": {
+   "auStack_130": "battleActionCopy",
+   "auVar10_x1": "unused1",
+   "extraout_x1": "unused2",
+   "method_01": "unused3",
+   "pcStack_60": "unused4",
+   "plVar5": "itemSlot",
+   "uRam0000000006b720a8": "intClass",
+   "uStack_38": "scratch38",
+   "uStack_38_part4": "scratch38Part4",
+   "uStack_40": "scratch40",
+   "uStack_40_part1": "scratch40Part1",
+   "uStack_48": "scratch48",
+   "uStack_48_part4": "scratch48Part4",
+   "uStack_50": "scratch50",
+   "uVar6": "exception"
+  }
+ },
+ "3284ac8": {
+  "summary": "Records a received player action in the enemy action log and queues a remote action for execution.",
+  "renames": {
+   "alStack_68": "actionSlot",
+   "auStack_230": "battleActionCopy",
+   "auVar7_x1": "unused1",
+   "lVar2": "listAddMethod",
+   "plVar6": "itemSlot",
+   "uStack_12c": "isPlayerSlot",
+   "uStack_130": "actionTypeSlot"
+  }
+ },
+ "3284b9c": {
+  "summary": "Builds a remote-action BattleAction from a PlayerAction and queues it as an auto action.",
+  "renames": {
+   "alStack_68": "actionSlot",
+   "auStack_230": "battleActionCopy",
+   "uStack_12c": "isPlayerSlot",
+   "uStack_130": "actionTypeSlot"
+  }
+ },
+ "3284ea0": {
+  "summary": "Handles a disconnect during battle depending on battle stage, showing the disconnection popup or waiting for last actions.",
+  "renames": {
+   "acStack_34": "isPlayerSlot",
+   "auVar6": "trueFlag",
+   "bVar2": "shouldWait",
+   "method_00": "unused1",
+   "uStack_48": "enumTypeLength",
+   "uStack_50": "enumType",
+   "uVar5": "resultText"
+  }
+ },
+ "32851d0": {
+  "summary": "Returns true if the opponent claims the match finished or actions are still queued.",
+  "renames": {
+   "auVar5": "claimsFinished",
+   "bVar2": "shouldWait"
+  }
+ },
+ "3285344": {
+  "summary": "Stops the opponent last-actions coroutine and the forfeit-disconnected-enemy coroutine.",
+  "renames": {
+   "uStack_48": "spanLength",
+   "uStack_50": "spanPtr"
+  }
+ },
+ "3285104": {
+  "summary": "Updates connection status for a disconnect and restarts the reconnect or forfeit coroutine, pausing the clock for the enemy.",
+  "renames": {
+   "lStack_30": "methodNameCopy",
+   "lVar5_2": "coroutineName",
+   "pcStack_40": "spanTempPtr",
+   "pcStack_60": "spanPtr",
+   "plVar6": "coroutineNamePtr",
+   "uStack_28": "exceptionCopy",
+   "uStack_38": "spanTempLength",
+   "uStack_58": "spanLength"
+  }
+ },
+ "3285430": {
+  "summary": "Handles failure to reconnect: resigns the player, marks disconnection or cancels a not-yet-started match.",
+  "renames": {
+   "lVar3_3": "uiStateName",
+   "lVar4_2": "playerDataManager",
+   "method_00": "oldStatus",
+   "uStack_38": "uiStateCopy",
+   "uStack_40": "scratchLen",
+   "uVar2": "emptyString"
+  }
+ },
+ "3285908": {
+  "summary": "Handles a successful reconnection: restores connected status, unpauses clock, resends mulligan or lost actions.",
+  "renames": {
+   "auVar5": "hasClock",
+   "auVar5_x1": "unused1",
+   "uStack_40": "scratchLen",
+   "uVar2_2": "uiStateName"
+  }
+ },
+ "3285a88": {
+  "summary": "Sends the player mulligan and environment card to the opponent via RPC; the rest is inlined Photon RPC and collection code.",
+  "renames": {
+   "apcStack_b0": "stackMethodPtr",
+   "auStack_34": "targetCountBuf",
+   "auVar36": "thrown3",
+   "auVar36_part8": "thrown3Part8",
+   "auVar36_x1": "thrown3X1",
+   "auVar37_x1": "methodInfoArg",
+   "auVar38": "thrown2",
+   "auVar38_part8": "thrown2Part8",
+   "cVar3": "groupByte",
+   "iVar20": "bucketCount",
+   "lStack_48": "savedMethodInfo",
+   "lStack_50": "savedMulligan",
+   "lStack_58": "savedComms",
+   "lVar17": "unusedObj",
+   "pcStack_70": "stackMethodPtr2",
+   "piVar24": "interfaceMapPtr",
+   "piVar34": "entryPtr",
+   "plStack_60": "savedLogger",
+   "plStack_90": "savedStack90",
+   "plVar18": "rpcParameters",
+   "ppcVar4": "stackFrame",
+   "puVar15": "messagePrefix",
+   "puVar22": "messageSuffix",
+   "puVar32": "methodPtrA",
+   "puVar33": "methodPtrB",
+   "uRam0000000006b72078": "charClass",
+   "uRam0000000006b72098": "shortClass",
+   "uRam0000000006b720a8": "intClass",
+   "uStack_64": "scratch64",
+   "uVar23": "interfaceCount",
+   "uVar25": "bucketIndex",
+   "uVar31_2": "entryIndex",
+   "uVar7_2": "remainingCount",
+   "uVar9_2": "thrownException",
+   "unaff_x25": "unused25",
+   "unaff_x26": "unused26",
+   "unaff_x27": "unused27",
+   "unaff_x29": "unused29"
+  }
+ }
+}

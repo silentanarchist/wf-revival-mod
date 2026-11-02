@@ -1,0 +1,304 @@
+{
+ "2f44768": {
+  "summary": "Checks whether the card has every trait in a combination and, if so, adds a combination enchantment effect unless one already exists.",
+  "renames": {
+   "lVar2": "closure",
+   "uVar4": "hasNext",
+   "uStack_50": "enumState",
+   "puStack_48": "enumPtr",
+   "uStack_40": "currentTrait",
+   "plVar6": "closurePtr",
+   "uStack_58": "scratch1",
+   "puStack_60": "scratch2"
+  }
+ },
+ "2f443f8": {
+  "summary": "Adds an enchantment effect to the card, records it in active enchantments and effects, and updates status animations and action flags for traits.",
+  "renames": {
+   "uVar4": "isEnchantmentNull",
+   "auVar14": "obscuredFlag",
+   "uStack_80": "enumState",
+   "uVar2": "staticsValue",
+   "uVar4_2": "devToolsOn",
+   "puVar6": "logResult",
+   "plVar9": "slotPtr",
+   "uStack_78": "enumPtr",
+   "lStack_70": "currentTrait",
+   "lStack_88": "scratch1",
+   "uStack_90": "scratch2",
+   "uVar4_3": "hasNext"
+  }
+ },
+ "2f44a78": {
+  "summary": "Returns whether the card's current traits include the given trait.",
+  "renames": {
+   "uStack_40": "enumPtr",
+   "lStack_38": "currentTrait"
+  }
+ },
+ "2f442d8": {
+  "summary": "Returns whether two card effects have the same trait, mark, daemon host and matching duration settings.",
+  "renames": {
+   "bVar1": "sameOwner"
+  }
+ },
+ "2f41024": {
+  "summary": "Removes all extrinsic effects on this card that came from the given enchanting card.",
+  "renames": {
+   "uVar2": "isMatch"
+  }
+ },
+ "2f44bc0": {
+  "summary": "Returns the Marks of Chaos not yet on the card (and, via merged code, the available daemon hosts), logging the count.",
+  "renames": {
+   "pplVar12": "disposeSrc",
+   "lStack_f8": "caughtException2",
+   "plStack_c8": "daemonEnumSlot",
+   "plStack_a8": "scratch1",
+   "plStack_a0": "scratch2",
+   "lStack_90": "scratch3",
+   "lStack_88": "scratch4",
+   "lStack_78": "caughtException",
+   "plStack_48": "markEnumSlot",
+   "lStack_58": "disposeSlot",
+   "pplStack_70": "scratch5",
+   "plStack_68": "scratch6",
+   "plVar9_2": "disposeTarget",
+   "plVar5_3": "enumObj",
+   "auVar16": "unwindInfo",
+   "uStack_98": "unwindInfoCopy",
+   "auVar16_part8": "unwindSelector",
+   "lVar4_3": "exceptionFlag",
+   "pplStack_f0": "scratch7",
+   "plStack_e8": "scratch8",
+   "pcStack_d0": "scratch9",
+   "puStack_c0": "scratch10",
+   "puStack_b8": "scratch11",
+   "lStack_d8": "daemonDisposeSlot",
+   "plVar5_6": "daemonEnumObj"
+  }
+ },
+ "2f4503c": {
+  "summary": "Returns the daemon host types not yet on the card, logging how many are available.",
+  "renames": {
+   "pplVar10": "disposeSrc",
+   "lStack_78": "caughtException",
+   "plStack_48": "enumSlot",
+   "lStack_58": "disposeSlot",
+   "pplStack_70": "savedEnumSlotPtr",
+   "plStack_68": "savedDisposeSlotPtr",
+   "plVar5_3": "enumObj",
+   "auVar14": "unwindInfo",
+   "auVar14_part8": "unwindSelector",
+   "lVar4_3": "exceptionFlag"
+  }
+ },
+ "2f41ac8": {
+  "summary": "Removes a card effect and reverts its stat, trait or health changes, then refreshes UI and handles the card dying if health is zero.",
+  "renames": {
+   "iVar5": "effectType",
+   "lVar9": "closure",
+   "lVar13": "removedEffectObj",
+   "auVar21": "hasCodexObject",
+   "uStack_134": "newHealthB",
+   "uStack_124": "scratch1",
+   "pcStack_120": "healthCopyB",
+   "uStack_118": "scratch2",
+   "uStack_108": "scratch3",
+   "uStack_104": "newDropPodAttack",
+   "uStack_100": "scratch4",
+   "uStack_f4": "scratch5",
+   "pcStack_f0": "dropPodAttackCopy",
+   "uStack_e8": "scratch6",
+   "uStack_d4": "newDropPodHealth",
+   "uStack_c4": "scratch7",
+   "pcStack_c0": "dropPodHealthCopy",
+   "plStack_b8": "scratch8",
+   "lStack_b0": "scratch9",
+   "uStack_a4": "newHealthA",
+   "uStack_a0": "scratch10",
+   "uStack_98": "scratch11",
+   "uStack_94": "scratch12",
+   "pcStack_90": "healthCopyA",
+   "uStack_88": "scratch13",
+   "uStack_80": "scratch14",
+   "plStack_78": "scratch15",
+   "plVar15": "closurePtr",
+   "lVar12": "scratchMethod",
+   "uStack_60_part4": "scratch16",
+   "lStack_b0_part4": "scratch17",
+   "uStack_c8": "scratch18",
+   "uStack_cc": "scratch19",
+   "uStack_d0": "scratch20",
+   "puStack_e0": "scratch21",
+   "puStack_e0_part4": "scratch22",
+   "uStack_f8": "scratch23",
+   "uStack_fc": "scratch24",
+   "unaff_x26": "unused25",
+   "unaff_x27": "unused26",
+   "unaff_x28": "unused27",
+   "uVar18_2": "traitValue",
+   "bVar4": "isActive",
+   "lVar14_4": "traitListRef",
+   "uStack_80_part4": "scratch28",
+   "iVar5_2": "clampedHealth",
+   "uStack_9c": "scratch29",
+   "lVar13_6": "removedEffectObj2",
+   "uStack_110": "scratch30",
+   "uStack_110_part4": "scratch31",
+   "iVar5_3": "healthValueB",
+   "iVar5_4": "clampedHealthB",
+   "uStack_12c": "scratch32",
+   "pcStack_70_part4": "scratch33",
+   "iVar5_5": "obscuredValue",
+   "pcStack_90_part4": "scratch34",
+   "auVar22": "cardUiRef",
+   "uStack_80_2": "scratch35",
+   "pcStack_70_2": "scratch36",
+   "lStack_68_2": "scratch37",
+   "uVar16": "iconIndex",
+   "uStack_d8": "scratch38",
+   "uStack_a0_2": "scratch39",
+   "plStack_b8_2": "scratch40",
+   "uStack_a8": "scratch41",
+   "auVar22_part8": "toggleFlag",
+   "lVar13_9": "cleanClosure",
+   "extraout_w1": "clearAllArg",
+   "uVar18_3": "hasNext",
+   "auVar21_x1": "scratch42"
+  }
+ },
+ "2f2d7d4": {
+  "summary": "Removes a trait from the card without triggering effects, clears its frame effects, plays exit effects and updates the flying display.",
+  "renames": {
+   "lVar2": "closure",
+   "uStack_70": "enumState",
+   "puStack_68": "enumPtr",
+   "lStack_60": "currentTraitEffect",
+   "puStack_80": "scratch1",
+   "lStack_78": "scratch2"
+  }
+ },
+ "2f3b994": {
+  "summary": "Adds a trait to the card's current and showing trait lists unless it is already present.",
+  "renames": {
+   "lVar6": "addMethod",
+   "plVar5": "slotPtr",
+   "extraout_x1": "unused1"
+  }
+ },
+ "2f3e86c": {
+  "summary": "Removes a trait from the card's trait lists, logs it, and refreshes UI animations and icons.",
+  "renames": {
+   "lVar1": "closure",
+   "uStack_48": "traitType",
+   "iStack_38": "traitLogicId",
+   "uStack_40": "scratchLen"
+  }
+ },
+ "2f2f764": {
+  "summary": "Removes all effects of a trait, then removes the trait itself from the card with logging and UI refresh.",
+  "renames": {
+   "lVar2": "closure",
+   "uStack_48": "traitType",
+   "iStack_38": "traitLogicId",
+   "lVar2_2": "removeTraitClosure",
+   "uStack_40": "scratchLen"
+  }
+ },
+ "2f2f658": {
+  "summary": "Updates the summon-sickness animation and recomputes whether the card can act or attack this turn.",
+  "renames": {
+   "auVar5": "canActValue"
+  }
+ },
+ "2f43e90": {
+  "summary": "Returns whether the card has an extrinsic effect from the given enchanting card matching buff type and base enchantment.",
+  "renames": {
+   "uVar2": "isMatch"
+  }
+ },
+ "2f45718": {
+  "summary": "Returns whether the card already has an effect equal to the given effect.",
+  "renames": {
+   "uVar3": "hasNoSource"
+  }
+ },
+ "2f45814": {
+  "summary": "Returns whether the card meets any of a fixed list of protective traits.",
+  "renames": {
+   "bVar1": "isFirstCheck",
+   "uVar5": "hasNext",
+   "lVar7": "addMethod",
+   "uStack_40": "scratchEnum",
+   "uStack_38": "currentTrait"
+  }
+ },
+ "2f45a9c": {
+  "summary": "Returns whether the card died on the current turn.",
+  "renames": {
+   "iVar2": "turnCounterValue",
+   "uStack_60": "turnCounterCopy",
+   "uStack_58": "initedCopy",
+   "uStack_50": "fakeValueCopy",
+   "auVar4_x1": "methodInfo"
+  }
+ },
+ "2f45b3c": {
+  "summary": "Returns whether the card died on the current or previous turn.",
+  "renames": {
+   "bVar2": "diedRecently",
+   "iVar3": "turnCounterValue",
+   "uStack_80": "turnCounterCopyB",
+   "uStack_78": "initedCopyB",
+   "uStack_70": "fakeValueCopyB",
+   "uStack_60": "turnCounterCopyA",
+   "uStack_58": "initedCopyA",
+   "uStack_50": "fakeValueCopyA"
+  }
+ },
+ "2f44078": {
+  "summary": "Returns the extrinsic effect on the card that came from the given enchanting card, or null.",
+  "renames": {
+   "uVar2": "hasSource",
+   "auVar9": "listObj",
+   "auVar9_part8": "indexValue",
+   "puVar3": "slotPtr",
+   "auVar8": "objArg",
+   "auVar8_x1": "typeArg"
+  }
+ },
+ "2f3c058": {
+  "summary": "Refreshes the card UI's trait icons: hides all, rebuilds from current traits with counters and initializes each icon.",
+  "renames": {
+   "iVar4": "iconIndex",
+   "uVar9": "hasNext",
+   "auVar15": "hasCodexObject",
+   "uStack_110": "scratch1",
+   "plStack_b8": "scratch2",
+   "lStack_b0": "scratch3",
+   "lStack_a8": "scratch4",
+   "lStack_a0": "scratch5",
+   "uStack_98": "scratch6",
+   "uStack_80": "scratch7",
+   "plStack_78": "scratch8",
+   "lStack_70": "scratch9",
+   "lStack_68": "scratch10",
+   "unaff_x26": "unused11",
+   "unaff_x27": "unused12",
+   "unaff_x28": "unused13",
+   "uVar12_3": "traitValue",
+   "bVar2": "isActive",
+   "lVar10_6": "iconsArray",
+   "pcStack_90": "scratch14",
+   "auVar15_x1": "scratchArg",
+   "pcStack_f0": "scratch15",
+   "puStack_108": "scratch16",
+   "uStack_100": "scratch17",
+   "lVar5_2": "cleanClosure",
+   "extraout_w1": "clearAllArg",
+   "puStack_120": "scratch18",
+   "uStack_118": "scratch19"
+  }
+ }
+}

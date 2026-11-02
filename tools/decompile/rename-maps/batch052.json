@@ -1,0 +1,424 @@
+{
+ "2f4e1ec": {
+  "summary": "Enables or disables the big-view collider and resizes the box collider for either the enlarged view or the in-hand height.",
+  "renames": {
+   "in_s1": "scaledHeight",
+   "fVar4": "originalHeight"
+  }
+ },
+ "2f4e450": {
+  "summary": "Shows the damage counter object, sets its text to the damage value and plays its animation.",
+  "renames": {
+   "iStack_14": "damageValueCopy"
+  }
+ },
+ "2f4e4e4": {
+  "summary": "Fills the enchantment item's name and description text for an effect, handling secret, quest and mark of chaos cases.",
+  "renames": {
+   "uVar6": "unused1",
+   "puVar5": "unused2",
+   "plVar8": "locKeyPtr",
+   "uStack_38": "markTraitOffset",
+   "uStack_40": "unused3"
+  }
+ },
+ "2f4eadc": {
+  "summary": "Returns true if the effect text field has no text.",
+  "renames": {}
+ },
+ "2f4eb60": {
+  "summary": "Initializes highlight scale and colors, hides the minion-will-die icon and resets attack-type highlights for the card.",
+  "renames": {
+   "in_s1": "initialScaleY",
+   "in_s2": "initialScaleZ",
+   "uVar2": "hasCardScript",
+   "auVar10": "exceptionResult",
+   "plVar3": "highlightSlot",
+   "auVar10_x1": "extraReg",
+   "pcStack_50": "callbackPtr",
+   "uStack_5c": "savedG",
+   "uStack_58": "savedB",
+   "uStack_54": "savedA"
+  }
+ },
+ "2f4f4e0": {
+  "summary": "Switches the highlight state, tweening the frame color and card scale to match the new state.",
+  "renames": {
+   "puVar4": "animFieldPtr"
+  }
+ },
+ "2f4eee4": {
+  "summary": "Previews combat damage on this card against another card, toggling the will-die icon and attack-type highlights.",
+  "renames": {
+   "uVar4": "hasCards",
+   "auVar12": "exceptionResult",
+   "plVar9": "highlightSlot",
+   "auVar12_x1": "extraReg",
+   "lVar6_3": "typeIndex",
+   "auStack_60": "colorBuffer"
+  }
+ },
+ "2f4f740": {
+  "summary": "Stores the remnant frame highlight renderer and copies the main frame highlight color onto it.",
+  "renames": {
+   "lVar2": "remnantRef",
+   "plVar1": "unused1",
+   "auStack_30": "colorBuffer",
+   "lVar3": "rendererPtr"
+  }
+ },
+ "2f4f6d0": {
+  "summary": "Calls HighlightIfNeeded for every attack type highlight with the given attack type.",
+  "renames": {
+   "auVar6": "exceptionResult",
+   "pcStack_40": "savedCallback",
+   "plVar3": "highlightSlot",
+   "auVar6_x1": "extraReg",
+   "uStack_38": "attackTypeCopy",
+   "lVar2": "highlightType",
+   "auStack_60": "colorBuffer",
+   "pcStack_50": "savedCallback2"
+  }
+ },
+ "2f4f5f0": {
+  "summary": "Tweens the card body to a target scale over a time, or sets it instantly if the time is zero.",
+  "renames": {
+   "puVar4": "scaleTweenSlot",
+   "param_5": "selfPtr",
+   "lVar2": "cardBody",
+   "lVar5": "bodyPtr"
+  }
+ },
+ "2f4ec78": {
+  "summary": "Changes the frame highlight colors to a target color, tweened over seconds or instantly, hiding frames if fully transparent.",
+  "renames": {
+   "puVar4": "colorTweenSlot",
+   "param_5": "secondsValue",
+   "param_6": "selfPtr",
+   "uVar1_2": "scratch1",
+   "uVar1_3": "remnantExists"
+  }
+ },
+ "2f4ebc0": {
+  "summary": "Sets the active state of the frame highlight and remnant frame highlight objects.",
+  "renames": {
+   "uVar2": "hasRemnant"
+  }
+ },
+ "2f4f7a0": {
+  "summary": "Tween callback that deactivates the frame highlight and remnant highlight objects.",
+  "renames": {
+   "uVar2": "hasRemnant"
+  }
+ },
+ "2f4f8c8": {
+  "summary": "Returns the matcap texture for a raw card's tier, clamping the tier to the texture array range.",
+  "renames": {
+   "uVar1": "clampedTier",
+   "unaff_x19": "unused1",
+   "unaff_x30": "unused2",
+   "auVar6": "exceptionResult",
+   "auVar6_x1": "extraReg"
+  }
+ },
+ "2f4f920": {
+  "summary": "Returns the matcap texture for a card's tier, clamping the tier to the texture array range.",
+  "renames": {
+   "uVar1": "clampedTier",
+   "auVar6_x1": "cardCopy",
+   "unaff_x19": "unused1",
+   "unaff_x30": "unused2"
+  }
+ },
+ "2f4f97c": {
+  "summary": "Static constructor creating the singleton instance of the compiler-generated closure class.",
+  "renames": {
+   "uVar1": "instance"
+  }
+ },
+ "2f4fa5c": {
+  "summary": "Rotates the card back to zero rotation after turning around and updates its visibility and stat display values.",
+  "renames": {
+   "puVar4": "vectorStatics"
+  }
+ },
+ "2f4fa84": {
+  "summary": "Update callback that sets the card's local scale from the position-based minion scale.",
+  "renames": {
+   "auVar6_x1": "extraReg"
+  }
+ },
+ "2f4fb24": {
+  "summary": "On reaching the target in a melee attack, resolves attack effects and punches the target away with a delayed return tween.",
+  "renames": {
+   "auVar11_x1": "extraReg",
+   "pfVar5": "vectorStatics",
+   "fVar7": "deltaX",
+   "fVar8": "dirY",
+   "fVar9": "distance"
+  }
+ },
+ "2f4fbb8": {
+  "summary": "Update callback that sets the card's local scale from the position-based minion scale.",
+  "renames": {
+   "auVar6_x1": "extraReg"
+  }
+ },
+ "2f4fc74": {
+  "summary": "Update callback that sets the card's local scale from the position-based minion scale.",
+  "renames": {
+   "auVar6_x1": "extraReg"
+  }
+ },
+ "2f4fd50": {
+  "summary": "Swarm completion: adds a stat buff copying this unit's stats to the buffed unit, destroys this unit and broadcasts the swarm.",
+  "renames": {
+   "uVar2": "healthValue",
+   "uStack_60": "healthCopy",
+   "uStack_58": "initedCopy",
+   "uStack_50": "fakeActiveCopy"
+  }
+ },
+ "2f4fedc": {
+  "summary": "Predicate returning true if the active enchantment's card matches the target enchantment card.",
+  "renames": {
+   "bVar1": "matches"
+  }
+ },
+ "2f4ff5c": {
+  "summary": "Predicate returning true if the active enchantment's card matches the target enchantment card.",
+  "renames": {
+   "bVar1": "matches"
+  }
+ },
+ "2f4ffd4": {
+  "summary": "Predicate returning true if the active enchantment's card matches the target enchantment card.",
+  "renames": {
+   "bVar1": "matches"
+  }
+ },
+ "2f50134": {
+  "summary": "Coroutine step for a melee attack: plays sound, builds tween sequence moving toward target and back, then waits until it finishes.",
+  "renames": {
+   "lVar4": "closure",
+   "uVar6": "hasAttackSound",
+   "plVar14": "targetRef",
+   "uVar11": "nextState",
+   "pfVar12": "vectorStatics",
+   "puVar13": "quatStatics",
+   "fVar16": "targetX",
+   "fVar17": "attackMargin",
+   "fVar27": "posX",
+   "fVar28": "posY",
+   "fVar23": "tempFloat1",
+   "fVar25": "dirZ",
+   "fVar20": "deltaZSquared",
+   "fVar18": "distance",
+   "uVar8_5": "directionXY",
+   "auStack_a4": "boolBuffer",
+   "iVar2": "dotweenStatic",
+   "cVar3": "flagByte",
+   "lVar9_3": "attackerData",
+   "pfVar12_2": "vectorStatics2",
+   "fVar29": "tempFloat2"
+  }
+ },
+ "2f50b48": {
+  "summary": "Throws NotSupportedException because Reset is not supported on the AttackMeleeAnim coroutine enumerator.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "2f50bb4": {
+  "summary": "Coroutine moving a newly created card into hand with move, rotate and scale tweens and a sound, then sets it in hand.",
+  "renames": {
+   "uVar3": "isOuterNull"
+  }
+ },
+ "2f50e4c": {
+  "summary": "Throws NotSupportedException because Reset is not supported on the CreateCardInGame coroutine enumerator.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "2f50eb8": {
+  "summary": "Coroutine that scales up and dissolves a destroyed card, then sends it to the cemetery.",
+  "renames": {
+   "bVar2": "hasMore"
+  }
+ },
+ "2f51094": {
+  "summary": "Throws NotSupportedException because Reset is not supported on the DestroyCard coroutine enumerator.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "2f51100": {
+  "summary": "Coroutine that dissolves a card destroyed by an offensive and moves it to the offensive button position.",
+  "renames": {
+   "uVar4": "nextState"
+  }
+ },
+ "2f5123c": {
+  "summary": "Throws NotSupportedException because Reset is not supported on the DestroyCardOffensive coroutine enumerator.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "2f512a8": {
+  "summary": "Coroutine showing an enemy card in the screen center with move, scale and rotate tweens, then hiding it again.",
+  "renames": {
+   "uVar4": "nextState",
+   "puVar5": "vectorStatics"
+  }
+ },
+ "2f51614": {
+  "summary": "Throws NotSupportedException because Reset is not supported on the DisplayEnemyCardInCenter coroutine enumerator.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "2f51680": {
+  "summary": "Coroutine showing an offensive card in the screen center with move, scale and rotate tweens, then hiding it again.",
+  "renames": {
+   "uVar3": "nextState",
+   "puVar4": "vectorStatics"
+  }
+ },
+ "2f5198c": {
+  "summary": "Throws NotSupportedException because Reset is not supported on the DisplayOffensiveCardInCenter coroutine enumerator.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "2f519f8": {
+  "summary": "Coroutine that heals a unit, clamps heal to missing health, shows animated heal text, effects and sounds, then clears pending healing.",
+  "renames": {
+   "uVar4": "isOuterNull",
+   "piVar9": "healValuePtr",
+   "fVar14": "smallScaleY",
+   "uVar15": "tweenParamA",
+   "uVar16": "copyA",
+   "uVar17": "tweenParamB",
+   "uVar18": "copyB",
+   "uStack_f4": "newHealth",
+   "uStack_ec": "newHealthInited",
+   "uStack_e4": "newHealthFake",
+   "uStack_e0": "healthSnapshot2",
+   "uStack_d8": "healthSnapshot2Inited",
+   "uStack_d0": "healthSnapshot2Fake",
+   "uStack_c0": "healthSnapshot",
+   "uStack_b8": "healthSnapshotInited",
+   "uStack_b0": "healthSnapshotFake",
+   "iStack_74": "unused1",
+   "iVar2_2": "currentHealthValue",
+   "puVar6": "messagePrefix",
+   "lVar10_5": "soundManager",
+   "lVar10_11": "unused2",
+   "uVar19": "unused3",
+   "uVar13": "unused4"
+  }
+ },
+ "2f5214c": {
+  "summary": "Throws NotSupportedException because Reset is not supported on the Heal coroutine enumerator.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "2f521b8": {
+  "summary": "Coroutine for a hero landing into the field: scales and fades it in, shows stat counters, lands on ground, then activates traits.",
+  "renames": {
+   "uVar6": "isOuterNull",
+   "in_s2": "unitScaleZ"
+  }
+ },
+ "2f526b8": {
+  "summary": "Throws NotSupportedException because Reset is not supported on the HeroLandIntoField coroutine enumerator.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "2f52724": {
+  "summary": "Coroutine for a minion played into the field: positions it, lands it, triggers summon effects and sets it in play.",
+  "renames": {
+   "in_s1": "spareFloat1",
+   "in_s2": "spareFloat2",
+   "uStack_b0": "turnCounterSnapshot",
+   "uStack_a8": "turnCounterInited",
+   "uStack_a0": "turnCounterFake",
+   "uVar9": "unused1",
+   "uVar12_2": "turnCounterValue",
+   "uVar6_5": "eulerPacked",
+   "plVar7": "minionManagerSlot"
+  }
+ },
+ "2f52d9c": {
+  "summary": "Throws NotSupportedException because Reset is not supported on the MinionPlayedIntoField coroutine enumerator.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "2f52e08": {
+  "summary": "Coroutine moving a card toward a target with position and rotation tweens, then optionally hiding its body when finished.",
+  "renames": {
+   "lVar3": "closure",
+   "plVar8": "closureSlot",
+   "fVar12": "tempFloat1",
+   "fVar25": "tempX",
+   "fVar26": "tempY",
+   "fVar14": "tempLength",
+   "uVar23_3": "directionXY",
+   "fVar18": "tempQ1",
+   "lVar5_2": "movementInfoRef",
+   "auStack_44": "boolBuffer",
+   "cRam0000000006b5478d": "unused1",
+   "cRam0000000006b54901": "unused2",
+   "cRam0000000006b545e2": "unused3"
+  }
+ },
+ "2f53a14": {
+  "summary": "Throws NotSupportedException because Reset is not supported on the MoveAndDisappearAnim coroutine enumerator.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "2f53a80": {
+  "summary": "Coroutine playing an enemy card: shows it in the center, then moves it into the field from hand.",
+  "renames": {
+   "bVar1": "hasMore"
+  }
+ },
+ "2f53c50": {
+  "summary": "Throws NotSupportedException because Reset is not supported on the PlayEnemyCard coroutine enumerator.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "2f53cbc": {
+  "summary": "Coroutine playing a player card: shows it in the center, then moves it into the field from hand.",
+  "renames": {
+   "bVar1": "hasMore"
+  }
+ },
+ "2f53e8c": {
+  "summary": "Throws NotSupportedException because Reset is not supported on the PlayPlayerCard coroutine enumerator.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ },
+ "2f53ef8": {
+  "summary": "Coroutine preparing or ending a minion attack: sets sorting layer, plays sound or resets position, and re-shows stealth.",
+  "renames": {
+   "uVar3": "isOuterNull",
+   "puVar7": "quatStatics",
+   "plVar5": "sortingLayerName",
+   "this_01": "soundManager"
+  }
+ },
+ "2f54234": {
+  "summary": "Throws NotSupportedException because Reset is not supported on the PrepareAttack coroutine enumerator.",
+  "renames": {
+   "uVar2": "resetMethod"
+  }
+ }
+}

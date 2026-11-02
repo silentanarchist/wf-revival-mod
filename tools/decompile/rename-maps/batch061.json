@@ -1,0 +1,345 @@
+{
+ "2f41288": {
+  "summary": "Reacts when a unit is jammed: strips its effects and traits, applies the jam trait, or re-adds pack and other buff effects by buff type.",
+  "renames": {
+   "uVar11_2": "comparisonResult",
+   "iVar7_7": "obscuredValue",
+   "iVar7_8": "clampedHealth",
+   "iVar7_9": "effectIdx",
+   "plVar18": "slotPtr",
+   "uVar14_5": "scratch1",
+   "uVar14_7": "hasEnchantment",
+   "uVar8_2": "armourAmount",
+   "auVar22_x1": "unused1",
+   "uStack_6c": "enumeratorPart",
+   "uStack_70_2": "buffTypeValue",
+   "puStack_f8": "dropHealthInited",
+   "uStack_100": "dropHealthCopy",
+   "uStack_f0": "dropHealthFakeState",
+   "uStack_114": "newDropHealth",
+   "uStack_10c": "newDropHealthInited",
+   "uStack_104": "newDropHealthFake",
+   "puStack_128": "dropAttackInited",
+   "uStack_130": "dropAttackCopy",
+   "uStack_120": "dropAttackFakeState",
+   "uStack_144": "newDropAttack",
+   "uStack_13c": "newDropAttackInited",
+   "uStack_134": "newDropAttackFake",
+   "uStack_158": "initialDropAttack",
+   "uStack_150": "initialDropAttackInited",
+   "uStack_148": "initialDropAttackFake",
+   "puStack_c8": "healthInitedSnap",
+   "uStack_d0": "healthCopySnap",
+   "uStack_c0": "healthFakeSnap",
+   "uStack_e4": "cappedHealthValue",
+   "uStack_b4": "newHealthValue",
+   "uStack_ac": "newHealthInitedFlag",
+   "uStack_a4": "newHealthFakeFlag",
+   "uStack_dc": "cappedInitedFlag",
+   "uStack_d4": "cappedFakeFlag",
+   "puStack_98": "healAddInited",
+   "uStack_a0": "healAddCopy",
+   "uStack_90": "healAddFakeState"
+  }
+ },
+ "2f45c60": {
+  "summary": "Applies the stun trait to a unit in play unless it is unstunnable, disabling its actions and attacks; returns whether it was stunned.",
+  "renames": {
+   "auStack_24": "isPlayerTurnBuf",
+   "auVar9": "falseFlag",
+   "lVar3_4": "scratchPtr",
+   "lVar8": "soundManager",
+   "puVar7": "slotPtr"
+  }
+ },
+ "2f46030": {
+  "summary": "Resets a unit's attack counters and recomputes whether it can act or attack, updating the can-attack animation.",
+  "renames": {
+   "auVar13": "canActFlag",
+   "puVar8": "unused1",
+   "uVar1": "unused2",
+   "uVar7": "devToolsEnabled"
+  }
+ },
+ "2f46218": {
+  "summary": "Removes cost-changing effects from the card, refreshes its display, then performs a death check on units.",
+  "renames": {
+   "auStack_34": "damageInfoBuf",
+   "bVar1": "isLastIteration",
+   "iVar3": "effectIndex",
+   "iVar7": "prevIndex",
+   "uStack_70": "dropPodFakeCopy",
+   "uStack_78": "dropPodInitedCopy",
+   "uStack_80": "dropPodHealthCopy",
+   "uStack_90": "healthFakeCopy",
+   "uStack_98": "healthInitedCopy",
+   "uStack_a0": "healthCopy",
+   "in_x2": "unusedArg1"
+  }
+ },
+ "2f4631c": {
+  "summary": "Removes non-permanent cost-change effects sourced from either hero, refreshes the card display, then performs a death check on units.",
+  "renames": {
+   "bVar1": "isLastIteration",
+   "iVar4": "effectIndex",
+   "iVar9": "prevIndex",
+   "uVar7": "isHeroOwner",
+   "uStack_70": "dropPodFakeCopy",
+   "uStack_78": "dropPodInitedCopy",
+   "uStack_80": "dropPodHealthCopy",
+   "uStack_90": "healthFakeCopy",
+   "uStack_98": "healthInitedCopy",
+   "uStack_a0": "healthCopy",
+   "in_x2": "unusedArg1"
+  }
+ },
+ "2f3efd8": {
+  "summary": "Updates the card's health and armour counter displays, using drop pod health when applicable, and hides armour for enemy ambush cards.",
+  "renames": {
+   "iVar2": "healthValue",
+   "iVar3_2": "healthSnapshot",
+   "iVar3_4": "armourCurrent",
+   "iVar4_2": "armourMax",
+   "uStack_80": "healthCopy",
+   "uStack_78": "healthInitedCopy",
+   "uStack_70": "healthFakeCopy",
+   "uStack_c0": "armourCopy",
+   "uStack_b8": "armourInitedCopy",
+   "uStack_b0": "armourFakeCopy"
+  }
+ },
+ "2f435ec": {
+  "summary": "Refreshes the melee and ranged attack counter displays on the card UI.",
+  "renames": {
+   "iVar3": "baseAttackValue",
+   "uStack_70": "meleeBaseCopy",
+   "uStack_68": "meleeInitedCopy",
+   "uStack_60": "meleeFakeCopy"
+  }
+ },
+ "2f2c698": {
+  "summary": "Returns true if the card is in play, including attacking, aiming or transforming states.",
+  "renames": {
+   "bVar2": "stateIsInPlay"
+  }
+ },
+ "2f2e7c8": {
+  "summary": "Returns true if the card state is one of the in-hand states.",
+  "renames": {
+   "uVar1": "maskedState"
+  }
+ },
+ "2f3a5c8": {
+  "summary": "Returns the damage the card has taken: max health minus current health.",
+  "renames": {
+   "iVar2": "currentHealthValue",
+   "uStack_60": "healthCopy",
+   "uStack_58": "healthInitedCopy",
+   "uStack_50": "healthFakeCopy"
+  }
+ },
+ "2f46664": {
+  "summary": "Computes the AI value of the card in play from reference value and enchantments, scaled down by damage and stun or pindown.",
+  "renames": {
+   "iVar2": "healthValue",
+   "this_00": "aiForEnchantments",
+   "this_01": "aiRef",
+   "uStack_70": "healthCopyA",
+   "uStack_68": "healthInitedA",
+   "uStack_60": "healthFakeA",
+   "uStack_90": "healthCopyB",
+   "uStack_88": "healthInitedB",
+   "uStack_80": "healthFakeB"
+  }
+ },
+ "2f46680": {
+  "summary": "Returns the card's highest attack value, melee or ranged, summing addStats effects onto the base and honoring set-attack effects.",
+  "renames": {
+   "iVar2_2": "meleeBase",
+   "iVar2_4": "rangeBase",
+   "uVar4": "rangeResult",
+   "uStack_70": "baseCopy",
+   "uStack_68": "baseInitedCopy",
+   "uStack_60": "baseFakeCopy"
+  }
+ },
+ "2f46708": {
+  "summary": "Subtracts the given damage from the card's current health and refreshes the health text.",
+  "renames": {
+   "iVar1": "healthValue",
+   "uStack_84": "newHealth",
+   "uStack_7c": "newHealthInited",
+   "uStack_74": "newHealthFake",
+   "uStack_70": "healthCopy",
+   "uStack_68": "healthInitedCopy",
+   "uStack_60": "healthFakeCopy"
+  }
+ },
+ "2f467c4": {
+  "summary": "Checks whether the card has a 3D body object on its UI, meaning it is on the board.",
+  "renames": {
+   "uVar2": "hasBody3D"
+  }
+ },
+ "2f2dfe4": {
+  "summary": "Changes the card's attack type and plays the matching sound cue for melee, ranged or active ability changes.",
+  "renames": {
+   "alStack_78": "audioSourceBuf",
+   "auVar22": "hasCue",
+   "auVar22_x1": "unused1",
+   "iVar2_2": "uiState",
+   "lStack_98": "savedSoundManager",
+   "lStack_a0": "savedAudioSource",
+   "lVar10_2": "soundManager2",
+   "lVar3": "soundManager",
+   "pcStack_b0": "savedMethod",
+   "pcStack_c0": "savedMethod2",
+   "pcVar15": "canAttackFlagPtr",
+   "puStack_a8": "savedCue",
+   "puVar11": "audioCue",
+   "puVar13": "zeroVectorPtr",
+   "puVar14": "zeroVectorPtr2",
+   "uStack_88": "savedFlag2",
+   "uStack_90": "savedFlag1",
+   "uStack_c8": "unused2",
+   "uStack_d0": "savedVecPartB",
+   "uStack_d8": "savedAudioSource2",
+   "uStack_e0": "savedZeroVector",
+   "uStack_e8": "scratch3",
+   "uStack_f0": "scratch4",
+   "uVar12": "obscuredFlag",
+   "uVar17": "fieldValue",
+   "uVar20": "vecPartB",
+   "uVar21": "vecPartB2",
+   "uVar5": "paramName",
+   "uVar7": "hasAudioSource"
+  }
+ },
+ "2f46a1c": {
+  "summary": "Searches the card's abilities for the talent ability and returns its associated card script, if any.",
+  "renames": {
+   "auVar8_x1": "methodArg",
+   "cVar1": "initFlag",
+   "fVar7": "upVectorZ",
+   "lVar3_4": "abilityField",
+   "lVar3_5": "abilityResult",
+   "uVar5": "vectorY"
+  }
+ },
+ "2f46b28": {
+  "summary": "Constructor that sets CardScript's default timing, rotation, movement and animation values.",
+  "renames": {
+   "cVar1": "initFlag",
+   "fVar5": "upVectorZ",
+   "uVar3": "vectorY"
+  }
+ },
+ "2f57260": {
+  "summary": "Shows or hides the counter container depending on its activation rules, small screen UI and simplified card view.",
+  "renames": {
+   "iVar1": "ruleValue",
+   "lVar5": "rulesArray",
+   "uVar3": "shouldShow"
+  }
+ },
+ "2f56b28": {
+  "summary": "Initializes tweener, original color and original scale arrays for each text of the counters controller.",
+  "renames": {
+   "auVar22_x1": "unused1",
+   "auVar23": "exceptionResult",
+   "auVar23_part8": "newAmountPart",
+   "iVar4": "newAmountValue",
+   "iVar5": "currentValueInt",
+   "puVar12": "colorsPtr",
+   "puVar13": "scalesPtr",
+   "uVar14": "colorLoopCounter",
+   "uVar15": "elementIndex",
+   "uVar16": "loopCounter",
+   "uVar17": "localScaleValue",
+   "uVar2": "textActive",
+   "uVar20": "colorB",
+   "uVar21": "colorA",
+   "uVar6": "colorIndex",
+   "uVar7": "doAnimFlag",
+   "uVar8": "hideIfZeroFlag",
+   "uVar9": "removeContainerFlag",
+   "unaff_d10": "unusedD10",
+   "unaff_d10_2": "origScaleZ",
+   "unaff_d11": "unusedD11",
+   "unaff_d8": "scaleX",
+   "unaff_d9": "scaleY",
+   "unaff_x19": "unused19",
+   "unaff_x20": "unused20",
+   "unaff_x21": "unused21",
+   "unaff_x22": "savedController",
+   "unaff_x23": "amountString",
+   "unaff_x25": "tweenArray",
+   "unaff_x26": "elementIndexInt",
+   "unaff_x27": "typeObject",
+   "unaff_x28": "structSize",
+   "unaff_x29": "elementIdx",
+   "unaff_x30": "unused30",
+   "in_x2": "unusedArg1",
+   "in_d1": "vectorY",
+   "in_d2": "vectorZ",
+   "in_s3": "colorAlpha",
+   "in_w3": "scratch3",
+   "in_w4": "scratch4",
+   "in_w5": "scratch5",
+   "in_w6": "scratch6",
+   "in_w7": "scratch7"
+  }
+ },
+ "2f56d60": {
+  "summary": "Sets a counter's text and color, shows or hides it, and plays a punch-scale bump animation when the amount changes.",
+  "renames": {
+   "auVar27": "exceptionObj",
+   "auVar27_x1": "unused1",
+   "auVar28": "exceptionObj2",
+   "auVar28_part8": "newAmountPart",
+   "iVar5": "newAmountInt",
+   "iVar6": "currentValueInt",
+   "uVar1": "amountString",
+   "uVar8": "doColorChangeFlag",
+   "uVar9": "animFlagCopy",
+   "uVar10": "hideIfZeroCopy",
+   "uVar11": "removeContainerFlag",
+   "uVar12": "removeContainerCopy",
+   "uVar15": "scaleZBits",
+   "uVar16": "hideIfZeroFlag",
+   "uVar19": "textColor",
+   "uVar20_2": "colorG",
+   "uVar21": "doAnimFlag",
+   "uVar21_2": "colorR",
+   "uVar21_3": "animFlagSaved",
+   "uVar22": "colorB",
+   "uVar24": "colorBaseVec",
+   "uVar25": "loopIndex",
+   "uVar26": "scaleYBits",
+   "unaff_d10": "unusedD10",
+   "unaff_d11": "unusedD11",
+   "unaff_d8": "scaleX",
+   "unaff_d9": "scaleY",
+   "unaff_x19": "unused19",
+   "unaff_x20": "unused20",
+   "unaff_x21": "unused21",
+   "unaff_x22": "savedController",
+   "unaff_x23": "unused23",
+   "unaff_x25": "unused25",
+   "unaff_x26": "elementIndexInt",
+   "unaff_x27": "typeObject",
+   "unaff_x28": "structSize",
+   "unaff_x29": "elementIdx",
+   "unaff_x30": "unused30",
+   "in_d1": "vectorY",
+   "in_d2": "vectorZ"
+  }
+ },
+ "2f571ac": {
+  "summary": "Marks the stat as hidden, resets its amount, and calls a method on each text object to hide it.",
+  "renames": {
+   "auVar4_x1": "unused1",
+   "plVar1": "textObject"
+  }
+ }
+}

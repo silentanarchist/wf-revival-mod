@@ -1,0 +1,398 @@
+{
+ "3150d88": {
+  "summary": "Opens the card display window for the selected deck's warlord card, initializing card UIs, lore, voice-over and related-card UI.",
+  "renames": {
+   "auStack_48": "nullableTier",
+   "auVar22": "errorResult",
+   "auVar22_x1": "errorResultAux",
+   "bVar2": "skipMaterialUpdate",
+   "fVar20": "rectSizeX",
+   "fVar21": "rectSizeY",
+   "in_s2": "rectX",
+   "in_s3": "rectY",
+   "lVar8_3": "flavourText",
+   "lVar8_5": "displayClosure",
+   "lVar9_3": "displayWindow",
+   "plVar19": "imageSpriteSlot",
+   "plVar6": "warlordCardSlot",
+   "puVar17": "listSlot",
+   "uVar11": "flag"
+  }
+ },
+ "3150e7c": {
+  "summary": "Registers the ButtonOnClick handler on the deck selector item's button.",
+  "renames": {
+   "lVar2": "addMethod",
+   "puVar6": "listSlot",
+   "uVar1": "callCount"
+  }
+ },
+ "3150f0c": {
+  "summary": "Removes the ButtonOnClick listener from the deck selector item's button by filtering out matching persistent calls.",
+  "renames": {
+   "iVar1": "newCount",
+   "lVar9": "callList",
+   "plVar4": "callsToRemove",
+   "uVar2": "callCount",
+   "uVar6": "isMatch"
+  }
+ },
+ "3150f9c": {
+  "summary": "Initializes a deck selector item with a practice deck, setting its image, name, colors and player-deck highlight.",
+  "renames": {
+   "lVar4_2": "deckDisplayName",
+   "lVar7": "previousDeck",
+   "plVar2": "previousDeckObj",
+   "uVar1": "hadPreviousDeck"
+  }
+ },
+ "3151294": {
+  "summary": "Initializes a deck selector item's image, name text, background color and selection state.",
+  "renames": {
+   "lVar2": "highlightObj",
+   "lVar3": "highlightPtr",
+   "param_8": "deckNameText",
+   "plVar1": "nameText"
+  }
+ },
+ "3151378": {
+  "summary": "Highlights this deck item, deselects the previous one, sets the selected practice deck and updates deck info and game mode text.",
+  "renames": {
+   "lVar5_2": "playerData",
+   "uVar2": "hasPreviousSelection"
+  }
+ },
+ "31515a4": {
+  "summary": "Handles a click on the deck item: selects it, deselects the previous one and updates the practice menu's deck info.",
+  "renames": {
+   "lVar5_2": "playerData",
+   "uVar2": "hasPreviousSelection"
+  }
+ },
+ "3151240": {
+  "summary": "Loads and returns the deck's button sprite via the addressables reference counter, waiting for completion and logging failures.",
+  "renames": {
+   "lStack_40": "refField3",
+   "lStack_48": "refField2",
+   "lStack_50": "refField1",
+   "lVar9": "typeInfo",
+   "uStack_60": "opHandleC",
+   "uStack_68": "opHandleB",
+   "uStack_70": "opHandleA",
+   "uStack_78": "returnedC",
+   "uStack_80": "returnedB",
+   "uStack_88": "returnedA",
+   "uVar7": "assetKey"
+  }
+ },
+ "3150930": {
+  "summary": "Loads and returns the deck hero's full character sprite through addressables, waiting for completion and logging failures.",
+  "renames": {
+   "lStack_40": "refField3",
+   "lStack_48": "refField2",
+   "lStack_50": "refField1",
+   "lVar9": "typeInfo",
+   "uStack_60": "opHandleC",
+   "uStack_68": "opHandleB",
+   "uStack_70": "opHandleA",
+   "uStack_78": "returnedC",
+   "uStack_80": "returnedB",
+   "uStack_88": "returnedA",
+   "uVar7": "assetKey"
+  }
+ },
+ "315162c": {
+  "summary": "Releases the skirmish deck hero's full sprite addressable reference, warning if the asset was not loaded.",
+  "renames": {
+   "uVar1": "assetKey",
+   "uVar2": "foundInCache"
+  }
+ },
+ "3151698": {
+  "summary": "Releases the deck's button image addressable reference, warning if the asset was not loaded.",
+  "renames": {
+   "uVar1": "assetKey",
+   "uVar2": "foundInCache"
+  }
+ },
+ "3150998": {
+  "summary": "Returns the classic or skirmish prebuilt deck depending on the play mode.",
+  "renames": {
+   "lVar1": "fieldOffset"
+  }
+ },
+ "3150828": {
+  "summary": "Returns the localized name of the classic or skirmish prebuilt deck for the given mode.",
+  "renames": {
+   "lVar1": "fieldOffset"
+  }
+ },
+ "31508f4": {
+  "summary": "Returns the localized warlord name (with modular name modifier) for the deck's hero in the given play mode.",
+  "renames": {
+   "lVar1": "fieldOffset"
+  }
+ },
+ "3151700": {
+  "summary": "Releases the deck hero's (or its reference card's) full sprite addressable reference if loaded.",
+  "renames": {
+   "uVar2": "isValidRef"
+  }
+ },
+ "316541c": {
+  "summary": "Hooks the button click listener and toggles data/no-data objects by whether a card is set; includes unreachable decompiler listener-removal code.",
+  "renames": {
+   "iVar1": "newCount",
+   "lVar11": "callList",
+   "plVar4": "callsToRemove",
+   "uVar6": "isMatch"
+  }
+ },
+ "31655e8": {
+  "summary": "Removes the ButtonOnClick listener from the card info item's button by filtering out matching persistent calls.",
+  "renames": {
+   "iVar1": "newCount",
+   "lVar9": "callList",
+   "plVar4": "callsToRemove",
+   "uVar2": "callCount",
+   "uVar6": "isMatch"
+  }
+ },
+ "3165678": {
+  "summary": "Initializes a card info row: checks ban status for the active event, sets name, cost, count, rarity colors and banned visuals.",
+  "renames": {
+   "in_s1": "colorG",
+   "in_s2": "colorB",
+   "in_s3": "colorA",
+   "lVar4_3": "banList",
+   "piVar9": "interfaceMapPtr",
+   "plVar5_2": "isBanned",
+   "uVar10_2": "costText",
+   "uVar8": "hasColors"
+  }
+ },
+ "3165988": {
+  "summary": "Shows and sets the card's mana cost text if a cost label exists.",
+  "renames": {
+   "uVar1": "hasCostText",
+   "uVar4_2": "costString"
+  }
+ },
+ "3165a5c": {
+  "summary": "Sets the card count display and toggles the invalid state based on how many copies the player owns.",
+  "renames": {
+   "iStack_24": "boxedAmount",
+   "uVar2": "hasCountText"
+  }
+ },
+ "3165bbc": {
+  "summary": "Sets the canvas group's alpha to full or half depending on whether the item is valid.",
+  "renames": {
+   "uVar3": "alphaBits"
+  }
+ },
+ "3165c08": {
+  "summary": "Handles card item click: invokes override or opens the card display window with the card, lore, voice-over and related cards.",
+  "renames": {
+   "auStack_48": "nullableTier",
+   "auVar22": "errorResult",
+   "auVar22_x1": "errorResultAux",
+   "bVar2": "skipMaterialUpdate",
+   "fVar20": "rectSizeX",
+   "fVar21": "rectSizeY",
+   "in_s2": "rectX",
+   "in_s3": "rectY",
+   "lVar11": "scratchZero",
+   "lVar14_3": "imageSpriteSlotValue",
+   "lVar14_5": "displayWindow",
+   "lVar7_3": "flavourText",
+   "lVar7_5": "displayClosure",
+   "plVar18": "warlordCardSlot",
+   "plVar19": "imageSpriteSlot",
+   "puVar16": "listSlot",
+   "uVar8": "flag"
+  }
+ },
+ "31654b4": {
+  "summary": "Toggles objects shown when the card has data versus no data; includes unreachable decompiler listener-removal code.",
+  "renames": {
+   "iVar1": "newCount",
+   "lVar9": "callList",
+   "plVar3": "callsToRemove",
+   "uVar5": "isMatch"
+  }
+ },
+ "3165c68": {
+  "summary": "Sets up the alliance tab's army progress bar from a timed draft event's leaderboard totals and army icons.",
+  "renames": {
+   "auVar15_part8": "leftArmy",
+   "bVar1": "skipMaterialUpdate",
+   "fVar13": "rectSizeX",
+   "fVar14": "rectSizeY",
+   "in_s2": "rectX",
+   "in_s3": "rectY",
+   "lVar5_5": "imageSpriteValue",
+   "lVar5_7": "imageSpriteValue2",
+   "plVar11": "imageSpriteSlot",
+   "register0x00000008": "stackFrame",
+   "uVar7": "flag",
+   "unaff_d8": "unused1",
+   "unaff_d9": "unused2",
+   "unaff_x19": "unused3",
+   "unaff_x20": "unused4",
+   "unaff_x21": "unused5",
+   "unaff_x22": "unused6",
+   "unaff_x23": "unused7",
+   "unaff_x24": "unused8",
+   "unaff_x30": "unused9"
+  }
+ },
+ "3168dcc": {
+  "summary": "Plays the pack movement sound and starts the effect-toggler animation for the second step of the pack select sequence.",
+  "renames": {
+   "fVar3": "startTime",
+   "plStack_38": "currentToggler",
+   "puStack_50": "enumeratorPtr",
+   "uStack_40": "scratch1",
+   "uStack_58": "stateBits"
+  }
+ },
+ "3168e58": {
+  "summary": "Plays the pack arrival sound cue through the SoundManager, with optional debug logging.",
+  "renames": {
+   "alStack_78": "audioSourceStack",
+   "auVar15": "selfCopy",
+   "auVar15_2": "cueFlag",
+   "auVar15_x1": "methodArg",
+   "lStack_98": "stackSoundManager",
+   "lStack_a0": "stackAudioSource",
+   "lVar6_3": "soundManager",
+   "pcStack_b0": "stackStrings",
+   "pcStack_c0": "stackMethod",
+   "puStack_a8": "stackCue",
+   "puVar7": "zeroVectorPtr",
+   "puVar8": "zeroVectorPtr2",
+   "this_00": "selfRef",
+   "this_00_2": "soundManager2",
+   "uStack_88": "scratch1",
+   "uStack_90": "scratch2",
+   "uStack_c8": "scratch3",
+   "uStack_d0": "stackPosition",
+   "uStack_d8": "stackSourceOwner",
+   "uStack_e0": "stackZeroVector",
+   "uStack_e8": "scratch4",
+   "uStack_f0": "scratch5",
+   "uVar13": "positionZ",
+   "uVar14": "positionZ2",
+   "uVar3": "hasAudioSource"
+  }
+ },
+ "3168ec0": {
+  "summary": "Final callback after pack select animation; reads the outer pack's game object (apparently a stub).",
+  "renames": {
+   "uVar2": "scratch1"
+  }
+ },
+ "3167df0": {
+  "summary": "Registers select and preview button listeners and resets the effect toggler controller on enable.",
+  "renames": {
+   "plStack_38": "currentToggler",
+   "puStack_50": "enumeratorPtr",
+   "uStack_40": "scratch1",
+   "uStack_58": "stateBits",
+   "uVar2": "hasNext"
+  }
+ },
+ "3167ef4": {
+  "summary": "Unregisters the select button listener and clears the preview button's click listeners on disable.",
+  "renames": {
+   "auVar6_x1": "scratchArg"
+  }
+ },
+ "3168080": {
+  "summary": "Initializes the prebuilt pack UI: sets pack name and creates/initializes card info items for the pack's card library.",
+  "renames": {
+   "lVar3": "localizedName",
+   "plVar9": "packSlot"
+  }
+ },
+ "31682d4": {
+  "summary": "Destroys all current card info item game objects and clears the list.",
+  "renames": {
+   "auVar5_x1": "methodArg",
+   "lStack_38": "currentItem",
+   "uStack_40": "scratch1",
+   "uVar3": "hasNext"
+  }
+ },
+ "3168554": {
+  "summary": "Plays the pack open animation: scales up and fades in the pack content with a delay based on pack index.",
+  "renames": {
+   "fVar4": "startScale"
+  }
+ },
+ "3168778": {
+  "summary": "Enables the pack select button, clearing event system selection if it is not interactable and computing its visual state.",
+  "renames": {
+   "uVar5": "selectionState"
+  }
+ },
+ "3168794": {
+  "summary": "Plays the pack close animation: fades out and scales down the pack content.",
+  "renames": {
+   "lVar4": "oneVectorPtr",
+   "lVar5_2": "scaleClosure",
+   "puVar6": "targetPtr"
+  }
+ },
+ "3168860": {
+  "summary": "Creates a duplicate pack UI and plays the select animation moving it to a target position with scale, fade and callbacks.",
+  "renames": {
+   "lVar3_4": "animClosure",
+   "lVar8": "oneVectorPtr",
+   "param_5": "anchorParent"
+  }
+ },
+ "31689ac": {
+  "summary": "Plays the pack select animation sequence on this pack: scales, moves to target, fades and fires callbacks.",
+  "renames": {
+   "lVar1": "animClosure",
+   "lVar7": "oneVectorPtr",
+   "param_4": "packUI"
+  }
+ },
+ "317df2c": {
+  "summary": "Static constructor creating the singleton compiler-generated closure instance.",
+  "renames": {
+   "uVar1": "instance"
+  }
+ },
+ "317d930": {
+  "summary": "Opens the view deck info popup and registers the close button click listener.",
+  "renames": {
+   "lVar2": "addMethod",
+   "puVar6": "listSlot",
+   "uVar1": "callCount"
+  }
+ },
+ "317d9c8": {
+  "summary": "Closes the popup and removes the close button click listener.",
+  "renames": {
+   "iVar1": "newCount",
+   "lVar9": "callList",
+   "plVar4": "callsToRemove",
+   "uVar2": "callCount",
+   "uVar6": "isMatch"
+  }
+ },
+ "317da60": {
+  "summary": "Initializes the deck view popup: creates card info items, sorts the deck's cards and fills each item.",
+  "renames": {
+   "lVar10": "offsetOrFunc",
+   "lVar10_8": "itemsArrayCheck",
+   "lVar3_3": "sortedCards",
+   "plVar2": "itemsArray",
+   "plVar7": "itemsFieldPtr"
+  }
+ }
+}

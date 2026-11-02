@@ -1,0 +1,333 @@
+{
+ "2f30c54": {
+  "summary": "Builds the list of valid targets for a card's ability based on its targets-available counter, including heroes, mana-based targets, cemetery, filters, and selection limits.",
+  "renames": {
+   "auVar23_x1": "savedMethod",
+   "uStack_64": "targetCount",
+   "lVar15": "abilityStatics",
+   "plVar11": "listSlot",
+   "lVar13": "targetListPtr",
+   "lVar21_2": "battleManagerRef",
+   "lVar21_13": "staticsListPtr",
+   "lVar21_17": "battleManagerRef2",
+   "puVar18": "closureInstance",
+   "puVar18_2": "logMessageStr",
+   "uVar10_3": "condition",
+   "lVar20_3": "counterOrList",
+   "lVar20_5": "targetListTemp",
+   "lVar20_8": "targetListForAdd",
+   "lVar15_5": "handCardList",
+   "lVar15_6": "previousTargetList",
+   "lVar15_8": "filteredTargetList",
+   "cVar3": "sideFlagA",
+   "cVar4": "sideFlagB",
+   "cVar5": "sideFlagC"
+  }
+ },
+ "2f30d2c": {
+  "summary": "Turns this card into a hero by setting its state, position and scale, and toggles ambush-dependent visuals.",
+  "renames": {
+   "param_7": "selfCard",
+   "param_6": "isUIHeroValue",
+   "bVar1": "hasAmbush"
+  }
+ },
+ "2f30e94": {
+  "summary": "Plays the invoke animation and invoke sound cue when a card turns into a minion on the board.",
+  "renames": {
+   "uVar3": "hasAudioSource",
+   "puVar6": "vectorStatics",
+   "puVar7": "vectorStatics2",
+   "this_01": "soundManager",
+   "method_00": "unused1",
+   "uVar13": "positionTail",
+   "uVar14": "positionTail2",
+   "auVar15": "cueValid",
+   "auVar15_x1": "clipArg",
+   "lVar5_2": "soundManager2",
+   "uStack_e0": "scratch1",
+   "uStack_d8": "scratch2",
+   "uStack_d0": "scratch3",
+   "pcStack_c0": "scratch4",
+   "pcStack_b0": "scratch5",
+   "puStack_a8": "scratch6",
+   "lStack_a0": "scratch7",
+   "lStack_98": "scratch8",
+   "uStack_90": "scratch9",
+   "uStack_88": "scratch10",
+   "uStack_c8": "scratch11",
+   "uStack_f0": "scratch12",
+   "uStack_e8": "scratch13",
+   "alStack_78": "audioSourceBuf"
+  }
+ },
+ "2f30f48": {
+  "summary": "Hides the 2D card, shows the 3D body, and plays the invoke sound for a teleport-style minion summon.",
+  "renames": {
+   "uVar4": "hasAudioSource",
+   "puVar7": "vectorStatics",
+   "puVar8": "vectorStatics2",
+   "lVar2_4": "soundManager",
+   "lVar6_2": "soundManager2",
+   "method_00": "unused1",
+   "uVar14": "positionTail",
+   "uVar15": "positionTail2",
+   "auVar16": "cueValid",
+   "auVar16_x1": "clipArg",
+   "uStack_e0": "scratch1",
+   "uStack_d8": "scratch2",
+   "uStack_d0": "scratch3",
+   "pcStack_c0": "scratch4",
+   "pcStack_b0": "scratch5",
+   "puStack_a8": "scratch6",
+   "lStack_a0": "scratch7",
+   "lStack_98": "scratch8",
+   "uStack_90": "scratch9",
+   "uStack_88": "scratch10",
+   "uStack_c8": "scratch11",
+   "uStack_f0": "scratch12",
+   "uStack_e8": "scratch13",
+   "alStack_78": "audioSourceBuf"
+  }
+ },
+ "2f31020": {
+  "summary": "Returns the time of the first animation event in the hand-to-board animation clip.",
+  "renames": {
+   "lVar2_5": "animationEvents",
+   "iVar1": "sortingOrderValue",
+   "auVar5_part8": "indexInDeckValue",
+   "fVar4": "eventTime"
+  }
+ },
+ "2f310d0": {
+  "summary": "Puts the card into deck state and sets its canvas sorting order from its deck index.",
+  "renames": {
+   "iVar1": "sortingOrder"
+  }
+ },
+ "2f31104": {
+  "summary": "Sets the card to the in-deck state, positions it on the deck, and resets its collider size and offset.",
+  "renames": {
+   "bVar2": "isCemeteryOrRemoved"
+  }
+ },
+ "2f31148": {
+  "summary": "Copies the deck reference object's local position, rotation and scale onto this card.",
+  "renames": {
+   "auStack_2c": "localScaleBuf"
+  }
+ },
+ "2f3120c": {
+  "summary": "Moves a minion to a new in-play position, tweening if needed, skipping when it is already there.",
+  "renames": {
+   "uVar3": "isMissing",
+   "fVar8": "compareX",
+   "fVar10": "compareY",
+   "fVar11": "compareZ",
+   "iVar1": "currentCardState",
+   "param_7": "isFromCardFlag",
+   "puVar7": "quaternionStatics"
+  }
+ },
+ "2f31730": {
+  "summary": "Moves an asset card to a new in-play position with an optional tween, optionally storing it as the permanent position.",
+  "renames": {
+   "fVar7": "compareX",
+   "fVar9": "compareY",
+   "fVar10": "compareZ",
+   "puVar6": "quaternionStatics",
+   "param_7": "setAsPermanentFlag"
+  }
+ },
+ "2f31560": {
+  "summary": "Checks whether the card's rotation and local position already match the target position within a small tolerance.",
+  "renames": {
+   "pfVar2": "quaternionStatics",
+   "fVar3": "tempValueA",
+   "fVar4": "tempValueB",
+   "fVar5": "tempValueC",
+   "param_4": "quatParamW"
+  }
+ },
+ "2f31aa8": {
+  "summary": "Tweens a card in hand to a target position, rotation and scale, killing any previous tweens.",
+  "renames": {
+   "param_9": "selfCard",
+   "param_8": "moveDuration",
+   "fVar2": "eulerRad"
+  }
+ },
+ "2f31db8": {
+  "summary": "Animates drawing a card from the deck into the hand with sound, scale, rotation and bounce-eased movement.",
+  "renames": {
+   "uVar2": "stateName",
+   "puVar5": "vectorStatics",
+   "lVar6": "soundManager",
+   "fVar7": "overshootValue",
+   "param_8": "selfCard",
+   "param_7": "drawDuration",
+   "param_6": "scaleParam",
+   "uStack_68": "scratch1",
+   "uStack_70": "scratch2",
+   "extraout_x0": "unused1"
+  }
+ },
+ "2f32374": {
+  "summary": "Finishes the draw animation by updating card visibility and rotating the card back with an InBack ease.",
+  "renames": {
+   "puVar4": "vectorStatics",
+   "fVar5": "overshootValue"
+  }
+ },
+ "2f32670": {
+  "summary": "Puts the card into the mulligan kept or discarded state, parenting it to the mulligan anchor and resetting its collider.",
+  "renames": {
+   "bVar1": "isCemeteryOrRemoved"
+  }
+ },
+ "2f326f8": {
+  "summary": "Destroys the mulligan selected and button frame objects on the card UI.",
+  "renames": {
+   "uVar2": "hasFrame"
+  }
+ },
+ "2f320c8": {
+  "summary": "Moves the card into the player's hand state, refreshing its UI and parenting it to the hand anchor, ignoring heroes.",
+  "renames": {
+   "uVar7": "logArg",
+   "puVar6": "loggerResult"
+  }
+ },
+ "2f2cbc4": {
+  "summary": "Each frame moves and rotates a charging card toward its attack target using lerp and camera conversion.",
+  "renames": {
+   "fVar1": "lerpFactor",
+   "lVar3": "vectorStatics",
+   "fVar4": "sideSign",
+   "fVar7": "chargeProgress",
+   "fVar8": "currentLocalX",
+   "fVar13": "backVectorZ",
+   "fVar15": "upVectorZ",
+   "in_s2": "currentLocalZ"
+  }
+ },
+ "2f328e8": {
+  "summary": "Returns whether any active effect on the card is an enchantment of mutation type.",
+  "renames": {
+   "auVar5_x1": "savedMethod",
+   "auVar5_3": "hasEnchantment"
+  }
+ },
+ "2f329f0": {
+  "summary": "Returns whether the card has the given non-cumulative mutation among its active effects.",
+  "renames": {
+   "uVar4": "isSameEnchantment"
+  }
+ },
+ "2f32ae8": {
+  "summary": "Logs and sets the card's state.",
+  "renames": {
+   "uStack_50": "scratch1",
+   "iStack_48": "stateCopy",
+   "uVar1": "stateName"
+  }
+ },
+ "2f32ce4": {
+  "summary": "Moves the card to the center of the screen with scale and move tweens, returning the total animation time.",
+  "renames": {
+   "puVar5": "vectorStatics",
+   "fVar6": "currentPosX",
+   "fVar7": "targetPosY",
+   "fVar9": "zOffset",
+   "in_s1": "currentPosY",
+   "in_s2": "currentPosZ"
+  }
+ },
+ "2f330cc": {
+  "summary": "Sends the card to the cemetery: dissolves it, resets values, and adds it to the cemetery list unless it is ephemeral.",
+  "renames": {
+   "plVar8": "itemSlot"
+  }
+ },
+ "2f332d8": {
+  "summary": "Animates the card back into its deck with move, scale and rotation tweens, returning the total animation time.",
+  "renames": {
+   "uVar11": "animOffset",
+   "fVar12": "animDelay",
+   "fVar15": "offsetZ",
+   "fVar7": "tempValue",
+   "fVar5": "currentPosX",
+   "in_s1": "offsetY",
+   "fVar8": "localScaleX",
+   "fVar9": "lossyScaleX",
+   "fVar10": "deckLocalScale",
+   "fVar13": "oneVectorZ",
+   "lVar3_10": "oneVectorStatics",
+   "uStack_80": "scratch1",
+   "uStack_7c": "scratch2",
+   "uStack_78": "scratch3"
+  }
+ },
+ "2f33114": {
+  "summary": "Destroys the active in-play animation objects on the card UI and clears the list; decompiled output is mostly array helper garbage.",
+  "renames": {
+   "unaff_x19": "unused1",
+   "unaff_x20": "unused2",
+   "unaff_x20_2": "unused3",
+   "unaff_x21": "unused4",
+   "unaff_x22": "unused5",
+   "unaff_x23": "unused6",
+   "unaff_x24": "unused7",
+   "unaff_x30": "unused8",
+   "iVar6": "interfaceOffset",
+   "uVar18": "scratchA",
+   "puVar16": "errorMessage",
+   "puVar1": "stackPtr1",
+   "puVar2": "stackPtr2",
+   "puVar3": "stackPtr3",
+   "puVar4": "stackPtr4",
+   "uVar9": "scratchB",
+   "uVar23": "scratchC",
+   "indexOf2": "exceptionArg",
+   "plVar17_3": "elementObj",
+   "lVar21": "searchValue",
+   "lVar22_2": "lastIndexCursor",
+   "lVar11_4": "objectArray",
+   "pcVar24": "methodRef",
+   "auVar25_x1": "searchItem"
+  }
+ },
+ "2f33818": {
+  "summary": "Toggles a card between kept and discarded during mulligan selection, or in replays shows the selected frame and plays a toggle sound.",
+  "renames": {
+   "uVar4": "hasAudioSource",
+   "uVar6": "devToolsEnabled",
+   "puVar11": "vectorStatics",
+   "puVar12": "quaternionStatics",
+   "puVar12_2": "quaternionStatics2",
+   "uVar17": "playerDataClass",
+   "uVar19": "positionTail",
+   "uVar21": "quaternionPart1",
+   "uVar22": "quaternionPart2",
+   "uVar23": "quaternionPart3",
+   "auVar24": "cueValid",
+   "auVar24_x1": "clipArg",
+   "lVar3_2": "soundManager",
+   "lVar5_2": "soundManager2",
+   "uStack_e0": "scratch1",
+   "uStack_d8": "scratch2",
+   "uStack_d0": "scratch3",
+   "pcStack_c0": "scratch4",
+   "pcStack_b0": "scratch5",
+   "puStack_a8": "scratch6",
+   "lStack_a0": "scratch7",
+   "lStack_98": "scratch8",
+   "uStack_90": "scratch9",
+   "uStack_88": "scratch10",
+   "uStack_c8": "scratch11",
+   "uStack_f0": "scratch12",
+   "uStack_e8": "scratch13",
+   "lStack_78": "audioSourceBuf"
+  }
+ }
+}

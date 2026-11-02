@@ -1,0 +1,524 @@
+{
+ "2fc7f90": {
+  "summary": "Error callback for granting a starter deck: logs the error, increments retry count and retries the PlayFab grant request.",
+  "renames": {
+   "uVar1": "retryBoxed"
+  }
+ },
+ "2fc6ffc": {
+  "summary": "Opens the FTUE deck selection window, spawns containers for visible starter decks, and wires up the continue button (decompiler merged in the continue-click logic).",
+  "renames": {
+   "uVar13": "deckId",
+   "lVar14": "displayClass",
+   "lStack_88": "starterDecksCopy",
+   "lStack_70": "savedDisplayClass",
+   "lStack_68": "savedWindow",
+   "pcStack_a0": "scratchCallback",
+   "pcStack_90": "scratchType",
+   "puStack_98": "scratchMethod",
+   "uVar3": "campaignName",
+   "uVar4": "requestPayload",
+   "puStack_98_part4": "scratchPart",
+   "unaff_x21": "deckInfo"
+  }
+ },
+ "2fc72b0": {
+  "summary": "Handles the continue click: disables input, finds the active campaign and asks PlayFab to grant the selected starter deck.",
+  "renames": {
+   "uVar3": "requestPayload",
+   "lVar4": "displayClass",
+   "uVar1": "campaignName"
+  }
+ },
+ "2fc7500": {
+  "summary": "Deselects all other deck containers when one is chosen, stores its deck as current and refreshes the continue button.",
+  "renames": {
+   "uVar1": "condition",
+   "uStack_50": "scratch1",
+   "lStack_48": "enumeratorCurrent"
+  }
+ },
+ "2fc76a4": {
+  "summary": "Shows and fades in the continue button, sets the faction icon for the selected deck, plays the hero intro sound and triggers the shine effect.",
+  "renames": {
+   "uVar2": "hasValue",
+   "extraout_x1": "playedAudioSource",
+   "lVar1_4": "previousAudioSource",
+   "lVar6_2": "soundManager"
+  }
+ },
+ "2fc78fc": {
+  "summary": "Constructor: creates the deck container list and sets default window flags and open/close delegates.",
+  "renames": {
+   "puVar4": "unusedStatics",
+   "iVar1": "classInitFlag"
+  }
+ },
+ "2fe04cc": {
+  "summary": "Before JSON read, converts the RankedGame token from a boolean-typed value into a normalized boolean value.",
+  "renames": {
+   "plStack_28": "rankedGameToken",
+   "iVar2": "tokenType",
+   "uVar1": "rankedGameKey"
+  }
+ },
+ "2fe0608": {
+  "summary": "Constructor: initializes opponent and player id, name, hero and alliance strings to defaults and RankedGame to true.",
+  "renames": {}
+ },
+ "300c1e8": {
+  "summary": "Registers CancelButtonClick as a listener on the cancel button's click event.",
+  "renames": {
+   "lVar2": "addMethod",
+   "uVar1": "callCount",
+   "puVar6": "slotPtr"
+  }
+ },
+ "300c278": {
+  "summary": "Unregisters CancelButtonClick from the cancel button's click event by rebuilding the call lists.",
+  "renames": {
+   "plVar4": "matchingCalls",
+   "uVar6": "isMatch",
+   "lVar9": "matchingItems",
+   "uVar2": "matchCount",
+   "iVar1": "otherCount"
+  }
+ },
+ "300c308": {
+  "summary": "Opens the searching-opponent window, initializing the player info display and showing the not-found opponent container.",
+  "renames": {}
+ },
+ "300c48c": {
+  "summary": "Closes the window and cancels the ongoing battle search in the matchmaker.",
+  "renames": {
+   "lVar1": "matchMaker"
+  }
+ },
+ "300c4a0": {
+  "summary": "Cancels matchmaking by clearing a matchmaker flag and cancelling the battle search.",
+  "renames": {
+   "lVar1": "matchMaker"
+  }
+ },
+ "300c50c": {
+  "summary": "Constructor: sets default window flags and open/close delegates.",
+  "renames": {
+   "puVar3": "unusedStatics",
+   "iVar1": "classInitFlag"
+  }
+ },
+ "300c514": {
+  "summary": "On destroy, releases the warlord card image asset from the addressables cache, warning if it was not loaded.",
+  "renames": {
+   "uVar2": "assetKey",
+   "uVar3": "found",
+   "auVar6_x1": "methodInfo"
+  }
+ },
+ "300d6d4": {
+  "summary": "Static constructor creating the singleton closure-holder instance.",
+  "renames": {
+   "uVar1": "instance"
+  }
+ },
+ "300d744": {
+  "summary": "Callback for a fetched match recording: starts a replay match if found, otherwise shows a load-error popup.",
+  "renames": {
+   "lVar1": "matchMaker",
+   "lVar3": "matchDataOrClosure",
+   "unaff_x19": "pendingException",
+   "unaff_x20": "unused1",
+   "auVar8": "windowsManagerCopy",
+   "pcStack_50": "scratchCallback",
+   "uStack_a8": "pad1",
+   "uStack_b0": "emptyMatchParams",
+   "uStack_98": "pad3",
+   "uStack_a0": "pad2",
+   "uStack_88": "pad5",
+   "uStack_90": "pad4",
+   "uStack_78": "pad7",
+   "uStack_80": "pad6",
+   "uStack_68": "pad9",
+   "uStack_70": "pad8",
+   "uStack_58": "pad11",
+   "uStack_60": "pad10",
+   "auVar8_x1": "coroutineHandle",
+   "lVar1_3": "coroutineOwner",
+   "unaff_x21": "unused2"
+  }
+ },
+ "300c584": {
+  "summary": "Fills a battle log entry: initializes own and enemy player displays, match type text, win/lose/draw result display and button handlers.",
+  "renames": {
+   "uVar7": "replayAvailable",
+   "uVar10": "resultText",
+   "uStack_a0": "resultStructA",
+   "uStack_98": "resultStructB",
+   "uStack_90": "resultStructC",
+   "uStack_c0": "localizedStruct0",
+   "uStack_c0_part4": "localizedStructPart",
+   "plVar11": "pinStateRef",
+   "uStack_b8": "localizedStruct1",
+   "uStack_a8": "localizedStruct2",
+   "uStack_b0": "localizedStruct3",
+   "uStack_d0": "copyStruct3",
+   "uStack_d8": "copyStruct1",
+   "uStack_e0": "copyStruct0"
+  }
+ },
+ "300d300": {
+  "summary": "Sets the pin button image alpha depending on whether the entry is pinned.",
+  "renames": {
+   "uVar2": "alpha"
+  }
+ },
+ "300d34c": {
+  "summary": "Requests recovery of the match recording from the cloud so it can be replayed.",
+  "renames": {
+   "lVar2": "closure",
+   "plVar6": "recordingIndexRef",
+   "lVar8": "playerDataManager",
+   "uVar1": "recordingIndexText",
+   "uVar5": "playfabId",
+   "lVar3_3": "requestPayload",
+   "lVar2_2": "cloudHandleName"
+  }
+ },
+ "300d4e0": {
+  "summary": "Toggles the pinned state of the recording via a cloud script call, disabling the pin button meanwhile.",
+  "renames": {
+   "lVar4": "closure",
+   "lVar6": "playerDataManager",
+   "auVar8_x1": "unusedMethod1",
+   "auVar8_x1_2": "unusedMethod2",
+   "auVar8_2": "unusedResult",
+   "lVar5_3": "requestPayload",
+   "lVar4_2": "cloudHandleName"
+  }
+ },
+ "300d664": {
+  "summary": "Pin success callback: re-enables the button, flips the pinned flag and updates the pin icon alpha.",
+  "renames": {
+   "bVar1": "newPinned",
+   "auVar6": "unusedResult",
+   "auVar6_x1": "unusedMethod",
+   "lVar3_2": "unusedResult2",
+   "uVar5": "alpha"
+  }
+ },
+ "300d6a4": {
+  "summary": "Pin error callback: logs the error and re-enables the pin button (inlined interactable setter and state computation).",
+  "renames": {
+   "uVar5": "buttonState"
+  }
+ },
+ "300d868": {
+  "summary": "Compiler-generated record property returning the type of BattleLogPlayerData (equality contract).",
+  "renames": {
+   "lStack_18": "typeHandle",
+   "uVar2": "lookupFailed",
+   "uVar1": "typeClass"
+  }
+ },
+ "300d9a0": {
+  "summary": "Compiler-generated record ToString for BattleLogPlayerData.",
+  "renames": {
+   "lVar3": "resultString"
+  }
+ },
+ "300da88": {
+  "summary": "Compiler-generated record PrintMembers appending all BattleLogPlayerData fields to a StringBuilder.",
+  "renames": {
+   "auStack_68": "isPracticeFlag",
+   "uStack_78": "scratch"
+  }
+ },
+ "300dee4": {
+  "summary": "Compiler-generated record GetHashCode combining hashes of all BattleLogPlayerData fields.",
+  "renames": {
+   "uVar15": "equalityContractType",
+   "iVar1": "typeHash",
+   "iVar2": "playerIdHash",
+   "iVar3": "playerHash",
+   "iVar4": "altBotIdHash",
+   "iVar5": "heroHash",
+   "iVar6": "allianceHash",
+   "iVar7": "eventXpHash",
+   "iVar8": "xpChangeHash",
+   "iVar9": "rankedRatingHash",
+   "iVar10": "skullsHash",
+   "iVar11": "globalRatingHash",
+   "iVar12": "matchSeasonHash",
+   "iVar13": "matchTypeHash"
+  }
+ },
+ "300e1c8": {
+  "summary": "Compiler-generated record Equals(object): casts to BattleLogPlayerData and compares.",
+  "renames": {}
+ },
+ "300e250": {
+  "summary": "Compiler-generated record Equals comparing all BattleLogPlayerData fields.",
+  "renames": {
+   "bVar2": "areEqual",
+   "uVar5": "fieldsEqual"
+  }
+ },
+ "300e5dc": {
+  "summary": "Compiler-generated record Deconstruct writing all fields into out parameters.",
+  "renames": {}
+ },
+ "300ca8c": {
+  "summary": "Fills a battle log player display: names, hero, clan, rank division or XP text, rank icons, skulls, and click handler for profile.",
+  "renames": {
+   "bVar4": "scratchByte",
+   "bVar5": "isHighRating",
+   "lVar13": "playerDataManagerClass",
+   "bVar1": "useRawXpDisplay",
+   "lVar13_3": "divisionClass",
+   "uVar15": "divisionHierarchyDepth",
+   "lStack_70_part4": "formatArgPart1",
+   "lStack_90": "formatArgStruct",
+   "lStack_90_part4": "formatArgPart2",
+   "lVar13_6": "textVTable",
+   "lStack_88": "divisionField40",
+   "lStack_80": "divisionField48"
+  }
+ },
+ "300e6d0": {
+  "summary": "On destroy, unregisters OnPlayerClicked from the clickable's click event by rebuilding the call lists.",
+  "renames": {
+   "uVar3": "flag",
+   "plVar5": "matchingCalls",
+   "lVar8": "matchingItems",
+   "uVar2": "matchCount",
+   "iVar1": "otherCount"
+  }
+ },
+ "300e7a8": {
+  "summary": "Opens the player profile window for the clicked player or bot, with a callback.",
+  "renames": {
+   "auVar9_x1": "unusedMethod",
+   "lVar5": "windowMethod",
+   "uVar8": "funcTypeArg",
+   "lVar3": "classPtr"
+  }
+ },
+ "300e90c": {
+  "summary": "Registers the close handler on the close button's click event.",
+  "renames": {
+   "lVar2": "addMethod",
+   "uVar1": "callCount",
+   "puVar6": "slotPtr"
+  }
+ },
+ "300e98c": {
+  "summary": "Unregisters the close handler from the close button's click event by rebuilding the call lists.",
+  "renames": {
+   "plVar4": "matchingCalls",
+   "uVar6": "isMatch",
+   "lVar9": "matchingItems",
+   "uVar2": "matchCount",
+   "iVar1": "otherCount"
+  }
+ },
+ "300ea0c": {
+  "summary": "Opens the battle log popup and instantiates a log item for each stored match log.",
+  "renames": {
+   "uStack_60": "scratch",
+   "lStack_58": "currentMatch"
+  }
+ },
+ "300ebe8": {
+  "summary": "Constructor: sets default window flags and open/close delegates.",
+  "renames": {
+   "puVar3": "unusedStatics",
+   "iVar1": "classInitFlag"
+  }
+ },
+ "300ffb8": {
+  "summary": "Finds and loads the icon sprite for an alternate art style from the icon list.",
+  "renames": {
+   "uVar1": "hasNext",
+   "uVar2": "foundItem",
+   "alStack_50": "enumeratorState"
+  }
+ },
+ "300ffd0": {
+  "summary": "Releases the loaded icon assets for an alternate art style across all style items.",
+  "renames": {
+   "uStack_40": "scratch",
+   "lStack_38": "currentItem"
+  }
+ },
+ "300f118": {
+  "summary": "Returns the list of alternate art styles filtered by a predicate (inlined List.FindAll and helper exceptions).",
+  "renames": {
+   "uVar18": "itemIndex",
+   "auVar20": "thrownResult",
+   "auVar20_x1": "thrownResultAux",
+   "uVar9": "matched",
+   "extraout_x8": "enumeratorOut"
+  }
+ },
+ "3010030": {
+  "summary": "Looks up the default cardback cosmetic item for an army.",
+  "renames": {
+   "alStack_50": "cardbackItem",
+   "lStack_38": "currentEntry"
+  }
+ },
+ "3010048": {
+  "summary": "Returns the default cardback sprite pair for an army, or null sprites if none.",
+  "renames": {
+   "uVar1": "hasCardback",
+   "alStack_40": "spritePair"
+  }
+ },
+ "3010060": {
+  "summary": "Releases the default cardback image and SDF assets for an army from the addressables cache.",
+  "renames": {
+   "uVar1": "flag",
+   "uVar2": "cacheKey"
+  }
+ },
+ "300464c": {
+  "summary": "Looks up the icon sprite for an army.",
+  "renames": {
+   "alStack_50": "armySprite",
+   "lStack_38": "currentEntry"
+  }
+ },
+ "3010078": {
+  "summary": "Looks up the forge icon sprite for an army.",
+  "renames": {
+   "alStack_50": "armySprite",
+   "lStack_38": "currentEntry"
+  }
+ },
+ "3010090": {
+  "summary": "Looks up the active ability icon sprite for an army.",
+  "renames": {
+   "alStack_50": "armySprite",
+   "lStack_38": "currentEntry"
+  }
+ },
+ "30100a8": {
+  "summary": "Releases the active ability icon assets for an army.",
+  "renames": {
+   "uStack_40": "scratch",
+   "lStack_38": "currentEntry"
+  }
+ },
+ "30100c0": {
+  "summary": "Loads the medium background sprite for an army (decompiler merged in nearby release code).",
+  "renames": {
+   "uStack_78": "outSprite2",
+   "lStack_38": "backgroundSprite",
+   "auVar8": "thrownResult",
+   "lVar2": "armyItem",
+   "auVar8_x1": "thrownResultAux"
+  }
+ },
+ "30100d8": {
+  "summary": "Releases the medium background asset for an army.",
+  "renames": {
+   "uStack_38": "outSprite",
+   "lVar5": "armyItem"
+  }
+ },
+ "3006be4": {
+  "summary": "Returns the localized army name, trying the short-name term first if requested.",
+  "renames": {
+   "uStack_48": "armyEnumType",
+   "iStack_38": "boxedArmy",
+   "uStack_40": "scratch"
+  }
+ },
+ "30100f0": {
+  "summary": "Maps an army code string such as SOR or TAU to its CardArmy enum value using a string hash switch.",
+  "renames": {
+   "uVar2": "codeMatches",
+   "uVar1": "codeHash"
+  }
+ },
+ "30104f0": {
+  "summary": "Finds the cursor and highlight sprites for an army, loading them, and returns whether found.",
+  "renames": {
+   "bVar7": "found",
+   "auVar10": "thrownResult",
+   "iVar1": "cursorArmy",
+   "auVar10_part8": "thrownResultPart"
+  }
+ },
+ "3010508": {
+  "summary": "Releases the cursor assets for an army from the addressables cache.",
+  "renames": {
+   "uVar3": "cacheKey",
+   "uVar5": "flag",
+   "auVar8": "thrownResult",
+   "auVar8_part8": "thrownResultPart"
+  }
+ },
+ "3013ad0": {
+  "summary": "Configures card renderers and text materials for rendering inside a scroll mask (merged with the SetDraftView and sorting layer helper code).",
+  "renames": {
+   "lVar5": "arrayBase",
+   "pplVar13": "enumeratorRef",
+   "auVar19": "catchResult",
+   "pcStack_100": "spanWrapper",
+   "pcStack_e0": "scratchCallback1",
+   "pcStack_d0": "scratchCallback2",
+   "plStack_c8": "savedCurrent",
+   "plStack_c0": "savedDisposable",
+   "lStack_b0": "exceptionClass",
+   "pcStack_90": "scratchCallback3",
+   "plStack_88": "enumeratorHolder",
+   "pcStack_80": "scratchCallback4",
+   "pcStack_70": "scratchCallback5",
+   "uStack_68": "savedStencilComp",
+   "uStack_60": "savedStencilId",
+   "lStack_58": "savedSelf",
+   "uVar3_3": "isNullMaterial",
+   "lStack_98": "disposableSlot",
+   "uVar3_5": "flag",
+   "pplStack_a8": "enumeratorRefSlot",
+   "plStack_a0": "disposableSlotRef",
+   "plVar9_3": "currentChild",
+   "auVar18": "unwindResult",
+   "uStack_b8": "exceptionObject",
+   "auVar18_part8": "unwindKind",
+   "lVar5_4": "caughtException",
+   "auVar19_x1": "catchResultAux",
+   "lVar5_5": "targetObject",
+   "puStack_d8": "scratchType",
+   "puStack_f8": "spanWrapperPart"
+  }
+ },
+ "3013dc0": {
+  "summary": "Switches a card list item to draft view: sets hide threshold and moves all children to the Hand sorting layer.",
+  "renames": {
+   "uVar3": "flag",
+   "pplVar12": "enumeratorRef",
+   "auVar16": "catchResult",
+   "pcStack_b0": "spanWrapper",
+   "pcStack_90": "scratchCallback1",
+   "pcStack_80": "scratchCallback2",
+   "plStack_78": "savedCurrent",
+   "plStack_70": "savedDisposable",
+   "lStack_60": "exceptionClass",
+   "plStack_38": "enumeratorHolder",
+   "alStack_48": "disposableSlot",
+   "pplStack_58": "enumeratorRefSlot",
+   "plStack_50": "disposableSlotRef",
+   "plVar7_3": "currentChild",
+   "auVar15": "unwindResult",
+   "uStack_68": "exceptionObject",
+   "auVar15_part8": "unwindKind",
+   "lVar4_3": "caughtException",
+   "auVar16_x1": "catchResultAux",
+   "lVar4_4": "targetObject",
+   "puStack_88": "scratchType",
+   "puStack_a8": "spanWrapperPart"
+  }
+ }
+}

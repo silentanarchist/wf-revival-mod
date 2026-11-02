@@ -1,0 +1,415 @@
+{
+ "303b5e0": {
+  "summary": "Shows the selected card in the card display window: sets the current card, shows the matching card UIs, loads flavour background, voice-over and lore, and opens the window.",
+  "renames": {
+   "auStack_48": "nullableTier",
+   "auVar22": "thrownResult",
+   "auVar22_x1": "thrownResultExtra",
+   "bVar2": "skipMaterialUpdate",
+   "fVar20": "spriteRectX",
+   "fVar21": "spriteRectY",
+   "in_s2": "rectDeltaX",
+   "in_s3": "rectDeltaY",
+   "lVar12": "scratch1",
+   "lVar14_3": "outerWindow",
+   "lVar6_3": "flavourText",
+   "lVar6_5": "cardWindow",
+   "plVar19": "spriteSlotPtr",
+   "plVar7": "cardSlotPtr",
+   "puVar17": "listSlotPtr",
+   "uVar9": "condition"
+  }
+ },
+ "303b04c": {
+  "summary": "Shows the deck list drawer or the deck info drawer depending on the showList flag.",
+  "renames": {
+   "bVar1": "showInfo"
+  }
+ },
+ "303b618": {
+  "summary": "Opens the deck editor for this deck, or shows a can't-import error message if an imported deck's army is not allowed.",
+  "renames": {
+   "lStackY_58": "errorItem",
+   "lVar7": "scratch1",
+   "lVar9_3": "messageController",
+   "puVar8": "logCallResult",
+   "uStackY_60": "enumeratorExtra",
+   "uStackY_68": "itemEnumerator",
+   "uVar14": "nullMessageText",
+   "uVar16": "showArg1",
+   "uVar17": "showArg2",
+   "uVar18": "showArg3"
+  }
+ },
+ "303b998": {
+  "summary": "Starts a casual practice match with the given deck, or shows an invalid-deck popup if it contains hidden cards.",
+  "renames": {
+   "auStack_118": "battleData",
+   "auStack_180": "battleDataCopy",
+   "lVar2_5": "matchMaker",
+   "uStack_b0": "battleDataBuffer",
+   "uStack_50": "scratch1",
+   "uStack_58": "scratch2",
+   "uStack_60": "scratch3",
+   "uStack_68": "scratch4",
+   "uStack_70": "scratch5",
+   "uStack_78": "scratch6",
+   "uStack_80": "scratch7",
+   "uStack_88": "scratch8",
+   "uStack_90": "scratch9",
+   "uStack_98": "scratch10",
+   "uStack_a0": "scratch11",
+   "uStack_a8": "scratch12"
+  }
+ },
+ "303bcc0": {
+  "summary": "Shows a delete-deck confirmation popup with Cancel and Delete buttons.",
+  "renames": {
+   "auVar9_x1": "popUpResult",
+   "plVar6": "cachedDelegatePtr",
+   "register0x00000008": "stackPtr",
+   "unaff_x19": "routineException",
+   "unaff_x20": "unused1",
+   "unaff_x21": "unused2",
+   "unaff_x30": "unused3"
+  }
+ },
+ "303becc": {
+  "summary": "Builds a shareable string of the deck: serialized deck, warlord name, and each unique card with its copy count.",
+  "renames": {
+   "auVar10_3": "scratch1",
+   "auVar10_4": "scratch2",
+   "auVar10_x1": "methodArg",
+   "lStack_70": "currentCard",
+   "lStack_90": "scratch3",
+   "lVar3_2": "deckCard",
+   "lVar8_3": "heroCard",
+   "lVar8_5": "deckCards",
+   "plVar7": "listSlotPtr",
+   "puStack_78": "enumeratorPtr1",
+   "puStack_98": "enumeratorPtr2",
+   "uStack_80": "cardEnumerator"
+  }
+ },
+ "303c514": {
+  "summary": "Copies the deck string to the clipboard and shows an export-successful message.",
+  "renames": {
+   "iVar1": "nextIndex",
+   "lStack_58": "errorItem",
+   "lVar4": "messageController",
+   "puVar7": "logCallResult",
+   "uStack_60": "enumeratorExtra",
+   "uStack_68": "itemEnumerator",
+   "uVar12": "showArg1",
+   "uVar13": "showArg2",
+   "uVar14": "showArg3",
+   "uVar2": "nullMessageText",
+   "uVar8": "messageTerm"
+  }
+ },
+ "303a810": {
+  "summary": "Opens an options panel letting the player share the deck to alliance or global chat; also contains the popup Open setup code.",
+  "renames": {
+   "auStack_c4": "nullableCheckOwnership",
+   "bVar1": "globalBanned",
+   "bVar2": "allianceBanned",
+   "lStack_98": "savedMountPoint",
+   "lStack_a0": "savedThis",
+   "lStack_a8": "savedUtilities",
+   "lStack_d0": "nullableGameMode",
+   "pcStack_c0": "savedFunction",
+   "plStack_b0": "savedButtons",
+   "plVar13": "contextPtr",
+   "uStack_68": "allianceExtra3",
+   "uStack_70": "allianceExtra2",
+   "uStack_78": "allianceExtra1",
+   "uStack_80": "globalExtra3",
+   "uStack_88": "globalExtra2",
+   "uStack_90": "globalExtra1",
+   "uStack_b8": "savedBannedFlag"
+  }
+ },
+ "303c5dc": {
+  "summary": "Duplicates the deck, then builds and uploads the copied deck data to the server via cloud script, with delete-deck handling mixed in.",
+  "renames": {
+   "auVar20": "unwindResult",
+   "auVar20_part8": "unwindState",
+   "auVar21": "catchResult",
+   "auVar21_x1": "catchResultExtra",
+   "bVar1": "deckDataMissing",
+   "iVar3": "deckSlotValue",
+   "iVar3_2": "gameModeInt",
+   "lStackY_c8": "savedDisplayClass",
+   "lStackY_d8": "savedAzureDeck",
+   "lStack_78": "nullableGameMode",
+   "lVar15_3": "uploadClosure",
+   "lVar15_4": "deleteClosure",
+   "lVar17": "playerDataClass",
+   "lVar4": "displayClass",
+   "lVar4_2": "deckDataObj",
+   "lVar4_4": "enumerableClass",
+   "lVar4_6": "caughtException",
+   "lVar5_2": "deckDataRef",
+   "lVar5_6": "deleteArgs",
+   "pcStackY_100": "savedFunction",
+   "piVar14": "interfaceTablePtr",
+   "plStackY_d0": "savedStaticsPtr",
+   "plStackY_e8": "savedLogger",
+   "plStack_68": "enumeratorSlot",
+   "plVar16": "deckDataPtr",
+   "plVar19_4": "disposableEnumerator",
+   "pplStack_70": "enumeratorSlotPtr",
+   "pplVar11": "enumeratorSlotRef",
+   "puVar18": "interfaceSlot",
+   "uStackY_108": "eventPlayMode",
+   "uStackY_110": "scratch1",
+   "uStackY_e0": "unwindException",
+   "uStackY_f0": "savedString",
+   "uVar10": "scratch2",
+   "uVar10_3": "playModeName",
+   "uVar13": "flagValue"
+  }
+ },
+ "303c780": {
+  "summary": "Constructor: enables default close sound, sets extra small-screen scale to 1, and assigns default open/close callbacks.",
+  "renames": {
+   "iVar1": "initFlag",
+   "puVar3": "classStatics"
+  }
+ },
+ "303c788": {
+  "summary": "Delete button handler: closes popup, removes the deck from inventory and sends a delete-deck cloud script request.",
+  "renames": {
+   "bVar1": "deckIsNull",
+   "lVar10": "playerDataManager",
+   "lVar11_3": "deleteArgs",
+   "this_00": "deleteClosure",
+   "uStack_48": "eventPlayMode",
+   "uStack_50": "scratch1",
+   "uVar6": "playModeName"
+  }
+ },
+ "303c78c": {
+  "summary": "Local function that closes popup, removes the deck from inventory and sends a delete-deck cloud script request.",
+  "renames": {
+   "bVar1": "deckIsNull",
+   "lVar10": "playerDataManager",
+   "lVar11_3": "deleteArgs",
+   "this_00": "deleteClosure",
+   "uStack_48": "eventPlayMode",
+   "uStack_50": "scratch1",
+   "uVar6": "playModeName"
+  }
+ },
+ "303c8b8": {
+  "summary": "Delete-failure callback: shows a failed-to-delete error, marks the deck unsynced and re-adds it to the inventory.",
+  "renames": {
+   "lVar7": "deckClass",
+   "piVar8": "interfaceTablePtr",
+   "puVar2": "interfaceSlot",
+   "uVar3": "deckId"
+  }
+ },
+ "303c9ac": {
+  "summary": "Shares the serialized deck to the alliance chat and opens the alliance chat panel.",
+  "renames": {
+   "bVar1": "isBanned",
+   "lVar5": "windowClass",
+   "uVar8": "funcCtorArg"
+  }
+ },
+ "303cb78": {
+  "summary": "Shares the serialized deck to the global chat and opens the global chat panel.",
+  "renames": {
+   "bVar1": "isBanned",
+   "lVar5": "windowClass",
+   "uVar8": "funcCtorArg"
+  }
+ },
+ "303ca10": {
+  "summary": "Shares the serialized deck to the given chat channel (unless banned) and opens the chat panel.",
+  "renames": {
+   "bVar1": "isBanned",
+   "lVar5": "windowClass",
+   "uVar8": "funcCtorArg"
+  }
+ },
+ "303fee0": {
+  "summary": "Static constructor: creates the singleton compiler-generated closure instance.",
+  "renames": {
+   "uVar1": "newInstance"
+  }
+ },
+ "303ff8c": {
+  "summary": "Sort key selector: returns the localized card name of a card info item, applying modular name formatting.",
+  "renames": {}
+ },
+ "303ffb4": {
+  "summary": "Predicate: true if the item's current card equals the captured card.",
+  "renames": {
+   "bVar1": "isMatch"
+  }
+ },
+ "3040024": {
+  "summary": "Predicate: true if the item's current card equals the captured card.",
+  "renames": {
+   "bVar1": "isMatch"
+  }
+ },
+ "3040094": {
+  "summary": "Predicate: true if the item's current card equals the captured card.",
+  "renames": {
+   "bVar1": "isMatch"
+  }
+ },
+ "3040104": {
+  "summary": "Predicate: true if the item's current card equals the captured card.",
+  "renames": {
+   "bVar1": "isMatch"
+  }
+ },
+ "3034354": {
+  "summary": "Adds a handler to the OnCardSelected event via compare-exchange; decompilation also merges Initialize code for a deck editing panel.",
+  "renames": {
+   "auVar14_x1": "exitResultExtra",
+   "bVar1": "flag",
+   "iStack_74": "cardCount1",
+   "iStack_78": "cardCount2",
+   "iVar2": "cardCount3",
+   "lStack_48": "savedValue",
+   "lStack_58": "savedOldDelegate",
+   "lStack_60": "savedCombined",
+   "lVar7": "scratch1",
+   "lVar8": "oldDelegate",
+   "pcStack_70": "savedFunction",
+   "piVar10": "interfaceTablePtr",
+   "plStack_50": "savedEventPtr",
+   "plVar12": "countLabel",
+   "uStack_68_2": "savedFormat",
+   "uVar6": "idText",
+   "uVar9": "interfaceCount"
+  }
+ },
+ "303b1a8": {
+  "summary": "Removes a handler from the OnCardSelected event using an atomic compare-exchange loop.",
+  "renames": {
+   "bVar2": "changed"
+  }
+ },
+ "30346e0": {
+  "summary": "Initializes the drawer from a CardDeck: sets options, clears old items, and adds each library card (excluding warlord if hidden), then reorders.",
+  "renames": {
+   "auVar14": "unwindResult",
+   "auVar14_part8": "unwindState",
+   "auVar15": "loopResult",
+   "auVar15_x1": "loopResultExtra",
+   "lVar12_4": "exceptionObj",
+   "lVar6_2": "currentCard",
+   "piVar11": "interfaceTablePtr",
+   "plVar5": "libraryRef",
+   "plVar7": "listSlotPtr",
+   "puVar2": "framePtr",
+   "puVar8": "interfaceSlot",
+   "register0x00000008": "stackPointer",
+   "unaff_x19": "unused1",
+   "unaff_x20": "unused2",
+   "unaff_x21": "unused3",
+   "unaff_x22": "unused4",
+   "unaff_x23": "unused5",
+   "unaff_x30": "unused6"
+  }
+ },
+ "303ecac": {
+  "summary": "Initializes the drawer from a PrebuiltDeck: builds its card library with the hero, then lists each card and reorders.",
+  "renames": {
+   "auVar12_x1": "deckArg",
+   "auVar13": "unwindResult",
+   "auVar13_part8": "unwindState",
+   "lVar10_4": "exceptionObj",
+   "lVar3_6": "currentCard",
+   "lVar8_3": "enumeratorClass",
+   "piVar9": "interfaceTablePtr",
+   "plVar6": "listSlotPtr",
+   "puVar7": "interfaceSlot",
+   "register0x00000008": "stackPointer",
+   "unaff_x19": "unused1",
+   "unaff_x20": "unused2",
+   "unaff_x21": "unused3",
+   "unaff_x30": "unused4"
+  }
+ },
+ "303e8f4": {
+  "summary": "Initializes the drawer from a list of cards: applies options, clears old items, adds each card, and reorders.",
+  "renames": {
+   "auVar11": "unwindResult",
+   "auVar11_part8": "unwindState",
+   "auVar12": "loopResult",
+   "auVar12_x1": "loopResultExtra",
+   "lVar3_2": "currentCard",
+   "lVar6": "enumeratorClass",
+   "lVar9_4": "exceptionObj",
+   "piVar8": "interfaceTablePtr",
+   "plVar4": "listSlotPtr",
+   "puVar5": "interfaceSlot",
+   "register0x00000008": "stackPointer",
+   "unaff_x19": "unused1",
+   "unaff_x20": "unused2",
+   "unaff_x21": "unused3",
+   "unaff_x22": "unused4",
+   "unaff_x23": "unused5",
+   "unaff_x30": "unused6"
+  }
+ },
+ "303ee00": {
+  "summary": "Applies the ShowWarlord, CheckOwnership and StackCopies options to the drawer when they have values.",
+  "renames": {
+   "auStack_24": "nullableBool"
+  }
+ },
+ "303eedc": {
+  "summary": "Destroys all child card items in the container except the template prefabs, then clears the card item list.",
+  "renames": {
+   "auVar11_3": "disposeResult",
+   "auVar11_x1": "methodArg",
+   "auVar12": "unwindResult",
+   "auVar12_part8": "unwindState",
+   "lStack_48": "disposableSlot",
+   "lStack_60": "savedException",
+   "lStack_68": "savedThis",
+   "lVar1_3": "caughtException",
+   "pcStack_80": "savedFunction",
+   "plStack_38": "enumeratorSlot",
+   "plStack_50": "disposableSlotPtr",
+   "plVar4": "currentChild",
+   "pplStack_58": "enumeratorSlotPtr",
+   "pplVar5": "enumeratorSlotRef",
+   "uStack_70": "unwindException",
+   "unaff_x21": "unused1"
+  }
+ },
+ "30350dc": {
+  "summary": "Adds a card to the list, either spawning a new item or incrementing the stack count, then updates count and defensive/hero item visibility.",
+  "renames": {
+   "lVar3": "displayClass",
+   "plVar9": "cardPtr",
+   "uVar2": "hasHero",
+   "uVar6": "flag"
+  }
+ },
+ "303faa4": {
+  "summary": "Instantiates the right card info item prefab (hero, defensive or normal) for a card, optionally animates it in, initializes it and adds it to the list.",
+  "renames": {
+   "extraout_x1": "unused1",
+   "plVar5": "itemSlotPtr",
+   "uVar3": "hasItem"
+  }
+ },
+ "303f638": {
+  "summary": "Sorts card items by order then name, sets their sibling indices, and moves hero and defensive items to the top.",
+  "renames": {
+   "plVar4": "cardRefPtr",
+   "uVar3": "heroItemFlag",
+   "uVar6": "itemFlag"
+  }
+ }
+}

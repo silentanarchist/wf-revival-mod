@@ -1,0 +1,333 @@
+{
+ "325d030": {
+  "summary": "Returns whether the deck's hero matches the given card or any card in the card library matches it (LINQ Any).",
+  "renames": {
+   "acStack_10c": "anyResultBuf",
+   "auVar26": "unwindState",
+   "auVar26_part8": "unwindKind",
+   "auVar27": "catchResult",
+   "auVar27_x1": "catchSecondResult",
+   "auVar27_x1_2": "enumeratorTemp",
+   "auVar28_x1": "savedSecondArg",
+   "auVar29": "appendSource",
+   "auVar29_x1": "appendElement",
+   "bVar2": "anyMatch",
+   "lStack_108": "stackCanary",
+   "lVar13": "ifaceClass",
+   "lVar14": "objClass",
+   "lVar3": "closure",
+   "lVar3_2": "runtimeClass",
+   "lVar3_4": "threadLocalBase",
+   "pcStack_80": "anyMethodPtr",
+   "pcVar17": "methodPtr",
+   "piVar18": "interfaceEntry",
+   "plStack_118": "argBuffer",
+   "plStack_120": "enumeratorC",
+   "plStack_130": "exceptionC",
+   "plStack_38": "enumeratorA",
+   "plStack_48": "exceptionA",
+   "plStack_60": "savedElement",
+   "plStack_68": "savedSource",
+   "plStack_88": "enumeratorB",
+   "plStack_98": "exceptionB",
+   "plVar12": "genericClassA",
+   "plVar22": "frameBase",
+   "plVar23": "tempBufA",
+   "plVar24": "tempBufB",
+   "plVar5_2": "genericMethod",
+   "plVar7_2": "enumeratorObj",
+   "pplStack_128": "enumeratorRefC",
+   "pplStack_40": "enumeratorRefA",
+   "pplStack_90": "enumeratorRefB",
+   "pplVar16": "enumeratorRef",
+   "puVar10": "argName",
+   "puVar11": "invokeInfo",
+   "puVar8": "interfaceSlot",
+   "puVar9": "caughtException",
+   "uStack_58": "unwindStateA",
+   "uVar1": "typeFlag",
+   "uVar20_3": "invokeTarget",
+   "uVar21": "elementSize",
+   "uVar25": "anyResultC",
+   "uVar4": "countOrFlag",
+   "uVar6": "otherHeroId",
+   "unaff_x22": "unusedEnumeratorObj"
+  }
+ },
+ "325d1b4": {
+  "summary": "Predicate that returns true if a cosmetic item's unique ID equals this object's cardback ID (string equality).",
+  "renames": {
+   "bVar1": "charsEqual",
+   "uVar4_2": "chunkDiffers"
+  }
+ },
+ "325d35c": {
+  "summary": "Sets the card image sprite for a card type, applying type-specific scale, frame mask and material offsets.",
+  "renames": {
+   "bVar1": "skipMaterialUpdate",
+   "fVar10": "clampedPosAbs",
+   "fVar14": "epsilonThreshold",
+   "fVar14_2": "scaleOrEpsilon",
+   "fVar14_3": "oldRectWidth",
+   "fVar14_4": "newRectWidth",
+   "fVar16_3": "rectWidthDiff",
+   "lVar4_6": "currentSprite",
+   "lVar4_8": "currentSpriteB",
+   "plVar9": "spriteFieldPtr",
+   "puVar8": "materialFieldPtr",
+   "uVar15": "defaultPositionZ",
+   "uVar17_2": "baseOffsetXY",
+   "uVar6": "hasValue"
+  }
+ },
+ "325d854": {
+  "summary": "Changes the card image between small, big and other size states, tweening scale, clamp range and mask strength.",
+  "renames": {
+   "bVar7": "animate",
+   "puVar9": "tweenHelper",
+   "uVar1": "scaleYTarget",
+   "uVar11_2": "clampRangeXY",
+   "uVar11_3": "clampXY",
+   "uVar12": "clampZW",
+   "uVar14": "clampY",
+   "uVar15": "clampW",
+   "uVar6": "instantFlag"
+  }
+ },
+ "325d7f8": {
+  "summary": "Enables or disables the frame soft mask according to the option flag.",
+  "renames": {
+   "plVar1_2": "maskEnabledResult",
+   "uVar2": "nullResult"
+  }
+ },
+ "325d858": {
+  "summary": "Changes the card image state (small, big, other) with tweened scale, material clamp range and mask strength; duplicate of ChangeSize.",
+  "renames": {
+   "bVar7": "animate",
+   "puVar9": "tweenHelper",
+   "uVar1": "scaleYTarget",
+   "uVar11_2": "clampRangeXY",
+   "uVar11_3": "clampXY",
+   "uVar12": "clampZW",
+   "uVar14": "clampY",
+   "uVar15": "clampW",
+   "uVar6": "instantFlag"
+  }
+ },
+ "325da9c": {
+  "summary": "Tweens or sets the card image scale, material clamp range and mask strength toward target values, optionally instantly.",
+  "renames": {
+   "param_10": "isInstant",
+   "param_11": "disableOnFinish",
+   "param_8": "targetMaskStrength",
+   "param_9": "controllerSelf",
+   "plVar3": "cardImageRef",
+   "puVar8": "propertyName",
+   "uVar6": "hasProperty"
+  }
+ },
+ "325dde4": {
+  "summary": "Draws a gizmo sphere at the card image position offset by the tactics offset when selected in the editor.",
+  "renames": {
+   "fStack_24": "gizmoZ",
+   "fStack_28": "gizmoY",
+   "fStack_2c": "gizmoX",
+   "fVar2": "zeroY",
+   "fVar3": "oneZ"
+  }
+ },
+ "325de4c": {
+  "summary": "Constructor: sets default big-size multiplier and original image position, and caches the clamp range shader property ID.",
+  "renames": {
+   "uVar1": "clampRangeName"
+  }
+ },
+ "325dec8": {
+  "summary": "Static constructor: initializes the small and big card image clamp range constants.",
+  "renames": {
+   "lVar2": "staticsAlias"
+  }
+ },
+ "325df64": {
+  "summary": "On mouse click toggles the controller's image state and runs the same size-change tween as ChangeSize.",
+  "renames": {
+   "bVar8": "animate",
+   "puVar9": "tweenHelper",
+   "uVar1": "newState",
+   "uVar11_2": "clampRangeXY",
+   "uVar11_3": "clampXY",
+   "uVar12": "clampZW",
+   "uVar6_3": "hasProperty"
+  }
+ },
+ "325d698": {
+  "summary": "Returns a tuple of whether a scale exists for the card type and its scale value, building the cache dictionary if needed.",
+  "renames": {
+   "iVar1": "cachedCount",
+   "lStack_28": "resultTuple",
+   "plVar5": "cacheFieldPtr",
+   "uVar3": "hasType"
+  }
+ },
+ "325dfb0": {
+  "summary": "Fills the card type to scale dictionary from the scales array, adding or overwriting entries by card type.",
+  "renames": {
+   "auVar13": "exceptionObj",
+   "auVar13_x1": "exceptionMethod",
+   "lVar12": "firstEntry",
+   "lVar6": "secondEntry",
+   "plVar8": "dictFieldPtr",
+   "uVar10": "loopIndex",
+   "unaff_x19": "unused1",
+   "unaff_x20": "unused2",
+   "unaff_x21": "unused3",
+   "unaff_x22": "unused4",
+   "unaff_x23": "unused5",
+   "unaff_x24": "unused6",
+   "unaff_x25": "unused7",
+   "unaff_x26": "unused8",
+   "unaff_x27": "unused9",
+   "unaff_x30": "unused10"
+  }
+ },
+ "325e0b8": {
+  "summary": "Editor validation: logs errors for duplicate card types in the scales array, then rebuilds the card type dictionary cache.",
+  "renames": {
+   "auVar13_x1": "methodSlot",
+   "lVar12": "firstEntry",
+   "lVar6": "secondEntry",
+   "plVar8": "dictFieldPtr",
+   "uVar11": "scaleIndex",
+   "unaff_x19": "unused1",
+   "unaff_x21": "unused2",
+   "unaff_x22": "containsKeyMethod",
+   "unaff_x23": "setItemMethod",
+   "unaff_x24": "addMethod",
+   "unaff_x25": "loopIndex",
+   "unaff_x26": "unused3",
+   "unaff_x27": "unused4",
+   "unaff_x30": "unused5"
+  }
+ },
+ "325e264": {
+  "summary": "Sets the rarity image sprite from the rarity sprite array, clamping the index and logging an error if max rarity mismatches.",
+  "renames": {
+   "bVar4": "skipMaterialUpdate",
+   "fVar14": "newRectWidth",
+   "fVar15": "newRectHeight",
+   "in_s2": "rectWidthDiff",
+   "in_s3": "rectHeightDiff",
+   "lVar12": "currentSprite",
+   "plVar11": "spriteFieldPtr",
+   "uVar1": "clampedHigh",
+   "uVar2": "spriteIndex",
+   "uVar3": "rarityIndex",
+   "uVar8": "hasValue"
+  }
+ },
+ "325efb4": {
+  "summary": "Static constructor that creates the singleton instance of the compiler-generated lambda holder class.",
+  "renames": {
+   "uVar1": "instance"
+  }
+ },
+ "325f04c": {
+  "summary": "Predicate returning true if the card is non-null and its army equals the captured army.",
+  "renames": {
+   "bVar1": "result",
+   "uVar2": "isNotNull"
+  }
+ },
+ "325f0dc": {
+  "summary": "Predicate returning true if the given card equals the captured card, using Unity null-aware comparison.",
+  "renames": {
+   "bVar1": "result"
+  }
+ },
+ "325e4a8": {
+  "summary": "Editor validation: adds new playable cards from cardsToAdd into the card library, logs the added cards and clears the list.",
+  "renames": {
+   "lVar3": "listAddMethod",
+   "lVar7": "libraryList",
+   "lVar9": "libraryItems",
+   "plStack_70": "currentCardSlot",
+   "plStack_90": "enumeratorSecond",
+   "plVar11": "libraryFieldPtr",
+   "plVar4": "currentCard",
+   "puStack_78": "savedEnumPtr",
+   "puStack_98": "enumeratorRef",
+   "puVar10": "slotPtr",
+   "uStack_80": "enumeratorSlot"
+  }
+ },
+ "325e99c": {
+  "summary": "Returns the cards of a given army from the library as a list, ordered by one key then another (LINQ Where/OrderBy/ThenBy/ToList).",
+  "renames": {
+   "alStack_250": "frameBuffer",
+   "auStack_1fc": "boolBuffer",
+   "auVar31": "unwindState",
+   "auVar31_part8": "unwindKind",
+   "auVar32": "catchResult",
+   "auVar32_x1": "catchSecondResult",
+   "lStack_128": "savedLookup",
+   "lStack_140": "savedKeySelector",
+   "lStack_150": "savedGrouping",
+   "lStack_1e8": "stackCanary",
+   "lStack_220": "pendingException",
+   "lStack_228": "lookupResult",
+   "lStack_230": "keyBuffer",
+   "lVar16": "objClass",
+   "lVar18": "runtimeClass",
+   "lVar26": "genericArgClass",
+   "lVar26_3": "genericArgClassB",
+   "lVar26_5": "genericArgClassC",
+   "lVar3": "closure",
+   "lVar3_6": "keyBufferBase",
+   "lVar6_3": "objClassB",
+   "pcStack_100": "toLookupMethod",
+   "pcStack_160": "lookupCreateMethod",
+   "pcVar25": "methodPtr",
+   "piVar21": "interfaceEntry",
+   "plStack_108": "enumeratorA",
+   "plStack_118": "exceptionA",
+   "plStack_138": "savedEnumeratorObj",
+   "plStack_148": "savedSource",
+   "plStack_168": "enumeratorB",
+   "plStack_178": "exceptionB",
+   "plStack_208": "groupingResult",
+   "plStack_210": "enumeratorC",
+   "plStack_238": "keySelectorB",
+   "plStack_240": "elementSelectorB",
+   "plVar11": "resultList",
+   "plVar13_3": "enumeratorObj",
+   "plVar14": "classInfoA",
+   "plVar15": "genericClassA",
+   "plVar15_3": "classInfoB",
+   "plVar22": "genericClassC",
+   "plVar24": "genericClassB",
+   "plVar24_3": "classInfoC",
+   "plVar5": "sourceEnumerable",
+   "plVar7": "sourceB",
+   "pplStack_110": "enumeratorRefA",
+   "pplStack_170": "enumeratorRefB",
+   "pplStack_218": "enumeratorRefC",
+   "pplVar17": "enumeratorRef",
+   "puStack_1f0": "argSlotB",
+   "puStack_1f8": "argSlotA",
+   "puStack_1f8_2": "argSlotC",
+   "puVar10": "argName",
+   "puVar19": "interfaceSlot",
+   "puVar27": "tempBufB",
+   "puVar28": "tempBufC",
+   "puVar29": "tempBufD",
+   "puVar30": "tempBufE",
+   "puVar9": "interfaceSlotB",
+   "uStack_130": "unwindStateA",
+   "uVar1": "classReady",
+   "uVar2": "keyValue",
+   "uVar20": "countOrFlag",
+   "uVar8": "keyValueB"
+  }
+ }
+}

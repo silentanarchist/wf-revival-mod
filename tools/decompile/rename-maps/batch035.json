@@ -1,0 +1,423 @@
+{
+ "328707c": {
+  "summary": "Builds a list of environmental effect card scripts for an army, choosing offensive or defensive cards and limiting by draft victories or owned rewards.",
+  "renames": {
+   "auStack_50": "savedRegs",
+   "auVar16_part12": "zeroPart",
+   "auVar16_part8": "armyArg",
+   "auVar16_x1": "armyRaw",
+   "uVar13": "rewardsCollectedRaw",
+   "uVar4": "useOffensive",
+   "uVar5": "minVictories",
+   "unaff_x20": "savedJustOwned",
+   "unaff_x21": "savedOffensive",
+   "unaff_x25": "addMethod",
+   "unaff_x26": "listType",
+   "unaff_x30": "returnAddr"
+  }
+ },
+ "3287138": {
+  "summary": "Removes and returns the top card of the player's or enemy's shuffled deck for a mulligan, activating its GameObject and logging if the deck is empty.",
+  "renames": {
+   "auStack_24": "isPlayerBox",
+   "iVar4": "deckCount",
+   "lVar5": "shuffledDeck"
+  }
+ },
+ "32872b8": {
+  "summary": "Builds a localized battle-result share message with the opponent name and requests Android storage permission to share a screenshot.",
+  "renames": {
+   "auStackY_80": "stackBuffer",
+   "auVar16": "unwindResult",
+   "auVar16_part8": "unwindKind",
+   "iVar1": "frameDepth",
+   "lStackY_48": "stackGuard",
+   "lStackY_68": "flagPtr",
+   "lStackY_78": "caughtException",
+   "lVar11": "pendingException",
+   "lVar12": "playerDataManager",
+   "lVar12_2": "permitStatics",
+   "lVar5_3": "displayClass",
+   "lVar9": "flagCursor",
+   "plVar8": "permissionArgs",
+   "ppuStackY_70": "frameListPtr",
+   "ppuVar10": "frameCountPtr",
+   "puStackY_50": "argCount",
+   "puStackY_58": "jniArgsPtr",
+   "puStackY_58_2": "jniArgsPtr2",
+   "puStackY_58_3": "androidClassSaved",
+   "puVar13": "stringArg",
+   "puVar14": "jniArgArray",
+   "uStackY_60": "permissionStrSaved",
+   "uStackY_60_part0": "scratch1",
+   "uVar15": "argLength"
+  }
+ },
+ "3283eac": {
+  "summary": "Handles a hero dying: logs state, ends the battle, builds the ranked match result with skulls and duration, then saves the winner and finishes the battle.",
+  "renames": {
+   "abStack_44": "isPlayerDyingBox",
+   "auVar14": "obscuredFalse",
+   "auVar14_part8": "obscuredFalseInited",
+   "dVar13": "durationMinutes",
+   "iStack_70": "battleResultCopy",
+   "iStack_70_2": "enemyHealthFake",
+   "iStack_c0": "enemyHealthFakeCopy",
+   "iStack_e0": "playerHealthFake",
+   "iVar3_2": "playerHealthArg",
+   "lVar4_3": "eventClass",
+   "lVar4_6": "matchResultRef",
+   "piVar11": "interfaceCursor",
+   "uStack_78": "enemyHealthInited",
+   "uStack_80": "enemyHealthValue",
+   "uStack_90": "uiStateTypeInfo",
+   "uStack_a8": "battleStageTypeInfo",
+   "uStack_c8": "enemyHealthInitedCopy",
+   "uStack_d0_2": "enemyHealthCopy",
+   "uStack_e8": "playerHealthInited",
+   "uStack_f0_2": "playerHealthCopy",
+   "uVar2_2": "enemyHealthArg",
+   "uVar7": "loseIfDisconnect"
+  }
+ },
+ "32876dc": {
+  "summary": "Logs and records the current match result's winner if the battle is in post-battle stage, then processes the match result unless already recorded.",
+  "renames": {
+   "uStack_30": "typeInfoScratch",
+   "uVar1": "winnerText"
+  }
+ },
+ "3287b14": {
+  "summary": "Submits the finished match result to the server or live ops handler, retrying via SaveMatchWinner and logging an error if winner state mismatches.",
+  "renames": {
+   "lVar9_5": "playerDataManager",
+   "puVar7": "logMethod",
+   "uStack_70": "winnerTypeInfo",
+   "uStack_88": "stageTypeInfo",
+   "uStack_a0": "healthFakeActive",
+   "uStack_a8": "healthInited",
+   "uStack_b0": "healthValue",
+   "uVar4": "loseIfDisconnect",
+   "uVar8": "unused1"
+  }
+ },
+ "32881c0": {
+  "summary": "Stores the online match result, marks processing finished, updates missions, achievements and alliance trophies, then shows the finish screen.",
+  "renames": {
+   "uStack_30": "typeInfoScratch",
+   "uVar1": "winnerText"
+  }
+ },
+ "3288370": {
+  "summary": "Gathers match data such as winner, health, turn count and deck names and sends it to the analytics service.",
+  "renames": {
+   "auVar7_x1": "rankedMatchResultArg",
+   "uStack_a0": "playerHealthFake",
+   "uStack_a8": "playerHealthInited",
+   "uStack_b0": "playerHealthValue"
+  }
+ },
+ "3288744": {
+  "summary": "Closes any open voice-line popup, resets connection status to connected, and disables the active skill description object.",
+  "renames": {
+   "auVar3_x1": "scratchArg"
+  }
+ },
+ "328041c": {
+  "summary": "Subscribes the voice line popup show and hide handlers to the voice lines controller events.",
+  "renames": {
+   "auVar7_x1": "removeTarget",
+   "bVar1": "exchangeSucceeded",
+   "lVar6_2": "currentHandler",
+   "plVar5": "eventFieldPtr"
+  }
+ },
+ "32830f0": {
+  "summary": "Unsubscribes the voice line popup show and hide handlers from the voice lines controller events.",
+  "renames": {
+   "bVar1": "exchangeSucceeded",
+   "lVar6_2": "currentHandler",
+   "plVar5": "eventFieldPtr"
+  }
+ },
+ "32887b0": {
+  "summary": "Marks a popup as open and plays the chat-show sound cue through the SoundManager, with debug logging.",
+  "renames": {
+   "alStack_78": "audioSourceRef",
+   "auVar16": "cueValid",
+   "auVar16_x1": "clipArg",
+   "cVar1": "initFlag",
+   "lStack_98": "soundManagerSaved",
+   "lStack_a0": "audioSourceSaved",
+   "lVar7_2": "soundManagerAlt",
+   "pcStack_b0": "playMethodSaved",
+   "pcStack_c0": "playMethodCopy",
+   "puStack_a8": "cueSaved",
+   "puVar8": "zeroVectorPtr",
+   "puVar9": "zeroVectorPtr2",
+   "this_01": "soundManager",
+   "uStack_88": "scratch1",
+   "uStack_90": "scratch2",
+   "uStack_c8": "scratch3",
+   "uStack_d0": "positionSaved",
+   "uStack_d8": "audioSourceSaved2",
+   "uStack_e0": "vectorSaved",
+   "uStack_e8": "scratch4",
+   "uStack_f0": "scratch5",
+   "uVar14": "positionZ",
+   "uVar15": "positionZ2",
+   "uVar4": "audioSourceValid"
+  }
+ },
+ "328756c": {
+  "summary": "Determines the battle winner after battle end, returning draw if the hero is dead or draw was pressed, and forcing player win in always-win tutorial stages.",
+  "renames": {
+   "auVar4_2": "heroHealth",
+   "auVar4_3": "hasTutorialStage",
+   "uStack_60": "healthFakeActive",
+   "uStack_68": "healthInited",
+   "uStack_70": "healthValue"
+  }
+ },
+ "3288830": {
+  "summary": "Finishes an offline battle, setting rewards on a win and advancing the campaign index, then marks the result as saved.",
+  "renames": {
+   "cVar4": "initFlag",
+   "iVar1": "campaignProgress",
+   "lVar6": "progressRef",
+   "uVar2": "xpKey"
+  }
+ },
+ "3285594": {
+  "summary": "Logs an error and cancels the match without a result, setting disconnected status and notifying the player data manager and desync listeners.",
+  "renames": {
+   "lVar2_3": "uiStateText",
+   "lVar3_2": "playerDataManager",
+   "uStack_38": "uiStateCopy",
+   "uStack_40": "typeInfoScratch"
+  }
+ },
+ "3288b04": {
+  "summary": "Cancels the match: leaves the battle room when not won, or on a win resigns, ends the battle and records the result.",
+  "renames": {
+   "abStack_44": "isPlayerDyingBox",
+   "auStack_168": "deckCopy",
+   "auStack_48": "typeInfoBox",
+   "auStack_f8": "tutorialDeckData",
+   "auVar15": "hasNetworkManager",
+   "auVar15_2": "obscuredFalse",
+   "auVar15_part8": "obscuredFalseInited",
+   "dVar14": "durationMinutes",
+   "iVar3_2": "playerHealthArg",
+   "lVar5": "networkManagerRef",
+   "lVar5_10": "matchResultRef",
+   "lVar5_4": "matchMakerManager",
+   "lVar5_7": "eventClass",
+   "piVar12": "interfaceCursor",
+   "uStack_100": "deckSecond",
+   "uStack_50": "typeInfoScratch",
+   "uStack_50_part4": "typeInfoScratchHigh",
+   "uStack_68": "scratch1",
+   "uStack_70": "healthFakeActive",
+   "uStack_70_part4": "healthFakeHigh",
+   "uStack_88": "uiStateScratch",
+   "uStack_88_part4": "uiStateHigh",
+   "uStack_90": "uiStateTypeInfo",
+   "uStack_a8": "battleStageTypeInfo",
+   "uStack_c0": "enemyHealthFakeCopy",
+   "uStack_c8": "enemyHealthInitedCopy",
+   "uStack_d0_2": "enemyHealthCopy",
+   "uStack_e0": "playerHealthFakeCopy",
+   "uStack_e8": "playerHealthInitedCopy",
+   "uStack_f0_2": "playerHealthCopy",
+   "uVar2_2": "enemyHealthArg",
+   "uVar6": "roomValue",
+   "uVar9_2": "loseIfDisconnect"
+  }
+ },
+ "3284700": {
+  "summary": "Logs an error and cancels the match with a victory for the player after a desync, notifying the server and opponent unless already finished.",
+  "renames": {
+   "lVar6": "playerDataManager",
+   "puVar5": "logMessagePtr",
+   "uVar3": "logMessage",
+   "uVar4": "unused1"
+  }
+ },
+ "3285d7c": {
+  "summary": "Builds a formatted game-state string containing warlord, in-play, hand and deck data for both players.",
+  "renames": {
+   "auVar9_x1": "formatArg",
+   "lVar4": "formatString",
+   "pcStack_80": "formatMethod",
+   "puVar1": "paramName",
+   "uStack_28": "argsScratch1",
+   "uStack_30": "argsScratch2",
+   "uStack_38": "argsScratch3",
+   "uStack_40": "paramsArray",
+   "uStack_48": "paramsCopyC",
+   "uStack_50": "paramsCopyD",
+   "uStack_58": "paramsCopyB",
+   "uStack_60": "paramsCopyA",
+   "uStack_68": "exceptionParam",
+   "uStack_70": "exceptionSaved",
+   "uStack_88": "argsScratch4",
+   "uStack_90": "argsScratch5",
+   "uStack_98": "argsScratch6",
+   "uStack_a0": "paramsArray2",
+   "uStack_a8": "paramsCopy2C",
+   "uStack_b0": "paramsCopy2D",
+   "uStack_b8": "paramsCopy2B",
+   "uStack_c0": "paramsCopy2A",
+   "uVar5": "paramNameCopy",
+   "uVar8": "unused1"
+  }
+ },
+ "3288bf0": {
+  "summary": "Builds a debug string describing a hero's id, health, melee and ranged attack and whether it can attack.",
+  "renames": {
+   "auStack_28": "canAttackBox"
+  }
+ },
+ "3288f38": {
+  "summary": "Builds a debug string listing every in-play unit for a side with index, id, health, attacks and can-attack flag.",
+  "renames": {
+   "auStack_70": "canAttackBox",
+   "lStack_68": "unitsListRef",
+   "lVar1": "minionManagerOffset"
+  }
+ },
+ "3289734": {
+  "summary": "Builds a debug string listing the id and unique id of every card in a side's deck.",
+  "renames": {
+   "uVar4": "cardIdText"
+  }
+ },
+ "328570c": {
+  "summary": "Creates a resign player action, flags suspicious games, and appends the action to the current turn's player or enemy action log.",
+  "renames": {
+   "extraout_x1": "unused1",
+   "lVar6": "addMethod",
+   "plVar5": "itemSlot"
+  }
+ },
+ "3289db0": {
+  "summary": "Returns true if the player has no skulls and the game time is below the suspicious-game threshold.",
+  "renames": {
+   "bVar1": "isSuspicious"
+  }
+ },
+ "3289e54": {
+  "summary": "Deactivates all cards in the cemetery and the hidden cards remaining in both shuffled decks.",
+  "renames": {
+   "iVar4_2": "deckSize",
+   "uVar2": "hasCard",
+   "uVar5": "deckIndexPlusOne"
+  }
+ },
+ "32877f8": {
+  "summary": "Finishes the battle, triggers victory chat, and either runs post-battle scripted actions or starts the basic battle end sequence.",
+  "renames": {
+   "auVar8": "thrownException",
+   "auVar8_x1": "coroutineArg",
+   "lVar2": "outerClosure",
+   "lVar5": "innerClosure",
+   "lVar6_3": "scriptedTurnRef",
+   "plVar7": "scriptedTurnPtr",
+   "uStack_54": "turnFakeActive",
+   "uStack_5c": "turnInited",
+   "uStack_70": "turnFakeActiveCopy",
+   "uStack_78": "turnInitedCopy",
+   "uStack_80": "turnValueCopy",
+   "uStack_90": "turnFakeActiveArg",
+   "uStack_98": "turnInitedArg",
+   "uStack_a0": "turnValueArg",
+   "unaff_x19": "exceptionObj",
+   "unaff_x20": "savedThis",
+   "unaff_x21": "unused1",
+   "unaff_x30": "returnAddr"
+  }
+ },
+ "328a430": {
+  "summary": "Returns the match player id for the current player or the opponent id depending on whose turn it is.",
+  "renames": {
+   "plVar2": "idFieldPtr"
+  }
+ },
+ "328a4ec": {
+  "summary": "Computes how much unused mana can be saved from the mana accumulation setting and records it on the player's mana manager.",
+  "renames": {
+   "iVar1": "unusedMana",
+   "iVar1_2": "unusedManaArg",
+   "lVar3": "manaOwner",
+   "uStack_34": "totalManaFake",
+   "uStack_3c": "totalManaInited",
+   "uStack_44": "savedManaObscured",
+   "uStack_50": "unusedFake",
+   "uStack_58": "unusedInited",
+   "uStack_60": "unusedValue",
+   "uStack_70": "totalFake",
+   "uStack_78": "totalInited",
+   "uStack_80": "totalValue"
+  }
+ },
+ "328a580": {
+  "summary": "Handles drawing cards at turn start, skipping draw if a sentinel is present and playing sentinel effects or queuing overtime draw actions.",
+  "renames": {
+   "auStackY_140": "drawAction",
+   "auStackY_240": "drawActionCopy",
+   "auVar25": "matchDataRef",
+   "auVar25_2": "cueValid",
+   "auVar25_x1": "battleAnimsRef",
+   "lStackY_98": "soundManagerSaved",
+   "lStackY_a0": "audioSourceSaved",
+   "lStack_78": "audioSourceRef",
+   "lVar12": "handOrSoundManager",
+   "lVar12_4": "soundManager",
+   "lVar3_5": "soundManagerAlt",
+   "pcStackY_b0": "playMethodSaved",
+   "pcStackY_c0": "playMethodCopy",
+   "puStackY_a8": "cueSaved",
+   "puVar10": "identityQuaternionPtr",
+   "puVar10_2": "identityQuaternionPtr2",
+   "puVar11": "zeroVectorPtr",
+   "uStackY_13c": "playerTurnFlag",
+   "uStackY_c8": "scratch1",
+   "uStackY_d0": "positionSaved",
+   "uStackY_d8": "audioSourceSaved2",
+   "uStackY_e0": "vectorSaved",
+   "uStackY_e8": "scratch2",
+   "uStackY_f0": "scratch3",
+   "uVar20": "positionZ",
+   "uVar22": "rotationY",
+   "uVar23": "rotationZ",
+   "uVar24": "rotationW",
+   "uVar4": "audioSourceValid",
+   "uVar5": "playerTurnFlag2",
+   "uVar5_2": "cueFlag"
+  }
+ },
+ "328a6c8": {
+  "summary": "Activates the minions and hero for the side whose turn begins, updating canAct and canAttack state and attack animation indicators.",
+  "renames": {
+   "auVar4": "canActFlag"
+  }
+ },
+ "328a844": {
+  "summary": "Handles the end-turn button click, rejecting it when blocked or pending berzerk attacks exist, otherwise stopping the clock and queuing an end turn action.",
+  "renames": {
+   "auStack_44": "boolBox",
+   "extraout_x1": "unused1",
+   "iVar2": "actionCounterArg",
+   "lVar8": "soundManager",
+   "uVar11": "pointerRelativePos"
+  }
+ },
+ "328b8dc": {
+  "summary": "Queues an automatic end-turn action for the given player with the turn-end priority.",
+  "renames": {
+   "uStack_11c": "isPlayerByte",
+   "uStack_120": "actionBuffer"
+  }
+ }
+}

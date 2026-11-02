@@ -1,0 +1,525 @@
+{
+ "2f655b8": {
+  "summary": "Per-frame update of a card that flies or lands, advancing state transitions or moving the card along its fly position.",
+  "renames": {
+   "fVar10": "frameDelta",
+   "in_s1": "unused1",
+   "in_s2": "unused2",
+   "unaff_d8": "unused3",
+   "unaff_x19": "unused4",
+   "unaff_x20": "unused5",
+   "unaff_x30": "unused6"
+  }
+ },
+ "2f654e8": {
+  "summary": "Starts a fly/land toggle with an optional transition time, warning on negative time and changing state accordingly.",
+  "renames": {
+   "in_s1": "unused1",
+   "in_s2": "unused2",
+   "uVar4": "finishFlag",
+   "unaff_d8": "unused3",
+   "unaff_x19": "unused4",
+   "unaff_x20": "unused5",
+   "unaff_x21": "unused6",
+   "unaff_x30": "unused7"
+  }
+ },
+ "2f65344": {
+  "summary": "Switches the flying card to a new state, setting up transition positions and firing the toggle-finished callback.",
+  "renames": {
+   "in_s1": "unused1",
+   "in_s2": "unused2"
+  }
+ },
+ "2f65628": {
+  "summary": "Advances the fly animation time and sets the card transform to the current fly position.",
+  "renames": {
+   "fStack_28": "flyPosZ",
+   "fVar3": "frameDelta"
+  }
+ },
+ "2f65754": {
+  "summary": "Interpolates the card toward its target position over the desired time and returns true when it has arrived.",
+  "renames": {
+   "fVar3": "clampedT",
+   "in_s1": "currentY",
+   "in_s2": "currentZ"
+  }
+ },
+ "2f65890": {
+  "summary": "Constructor setting default animation speed and initial height offset to 1.",
+  "renames": {
+   "uVar1": "defaultOne"
+  }
+ },
+ "2f658a8": {
+  "summary": "Returns the cached target scale, initializing it from the transform local scale when unset.",
+  "renames": {
+   "fVar1": "diffX",
+   "fVar4": "diffY",
+   "fVar6": "diffZ",
+   "uVar2": "localScaleVec",
+   "uVar3": "zeroVec",
+   "uVar5": "scaleYBits",
+   "uVar7": "cachedScaleXY"
+  }
+ },
+ "2f65968": {
+  "summary": "Highlights or un-highlights the attack type counter by tweening its scale and toggling a highlight object.",
+  "renames": {
+   "fVar10": "diffY",
+   "in_s2": "unused1",
+   "lVar2": "scaleClosure",
+   "puVar3": "closureTargetPtr",
+   "uVar1": "targetScaleXY",
+   "uVar9": "zeroVec"
+  }
+ },
+ "2f65c4c": {
+  "summary": "After a held click, shows the large card with effects for the warlord ability card and hides other UI.",
+  "renames": {
+   "auVar14_x1": "unused1",
+   "fVar13": "currentTime",
+   "iVar4": "textureWidth",
+   "iVar5": "textureHeight",
+   "lStack_48": "cardTierNullable",
+   "lVar6_3": "effectsOwner",
+   "lVar7_4": "effectsSource",
+   "uVar9": "isClickedAsTarget"
+  }
+ },
+ "2f65c9c": {
+  "summary": "On touch release, shows the active skill description and tries to use the warlord ability, flashing the pressed button.",
+  "renames": {
+   "auVar7_x1": "unused1",
+   "uVar3": "hasPressedBtn"
+  }
+ },
+ "2f65e14": {
+  "summary": "Configures a cemetery log card with damage text, highlight color and text sorting layer.",
+  "renames": {
+   "iStack_24": "damageCopy",
+   "lVar2": "highlightObj",
+   "lVar2_3": "textRenderer",
+   "param_5": "cardInstance",
+   "param_6": "damageValue",
+   "plVar4": "textComponent"
+  }
+ },
+ "2f65f9c": {
+  "summary": "Constructor setting default animation timing, rotation and movement values for a cemetery log card.",
+  "renames": {
+   "cVar1": "staticInitFlag",
+   "fVar5": "upZ",
+   "uVar3": "zeroZ"
+  }
+ },
+ "2f6602c": {
+  "summary": "Shows a cemetery action by clearing old cards and creating main, target and second target cards.",
+  "renames": {
+   "lVar2": "actionCopy",
+   "uVar1": "hasTargetCard"
+  }
+ },
+ "2f66364": {
+  "summary": "Creates a target card in the cemetery group and positions it by index.",
+  "renames": {
+   "afStack_2c": "localPosArray"
+  }
+ },
+ "2f662d8": {
+  "summary": "Creates the main cemetery card and places it at the group origin position.",
+  "renames": {
+   "plVar3": "mainCardField",
+   "uStack_2c": "posX",
+   "uStack_28": "posY",
+   "uStack_24": "posZ"
+  }
+ },
+ "2f66158": {
+  "summary": "Hides the action image and destroys the main and target cemetery cards.",
+  "renames": {
+   "auVar3_3": "hasMainCard",
+   "auVar3_5": "hasTargetCard1",
+   "auVar3_7": "hasTargetCard2",
+   "auVar3_x1": "unused1"
+  }
+ },
+ "2f6660c": {
+  "summary": "Initializes the cemetery log manager: card list, original slider positions, action list, and hides the cemetery groups.",
+  "renames": {
+   "auStack_160": "centralActionCopy",
+   "auStack_1c8": "upperActionCopy",
+   "auStack_230": "lowerActionCopy",
+   "auStack_f8": "actionListItem",
+   "auVar16": "exceptionResult2",
+   "auVar16_part8": "unused2",
+   "auVar17": "exceptionResult",
+   "auVar17_part8": "actionIndex",
+   "auVar17_x1": "unused3",
+   "in_d1": "positionY",
+   "plVar11": "cardImagesRef",
+   "puVar2": "posEntryPtr",
+   "uStack_84": "sliderIndexCopy",
+   "uVar1": "lowerCount",
+   "uVar8": "hasShade",
+   "unaff_x19_2": "cemeteryManager",
+   "unaff_x20": "unused4",
+   "unaff_x21": "unused5",
+   "unaff_x30": "unused6"
+  }
+ },
+ "2f6684c": {
+  "summary": "Handles a cemetery slider click, showing the clicked action with its neighboring actions in the central, upper and lower groups.",
+  "renames": {
+   "auStack_120": "centralActionCopy",
+   "auStack_188": "upperActionCopy",
+   "auStack_1f0": "lowerActionCopy",
+   "auStack_b8": "actionListItem",
+   "auVar12": "hasCemeteryManager",
+   "auVar12_x1": "unused1",
+   "auVar13": "exceptionResult",
+   "auVar13_part8": "unused2",
+   "iStack_44": "sliderIndexCopy",
+   "iVar1": "remainingCount",
+   "uVar5": "scratchFlag"
+  }
+ },
+ "2f66bec": {
+  "summary": "Hides the cemetery action groups and restores the shade when a slider is released.",
+  "renames": {
+   "auVar6": "hasShadeSprite",
+   "auVar6_x1": "unused1",
+   "uVar2": "hasShade"
+  }
+ },
+ "2f66cf0": {
+  "summary": "Clears the actions of the upper, central and lower cemetery groups.",
+  "renames": {
+   "uVar2": "hasMainCard"
+  }
+ },
+ "2f66d24": {
+  "summary": "Adds a card to the cemetery list, reparents it, sets sorting and visibility, and tweens it to cemetery scale.",
+  "renames": {
+   "fVar10": "oneY",
+   "fVar11": "oneZ",
+   "lVar4": "addMethod",
+   "lVar4_3": "vector3Statics",
+   "plVar8": "itemSlotPtr"
+  }
+ },
+ "2f66e60": {
+  "summary": "Removes a card from the cemetery list, logging a warning if it is not found.",
+  "renames": {
+   "puVar6": "logMethod",
+   "uVar7": "logType"
+  }
+ },
+ "2f66e18": {
+  "summary": "Returns the number of cards in the cemetery list.",
+  "renames": {
+   "auVar1_x1": "unused1"
+  }
+ },
+ "2f66f6c": {
+  "summary": "Returns the slider index, likely from the transform sibling index.",
+  "renames": {
+   "iVar1": "index"
+  }
+ },
+ "2f66fd4": {
+  "summary": "Sets the mana text to available/total and plays the text animation.",
+  "renames": {
+   "iStack_34": "availableCopy",
+   "iStack_38": "totalCopy",
+   "uVar2": "totalBoxed"
+  }
+ },
+ "2f672e4": {
+  "summary": "Toggles the quest points holder and sets its text to current/total points.",
+  "renames": {
+   "iStack_34": "initialValueCopy",
+   "iStack_38": "totalPointsCopy",
+   "plVar1": "altTipKey",
+   "uVar3": "totalBoxed"
+  }
+ },
+ "2f6738c": {
+  "summary": "Updates saved-mana visuals: toggles VFX, fades the accumulation image, and plays the accumulation sound.",
+  "renames": {
+   "alStack_78": "audioSourceArgs",
+   "auVar24": "hasAudioCueFlag",
+   "auVar24_x1": "unused1",
+   "fVar19": "epsilonScaled",
+   "fVar2": "maxMagnitude",
+   "fVar3": "tolerance",
+   "iVar1": "lastPlayedFrame",
+   "in_s3": "currentAlpha",
+   "lStack_98": "soundManagerSaved",
+   "lStack_a0": "audioSourceSaved",
+   "lVar13_2": "soundManagerAlt",
+   "lVar7_2": "soundManager",
+   "lVar8": "savedManaClosure",
+   "lVar8_2": "closureOrFieldOffset",
+   "pcStack_b0": "stackScratch1",
+   "pcStack_c0": "stackScratch2",
+   "puStack_a8": "audioCueSaved",
+   "puVar15": "vectorStatics",
+   "puVar16": "vectorStatics2",
+   "uStack_88": "scratch3",
+   "uStack_90": "scratch4",
+   "uStack_c8": "scratch5",
+   "uStack_d0": "positionExtraSaved",
+   "uStack_d8": "audioSourceSaved2",
+   "uStack_e0": "zeroVectorSaved",
+   "uStack_e8": "scratch6",
+   "uStack_f0": "scratch7",
+   "uVar10": "hasAudioSource",
+   "uVar14": "flagScratch",
+   "uVar22": "positionExtra",
+   "uVar23": "positionExtra2"
+  }
+ },
+ "2f67618": {
+  "summary": "Sets the quest points text to value/total, optionally animating.",
+  "renames": {
+   "iStack_34": "questPointsCopy",
+   "iStack_38": "totalCopy",
+   "uVar2": "totalBoxed"
+  }
+ },
+ "2f67650": {
+  "summary": "Shows available/total mana text, or a placeholder for available mana when deactivated.",
+  "renames": {
+   "iStack_24": "availableCopy",
+   "iStack_28": "totalCopyOff",
+   "iStack_34": "totalCopyOn",
+   "uVar3": "totalBoxed"
+  }
+ },
+ "2f67d4c": {
+  "summary": "Closure callback that sets the mana text to unused/total and plays the text animation.",
+  "renames": {
+   "uStack_38": "totalCopy",
+   "uVar3": "totalBoxed"
+  }
+ },
+ "2f67770": {
+  "summary": "Sets the mana text to a single value and optionally animates.",
+  "renames": {
+   "iStack_24": "valueCopy"
+  }
+ },
+ "2f677f0": {
+  "summary": "Plays a punch-scale tween on the mana text, remembering its original scale.",
+  "renames": {
+   "auVar11_x1": "unused1",
+   "fVar10": "oneZ",
+   "in_s1": "scaleY",
+   "in_s2": "scaleZ",
+   "lVar2": "punchClosure",
+   "plVar6": "punchTarget",
+   "plVar7": "targetComponent"
+  }
+ },
+ "2f66ff8": {
+  "summary": "Sets the mana text to value/value2 and optionally animates.",
+  "renames": {
+   "iStack_34": "valueCopy",
+   "iStack_38": "value2Copy",
+   "uVar2": "value2Boxed"
+  }
+ },
+ "2f67160": {
+  "summary": "Shows or hides the holder object and optionally sets an alternate localized tooltip.",
+  "renames": {
+   "uVar2": "isAltTipEmpty"
+  }
+ },
+ "2f678e0": {
+  "summary": "Spawns a value-up or value-down VFX when the mana value changes and stores the new value.",
+  "renames": {
+   "in_s1": "unused1",
+   "in_s2": "unused2",
+   "plVar4": "vfxReference",
+   "uVar1": "isLoadable",
+   "uVar5": "spawnPosition",
+   "uVar7": "unused3",
+   "uVar8": "unused4"
+  }
+ },
+ "2f673a4": {
+  "summary": "Updates saved-mana visuals: toggles VFX, fades the accumulation image, and plays the accumulation sound.",
+  "renames": {
+   "alStack_78": "audioSourceArgs",
+   "fVar18": "epsilonScaled",
+   "fVar2": "maxMagnitude",
+   "fVar3": "tolerance",
+   "iVar1": "lastPlayedFrame",
+   "in_s3": "currentAlpha",
+   "lStack_98": "soundManagerSaved",
+   "lStack_a0": "audioSourceSaved",
+   "lVar13_2": "soundManagerAlt",
+   "pcStack_b0": "stackScratch1",
+   "pcStack_c0": "stackScratch2",
+   "puStack_a8": "audioCueSaved",
+   "puVar14": "vectorStatics",
+   "puVar15": "vectorStatics2",
+   "uStack_88": "scratch3",
+   "uStack_90": "scratch4",
+   "uStack_c8": "scratch5",
+   "uStack_d0": "positionExtraSaved",
+   "uStack_d8": "audioSourceSaved2",
+   "uStack_e0": "zeroVectorSaved",
+   "uStack_e8": "scratch6",
+   "uStack_f0": "scratch7",
+   "uVar21": "positionExtra",
+   "uVar22": "positionExtra2",
+   "auVar23": "hasAudioCueFlag",
+   "auVar23_x1": "unused1",
+   "lVar7": "savedManaClosure",
+   "lVar7_2": "closureOrFieldOffset",
+   "lVar7_3": "soundManager",
+   "uVar12": "flagScratch",
+   "uVar9": "hasAudioSource"
+  }
+ },
+ "2f67a58": {
+  "summary": "Fades the mana accumulation image in or out, schedules a callback and plays the accumulation sound.",
+  "renames": {
+   "alStack_78": "audioSourceArgs",
+   "fVar18": "epsilonScaled",
+   "fVar2": "maxMagnitude",
+   "fVar3": "tolerance",
+   "iVar1": "lastPlayedFrame",
+   "in_s3": "currentAlpha",
+   "lStack_98": "soundManagerSaved",
+   "lStack_a0": "audioSourceSaved",
+   "lVar13_2": "soundManagerAlt",
+   "pcStack_b0": "stackScratch1",
+   "pcStack_c0": "stackScratch2",
+   "puStack_a8": "audioCueSaved",
+   "puVar14": "vectorStatics",
+   "puVar15": "vectorStatics2",
+   "uStack_88": "scratch3",
+   "uStack_90": "scratch4",
+   "uStack_c8": "scratch5",
+   "uStack_d0": "positionExtraSaved",
+   "uStack_d8": "audioSourceSaved2",
+   "uStack_e0": "zeroVectorSaved",
+   "uStack_e8": "scratch6",
+   "uStack_f0": "scratch7",
+   "uVar21": "positionExtra",
+   "uVar22": "positionExtra2",
+   "auVar23": "hasAudioCueFlag",
+   "auVar23_x1": "unused1",
+   "lVar7": "closureOrFieldOffset",
+   "lVar7_2": "soundManager",
+   "uVar10": "flagScratch",
+   "uVar11": "hasAudioSource"
+  }
+ },
+ "2f67668": {
+  "summary": "Shows current/total mana text, or a placeholder for current mana when deactivated.",
+  "renames": {
+   "iStack_24": "currentCopy",
+   "iStack_28": "totalCopyOff",
+   "iStack_34": "totalCopyOn",
+   "uVar2": "totalBoxed"
+  }
+ },
+ "2f67d30": {
+  "summary": "Test routine that forces the saved-mana VFX on and plays the accumulation fade and sound.",
+  "renames": {
+   "alStack_78": "audioSourceArgs",
+   "fVar18": "epsilonScaled",
+   "fVar2": "maxMagnitude",
+   "fVar3": "tolerance",
+   "iVar1": "lastPlayedFrame",
+   "in_s3": "currentAlpha",
+   "lStack_98": "soundManagerSaved",
+   "lStack_a0": "audioSourceSaved",
+   "lVar13_2": "soundManagerAlt",
+   "pcStack_b0": "stackScratch1",
+   "pcStack_c0": "stackScratch2",
+   "puStack_a8": "audioCueSaved",
+   "puVar14": "vectorStatics",
+   "puVar15": "vectorStatics2",
+   "uStack_88": "scratch3",
+   "uStack_90": "scratch4",
+   "uStack_c8": "scratch5",
+   "uStack_d0": "positionExtraSaved",
+   "uStack_d8": "audioSourceSaved2",
+   "uStack_e0": "zeroVectorSaved",
+   "uStack_e8": "scratch6",
+   "uStack_f0": "scratch7",
+   "uVar21": "positionExtra",
+   "uVar22": "positionExtra2",
+   "auVar23": "hasAudioCueFlag",
+   "auVar23_x1": "unused1",
+   "lVar7": "savedManaClosure",
+   "lVar7_3": "accumulationClosure",
+   "lVar7_4": "soundManager",
+   "uVar12": "hasAudioSource",
+   "uVar9": "flagScratch"
+  }
+ },
+ "2f67d88": {
+  "summary": "Sets the quest point counter objects, activating the first value ones and scaling them with tweens.",
+  "renames": {
+   "extraout_x1": "isActivating",
+   "fVar9": "amplitude",
+   "puVar5": "staticsPtrA",
+   "puVar6": "staticsPtrB",
+   "puVar7": "staticsPtrC",
+   "uVar11": "startScale",
+   "uVar12": "scaleZ",
+   "uVar14": "easeClass"
+  }
+ },
+ "2f67e54": {
+  "summary": "Activates or deactivates a quest counter object and tweens its scale with an ease.",
+  "renames": {
+   "fVar8": "amplitude",
+   "puVar5": "staticsPtrA",
+   "puVar6": "staticsPtrB",
+   "puVar7": "staticsPtrC",
+   "uVar10": "startScale",
+   "uVar11": "scaleZ",
+   "uVar13": "easeClass"
+  }
+ },
+ "2f6d03c": {
+  "summary": "Static constructor creating the singleton instance of the compiler-generated class.",
+  "renames": {
+   "uVar1": "instance"
+  }
+ },
+ "2f680c8": {
+  "summary": "Returns the left slot positions, normal or weapon variant.",
+  "renames": {
+   "lVar1": "fieldOffset"
+  }
+ },
+ "2f680e4": {
+  "summary": "Returns the right slot positions, normal or weapon variant.",
+  "renames": {
+   "lVar1": "fieldOffset"
+  }
+ },
+ "2f68100": {
+  "summary": "Returns the number of board spaces from the left slot position array length.",
+  "renames": {
+   "lVar1": "fieldOffset"
+  }
+ },
+ "2f6812c": {
+  "summary": "Initializes slots per side from player data, fills minion positions and creates minion lists.",
+  "renames": {
+   "auVar4": "hasPlayerData",
+   "auVar4_x1": "unused1",
+   "uVar2": "playerDataManager"
+  }
+ }
+}

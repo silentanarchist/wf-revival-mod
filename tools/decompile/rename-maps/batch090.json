@@ -1,0 +1,354 @@
+{
+ "3138090": {
+  "summary": "Shows the golden avatar border sprite on the border image if the border is unlocked, updating the Image's sprite state.",
+  "renames": {
+   "bVar1": "skipMaterialUpdate",
+   "uVar6": "condition",
+   "plVar8": "imageSpritePtr",
+   "lVar9": "currentSprite",
+   "in_s2": "rectSizeX",
+   "in_s3": "rectSizeY",
+   "fVar11": "newSizeX",
+   "fVar12": "newSizeY",
+   "auVar13_x1": "playerInfoCopy"
+  }
+ },
+ "3139480": {
+  "summary": "Shows how many copies of a card the player owns, using a single counter or a duplicate counter when owned exceeds the deck limit.",
+  "renames": {
+   "iVar1": "shownCount",
+   "iStack_34": "shownCountValue",
+   "iStack_38": "spareCount"
+  }
+ },
+ "31397bc": {
+  "summary": "Shows the single counter UI with the given count formatted as xN and hides the duplicate counter.",
+  "renames": {
+   "iStack_24": "counterValue"
+  }
+ },
+ "3139694": {
+  "summary": "Shows the duplicate counter UI with the card count and the number of spare copies, hiding the single counter.",
+  "renames": {
+   "iStack_38": "sparesValue",
+   "iStack_34": "counterValue"
+  }
+ },
+ "31403a8": {
+  "summary": "Enables and loads card effect slots for each effect to display, disabling empty ones, and returns the count of non-empty slots.",
+  "renames": {
+   "lVar3": "slotArrayCopy",
+   "uVar4": "isNull",
+   "puVar8": "fieldPtr",
+   "uVar9": "cachedComponent"
+  }
+ },
+ "31404c8": {
+  "summary": "Disables all remaining card effect slots from the current index to the end of the slot array.",
+  "renames": {
+   "uVar1": "isNull"
+  }
+ },
+ "314d7b4": {
+  "summary": "Sets up a deck cost row: caches original fill color, animates or sets the slider to the normalized quantity, and updates card count and cost text.",
+  "renames": {
+   "iStack_28": "costValue",
+   "iStack_24": "cardsInDeckValue",
+   "pcVar4": "originalColorPtr",
+   "uStack_58": "colorLow",
+   "uStack_50": "colorMid",
+   "uStack_48": "colorHigh",
+   "fVar5": "currentSliderValue",
+   "fVar6": "maxAbsValue",
+   "fVar7": "epsilonScaled",
+   "fVar1": "tolerance"
+  }
+ },
+ "314daec": {
+  "summary": "Constructor setting the max cost to draw to 8 and the while-updating color to white.",
+  "renames": {
+   "auVar1": "whiteColor",
+   "auVar1_x1": "whiteColorTail"
+  }
+ },
+ "314e39c": {
+  "summary": "Static constructor creating the singleton instance of the compiler-generated closure class.",
+  "renames": {
+   "uVar1": "newInstance"
+  }
+ },
+ "314db04": {
+  "summary": "Counts cards in a prebuilt deck by energy cost, normalizes each bucket against 10, and initializes each cost row drawer.",
+  "renames": {
+   "unaff_x30": "savedLinkReg",
+   "unaff_x23": "savedReg23",
+   "unaff_x22": "savedReg22",
+   "unaff_x21": "savedReg21",
+   "unaff_x20": "savedReg20",
+   "unaff_x19": "savedReg19",
+   "unaff_d10": "savedFloat10",
+   "unaff_d9": "savedFloat9",
+   "unaff_d8": "savedFloat8",
+   "unaff_x26": "intArrayData",
+   "unaff_x24": "enumeratorState",
+   "uVar13": "playerDataManager",
+   "uVar6": "unused1",
+   "puVar5": "interfaceMethodPtr",
+   "piVar11": "interfaceEntryPtr",
+   "uVar14": "rowIndex",
+   "plVar15": "maxIndexCopy",
+   "fVar16": "rawFraction",
+   "fVar17": "clampedHigh",
+   "auVar19": "playerDataFound",
+   "auVar20": "exceptionInfo",
+   "auVar20_part8": "exceptionKind"
+  }
+ },
+ "314e148": {
+  "summary": "Counts cards in a deck by energy cost, normalizes each bucket against 10, and initializes each cost row drawer, optionally resetting rows first.",
+  "renames": {
+   "unaff_x30": "savedLinkReg",
+   "unaff_x23": "savedReg23",
+   "unaff_x22": "savedReg22",
+   "unaff_x19": "savedReg19",
+   "unaff_d10": "savedFloat10",
+   "unaff_d9": "savedFloat9",
+   "unaff_d8": "savedFloat8",
+   "unaff_x26": "intArrayData",
+   "unaff_x24": "enumeratorState",
+   "auVar20_x1": "deckArg",
+   "uVar5": "resetRowsFlag",
+   "uVar16": "playerDataManager",
+   "auVar21": "playerDataFound",
+   "uVar16_3": "playerDataManagerSaved",
+   "uVar11": "savedValueA",
+   "uVar13": "savedValueB",
+   "uVar17": "savedValueC",
+   "lVar14_5": "workPtr",
+   "piVar10": "interfaceEntryPtr",
+   "puVar8": "interfaceMethodPtr",
+   "uVar15": "rowIndex",
+   "fVar18": "rawFraction",
+   "fVar19": "clampedHigh",
+   "auVar22": "exceptionInfo",
+   "auVar22_part8": "exceptionKind",
+   "uVar2": "errorMessage"
+  }
+ },
+ "314dbec": {
+  "summary": "Counts cards from an enumerable by energy cost, normalizes each bucket against 10, and initializes each cost row drawer.",
+  "renames": {
+   "unaff_x30": "savedLinkReg",
+   "unaff_x23": "savedReg23",
+   "unaff_x22": "savedReg22",
+   "unaff_x21": "savedReg21",
+   "unaff_x20": "savedReg20",
+   "unaff_x19": "savedReg19",
+   "unaff_d10": "savedFloat10",
+   "unaff_d9": "savedFloat9",
+   "unaff_d8": "savedFloat8",
+   "unaff_x26": "intArrayData",
+   "unaff_x24": "enumeratorState",
+   "uVar13": "playerDataManager",
+   "piVar11": "interfaceEntryPtr",
+   "puVar5": "interfaceMethodPtr",
+   "plVar6": "enumerator",
+   "plVar17": "maxIndexCopy",
+   "uVar16": "rowIndex",
+   "auVar22": "playerDataFound",
+   "auVar23": "exceptionInfo",
+   "auVar23_part8": "exceptionKind",
+   "uVar12": "savedValueA",
+   "uVar15": "savedValueB",
+   "uVar18": "savedValueC",
+   "uVar2": "errorMessage",
+   "auVar21_x1": "deckObject",
+   "fVar19": "rawFraction",
+   "fVar20": "clampedHigh"
+  }
+ },
+ "314e430": {
+  "summary": "Registers click listeners for the card-in-deck info, deck general info and warlord text buttons.",
+  "renames": {
+   "uVar1": "usedCount",
+   "puVar6": "slotPtr",
+   "lVar2": "addMethod"
+  }
+ },
+ "314e568": {
+  "summary": "Removes click listeners from the deck info buttons and clears the warlord button's runtime call list.",
+  "renames": {
+   "auVar6_x1": "unused1"
+  }
+ },
+ "314e668": {
+  "summary": "Displays a deck's warlord name, army icon, character image, cardback and card list in the ranked deck info panel.",
+  "renames": {
+   "unaff_x30": "savedLinkReg",
+   "unaff_x23": "savedReg23",
+   "unaff_x22": "savedReg22",
+   "unaff_x21": "savedReg21",
+   "unaff_x20": "savedReg20",
+   "unaff_x19": "savedReg19",
+   "plVar14": "currentCardbackPtr",
+   "lVar12": "cardbackRef",
+   "plVar13": "currentDeckPtr",
+   "lVar9": "disposableClass",
+   "puVar8": "interfaceMethodPtr",
+   "puVar1": "stackFrame",
+   "piVar11": "interfaceEntryPtr",
+   "auVar18": "exceptionInfo",
+   "auVar18_part8": "exceptionKind",
+   "auVar19": "enumeratorResult",
+   "auVar19_x1": "currentCard",
+   "lVar15_2": "deckRef",
+   "lVar15_4": "enumeratorClass",
+   "lVar12_5": "newCardbackRef",
+   "plVar4": "listSlotPtr"
+  }
+ },
+ "314e984": {
+  "summary": "Shows or hides the general info container and inversely toggles the cards-in-deck panel.",
+  "renames": {
+   "bVar1": "isInactive"
+  }
+ },
+ "314e9e8": {
+  "summary": "Opens the card display window for the current deck's warlord card, setting up card UI, lore, voice-over and related elements.",
+  "renames": {
+   "bVar2": "skipMaterialUpdate",
+   "uVar9": "condition",
+   "auStack_48": "tierNullable",
+   "auVar22": "exceptionInfo",
+   "auVar22_x1": "cardArg",
+   "lVar12": "unused1",
+   "lVar7_3": "flavourText",
+   "lVar7_5": "displayClosure",
+   "lVar8_3": "currentSprite",
+   "lVar8_5": "spriteOrWindow",
+   "plVar19": "imageSpriteFieldPtr",
+   "fVar20": "spriteSizeX",
+   "fVar21": "spriteSizeY",
+   "in_s2": "rectSizeX",
+   "in_s3": "rectSizeY",
+   "plVar18": "availableSoundsPtr",
+   "puVar16": "callSlotPtr"
+  }
+ },
+ "314ea38": {
+  "summary": "Fills the deck info drawer with the deck's energy costs, cardback sprites, deck name and warlord name.",
+  "renames": {
+   "uVar2": "hasDeckName"
+  }
+ },
+ "314f940": {
+  "summary": "Static constructor creating the singleton instance of the compiler-generated closure class.",
+  "renames": {
+   "uVar1": "newInstance"
+  }
+ },
+ "314f37c": {
+  "summary": "Registers the close button click listener.",
+  "renames": {
+   "uVar1": "usedCount",
+   "puVar6": "slotPtr",
+   "lVar2": "addMethod"
+  }
+ },
+ "314f40c": {
+  "summary": "Creates card info items for a prebuilt deck, sorts the cards by cost then name, and initializes or resets each item.",
+  "renames": {
+   "plVar8": "cardInfoItemsPtr",
+   "lVar2": "arrayOffset",
+   "plVar4": "infoItemsArray",
+   "lVar2_10": "infoItemsRef",
+   "auVar12_part8": "flagBits"
+  }
+ },
+ "314f9d8": {
+  "summary": "Initializes a card slot preview with the card's cost (hidden for negative cost or hero cards) and name.",
+  "renames": {
+   "bVar1": "showCost",
+   "piVar5": "manaCostPtr"
+  }
+ },
+ "314fb64": {
+  "summary": "Sets the cosmetic item's sprite on the preview cardback image, updating the Image's sprite state.",
+  "renames": {
+   "bVar1": "skipMaterialUpdate",
+   "uVar5": "condition",
+   "plVar8": "imageSpritePtr",
+   "lVar9": "currentSprite",
+   "lVar9_3": "currentSpriteAgain",
+   "in_s2": "rectSizeX",
+   "in_s3": "rectSizeY",
+   "fVar11": "newSizeX",
+   "fVar12": "newSizeY"
+  }
+ },
+ "314fc38": {
+  "summary": "Registers click listeners for the deck info, deck general info, warlord text and change-deck buttons.",
+  "renames": {
+   "uVar1": "usedCount",
+   "puVar6": "slotPtr",
+   "lVar2": "addMethod"
+  }
+ },
+ "314fdc0": {
+  "summary": "On disable, unloads the demo deck's character image and releases the current cardback's addressable reference.",
+  "renames": {
+   "uVar1": "hasValue"
+  }
+ },
+ "314fe8c": {
+  "summary": "Removes click listeners from the demo deck info buttons and clears the warlord button's runtime call list.",
+  "renames": {
+   "auVar6_x1": "unused1"
+  }
+ },
+ "314ffdc": {
+  "summary": "Sets the demo deck info panel content for a selected deck, configuring panel, energy drawer, cards panel and button visibility.",
+  "renames": {
+   "uVar1": "hasCardback",
+   "plVar2": "classRef",
+   "lVar10": "currentDeckRef"
+  }
+ },
+ "315015c": {
+  "summary": "Shows or hides the general info container and inversely toggles the cards-in-deck panel.",
+  "renames": {
+   "bVar1": "isInactive"
+  }
+ },
+ "31505ec": {
+  "summary": "Sets deck name, warlord name, army icon, lore, character image and cardback sprites on the demo deck info panel.",
+  "renames": {
+   "uVar3": "condition",
+   "lVar5": "cardbackRef",
+   "auVar9": "exceptionInfo",
+   "auVar9_part8": "exceptionKind"
+  }
+ },
+ "31509c0": {
+  "summary": "Opens the deck info popup in view mode for the current demo deck, building a CardDeck if needed.",
+  "renames": {
+   "lVar7": "methodOrOffset",
+   "lVar3": "genericClassInfo",
+   "uVar9": "funcMethodPtr"
+  }
+ },
+ "3150b0c": {
+  "summary": "Opens the deck selection popup for the current demo deck so the player can change their deck.",
+  "renames": {
+   "lVar6": "openWindowMethod",
+   "lVar3": "genericClassInfo",
+   "uVar8": "funcMethodPtr"
+  }
+ },
+ "3150c54": {
+  "summary": "Invokes the deck-selected callback with the new deck, then queries the active ranked live-ops event.",
+  "renames": {
+   "puVar2": "interfaceMethodPtr"
+  }
+ }
+}

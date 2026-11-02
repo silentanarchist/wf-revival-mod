@@ -1,0 +1,547 @@
+{
+ "2f5c0e0": {
+  "summary": "Sets up the choose-card menu UI for a set of cards, starts the card UI coroutine, handles replay auto-selection and the selection timer.",
+  "renames": {
+   "unaff_x19": "unusedException",
+   "unaff_x20": "unused1",
+   "unaff_x21": "unused2",
+   "unaff_x30": "unused3",
+   "auVar8_x1": "unused4"
+  }
+ },
+ "2f5c6f8": {
+  "summary": "Creates and returns the coroutine that ends the card selection after a delay.",
+  "renames": {
+   "lVar1": "stateMachine"
+  }
+ },
+ "2f5c68c": {
+  "summary": "Creates and returns the coroutine that automatically completes the choose-card step.",
+  "renames": {
+   "lVar1": "stateMachine"
+  }
+ },
+ "2f5c3ec": {
+  "summary": "Creates and returns the coroutine that builds the choose-card UI elements.",
+  "renames": {
+   "lVar1": "stateMachine"
+  }
+ },
+ "2f5c9d0": {
+  "summary": "Instantiates a card UI at its anchor position in the choose menu, scales it, fills it with card data and returns it.",
+  "renames": {
+   "auVar6_x1": "unused1",
+   "lVar4": "vectorStatics",
+   "this_00": "cardUi"
+  }
+ },
+ "2f5cc94": {
+  "summary": "On timer countdown, auto-picks a random card if none selected, updates timer, and at the end clears the menu UI and reports the chosen card.",
+  "renames": {
+   "pplVar2": "currentChooseUiCopy",
+   "pplStack_60": "currentChooseUi",
+   "pplStack_68": "scratch1",
+   "pplStack_88": "scratch2",
+   "pplStack_90": "scratch3",
+   "plStack_70": "listEnumerator",
+   "plStack_80": "disposableHolder",
+   "lVar5_6": "disposableType",
+   "piVar9": "interfaceMapPtr",
+   "puVar6": "interfaceSlotPtr",
+   "plVar7_4": "childTransform",
+   "auVar11_2": "disposeResult"
+  }
+ },
+ "2f5c480": {
+  "summary": "Marks a card as selected, enables the choose button, plays a sound and deselects all other choice cards.",
+  "renames": {
+   "uStack_50": "scratch1",
+   "lStack_48": "currentEntry",
+   "lVar1": "currentEntryCopy"
+  }
+ },
+ "2f5d314": {
+  "summary": "If a card is selected, stops auto-process, hides and destroys the choose UI, and reports the chosen card to the battle manager.",
+  "renames": {
+   "pplVar2": "currentChooseUiCopy",
+   "pplStack_60": "currentChooseUi",
+   "pplStack_68": "scratch1",
+   "pplStack_88": "scratch2",
+   "pplStack_90": "scratch3",
+   "plStack_70": "listEnumerator",
+   "plStack_80": "disposableHolder",
+   "auVar10_2": "isNoSelection",
+   "uVar4": "loopFlag",
+   "lVar3_5": "disposableType",
+   "piVar8": "interfaceMapPtr",
+   "puVar5": "interfaceSlotPtr",
+   "plVar6_4": "childTransform",
+   "auVar10_4": "disposeResult"
+  }
+ },
+ "2f5ce30": {
+  "summary": "Hides and destroys the choose-card UI and reports the chosen card to the battle manager.",
+  "renames": {
+   "pplVar2": "currentChooseUiCopy",
+   "pplStack_60": "currentChooseUi",
+   "pplStack_68": "scratch1",
+   "pplStack_88": "scratch2",
+   "pplStack_90": "scratch3",
+   "plStack_70": "listEnumerator",
+   "plStack_80": "disposableHolder",
+   "uVar4": "loopFlag",
+   "lVar3_5": "disposableType",
+   "piVar8": "interfaceMapPtr",
+   "puVar6": "interfaceSlotPtr",
+   "plVar7_4": "childTransform",
+   "auVar9_2": "disposeResult"
+  }
+ },
+ "2f5d67c": {
+  "summary": "Button callback: if a card is selected, hides and destroys the choose UI and reports the chosen card.",
+  "renames": {
+   "pplVar2": "currentChooseUiCopy",
+   "pplStack_60": "currentChooseUi",
+   "pplStack_68": "scratch1",
+   "pplStack_88": "scratch2",
+   "pplStack_90": "scratch3",
+   "plStack_70": "listEnumerator",
+   "plStack_80": "disposableHolder",
+   "auVar10_2": "isNoSelection",
+   "uVar4": "loopFlag",
+   "lVar3_5": "disposableType",
+   "piVar8": "interfaceMapPtr",
+   "puVar5": "interfaceSlotPtr",
+   "plVar6_4": "childTransform",
+   "auVar10_4": "disposeResult"
+  }
+ },
+ "2f5d680": {
+  "summary": "Callback that, if a card is selected, hides and destroys the choose UI and reports the chosen card.",
+  "renames": {
+   "pplVar2": "currentChooseUiCopy",
+   "pplStack_60": "currentChooseUi",
+   "pplStack_68": "scratch1",
+   "pplStack_88": "scratch2",
+   "pplStack_90": "scratch3",
+   "plStack_70": "listEnumerator",
+   "plStack_80": "disposableHolder",
+   "auVar10_2": "isNoSelection",
+   "uVar4": "loopFlag",
+   "lVar3_5": "disposableType",
+   "piVar8": "interfaceMapPtr",
+   "puVar5": "interfaceSlotPtr",
+   "plVar6_4": "childTransform",
+   "auVar10_4": "disposeResult"
+  }
+ },
+ "2f5cd94": {
+  "summary": "Formats the remaining seconds into the choose button text.",
+  "renames": {
+   "iStack_24": "secondsValue"
+  }
+ },
+ "2f5d44c": {
+  "summary": "Toggles visibility of the choose-card menu elements and fades the background shade accordingly.",
+  "renames": {
+   "auVar7_x1": "unused1",
+   "auVar7_2": "hasShadeTerm"
+  }
+ },
+ "2f5d3a4": {
+  "summary": "Shows or hides choose-card menu elements and fades the battle background shade in or out.",
+  "renames": {
+   "auVar6": "hasShadeSprite",
+   "auVar6_x1": "unused1"
+  }
+ },
+ "2f5d488": {
+  "summary": "Shows or hides every choose-card UI in the list.",
+  "renames": {
+   "uStack_40": "scratch1",
+   "lStack_38": "currentChooseUi"
+  }
+ },
+ "2f5cc4c": {
+  "summary": "Initializes a choose-card UI: sets up its frame button and applies the highlight colour to the card's highlight material.",
+  "renames": {
+   "auVar6": "hasInstancedMaterial"
+  }
+ },
+ "2f5d2fc": {
+  "summary": "Toggles a card's highlight and the interactable state of its select button, clearing UI selection if needed.",
+  "renames": {
+   "bVar1": "interactableValue",
+   "uVar6": "buttonState"
+  }
+ },
+ "2f5e008": {
+  "summary": "Registers the select-button click handler on the button's onClick event.",
+  "renames": {
+   "uVar1": "insertIndex",
+   "puVar6": "slotPtr",
+   "lVar2": "addMethod"
+  }
+ },
+ "2f5e098": {
+  "summary": "Removes the select-button click listener and unhooks the card click handler from the card UI.",
+  "renames": {
+   "uVar4": "hasCardUi",
+   "lVar2": "addMethod",
+   "uVar1": "insertIndex",
+   "puVar7": "slotPtr"
+  }
+ },
+ "2f5dde4": {
+  "summary": "Attaches the frame to a card UI, resets its transform, applies highlight colour and subscribes to card clicks.",
+  "renames": {
+   "lVar5": "scaleStatics",
+   "puVar6": "positionStatics",
+   "lVar4": "persistentCalls",
+   "lVar7": "callsList",
+   "uVar1": "insertIndex",
+   "puVar8": "slotPtr"
+  }
+ },
+ "2f5dfb0": {
+  "summary": "Toggles a card's highlight and the select button's interactable state, clearing UI selection if needed.",
+  "renames": {
+   "bVar1": "interactableValue",
+   "uVar6": "buttonState"
+  }
+ },
+ "2f5e1d4": {
+  "summary": "Handles select-button click: selects the card in the menu, highlights it and disables its select button.",
+  "renames": {
+   "uVar5": "buttonState"
+  }
+ },
+ "2f5e2a0": {
+  "summary": "Initializes the clock: caches transform, registers language-change and end-turn handlers, and disables the button in replays.",
+  "renames": {
+   "uVar7_2": "anchoredPos",
+   "lVar2_4": "rectPtr",
+   "uVar4": "hasInstance",
+   "uVar3_3": "playerDataStatics",
+   "uVar3_4": "upperText"
+  }
+ },
+ "2f5e69c": {
+  "summary": "Sets the clock text to the localized end-turn or enemy-turn label (skipped in replays).",
+  "renames": {
+   "plVar6": "termKey",
+   "uVar8_2": "upperText"
+  }
+ },
+ "2f5ed30": {
+  "summary": "Refreshes the clock text translation after a language change, based on button interactability.",
+  "renames": {
+   "plVar7": "termKey",
+   "uVar9_2": "upperText"
+  }
+ },
+ "2f5ed68": {
+  "summary": "Sets the clock UI to enemy turn text and makes the clock button non-interactable.",
+  "renames": {
+   "uVar5": "buttonState"
+  }
+ },
+ "2f5ee14": {
+  "summary": "Stops the clock coroutines, removes countdown animation, switches to enemy turn UI and plays the out animation.",
+  "renames": {
+   "uVar1": "hasNoActionsAnim",
+   "auVar3_x1": "unused1"
+  }
+ },
+ "2f5ee68": {
+  "summary": "Stops the clock coroutines, removes countdown animation, switches to enemy turn UI and plays the out animation.",
+  "renames": {
+   "uVar1": "hasNoActionsAnim",
+   "auVar3_x1": "unused1"
+  }
+ },
+ "2f5ef54": {
+  "summary": "Pauses the clock, recording the pause start time and logging it when dev tools are active.",
+  "renames": {
+   "uVar3": "devToolsEnabled",
+   "puVar4": "logMethod"
+  }
+ },
+ "2f5f000": {
+  "summary": "Unpauses the clock, resets pause start time and logs when dev tools are active.",
+  "renames": {
+   "uVar2_2": "pausedTimeText",
+   "uVar1": "unused1",
+   "uVar4": "devToolsEnabled",
+   "puVar5": "logMethod"
+  }
+ },
+ "2f5ea78": {
+  "summary": "Sets up the clock's start-of-turn UI, enables the button and spawns the intro animation.",
+  "renames": {
+   "uVar6_2": "playerDataStatics"
+  }
+ },
+ "2f5f238": {
+  "summary": "Shows the no-actions-left animation and plays the out-of-actions sound once, if not already triggered.",
+  "renames": {
+   "auVar6_x1": "unused1",
+   "uVar3": "hasNoActionsAnim"
+  }
+ },
+ "2f5f654": {
+  "summary": "Instantiates the countdown animation prefab if one does not already exist.",
+  "renames": {
+   "plVar3": "countdownAnimRef",
+   "lVar5": "existingAnim",
+   "uVar2": "hasAnim"
+  }
+ },
+ "2f5f41c": {
+  "summary": "Instantiates the no-actions animation prefab if missing and particles are enabled.",
+  "renames": {
+   "plVar3": "noActionsAnimRef",
+   "lVar4": "existingAnim",
+   "uVar1": "isMissing"
+  }
+ },
+ "2f5f08c": {
+  "summary": "Instantiates the given in/out animation prefab under the clock's parent.",
+  "renames": {
+   "uVar1": "hasPrefab"
+  }
+ },
+ "2f5ec94": {
+  "summary": "Returns the total turn time limit, using fixed values for certain match types.",
+  "renames": {
+   "fVar5": "eventAiTime",
+   "fVar4_3": "totalTime"
+  }
+ },
+ "2f5e8fc": {
+  "summary": "Swaps the turn button's material between the normal and hurry-up appearance.",
+  "renames": {
+   "puVar4": "originalMaterialRef",
+   "uVar2": "hasMaterial",
+   "lVar1": "materialOffset"
+  }
+ },
+ "2f5f79c": {
+  "summary": "On app pause/resume, records timestamps and adjusts background time and countdown counter by time away.",
+  "renames": {
+   "auStack_34": "pauseArg",
+   "uVar4": "isThisNull",
+   "dVar2": "secondsPassedDouble",
+   "iVar1": "secondsInt",
+   "extraout_s0": "realtimeNow"
+  }
+ },
+ "2f5fb28": {
+  "summary": "Per-frame clock update: tracks turn time, triggers hurry-up chat and countdown, and ends the turn when time runs out.",
+  "renames": {
+   "auVar14_x1": "unused1",
+   "lVar8": "unused2",
+   "fVar11": "elapsedTime",
+   "fVar13": "hurryUpOffset",
+   "extraout_s0": "realtimeNow",
+   "extraout_s0_00": "deltaTimeScratch1",
+   "extraout_s0_01": "deltaTimeScratch2",
+   "extraout_x0": "unused3",
+   "extraout_x1": "unused4",
+   "uVar7": "hasCountdownAnim"
+  }
+ },
+ "2f5fddc": {
+  "summary": "Starts the end-of-turn countdown, displaying the counter and creating the countdown animation.",
+  "renames": {
+   "auVar4_x1": "unused1",
+   "auVar4_2": "hasNoActionsPrefab"
+  }
+ },
+ "2f5fedc": {
+  "summary": "Ends the countdown: plays the timer-expired sound, destroys the animation and forces end of turn.",
+  "renames": {
+   "uVar3": "hasCountdownAnim"
+  }
+ },
+ "2f60038": {
+  "summary": "Removes the language-change callback on destroy (with decompiler-merged dropdown localization code that refills dropdown options).",
+  "renames": {
+   "bVar3": "exchangeSucceeded",
+   "puVar10": "slotPtr",
+   "pcStack_80": "scratch1",
+   "uStack_a0": "termEnumerator",
+   "uStack_98": "scratch2",
+   "lStack_90": "currentTerm",
+   "puStack_b0": "scratch3",
+   "lStack_a8": "scratch4",
+   "auVar13_x1": "unused1"
+  }
+ },
+ "2f600dc": {
+  "summary": "Constructor: sets the default hurry-up time and initializes the pause timestamp to now.",
+  "renames": {}
+ },
+ "2f6014c": {
+  "summary": "Starts a countdown timer of a given duration and speed and displays the initial time text.",
+  "renames": {
+   "puVar6": "timeAvailableRef",
+   "uStack_48": "durationSpan",
+   "iVar1": "classInitFlag",
+   "uVar4": "secondsBoxed",
+   "plVar5": "timerTextRef"
+  }
+ },
+ "2f6031c": {
+  "summary": "Changes the countdown speed, resetting the reference time.",
+  "renames": {}
+ },
+ "2f603a0": {
+  "summary": "Returns the seconds remaining in the countdown.",
+  "renames": {
+   "dVar2": "secondsLeft",
+   "uStack_28": "remainingSpan"
+  }
+ },
+ "2f60420": {
+  "summary": "Updates the countdown each frame, refreshing the displayed time and playing a sound at under five seconds.",
+  "renames": {
+   "lVar1": "scaledTicks",
+   "uVar5": "secondsBoxed"
+  }
+ },
+ "2f60c78": {
+  "summary": "Always throws NotSupportedException for the iterator Reset.",
+  "renames": {
+   "uVar2": "unused1"
+  }
+ },
+ "2f60660": {
+  "summary": "Returns the Transform of the card back reference object.",
+  "renames": {
+   "lVar5_3": "targetPtr"
+  }
+ },
+ "2f607a0": {
+  "summary": "Shows the your-turn indicator and hides the enemy-turn indicator, or the reverse.",
+  "renames": {
+   "bVar1": "notPlayerTurn"
+  }
+ },
+ "2f607e8": {
+  "summary": "Returns the card back reference's local scale and local rotation as a tuple.",
+  "renames": {
+   "in_x8": "resultPtr",
+   "in_s1": "scaleExtra1",
+   "in_s2": "scaleExtra2",
+   "in_s3": "rotationExtra",
+   "uVar4": "rotationPart1",
+   "uVar5": "rotationPart2"
+  }
+ },
+ "2f608a8": {
+  "summary": "Returns the world position of the card back reference.",
+  "renames": {
+   "uStack_28": "positionTail",
+   "uStack_30": "position"
+  }
+ },
+ "2f608c0": {
+  "summary": "Shows or hides the deck size display with the localized cards-left text.",
+  "renames": {
+   "iStack_24": "cardsLeftValue"
+  }
+ },
+ "2f60af4": {
+  "summary": "Creates and returns the coroutine that adds a not-yet-drawn card to the deck.",
+  "renames": {
+   "lVar1": "stateMachine"
+  }
+ },
+ "2f60cb8": {
+  "summary": "Awake: null-checks the army rating icon's game object.",
+  "renames": {
+   "auVar3_x1": "unused1"
+  }
+ },
+ "2f60ce4": {
+  "summary": "Releases the victory, defeat and draw video addressable assets on disable.",
+  "renames": {
+   "uVar2": "assetKey",
+   "uVar3": "found"
+  }
+ },
+ "2f60d6c": {
+  "summary": "Cleans up the render texture on destroy.",
+  "renames": {
+   "uVar1": "unused1"
+  }
+ },
+ "2f60dc8": {
+  "summary": "Sets up the end-of-battle door: picks winner video and audio, shows rewards, creates render texture and returns the video duration plus 2 seconds.",
+  "renames": {
+   "uVar7": "fadeFlag",
+   "lStack_80": "scratchEnum",
+   "lStack_78": "videoRef",
+   "iStack_70": "matchTypeCopy",
+   "uStack_90": "scratch1",
+   "uVar3_2": "winnerTypeText",
+   "plVar8": "renderTexRef",
+   "dVar9": "clipLength"
+  }
+ },
+ "2f6130c": {
+  "summary": "Displays end-of-battle rewards: skulls, reward items, rating or seals, and fades the reward group in.",
+  "renames": {
+   "uStack_84": "rewardAmount",
+   "lStack_80": "savedGameMode",
+   "lStack_78": "savedWarlord",
+   "lStack_70": "savedResult",
+   "lStack_68": "savedDoors",
+   "piVar11": "sealsRef",
+   "piVar16": "ratingRef",
+   "auVar19": "exceptionResult",
+   "auVar19_x1": "unused1",
+   "lVar5_6": "eventClass",
+   "iVar3": "currentScore",
+   "iVar4": "legendaryElo"
+  }
+ },
+ "2f61210": {
+  "summary": "Hides all reward objects and the rewards group (decompiler merged in reward display code).",
+  "renames": {
+   "uStack_a4": "rewardAmount",
+   "lStack_90": "savedResult",
+   "lStack_88": "savedGameObject",
+   "plStack_a0": "savedMethod",
+   "auVar22_x1": "unused1",
+   "auVar23": "exceptionResult",
+   "auVar23_x1": "unused2",
+   "iVar3": "skullsOrScore",
+   "iVar4": "legendaryElo",
+   "piVar12": "sealsRef",
+   "piVar19": "ratingRef",
+   "in_x3": "skullsArg",
+   "in_x4": "warlordArg",
+   "lVar16_4": "eventClass",
+   "plVar6": "rewardDrawer",
+   "uVar7": "canShow"
+  }
+ },
+ "2f61bfc": {
+  "summary": "Starts a DOTween float tween that blends a scenario value to a target over a set time.",
+  "renames": {
+   "lVar1": "applyToMethod"
+  }
+ },
+ "2f61d14": {
+  "summary": "Registers this toggler in the environment conditions manager's blendable list.",
+  "renames": {
+   "plVar6": "listRef",
+   "lVar4_3": "blendList",
+   "lVar3": "addMethod",
+   "plVar2": "slotPtr",
+   "extraout_x1_02": "unused1"
+  }
+ }
+}

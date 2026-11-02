@@ -1,0 +1,307 @@
+{
+ "3259078": {
+  "summary": "Returns a copy of the deck's card list with the hero and defensive card inserted at the front.",
+  "renames": {
+   "uVar2": "hasCard"
+  }
+ },
+ "32591a0": {
+  "summary": "Initializes a deck's name, hero, defensive card, army, id (generating a GUID if empty) and empty card list.",
+  "renames": {
+   "auStack_50_x1": "unused1",
+   "plVar4": "heroClassPtr"
+  }
+ },
+ "325951c": {
+  "summary": "Constructs a deck from a prebuilt deck definition, loading its name, hero, cardback, game mode and cards.",
+  "renames": {
+   "puVar3": "deckIdSlot",
+   "puVar4": "cardbackIdSlot",
+   "uStack_48": "gameModeNullable"
+  }
+ },
+ "3259a80": {
+  "summary": "Constructs a deck from Azure-saved deck info, resolving hero, defense card and each card id with its copy count.",
+  "renames": {
+   "iVar2": "copyCount",
+   "lStack_70": "cardIdKey",
+   "lStack_90": "enumCurrentTmp",
+   "plVar9": "itemSlot",
+   "puStack_98": "enumStatePtr",
+   "uStack_78": "enumStateTail",
+   "uStack_80": "keyEnumerator",
+   "uStack_88": "lastEditDate",
+   "uStack_a0": "enumeratorTmp"
+  }
+ },
+ "3259f90": {
+  "summary": "Constructs a pack-constructed deck from a hero, prebuilt packs' cards and an optional pilot card.",
+  "renames": {
+   "extraout_x1": "unused1",
+   "plVar6": "itemSlot",
+   "uVar3": "hasPack"
+  }
+ },
+ "325a75c": {
+  "summary": "Adds a card to the deck library, setting the deck army if the deck was empty.",
+  "renames": {
+   "extraout_x1": "unused1",
+   "lVar4": "addMethodInfo",
+   "plVar3": "itemSlot"
+  }
+ },
+ "325a824": {
+  "summary": "Tries to add a card to the deck, discarding the error message output.",
+  "renames": {
+   "uStack_8": "errorOut"
+  }
+ },
+ "325a944": {
+  "summary": "Checks whether a card can be added to the deck (copies, ownership, army, bans, rarity limits, deck space), returning an error string if not.",
+  "renames": {
+   "auVar13": "eventResult",
+   "auVar13_x1": "eventResultAux",
+   "iStack_34": "maxCopiesBoxed",
+   "iVar2_4": "deckCardCount",
+   "lVar6_3": "defenseEventData",
+   "lVar6_5": "copiesEventData",
+   "lVar6_7": "rulesEventData",
+   "lVar6_9": "heroEventData",
+   "lVar9": "errorRef",
+   "piVar11": "interfaceMapEntry",
+   "plVar10": "errorKeyPtr",
+   "uStack_38": "maxLegendaryBoxed"
+  }
+ },
+ "325bca4": {
+  "summary": "Sets the deck hero and updates the deck army from the hero's army.",
+  "renames": {
+   "plVar1": "armyStaticsPtr"
+  }
+ },
+ "325b034": {
+  "summary": "Checks whether a hero card can be added to the deck, returning an error string on failure.",
+  "renames": {
+   "lVar6_3": "eventData",
+   "piVar10": "interfaceMapEntry",
+   "uStack_34": "maxCopiesBoxed"
+  }
+ },
+ "325b440": {
+  "summary": "Checks whether a defensive card can be added to the deck, returning an error string on failure.",
+  "renames": {
+   "lVar6_3": "eventData",
+   "piVar10": "interfaceMapEntry",
+   "uStack_34": "maxCopiesBoxed"
+  }
+ },
+ "325b84c": {
+  "summary": "Counts how many copies of a card are in the deck using a LINQ Count with a closure predicate (heroes count as 1).",
+  "renames": {
+   "aplStack_e0": "unwindFrame",
+   "auVar3": "savedCount",
+   "auVar3_x1": "savedSource",
+   "auVar32": "countValue",
+   "auVar32_x1": "sourceList",
+   "auVar33": "countValue2",
+   "auVar33_x1": "sourceList2",
+   "auVar34": "defaultIfEmptySource",
+   "auVar34_x1": "defaultIfEmptyDefault",
+   "auVar35": "thrownException",
+   "auVar35_part8": "exceptionTypeFlag",
+   "cStack_bc": "predicateResult",
+   "lStack_b8": "stackGuard",
+   "lVar18": "cardClass",
+   "lVar19": "listClass",
+   "lVar4": "closure",
+   "lVar4_2": "enumeratorClass",
+   "lVar4_3": "iteratorObj",
+   "lVar7_2": "typeInfo",
+   "pcVar31": "iteratorMethod",
+   "piVar24": "interfaceMapEntry",
+   "plStack_38": "enumerator",
+   "plStack_50": "caughtException",
+   "plVar15": "genericContext",
+   "plVar21": "genericArgs",
+   "plVar26_2": "disposable",
+   "plVar26_3": "sourceSeq",
+   "plVar26_4": "disposable2",
+   "plVar27": "countMethod",
+   "plVar28": "cardRef",
+   "pplStack_48": "enumeratorRef",
+   "pplVar20": "enumeratorRef2",
+   "ppuVar16": "genericClassA",
+   "ppuVar17": "genericClassB",
+   "puStack_c8": "callArgs",
+   "puVar1": "copySrc",
+   "puVar11": "vtable2",
+   "puVar12": "errorParamName",
+   "puVar30": "stackBuffer2",
+   "puVar8": "vtableOrBuffer",
+   "stack0xffffffffffffff50": "stackScratch",
+   "uStack_d0": "sourceEnumerator",
+   "uVar2": "flagsScratch",
+   "uVar22": "moveNextResult2",
+   "uVar23": "enumeratorObj",
+   "uVar29": "elementSize",
+   "uVar6": "interfaceCount"
+  }
+ },
+ "325b99c": {
+  "summary": "Counts the legendary cards in the deck using a cached LINQ Count delegate.",
+  "renames": {
+   "aplStack_e0": "unwindFrame",
+   "auVar28": "countValue",
+   "auVar28_x1": "sourceList",
+   "auVar29": "countValue2",
+   "auVar29_x1": "sourceList2",
+   "auVar3": "savedCount",
+   "auVar3_x1": "savedSource",
+   "auVar30": "defaultIfEmptySource",
+   "auVar30_x1": "defaultIfEmptyDefault",
+   "auVar31": "thrownException",
+   "auVar31_part8": "exceptionTypeFlag",
+   "cStack_bc": "predicateResult",
+   "in_x3": "inputArg3",
+   "lStack_b8": "stackGuard",
+   "lVar14": "listClass",
+   "lVar23_4": "threadOrIterator",
+   "lVar9": "typeInfo",
+   "pcVar27": "iteratorMethod",
+   "piVar20": "interfaceMapEntry",
+   "plStack_38": "enumerator",
+   "plStack_50": "caughtException",
+   "plVar10": "sourceSeq",
+   "plVar11": "genericContext",
+   "plVar16": "genericArgs",
+   "plVar22_2": "disposable",
+   "plVar4": "countMethod",
+   "pplStack_48": "enumeratorRef",
+   "pplVar15": "enumeratorRef2",
+   "ppuVar12": "genericClassB",
+   "puStack_c8": "callArgs",
+   "puStack_c8_2": "callArgs2",
+   "puVar1": "copySrc",
+   "puVar13": "vtableOrBuffer",
+   "puVar13_2": "vtableOrBuffer2",
+   "puVar26": "stackBuffer2",
+   "puVar6": "vtable2",
+   "puVar7": "errorParamName",
+   "stack0xffffffffffffff50": "stackScratch",
+   "uStack_d0": "sourceEnumerator",
+   "uVar17": "interfaceCount",
+   "uVar18": "interfaceCount2",
+   "uVar19": "enumeratorObj",
+   "uVar2": "flagsScratch",
+   "uVar24_4": "defaultValue",
+   "uVar25": "elementSize"
+  }
+ },
+ "325a6bc": {
+  "summary": "Returns the number of cards in the deck library, optionally counting the hero as one more.",
+  "renames": {
+   "uVar1": "hasHero"
+  }
+ },
+ "325ba98": {
+  "summary": "Returns how many card slots remain in the deck, using 30 by default or the active live event's deck size.",
+  "renames": {
+   "iVar1": "maxSlots",
+   "in_x2": "unused1",
+   "lVar3_3": "eventData",
+   "piVar7": "interfaceMapEntry",
+   "uVar6": "interfaceCount"
+  }
+ },
+ "325bce8": {
+  "summary": "Finds the cosmetic cardback item matching the deck's cardback id, or a default for the deck army (heavily inlined List code).",
+  "renames": {
+   "auVar18": "catchResult",
+   "auVar18_x1": "catchResultAux",
+   "extraout_x8": "returnBuffer",
+   "iVar2": "currentVersion",
+   "stack0xffffffffffffffb8": "enumeratorScratch",
+   "uVar16": "reverseIndex",
+   "uVar3": "argumentName",
+   "uVar7": "matchResult",
+   "uVar9": "foundItem"
+  }
+ },
+ "325be08": {
+  "summary": "Returns true if any non-neutral card in the deck belongs to a different army than the hero.",
+  "renames": {
+   "uVar2": "hasNoHero"
+  }
+ },
+ "325bf70": {
+  "summary": "Checks whether the player owns enough copies of every deck card, filling missingCards with the shortfall.",
+  "renames": {
+   "bVar10": "hasAllCards",
+   "iVar3": "copiesNeeded",
+   "lVar11": "itemsArray",
+   "lVar9": "missingList",
+   "puStack_78": "enumStatePtr1",
+   "puStack_a8": "enumStatePtr2",
+   "puStack_d0": "enumPtrScratch",
+   "puVar12": "itemSlot",
+   "uStack_70": "currentCard",
+   "uStack_80": "cardEnumerator",
+   "uStack_90": "dictEnumStateA",
+   "uStack_98": "requiredCount",
+   "uStack_a0": "entryKey",
+   "uStack_b0": "dictEnumerator",
+   "uStack_b8": "dictEnumStateB",
+   "uStack_c0": "dictEnumStateC",
+   "uStack_c8": "enumCurrentTmp",
+   "uVar1": "listSize",
+   "uVar2": "neededCount",
+   "uVar6_2": "cardKey"
+  }
+ },
+ "325c3fc": {
+  "summary": "Removes non-neutral cards from the deck whose army differs from the hero's, logging each removal.",
+  "renames": {
+   "puVar4": "logMethod",
+   "uVar2": "hasNoHero",
+   "uVar5": "unused1"
+  }
+ },
+ "325c6c8": {
+  "summary": "Equality operator comparing two decks by deckId string, with inlined string comparison.",
+  "renames": {
+   "bVar1": "charsEqual",
+   "uVar5_2": "blockDiffers"
+  }
+ },
+ "325c6f8": {
+  "summary": "Inequality operator comparing two decks by deckId.",
+  "renames": {
+   "bVar1": "notEqual"
+  }
+ },
+ "325c738": {
+  "summary": "Equals override comparing this deck's deckId with another CardDeck's deckId.",
+  "renames": {
+   "bVar1": "charsEqual",
+   "lVar7": "otherDeckId",
+   "uVar5_2": "blockDiffers"
+  }
+ },
+ "325c7cc": {
+  "summary": "Serializes a deck (name, card ids, play mode) into a delimiter-separated string encoded as base64.",
+  "renames": {
+   "plStack_60": "currentCard",
+   "uStack_68": "enumStateTail",
+   "uVar4": "hasNext"
+  }
+ },
+ "325cab8": {
+  "summary": "Decodes a base64 deck string into a CardDeck, extracting name, cards, hero, defensive card and game mode.",
+  "renames": {
+   "auStack_68": "gameModeNullable",
+   "lVar10": "nextIndex",
+   "plVar6": "itemSlot",
+   "uStack_58": "unused1"
+  }
+ }
+}
