@@ -1531,5 +1531,6 @@
   "replays.wentFirst": "{name} empezó primero.",
   "replays.withCode": "Con código de repetición",
   "replays.withRecording": "Con grabación",
-  "replays.won": "Victoria"
+  "replays.won": "Victoria",
+  "mode.skirmishDraft": "Draft de Escaramuza"
 }
