@@ -1,0 +1,885 @@
+{
+ "2f64b50": {
+  "summary": "Per-frame check on a scenario particle blender: once every particle system has no live particles it finishes the blend. The tail is misdecoded and contains inlined DoScenarioBlend code.",
+  "comments": [
+   [
+    7,
+    "Only runs while blend options exist, finish-notify is on and the blend direction flag is off; otherwise just a null"
+   ],
+   [
+    18,
+    "Scan all particle systems; any one still alive means keep waiting"
+   ],
+   [
+    42,
+    "Particle system still has particles: return and check again next frame"
+   ],
+   [
+    50,
+    "All systems are empty: invoke the finish callback in the options and clear them"
+   ],
+   [
+    60,
+    "Decompiler merged the rest of the function (an inlined DoScenarioBlend) after this point; treat the tail as unreliable"
+   ],
+   [
+    72,
+    "Set each particle system's emission to the blend direction flag"
+   ],
+   [
+    79,
+    "Without notify-on-empty, start the wait-for-blend-time coroutine; Update polling stays enabled only when notifying"
+   ]
+  ]
+ },
+ "2f64c2c": {
+  "summary": "Starts a scenario blend on the particle systems: stores the options, sets emission on/off from the blend direction, then either starts a timed wait coroutine or enables Update polling for empty particles.",
+  "comments": [
+   [
+    6,
+    "Remember the blend options so Update or the coroutine can report completion"
+   ],
+   [
+    7,
+    "Toggle emitters unless direction is on-and-forced-enable; sets emission to the direction flag for each system"
+   ],
+   [
+    31,
+    "If not waiting for particles to die, use a timed coroutine; otherwise enable Update to poll particle counts"
+   ],
+   [
+    39,
+    "Null options or null particle array"
+   ]
+  ]
+ },
+ "2f64d6c": {
+  "summary": "Creates and returns the coroutine state machine that waits for the blend time.",
+  "comments": []
+ },
+ "2f64f34": {
+  "summary": "Scenario blend handler: sets each particle system's emission to the blend direction. The tail is misdecoded registration code from another method.",
+  "comments": [
+   [
+    6,
+    "Loop over all particle systems and set emission enabled to the blend direction"
+   ],
+   [
+    11,
+    "Decompiler glitch: code after this point is the Initialize registration into the blendeable list, not part of this"
+   ],
+   [
+    25,
+    "Add the item to the environment manager's blendeable list (inlined List.Add with capacity growth)"
+   ]
+  ]
+ },
+ "2f65018": {
+  "summary": "Registers this particle toggler in the battle's environment conditions manager list of blendeable objects, creating the list if needed. Called at setup.",
+  "comments": [
+   [
+    4,
+    "Get the battle manager and its environment conditions manager"
+   ],
+   [
+    10,
+    "Create the blendeable list on first use"
+   ],
+   [
+    19,
+    "Inlined List.Add: append this object, growing the array if full"
+   ]
+  ]
+ },
+ "2f650c0": {
+  "summary": "Registers this tau cannon animation stopper in the environment conditions manager's blendeable list, creating the list if needed. Called at setup.",
+  "comments": [
+   [
+    4,
+    "Get the battle manager and its environment conditions manager"
+   ],
+   [
+    10,
+    "Create the blendeable list on first use"
+   ],
+   [
+    19,
+    "Inlined List.Add: append this object, growing the array if full"
+   ]
+  ]
+ },
+ "2f65160": {
+  "summary": "Turns the tau cannon animation on or off: enables or disables look-at constraints, plays or stops particles and the FX controller; when turned off it also stops the animation and tweens the cannon to its final rotation. Decompiler output is tangled.",
+  "comments": [
+   [
+    14,
+    "Look-at constraints: set each one's enabled flag to the requested state"
+   ],
+   [
+    29,
+    "Particle systems: Play when turning on, Stop when turning off"
+   ],
+   [
+    33,
+    "Enable or disable the FX animation controller; when turning on, nothing more to do"
+   ],
+   [
+    38,
+    "Turning off: stop the animation component and tween the cannon to its final rotation"
+   ],
+   [
+    47,
+    "Ease set to InOutSine (the flash-ease branch is inlined DOTween SetEase)"
+   ],
+   [
+    80,
+    "Decompiler glitch: stack-spill and error paths merged here (index error then DoScenarioBlend code); ignore"
+   ]
+  ]
+ },
+ "2f652e4": {
+  "summary": "Scenario blend handler for the tau cannon: only on blend-out (direction off) it disables look-at constraints, stops particles and animation, and tweens the cannon to its final rotation.",
+  "comments": [
+   [
+    12,
+    "Direction is on: nothing to do, the cannon is left running"
+   ],
+   [
+    22,
+    "Blend-out: disable every look-at constraint"
+   ],
+   [
+    37,
+    "Stop every particle system"
+   ],
+   [
+    41,
+    "Disable FX controller and animation, then tween cannon to its final rotation"
+   ],
+   [
+    52,
+    "Ease set to InOutSine (inlined DOTween SetEase)"
+   ],
+   [
+    79,
+    "Decompiler glitch: error paths and stack spills merged here; ignore"
+   ]
+  ]
+ },
+ "2f655b8": {
+  "summary": "Per-frame update of a card that flies up or lands: finishes transitions when the target position is reached, otherwise moves the card along its fly position. Contains an inlined copy of ChangeState and the decompiler tangled the flow.",
+  "comments": [
+   [
+    5,
+    "Transitional or landed states: Landed does nothing"
+   ],
+   [
+    9,
+    "Moving to land: step toward target; when arrived switch to Landed"
+   ],
+   [
+    15,
+    "Inlined ChangeState: apply the new state (same logic as ChangeState)"
+   ],
+   [
+    21,
+    "Start of a land transition: reset timer, enable updates, remember current position, target is original position"
+   ],
+   [
+    33,
+    "Start of a fly transition: target is the fly position"
+   ],
+   [
+    51,
+    "Final state reached: Landed disables updates and snaps to original position, Flying keeps updating"
+   ],
+   [
+    61,
+    "Notify the toggle-finished callback (true when flying, false when landed)"
+   ],
+   [
+    95,
+    "Moving to fly: step toward target; when arrived switch to Flying"
+   ],
+   [
+    105,
+    "Invalid state: throws an exception (decompiler tangle follows)"
+   ],
+   [
+    111,
+    "Flying state: advance animation time and place the card at the current fly position each frame"
+   ]
+  ]
+ },
+ "2f654e8": {
+  "summary": "Starts a fly or land toggle for the card with an optional transition time; a negative time logs a warning and acts as instant, zero time changes state immediately, otherwise starts a timed transition. Contains inlined ChangeState code.",
+  "comments": [
+   [
+    10,
+    "Negative time is invalid: log a warning and make the change instant"
+   ],
+   [
+    25,
+    "Zero time means instant: jump straight to Flying or Landed"
+   ],
+   [
+    28,
+    "Timed transition: pick the transition-to-fly or transition-to-land state"
+   ],
+   [
+    40,
+    "Inlined ChangeState for land transition: ignore if already landed; else reset timer and aim at original position"
+   ],
+   [
+    60,
+    "Inlined ChangeState for fly transition: ignore if already flying; else aim at the fly position"
+   ],
+   [
+    81,
+    "Direct states: Landed disables updates and snaps to original position; Flying keeps updating; both fire the finish"
+   ],
+   [
+    109,
+    "Unknown state: throws; decompiler loop back to the start is an artifact"
+   ]
+  ]
+ },
+ "2f65344": {
+  "summary": "Switches the flying card to a new state: transitions set timer and start/target positions, Landed and Flying are final states that fire the toggle-finished callback.",
+  "comments": [
+   [
+    5,
+    "Ignore a request to switch into the state already being switched to"
+   ],
+   [
+    7,
+    "Transition to land: skip if already landed; else reset timer, enable updates, aim at original position"
+   ],
+   [
+    21,
+    "Transition to fly: skip if already flying; else aim at the fly position"
+   ],
+   [
+    39,
+    "Final states (Landed or Flying): set state and timer"
+   ],
+   [
+    42,
+    "Landed: stop per-frame updates and snap to original position"
+   ],
+   [
+    49,
+    "Notify the toggle-finished callback with false (landed)"
+   ],
+   [
+    58,
+    "Any other value is invalid and throws"
+   ],
+   [
+    67,
+    "Flying: keep updating and notify the callback with true"
+   ]
+  ]
+ },
+ "2f65628": {
+  "summary": "Per-frame step of the Flying state: advances animation time and sets the card's local position to the current fly position.",
+  "comments": [
+   [
+    4,
+    "Advance animation time by delta time scaled by the animation speed"
+   ],
+   [
+    9,
+    "Compute the fly position for the new time and apply it to the transform"
+   ]
+  ]
+ },
+ "2f65754": {
+  "summary": "Moves the card toward its target position over the desired change time and returns true once it is practically there (squared distance at most 0.0001).",
+  "comments": [
+   [
+    4,
+    "Advance timer by this frame's delta"
+   ],
+   [
+    18,
+    "Normalized progress = time / desired time, clamped to 0..1"
+   ],
+   [
+    29,
+    "Lerp each axis from the start position to the target by the clamped progress"
+   ],
+   [
+    33,
+    "Squared distance to the target"
+   ],
+   [
+    34,
+    "Close enough: snap exactly onto the target"
+   ],
+   [
+    39,
+    "Return true when arrived"
+   ]
+  ]
+ },
+ "2f65890": {
+  "summary": "Constructor: sets default animation speed and initial height offset to 1.",
+  "comments": []
+ },
+ "2f658a8": {
+  "summary": "Property getter for the target scale, caching the transform's local scale on first use. The decompiler lost access to the fields and shows raw offsets.",
+  "comments": [
+   [
+    9,
+    "If the cached scale is still the zero vector (unset), it is treated as uninitialized"
+   ],
+   [
+    12,
+    "Initialize from the transform's current local scale and store it"
+   ]
+  ]
+ },
+ "2f65968": {
+  "summary": "Highlights or un-highlights the attack type counter when an attack type is selected: scales the counter up with a tween and shows a highlight object, or restores its original size and hides the highlight.",
+  "comments": [
+   [
+    9,
+    "Remember the original scale the first time (zero means not yet captured)"
+   ],
+   [
+    23,
+    "This counter matches the selected attack type: highlight it"
+   ],
+   [
+    26,
+    "Target scale = original scale times the highlight modifier"
+   ],
+   [
+    33,
+    "Tween the counter to the target scale in about 0.15 seconds (inlined DOScale)"
+   ],
+   [
+    46,
+    "Different attack type: tween back to the original scale"
+   ],
+   [
+    52,
+    "Hide the highlight object (decompiler dropped the SetActive call)"
+   ]
+  ]
+ },
+ "2f65c4c": {
+  "summary": "Per-frame check: after the warlord ability card has been held long enough, shows the large card view with its effects and hides the rest of the battle scene. Heavily tangled; tail is misdecoded effect-display code.",
+  "comments": [
+   [
+    4,
+    "Only act when a press is pending and it has been held longer than the card show time"
+   ],
+   [
+    7,
+    "Clear the pending flag and mark the card as displaying"
+   ],
+   [
+    19,
+    "Skip in certain UI states or when the tutorial forbids showing a large card"
+   ],
+   [
+    23,
+    "If this card was just clicked as a target, ignore the hold and clear that flag"
+   ],
+   [
+    28,
+    "A large card is already shown: nothing more to do"
+   ],
+   [
+    38,
+    "Show the large card with the card's data, tier and effects"
+   ],
+   [
+    51,
+    "Opponent's in-play minion with ambush: hide stats and show the ambush icon instead of its real card"
+   ],
+   [
+    93,
+    "Hide the rest of the battle: disable other cards, audio object and environment effects"
+   ],
+   [
+    109,
+    "Decompiler glitch: the code below is another method's effect-display logic (builds a CardEffectsService) merged in"
+   ]
+  ]
+ },
+ "2f65c9c": {
+  "summary": "Handles releasing a touch on the warlord active ability button: ignored for the opponent, shows the active skill description, tries to use the ability, and on success flashes the pressed button briefly.",
+  "comments": [
+   [
+    7,
+    "Only the local player's warlord can use the ability"
+   ],
+   [
+    12,
+    "Show the active skill description for this card"
+   ],
+   [
+    15,
+    "Ask the battle manager to use the card's active ability"
+   ],
+   [
+    19,
+    "On success, show the pressed button and hide it again after about 0.4 seconds via a tween callback"
+   ],
+   [
+    40,
+    "Null reference exit"
+   ]
+  ]
+ },
+ "2f65e14": {
+  "summary": "Sets up a cemetery log card: applies a highlight color, shows the damage number (only if above zero) and puts the text on the HandMoving sorting layer. Decompiler lost the field names.",
+  "comments": [
+   [
+    6,
+    "Tint the highlight with the given color"
+   ],
+   [
+    9,
+    "Damage text object is shown only when damage is positive"
+   ],
+   [
+    15,
+    "Put the text on the HandMoving sorting layer with order 10 so it draws above the card"
+   ]
+  ]
+ },
+ "2f65f9c": {
+  "summary": "Constructor: sets default values for the cemetery log card's animation timings, rotations, speeds and a short wait delay. Values are packed float pairs in the decompilation.",
+  "comments": [
+   [
+    5,
+    "Default animation timing and movement tuning values (decompiler shows floats packed into 64-bit constants)"
+   ],
+   [
+    19,
+    "Create the WaitForSeconds delay object"
+   ],
+   [
+    33,
+    "Default attack type is Melee"
+   ]
+  ]
+ },
+ "2f6602c": {
+  "summary": "Shows one cemetery action: clears the old cards, then creates the acting card and, if present, the first and second target cards.",
+  "comments": [
+   [
+    5,
+    "Remove previously shown cards"
+   ],
+   [
+    6,
+    "Acting card goes in the main slot"
+   ],
+   [
+    9,
+    "If the action has a target card, create it with its damage"
+   ],
+   [
+    14,
+    "A second target exists only if a first one does: create and position it"
+   ]
+  ]
+ },
+ "2f66364": {
+  "summary": "Creates a target card in the cemetery group and positions it to the right of the main card by index (6.5 + 4 per index).",
+  "comments": [
+   [
+    7,
+    "Index 1 stores the card as targetCard2, otherwise targetCard1"
+   ],
+   [
+    15,
+    "Place the card at x = 6.5 + 4*index, y and z zero"
+   ]
+  ]
+ },
+ "2f662d8": {
+  "summary": "Creates the main cemetery card and puts it at the group origin position.",
+  "comments": [
+   [
+    5,
+    "Remember the card as the group's main card"
+   ],
+   [
+    9,
+    "Move it to local position zero"
+   ]
+  ]
+ },
+ "2f66158": {
+  "summary": "Hides the action image and destroys the main card and both target cards of this cemetery group.",
+  "comments": [
+   [
+    7,
+    "Hide the action icon"
+   ],
+   [
+    11,
+    "Destroy the main card if it exists"
+   ],
+   [
+    21,
+    "Destroy the first target card if it exists"
+   ],
+   [
+    31,
+    "Destroy the second target card if it exists"
+   ]
+  ]
+ },
+ "2f6660c": {
+  "summary": "Initializes the cemetery log manager: makes the card list, hides every slider image and records its original position, creates the action list and hides the three cemetery groups. Contains misdecoded inlined ClickCemeterySlider and ReleaseCemeterySlider code.",
+  "comments": [
+   [
+    4,
+    "Empty list of cemetery cards"
+   ],
+   [
+    7,
+    "Array to store the starting position of each cemetery slider image"
+   ],
+   [
+    13,
+    "For each slider image: hide it and save its world position"
+   ],
+   [
+    33,
+    "Vertical step between slider images is taken from two saved positions"
+   ],
+   [
+    36,
+    "Decompiler glitch: the code below (until the null exit) is inlined ClickCemeterySlider and ReleaseCemeterySlider bodies"
+   ],
+   [
+    45,
+    "Do nothing unless the cemetery can be shown"
+   ],
+   [
+    49,
+    "Do nothing if the action list is empty"
+   ],
+   [
+    55,
+    "Dim the screen with the shade"
+   ],
+   [
+    59,
+    "Remember which slider's action is displayed"
+   ],
+   [
+    62,
+    "Number of actions after the clicked one"
+   ],
+   [
+    65,
+    "Move the cemetery group next to the clicked slider"
+   ],
+   [
+    142,
+    "Central group shows the clicked action"
+   ],
+   [
+    146,
+    "Upper group shows the previous action if there is one; otherwise it is hidden"
+   ],
+   [
+    159,
+    "Lower group shows the next action if there is one; otherwise it is hidden"
+   ],
+   [
+    183,
+    "Index out of range: log an error with the index and list size"
+   ],
+   [
+    199,
+    "Real Start continues here: store the vertical movement, create the action list and hide the three groups"
+   ]
+  ]
+ },
+ "2f6684c": {
+  "summary": "Handles a click on a cemetery slider: dims the screen, moves the group beside the slider and shows that action in the central group with the previous action above and the next action below.",
+  "comments": [
+   [
+    9,
+    "Do nothing unless the battle manager says the cemetery can be shown"
+   ],
+   [
+    15,
+    "Do nothing when the action list is empty"
+   ],
+   [
+    19,
+    "Turn on the shade behind the cemetery"
+   ],
+   [
+    24,
+    "Remember which slider's action is displayed"
+   ],
+   [
+    27,
+    "Count of actions after this one"
+   ],
+   [
+    31,
+    "Position the cemetery group next to the clicked slider image"
+   ],
+   [
+    36,
+    "Decompiler glitch: code from here to the null exit is the ReleaseCemeterySlider body merged in"
+   ],
+   [
+    97,
+    "Central group displays the clicked action"
+   ],
+   [
+    103,
+    "Upper group shows the previous action unless this is the first"
+   ],
+   [
+    116,
+    "Lower group shows the next action unless this is the last"
+   ],
+   [
+    140,
+    "Index out of range: log an error with the index and list size"
+   ]
+  ]
+ },
+ "2f66bec": {
+  "summary": "Hides the cemetery groups and clears their cards when the slider that opened them is released, then restores the shade state.",
+  "comments": [
+   [
+    4,
+    "Only react if this slider is the one whose action is displayed"
+   ],
+   [
+    7,
+    "Hide the central, upper and lower cemetery groups"
+   ],
+   [
+    13,
+    "Destroy their cards"
+   ],
+   [
+    21,
+    "Stop any running shade tween, make the shade visible and set its alpha to 0"
+   ]
+  ]
+ },
+ "2f66cf0": {
+  "summary": "Clears the cards of the upper, central and lower cemetery groups (the lower one is inlined).",
+  "comments": [
+   [
+    4,
+    "Upper and central groups clear through ClearActions"
+   ],
+   [
+    8,
+    "Lower group's ClearActions was inlined: hide action image, destroy main and target cards"
+   ]
+  ]
+ },
+ "2f66d24": {
+  "summary": "Adds a card to the cemetery list, parents it to the manager, puts it on the Elements sorting layer ordered by cemetery size, hides its collider, and tweens it to the cemetery scale.",
+  "comments": [
+   [
+    6,
+    "Append to the cemetery card list (inlined List.Add)"
+   ],
+   [
+    23,
+    "Parent the card to the cemetery and use the new cemetery size as draw order"
+   ],
+   [
+    27,
+    "Move the card to the cemetery position from global settings"
+   ],
+   [
+    29,
+    "Set sorting layer, order and visibility for a card in the cemetery"
+   ],
+   [
+    34,
+    "Card is no longer in hand: update its collider"
+   ],
+   [
+    46,
+    "Tween the card scale to the cemetery scale with InQuint easing (inlined DOTween SetEase)"
+   ]
+  ]
+ },
+ "2f66e60": {
+  "summary": "Removes a card from the cemetery list, or logs a warning if it is not there.",
+  "comments": [
+   [
+    5,
+    "Card not in the list: log a warning with the card name"
+   ],
+   [
+    20,
+    "Find the card's index and remove it"
+   ]
+  ]
+ },
+ "2f66e18": {
+  "summary": "Returns how many cards are in the cemetery list.",
+  "comments": []
+ },
+ "2f66f6c": {
+  "summary": "Returns the slider's index, probably its sibling index in the transform; the decompiler lost the actual call.",
+  "comments": [
+   [
+    8,
+    "Decompiler lost the call that gives the index"
+   ]
+  ]
+ },
+ "2f66fd4": {
+  "summary": "Updates the Energy display text to \"available/total\" and plays the text animation if the holder uses tweens.",
+  "comments": [
+   [
+    9,
+    "Format as available/total in the Energy text"
+   ],
+   [
+    18,
+    "Animate the text change if enabled"
+   ],
+   [
+    21,
+    "Virtual call on the holder with the available value; seems to be a change notification"
+   ]
+  ]
+ },
+ "2f672e4": {
+  "summary": "Shows or hides the quest points holder and sets its text to \"current/total\" quest points, optionally with the alternate tooltip key.",
+  "comments": [
+   [
+    5,
+    "Alternate tooltip key is used only when requested"
+   ],
+   [
+    10,
+    "Toggle the quest points holder visibility"
+   ],
+   [
+    14,
+    "Format the text as initial value/total"
+   ],
+   [
+    23,
+    "Animate the text change if enabled"
+   ]
+  ]
+ },
+ "2f6738c": {
+  "summary": "Updates the saved (accumulated) Energy visuals: switches the on/off VFX, fades the accumulation image in or out, and plays the accumulation sound once per frame. Audio code is heavily inlined.",
+  "comments": [
+   [
+    15,
+    "Turn the accumulation VFX on when there is saved Energy, the off VFX otherwise"
+   ],
+   [
+    22,
+    "No saved Energy: optionally schedule the number change via a callback"
+   ],
+   [
+    31,
+    "Saved Energy present: update numbers (unused minus 1 over total) and prepare a fade-in"
+   ],
+   [
+    40,
+    "Kill any running tween on the accumulation image"
+   ],
+   [
+    46,
+    "Fade target: 1 when accumulating, 0 when it is used"
+   ],
+   [
+    53,
+    "Skip if alpha already equals the target (float tolerance compare)"
+   ],
+   [
+    70,
+    "Fade the image over 1 second with a small delay, then run a delayed callback"
+   ],
+   [
+    74,
+    "Pick the accumulated or accumulated-used sound cue"
+   ],
+   [
+    83,
+    "Play only once per frame to avoid stacked sounds"
+   ],
+   [
+    107,
+    "Inlined SoundManager.Play2D: get an audio source, configure and play it"
+   ],
+   [
+    119,
+    "Debug builds log the sound played"
+   ],
+   [
+    149,
+    "Decompiler glitch: the rest is an inlined Play2D overload for a plain clip"
+   ]
+  ]
+ },
+ "2f67618": {
+  "summary": "Sets the quest points text to \"value/total\" and, unless silent, plays the text animation.",
+  "comments": [
+   [
+    9,
+    "Format value/total into the text"
+   ],
+   [
+    16,
+    "Skip animation and change notification when silent"
+   ]
+  ]
+ },
+ "2f67650": {
+  "summary": "Sets the Energy text to \"available/total\" when active, or a placeholder in place of the available amount when deactivated.",
+  "comments": [
+   [
+    10,
+    "Active: show the available Energy"
+   ],
+   [
+    15,
+    "Inactive: show a placeholder instead of the available Energy"
+   ],
+   [
+    20,
+    "Format and set the text"
+   ]
+  ]
+ },
+ "2f67d4c": {
+  "summary": "Closure callback that sets the Energy text to \"unused/total\" and plays the text animation if enabled.",
+  "comments": [
+   [
+    8,
+    "Take the captured unused and total Energy"
+   ],
+   [
+    14,
+    "Format unused/total into the text"
+   ],
+   [
+    19,
+    "Animate if tweening is enabled"
+   ]
+  ]
+ }
+}

@@ -1,0 +1,179 @@
+{
+"2f43258": {"summary": "Builds the localized ability description text for the card's active ability, choosing the load, effect or reload variant of the text term. It then expands modular description terms, card names, melee/ranged/reanimate and trait names, and Energy icon tags. Used when showing ability text on a card.", "comments": [
+[4, "Find the active ability card, and whether it is a loadable (siege-style) ability"],
+[6, "Ability needs loading: pick the '-load' text before loading, or '-effect' text once loaded"],
+[18, "No '-load' text defined: fall back to the generic siege text"],
+[26, "Normal ability: build the term name from the ability's key (custom text key if set, else card id)"],
+[46, "Not a loadable ability: use the plain text, or the reload variant if the unit has lost its reload trait"],
+[64, "Reload text: strip the reload marker from the translated string"],
+[74, "Empty text: nothing to substitute"],
+[83, "Text has modular-term markers: expand each one from the Modular_Description terms"],
+[133, "Marker holds comma-separated parts: part 0 is the term, parts 1 and 2 are parameters"],
+[162, "Insert the first parameter into the term text"],
+[173, "Insert the second parameter into the term text"],
+[179, "Replace the whole marker in the description with the expanded term"],
+[185, "Decompiler output below is dispose/finally cleanup for the enumerators and jumps back; calls are right"],
+[250, "Next: if the text has card-name markers, replace each with the localized card name"],
+[259, "Text has Energy markers: replace each numbered marker (0 to 8) with the Energy sprite tag"],
+[277, "Wrap keywords melee, ranged and reanimate in bold no-break tags using their menu translations"],
+[305, "Loop over every DefinedTrait and replace its marker with the display name of the trait"],
+[374, "Card-name markers: look up each card id and swap in its localized name"],
+[425, "Start from the Card_Name term, then prefer the name from the player's card collection when found"],
+[430, "Card collection manager missing: just log it and keep the term text"],
+[456, "End of function; decompiler dead-end null check, not real behaviour"]
+]},
+"2f43454": {"summary": "Spawns a trigger animation prefab under the card UI's effects anchor and returns it. Passes the source card and target to the effect controller and sets the displayed trait value. Warns and returns null if no prefab is given.", "comments": [
+[5, "No prefab supplied: warn and bail out"],
+[9, "Parent the new animation under the card's effects anchor"],
+[15, "If the prefab has an effect controller, tell it this card and the target card"],
+[21, "If it has a value display, show the trait value on it"]
+]},
+"2f2dc50": {"summary": "Refreshes the card's health, attack, cost and trait icons, then for units checks whether the unit is dead. Handles destroyed drop pods, survivor activation, turning into a remnant, or marking the unit waitingToDie.", "comments": [
+[4, "Refresh all on-card texts and icons first"],
+[11, "Only units can die; other card types stop here"],
+[17, "Builds a debug log message (string concat of the CheckIfDead info); not game logic"],
+[41, "Card with no starting health cannot die by health: ignore"],
+[47, "Unit with the drop pod trait in an in-play state: a drop pod with no health is destroyed instead"],
+[65, "Read current health; if still above zero the unit is alive, nothing more to do"],
+[75, "Unit is not in an in-play state: warn and skip"],
+[81, "Survivor charges left: use one instead of dying"],
+[83, "Sacrifice units trigger their sacrifice effect when it is their owner's turn"],
+[95, "No survivor left: a unit that must become a remnant triggers backlash and transforms (once)"],
+[103, "Otherwise mark the unit as waiting to die"],
+[108, "Hide the can-attack and ability animations, then run on-death backlash actions"],
+[127, "Decompiler null-check landing; not real behaviour"]
+]},
+"2f4386c": {"summary": "Sets the card's base melee attack to a new value, first removing its own (non-extrinsic) addStats effects that change melee attack. Updates the attack text. Used when an effect rewrites a unit's base attack.", "comments": [
+[8, "Walk the active effects backwards so removals do not shift unvisited entries"],
+[15, "Only intrinsic effects (not from other cards' auras) are removed"],
+[17, "Remove stat buffs that change melee attack"],
+[27, "Store the new value in the anti-cheat wrapped base attack field"],
+[31, "Refresh the attack number shown on the card"]
+]},
+"2f439c8": {"summary": "Adds a (possibly negative) amount to the card's armour, never letting armour fall below zero, and refreshes the health text.", "comments": [
+[4, "Read current armour, add the amount and store it back"],
+[19, "Armour went negative: clamp to zero"],
+[25, "Armour is shown with health, so refresh the health text"]
+]},
+"2f43acc": {"summary": "Sets a new base max health: removes this card's own health buffs, adds the extrinsic (aura) health bonuses on top, stores the result as max health and caps current health to it. Refreshes the health text.", "comments": [
+[8, "Walk effects backwards, summing health bonuses from extrinsic (other card) effects"],
+[19, "Intrinsic stat buff that changes health: it is being replaced by the new base"],
+[26, "If it also changes attack, only zero its health part; otherwise remove the whole effect"],
+[39, "Extrinsic addStats effects keep applying: add their health change to the bonus"],
+[52, "New max health is the new base plus extrinsic bonuses"],
+[63, "Current health cannot exceed the new max health"],
+[71, "Update the displayed health"]
+]},
+"2f43d64": {"summary": "Forces both max health and current health of the card to the given value (healing to full) and refreshes the health text. Also remembers it as the card's newMaxHealth.", "comments": [
+[5, "Remember the forced value as the new max health"],
+[8, "Set max health"],
+[12, "Set current health to the same value, so the unit is at full health"],
+[16, "Update the displayed health"]
+]},
+"2f43e18": {"summary": "Sets the card's current health to zero. It does not check for death; callers use UpdateFigures or CheckIfDead afterwards.", "comments": [
+[4, "Write zero into the anti-cheat wrapped current health"]
+]},
+"2f3c664": {"summary": "Applies a CardEffect (buff, trait, enchantment, mark and so on) to this card depending on its buff type, updating stats, traits, drop pod stats and the active effect list. Returns false if the effect is rejected, true otherwise, and rechecks trait combinations at the end.", "comments": [
+[4, "Card is in a state that cannot take effects (hand/dead style states): warn and reject"],
+[21, "Effect comes from a card with the jam trait: its extrinsic effects are ignored"],
+[29, "Extrinsic (aura) effect: first check for duplicates from the same source"],
+[33, "Same aura already applied: non-variable ones are ignored; variable ones are replaced unless identical"],
+[48, "Remnants only accept remnant traits and health buffs"],
+[55, "Aura from a minion that has left play is rejected, unless it is this card still being summoned"],
+[75, "Now apply the effect depending on its buff type"],
+[76, "Double attack is converted into a plain stat buff equal to the current melee attack"],
+[89, "Buff types above 0x2d: set-attack, set-cost, set-health and remnant trait"],
+[91, "Set melee or ranged attack: remove earlier set-attack effects, then add this one"],
+[105, "Set cost: replace any earlier set-cost effect and refresh the cost text"],
+[112, "Set current health: may trigger the Ecstasy ability, then health is overwritten"],
+[125, "Unknown buff type: log a warning"],
+[135, "Buff types 0x24 to 0x2d: replace ability and drop pod stat buffs"],
+[136, "Replace the unit's active ability with the one from the enchantment, and refresh the ability icon"],
+[163, "Drop pod stat buff: add its health and attack changes to the drop pod's stats"],
+[195, "Switch on the remaining low buff types"],
+[196, "Stat buffs (addStats and similar): merge into an identical existing effect, else add as new"],
+[205, "No effect merged: add the new effect to the list"],
+[209, "Apply the health change: damage is capped by max health, a heal adds on top"],
+[241, "Apply any armour change"],
+[260, "Merge test: same source card, id, type and timing, so add the numbers into the existing effect"],
+[297, "Add trait (also used for remnant traits)"],
+[307, "Poison is cancelled by the resistant trait, with an animation"],
+[319, "Survivor trait with zero health is ignored"],
+[321, "Blind: lasts until the enemy turn start, forces melee attack"],
+[333, "Count-stacking traits start at a trait value of 1"],
+[343, "Look for an existing equal trait effect to stack with, by max, sum or count"],
+[411, "Nothing stacked: add this as a new effect and give the trait silently"],
+[418, "Drop pod: reset drop pod health and attack to the starting values"],
+[431, "Gaining survivor clears the spent-survivor marker"],
+[434, "Gaining resistant while poisoned removes the poison"],
+[450, "Tide and companion: set their counters from the current values"],
+[468, "Pin down forces ranged attack type"],
+[473, "Markerlight and hunt mark: tell the battle manager the mark was resolved (sent to the other player)"],
+[486, "If in play, show the trait activation animation"],
+[492, "Remove trait: stealth loss is broadcast, earlier trait effects removed, trait removed"],
+[507, "Swap stats: not allowed on a warlord (logs an error); otherwise rebuild base attack and health"],
+[548, "Case 6 and 0x1e: clear earlier effects of this type and all extrinsic ones, then add"],
+[552, "Mark of chaos: trigger the mark enchantment on this card and broadcast it resolved"],
+[564, "Set health: replace earlier set-health effect, maybe trigger Ecstasy, then set current health"],
+[585, "Remove all extrinsic effects that came from the enchanting card"],
+[588, "Enchantment buff types: hand over to AddEnchantment"],
+[592, "Enchantment with card: register it as active enchantment, then handle special enchantment ids"],
+[611, "Enchantment id 0x78 is a quest: replace older quest buffs, mark as quest and show status"],
+[642, "Enchantment id 0x3c is a secret"],
+[645, "Enchantment id 0x82 is a mutation: spend it and trigger it at once"],
+[653, "Enchantment ids 0xbe and 0x8c are marks: spend, trigger and broadcast as resolved"],
+[667, "Mark of chaos applied via the battle manager's pending mark"],
+[675, "Reflected copy: make the card ephemeral"],
+[696, "Daemon host buff type is not implemented: logs an error"],
+[701, "Refresh all figures and icons, then recheck trait combinations"]
+]},
+"2f44638": {"summary": "Goes through all of the card's trait combinations and checks whether each one is now met.", "comments": [
+[7, "Loop over every trait combination defined for this card"],
+[11, "Grants the combination's enchantment if all its traits are present"]
+]},
+"2f44768": {"summary": "Checks whether the card has every trait of a trait combination. If so and the combination enchantment is not already active, adds it as an enchantment effect.", "comments": [
+[9, "Closure keeps the combination for the lookup predicate"],
+[18, "Every required trait must be on the card, otherwise stop"],
+[26, "All traits present: skip if the combination enchantment is already active"],
+[39, "Build an enchantment effect for the combination, using a fresh enchantment id"],
+[53, "Apply it through AddEnchantment"]
+]},
+"2f443f8": {"summary": "Adds an enchantment effect to the card: records an ActiveEnchantment with a new id and stores the effect. If the card is in play, shows a status animation for every trait and updates canAct/canAttack for certain traits.", "comments": [
+[5, "An effect without an enchantment is only logged, and only when dev tools are on"],
+[25, "Create the active enchantment list on first use"],
+[31, "Record the enchantment card and a unique enchantment id from the battle manager"],
+[36, "Add to the active enchantments list (inlined List.Add)"],
+[51, "Also add the effect to the card's active effects"],
+[69, "Card is in play: refresh status animations for every current trait"],
+[87, "Two traits (ids 0x28 and 0x1cc) let the unit act this turn"],
+[94, "Two other traits (ids 0x4f1 and 0x4fb) let it act but stop it attacking"]
+]},
+"2f44a78": {"summary": "Returns true if the card's current trait list contains the given trait.", "comments": [
+[10, "Scan the current traits and compare each one to the wanted trait"]
+]},
+"2f442d8": {"summary": "Returns whether two card effects count as the same trait effect: same trait, mark of chaos and daemon host, and equal duration flags. Used to decide if trait effects should stack.", "comments": [
+[7, "Trait, mark of chaos type and daemon host type must all match"],
+[10, "Duration flags must match; turn-start flags only count if both effects are on the same player's side"],
+[11, "Finally the until-next-attack flag must match too"]
+]},
+"2f41024": {"summary": "Removes every extrinsic effect on this card that came from the given enchanting card, e.g. when an aura source leaves play.", "comments": [
+[8, "Walk the effect list backwards because effects get removed"],
+[17, "Only extrinsic (aura) effects are considered"],
+[24, "Source card is the given enchanting card: remove the effect"]
+]},
+"2f44bc0": {"summary": "Returns the Marks of Chaos the card does not have yet, by looping over all MarkOfChaosType values and skipping owned ones. The rest of the output is merged code for the daemon host version; logs the count.", "comments": [
+[7, "Marks already on the card"],
+[11, "Loop over every mark type in the enum"],
+[51, "Skip marks the card already has, add the rest to the result"],
+[75, "Enumerator cleanup, then log how many marks are available and return the list"],
+[93, "Decompiler merged GetAvailableDaemonHosts and other methods in below; same logic for daemon hosts"],
+[216, "Code from here on is unrelated merged code (counts mark of chaos effects); unreliable"]
+]},
+"2f4503c": {"summary": "Returns the daemon host types the card does not have yet, by looping over all DaemonhostType values and skipping owned ones. Logs how many are available.", "comments": [
+[7, "Daemon hosts already on the card"],
+[11, "Loop over every daemon host type in the enum"],
+[51, "Skip owned hosts, add the rest to the result"],
+[75, "Enumerator cleanup, then log the count and return the list"],
+[101, "Code from here on is unrelated merged code (counts mark of chaos effects); unreliable"]
+]}
+}

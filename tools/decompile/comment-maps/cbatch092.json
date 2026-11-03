@@ -1,0 +1,470 @@
+{
+ "2f84f34": {
+  "summary": "Returns true if the match's match type is in the possibleTypes array. Used to decide whether a voice-line popup entry is available for the current match. Decompiler output is mostly merged generic LINQ helper code.",
+  "comments": [
+   [
+    4,
+    "Null match data is an error: the match type is read from it"
+   ],
+   [
+    7,
+    "Capture the match type in a closure so the LINQ predicate can compare against it"
+   ],
+   [
+    15,
+    "Calls LINQ Any(possibleTypes, predicate): true if any allowed type equals the match type"
+   ],
+   [
+    53,
+    "Enumerator loop: step through possibleTypes, stop at the first element the predicate accepts"
+   ],
+   [
+    116,
+    "Decompiler lost the try/finally: this section disposes the enumerator and returns the Any result"
+   ],
+   [
+    152,
+    "Everything below is decompiler spill from neighbouring LINQ generics (Any, Append); not part of this method"
+   ]
+  ]
+ },
+ "2f850e4": {
+  "summary": "Returns true if the given match type appears in the possibleTypes array, via LINQ Any with a closure comparing against matchType. Called by IsAvailable to test a voice line's allowed match types.",
+  "comments": [
+   [
+    4,
+    "Closure object holds the match type being searched for"
+   ],
+   [
+    10,
+    "Build the predicate delegate that compares each array element with the captured match type"
+   ],
+   [
+    18,
+    "Any(possibleTypes, predicate): null source or predicate throws ArgumentNull"
+   ],
+   [
+    48,
+    "Enumerator loop: stops at the first match type the predicate accepts"
+   ],
+   [
+    112,
+    "Decompiler lost the try/finally: enumerator is disposed and the Any result returned"
+   ],
+   [
+    149,
+    "The remainder is decompiler spill from other LINQ generic methods, not part of this function"
+   ]
+  ]
+ },
+ "2f8525c": {
+  "summary": "Closes the voice-line popup: stops any running tween, then slides the popup to its off-screen position while fading it out. Runs a completion callback when the slide finishes and stores the new tween.",
+  "comments": [
+   [
+    4,
+    "Stop the previous open/close animation if it is still playing"
+   ],
+   [
+    8,
+    "Build a sequence: slide to the off-screen position, ease in, then run the completion callback"
+   ],
+   [
+    14,
+    "Fade the canvas group to transparent at the same time as the slide"
+   ]
+  ]
+ },
+ "2f853e4": {
+  "summary": "Opens the voice-line popup: stops any running tween, then slides the popup back to its original position while fading it in. Stores the new tween.",
+  "comments": [
+   [
+    4,
+    "Stop the previous open/close animation if it is still playing"
+   ],
+   [
+    8,
+    "Build a sequence: slide to the original on-screen position with easing"
+   ],
+   [
+    12,
+    "Fade the canvas group to fully opaque at the same time"
+   ]
+  ]
+ },
+ "2f85840": {
+  "summary": "IEnumerator.Reset for the YourTurnUI DisplaySign coroutine. Always throws NotSupportedException, as for all compiler-made iterators.",
+  "comments": [
+   [
+    5,
+    "Coroutines cannot be reset; always throw"
+   ]
+  ]
+ },
+ "2f85514": {
+  "summary": "Prepares the your-turn banner: deactivates the background image object and touches the text object. Decompiled mostly as null checks; the text object's own state change seems lost.",
+  "comments": [
+   [
+    5,
+    "Hide the banner background until the sign is displayed"
+   ],
+   [
+    8,
+    "Check the text object too; decompiler shows only null checks here, any state change was lost"
+   ]
+  ]
+ },
+ "2f85564": {
+  "summary": "Creates the DisplaySign coroutine object (the your-turn banner animation) bound to this YourTurnUI. The caller starts it with StartCoroutine.",
+  "comments": [
+   [
+    5,
+    "New iterator starts at state 0 with a reference back to the UI"
+   ]
+  ]
+ },
+ "2f855f8": {
+  "summary": "Ends the your-turn banner animation. Decompiled as null checks on the text object; the actual deactivation call seems lost.",
+  "comments": [
+   [
+    5,
+    "Needs the banner text object; throws if missing"
+   ],
+   [
+    8,
+    "Decompiler lost the call here; only the null check on the text game object remains"
+   ]
+  ]
+ },
+ "2f94928": {
+  "summary": "Picks a random avatar id for an AI bot from all avatars that are on the bot whitelist, returning defaultAvatar if none qualify. The decompiler merged in the neighbouring GetRandomTitle and GetRandomCardback code.",
+  "comments": [
+   [
+    4,
+    "Build a list of candidate avatars"
+   ],
+   [
+    7,
+    "Get every avatar the game knows and enumerate them"
+   ],
+   [
+    47,
+    "Keep only avatars that are on this bot config's whitelist"
+   ],
+   [
+    56,
+    "Append the avatar to the candidate list"
+   ],
+   [
+    83,
+    "After enumeration: pick a random candidate if there is any, else return the default"
+   ],
+   [
+    93,
+    "Exception handler path (enumerator cleanup); the calls are right"
+   ],
+   [
+    102,
+    "Everything from here is decompiler spill from GetRandomTitle and GetRandomCardback"
+   ]
+  ]
+ },
+ "2f94d9c": {
+  "summary": "Picks a random title id for an AI bot from the cosmetic collection filtered by the bot title whitelist, returning defaultTitle if none qualify. The decompiler also merged in the start of GetRandomCardback and tier code.",
+  "comments": [
+   [
+    7,
+    "Collect candidate titles from the full cosmetic collection"
+   ],
+   [
+    64,
+    "Keep only titles on this bot config's whitelist"
+   ],
+   [
+    104,
+    "Pick a random candidate title; fall back to the default if the list is empty"
+   ],
+   [
+    148,
+    "Decompiler spill from GetRandomCardback and GetRandomCardTier follows; not part of this method"
+   ],
+   [
+    280,
+    "Rolls a 0-1 random number against a tier chance (spill from GetRandomCardTier)"
+   ]
+  ]
+ },
+ "2f95228": {
+  "summary": "Picks a random cardback id for an AI bot from the cosmetic collection filtered by the bot cardback whitelist, returning defaultCardback if none qualify. The decompiler also merged in GetRandomCardTier code.",
+  "comments": [
+   [
+    7,
+    "Collect candidate cardbacks from the full cosmetic collection"
+   ],
+   [
+    63,
+    "Keep only cardbacks on this bot config's whitelist"
+   ],
+   [
+    103,
+    "Pick a random candidate; fall back to the default if the list is empty"
+   ],
+   [
+    122,
+    "Decompiler spill from GetRandomCardTier: per-tier chance scaled by bot rank"
+   ],
+   [
+    150,
+    "Roll random 0-1; the tier is kept if its chance beats the roll"
+   ]
+  ]
+ },
+ "2f956b4": {
+  "summary": "Rolls a card tier for an AI bot of the given rank. Tests tiers 2 to 4 in turn with a chance scaled by rank (config base chance times a rank curve) and returns the highest tier that passes, starting from Tier1.",
+  "comments": [
+   [
+    7,
+    "Loop over tier indexes 1..3, which seem to map to tiers 2..4"
+   ],
+   [
+    9,
+    "Highest tier: below its minimum bot rank, stop and return what was rolled so far"
+   ],
+   [
+    19,
+    "Lower tiers use their own base chance setting"
+   ],
+   [
+    27,
+    "Chance = base chance times a curve of botRank (offset, scaling reference and k factor from config)"
+   ],
+   [
+    31,
+    "Logs the chance for this tier"
+   ],
+   [
+    33,
+    "Random roll in 0-1; tier is awarded when the roll is below the chance"
+   ]
+  ]
+ },
+ "2f84568": {
+  "summary": "Returns true randomly, with the configured reply chance, when the AI bot should reply to an emote from the opponent.",
+  "comments": [
+   [
+    3,
+    "Roll 0-1 and compare with the configured reply chance"
+   ]
+  ]
+ },
+ "2f845a0": {
+  "summary": "Returns true randomly, with the configured chance, when the AI bot should emote after performing an action.",
+  "comments": [
+   [
+    3,
+    "Roll 0-1 and compare with the emote-after-action chance"
+   ]
+  ]
+ },
+ "2f845d8": {
+  "summary": "Returns a random delay in seconds between the configured minimum and maximum, used before the AI bot replies to an emote.",
+  "comments": [
+   [
+    7,
+    "Random value between the min and max reply delay; the Random.Range call was lost by the decompiler"
+   ]
+  ]
+ },
+ "2f95818": {
+  "summary": "Returns a random delay in seconds between the configured minimum and maximum, used before the AI bot's first action in a turn.",
+  "comments": [
+   [
+    7,
+    "Random value between min and max first-action delay; the Random.Range call was lost by the decompiler"
+   ]
+  ]
+ },
+ "2f95834": {
+  "summary": "Returns a random delay in seconds between the configured minimum and maximum, used between the AI bot's actions.",
+  "comments": [
+   [
+    7,
+    "Random value between min and max action delay; the Random.Range call was lost by the decompiler"
+   ]
+  ]
+ },
+ "2f95850": {
+  "summary": "Returns a random delay in seconds between the configured minimum and maximum, used before the AI bot ends its turn.",
+  "comments": [
+   [
+    7,
+    "Random value between min and max end-turn delay; the Random.Range call was lost by the decompiler"
+   ]
+  ]
+ },
+ "2fa0630": {
+  "summary": "Singleton setup for the battle particle collider manager: becomes the Instance, or destroys its own game object if a different instance already exists.",
+  "comments": [
+   [
+    5,
+    "An instance is already registered"
+   ],
+   [
+    8,
+    "It is a different object: this duplicate destroys itself (the Destroy call is mangled here)"
+   ],
+   [
+    20,
+    "No other instance: register as the singleton"
+   ]
+  ]
+ },
+ "2fa0790": {
+  "summary": "Clears the singleton Instance when this manager is destroyed, but only if it is the registered instance.",
+  "comments": [
+   [
+    6,
+    "Only clear the reference if it points at this object"
+   ]
+  ]
+ },
+ "2f9d08c": {
+  "summary": "Returns the collider transform for a battle collider type (floor, player or enemy minion/warlord, warlord-from-camera, generic target), or null for an unknown type. Used to aim particle effects.",
+  "comments": [
+   [
+    3,
+    "Lower half of the enum: floor, player minion, player warlord"
+   ],
+   [
+    17,
+    "Middle values: player warlord seen from camera, enemy minion"
+   ],
+   [
+    28,
+    "Upper values: enemy warlord and generic target"
+   ],
+   [
+    37,
+    "Return the selected collider transform"
+   ]
+  ]
+ },
+ "2fa702c": {
+  "summary": "Turns the swarm icon on or off. Does nothing if already in that state. On: kills tweens, resets position, activates it, starts its animation and plays the toggle sound. Off: stops the animation, fades and moves it back, then runs a callback.",
+  "comments": [
+   [
+    5,
+    "Already in the requested state: nothing to do"
+   ],
+   [
+    9,
+    "Make sure the icon is initialized first (check looks inverted; the decompiler may have flipped it)"
+   ],
+   [
+    12,
+    "Turning on: stop running tweens on the sprite and transform, then restore the start position"
+   ],
+   [
+    22,
+    "Activate the icon, enable its animation and play the toggle-on sound"
+   ],
+   [
+    41,
+    "Turning off: stop the animation, fade the sprite out and move it back to its original position"
+   ],
+   [
+    47,
+    "When the move finishes, a callback runs (likely deactivating the icon)"
+   ]
+  ]
+ },
+ "2fa767c": {
+  "summary": "IEnumerator.Reset for the SwarmVFXController SafeExit coroutine. Always throws NotSupportedException.",
+  "comments": [
+   [
+    5,
+    "Coroutines cannot be reset; always throw"
+   ]
+  ]
+ },
+ "2fa7304": {
+  "summary": "Starts the swarm visual effect for a card: applies the card's look to the effect material, hides the card's 3D body, stores the finish callback, plays a positional sound, and starts the SafeExit coroutine as a fallback finish.",
+  "comments": [
+   [
+    5,
+    "Configure the effect's material so it shows this card's art"
+   ],
+   [
+    10,
+    "Hide the real card body while the swarm effect plays"
+   ],
+   [
+    11,
+    "Remember the callback to run when the effect ends"
+   ],
+   [
+    16,
+    "Play the effect sound at the effect's position"
+   ],
+   [
+    17,
+    "Start the SafeExit coroutine, which makes sure the effect eventually finishes"
+   ]
+  ]
+ },
+ "2fa74dc": {
+  "summary": "Called when the swarm animation ends (animation event or SafeExit): runs the finish callback, stops all coroutines and destroys the effect object (the Destroy call is mangled by the decompiler).",
+  "comments": [
+   [
+    5,
+    "Tell the owner the effect is finished"
+   ],
+   [
+    8,
+    "Stop the SafeExit coroutine so it cannot fire a second time"
+   ],
+   [
+    9,
+    "Destroy or deactivate the effect game object (decompiler lost the exact call)"
+   ]
+  ]
+ },
+ "2fa7470": {
+  "summary": "Creates the SafeExit coroutine object for the swarm effect. The caller starts it with StartCoroutine.",
+  "comments": [
+   [
+    5,
+    "New iterator starts at state 0 with a reference back to the controller"
+   ]
+  ]
+ },
+ "2fa8640": {
+  "summary": "If this color preset is for the given attack type, sets the crosshair sprite color and the line material's main color. Used by the targeting reticle to color it by attack type.",
+  "comments": [
+   [
+    4,
+    "Preset belongs to a different attack type: skip"
+   ],
+   [
+    7,
+    "Apply the preset color to the crosshair sprite"
+   ],
+   [
+    8,
+    "Find the material's main color property; fall back to the default color id if none is tagged"
+   ],
+   [
+    17,
+    "Set the line color (color argument is hidden by the decompiler)"
+   ]
+  ]
+ },
+ "2fa789c": {
+  "summary": "On startup, stores the crosshair sprite's original local scale so later reticle animations can restore it.",
+  "comments": [
+   [
+    6,
+    "Read the crosshair's scale and cache it as the original scale"
+   ]
+  ]
+ }
+}

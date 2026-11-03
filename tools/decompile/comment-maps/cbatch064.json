@@ -1,0 +1,942 @@
+{
+ "2f53a14": {
+  "summary": "Unsupported IEnumerator.Reset on the MoveAndDisappearAnim coroutine; always throws NotSupportedException. The game never calls it.",
+  "comments": [
+   [
+    4,
+    "compiler-generated boilerplate: Unity coroutines are never reset, so this just throws"
+   ]
+  ]
+ },
+ "2f53c50": {
+  "summary": "Unsupported IEnumerator.Reset on the PlayEnemyCard coroutine; always throws NotSupportedException. The game never calls it.",
+  "comments": [
+   [
+    4,
+    "compiler-generated boilerplate: Unity coroutines are never reset, so this just throws"
+   ]
+  ]
+ },
+ "2f53e8c": {
+  "summary": "Unsupported IEnumerator.Reset on the PlayPlayerCard coroutine; always throws NotSupportedException. The game never calls it.",
+  "comments": [
+   [
+    4,
+    "compiler-generated boilerplate: Unity coroutines are never reset, so this just throws"
+   ]
+  ]
+ },
+ "2f54234": {
+  "summary": "Unsupported IEnumerator.Reset on the PrepareAttack coroutine; always throws NotSupportedException. The game never calls it.",
+  "comments": [
+   [
+    4,
+    "compiler-generated boilerplate: Unity coroutines are never reset, so this just throws"
+   ]
+  ]
+ },
+ "2f54c24": {
+  "summary": "Unsupported IEnumerator.Reset on the ReceiveDamage coroutine; always throws NotSupportedException. The game never calls it.",
+  "comments": [
+   [
+    4,
+    "compiler-generated boilerplate: Unity coroutines are never reset, so this just throws"
+   ]
+  ]
+ },
+ "2f551e0": {
+  "summary": "Unsupported IEnumerator.Reset on the ResolveAttackRangedAnim coroutine; always throws NotSupportedException. The game never calls it.",
+  "comments": [
+   [
+    4,
+    "compiler-generated boilerplate: Unity coroutines are never reset, so this just throws"
+   ]
+  ]
+ },
+ "2f55360": {
+  "summary": "Unsupported IEnumerator.Reset on the ResolveRangedAttack coroutine; always throws NotSupportedException. The game never calls it.",
+  "comments": [
+   [
+    4,
+    "compiler-generated boilerplate: Unity coroutines are never reset, so this just throws"
+   ]
+  ]
+ },
+ "2f55760": {
+  "summary": "Unsupported IEnumerator.Reset on the ReturnToDeckAnim coroutine; always throws NotSupportedException. The game never calls it.",
+  "comments": [
+   [
+    4,
+    "compiler-generated boilerplate: Unity coroutines are never reset, so this just throws"
+   ]
+  ]
+ },
+ "2f558d0": {
+  "summary": "Unsupported IEnumerator.Reset on the ShowEnemyCardInHand coroutine; always throws NotSupportedException. The game never calls it.",
+  "comments": [
+   [
+    4,
+    "compiler-generated boilerplate: Unity coroutines are never reset, so this just throws"
+   ]
+  ]
+ },
+ "2f55cf8": {
+  "summary": "Unsupported IEnumerator.Reset on the TransformUnitInPlayToCard coroutine; always throws NotSupportedException. The game never calls it.",
+  "comments": [
+   [
+    4,
+    "compiler-generated boilerplate: Unity coroutines are never reset, so this just throws"
+   ]
+  ]
+ },
+ "2f55e08": {
+  "summary": "Unsupported IEnumerator.Reset on the TutorialIconAnim coroutine; always throws NotSupportedException. The game never calls it.",
+  "comments": [
+   [
+    4,
+    "compiler-generated boilerplate: Unity coroutines are never reset, so this just throws"
+   ]
+  ]
+ },
+ "2f56ab0": {
+  "summary": "Unsupported IEnumerator.Reset on the UnitDeath coroutine; always throws NotSupportedException. The game never calls it.",
+  "comments": [
+   [
+    4,
+    "compiler-generated boilerplate: Unity coroutines are never reset, so this just throws"
+   ]
+  ]
+ },
+ "2f52e08": {
+  "summary": "Coroutine body of CardScript.MoveAndDisappearAnim. Optionally waits movementInfo.delay, tweens the card toward a point in front of the target (position and rotation), waits for the tweens, then hides the 3D body if visibilityStateAfterFinish is false. Purely visual.",
+  "comments": [
+   [
+    6,
+    "state 0/1 = start (after optional delay); state 2 = rotation loop; state 3 = wait for tweens to finish"
+   ],
+   [
+    14,
+    "movementInfo.delay: wait before moving if it is positive"
+   ],
+   [
+    30,
+    "compute the destination: a point in front of the target, backed off by the player/enemy attack margin"
+   ],
+   [
+    61,
+    "decompiler dropped the body of this branch; the surviving code is the same either way"
+   ],
+   [
+    83,
+    "reset the flags the tween callbacks set when each axis reaches its target"
+   ],
+   [
+    88,
+    "stop the summon-sickness animation before moving"
+   ],
+   [
+    94,
+    "if useXZCurve is off, one DOMove handles all axes; otherwise X and Z get their own eased tweens"
+   ],
+   [
+    128,
+    "Y axis: either tween it with its own curve or mark it as already reached"
+   ],
+   [
+    145,
+    "remember the starting rotation so the per-frame rotation below can be applied to it"
+   ],
+   [
+    159,
+    "state 3: snap to the final position and hide the 3D body unless it should stay visible"
+   ],
+   [
+    165,
+    "visibilityStateAfterFinish false: hide the card body (ToggleBody3D false)"
+   ],
+   [
+    177,
+    "state 2 loop: while animTime has not elapsed keep applying the disappear rotation each frame"
+   ],
+   [
+    180,
+    "time is up: wait until all three axes report reached, then go to state 3"
+   ],
+   [
+    189,
+    "decompiled quaternion math: combines three axis rotations and writes the card UI rotation"
+   ],
+   [
+    226,
+    "wait one frame (WaitForEndOfFrame) and add deltaTime to currentAnimTime, then loop to state 2"
+   ],
+   [
+    239,
+    "compiler null check: any missing object lands here"
+   ]
+  ]
+ },
+ "2f53a80": {
+  "summary": "Coroutine that plays an enemy-controlled card: marks it as being played, shows it in the center of the screen, and for minions then moves it from hand into the field. Non-minions show a different center display and the coroutine ends.",
+  "comments": [
+   [
+    4,
+    "state 0 = start, 1 = center display done, 2/3 = finished"
+   ],
+   [
+    11,
+    "state 1: centre display done, move the minion from hand onto the board and wait stepTime again"
+   ],
+   [
+    31,
+    "state 0: log the card name and mark it as inHandPlaying"
+   ],
+   [
+    37,
+    "minions: show in the center, wait stepTime, then continue to state 1"
+   ],
+   [
+    45,
+    "spells and other types: run the enemy center-display coroutine (stepTime*0.6) and finish after it"
+   ]
+  ]
+ },
+ "2f53cbc": {
+  "summary": "Coroutine that plays a player-controlled card: marks it as being played, shows it in the center, and for minions then moves it from hand into the field. Same flow as PlayEnemyCard but with a player log message.",
+  "comments": [
+   [
+    4,
+    "state 0 = start, 1 = center display done, 2/3 = finished"
+   ],
+   [
+    11,
+    "state 1: center display done, move the minion from hand onto the board and wait stepTime again"
+   ],
+   [
+    31,
+    "state 0: log the card name and mark it as inHandPlaying"
+   ],
+   [
+    37,
+    "minions: show in the center, wait stepTime, then continue to state 1"
+   ],
+   [
+    45,
+    "spells and other types: run the center-display coroutine (stepTime*0.6) and finish after it"
+   ]
+  ]
+ },
+ "2f53ef8": {
+  "summary": "Coroutine run when a minion starts or stops preparing an attack. When preparing it raises the sorting layer, hides stealth and plays the attack sound; otherwise it drops back to the board and resets position and rotation. Re-shows stealth afterwards.",
+  "comments": [
+   [
+    6,
+    "state 0: start of the animation"
+   ],
+   [
+    8,
+    "toPrepareAttack false = attack is over: normal layer, card back to inPlay"
+   ],
+   [
+    15,
+    "preparing an attack: draw the card above other elements"
+   ],
+   [
+    19,
+    "refresh canAct/canAttack for the current turn"
+   ],
+   [
+    21,
+    "attack ended: clear attacking status and tween the card back to its play position and rotation"
+   ],
+   [
+    33,
+    "attack starting: hide stealth effect, mark traits as attacking and play the minion-initiating-attack sound"
+   ],
+   [
+    40,
+    "wait AttackStepTime before state 1"
+   ],
+   [
+    46,
+    "state 1: if the animation was not cancelled and the attack is over, show stealth again for stealthy minions"
+   ]
+  ]
+ },
+ "2f542a0": {
+  "summary": "Coroutine that applies damage to a card. It ignores damage for dodge, invulnerable or shield, otherwise reduces drop pod health, bastion, or armour-adjusted health, then adds extra vulnerable damage, updates the UI, checks death and strips dodge/shield that absorbed a hit. Mutates card health and fires damage animations.",
+  "comments": [
+   [
+    7,
+    "states 0/1 run the main path; later states are the wait steps near the end"
+   ],
+   [
+    14,
+    "dodge, invulnerable or shield: the hit does no damage (hasDoneDamage false)"
+   ],
+   [
+    20,
+    "warlord with drop pod: damage comes off the drop pod health instead of normal health"
+   ],
+   [
+    37,
+    "bastion absorbs damage first, unless this is the attacker taking combat damage"
+   ],
+   [
+    39,
+    "no bastion (or attacker in combat): normal damage path"
+   ],
+   [
+    47,
+    "has armour and damage above 0: armour reduces the damage, but at least 1 gets through"
+   ],
+   [
+    71,
+    "no armour (or remnant): subtract damage straight from health"
+   ],
+   [
+    89,
+    "bastion present: RemoveBastionDamage returns leftover damage; negative leftover reduces health"
+   ],
+   [
+    104,
+    "clear status animations on the card after the bastion changed"
+   ],
+   [
+    110,
+    "vulnerable: an extra hit of CurrentVulnerable damage is dealt, unless dodge/shield/invulnerable or bastion absorbed it"
+   ],
+   [
+    125,
+    "only for living non-remnant units, and not when the damage itself was vulnerable damage (avoids recursion)"
+   ],
+   [
+    135,
+    "extra damage type is 8 for attacks, otherwise 7"
+   ],
+   [
+    144,
+    "deal the extra vulnerable damage to this card through the battle manager"
+   ],
+   [
+    156,
+    "continue to animation; if a damage animation is already running, wait the card's delay first"
+   ],
+   [
+    170,
+    "stop if animation cannot continue (battle ended or card gone)"
+   ],
+   [
+    177,
+    "vulnerable damage: flash the vulnerable icon and trigger animation, then wait 0.4s unless fast mode"
+   ],
+   [
+    191,
+    "state 2/3: resume after the waits (state 2 = after vulnerable flash, 3 = after the damage pause)"
+   ],
+   [
+    202,
+    "refresh health text, clear pending damage and check for skull rewards and death"
+   ],
+   [
+    207,
+    "show floating damage number only if damage was actually done"
+   ],
+   [
+    211,
+    "dodge was used up: remove it if damage was above 0"
+   ],
+   [
+    221,
+    "shield was used up: remove it if damage was above 0"
+   ],
+   [
+    234,
+    "fast mode: finish immediately; otherwise wait 1 second for the animation"
+   ]
+  ]
+ },
+ "2f54c90": {
+  "summary": "Coroutine that plays a ranged attack: moves the card back to its play position with a tween sequence, waits, then spawns the ranged attack particles (custom or clan default) toward the target. Increments attacksThisTurn for the attacker.",
+  "comments": [
+   [
+    8,
+    "state 0: start; state 1 and 2 are waits; state 3 is the particle wait"
+   ],
+   [
+    11,
+    "build the debug log string: attacker, target, and whether target is a remnant"
+   ],
+   [
+    34,
+    "the attacker is now in the attacking state and has used one attack this turn"
+   ],
+   [
+    38,
+    "tween the card back to its play spot, upright rotation and default scale, then call FinishAfterAttack"
+   ],
+   [
+    61,
+    "decompiler failure branch (bad array index); not reachable normally"
+   ],
+   [
+    70,
+    "state 1: wait AttackStepTime"
+   ],
+   [
+    92,
+    "state 2: choose particles: the card's custom ranged particles, else the clan default"
+   ],
+   [
+    110,
+    "start the ranged attack animation toward the target and wait for it"
+   ],
+   [
+    121,
+    "compiler null check"
+   ]
+  ]
+ },
+ "2f5524c": {
+  "summary": "Coroutine for a ranged attack: counts the attack, runs ResolveAttackRangedAnim and, if the animation can continue, calls AfterAttack to apply post-attack effects.",
+  "comments": [
+   [
+    6,
+    "state 0: count this attack and start the ranged attack animation coroutine"
+   ],
+   [
+    19,
+    "state 1: animation done; only finish the attack if nothing cancelled it"
+   ]
+  ]
+ },
+ "2f553cc": {
+  "summary": "Coroutine animating a card flying back to its deck: turns it face down, tweens scale, rotation and position to the owner's deck with a bounce, then hides the card. Logs an error if the card is already in the deck.",
+  "comments": [
+   [
+    5,
+    "state 1: after the tween finishes put the card in the Background layer and deactivate it"
+   ],
+   [
+    22,
+    "state 0: skip if already in the deck state, otherwise mark it as in the deck"
+   ],
+   [
+    27,
+    "opponent's card: just change visibility; player's card: flip it face down over timeToMove"
+   ],
+   [
+    35,
+    "pick the owner's deck (player or enemy) for its target position and scale"
+   ],
+   [
+    57,
+    "three bounce tweens: scale, rotation and position into the deck, then SetInDeckPosition on completion"
+   ],
+   [
+    78,
+    "already in the deck: log an error"
+   ]
+  ]
+ },
+ "2f557cc": {
+  "summary": "Coroutine that highlights an enemy card in the enemy's hand for 0.5 seconds, then removes the highlight. Used to show which card the opponent is about to use.",
+  "comments": [
+   [
+    9,
+    "state 0: turn the hand-card highlight on, then wait 0.5s"
+   ],
+   [
+    21,
+    "state 1: turn the highlight off"
+   ]
+  ]
+ },
+ "2f5593c": {
+  "summary": "Coroutine that turns a unit in play back into a hand card: plays the back-to-hand animation and sound, moves it up, then resets it to a hand card and waits for the teleport animation if it has teleport.",
+  "comments": [
+   [
+    6,
+    "state 2: after the teleport wait, reset the teleport-out-of-battle visuals"
+   ],
+   [
+    14,
+    "state 1: card has arrived, reposition it for the UI and put it in hand state"
+   ],
+   [
+    22,
+    "cards with teleport play a longer animation, so wait for the hand-to-board event time"
+   ],
+   [
+    34,
+    "state 0: begin the transformation"
+   ],
+   [
+    47,
+    "mark the card as just created in hand and stop its board animations"
+   ],
+   [
+    63,
+    "move the card up in a quick InBack tween while the back-to-hand animation plays"
+   ],
+   [
+    65,
+    "play the back-to-hand sound and wait before state 1"
+   ],
+   [
+    81,
+    "null object or transform: log an error"
+   ]
+  ]
+ },
+ "2f55d64": {
+  "summary": "Trivial coroutine that waits about 0.7 seconds and finishes. Used as a pause for the tutorial icon animation.",
+  "comments": [
+   [
+    6,
+    "state 0: wait roughly 0.7 seconds"
+   ],
+   [
+    14,
+    "state 1: done"
+   ]
+  ]
+ },
+ "2f55e48": {
+  "summary": "Async method that fades the card items back in over the globals' timeToDissolveCard, waits that long, then re-enables the card collider so the card can be clicked again. Undoes a dissolve.",
+  "comments": [
+   [
+    8,
+    "resuming after the await: finish the task"
+   ],
+   [
+    20,
+    "first run: start the fade-in of all card items"
+   ],
+   [
+    36,
+    "convert dissolve time to milliseconds (clamped if out of range) and await a Task.Delay"
+   ],
+   [
+    55,
+    "awaiter completed: re-enable the card collider"
+   ]
+  ]
+ },
+ "2f56128": {
+  "summary": "Compiler-generated SetStateMachine for the UnDissolveWholeCard async method. Stores the state machine in the builder, throwing if null or already set. Trailing code looks like merged async completion tracing.",
+  "comments": [
+   [
+    5,
+    "null state machine: throw ArgumentNullException"
+   ],
+   [
+    12,
+    "first time: store it"
+   ],
+   [
+    16,
+    "already set: throw InvalidOperationException"
+   ],
+   [
+    22,
+    "the rest looks like another function merged in: causality tracing and continuation run on completion"
+   ]
+  ]
+ },
+ "2f56160": {
+  "summary": "Coroutine for a unit dying: refuses to kill a warlord unless allowed, marks it in cemetery, plays its death sound with a shake, spawns death particles and hides the 3D body, then sends it to the cemetery.",
+  "comments": [
+   [
+    6,
+    "state 2: final step, send the card to the cemetery if animation can continue"
+   ],
+   [
+    22,
+    "state 0: only die if the object is active and in waitingToDie state"
+   ],
+   [
+    41,
+    "warlords are never auto-killed unless allowWarlord is set"
+   ],
+   [
+    48,
+    "set the cemetery state before the animations play"
+   ],
+   [
+    51,
+    "play the death sound and shake the card for the death duration (warlord or minion time)"
+   ],
+   [
+    90,
+    "card already disappeared: log a warning"
+   ],
+   [
+    95,
+    "state 1: shake finished; continue if animation is still valid"
+   ],
+   [
+    115,
+    "normal unit: swap the 3D body for death particles"
+   ],
+   [
+    120,
+    "custom death particles if the card has them, otherwise the default destroy effect"
+   ],
+   [
+    154,
+    "tint the death effect material with the card's look, random explosion offset"
+   ],
+   [
+    167,
+    "hide the 3D body and any remnant body"
+   ],
+   [
+    178,
+    "remnants: show original card and destroy the remnant body, then it is no longer a remnant"
+   ],
+   [
+    185,
+    "play the 3D death sound"
+   ],
+   [
+    194,
+    "stop in-play animations and wait before state 2"
+   ],
+   [
+    203,
+    "compiler null check"
+   ]
+  ]
+ },
+ "2f2c474": {
+  "summary": "Event add accessor for OnDisplaySummonMessage: combines the handler into the delegate with a lock-free compare-exchange loop.",
+  "comments": [
+   [
+    5,
+    "retry loop: combine, then swap only if nobody changed the delegate meanwhile"
+   ],
+   [
+    12,
+    "type-check failure branch is decompiler noise from the generic cast"
+   ]
+  ]
+ },
+ "2f2c524": {
+  "summary": "Event remove accessor for OnDisplaySummonMessage: removes the handler with a lock-free compare-exchange loop.",
+  "comments": [
+   [
+    5,
+    "retry loop: remove, then swap only if nobody changed the delegate meanwhile"
+   ]
+  ]
+ },
+ "2f2c720": {
+  "summary": "Getter returning the obscured (anti-cheat) canAct flag.",
+  "comments": []
+ },
+ "2f2c73c": {
+  "summary": "Getter returning the obscured (anti-cheat) canAttack flag.",
+  "comments": []
+ },
+ "2f2c8e0": {
+  "summary": "Property getter returning the list of trait combinations from the player data manager's TraitCombinationsList.",
+  "comments": [
+   [
+    4,
+    "every link in the chain is null-checked; any null throws"
+   ]
+  ]
+ },
+ "2f2ca04": {
+  "summary": "Setter for DefaultScale: writes the vector to the card transform's localScale.",
+  "comments": [
+   [
+    7,
+    "set the transform's local scale (native call at the end)"
+   ]
+  ]
+ },
+ "2f2ca68": {
+  "summary": "Unity Awake: resets canAct/canAttack, creates the activeEffects list and caches the BattleCardUI and CardHighlight components.",
+  "comments": [
+   [
+    4,
+    "card starts unable to act or attack and not playable"
+   ],
+   [
+    13,
+    "cache UI and highlight components from the game object"
+   ],
+   [
+    18,
+    "default mulligan option normal; quest counter starts at 0"
+   ]
+  ]
+ },
+ "2f2cbb0": {
+  "summary": "Per-frame update while a unit is aiming an attack: eases it up and back from its play position and rotates it to face the targeting reticle. Does nothing in other states.",
+  "comments": [
+   [
+    4,
+    "only runs in the inPlayAminingAttack state"
+   ],
+   [
+    10,
+    "direction flips depending on whose side the card is on"
+   ],
+   [
+    20,
+    "progress 0-1 = deltaTime / timeToChargeAttack, clamped"
+   ],
+   [
+    34,
+    "move toward the charged-up position: pulled back and raised from the original play position"
+   ],
+   [
+    37,
+    "find the reticle position, converting between board and HUD cameras"
+   ],
+   [
+    58,
+    "rotate (slerp) toward the reticle, with an extra tilt of chargeAttackAngle"
+   ],
+   [
+    92,
+    "compiler null check"
+   ]
+  ]
+ },
+ "2f2cf84": {
+  "summary": "Assigns the battle manager and raw card data, finds the BattleCardUI, initializes it with this card and names the game object for debugging.",
+  "comments": [
+   [
+    8,
+    "find the card UI component; log an error if absent"
+   ],
+   [
+    24,
+    "initialize the UI from this card"
+   ],
+   [
+    27,
+    "name the object with card name and unique id (debug aid)"
+   ],
+   [
+    29,
+    "the span/pinned-string code is Unity's SetName marshaling"
+   ]
+  ]
+ },
+ "2f2d104": {
+  "summary": "Sets up a card for battle: copies base stats from the raw card data, resets health unless keepStats, sets traits, drop pod values, counters and UI toggles, and creates the hidden summon particles.",
+  "comments": [
+   [
+    5,
+    "setup UI for army and ownership"
+   ],
+   [
+    11,
+    "copy max health, armour, melee and ranged attack from the card data"
+   ],
+   [
+    29,
+    "not a remnant, backlash not triggered, no turn played yet"
+   ],
+   [
+    35,
+    "only the player's warlord can become invulnerable at low life, in the tutorial/first-game bot config"
+   ],
+   [
+    47,
+    "keepStats: only clamp health to current max; otherwise full reset"
+   ],
+   [
+    65,
+    "fresh setup: full health, no attacks, no ability use, jam removed"
+   ],
+   [
+    73,
+    "apply base traits from the card data"
+   ],
+   [
+    75,
+    "warlord with drop pod: set drop pod health and attack from static data"
+   ],
+   [
+    90,
+    "massive enemy: reset card image scale"
+   ],
+   [
+    98,
+    "warlords hide their stat counters"
+   ],
+   [
+    117,
+    "show armour frame only when armour is above 0"
+   ],
+   [
+    120,
+    "ambush enemy hides its armour counter"
+   ],
+   [
+    125,
+    "tide and companion start their counters from the current trait values"
+   ],
+   [
+    135,
+    "pick an attack type, clear swarm, then create the spawn VFX"
+   ],
+   [
+    137,
+    "legendary units use a different summon effect than normal ones"
+   ],
+   [
+    150,
+    "VFX is created hidden under the board anchor to be played later"
+   ],
+   [
+    183,
+    "compiler null check"
+   ]
+  ]
+ },
+ "2f2ddb0": {
+  "summary": "For an enemy secret (trap or secret order), hides its real details: sets Trap/Secret title and classified text and swaps the card frame sprite on the rarity holder image.",
+  "comments": [
+   [
+    9,
+    "only acts for enemy secrets the player should not see"
+   ],
+   [
+    15,
+    "title is Trap or Secret Order depending on spell type"
+   ],
+   [
+    20,
+    "description text is the 'classified' placeholder"
+   ],
+   [
+    30,
+    "get the clan frame sprite and set it as the flavour background"
+   ],
+   [
+    36,
+    "the rest is the inlined UI Image sprite setter: skips layout/material updates when the sprite is effectively unchanged"
+   ]
+  ]
+ },
+ "2f2ddcc": {
+  "summary": "Recomputes canAct and canAttack for a minion for the given turn: only on its owner's turn, in play, with no attacks used (or one with bloodthirst), not stunned and not summon-sick. Ferocity/oath minions can act despite summon sickness. Updates the attack indicator.",
+  "comments": [
+   [
+    4,
+    "cannot act: wrong turn, not in play, already attacked (bloodthirst allows two), or stunned"
+   ],
+   [
+    8,
+    "otherwise it can act unless it is still summon-sick"
+   ],
+   [
+    14,
+    "ferocity or oath: may act while summon-sick, so recompute canAct ignoring summon sickness"
+   ],
+   [
+    25,
+    "if still summon-sick, force the attack type to Active ability"
+   ],
+   [
+    30,
+    "show or hide the can-attack glow"
+   ]
+  ]
+ },
+ "2f2e5f8": {
+  "summary": "Sets the card's unique in-game id and updates the id text on the card UI.",
+  "comments": [
+   [
+    5,
+    "update the debug id label if it exists"
+   ]
+  ]
+ },
+ "2f2e6b8": {
+  "summary": "Sets whether the card belongs to the player; for the player's unarmed Trap or Secret Order tactic in hand it re-initializes the card UI and renames the object.",
+  "comments": [
+   [
+    5,
+    "setCardback is deprecated; warn if used"
+   ],
+   [
+    8,
+    "only for the player's trap/secret tactics in hand states (state bitmask) that are not yet armed"
+   ],
+   [
+    17,
+    "re-find the UI component and re-initialize it with this card"
+   ],
+   [
+    36,
+    "rename the object with card name and unique id"
+   ]
+  ]
+ },
+ "2f2e998": {
+  "summary": "Returns true if the card has the requiem trait, or a while-in-play ability whose expansion pack id is 100 (marking an adjacent-effect ability).",
+  "comments": [
+   [
+    4,
+    "requiem always counts"
+   ],
+   [
+    12,
+    "scan the card abilities for the expansion pack id 100 marker"
+   ],
+   [
+    22,
+    "found it: loop returns true; ran out: false"
+   ]
+  ]
+ },
+ "2f2ea74": {
+  "summary": "Returns whether the card can act now: it can attack, or has an active ability usable this turn with enough Energy (including oath cost), in an allowed UI state and card state.",
+  "comments": [
+   [
+    4,
+    "can attack: done"
+   ],
+   [
+    8,
+    "otherwise needs an active ability and the owner's actions allowed"
+   ],
+   [
+    19,
+    "card state bitmasks: only certain in-play states may use an ability"
+   ],
+   [
+    25,
+    "pick the owner's player manager to check Energy"
+   ],
+   [
+    31,
+    "check Energy for the ability cost (psychic/plasma variants)"
+   ],
+   [
+    41,
+    "oath: also needs Energy for the oath cost and the oath ability must be usable"
+   ],
+   [
+    55,
+    "player's card: UI state must be normal battle, targeting or attacking"
+   ],
+   [
+    77,
+    "cannot act normally but oath can still be paid: allowed"
+   ],
+   [
+    86,
+    "otherwise return decrypted canAct"
+   ]
+  ]
+ }
+}

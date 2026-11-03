@@ -1,0 +1,923 @@
+{
+"2f6e10c": {
+"summary": "Plays every effect in the animEffects array: zero-delay (or Fade) effects run now, others via a delayed coroutine. The decompiler also merged the body of PlayEffect (fade, prefab, sound, screen shake) into this listing.",
+"comments": [
+[
+6,
+"Nothing to play if the effect list is empty"
+],
+[
+10,
+"Loop over every effect entry"
+],
+[
+17,
+"No delay (offset 0x24 seems to be animDelay) or type 10 (Fade): play right away"
+],
+[
+21,
+"Delayed effect: run the PlayDelayedEffect coroutine, which waits and then plays it"
+],
+[
+32,
+"Decompiler merged the body of PlayEffect in below; it is not part of this loop"
+],
+[
+39,
+"Switch on effect type: 10 Fade, 20 AnimPrefab, 30 PlaySound, 40 ScreenShake"
+],
+[
+50,
+"Fade: for each sprite set the start alpha, then tween it to the end alpha after the delay"
+],
+[
+85,
+"Type 0x14 (AnimPrefab) jumps to the prefab-spawning code further down"
+],
+[
+89,
+"Type 0x28 (ScreenShake): find a CameraShake object in the scene"
+],
+[
+103,
+"Starts the ResolveScreenShake coroutine by name; the null/MonoBehaviour checks are inlined Unity code"
+],
+[
+163,
+"Type 30 (PlaySound): needs an AudioSource on this object"
+],
+[
+166,
+"Sound effects volume is zero: stay silent"
+],
+[
+173,
+"No sound asset set on the effect: nothing to play"
+],
+[
+211,
+"Clip was null: log a warning (PlayOneShot with null clip)"
+],
+[
+216,
+"No AudioSource: log a warning"
+],
+[
+225,
+"Warnings are only logged when the developer tools flag is on"
+],
+[
+267,
+"AnimPrefab: skipped entirely when particles are disabled in settings"
+],
+[
+275,
+"Effect has no prefab assigned: falls to the warning near the end"
+],
+[
+288,
+"Spawn the prefab at this object's position plus the effect's offset, no rotation"
+],
+[
+298,
+"Parent the spawned prefab under this object (warns if it is a RectTransform)"
+],
+[
+328,
+"Logs 'Undefinded anim prefab' (sic) in dev mode"
+],
+[
+331,
+"Tail of the Fade case: same fade, but for the text elements"
+]
+]
+},
+"2f6e1ac": {
+"summary": "Plays one animation effect by its type: Fade tweens sprites and texts, AnimPrefab spawns a prefab, PlaySound plays a clip once, ScreenShake starts the camera shake coroutine. Called for immediate effects and by the delayed coroutine.",
+"comments": [
+[
+10,
+"Switch on effect type: Fade, AnimPrefab, PlaySound, ScreenShake (other types do nothing)"
+],
+[
+16,
+"Fade: for each sprite set the start alpha, then tween it to the end alpha after the delay"
+],
+[
+55,
+"AnimPrefab jumps to the prefab-spawning code below"
+],
+[
+57,
+"ScreenShake: find a CameraShake object in the scene"
+],
+[
+60,
+"No CameraShake found: nothing to do"
+],
+[
+73,
+"Starts the ResolveScreenShake coroutine by name; null/MonoBehaviour checks are inlined Unity code"
+],
+[
+134,
+"PlaySound: needs an AudioSource on this object"
+],
+[
+138,
+"Sound effects volume is zero: stay silent"
+],
+[
+145,
+"No sound asset set on the effect: nothing to play"
+],
+[
+183,
+"Clip was null: log a warning (PlayOneShot with null clip)"
+],
+[
+186,
+"No AudioSource: log a warning, only if the developer tools flag is on"
+],
+[
+215,
+"Decompiler artifact: array index failure path shared with other fade code"
+],
+[
+234,
+"AnimPrefab: skipped entirely when particles are disabled in settings"
+],
+[
+241,
+"Effect has no prefab assigned: falls to the warning near the end"
+],
+[
+255,
+"Spawn the prefab at this object's position plus the effect's offset, no rotation"
+],
+[
+265,
+"Parent the spawned prefab under this object (warns if it is a RectTransform)"
+],
+[
+295,
+"Logs 'Undefinded anim prefab' (sic) in dev mode"
+],
+[
+297,
+"Tail of the Fade case: same fade, but for the text elements"
+]
+]
+},
+"2f6e1f4": {
+"summary": "Creates the coroutine object for PlayDelayedEffect, which waits the effect's delay and then plays it. Called from PlayEffects for effects with a delay.",
+"comments": []
+},
+"2f6e27c": {
+"summary": "Fade effect: sets each sprite and text to the start alpha, then tweens it to the end alpha after the effect's delay. The decompiler mixed in ResolveAnimPrefab code at the end.",
+"comments": [
+[
+4,
+"First pass: fade every sprite in the effect"
+],
+[
+9,
+"Sprites done: continue with the text elements"
+],
+[
+19,
+"Skip empty entries in the sprite array"
+],
+[
+25,
+"Snap to the start alpha before tweening"
+],
+[
+30,
+"Tween to end alpha over animDuration, then apply animDelay"
+],
+[
+38,
+"Decompiler artifact: following code is a copy of the AnimPrefab spawn logic merged in"
+],
+[
+41,
+"Prefab spawning is skipped when particles are disabled"
+],
+[
+48,
+"No prefab assigned: warn in dev mode only"
+],
+[
+76,
+"Instantiate prefab at position plus offset with identity rotation"
+],
+[
+102,
+"Text fade loop (reached by goto): same as the sprite fade but for Text elements"
+]
+]
+},
+"2f6e494": {
+"summary": "Spawns the effect's animation prefab at this object's position plus the effect's offset and parents it to this object. Does nothing when particles are disabled; warns in dev mode if no prefab is set.",
+"comments": [
+[
+4,
+"Particle effects turned off in settings: skip"
+],
+[
+11,
+"No prefab assigned: log a warning in dev mode only"
+],
+[
+39,
+"Instantiate at position plus offset, with no rotation"
+],
+[
+44,
+"Parent the new object under this one (Unity warns if it is a RectTransform)"
+]
+]
+},
+"2f6e6dc": {
+"summary": "Plays the effect's sound clip once through this object's AudioSource, scaled by the sound effects volume. Logs warnings in dev mode when the audio source or clip is missing.",
+"comments": [
+[
+7,
+"No AudioSource on this object: warn (dev mode only) and stop"
+],
+[
+25,
+"Silent if the sound effects volume is zero"
+],
+[
+30,
+"Needs a sound asset with a clip"
+],
+[
+42,
+"Clip missing: warn, otherwise play it once at the sound effects volume"
+]
+]
+},
+"2f6e8bc": {
+"summary": "Finds a CameraShake object in the scene and starts its ResolveScreenShake coroutine, passing the effect's shake info.",
+"comments": [
+[
+4,
+"Look up all CameraShake objects; do nothing if there are none"
+],
+[
+17,
+"Starts the coroutine by name; the checks below are inlined Unity StartCoroutine code"
+],
+[
+55,
+"Error branches Unity would throw: not a MonoBehaviour, or name null/empty"
+]
+]
+},
+"2f6eac4": {
+"summary": "Names the effect: uses the manual description if one was entered, otherwise the effect type's name. Used for readable labels in the editor.",
+"comments": [
+[
+5,
+"No manual description: label by effect type"
+]
+]
+},
+"2f6eb7c": {
+"summary": "Unity Awake for the overtime UI: makes the overtime icon and splash invisible and deactivates both objects until overtime starts.",
+"comments": [
+[
+8,
+"Icon colour is reset (set transparent) - decompiler dropped the arguments"
+],
+[
+13,
+"Splash group alpha set to 0"
+],
+[
+17,
+"Hide the splash object until overtime is displayed"
+]
+]
+},
+"2f6ec20": {
+"summary": "Shows the overtime splash and icon, fades them in and out with a tween sequence, then deactivates the splash, and plays the 'entering overtime' sound. Called when the match goes into overtime.",
+"comments": [
+[
+10,
+"Activate the splash and icon objects before fading"
+],
+[
+17,
+"Build a DOTween sequence: fade in splash and icon together, hold, fade out the splash"
+],
+[
+25,
+"At the end of the sequence call the callback that deactivates the splash"
+],
+[
+27,
+"Play the entering-overtime sound through the SoundManager"
+],
+[
+38,
+"No AudioCue assigned: log an error if sound debugging is on"
+],
+[
+51,
+"Optional debug log of which cue, source and mixer play the sound"
+],
+[
+86,
+"Decompiler artifact: the code after this seems to be the inlined Play2D clip overload, not reached normally"
+]
+]
+},
+"2f6edf0": {
+"summary": "Tween callback at the end of the overtime fade: deactivates the overtime splash object.",
+"comments": []
+},
+"2f731b0": {
+"summary": "Coroutine for adding an active trap card to the hand: moves it to the draw position, waits, then adds it to the hand list and sets it up. State 0 starts the draw, state 1 finishes it.",
+"comments": [
+[
+6,
+"State 0: start the draw animation"
+],
+[
+14,
+"Where the drawn card appears on screen for this side"
+],
+[
+16,
+"Put the card on the Hand sorting layer"
+],
+[
+26,
+"Animate the card to the draw position at the drawn-card scale"
+],
+[
+28,
+"Wait the draw time plus 0.1s"
+],
+[
+40,
+"State 1: draw finished"
+],
+[
+45,
+"Add the card to the hand list (inlined List.Add)"
+],
+[
+61,
+"Lay the card out in its hand slot"
+]
+]
+},
+"2f73434": {
+"summary": "IEnumerator.Reset for the AddActiveTrapToHand coroutine; always throws NotSupportedException.",
+"comments": []
+},
+"2f73478": {
+"summary": "Coroutine that adds a card to the hand without a draw animation: adds it if there is room, repositions the hand and waits; otherwise shows 'hand full' and sends it to the cemetery.",
+"comments": [
+[
+6,
+"State 1: wait finished, coroutine ends"
+],
+[
+9,
+"State 0: start"
+],
+[
+18,
+"Room in hand (below the max cards allowed)"
+],
+[
+28,
+"Add the card to the hand list (inlined List.Add)"
+],
+[
+35,
+"Set up the card and start the coroutine that repositions every card in hand"
+],
+[
+41,
+"Wait for the card positioning time"
+],
+[
+50,
+"Hand full: show the 'Hand full' tip and send the card to the cemetery"
+]
+]
+},
+"2f736d4": {
+"summary": "IEnumerator.Reset for the AddCardNotDrawnToHand coroutine; always throws NotSupportedException.",
+"comments": []
+},
+"2f73718": {
+"summary": "Coroutine that inserts a card into the hand at a given index without a draw animation, repositions the hand and waits; if the hand is full, shows a tip and sends the card to the cemetery.",
+"comments": [
+[
+6,
+"State 1: wait finished, coroutine ends"
+],
+[
+9,
+"State 0: start"
+],
+[
+17,
+"Room in hand: insert at the requested index"
+],
+[
+22,
+"Set up the card, then reposition every card in hand"
+],
+[
+27,
+"Wait for the card positioning time"
+],
+[
+36,
+"Hand full: show the 'Hand full' tip and send the card to the cemetery"
+]
+]
+},
+"2f7392c": {
+"summary": "IEnumerator.Reset for the AddCardNotDrawnToHandAtIndex coroutine; always throws NotSupportedException.",
+"comments": []
+},
+"2f73970": {
+"summary": "Coroutine that deals the mulligan cards one at a time. Works out how many cards (base, warlord bonus, second-player extra, or a forced count), draws each, tags its mulligan type and moves it into place with a short wait.",
+"comments": [
+[
+15,
+"Count base hand size, warlord extra cards (never negative) and second-player extra cards"
+],
+[
+30,
+"A forced mulligan count overrides the total"
+],
+[
+36,
+"Fresh list that will hold the mulligan cards"
+],
+[
+40,
+"Done when all cards are dealt"
+],
+[
+44,
+"Skipped if the mulligan has been stopped"
+],
+[
+47,
+"Take the next card from the deck for this side"
+],
+[
+66,
+"Pick the mulligan option by slot: 30 whisper cards, 20 warlord cards, 10 second-turn extras, 0 normal"
+],
+[
+81,
+"Set up the card for mulligan display and move it to its mulligan position"
+],
+[
+85,
+"Wait half the draw time before the next card"
+],
+[
+96,
+"No card could be drawn: log and skip"
+],
+[
+98,
+"Next card index"
+]
+]
+},
+"2f73c7c": {
+"summary": "IEnumerator.Reset for the AddCardsToMulligan coroutine; always throws NotSupportedException.",
+"comments": []
+},
+"2f73cc0": {
+"summary": "Coroutine that animates a drawn card to the draw position, then adds it to the hand if there is room. If the hand is full it sends the card to the cemetery after a short wait and shows a tip to the player.",
+"comments": [
+[
+7,
+"State 2: after the full-hand wait, send the card to the cemetery"
+],
+[
+17,
+"State 1: draw animation finished"
+],
+[
+20,
+"Player's own card: re-enable its collider"
+],
+[
+31,
+"Room in hand: add the card (inlined List.Add)"
+],
+[
+48,
+"Set up the card in its slot and start repositioning the hand"
+],
+[
+55,
+"Hand full: log it and put the card into the cemetery state"
+],
+[
+59,
+"Only the human player sees the 'Hand full' tip"
+],
+[
+65,
+"Wait 0.5s then go to state 2"
+],
+[
+76,
+"State 0: start the draw"
+],
+[
+85,
+"Where the drawn card appears on screen for this side"
+],
+[
+89,
+"Put the card on the Hand sorting layer"
+],
+[
+99,
+"Animate the card to the draw position at the drawn-card scale"
+],
+[
+102,
+"Disable the player's card collider during the animation"
+],
+[
+106,
+"Wait draw time plus 0.1s"
+]
+]
+},
+"2f740fc": {
+"summary": "IEnumerator.Reset for the AddDrawnCardToHand coroutine; always throws NotSupportedException.",
+"comments": []
+},
+"2f74140": {
+"summary": "Coroutine that repositions every card in a list except one excluded card (such as a card being dragged), waits the positioning time, then clears the hand animation flag.",
+"comments": [
+[
+6,
+"State 0: start; state 1 is the wait finishing"
+],
+[
+10,
+"State 1: clear the animation-busy flag"
+],
+[
+18,
+"Mark the hand as animating"
+],
+[
+23,
+"Loop over the cards"
+],
+[
+36,
+"Skip the excluded card; also skip cards waiting to be played"
+],
+[
+48,
+"Place the card in the fan of the remaining cards"
+],
+[
+24,
+"Once all positioned, wait for the positioning time"
+]
+]
+},
+"2f7434c": {
+"summary": "IEnumerator.Reset for the DisplayHandMinusCard coroutine; always throws NotSupportedException.",
+"comments": []
+},
+"2f74390": {
+"summary": "Coroutine that finishes the mulligan: for each discarded card draws a replacement and animates the old card back to the deck; kept cards just finish their mulligan UI. Optionally fades the cards out at the end.",
+"comments": [
+[
+7,
+"State 2 or 3: closing steps"
+],
+[
+10,
+"State 2: optionally fade out all mulligan cards"
+],
+[
+24,
+"Fade each mulligan card's UI items out over 0.3s"
+],
+[
+34,
+"State 3: finished"
+],
+[
+42,
+"State 0: start with no replacements yet"
+],
+[
+49,
+"State 1: previous return-to-deck animation finished"
+],
+[
+54,
+"Draw a replacement card for the discarded slot"
+],
+[
+63,
+"Put the replacement into the same mulligan slot and place it"
+],
+[
+68,
+"Step to the next mulligan card"
+],
+[
+74,
+"All cards processed"
+],
+[
+75,
+"Opponent side: end now; player waits for the draw animation"
+],
+[
+87,
+"Card is discarded: replace it; otherwise it is kept"
+],
+[
+89,
+"Kept card: finalize its mulligan UI"
+],
+[
+91,
+"Discarded card: put back into the deck and animate its return"
+]
+]
+},
+"2f7478c": {
+"summary": "IEnumerator.Reset for the FinishMulligan coroutine; always throws NotSupportedException.",
+"comments": []
+},
+"2f747d0": {
+"summary": "Coroutine that repositions every card in the hand: sets sorting order and positions each card (fanned around the selected card), waits, then restores colliders and clears the animation flag.",
+"comments": [
+[
+6,
+"State 0: lay out the cards"
+],
+[
+10,
+"Default to the current hand if no list was given"
+],
+[
+13,
+"Not a hover/selection move (index -1): mark the hand as animating"
+],
+[
+24,
+"Turn off the card's collider while it moves"
+],
+[
+29,
+"Sorting order decreases along the hand so earlier cards draw on top"
+],
+[
+36,
+"Skip placement for cards waiting to be played"
+],
+[
+50,
+"Wait the positioning time"
+],
+[
+61,
+"State 1: animation done, restore collider for hand use"
+],
+[
+78,
+"Clear the animation flag and relight the playable cards"
+],
+[
+80,
+"Reset the last empty slot marker to -100"
+]
+]
+},
+"2f74ac0": {
+"summary": "IEnumerator.Reset for the MoveCardsInHandToPosition coroutine; always throws NotSupportedException.",
+"comments": []
+},
+"2f6eee4": {
+"summary": "Returns how long a card draw takes: the player's draw time for your own hand, the enemy's draw time otherwise.",
+"comments": [
+[
+6,
+"Pick the player or enemy draw time from global vars"
+]
+]
+},
+"2f6f060": {
+"summary": "Rescales the hand on small screens by blending between two multipliers depending on screen diagonal, remembering the original scale first. Does nothing unless small-screen scaling is on.",
+"comments": [
+[
+4,
+"Only runs if the debug override is on, or small-screen UI and scaling are enabled"
+],
+[
+13,
+"First time: remember the hand's original scale"
+],
+[
+29,
+"Clamp the diagonal size ratio to 0..1"
+],
+[
+37,
+"Blend between small and big-mobile multipliers"
+],
+[
+38,
+"Apply the multiplier to the original scale"
+]
+]
+},
+"2f6f1cc": {
+"summary": "Creates the coroutine object for AddDrawnCardToHand (animates a drawn card to the hand).",
+"comments": []
+},
+"2f6f27c": {
+"summary": "Creates the coroutine object for AddActiveTrapToHand.",
+"comments": []
+},
+"2f6f32c": {
+"summary": "Creates the coroutine object for AddCardNotDrawnToHand.",
+"comments": []
+},
+"2f6f3dc": {
+"summary": "Creates the coroutine object for AddCardNotDrawnToHandAtIndex.",
+"comments": []
+},
+"2f6f494": {
+"summary": "Creates the coroutine object for AddCardsToMulligan, passing whether this side goes first and an optional forced card count.",
+"comments": []
+},
+"2f6f544": {
+"summary": "Returns the scenario's starting hand size plus the hero's warlord bonus cards (only if the bonus is positive) for the given side.",
+"comments": [
+[
+8,
+"Warlord bonus cards come from the hero's daimyo (warlord) prefab"
+],
+[
+10,
+"Negative bonus is clamped to zero"
+]
+]
+},
+"2f6f784": {
+"summary": "Builds an array of unique in-game IDs of the cards marked to discard in the mulligan. The decompiler merged in SetMulliganCardsToDiscard code after the loop.",
+"comments": [
+[
+9,
+"One int per mulligan card to discard"
+],
+[
+15,
+"Index check failure: decompiler jumps into merged code from here on"
+],
+[
+19,
+"Merged code below is SetMulliganCardsToDiscard: validate IDs, then mark cards"
+],
+[
+24,
+"Verify every id exists in the current mulligan"
+],
+[
+31,
+"Log an error if invalid"
+],
+[
+41,
+"Loop over the mulligan cards, marking each as discard or keep"
+],
+[
+50,
+"Card is discarded when its id is in the list"
+]
+]
+},
+"2f6f868": {
+"summary": "Validates a list of card IDs to discard in the mulligan (e.g. received from the other player) and marks each mulligan card as discarded or kept. Returns false if the IDs are invalid.",
+"comments": [
+[
+5,
+"Log whose mulligan is being set"
+],
+[
+9,
+"All IDs must match cards in the current mulligan"
+],
+[
+21,
+"Card is discarded if its id is in the list; otherwise kept"
+],
+[
+31,
+"Invalid IDs: log an error and return false"
+]
+]
+},
+"2f6fb9c": {
+"summary": "Validates the mulligan discard IDs and simulates a click on each matching card to select it for discard (used at mulligan start, e.g. for replays or the other player). Returns false if invalid.",
+"comments": [
+[
+9,
+"All IDs must match cards in the current mulligan"
+],
+[
+22,
+"Matching card: click it to select it for discard"
+],
+[
+31,
+"Invalid IDs: log an error and return false"
+]
+]
+},
+"2f6f9fc": {
+"summary": "Checks that each given card ID is in the current mulligan, logging an error for the first missing one. The decompiler merged in some SetMulliganCardsToDiscardStart code below.",
+"comments": [
+[
+8,
+"Empty list counts as valid"
+],
+[
+13,
+"For each ID, search the mulligan cards"
+],
+[
+16,
+"Index check failure path; the decompiler placed merged code here"
+],
+[
+39,
+"Look through all mulligan cards for this ID"
+],
+[
+56,
+"Not found: log an error and return false"
+],
+[
+70,
+"Merged code: click-select each matching card (as in SetMulliganCardsToDiscardStart)"
+]
+]
+},
+"2f6fd2c": {
+"summary": "Creates the coroutine object for FinishMulligan, passing whether to fade the mulligan cards.",
+"comments": []
+},
+"2f6fe78": {
+"summary": "Returns a discarded mulligan card to its side's deck: reparents it under the deck, adds it to the deck list, restores sorting, and destroys the mulligan selection and button frames.",
+"comments": [
+[
+7,
+"Get the deck list for this side"
+],
+[
+12,
+"Reparent the card under the player or enemy deck object"
+],
+[
+20,
+"Add the card back to the deck list"
+],
+[
+33,
+"Re-enable override sorting on the card"
+],
+[
+38,
+"Remove the mulligan selected frame from the card UI"
+],
+[
+44,
+"Remove the mulligan button frame too"
+]
+]
+}
+}

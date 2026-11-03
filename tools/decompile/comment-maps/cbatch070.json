@@ -1,0 +1,568 @@
+{
+ "2f411c0": {
+  "summary": "Handles a card leaving the game. If it is this card, hides its UI, strips its effects and traits and jams it; otherwise clears the removed card's extrinsic effects. The decompiler has inlined UpdateWhileInPlay and AddEffect, so the pack-bonus and buff-application code is also here, ending with a figures refresh and combination check.",
+  "comments": [
+   [
+    4,
+    "removedCard is the card leaving the game; first branch handles this card itself being removed."
+   ],
+   [
+    6,
+    "This card was removed: mark it removedFromGame and take its collider out of play."
+   ],
+   [
+    13,
+    "Stop in-play animations and hide the card's visuals (cardback or 2D face off, 3D body off)."
+   ],
+   [
+    17,
+    "Show the cardback if this state calls for it, otherwise hide the 2D card."
+   ],
+   [
+    25,
+    "Hide 3D body and extra effects, clear highlight, trait icons and status animations."
+   ],
+   [
+    40,
+    "Hide the 'created by' label; decompiler tangled the exit paths here, so the tail is unreliable."
+   ],
+   [
+    56,
+    "Decompiler merged the self-removal cleanup with what follows; the calls below are right."
+   ],
+   [
+    59,
+    "Removed card is this card: strip all of its active effects and traits (silence it)."
+   ],
+   [
+    63,
+    "Walk the active effects from last to first and remove each one."
+   ],
+   [
+    74,
+    "Copy the current traits into a temp list so they can be removed without changing the list mid-loop."
+   ],
+   [
+    106,
+    "Remove every trait on this card."
+   ],
+   [
+    110,
+    "Clear pending stun and markerlight flags, then add the jam trait (card is now disabled)."
+   ],
+   [
+    128,
+    "Non-hero cards lose their active ability."
+   ],
+   [
+    132,
+    "Refresh the UI: stop animations, update trait icons and figures, show the jam animation."
+   ],
+   [
+    149,
+    "Remove any extrinsic effects (auras) that removedCard was giving this card."
+   ],
+   [
+    155,
+    "Re-run this card's while-in-play update now that the board has changed."
+   ],
+   [
+    157,
+    "Once-only triggered ability: re-check it and clear the flag if it fired."
+   ],
+   [
+    168,
+    "Pack trait: attack bonus scales with the number of other friendly troops."
+   ],
+   [
+    171,
+    "Not a pack card (or still in hand): drop any leftover own pack buff effects."
+   ],
+   [
+    199,
+    "Pack card still in hand does no scaling, so it takes the cleanup path above."
+   ],
+   [
+    202,
+    "Count friendly units on the board: a Hero counts them all, other units exclude themselves."
+   ],
+   [
+    210,
+    "Do nothing if the count is unchanged; otherwise store it and remove the old pack buffs."
+   ],
+   [
+    215,
+    "Build a fresh extrinsic addStats effect giving +N melee and +N ranged attack, N = troop count."
+   ],
+   [
+    227,
+    "Inlined AddEffect: refuse (with a warning) if the card is in a state that cannot take effects."
+   ],
+   [
+    244,
+    "A jammed enchanting card cannot give extrinsic effects."
+   ],
+   [
+    252,
+    "Extrinsic effect: skip it if the same one is already applied; replace it if the values changed."
+   ],
+   [
+    271,
+    "Remnants only accept the remnant trait or health buffs."
+   ],
+   [
+    277,
+    "Source minion must still be in play (or be this card); else warn 'from card no longer in play'."
+   ],
+   [
+    298,
+    "doubleAttack is converted to an addStats effect adding the current melee attack."
+   ],
+   [
+    312,
+    "Dispatch on buffType: first the high-numbered ones (set attack, set cost, set health, drop pod, replace ability)."
+   ],
+   [
+    314,
+    "setMeleeAttack / setRangeAttack: remove the previous such effect, add this one, refresh attack text."
+   ],
+   [
+    327,
+    "Remnant trait is handled by the add-trait case below."
+   ],
+   [
+    328,
+    "setCost: replace any earlier setCost effect and update the cost text."
+   ],
+   [
+    335,
+    "setCurrentHealth: fire the Ecstasy trigger if it qualifies, then set current health."
+   ],
+   [
+    347,
+    "Unknown buffType: log a warning."
+   ],
+   [
+    358,
+    "Mid-range buffTypes: replaceAbility and addStatsDropPod."
+   ],
+   [
+    359,
+    "replaceAbility: swap in the new active ability, reset its icon and refresh trait icons."
+   ],
+   [
+    386,
+    "addStatsDropPod: add the effect and adjust the drop pod health/attack counters."
+   ],
+   [
+    418,
+    "Switch for low buffTypes: stat buffs, traits, set stats, enchantments, marks of chaos."
+   ],
+   [
+    419,
+    "Stat buff (addStats and similar): merge into an identical existing effect if possible, else add."
+   ],
+   [
+    432,
+    "Apply the health change: reductions clamp to max health, heals add to current health."
+   ],
+   [
+    464,
+    "Armour change is applied through AddArmour."
+   ],
+   [
+    471,
+    "Search existing effects for same source, buff type and timing; if found, add the new values to it."
+   ],
+   [
+    520,
+    "addTrait: log it, look up trait data, then handle the special cases."
+   ],
+   [
+    530,
+    "Poison is cancelled outright if the card has the resistant trait."
+   ],
+   [
+    542,
+    "Survivor granted with 0 health change is ignored with a warning."
+   ],
+   [
+    543,
+    "Drop any earlier removeTrait effect for this trait; blind also forces melee and clears expiry flags."
+   ],
+   [
+    552,
+    "Look for an existing effect of the same trait and stack it per the trait's rule (count, add, replace)."
+   ],
+   [
+    554,
+    "No match found: add this effect; count-stacking traits start at 1."
+   ],
+   [
+    636,
+    "Flank or fast changes summon sickness visuals."
+   ],
+   [
+    641,
+    "Drop pod: reset its drop pod health and attack counters to the starting values."
+   ],
+   [
+    654,
+    "Gaining survivor clears survivorSpent."
+   ],
+   [
+    657,
+    "Gaining resistant while poisoned shows the animation and cures the poison."
+   ],
+   [
+    673,
+    "Tide / companion: seed the counters from the current values."
+   ],
+   [
+    691,
+    "Pindown forces the unit to ranged attack."
+   ],
+   [
+    696,
+    "Markerlight and hunt mark: broadcast to the other player that the mark resolved."
+   ],
+   [
+    709,
+    "If the card is on the board, play the trait's activation animation."
+   ],
+   [
+    712,
+    "Traits changed: refresh the icons (flagged cases jump straight to the combination check)."
+   ],
+   [
+    715,
+    "removeTrait: broadcast stealth loss if needed, record the effect, then remove the trait and its buffed copy."
+   ],
+   [
+    730,
+    "swapStats: swap attack and health (refused on warlords)."
+   ],
+   [
+    733,
+    "Not a warlord: recompute base attack and max health from intrinsic values plus stat effects."
+   ],
+   [
+    764,
+    "Warlord: swapping is refused and an error is logged with the player ids."
+   ],
+   [
+    770,
+    "Reset-stat cases (6 and 0x1e): remove old such effects and all extrinsic effects, then add this one."
+   ],
+   [
+    775,
+    "Case 8: apply a mark of chaos to this card and tell the other player it resolved."
+   ],
+   [
+    787,
+    "setHealth: replace earlier setHealth, maybe fire Ecstasy, then set current health and refresh text."
+   ],
+   [
+    808,
+    "removeExtrinsic: drop all extrinsic effects from the enchanting card."
+   ],
+   [
+    811,
+    "Enchantment buff types: hand off to AddEnchantment."
+   ],
+   [
+    815,
+    "Case 0x10: attach an enchantment to this card and give it a unique enchantment id."
+   ],
+   [
+    834,
+    "Quest enchantment: replace other quest effects, reset the quest counter, show quest status."
+   ],
+   [
+    865,
+    "Secret-order enchantment is flagged as a secret buff."
+   ],
+   [
+    868,
+    "Mutation enchantment: spend it, trigger it and run the mutation."
+   ],
+   [
+    876,
+    "Mark of chaos / wing enchantment: spend, remember as last mark, trigger and broadcast."
+   ],
+   [
+    890,
+    "Case 0x11: re-trigger the last mark of chaos on this card."
+   ],
+   [
+    898,
+    "Case 0x19: reflected copy; make the card ephemeral and show that."
+   ],
+   [
+    906,
+    "Case 0x1e: reset-stat variant, shares the code with case 6."
+   ],
+   [
+    919,
+    "Case 0x23 (daemonHost) is not implemented: logs an error."
+   ],
+   [
+    924,
+    "Common exit: refresh stat figures, then check for card combinations."
+   ]
+  ]
+ },
+ "2f41744": {
+  "summary": "Runs this card's while-in-play and once-only trigger updates, then recomputes the pack troop bonus and applies it as an extrinsic CardEffect. The decompiler has inlined AddEffect, so the whole buff-application switch appears here, ending with a figures refresh and combination check.",
+  "comments": [
+   [
+    4,
+    "Passes unitJustSummoned (this card or nothing) to the card script's while-in-play update."
+   ],
+   [
+    17,
+    "Once-only triggered ability: re-check it and clear the flag if it fired."
+   ],
+   [
+    31,
+    "Pack trait: attack bonus scales with the number of other friendly troops."
+   ],
+   [
+    33,
+    "Not a pack card (or still in hand): drop any leftover own pack buff effects."
+   ],
+   [
+    62,
+    "Pack card still in hand does no scaling, so it takes the cleanup path above."
+   ],
+   [
+    65,
+    "Count friendly units on the board: a Hero counts them all, other units exclude themselves."
+   ],
+   [
+    73,
+    "Do nothing if the count is unchanged; otherwise store it and remove the old pack buffs."
+   ],
+   [
+    78,
+    "Build a fresh extrinsic addStats effect giving +N melee and +N ranged attack, N = troop count."
+   ],
+   [
+    90,
+    "Inlined AddEffect: refuse (with a warning) if the card is in a state that cannot take effects."
+   ],
+   [
+    110,
+    "A jammed enchanting card cannot give extrinsic effects."
+   ],
+   [
+    115,
+    "Extrinsic effect: skip it if the same one is already applied; replace it if the values changed."
+   ],
+   [
+    134,
+    "Remnants only accept the remnant trait or health buffs."
+   ],
+   [
+    140,
+    "Source minion must still be in play (or be this card); else warn 'from card no longer in play'."
+   ],
+   [
+    161,
+    "doubleAttack is converted to an addStats effect adding the current melee attack."
+   ],
+   [
+    175,
+    "Dispatch on buffType: first the high-numbered ones (set attack, set cost, set health, drop pod, replace ability)."
+   ],
+   [
+    177,
+    "setMeleeAttack / setRangeAttack: remove the previous such effect, add this one, refresh attack text."
+   ],
+   [
+    190,
+    "Remnant trait is handled by the add-trait case below."
+   ],
+   [
+    191,
+    "setCost: replace any earlier setCost effect and update the cost text."
+   ],
+   [
+    198,
+    "setCurrentHealth: fire the Ecstasy trigger if it qualifies, then set current health."
+   ],
+   [
+    210,
+    "Unknown buffType: log a warning."
+   ],
+   [
+    221,
+    "Mid-range buffTypes: replaceAbility and addStatsDropPod."
+   ],
+   [
+    222,
+    "replaceAbility: swap in the new active ability, reset its icon and refresh trait icons."
+   ],
+   [
+    249,
+    "addStatsDropPod: add the effect and adjust the drop pod health/attack counters."
+   ],
+   [
+    281,
+    "Switch for low buffTypes: stat buffs, traits, set stats, enchantments, marks of chaos."
+   ],
+   [
+    285,
+    "Stat buff (addStats and similar): merge into an identical existing effect if possible, else add."
+   ],
+   [
+    295,
+    "Apply the health change: reductions clamp to max health, heals add to current health."
+   ],
+   [
+    327,
+    "Armour change is applied through AddArmour."
+   ],
+   [
+    334,
+    "Search existing effects for same source, buff type and timing; if found, add the new values to it."
+   ],
+   [
+    383,
+    "addTrait: log it, look up trait data, then handle the special cases."
+   ],
+   [
+    393,
+    "Poison is cancelled outright if the card has the resistant trait."
+   ],
+   [
+    405,
+    "Survivor granted with 0 health change is ignored with a warning."
+   ],
+   [
+    406,
+    "Drop any earlier removeTrait effect for this trait; blind also forces melee and clears expiry flags."
+   ],
+   [
+    414,
+    "Look for an existing effect of the same trait and stack it per the trait's rule (count, add, replace)."
+   ],
+   [
+    417,
+    "No match found: add this effect; count-stacking traits start at 1."
+   ],
+   [
+    499,
+    "Flank or fast changes summon sickness visuals."
+   ],
+   [
+    504,
+    "Drop pod: reset its drop pod health and attack counters to the starting values."
+   ],
+   [
+    517,
+    "Gaining survivor clears survivorSpent."
+   ],
+   [
+    520,
+    "Gaining resistant while poisoned shows the animation and cures the poison."
+   ],
+   [
+    536,
+    "Tide / companion: seed the counters from the current values."
+   ],
+   [
+    554,
+    "Pindown forces the unit to ranged attack."
+   ],
+   [
+    559,
+    "Markerlight and hunt mark: broadcast to the other player that the mark resolved."
+   ],
+   [
+    572,
+    "If the card is on the board, play the trait's activation animation."
+   ],
+   [
+    575,
+    "Traits changed: refresh the icons (flagged cases jump straight to the combination check)."
+   ],
+   [
+    578,
+    "removeTrait: broadcast stealth loss if needed, record the effect, then remove the trait and its buffed copy."
+   ],
+   [
+    593,
+    "swapStats: swap attack and health (refused on warlords)."
+   ],
+   [
+    596,
+    "Not a warlord: recompute base attack and max health from intrinsic values plus stat effects."
+   ],
+   [
+    627,
+    "Warlord: swapping is refused and an error is logged with the player ids."
+   ],
+   [
+    633,
+    "Reset-stat cases (6 and 0x1e): remove old such effects and all extrinsic effects, then add this one."
+   ],
+   [
+    638,
+    "Case 8: apply a mark of chaos to this card and tell the other player it resolved."
+   ],
+   [
+    650,
+    "setHealth: replace earlier setHealth, maybe fire Ecstasy, then set current health and refresh text."
+   ],
+   [
+    671,
+    "removeExtrinsic: drop all extrinsic effects from the enchanting card."
+   ],
+   [
+    674,
+    "Enchantment buff types: hand off to AddEnchantment."
+   ],
+   [
+    678,
+    "Case 0x10: attach an enchantment to this card and give it a unique enchantment id."
+   ],
+   [
+    697,
+    "Quest enchantment: replace other quest effects, reset the quest counter, show quest status."
+   ],
+   [
+    728,
+    "Secret-order enchantment is flagged as a secret buff."
+   ],
+   [
+    731,
+    "Mutation enchantment: spend it, trigger it and run the mutation."
+   ],
+   [
+    739,
+    "Mark of chaos / wing enchantment: spend, remember as last mark, trigger and broadcast."
+   ],
+   [
+    753,
+    "Case 0x11: re-trigger the last mark of chaos on this card."
+   ],
+   [
+    761,
+    "Case 0x19: reflected copy; make the card ephemeral and show that."
+   ],
+   [
+    769,
+    "Case 0x1e: reset-stat variant, shares the code with case 6."
+   ],
+   [
+    782,
+    "Case 0x23 (daemonHost) is not implemented: logs an error."
+   ],
+   [
+    787,
+    "Common exit: refresh stat figures, then check for card combinations."
+   ]
+  ]
+ }
+}

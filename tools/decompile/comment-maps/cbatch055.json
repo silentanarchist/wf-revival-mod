@@ -1,0 +1,1532 @@
+{
+"329820c": {
+"summary": "Decides whether the standard battle-end sequence runs. Returns false when the tutorial stage is set to skip it for the current result (victory or defeat); true when there is no tutorial stage.",
+"comments": [
+[
+4,
+"no tutorial stage means a normal match: always run the standard end sequence"
+],
+[
+6,
+"tutorial stage present: pick the skip flag that matches win or loss"
+],
+[
+17,
+"run the normal end only if the stage's skip flag for this result is not set"
+]
+]
+},
+"32982ac": {
+"summary": "Shows a tutorial tip through the tutorial tip script. If the tip says the game must wait for it, sets WaitingForTutorialTipFlag, then starts the tip's coroutine.",
+"comments": [
+[
+8,
+"tip blocks the game until dismissed: set the waiting flag"
+],
+[
+13,
+"tip script returns the coroutine that displays the tip"
+],
+[
+27,
+"decompiler merged Unity's inlined StartCoroutine and its error checks (null routine, non-MonoBehaviour) from here"
+]
+]
+},
+"3298308": {
+"summary": "Queues a heal battle action on one target card and records the pending healing on it so later checks see the incoming heal. Called by heal effects.",
+"comments": [
+[
+4,
+"start with a zeroed action, then fill it as a heal action"
+],
+[
+8,
+"HealInfo carries the healer, amount and heal type"
+],
+[
+14,
+"remember the caster's raw card data if there is a caster"
+],
+[
+22,
+"put the heal on the action queue at the given priority"
+],
+[
+24,
+"mark the heal as pending on the target before the action resolves"
+]
+]
+},
+"3298488": {
+"summary": "Queues one heal battle action for a list of targets (copied first) and records the pending healing on every target.",
+"comments": [
+[
+4,
+"start with a zeroed action, then fill it as a heal action"
+],
+[
+10,
+"copy the target list so later changes to the caller's list do not affect the action"
+],
+[
+25,
+"put the heal on the action queue at the given priority"
+],
+[
+27,
+"mark the heal as pending on each target"
+]
+]
+},
+"3295b64": {
+"summary": "Queues an add-effect battle action that applies a CardEffect to a target card. Choice and last-mark-of-chaos enchantment effects get their enchantment card filled in first.",
+"comments": [
+[
+6,
+"choice enchantment: attach the card the player chose in the selection"
+],
+[
+19,
+"last mark of chaos: attach the remembered card from the previous mark"
+],
+[
+29,
+"store effect, target and caster's raw data on the action"
+],
+[
+38,
+"queue the add-effect action"
+]
+]
+},
+"32986bc": {
+"summary": "Sets up an attack between two cards, records the pending damage on both and queues the attack battle action.",
+"comments": [
+[
+6,
+"attacker prepares for the attack and any old pending damage is cleared on both cards"
+],
+[
+10,
+"work out the damage each side will take, including return damage"
+],
+[
+11,
+"build the attack action"
+],
+[
+13,
+"queue the attack"
+]
+]
+},
+"328dfd0": {
+"summary": "Re-queues an attack action for a continuation of an earlier attack, if the attacker is still in play. The tail of the output is an unrelated coroutine constructor merged in by the decompiler.",
+"comments": [
+[
+15,
+"only continue if the original attacker still exists"
+],
+[
+17,
+"attacker already left play: nothing to queue"
+],
+[
+25,
+"redo attack setup and pending damage for the same attacker and target"
+],
+[
+31,
+"build a fresh attack action"
+],
+[
+44,
+"0x35 is the action type for the attack continuation; it is queued at instant priority"
+],
+[
+67,
+"decompiler merged the next function here (constructor of the ResolvePlayCardFromHand coroutine); not part of this method"
+]
+]
+},
+"3298ce4": {
+"summary": "Queues a follow-resolution attack action for an attack, then (merged code) queues a remove-extrinsic-effects action for a card if any unit or hand card still holds effects from it.",
+"comments": [
+[
+7,
+"build the attack action for the acting and target cards"
+],
+[
+18,
+"scripted and forced attack types are flagged, apparently so the follow-up knows it was not a normal attack"
+],
+[
+29,
+"0x55 is the action type for the follow-resolution attack; queued at instant priority"
+],
+[
+47,
+"stack check fail ends the first method; the code below belongs to RemoveExtrinsicEffectsFrom, merged by the decompiler"
+],
+[
+52,
+"look for any unit in play holding effects that came from the acting card"
+],
+[
+65,
+"then check the hand of the current turn's player"
+],
+[
+79,
+"then check the other player's hand"
+],
+[
+99,
+"found one: queue a remove-effects action for that card"
+]
+]
+},
+"3298c28": {
+"summary": "Builds and returns an attack BattleAction for the acting card, copying its player side and current attack type. It does not queue the action.",
+"comments": [
+[
+4,
+"zeroed action, then set as an attack"
+],
+[
+9,
+"record side and attack type from the attacking card"
+]
+]
+},
+"3298798": {
+"summary": "Logs and records pending damage for an attack. Shuriken and markerlight damage come first and may already kill the target; then normal combat damage, optional return damage to the attacker, and blast damage to units next to the target.",
+"comments": [
+[
+7,
+"build the log text 'RecordAttackPendingDamage from X to Y priority N'"
+],
+[
+15,
+"decompiler pasted unrelated code (GetAttackBattleAction body) here; ignore it"
+],
+[
+43,
+"shuriken: ranged bonus damage dealt before the attack"
+],
+[
+46,
+"markerlight on the target: extra damage dealt by the attacker's markerlight value"
+],
+[
+56,
+"normal combat damage for the chosen attack type"
+],
+[
+59,
+"if the target hits back, record its damage on the attacker (unless return damage is disabled)"
+],
+[
+65,
+"blast: also damage the units adjacent to the target"
+],
+[
+68,
+"pick the target's side: player or enemy minion manager"
+],
+[
+88,
+"shuriken present: record it first, stop if the target would already die"
+],
+[
+97,
+"target dies from shuriken alone, so skip the rest of the attack damage"
+]
+]
+},
+"3298e1c": {
+"summary": "Queues a remove-extrinsic-effects action for a card, but only if some unit in play or card in either hand still has an effect that came from it.",
+"comments": [
+[
+6,
+"search all units in play for effects from the acting card"
+],
+[
+19,
+"then the hand of the player whose turn it is"
+],
+[
+33,
+"then the other player's hand"
+],
+[
+53,
+"at least one effect found: queue the removal"
+]
+]
+},
+"3299058": {
+"summary": "Queues an add-hand-effect battle action that applies a HandEffect to a player's hand.",
+"comments": [
+[
+5,
+"build the action"
+],
+[
+16,
+"queue the add-hand-effect action"
+]
+]
+},
+"3299180": {
+"summary": "Queues a recall-to-hand action for a card. Minions are flagged as destroyed right away so they stop counting as in play.",
+"comments": [
+[
+5,
+"build the recall action"
+],
+[
+16,
+"queue the recall"
+],
+[
+19,
+"minions are marked destroyed immediately, before the action resolves"
+]
+]
+},
+"32992c8": {
+"summary": "Queues a recall-to-deck action for a card (top of deck if requested). Minions are flagged as destroyed right away.",
+"comments": [
+[
+5,
+"build the recall action"
+],
+[
+17,
+"queue the recall"
+],
+[
+21,
+"minions are marked destroyed immediately, before the action resolves"
+]
+]
+},
+"3299424": {
+"summary": "Queues a reset-duty battle action for a card.",
+"comments": [
+[
+5,
+"build the action"
+],
+[
+16,
+"queue the reset-duty action"
+]
+]
+},
+"329954c": {
+"summary": "Queues a discard-from-hand battle action for a card.",
+"comments": [
+[
+5,
+"no caster: built with null acting card"
+],
+[
+8,
+"queue the discard"
+]
+]
+},
+"32995e8": {
+"summary": "Queues a disappear-from-hand battle action for a card (removed from hand without going to the cemetery, seems to).",
+"comments": [
+[
+5,
+"no caster: built with null acting card"
+],
+[
+8,
+"queue the disappearance"
+]
+]
+},
+"3299684": {
+"summary": "Queues a display-from-hand battle action, which shows the card from hand.",
+"comments": [
+[
+5,
+"no caster: built with null acting card"
+],
+[
+8,
+"queue the display"
+]
+]
+},
+"3299720": {
+"summary": "Queues a steal-from-hand battle action for a card.",
+"comments": [
+[
+5,
+"build the steal action with the stealing card as actor"
+],
+[
+8,
+"queue the steal"
+]
+]
+},
+"32997d0": {
+"summary": "Queues a steal-from-deck battle action for a card.",
+"comments": [
+[
+5,
+"build the steal action with the stealing card as actor"
+],
+[
+8,
+"queue the steal"
+]
+]
+},
+"3299880": {
+"summary": "Queues a steal-minion battle action that takes control of a minion.",
+"comments": [
+[
+5,
+"no caster: built with null acting card"
+],
+[
+7,
+"queue the steal"
+]
+]
+},
+"329991c": {
+"summary": "Queues a trigger-relentless battle action for a card.",
+"comments": [
+[
+5,
+"build the Relentless trigger action"
+],
+[
+8,
+"queue the trigger"
+]
+]
+},
+"32999bc": {
+"summary": "Queues a trigger action for a card played through stimulation, always at priority 1.",
+"comments": [
+[
+5,
+"build the stimulation trigger action"
+],
+[
+9,
+"queue at fixed priority 1"
+]
+]
+},
+"3299a68": {
+"summary": "Queues a Requiem trigger battle action for the target card at the given priority.",
+"comments": [
+[
+5,
+"build the Requiem trigger action"
+],
+[
+8,
+"queue the trigger"
+]
+]
+},
+"3299b08": {
+"summary": "Queues a Synapse trigger battle action for the target card at the given priority.",
+"comments": [
+[
+5,
+"build the Synapse trigger action"
+],
+[
+9,
+"queue the trigger"
+]
+]
+},
+"3299bb8": {
+"summary": "Queues a Pray trigger battle action for the target card at the given priority.",
+"comments": [
+[
+5,
+"build the Pray trigger action"
+],
+[
+9,
+"queue the trigger"
+]
+]
+},
+"3299c68": {
+"summary": "Queues a Mob trigger action for the target card, using the additional-mob action type when flagged.",
+"comments": [
+[
+6,
+"extra mob trigger: rebuild the action as the additional-mob type"
+],
+[
+11,
+"queue the trigger"
+]
+]
+},
+"3299d44": {
+"summary": "Queues a Courtesy trigger battle action for the target card at the given priority.",
+"comments": [
+[
+5,
+"build the Courtesy trigger action"
+],
+[
+8,
+"queue the trigger"
+]
+]
+},
+"3299de4": {
+"summary": "Queues a Sacrifice trigger battle action for the target card at the given priority.",
+"comments": [
+[
+5,
+"build the Sacrifice trigger action"
+],
+[
+8,
+"queue the trigger"
+]
+]
+},
+"3299e84": {
+"summary": "Queues a Codex trigger battle action for the target card at the given priority.",
+"comments": [
+[
+5,
+"build the Codex trigger action"
+],
+[
+8,
+"queue the trigger"
+]
+]
+},
+"3299f24": {
+"summary": "Queues a Regiment trigger battle action for the target card at the given priority.",
+"comments": [
+[
+5,
+"build the Regiment trigger action"
+],
+[
+8,
+"queue the trigger"
+]
+]
+},
+"3299fc4": {
+"summary": "Queues a Ambush trigger battle action for the target card at the given priority.",
+"comments": [
+[
+5,
+"build the Ambush trigger action"
+],
+[
+8,
+"queue the trigger"
+]
+]
+},
+"329a064": {
+"summary": "Queues a Uprising trigger battle action for the target card at the given priority.",
+"comments": [
+[
+5,
+"build the Uprising trigger action"
+],
+[
+8,
+"queue the trigger"
+]
+]
+},
+"329a104": {
+"summary": "Queues a Slay trigger battle action for the target card at the given priority.",
+"comments": [
+[
+5,
+"build the Slay trigger action"
+],
+[
+8,
+"queue the trigger"
+]
+]
+},
+"329a1a4": {
+"summary": "Queues a Teleport trigger battle action for the target card at the given priority.",
+"comments": [
+[
+5,
+"build the Teleport trigger action"
+],
+[
+8,
+"queue the trigger"
+]
+]
+},
+"329a244": {
+"summary": "Queues a SpiritStone trigger battle action for the target card at the given priority.",
+"comments": [
+[
+5,
+"build the SpiritStone trigger action"
+],
+[
+8,
+"queue the trigger"
+]
+]
+},
+"329a2e4": {
+"summary": "Queues a PlayerCodex trigger battle action; note the first argument is the acting card.",
+"comments": [
+[
+5,
+"build the PlayerCodex trigger action"
+],
+[
+8,
+"queue the trigger"
+]
+]
+},
+"329a384": {
+"summary": "Queues an action that moves the target card to the top of its owner's deck.",
+"comments": [
+[
+5,
+"build the set-deck-card-top action"
+],
+[
+7,
+"acting card is needed for the side"
+],
+[
+10,
+"queue the action"
+]
+]
+},
+"329a434": {
+"summary": "Queues a reveal-orders action for the acting card with the given enchantment.",
+"comments": [
+[
+5,
+"build the reveal-orders action"
+],
+[
+9,
+"queue the action"
+]
+]
+},
+"329a4f4": {
+"summary": "Finds the effect on the card that matches this enchantment and marks it as used: a single-use enchantment, or a choice enchantment not yet used. Logs it when dev tools are on.",
+"comments": [
+[
+7,
+"log which card spends the enchantment"
+],
+[
+13,
+"scan the card's active effects for the enchantment"
+],
+[
+21,
+"effect holds this enchantment: check it is a single-use one that is still unused"
+],
+[
+27,
+"mark the effect as spent"
+],
+[
+30,
+"log only when dev tools are active"
+],
+[
+51,
+"not a single-use match: check whether it is an unused choice enchantment"
+],
+[
+68,
+"decompiler dumped the inlined logger interface lookup here; no game logic"
+]
+]
+},
+"329a574": {
+"summary": "Queues an action that swaps two minions; both are put into a list on the action.",
+"comments": [
+[
+5,
+"build the exchange-minion action"
+],
+[
+7,
+"list holds both minions; decompiler shows the List.Add calls inlined"
+],
+[
+37,
+"queue the exchange"
+]
+]
+},
+"329a768": {
+"summary": "Queues a summon-unit action that puts a new unit on the board at a position for the given side, with caster, effect and enchantment. Logs it.",
+"comments": [
+[
+6,
+"log the summon with card and caster names"
+],
+[
+10,
+"build the summon action"
+],
+[
+16,
+"remember the caster's raw card data"
+],
+[
+22,
+"queue the summon"
+]
+]
+},
+"329a928": {
+"summary": "Queues an auto-play-from-hand action for a card if it is in hand or being drawn; otherwise logs a warning and does nothing.",
+"comments": [
+[
+6,
+"only cards in hand or currently being drawn can be auto-played"
+],
+[
+8,
+"build the auto-play action"
+],
+[
+16,
+"side comes from the caster; false when there is none"
+],
+[
+26,
+"queue the auto play"
+],
+[
+29,
+"card is elsewhere: just log a warning"
+]
+]
+},
+"329ab34": {
+"summary": "Creates a new card object in a player's hand (hidden at first), then queues a create-hand-card action. Returns the new CardScript.",
+"comments": [
+[
+7,
+"pick the player's or enemy's hand parent object (0xd0 vs 0xd8, different field)"
+],
+[
+13,
+"the hero's army decides the card back/style for the new card"
+],
+[
+17,
+"scale the new card to the small hand scale"
+],
+[
+24,
+"hide the card until the action reveals it"
+],
+[
+25,
+"build the create-hand-card action with start and end positions"
+],
+[
+33,
+"queue the action unless the game is in a state marked 0x3c (field name unknown)"
+],
+[
+37,
+"remember which card created it"
+],
+[
+41,
+"turn off the tooltips on the new card"
+]
+]
+},
+"329adf0": {
+"summary": "Creates a new card object for a deck (hidden), records its creator, and queues a create-deck-card action. Returns the new CardScript.",
+"comments": [
+[
+6,
+"raw card to create must be given"
+],
+[
+7,
+"checks a trap-state flag (0x14 / 0x46) on the raw card; seems to detect an armed trap"
+],
+[
+13,
+"pick the player's or enemy's deck parent object"
+],
+[
+21,
+"create the card object using the hero's army"
+],
+[
+25,
+"scale the new card down"
+],
+[
+31,
+"hide the card until it is shown by the action"
+],
+[
+33,
+"remember and log which card created it"
+],
+[
+40,
+"build the create-deck-card action and fill in positions"
+],
+[
+49,
+"queue the action"
+]
+]
+},
+"329b0e8": {
+"summary": "Queues an action that copies the target unit from the cemetery.",
+"comments": [
+[
+5,
+"build the action"
+],
+[
+8,
+"queue the copy"
+]
+]
+},
+"329b184": {
+"summary": "Copies the target card list and queues an action that shows it in a cards window, with an optional buff effect.",
+"comments": [
+[
+6,
+"copy the list so the action has its own"
+],
+[
+11,
+"append each card; List.Add is inlined by the decompiler"
+],
+[
+30,
+"queue the show-window action"
+]
+]
+},
+"329b354": {
+"summary": "Queues an action that transforms the target card into another card, optionally keeping its effects.",
+"comments": [
+[
+5,
+"build the transform action"
+],
+[
+17,
+"queue the transform"
+]
+]
+},
+"329b494": {
+"summary": "Queues an action that transforms the target card into another card and applies a buff effect to the result.",
+"comments": [
+[
+5,
+"build the transform action"
+],
+[
+18,
+"queue the transform"
+]
+]
+},
+"3295320": {
+"summary": "Queues an action that turns the target card into a remnant.",
+"comments": [
+[
+5,
+"build the transform-to-remnant action"
+],
+[
+7,
+"flag 1: becoming a remnant"
+],
+[
+16,
+"queue the transform"
+]
+]
+},
+"329b5e8": {
+"summary": "Marks the card as leaving remnant state and queues a transform action in the opposite direction (remnant back to unit).",
+"comments": [
+[
+6,
+"mark the card as leaving remnant first"
+],
+[
+7,
+"same action type as becoming a remnant but with the flag cleared"
+],
+[
+17,
+"queue the transform"
+]
+]
+},
+"329b728": {
+"summary": "Queues an action that replaces a player's hero power with a new one.",
+"comments": [
+[
+5,
+"0x18 is the action type for replace-hero-power"
+],
+[
+8,
+"queue the action"
+]
+]
+},
+"329b7b4": {
+"summary": "Queues an action that jams the given unit.",
+"comments": [
+[
+5,
+"build the jam action"
+],
+[
+8,
+"queue the jam"
+]
+]
+},
+"329b850": {
+"summary": "Queues a mana-buff action for a player (Energy gain/modifier).",
+"comments": [
+[
+5,
+"build the Energy buff action"
+],
+[
+8,
+"queue the buff"
+]
+]
+},
+"329b900": {
+"summary": "Logs and queues a psychic Energy buff of the given amount for a player's hero.",
+"comments": [
+[
+9,
+"log the call"
+],
+[
+11,
+"build the buff: friendly, psychic type, with the amount"
+],
+[
+18,
+"queue at priority 1"
+]
+]
+},
+"329ba34": {
+"summary": "Logs and queues a plasma Energy buff of the given amount for a player's hero.",
+"comments": [
+[
+9,
+"log the call"
+],
+[
+11,
+"build the buff: friendly, plasma type, with the amount"
+],
+[
+18,
+"queue at priority 1"
+]
+]
+},
+"329bb68": {
+"summary": "Queues a stun action on the target card, with a new stun CardEffect created by the caster.",
+"comments": [
+[
+5,
+"build the stun action"
+],
+[
+7,
+"new effect marks the stun; buffType is stun (decompiler shows a packed constant)"
+],
+[
+13,
+"queue the stun"
+]
+]
+},
+"329bc84": {
+"summary": "Queues a reset-actions action for the target card (restores its actions for the turn, seems to).",
+"comments": [
+[
+5,
+"build the action"
+],
+[
+8,
+"queue it"
+]
+]
+},
+"329bd30": {
+"summary": "Queues a miss action for the target card.",
+"comments": [
+[
+5,
+"build the action"
+],
+[
+8,
+"queue it"
+]
+]
+},
+"329bddc": {
+"summary": "Queues a force-attack action on the target card. If dontCountAttack is set, the attack this turn is removed again.",
+"comments": [
+[
+7,
+"log it"
+],
+[
+9,
+"build the force-attack action"
+],
+[
+12,
+"don't count this attack: remember if the card had none yet, then remove one attack this turn"
+],
+[
+16,
+"queue it"
+]
+]
+},
+"329bf10": {
+"summary": "Queues a scripted forced attack between two cards and records the pending damage. Can refund the attack count.",
+"comments": [
+[
+8,
+"log it"
+],
+[
+10,
+"build the scripted force attack"
+],
+[
+14,
+"don't count this attack: remember and remove one attack this turn"
+],
+[
+18,
+"clear old pending damage on both cards"
+],
+[
+21,
+"record the attack damage, no return damage"
+],
+[
+23,
+"queue it"
+]
+]
+},
+"329c090": {
+"summary": "Queues a force-attack-on-friendly-units action for the target card.",
+"comments": [
+[
+7,
+"log it"
+],
+[
+9,
+"build the action"
+],
+[
+12,
+"queue it"
+]
+]
+},
+"32967f8": {
+"summary": "Queues a berzerk attack from acting to target card at instant priority, then plays the berzerk trait frame effect on the acting card's UI. Decompiled UI part is unreliable.",
+"comments": [
+[
+6,
+"log the berzerk attack"
+],
+[
+11,
+"queue a normal attack at instant priority, blocking player actions"
+],
+[
+13,
+"now the visual part: trait frame animation for berzerk"
+],
+[
+18,
+"look up berzerk trait definition and its per-attack-type effects"
+],
+[
+23,
+"loop over the trait effects; decompiler lost the loop bounds"
+],
+[
+36,
+"heroes only get the effect when the trait effect is enabled"
+],
+[
+46,
+"trait value 3 or 6 is the active berzerk level (exact meaning not clear)"
+],
+[
+55,
+"skip if this card's trait frame effect is already playing"
+],
+[
+61,
+"start the trait animation coroutine on the card UI"
+]
+]
+},
+"329c194": {
+"summary": "Queues a scripted attack, unless the attacker has left play, is about to die, or is stunned. Melee or ranged is chosen by whichever deals more combat damage.",
+"comments": [
+[
+7,
+"attacker must still be in play"
+],
+[
+9,
+"attacker is already doomed by pending damage: ignore"
+],
+[
+14,
+"stunned units cannot attack"
+],
+[
+16,
+"prepare attack and clear pending damage on both cards"
+],
+[
+20,
+"build the scripted attack action"
+],
+[
+26,
+"choose melee when it deals more than ranged, otherwise ranged"
+],
+[
+32,
+"record damage for the chosen attack"
+],
+[
+34,
+"queue it"
+],
+[
+44,
+"unit left play: build a log message"
+],
+[
+47,
+"log only when dev tools are on; rest is the inlined logger call"
+]
+]
+},
+"329c3a0": {
+"summary": "Queues a redirected attack from acting to target card with the given attack type, only if the attacker is still in play and not about to die.",
+"comments": [
+[
+9,
+"attacker must still be in play"
+],
+[
+11,
+"attacker is doomed by pending damage: ignore"
+],
+[
+14,
+"clear old damage and set up the attack"
+],
+[
+18,
+"record the damage for this attack"
+],
+[
+19,
+"build the redirected attack action"
+],
+[
+26,
+"queue it"
+],
+[
+33,
+"unit left play: build a log message"
+],
+[
+36,
+"log only when dev tools are on"
+]
+]
+},
+"329c568": {
+"summary": "Queues a disappear-unit action for the target card and logs it.",
+"comments": [
+[
+5,
+"build the action"
+],
+[
+8,
+"log it"
+],
+[
+11,
+"queue it"
+]
+]
+},
+"329c66c": {
+"summary": "Queues a remove-from-cemetery action for the target card and logs it.",
+"comments": [
+[
+5,
+"build the action"
+],
+[
+8,
+"log it"
+],
+[
+11,
+"queue it"
+]
+]
+},
+"3281b0c": {
+"summary": "Queues a draw-card action for a player after flagging the next deck card as being drawn.",
+"comments": [
+[
+6,
+"build the draw action"
+],
+[
+8,
+"mark the top card of that deck as drawing"
+],
+[
+10,
+"queue the draw"
+]
+]
+},
+"329c854": {
+"summary": "Queues a draw action for a specific card, marking it as drawing from the deck.",
+"comments": [
+[
+5,
+"build the draw action"
+],
+[
+9,
+"mark the chosen card as drawing"
+],
+[
+11,
+"queue the draw"
+]
+]
+},
+"329c91c": {
+"summary": "Queues a play-animation action with start, end and rotate-towards transforms; can make the queue wait for the animation.",
+"comments": [
+[
+5,
+"build the animation action"
+],
+[
+13,
+"queue it"
+]
+]
+},
+"329ca38": {
+"summary": "Queues an ability-icon animation action for a card and trigger.",
+"comments": [
+[
+6,
+"for units the action is cancelled if they leave play"
+],
+[
+12,
+"queue it"
+]
+]
+},
+"329cb0c": {
+"summary": "Queues a trait-trigger animation action for a card and trigger.",
+"comments": [
+[
+6,
+"for units the action is cancelled if they leave play"
+],
+[
+12,
+"queue it"
+]
+]
+},
+"329cbe0": {
+"summary": "Queues an active-ability animation action for a card.",
+"comments": [
+[
+5,
+"always checks the caster is in play"
+],
+[
+9,
+"queue it"
+]
+]
+},
+"329cc84": {
+"summary": "Queues a multi-damage action over a copy of the target list and records the pending damage on every target.",
+"comments": [
+[
+6,
+"copy the target list"
+],
+[
+13,
+"queue the damage action"
+],
+[
+16,
+"mark pending damage on each target so checks see it early"
+]
+]
+},
+"329ce40": {
+"summary": "Queues a multi-damage action where each target has its own DamageInfo. Pending damage is not recorded here.",
+"comments": [
+[
+6,
+"copy the target list"
+],
+[
+12,
+"queue the damage action"
+]
+]
+},
+"329cf8c": {
+"summary": "Queues a multi-damage action that also destroys the caster, marking it destroyed and recording pending damage on targets.",
+"comments": [
+[
+6,
+"copy the target list"
+],
+[
+12,
+"caster dies as part of the effect: flag it destroyed right away"
+],
+[
+14,
+"queue the damage action"
+],
+[
+18,
+"mark pending damage on each target"
+]
+]
+},
+"329d14c": {
+"summary": "Queues a destroy-unit action and marks the target as destroyed immediately.",
+"comments": [
+[
+5,
+"build the destroy action with the death type"
+],
+[
+10,
+"queue it"
+],
+[
+12,
+"flag the unit destroyed right away"
+]
+]
+},
+"329d220": {
+"summary": "Queues a follow-after-resolution action linking the acting card and target card.",
+"comments": [
+[
+5,
+"build the action"
+],
+[
+9,
+"queue it"
+]
+]
+},
+"329d2d0": {
+"summary": "Queues an action that removes an enchantment effect from the target card.",
+"comments": [
+[
+5,
+"build the remove-effect action"
+],
+[
+8,
+"queue it"
+]
+]
+},
+"329d380": {
+"summary": "Queues an execute-swarm action for the acting and target cards.",
+"comments": [
+[
+5,
+"build the action"
+],
+[
+9,
+"queue it"
+]
+]
+},
+"329d430": {
+"summary": "Returns a new list with the first numCards cards of the player's or enemy's shuffled deck (fewer if the deck is shorter).",
+"comments": [
+[
+4,
+"choose the player's or enemy's shuffled deck"
+],
+[
+16,
+"copy cards from the top, as long as the deck has them"
+],
+[
+21,
+"List.Add is inlined by the decompiler"
+]
+]
+},
+"329d594": {
+"summary": "Computes the AI's value of a card in play: reference value plus enchantments, scaled down when damaged and by 0.8 when stunned or pinned down.",
+"comments": [
+[
+9,
+"base value from the AI manager"
+],
+[
+10,
+"add the AI value of enchantments on the card"
+],
+[
+21,
+"damaged: scale by half plus half of the health ratio"
+],
+[
+32,
+"stunned or pinned down units are worth 20% less"
+]
+]
+},
+"329d5b8": {
+"summary": "Adds a sound asset to the list of sounds to play, if it has an audio clip.",
+"comments": [
+[
+5,
+"ignore assets without a clip"
+],
+[
+8,
+"List.Add is inlined by the decompiler"
+]
+]
+},
+"329d6b0": {
+"summary": "Plays an audio clip once on the battle audio source when sound effect volume is above zero.",
+"comments": [
+[
+6,
+"skip when sound FX volume is 0"
+],
+[
+14,
+"decompiler expanded Unity's PlayOneShot null checks"
+],
+[
+36,
+"clip is null: log an error"
+]
+]
+},
+"329d7f4": {
+"summary": "Returns whether every card in the list is currently in play (true for an empty list).",
+"comments": [
+[
+6,
+"check each card in turn"
+],
+[
+12,
+"stop at the first card that is not in play"
+]
+]
+},
+"329d980": {
+"summary": "Creates a new list and fills it with units in play according to the include flags (hero, minions, hero parts, weapons, remnants, sides, dying).",
+"comments": [
+[
+6,
+"GetUnitsInPlayList fills the list through a holder"
+]
+]
+}
+}

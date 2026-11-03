@@ -1,0 +1,635 @@
+{
+ "328eca4": {
+  "summary": "Applies a card effect (from a BattleAction) to the acting card and logs it, broadcasts poison for effect type 3 with value 200, then runs the shared post-action cleanup. The cleanup reorders minions, ends the battle if a hero died, and refreshes hero/hand state and available actions.",
+  "comments": [
+   [
+    16,
+    "Effect type 3 with value 200 seems to be poison: tell the UI the unit is poisoned."
+   ],
+   [
+    24,
+    "Only when no queued actions remain: check whether either side's minions are out of position."
+   ],
+   [
+    27,
+    "Queue a reassemble (re-layout) order for the player's minion row if it is out of position."
+   ],
+   [
+    32,
+    "Same check for the enemy's minion row."
+   ],
+   [
+    37,
+    "Automatic follow-up actions still pending? If none, it is safe to check for a dead hero."
+   ],
+   [
+    39,
+    "Hero death ends the match here only in normal matches, not tutorial or campaign ones."
+   ],
+   [
+    41,
+    "Hero state 5 seems to mean dead; look at the player's hero first, then the enemy's."
+   ],
+   [
+    49,
+    "Builds the 'DeadHeroAfterActionsEnd' debug log line (battle result, UI state, battle stage)."
+   ],
+   [
+    82,
+    "Battle already in post-battle stage: normally log a warning and bail out unless a disconnect loss is pending."
+   ],
+   [
+    97,
+    "shouldLoseIfDisconnectEnd set: record a loss against the player and run the basic end sequence coroutine."
+   ],
+   [
+    106,
+    "Normal end: enter post-battle stage and stop the running battle."
+   ],
+   [
+    108,
+    "In a networked match, tell the other player the match is finished."
+   ],
+   [
+    113,
+    "Lock the UI into the finish-battle sequence and switch the during-battle flag off."
+   ],
+   [
+    119,
+    "Player won: raise a signal with the enemy hero's current health so UI/listeners react."
+   ],
+   [
+    135,
+    "Get the current event's leaderboard rating if it is a leaderboard event, else the stored Elo rating."
+   ],
+   [
+    158,
+    "Work out who won from the dead-hero flag."
+   ],
+   [
+    161,
+    "Create the match result record from the Elo rating and current XP."
+   ],
+   [
+    166,
+    "Store the player's and enemy's skull (milestone) counts on the match result."
+   ],
+   [
+    184,
+    "Enemy milestone is computed from the player's remaining hero health (0 if the player lost)."
+   ],
+   [
+    187,
+    "Record the result and the elapsed match time in minutes."
+   ],
+   [
+    197,
+    "Player win: flag it in player data; for certain match types (0x14, 0xd2, 0xb4) tell LiveOps the player is human."
+   ],
+   [
+    206,
+    "Save the winner, finish the battle, and return (no further turn handling)."
+   ],
+   [
+    230,
+    "Shared null-reference failure exit."
+   ],
+   [
+    233,
+    "No hero is dead: broadcast while-in-play triggers to the board."
+   ],
+   [
+    238,
+    "Action fully resolved: clear the resolving flag, then refresh whose turn it is."
+   ],
+   [
+    240,
+    "Enemy's turn: re-evaluate the enemy hero's ability to act/attack; player's turn: relight hand and activate pieces."
+   ],
+   [
+    248,
+    "Enemy hero can act only if it is alive/in play, not stunned and without summon sickness (bloodthirst allowed)."
+   ],
+   [
+    258,
+    "Ferocity or Oath hero: recompute canAct and force an Active attack type while summon sick."
+   ],
+   [
+    274,
+    "Show or hide the hero ability button depending on whether the hero can attack now."
+   ],
+   [
+    290,
+    "Player's turn: light up playable cards, activate minions and hero."
+   ],
+   [
+    299,
+    "Queue empty: run a garbage collection coroutine while idle and unpause the clock."
+   ],
+   [
+    304,
+    "If the player has no real action (only end turn) show the 'no actions left' clock UI."
+   ],
+   [
+    324,
+    "Scripted (tutorial) stage: continue the scripted turn once the awaited player action is done."
+   ],
+   [
+    338,
+    "Reset the manual-action marker for the next sequence."
+   ],
+   [
+    345,
+    "Shared null-reference failure exit."
+   ]
+  ]
+ },
+ "328ed38": {
+  "summary": "Adds a hand effect to the player's or enemy's hand depending on the action's player flag, then runs the shared post-action cleanup (minion reorder, hero death check and battle end, hero/hand refresh, available-action handling).",
+  "comments": [
+   [
+    4,
+    "Pick the hand: enemy hand by default, player hand when the action's player flag is set."
+   ],
+   [
+    16,
+    "Only when no queued actions remain: check whether either side's minions are out of position."
+   ],
+   [
+    19,
+    "Queue a reassemble (re-layout) order for the player's minion row if it is out of position."
+   ],
+   [
+    24,
+    "Same check for the enemy's minion row."
+   ],
+   [
+    29,
+    "Automatic follow-up actions still pending? If none, it is safe to check for a dead hero."
+   ],
+   [
+    31,
+    "Hero death ends the match here only in normal matches, not tutorial or campaign ones."
+   ],
+   [
+    33,
+    "Hero state 5 seems to mean dead; look at the player's hero first, then the enemy's."
+   ],
+   [
+    41,
+    "Builds the 'DeadHeroAfterActionsEnd' debug log line (battle result, UI state, battle stage)."
+   ],
+   [
+    74,
+    "Battle already in post-battle stage: normally log a warning and bail out unless a disconnect loss is pending."
+   ],
+   [
+    89,
+    "shouldLoseIfDisconnectEnd set: record a loss against the player and run the basic end sequence coroutine."
+   ],
+   [
+    98,
+    "Normal end: enter post-battle stage and stop the running battle."
+   ],
+   [
+    100,
+    "In a networked match, tell the other player the match is finished."
+   ],
+   [
+    105,
+    "Lock the UI into the finish-battle sequence and switch the during-battle flag off."
+   ],
+   [
+    111,
+    "Player won: raise a signal with the enemy hero's current health so UI/listeners react."
+   ],
+   [
+    127,
+    "Get the current event's leaderboard rating if it is a leaderboard event, else the stored Elo rating."
+   ],
+   [
+    150,
+    "Work out who won from the dead-hero flag."
+   ],
+   [
+    153,
+    "Create the match result record from the Elo rating and current XP."
+   ],
+   [
+    158,
+    "Store the player's and enemy's skull (milestone) counts on the match result."
+   ],
+   [
+    176,
+    "Enemy milestone is computed from the player's remaining hero health (0 if the player lost)."
+   ],
+   [
+    179,
+    "Record the result and the elapsed match time in minutes."
+   ],
+   [
+    189,
+    "Player win: flag it in player data; for certain match types (0x14, 0xd2, 0xb4) tell LiveOps the player is human."
+   ],
+   [
+    198,
+    "Save the winner, finish the battle, and return (no further turn handling)."
+   ],
+   [
+    222,
+    "Shared null-reference failure exit."
+   ],
+   [
+    225,
+    "No hero is dead: broadcast while-in-play triggers to the board."
+   ],
+   [
+    230,
+    "Action fully resolved: clear the resolving flag, then refresh whose turn it is."
+   ],
+   [
+    232,
+    "Enemy's turn: re-evaluate the enemy hero's ability to act/attack; player's turn: relight hand and activate pieces."
+   ],
+   [
+    240,
+    "Enemy hero can act only if it is alive/in play, not stunned and without summon sickness (bloodthirst allowed)."
+   ],
+   [
+    250,
+    "Ferocity or Oath hero: recompute canAct and force an Active attack type while summon sick."
+   ],
+   [
+    266,
+    "Show or hide the hero ability button depending on whether the hero can attack now."
+   ],
+   [
+    282,
+    "Player's turn: light up playable cards, activate minions and hero."
+   ],
+   [
+    291,
+    "Queue empty: run a garbage collection coroutine while idle and unpause the clock."
+   ],
+   [
+    296,
+    "If the player has no real action (only end turn) show the 'no actions left' clock UI."
+   ],
+   [
+    316,
+    "Scripted (tutorial) stage: continue the scripted turn once the awaited player action is done."
+   ],
+   [
+    330,
+    "Reset the manual-action marker for the next sequence."
+   ],
+   [
+    337,
+    "Shared null-reference failure exit."
+   ]
+  ]
+ },
+ "328ed8c": {
+  "summary": "Removes a CardEffect from a card, cancels its running animations and frame effects, then runs the shared post-action cleanup (minion reorder, hero death and battle end, hero/hand refresh).",
+  "comments": [
+   [
+    9,
+    "Remove the effect from the card and stop animations tied to the card and effect."
+   ],
+   [
+    15,
+    "Only when no queued actions remain: check whether either side's minions are out of position."
+   ],
+   [
+    18,
+    "Queue a reassemble (re-layout) order for the player's minion row if it is out of position."
+   ],
+   [
+    23,
+    "Same check for the enemy's minion row."
+   ],
+   [
+    28,
+    "Automatic follow-up actions still pending? If none, it is safe to check for a dead hero."
+   ],
+   [
+    30,
+    "Hero death ends the match here only in normal matches, not tutorial or campaign ones."
+   ],
+   [
+    32,
+    "Hero state 5 seems to mean dead; look at the player's hero first, then the enemy's."
+   ],
+   [
+    40,
+    "Builds the 'DeadHeroAfterActionsEnd' debug log line (battle result, UI state, battle stage)."
+   ],
+   [
+    73,
+    "Battle already in post-battle stage: normally log a warning and bail out unless a disconnect loss is pending."
+   ],
+   [
+    97,
+    "Normal end: enter post-battle stage and stop the running battle."
+   ],
+   [
+    99,
+    "In a networked match, tell the other player the match is finished."
+   ],
+   [
+    104,
+    "Lock the UI into the finish-battle sequence and switch the during-battle flag off."
+   ],
+   [
+    110,
+    "Player won: raise a signal with the enemy hero's current health so UI/listeners react."
+   ],
+   [
+    126,
+    "Get the current event's leaderboard rating if it is a leaderboard event, else the stored Elo rating."
+   ],
+   [
+    149,
+    "Work out who won from the dead-hero flag."
+   ],
+   [
+    152,
+    "Create the match result record from the Elo rating and current XP."
+   ],
+   [
+    157,
+    "Store the player's and enemy's skull (milestone) counts on the match result."
+   ],
+   [
+    175,
+    "Enemy milestone is computed from the player's remaining hero health (0 if the player lost)."
+   ],
+   [
+    178,
+    "Record the result and the elapsed match time in minutes."
+   ],
+   [
+    188,
+    "Player win: flag it in player data; for certain match types (0x14, 0xd2, 0xb4) tell LiveOps the player is human."
+   ],
+   [
+    197,
+    "Save the winner, finish the battle, and return (no further turn handling)."
+   ],
+   [
+    221,
+    "Shared null-reference failure exit."
+   ],
+   [
+    224,
+    "No hero is dead: broadcast while-in-play triggers to the board."
+   ],
+   [
+    229,
+    "Action fully resolved: clear the resolving flag, then refresh whose turn it is."
+   ],
+   [
+    231,
+    "Enemy's turn: re-evaluate the enemy hero's ability to act/attack; player's turn: relight hand and activate pieces."
+   ],
+   [
+    239,
+    "Enemy hero can act only if it is alive/in play, not stunned and without summon sickness (bloodthirst allowed)."
+   ],
+   [
+    249,
+    "Ferocity or Oath hero: recompute canAct and force an Active attack type while summon sick."
+   ],
+   [
+    265,
+    "Show or hide the hero ability button depending on whether the hero can attack now."
+   ],
+   [
+    281,
+    "Player's turn: light up playable cards, activate minions and hero."
+   ],
+   [
+    289,
+    "Queue empty: run a garbage collection coroutine while idle and unpause the clock."
+   ],
+   [
+    294,
+    "If the player has no real action (only end turn) show the 'no actions left' clock UI."
+   ],
+   [
+    312,
+    "Scripted (tutorial) stage: continue the scripted turn once the awaited player action is done."
+   ],
+   [
+    322,
+    "Reset the manual-action marker for the next sequence."
+   ],
+   [
+    329,
+    "Shared null-reference failure exit."
+   ]
+  ]
+ },
+ "328edec": {
+  "summary": "Broadcasts that all effects were removed from a card, then runs the shared post-action cleanup: minion reorder, hero death check and battle end, enemy/player turn activation and available-action handling.",
+  "comments": [
+   [
+    4,
+    "Tell the board and listeners that this card lost its effects."
+   ],
+   [
+    8,
+    "Only when no queued actions remain: check whether either side's minions are out of position."
+   ],
+   [
+    11,
+    "Queue a reassemble (re-layout) order for the player's minion row if it is out of position."
+   ],
+   [
+    16,
+    "Same check for the enemy's minion row."
+   ],
+   [
+    21,
+    "Automatic follow-up actions still pending? If none, it is safe to check for a dead hero."
+   ],
+   [
+    23,
+    "Hero death ends the match here only in normal matches, not tutorial or campaign ones."
+   ],
+   [
+    25,
+    "Hero state 5 seems to mean dead; look at the player's hero first, then the enemy's."
+   ],
+   [
+    33,
+    "Builds the 'DeadHeroAfterActionsEnd' debug log line (battle result, UI state, battle stage)."
+   ],
+   [
+    66,
+    "Battle already in post-battle stage: normally log a warning and bail out unless a disconnect loss is pending."
+   ],
+   [
+    81,
+    "shouldLoseIfDisconnectEnd set: record a loss against the player and run the basic end sequence coroutine."
+   ],
+   [
+    90,
+    "Normal end: enter post-battle stage and stop the running battle."
+   ],
+   [
+    92,
+    "In a networked match, tell the other player the match is finished."
+   ],
+   [
+    97,
+    "Lock the UI into the finish-battle sequence and switch the during-battle flag off."
+   ],
+   [
+    103,
+    "Player won: raise a signal with the enemy hero's current health so UI/listeners react."
+   ],
+   [
+    119,
+    "Get the current event's leaderboard rating if it is a leaderboard event, else the stored Elo rating."
+   ],
+   [
+    142,
+    "Work out who won from the dead-hero flag."
+   ],
+   [
+    145,
+    "Create the match result record from the Elo rating and current XP."
+   ],
+   [
+    150,
+    "Store the player's and enemy's skull (milestone) counts on the match result."
+   ],
+   [
+    168,
+    "Enemy milestone is computed from the player's remaining hero health (0 if the player lost)."
+   ],
+   [
+    171,
+    "Record the result and the elapsed match time in minutes."
+   ],
+   [
+    181,
+    "Player win: flag it in player data; for certain match types (0x14, 0xd2, 0xb4) tell LiveOps the player is human."
+   ],
+   [
+    190,
+    "Save the winner, finish the battle, and return (no further turn handling)."
+   ],
+   [
+    214,
+    "Shared null-reference failure exit."
+   ],
+   [
+    217,
+    "No hero is dead: broadcast while-in-play triggers to the board."
+   ],
+   [
+    222,
+    "Action fully resolved: clear the resolving flag, then refresh whose turn it is."
+   ],
+   [
+    224,
+    "Enemy's turn: re-evaluate the enemy hero's ability to act/attack; player's turn: relight hand and activate pieces."
+   ],
+   [
+    232,
+    "Enemy hero can act only if it is alive/in play, not stunned and without summon sickness (bloodthirst allowed)."
+   ],
+   [
+    242,
+    "Ferocity or Oath hero: recompute canAct and force an Active attack type while summon sick."
+   ],
+   [
+    258,
+    "Show or hide the hero ability button depending on whether the hero can attack now."
+   ],
+   [
+    274,
+    "Player's turn: light up playable cards, activate minions and hero."
+   ],
+   [
+    282,
+    "Queue empty: run a garbage collection coroutine while idle and unpause the clock."
+   ],
+   [
+    287,
+    "If the player has no real action (only end turn) show the 'no actions left' clock UI."
+   ],
+   [
+    305,
+    "Scripted (tutorial) stage: continue the scripted turn once the awaited player action is done."
+   ],
+   [
+    315,
+    "Reset the manual-action marker for the next sequence."
+   ],
+   [
+    322,
+    "Shared null-reference failure exit."
+   ]
+  ]
+ },
+ "3295060": {
+  "summary": "Cleans up a card's trait frame-effect objects when a buff is removed. It destroys the GameObject for the effect's trait in the card UI's Play and Trigger dictionaries and removes the entries. Later lines are decompiler spill-over from inlined Dictionary code.",
+  "comments": [
+   [
+    4,
+    "Null check on the effect being removed."
+   ],
+   [
+    8,
+    "Only a small range of buff types starting at 15 have frame effects; any other buff type returns early."
+   ],
+   [
+    12,
+    "If a 'play' frame effect exists for this trait, destroy its object and drop the dictionary entry."
+   ],
+   [
+    19,
+    "Get the frame effect's component and call DoDestroy so it plays its exit and cleans up."
+   ],
+   [
+    29,
+    "Now the 'trigger' frame effects: same lookup for this trait; return if there is none."
+   ],
+   [
+    41,
+    "Destroy the trigger frame effect object via its component."
+   ],
+   [
+    47,
+    "Inlined Dictionary.Remove for the trigger dictionary: hash the trait, find the bucket, unlink the entry."
+   ],
+   [
+    53,
+    "Hash the key with the dictionary's comparer (or the enum's own GetHashCode when none)."
+   ],
+   [
+    105,
+    "Walk the bucket's entry chain comparing hash and key; on a match unlink it and push onto the free list."
+   ],
+   [
+    183,
+    "Decompiler ran on into neighbouring code: Dictionary<Int32Enum,object>.Remove with an out value."
+   ],
+   [
+    324,
+    "Neighbouring code again: Dictionary<Int32Enum,object>.TryGetValue (find entry, write value or 0)."
+   ],
+   [
+    340,
+    "Neighbouring code again: Dictionary<Int32Enum,object>.TryAdd/insert with resize and free-list handling."
+   ],
+   [
+    517,
+    "Shared index/cast failure exit for the inlined dictionary code."
+   ]
+  ]
+ }
+}

@@ -1,0 +1,869 @@
+{
+"2f4e4e4": {
+"summary": "Fills an enchantment list item's title and description for a CardEffect. Hides details for secrets and the opponent's quests, shows mark-of-chaos names, and otherwise uses the effect's own name and description. Logs an error if the effect is null.",
+"comments": [
+[
+5,
+"no effect given: log an error and do nothing"
+],
+[
+15,
+"not a secret case: check quest and mark of chaos effects first"
+],
+[
+16,
+"a quest the viewer should not see: show only the generic quest title and a classified description"
+],
+[
+24,
+"quest the viewer may see: quest title plus the real description"
+],
+[
+25,
+"mark of chaos buff: title is built from the god's mark trait"
+],
+[
+28,
+"pick the mark trait for Khorne/Nurgle/Slaanesh/Tzeentch; the decompiler lost the exact trait lookup"
+],
+[
+54,
+"stacked marks (value above 1) get a multiplier suffix appended to the title"
+],
+[
+70,
+"ordinary enchantment: description from the effect, title from effect name or enchanting card"
+],
+[
+80,
+"effect has no name: fall back to the name of the card that enchanted"
+],
+[
+103,
+"secret case: generic secret title with a classified description"
+],
+[
+113,
+"set the description text (decompiled as a virtual call)"
+]
+]
+},
+"2f4eadc": {
+"summary": "Returns true if the effect description text box is empty (null or zero length).",
+"comments": [
+[
+9,
+"text exists and has nonzero length: not empty"
+]
+]
+},
+"2f4eb60": {
+"summary": "Unity Start for a card highlight: remembers the card body's starting scale, shows frames in the regular color, and hides the minion-will-die icon. Also resets the attack-type highlights to the card's current attack type.",
+"comments": [
+[
+4,
+"card body transform is required"
+],
+[
+7,
+"remember starting scale so highlight tweens can return to it"
+],
+[
+11,
+"show frame highlights and apply the regular (idle) color"
+],
+[
+26,
+"remnant cards show their original card face normally"
+],
+[
+32,
+"hide the 'minion will die' icon"
+],
+[
+41,
+"enemy cards get no attack type; own cards use their current attack type"
+],
+[
+47,
+"update each attack-type highlight (melee/range); decompiler garbled the loop and tail here"
+]
+]
+},
+"2f4f4e0": {
+"summary": "Switches the highlight to a new state (regular, valid target, selected, target on board, active ability). Tweens the frame color and card scale to match, and does nothing if the state is unchanged.",
+"comments": [
+[
+4,
+"already in this state: nothing to do"
+],
+[
+7,
+"make sure frames are visible, then record the new state"
+],
+[
+9,
+"hand/regular/selected states: color change only, no board scale"
+],
+[
+10,
+"back to regular: scale returns to initial size and frame uses the regular color"
+],
+[
+18,
+"valid target in hand: use the valid target color"
+],
+[
+19,
+"selected card: selected color, applied instantly"
+],
+[
+36,
+"board states: color change plus scale-up"
+],
+[
+37,
+"unit on board that can be targeted: valid target color"
+],
+[
+73,
+"unit on board already chosen as target: selected target color"
+],
+[
+80,
+"showing an active ability: playable color, applied instantly"
+],
+[
+89,
+"apply the color: kill any running tween, then tween or set instantly"
+],
+[
+95,
+"no animation time: set frame colors directly"
+],
+[
+107,
+"alpha is zero: hide the frame objects"
+],
+[
+129,
+"animate: tween frame (and remnant frame) color in a sequence"
+],
+[
+142,
+"if fading to transparent, deactivate the frames when the tween ends"
+]
+]
+},
+"2f4eee4": {
+"summary": "Previews combat or tactic/ability damage on this card from another card. Shows the 'minion will die' icon if the pending damage would kill it, and updates attack-type highlights. Called while hovering or dragging an attacker.",
+"comments": [
+[
+4,
+"need both this card and the other card to preview anything"
+],
+[
+11,
+"unity ability: damage is the other card's active ability damage"
+],
+[
+24,
+"ability damage uses damage type 3"
+],
+[
+40,
+"normal case: look at what the other card is"
+],
+[
+42,
+"other card is a tactic from the opposing side: use the damage it would deal to this card"
+],
+[
+63,
+"does the target hit back in combat?"
+],
+[
+65,
+"retaliation damage uses the other card's attack of the relevant type; damage type 4"
+],
+[
+91,
+"defender case: add the other card's shuriken damage and this card's markerlight damage"
+],
+[
+109,
+"ambush units never show the will-die icon"
+],
+[
+112,
+"no death predicted (or ambush): hide the icon"
+],
+[
+121,
+"would this card die from the previewed damage list?"
+],
+[
+123,
+"play the death icon animation; show it unless combat is already animating"
+],
+[
+133,
+"remnant cards: show the original card instead (decompiler tangled this tail)"
+],
+[
+157,
+"tactics, unity abilities, or no attack-type change: leave highlights alone"
+],
+[
+167,
+"otherwise highlight by the other card's attack type"
+],
+[
+173,
+"no preview possible: hide the will-die icon and reset the remnant view"
+],
+[
+183,
+"reset attack-type highlights only if asked to"
+],
+[
+188,
+"enemy cards use no attack type, own cards use their current one"
+],
+[
+195,
+"apply HighlightIfNeeded to each attack-type highlight; decompiler garbled the loop tail"
+]
+]
+},
+"2f4f740": {
+"summary": "Stores the remnant frame highlight sprite and copies the main frame highlight's color onto it. Used as a callback when a remnant's highlight gets created.",
+"comments": [
+[
+4,
+"keep the remnant highlight renderer"
+],
+[
+7,
+"copy the main frame's current color to the remnant frame"
+]
+]
+},
+"2f4f6d0": {
+"summary": "Tells every attack-type highlight (melee/range markers) to refresh for the given attack type.",
+"comments": [
+[
+4,
+"loop over all attack-type highlights"
+],
+[
+10,
+"bounds check failed: decompiler tail merged with another function here"
+],
+[
+38,
+"each highlight lights itself only if it matches this attack type"
+]
+]
+},
+"2f4f5f0": {
+"summary": "Tweens the card body to a target scale over a given time, or sets it immediately when the time is zero. Kills any running scale tween first.",
+"comments": [
+[
+5,
+"cancel any scale tween already running"
+],
+[
+10,
+"time above zero: animate to target scale"
+],
+[
+15,
+"no time: set local scale instantly"
+]
+]
+},
+"2f4ec78": {
+"summary": "Changes the frame highlight and remnant highlight to a target color, tweened over some seconds or instantly. If the color is fully transparent the frames are hidden afterwards.",
+"comments": [
+[
+5,
+"cancel any running color tween"
+],
+[
+9,
+"no duration: set colors directly"
+],
+[
+21,
+"transparent target: hide the frame objects"
+],
+[
+43,
+"with duration: tween frame color, and remnant frame at the same time"
+],
+[
+56,
+"transparent target: deactivate frames when the tween ends"
+]
+]
+},
+"2f4ebc0": {
+"summary": "Shows or hides the frame highlight object and, if present, the remnant frame highlight object.",
+"comments": [
+[
+4,
+"set main frame active state"
+],
+[
+7,
+"also set the remnant frame when it exists; decompiler lost its SetActive call"
+]
+]
+},
+"2f4f7a0": {
+"summary": "Tween-complete callback that hides the frame highlight and remnant frame highlight objects after a fade to transparent.",
+"comments": [
+[
+4,
+"hide main frame"
+],
+[
+7,
+"hide remnant frame too, if present; decompiler lost its SetActive call"
+]
+]
+},
+"2f4f8c8": {
+"summary": "Returns the matcap texture for a RawCardScript's tier. The tier is clamped to the texture array, with negative tiers using Tier1.",
+"comments": [
+[
+9,
+"read the card's tier"
+],
+[
+14,
+"clamp tier to the last texture"
+],
+[
+18,
+"negative tier falls back to Tier1"
+],
+[
+21,
+"return the matching texture; decompiler mangled the failure path below"
+]
+]
+},
+"2f4f920": {
+"summary": "Returns the matcap texture for a CardScript's tier by looking at its raw card data. The tier is clamped to the texture array, with negative tiers using Tier1.",
+"comments": [
+[
+12,
+"get tier from the card's raw data"
+],
+[
+19,
+"clamp tier to the last texture (length shown under a wrong field name)"
+],
+[
+24,
+"negative tier falls back to Tier1"
+],
+[
+28,
+"return the matching texture"
+]
+]
+},
+"2f4f97c": {
+"summary": "Static constructor for CardScript's compiler-generated closure holder; creates the shared instance used for lambdas.",
+"comments": []
+},
+"2f4fa5c": {
+"summary": "Callback at the end of a turn-around flip. Resets visibility for the card's state, tweens rotation back to zero, and sets the health display to a fake value (decompiler garbled the tail).",
+"comments": [
+[
+9,
+"UI must exist"
+],
+[
+10,
+"refresh visible parts for the current card state"
+],
+[
+12,
+"rotate back to zero over a quarter of the draw time"
+],
+[
+14,
+"tail looks mangled: seems to set an in-back ease and flag fake stat display values"
+]
+]
+},
+"2f4fa84": {
+"summary": "Update callback during a melee attack animation; sets the card's local scale from its board position so the unit keeps its perspective scale while moving.",
+"comments": [
+[
+11,
+"look up the scale table for this side's board"
+],
+[
+21,
+"apply scale for the current position (decompiler dropped the vector value)"
+]
+]
+},
+"2f4fb24": {
+"summary": "Called when the attacker reaches its target in a melee animation. Resolves attack animation effects and punches the target away from the attacker, then returns it to place after a delay.",
+"comments": [
+[
+5,
+"needs the attacker and its UI"
+],
+[
+7,
+"play hit effects in the attack direction and mark that the target was reached"
+],
+[
+21,
+"push-back strength depends on the attacker's unit size"
+],
+[
+24,
+"compute direction from attacker to target on the ground plane"
+],
+[
+29,
+"overlapping positions: use a zero direction"
+],
+[
+41,
+"punch the target with a short tween and delay"
+],
+[
+43,
+"when done, the target returns to its original board position"
+]
+]
+},
+"2f4fbb8": {
+"summary": "Update callback during a move-and-disappear animation; sets the card's local scale from its board position.",
+"comments": [
+[
+11,
+"look up the scale table for this side's board"
+],
+[
+21,
+"apply scale for the current position (decompiler dropped the vector value)"
+]
+]
+},
+"2f4fc74": {
+"summary": "Second update callback during a move-and-disappear animation; sets the card's local scale from its board position.",
+"comments": [
+[
+11,
+"look up the scale table for this side's board"
+],
+[
+21,
+"apply scale for the current position (decompiler dropped the vector value)"
+]
+]
+},
+"2f4fd50": {
+"summary": "Completion of a swarm: this unit adds its attack and health as a stat buff on the buffed unit, is silently destroyed, and the swarm is broadcast to the other player. Then calls the swarmFinished callback.",
+"comments": [
+[
+4,
+"build an add-stats enchantment copying this unit's melee, range and health"
+],
+[
+26,
+"apply to the unit that absorbs this one"
+],
+[
+30,
+"play the swarm trait particles"
+],
+[
+33,
+"remove this unit without death triggers"
+],
+[
+36,
+"tell the other player about the swarm"
+],
+[
+37,
+"notify the caller that the swarm finished"
+]
+]
+},
+"2f4fedc": {
+"summary": "Predicate used by CheckMeetsCombination: true if an active enchantment came from the same enchantment card as the trait combination requires.",
+"comments": [
+[
+7,
+"compare enchantment cards; both null counts as a match (Unity object equality)"
+]
+]
+},
+"2f4ff5c": {
+"summary": "Predicate used in RemoveEffect: true if an active enchantment came from the same card as the effect being removed.",
+"comments": [
+[
+7,
+"compare enchantment cards; both null counts as a match (Unity object equality)"
+]
+]
+},
+"2f4ffd4": {
+"summary": "Second predicate used in RemoveEffect: true if an active enchantment came from the same card as the effect being removed.",
+"comments": [
+[
+7,
+"compare enchantment cards; both null counts as a match (Unity object equality)"
+]
+]
+},
+"2f50134": {
+"summary": "Coroutine for a melee attack animation. Plays the attack sound, counts the attack, sets the state to attacking, builds a tween sequence (charge, rotate, return) and waits until the attack finishes.",
+"comments": [
+[
+6,
+"first step: set up the whole attack"
+],
+[
+17,
+"play the card's attack sound if it has one"
+],
+[
+23,
+"log which card attacks which target (and whether the target is a remnant)"
+],
+[
+50,
+"count this attack for the turn and mark the card as attacking"
+],
+[
+55,
+"build the sequence; when done FinishAfterAttack runs and an update callback keeps the scale"
+],
+[
+67,
+"attack margin differs for player and enemy cards"
+],
+[
+81,
+"compute direction and distance to the target on the ground plane"
+],
+[
+119,
+"charge towards the target with an in-back ease; reaching it applies hit effects"
+],
+[
+126,
+"tilt the card forward during the charge"
+],
+[
+137,
+"short pause, then glide back to the original board position with a bounce"
+],
+[
+148,
+"apply the attack time scale and wait until the attack finishes"
+],
+[
+155,
+"second step: the wait is over, finish"
+]
+]
+},
+"2f50b48": {
+"summary": "Reset is not supported on the AttackMeleeAnim coroutine; always throws NotSupportedException.",
+"comments": []
+},
+"2f50bb4": {
+"summary": "Coroutine for a card created directly in hand. Shows it in the hand layer, tweens it to its hand position, rotation and scale with a bounce, plays the create sound, waits, then sets it as in hand.",
+"comments": [
+[
+6,
+"later step: after the wait, move card into the normal in-hand state if animation can continue"
+],
+[
+20,
+"first step: mark card as just created in hand and refresh its visuals"
+],
+[
+28,
+"player's own card: show hand text once battle is running or mulligan finished"
+],
+[
+39,
+"tween position, rotation and scale to the hand slot with a bounce"
+],
+[
+48,
+"play the create-in-hand sound and wait for the draw time"
+]
+]
+},
+"2f50e4c": {
+"summary": "Reset is not supported on the CreateCardInGame coroutine; always throws NotSupportedException.",
+"comments": []
+},
+"2f50eb8": {
+"summary": "Coroutine for destroying a card. Marks it as in the cemetery, optionally enlarges it briefly, then dissolves it and finally sends it to the cemetery.",
+"comments": [
+[
+6,
+"last step: dissolve is finished, go to the cemetery"
+],
+[
+22,
+"first step: mark the card as in cemetery"
+],
+[
+23,
+"unless skipInit is set, first scale it up slightly and wait"
+],
+[
+35,
+"stop in-play animations and start the dissolve effect"
+],
+[
+40,
+"dissolve duration comes from the global variables"
+]
+]
+},
+"2f51094": {
+"summary": "Reset is not supported on the DestroyCard coroutine; always throws NotSupportedException.",
+"comments": []
+},
+"2f51100": {
+"summary": "Coroutine for a card destroyed by an offensive. Marks it as in the cemetery, dissolves it and moves it towards the offensive button, then waits half a step.",
+"comments": [
+[
+12,
+"mark in cemetery and stop in-play animations"
+],
+[
+15,
+"dissolve the card"
+],
+[
+18,
+"fly the card to the offensive button position"
+],
+[
+21,
+"wait half a step time before finishing"
+]
+]
+},
+"2f5123c": {
+"summary": "Reset is not supported on the DestroyCardOffensive coroutine; always throws NotSupportedException.",
+"comments": []
+},
+"2f512a8": {
+"summary": "Coroutine that shows an enemy card in the center of the screen, optionally flipping it face up, then shrinks it and hides it again. Used when the opponent plays a card.",
+"comments": [
+[
+6,
+"states 0/1 move and scale the card, state 2 shows text, state 3 hides"
+],
+[
+12,
+"flip step: if visibility is not changed here, turn the card around"
+],
+[
+18,
+"scale to the enemy card display size"
+],
+[
+31,
+"if changing visibility, show the card front"
+],
+[
+38,
+"move to the enemy card display position and rotate to zero"
+],
+[
+50,
+"state 2: show description and created-by text, remove highlight, wait a while"
+],
+[
+72,
+"state 3: flip card back to its back and hide created-by text"
+]
+]
+},
+"2f51614": {
+"summary": "Reset is not supported on the DisplayEnemyCardInCenter coroutine; always throws NotSupportedException.",
+"comments": []
+},
+"2f51680": {
+"summary": "Coroutine that shows an offensive card in the center of the screen face up, then scales it and hides its extra text again. Used when an offensive is played.",
+"comments": [
+[
+7,
+"state 0: show front and move to the offensive display position, rotate to zero"
+],
+[
+25,
+"state 1: scale to the display size and wait"
+],
+[
+45,
+"state 2: show description and created-by text, remove highlight, wait a while"
+],
+[
+63,
+"state 3: hide created-by text and finish"
+]
+]
+},
+"2f5198c": {
+"summary": "Reset is not supported on the DisplayOffensiveCardInCenter coroutine; always throws NotSupportedException.",
+"comments": []
+},
+"2f519f8": {
+"summary": "Coroutine that heals a unit. Clamps the heal to missing health, refuses to heal corrupt units, adds the health, plays heal sounds, text and particles, then clears pending healing and updates the health text.",
+"comments": [
+[
+6,
+"last step: finished"
+],
+[
+11,
+"after the animation wait: hide the heal text, clear pending healing and refresh health"
+],
+[
+46,
+"first step: heal amount must be positive and the unit alive"
+],
+[
+58,
+"corrupt units cannot be healed; log it"
+],
+[
+60,
+"clamp the heal to missing health"
+],
+[
+71,
+"add the healed amount to current health"
+],
+[
+75,
+"nothing was actually healed: just clean up"
+],
+[
+79,
+"play minion heal and syphon sounds"
+],
+[
+87,
+"show animated floating heal number that pops in and out"
+],
+[
+109,
+"normal heals also spawn a heal particle effect on the card"
+],
+[
+143,
+"bad heal value: log the problem and end"
+]
+]
+},
+"2f5214c": {
+"summary": "Reset is not supported on the Heal coroutine; always throws NotSupportedException.",
+"comments": []
+},
+"2f521b8": {
+"summary": "Coroutine for a hero (warlord) landing onto the field. Scales and fades it in, shows stat counters, lands it on the ground, then activates its summon traits if animation can continue.",
+"comments": [
+[
+6,
+"last step: activate summon traits"
+],
+[
+22,
+"first step: set the starting size, a bit smaller than final (warlord start size factor)"
+],
+[
+40,
+"wait multiplier set: nudge position for a slower landing"
+],
+[
+52,
+"fade the card and trait icons in"
+],
+[
+55,
+"optionally show armour, health, melee and range counters"
+],
+[
+84,
+"second step: scale to the final unit size on board with a smooth ease"
+],
+[
+111,
+"land on ground effect, then wait for the attack step time"
+]
+]
+},
+"2f526b8": {
+"summary": "Reset is not supported on the HeroLandIntoField coroutine; always throws NotSupportedException.",
+"comments": []
+},
+"2f52724": {
+"summary": "Coroutine for a minion played into the field. Positions and lands it, records the turn it entered play, sets summon sickness, triggers summon effects and visuals and finally sets it in play.",
+"comments": [
+[
+6,
+"later steps: land, summon message, delayed summon animation, then final state"
+],
+[
+7,
+"state 2: update position in the board and wait for landing time"
+],
+[
+24,
+"state 4: card is now in play: hide created-by text, activate summon traits and summon sickness visuals"
+],
+[
+44,
+"state 3: land if a transform animation was used; trigger summon display unless ephemeral or ambush"
+],
+[
+56,
+"show the summon message and spawn the delayed summon animation if the card has one"
+],
+[
+87,
+"first step: land now unless a transform animation is playing, clear pending damage"
+],
+[
+97,
+"record the turn it was played and reset rotation; set summon sickness unless keepStatus"
+],
+[
+125,
+"second step: set board layer, remember home position and scale to board size"
+],
+[
+150,
+"pick the minion manager of the side that owns the card and hide its shadow"
+]
+]
+},
+"2f52d9c": {
+"summary": "Reset is not supported on the MinionPlayedIntoField coroutine; always throws NotSupportedException.",
+"comments": []
+}
+}

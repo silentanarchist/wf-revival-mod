@@ -1,0 +1,686 @@
+{
+ "315dbf0": {
+  "summary": "Returns true if any ability on the card's ability list has the given trigger as its chosen ability. Used to ask whether a card reacts to a particular event (e.g. on play, on death).",
+  "comments": [
+   [
+    4,
+    "List must exist; a null list jumps to the null-reference throw at the end"
+   ],
+   [
+    8,
+    "Scan abilities in order; stop at the first whose trigger matches"
+   ],
+   [
+    10,
+    "Null entry in the list: compiler null check"
+   ],
+   [
+    12,
+    "Match found: result is already true, return it"
+   ],
+   [
+    18,
+    "Loop finished with no match (result is false), or list was empty"
+   ],
+   [
+    21,
+    "Null list: throws NullReferenceException"
+   ]
+  ]
+ },
+ "315d3d4": {
+  "summary": "Builds the list of valid target cards for an ability from its TargetCriteria: picks the candidate set by targetsAffected mode, filters by criteria, then trims to maxTargets using the select method. Returns a shared static list that is reused on every call.",
+  "comments": [
+   [
+    4,
+    "No ability data: nothing to evaluate (null check)"
+   ],
+   [
+    7,
+    "Unpack the cards involved: the ability owner, the card that triggered it, and its target"
+   ],
+   [
+    12,
+    "Reuse a shared static list for results; empty it first so each call starts clean"
+   ],
+   [
+    22,
+    "Dispatch on criteria.targetsAffected: first the simple, direct modes"
+   ],
+   [
+    24,
+    "Self: the ability's own card is the only target"
+   ],
+   [
+    42,
+    "Single target mode: the target chosen for this ability"
+   ],
+   [
+    44,
+    "Add the explicit target card if there is one"
+   ],
+   [
+    66,
+    "Target-count-traits mode uses the same single target as 'target'"
+   ],
+   [
+    67,
+    "Last card played that meets the criteria: looked up in the cemetery manager's played-card history"
+   ],
+   [
+    73,
+    "Choice resolution with no specific card list: the options are card definitions, not cards on board"
+   ],
+   [
+    74,
+    "Build the list of card definitions offered (e.g. a Discover-style pick) and remember it on the battle manager"
+   ],
+   [
+    79,
+    "Loop over every card in the full card collection; add those that meet the criteria"
+   ],
+   [
+    86,
+    "Skip cards flagged as not randomly creatable, and hidden cards"
+   ],
+   [
+    112,
+    "Mutation trait filter: afterwards drop options that already carry a single-use mutation (decompiler tangled this loop)"
+   ],
+   [
+    123,
+    "Not a simple mode: work out which side counts as 'friendly' for the owner (own units vs enemy units flags)"
+   ],
+   [
+    136,
+    "Modes that repeat a hero once per resource point: Energy, Faith, spirit stones, secrets played"
+   ],
+   [
+    138,
+    "Current spirit stones: add the hero once per spirit stone, for the friendly side and/or the enemy side"
+   ],
+   [
+    139,
+    "Friendly side: owner's hero repeated per spirit stone"
+   ],
+   [
+    167,
+    "Enemy side: opponent's hero repeated per spirit stone"
+   ],
+   [
+    196,
+    "Current Faith: same pattern, hero added once per point of Faith"
+   ],
+   [
+    259,
+    "Max Energy or secrets played: hero repeated per point"
+   ],
+   [
+    261,
+    "Secrets played: hero repeated once per secret played, friendly then enemy"
+   ],
+   [
+    318,
+    "Max Energy: hero added once per total Energy crystal, for each requested side"
+   ],
+   [
+    370,
+    "Build and write a debug log line with the result count and the friendly/enemy flags"
+   ],
+   [
+    390,
+    "Higher-numbered modes: enemy hero or current (unspent) Energy"
+   ],
+   [
+    391,
+    "Enemy hero of the acting player is the only target"
+   ],
+   [
+    400,
+    "Current Energy: hero repeated once per unspent Energy, friendly then enemy side"
+   ],
+   [
+    456,
+    "Debug log for the current-Energy case; the decompiler garbled the string-array writes here"
+   ],
+   [
+    465,
+    "Decompiler artifact (unreachable junk): array bounds failure block and stray code, not real logic"
+   ],
+   [
+    498,
+    "Target-if-meets-criteria: add the target card if present (criteria checked later)"
+   ],
+   [
+    505,
+    "Friendly hero mode: the acting card's own hero is the target"
+   ],
+   [
+    511,
+    "Second dispatch on targetsAffected: board/zone based selection and previous-ability results"
+   ],
+   [
+    521,
+    "Previous ability's targets are reused as this ability's targets"
+   ],
+   [
+    533,
+    "Acting-card style modes: add the single card to the result"
+   ],
+   [
+    539,
+    "Previous-ability-filtered: copy last targets, then filter them by criteria below"
+   ],
+   [
+    550,
+    "Cards referenced by this card (e.g. cards it linked to earlier)"
+   ],
+   [
+    558,
+    "Cards in a player's hand matching the card-type and side flags"
+   ],
+   [
+    564,
+    "Any: every unit in play for both sides, heroes, parts and weapons included"
+   ],
+   [
+    569,
+    "Hand plus deck cards"
+   ],
+   [
+    579,
+    "Hand plus units in play"
+   ],
+   [
+    592,
+    "Cards in the cemetery (graveyard)"
+   ],
+   [
+    598,
+    "Cards in the deck"
+   ],
+   [
+    604,
+    "All units in play on the chosen side(s), filtered by type flags (hero, minions, hero parts, weapons, remnants)"
+   ],
+   [
+    615,
+    "Units in play, including ones that are currently dying"
+   ],
+   [
+    620,
+    "Units adjacent to the ability's own card"
+   ],
+   [
+    626,
+    "Units adjacent to the first previous target (falls back to this card)"
+   ],
+   [
+    639,
+    "Units adjacent to the acting card"
+   ],
+   [
+    645,
+    "Units adjacent to the target, only if a target exists"
+   ],
+   [
+    654,
+    "Units adjacent to the friendly Warlord (hero)"
+   ],
+   [
+    661,
+    "Units adjacent to the enemy Warlord (hero)"
+   ],
+   [
+    667,
+    "Walk the candidate list backwards and drop any card that fails the criteria filter"
+   ],
+   [
+    676,
+    "Exclude-similar-cards: keep only candidates that are not the same card as the owner (by unique id)"
+   ],
+   [
+    691,
+    "Selection from a choose-resolution: keep only the card the player picked"
+   ],
+   [
+    724,
+    "More candidates than maxTargets: trim the list using the target select method"
+   ],
+   [
+    730,
+    "Highest attack: sort by a condition, then by attack descending, then take maxTargets"
+   ],
+   [
+    748,
+    "Highest value in play: sort descending by card value"
+   ],
+   [
+    759,
+    "Lowest value in play: sort ascending by card value"
+   ],
+   [
+    770,
+    "Take the first maxTargets of the sorted list"
+   ],
+   [
+    774,
+    "Last added: take the most recently added cards"
+   ],
+   [
+    796,
+    "Another sort method (code 6): ordered by a key, then truncated like the others"
+   ],
+   [
+    807,
+    "Method 7: simply the first maxTargets candidates in list order"
+   ],
+   [
+    830,
+    "Default: pick maxTargets random cards from the list using the match's seeded random so both clients agree"
+   ],
+   [
+    845,
+    "Replace the pool with the trimmed selection"
+   ],
+   [
+    851,
+    "Remaining special modes by number: cards referenced in play, highest-health Warlord, lowest-health unit"
+   ],
+   [
+    852,
+    "Highest-health Warlord (0xE6): add both heroes if there is no single highest"
+   ],
+   [
+    867,
+    "Lowest-health unit (0xF0) on the relevant side"
+   ],
+   [
+    874,
+    "Referenced cards: add only those that are still in play"
+   ],
+   [
+    898,
+    "Return the shared pooled target list (callers must copy it if they keep it)"
+   ],
+   [
+    899,
+    "Decompiler-detached loop: remove targets that have a single-use mutation (from the choice-resolution branch)"
+   ],
+   [
+    914,
+    "Exit point reached from the trimmed-selection branch"
+   ]
+  ]
+ },
+ "315fa34": {
+  "summary": "Overload of GetTargets that takes the owner, acting and target cards directly. Picks candidates by targetsAffected mode, filters them by the criteria, then trims to maxTargets with the select method. Returns a shared static list reused on every call.",
+  "comments": [
+   [
+    4,
+    "This overload takes the cards directly instead of an AbilityData; logic otherwise matches the other GetTargets"
+   ],
+   [
+    6,
+    "Reuse a shared static list; empty it so each call starts clean"
+   ],
+   [
+    16,
+    "Dispatch on criteria.targetsAffected: first the simple, direct modes"
+   ],
+   [
+    18,
+    "Self: the ability's own card is the only target"
+   ],
+   [
+    36,
+    "Single target mode: the passed targetCard"
+   ],
+   [
+    38,
+    "Add the target card if there is one"
+   ],
+   [
+    60,
+    "Target-count-traits mode uses the same single target as 'target'"
+   ],
+   [
+    61,
+    "Last card played that meets the criteria: looked up in the cemetery manager's played-card history"
+   ],
+   [
+    67,
+    "Choice resolution with no specific card list: options are card definitions, not cards on board"
+   ],
+   [
+    68,
+    "Build the list of card definitions offered and remember it on the battle manager"
+   ],
+   [
+    73,
+    "Loop over every card in the full card collection; add those that meet the criteria"
+   ],
+   [
+    80,
+    "Skip cards flagged as not randomly creatable, and hidden cards"
+   ],
+   [
+    106,
+    "Mutation trait filter: afterwards drop options with a single-use mutation (decompiler tangled this loop)"
+   ],
+   [
+    117,
+    "Not a simple mode: work out which side counts as friendly for the owner"
+   ],
+   [
+    130,
+    "Modes that repeat a hero once per resource point: Energy, Faith, spirit stones, secrets played"
+   ],
+   [
+    132,
+    "Current spirit stones: hero added once per spirit stone, friendly then enemy side"
+   ],
+   [
+    161,
+    "Enemy side: opponent's hero repeated per spirit stone"
+   ],
+   [
+    190,
+    "Current Faith: same pattern, hero added once per point of Faith"
+   ],
+   [
+    253,
+    "Max Energy or secrets played: hero repeated per point"
+   ],
+   [
+    255,
+    "Secrets played: hero repeated once per secret played, friendly then enemy"
+   ],
+   [
+    312,
+    "Max Energy: hero added once per total Energy crystal, for each requested side"
+   ],
+   [
+    364,
+    "Build and write a debug log line with the result count and the side flags"
+   ],
+   [
+    384,
+    "Higher-numbered modes (the decompiler shows raw numbers here): acting player's heroes or current Energy"
+   ],
+   [
+    385,
+    "0x82: the enemy hero of the acting card's owner"
+   ],
+   [
+    393,
+    "0xA0: current (unspent) Energy"
+   ],
+   [
+    394,
+    "Current Energy: hero repeated once per unspent Energy, friendly then enemy side"
+   ],
+   [
+    450,
+    "Debug log for the current-Energy case; the decompiler garbled the string-array writes here"
+   ],
+   [
+    459,
+    "Decompiler artifact (unreachable junk): bounds failure block and stray code, not real logic"
+   ],
+   [
+    492,
+    "0x5A: target if it meets criteria; add the target card if present"
+   ],
+   [
+    499,
+    "0x78: friendly hero of the acting card"
+   ],
+   [
+    505,
+    "Second dispatch on targetsAffected: board/zone based selection and previous-ability results"
+   ],
+   [
+    515,
+    "Previous ability's targets are reused as this ability's targets"
+   ],
+   [
+    527,
+    "Acting-card style modes: add the single card to the result"
+   ],
+   [
+    533,
+    "Previous-ability-filtered: copy last targets, then filter by criteria below"
+   ],
+   [
+    544,
+    "Cards referenced by this card"
+   ],
+   [
+    552,
+    "Cards in a player's hand matching the card-type and side flags"
+   ],
+   [
+    558,
+    "Any: every unit in play for both sides"
+   ],
+   [
+    563,
+    "Hand plus deck cards"
+   ],
+   [
+    573,
+    "Hand plus units in play"
+   ],
+   [
+    586,
+    "Cards in the cemetery (graveyard)"
+   ],
+   [
+    592,
+    "Cards in the deck"
+   ],
+   [
+    598,
+    "All units in play on the chosen side(s), filtered by type flags"
+   ],
+   [
+    609,
+    "Units in play, including ones that are currently dying"
+   ],
+   [
+    614,
+    "Units adjacent to the ability's own card"
+   ],
+   [
+    620,
+    "Units adjacent to the first previous target (falls back to this card)"
+   ],
+   [
+    633,
+    "Units adjacent to the acting card"
+   ],
+   [
+    639,
+    "Units adjacent to the target, only if a target exists"
+   ],
+   [
+    648,
+    "Units adjacent to the friendly Warlord (hero)"
+   ],
+   [
+    655,
+    "Units adjacent to the enemy Warlord (hero)"
+   ],
+   [
+    661,
+    "Walk the candidate list backwards and drop any card that fails the criteria filter"
+   ],
+   [
+    670,
+    "Exclude-similar-cards: keep only candidates that are not the same card as the owner (by unique id)"
+   ],
+   [
+    685,
+    "Selection from a choose-resolution: keep only the card the player picked"
+   ],
+   [
+    718,
+    "More candidates than maxTargets: trim the list using the target select method"
+   ],
+   [
+    724,
+    "Highest attack: sort by a condition, then by attack descending, then take maxTargets"
+   ],
+   [
+    742,
+    "Highest value in play: sort descending by card value"
+   ],
+   [
+    752,
+    "Lowest value in play: sort ascending by card value"
+   ],
+   [
+    764,
+    "Take the first maxTargets of the sorted list"
+   ],
+   [
+    768,
+    "Last added: take the most recently added cards"
+   ],
+   [
+    790,
+    "Another sort method (code 6): ordered by a key, then truncated like the others"
+   ],
+   [
+    801,
+    "Method 7: simply the first maxTargets candidates in list order"
+   ],
+   [
+    824,
+    "Default: pick maxTargets random cards using the match's seeded random so both clients agree"
+   ],
+   [
+    839,
+    "Replace the pool with the trimmed selection"
+   ],
+   [
+    845,
+    "Remaining special modes by number: cards referenced in play, highest-health Warlord, lowest-health unit"
+   ],
+   [
+    846,
+    "Highest-health Warlord (0xE6): add both heroes if there is no single highest"
+   ],
+   [
+    861,
+    "Lowest-health unit (0xF0) on the relevant side"
+   ],
+   [
+    868,
+    "Referenced cards: add only those that are still in play"
+   ],
+   [
+    892,
+    "Return the shared pooled target list (callers must copy it if they keep it)"
+   ],
+   [
+    893,
+    "Decompiler-detached loop: remove targets that have a single-use mutation (from the choice-resolution branch)"
+   ],
+   [
+    908,
+    "Exit point reached from the trimmed-selection branch"
+   ]
+  ]
+ },
+ "315d468": {
+  "summary": "Queues every card animation of an ability on the battle manager, after skipping those that need a free minion slot that is not available. Called when an ability fires; it only schedules visuals (AddCardAnim) and does not change game state itself.",
+  "comments": [
+   [
+    7,
+    "Iterate over this ability's list of card animations"
+   ],
+   [
+    17,
+    "Next animation; loop continues here when an animation is skipped"
+   ],
+   [
+    21,
+    "No more animations: dispose the enumerator and finish"
+   ],
+   [
+    25,
+    "Skip null entries or ones the animation reference reports as not valid"
+   ],
+   [
+    26,
+    "Load the animation asset (cached in the General addressable group)"
+   ],
+   [
+    37,
+    "Pick which minion manager is 'friendly' and which is enemy, depending on whose ability this is"
+   ],
+   [
+    56,
+    "Animations that summon into a friendly slot (id 0xE or next-spot end position): skip if no free slot 1"
+   ],
+   [
+    70,
+    "Animation 0xF needs a free slot on the enemy side; skip otherwise"
+   ],
+   [
+    84,
+    "Animation 0x10 or second-spot end: needs friendly slot 2 free"
+   ],
+   [
+    98,
+    "Animation 0x11 or third-spot end: needs friendly slot 3 free"
+   ],
+   [
+    113,
+    "Animation starts, ends or points at the ability target: must play once per target"
+   ],
+   [
+    114,
+    "No targets were supplied but the animation needs one: log an error and stop"
+   ],
+   [
+    125,
+    "Target in hand: only animate if it is the local player's card; the opponent's hand is hidden"
+   ],
+   [
+    138,
+    "Resolve start position for this target"
+   ],
+   [
+    140,
+    "Resolve end position only if it differs from the start"
+   ],
+   [
+    145,
+    "Resolve the point-towards position, unless it is 'self'"
+   ],
+   [
+    153,
+    "Only the last target's animation waits to apply the effect"
+   ],
+   [
+    166,
+    "Queue the animation with positions, priority, caster, target and whether it blocks player input"
+   ],
+   [
+    172,
+    "No per-target positions: single animation using the ability's own cards"
+   ],
+   [
+    176,
+    "End position only resolved if different from start"
+   ],
+   [
+    186,
+    "Queue the single animation"
+   ]
+  ]
+ }
+}

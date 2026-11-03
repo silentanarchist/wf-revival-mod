@@ -1,0 +1,824 @@
+{
+ "3045e04": {
+  "summary": "Destroys every child object under the content anchor and empties the list of deck containers. Resets the Game Mode deck tab before it is refilled. The decompiler also pasted in .NET Array helper code (Clear, IndexOf, LastIndexOf).",
+  "comments": [
+   [
+    4,
+    "Destroy all the deck container UI objects under the content anchor"
+   ],
+   [
+    10,
+    "Inlined List.Clear: reset the size, bump the version, then wipe the old slots"
+   ],
+   [
+    18,
+    "From here the decompiler mixed in Array.Clear / Array.IndexOf / Array.LastIndexOf internals"
+   ],
+   [
+    92,
+    "Array.IndexOf helper body (argument checks, then a scan comparing each element); not game logic"
+   ],
+   [
+    230,
+    "Array.LastIndexOf helper body (backwards scan); not game logic"
+   ]
+  ]
+ },
+ "304f244": {
+  "summary": "Unity Awake for the in-battle settings window. Hides the debug button group, then hooks the resign, skip tutorial, win, draw, console, close and background buttons, the chat-mute and auto-zoom toggles and the three volume sliders to their handlers.",
+  "comments": [
+   [
+    4,
+    "Debug buttons (win/draw/console) start hidden"
+   ],
+   [
+    9,
+    "Each button is only wired if it exists; the decompiler nested every check, so the code is a long staircase"
+   ],
+   [
+    45,
+    "Clicking the dark background also closes the window"
+   ],
+   [
+    51,
+    "Toggles: mute chat and combat auto-zoom"
+   ],
+   [
+    63,
+    "Sliders: sound effects, music and voice-over volume (handlers live on MediaTab)"
+   ],
+   [
+    80,
+    "Inlined UnityEvent.AddListener for the voice-over slider; it just appends the delegate to the call list"
+   ],
+   [
+    134,
+    "Reached when any referenced UI object was missing"
+   ]
+  ]
+ },
+ "304f6b0": {
+  "summary": "Unity OnDestroy for the battle settings window. Removes the listeners added in Awake from the buttons and sliders, and clears the auto-zoom toggle's listener lists so nothing fires on a destroyed window.",
+  "comments": [
+   [
+    4,
+    "Unhook the button handlers added in Awake"
+   ],
+   [
+    29,
+    "Background button and mute-chat toggle: remove every listener"
+   ],
+   [
+    33,
+    "Unhook the three volume sliders"
+   ],
+   [
+    48,
+    "Auto-zoom toggle: inlined RemoveAllListeners (clear the runtime call list, rebuild the executing calls)"
+   ],
+   [
+    90,
+    "Reached when a button or event was missing"
+   ]
+  ]
+ },
+ "304fb58": {
+  "summary": "Handler for the Console button in the battle settings. Logs whether dev tools are enabled and, if so, marks the Reporter debug console object as opened externally.",
+  "comments": [
+   [
+    5,
+    "Needs the battle manager and player data manager to exist"
+   ],
+   [
+    11,
+    "Look up the in-scene debug console (Reporter) object"
+   ],
+   [
+    15,
+    "Only touch the console when dev tools are enabled"
+   ],
+   [
+    27,
+    "Null-check failure target"
+   ]
+  ]
+ },
+ "304fdbc": {
+  "summary": "Handler for the debug Draw button. Closes the settings window; in PvP it does nothing unless dev tools are on, otherwise it ends the battle as a Draw-button result, builds the match result, records the time and saves it. The decompiler inlined the whole DeadHero end-of-battle logic.",
+  "comments": [
+   [
+    10,
+    "Close the settings window first"
+   ],
+   [
+    17,
+    "Networked (PvP) match: the button is disabled for normal players (cheating guard); only dev tools log/continue"
+   ],
+   [
+    34,
+    "Offline match: record a resign action in the replay log"
+   ],
+   [
+    38,
+    "Inlined DeadHero: build a debug string about the current battle state"
+   ],
+   [
+    69,
+    "Log the state before ending"
+   ],
+   [
+    71,
+    "Already in the post-battle stage: skip unless the disconnect-loss flag is still set"
+   ],
+   [
+    80,
+    "Disconnect-loss flag set: store the result, then run the normal battle end sequence coroutine"
+   ],
+   [
+    93,
+    "Normal path: enter the PostBattle stage and stop the battle"
+   ],
+   [
+    96,
+    "Tell the opponent the match finished if it is networked"
+   ],
+   [
+    100,
+    "Set the UI state to the finish-battle sequence and clear the during-battle flag"
+   ],
+   [
+    105,
+    "Enemy hero died: raise the health-change signal with health 0 for the UI"
+   ],
+   [
+    120,
+    "Read the player's Elo from the active leaderboard event, or from player data if there is none"
+   ],
+   [
+    145,
+    "Work out who won given the Draw-button result"
+   ],
+   [
+    148,
+    "Build the ranked match result from Elo and XP, and add both sides' skull (milestone) counts"
+   ],
+   [
+    174,
+    "Store the result type (DrawButton) and winner"
+   ],
+   [
+    176,
+    "Store how many minutes the match lasted"
+   ],
+   [
+    181,
+    "If the player won, flag the win in player data"
+   ],
+   [
+    188,
+    "Some match types (0x14, 0xb4, 0xd2) also tell the LiveOps handler the player is human"
+   ],
+   [
+    194,
+    "Persist the match result and finish the battle"
+   ],
+   [
+    216,
+    "Failed cast/index check"
+   ]
+  ]
+ },
+ "304fe80": {
+  "summary": "Handler for the debug Win button. Closes the settings window; in PvP it does nothing unless dev tools are on, otherwise ends the offline battle with a WinButton result, builds and saves the match result. The decompiler inlined the DeadHero end-of-battle logic.",
+  "comments": [
+   [
+    10,
+    "Close the settings window first"
+   ],
+   [
+    17,
+    "Networked (PvP) match: the button is inactive for normal players (cheating guard)"
+   ],
+   [
+    34,
+    "Already in the PostBattle stage (0x3c): do nothing"
+   ],
+   [
+    37,
+    "Offline match: record a resign action in the replay log"
+   ],
+   [
+    41,
+    "Inlined DeadHero: build a debug string about the current battle state"
+   ],
+   [
+    72,
+    "Log the state before ending"
+   ],
+   [
+    74,
+    "Already in the post-battle stage: skip unless the disconnect-loss flag is still set"
+   ],
+   [
+    87,
+    "Disconnect-loss flag set: store the result, then run the normal battle end sequence coroutine"
+   ],
+   [
+    96,
+    "Normal path: enter the PostBattle stage and stop the battle"
+   ],
+   [
+    99,
+    "Tell the opponent the match finished if it is networked"
+   ],
+   [
+    103,
+    "Set the UI state to the finish-battle sequence and clear the during-battle flag"
+   ],
+   [
+    108,
+    "Enemy hero died: raise the health-change signal with health 0 for the UI"
+   ],
+   [
+    123,
+    "Read the player's Elo from the active leaderboard event, or from player data if there is none"
+   ],
+   [
+    148,
+    "Work out who won given the WinButton result"
+   ],
+   [
+    151,
+    "Build the ranked match result from Elo and XP, and add both sides' skull (milestone) counts"
+   ],
+   [
+    177,
+    "Store the result type (WinButton) and winner"
+   ],
+   [
+    179,
+    "Store how many minutes the match lasted"
+   ],
+   [
+    184,
+    "If the player won, flag the win in player data"
+   ],
+   [
+    191,
+    "Some match types (0x14, 0xb4, 0xd2) also tell the LiveOps handler the player is human"
+   ],
+   [
+    197,
+    "Persist the match result and finish the battle"
+   ],
+   [
+    219,
+    "Failed cast/index check"
+   ]
+  ]
+ },
+ "304ff44": {
+  "summary": "Handler for the Resign button. Closes the window, then: in replays leaves the battle; in live matches tells the opponent (SendForfeit) when networked, records a resign action and ends the battle as a Forfeit, unless a tutorial or campaign stage blocks resigning.",
+  "comments": [
+   [
+    9,
+    "Close the settings window"
+   ],
+   [
+    14,
+    "Log that the player resigns (and whether the enemy is a PvP opponent)"
+   ],
+   [
+    21,
+    "Replay types (tutorial replay or replay): there is nothing to forfeit, just leave the battle"
+   ],
+   [
+    25,
+    "Live match: in a networked game, send the forfeit to the opponent"
+   ],
+   [
+    30,
+    "Record the resign in the action log (used for replays)"
+   ],
+   [
+    31,
+    "Tutorial or campaign stage: its script may forbid resigning"
+   ],
+   [
+    35,
+    "Normal case: the player's hero dies with result Forfeit"
+   ],
+   [
+    40,
+    "Stage forbids resigning: log it and run the stage's own on-resign scripted action, if any"
+   ],
+   [
+    58,
+    "Replay case: leave the battle through the network manager"
+   ],
+   [
+    62,
+    "Null-check failure target"
+   ]
+  ]
+ },
+ "3050008": {
+  "summary": "Handler for the Skip Tutorial button. Only valid in a Tutorial match; it then ends the battle as a WinButton win, builds the match result and saves it. The decompiler inlined the DeadHero end-of-battle logic.",
+  "comments": [
+   [
+    9,
+    "Close the settings window"
+   ],
+   [
+    19,
+    "Not a tutorial match: log an error and do nothing"
+   ],
+   [
+    29,
+    "Inlined DeadHero: build a debug string about the current battle state"
+   ],
+   [
+    63,
+    "Log the state before ending"
+   ],
+   [
+    65,
+    "Already in the post-battle stage: skip unless the disconnect-loss flag is still set"
+   ],
+   [
+    78,
+    "Disconnect-loss flag set: store the result, then run the normal battle end sequence coroutine"
+   ],
+   [
+    87,
+    "Normal path: enter the PostBattle stage and stop the battle"
+   ],
+   [
+    90,
+    "Tell the opponent the match finished if it is networked"
+   ],
+   [
+    94,
+    "Set the UI state to the finish-battle sequence and clear the during-battle flag"
+   ],
+   [
+    99,
+    "Enemy hero died: raise the health-change signal with health 0 for the UI"
+   ],
+   [
+    114,
+    "Read the player's Elo from the active leaderboard event, or from player data if there is none"
+   ],
+   [
+    139,
+    "Work out who won given the WinButton result"
+   ],
+   [
+    142,
+    "Build the ranked match result from Elo and XP, and add both sides' skull (milestone) counts"
+   ],
+   [
+    168,
+    "Store the result type (WinButton) and winner"
+   ],
+   [
+    170,
+    "Store how many minutes the match lasted"
+   ],
+   [
+    175,
+    "If the player won, flag the win in player data"
+   ],
+   [
+    182,
+    "Some match types (0x14, 0xb4, 0xd2) also tell the LiveOps handler the player is human"
+   ],
+   [
+    188,
+    "Persist the match result and finish the battle"
+   ],
+   [
+    210,
+    "Failed cast/index check"
+   ]
+  ]
+ },
+ "30500cc": {
+  "summary": "Skips the tutorial: refuses unless the current match is a tutorial (dev tools only log), then ends the battle as a WinButton win, builds the match result and saves it. The decompiler inlined the DeadHero end-of-battle logic.",
+  "comments": [
+   [
+    9,
+    "Only a tutorial match can be skipped"
+   ],
+   [
+    11,
+    "Not a tutorial: do nothing unless dev tools are active (then only a log call)"
+   ],
+   [
+    31,
+    "Inlined DeadHero: build a debug string about the current battle state"
+   ],
+   [
+    65,
+    "Log the state before ending"
+   ],
+   [
+    67,
+    "Already in the post-battle stage: skip unless the disconnect-loss flag is still set"
+   ],
+   [
+    80,
+    "Disconnect-loss flag set: store the result, then run the normal battle end sequence coroutine"
+   ],
+   [
+    89,
+    "Normal path: enter the PostBattle stage and stop the battle"
+   ],
+   [
+    92,
+    "Tell the opponent the match finished if it is networked"
+   ],
+   [
+    96,
+    "Set the UI state to the finish-battle sequence and clear the during-battle flag"
+   ],
+   [
+    101,
+    "Enemy hero died: raise the health-change signal with health 0 for the UI"
+   ],
+   [
+    116,
+    "Read the player's Elo from the active leaderboard event, or from player data if there is none"
+   ],
+   [
+    141,
+    "Work out who won given the WinButton result"
+   ],
+   [
+    144,
+    "Build the ranked match result from Elo and XP, and add both sides' skull (milestone) counts"
+   ],
+   [
+    170,
+    "Store the result type (WinButton) and winner"
+   ],
+   [
+    172,
+    "Store how many minutes the match lasted"
+   ],
+   [
+    177,
+    "If the player won, flag the win in player data"
+   ],
+   [
+    184,
+    "Some match types (0x14, 0xb4, 0xd2) also tell the LiveOps handler the player is human"
+   ],
+   [
+    190,
+    "Persist the match result and finish the battle"
+   ],
+   [
+    212,
+    "Failed cast/index check"
+   ]
+  ]
+ },
+ "3050240": {
+  "summary": "Called when the auto-zoom toggle changes. Stores the new setting and recomputes the combat camera's zoom from the larger side's unit count, so the view zooms in or out immediately.",
+  "comments": [
+   [
+    6,
+    "Save the new auto-zoom setting globally"
+   ],
+   [
+    13,
+    "Use whichever side has more units on the board"
+   ],
+   [
+    17,
+    "Auto-zoom off: no extra zoom (1.0); on: read the zoom curve at that unit count"
+   ],
+   [
+    24,
+    "Cancel any manual camera control and apply the zoom if the camera is not otherwise zoomed"
+   ],
+   [
+    28,
+    "Clamp the zoom level between 0 and 1"
+   ],
+   [
+    36,
+    "Set the camera's target zoom to the clamped level"
+   ]
+  ]
+ },
+ "30502f0": {
+  "summary": "Opens the battle settings window. Shows the Skip Tutorial button only in tutorials, relabels Resign as Exit in replays, sets sliders and toggles from saved settings, and applies the extra small-screen scale if needed.",
+  "comments": [
+   [
+    5,
+    "Read the current match type"
+   ],
+   [
+    9,
+    "Skip Tutorial button is visible only in a Tutorial match"
+   ],
+   [
+    16,
+    "Replay: the Resign button text becomes Exit"
+   ],
+   [
+    24,
+    "Set music, sound effects and voice-over sliders to the saved volumes"
+   ],
+   [
+    33,
+    "Show the saved auto-zoom setting without firing the change event"
+   ],
+   [
+    36,
+    "Sync the chat-mute toggle with the voice lines controller"
+   ],
+   [
+    39,
+    "Hide the touch input helper while the window is open (seems to)"
+   ],
+   [
+    41,
+    "Refresh the language selector"
+   ],
+   [
+    44,
+    "Small-screen UI: if the extra scale differs from 1, add a scale-in-small-screens controller"
+   ],
+   [
+    103,
+    "Null-check failure target"
+   ]
+  ]
+ },
+ "3050670": {
+  "summary": "Constructor for the battle settings window: enables the default close sound, sets the small-screen extra scale to 1.0 and assigns the shared open/close delegates from GameWindow.",
+  "comments": [
+   [
+    5,
+    "Use the default close sound when none is set"
+   ],
+   [
+    7,
+    "Extra scale for small screens starts at 1.0 (no change)"
+   ],
+   [
+    13,
+    "Lazily create the shared GameWindow open/close delegates (compiler-cached lambdas)"
+   ]
+  ]
+ },
+ "3058d08": {
+  "summary": "Constructor for a battle log match entry. Sets defaults: season 9, matchLose 1, matchType 10 and replay version \"0\".",
+  "comments": [
+   [
+    5,
+    "Default values for a new log entry"
+   ]
+  ]
+ },
+ "3058d80": {
+  "summary": "Constructor that builds a battle recording (replay data) from match data and the current server time. Copies match type, play mode, RNG numbers, both decks, action logs, mulligans and who goes first.",
+  "comments": [
+   [
+    5,
+    "Match data and its event are required"
+   ],
+   [
+    9,
+    "Game mode comes from the current play event (interface call)"
+   ],
+   [
+    12,
+    "Store the RNG numbers so the replay can reproduce the same random draws"
+   ],
+   [
+    16,
+    "Save both players' decks in serialized form"
+   ],
+   [
+    22,
+    "Store the first-player choice and each side's recorded actions"
+   ],
+   [
+    28,
+    "Store both mulligans and the recording timestamp"
+   ],
+   [
+    36,
+    "Null-check failure target"
+   ]
+  ]
+ },
+ "305acec": {
+  "summary": "Writes the match data (player id, play mode, match type, then both players' battle data) to the debug log.",
+  "comments": [
+   [
+    5,
+    "Log the player id"
+   ],
+   [
+    8,
+    "Log the play mode and match type as text"
+   ],
+   [
+    19,
+    "Log each side's raw battle data"
+   ]
+  ]
+ },
+ "305aea4": {
+  "summary": "Constructor for match data. Sets defaults, stores the play mode and event, picks the match type, generates the random numbers, sets the player's deck and, for AI modes, sets up a bot opponent. Replays return early since their data is loaded later.",
+  "comments": [
+   [
+    7,
+    "Defaults: normal bot difficulty, empty enchantment lists, starting Energy values"
+   ],
+   [
+    21,
+    "Work out the match type from the play mode"
+   ],
+   [
+    23,
+    "Replay: the data is filled in later by SetMatchRecording, so stop here"
+   ],
+   [
+    26,
+    "Generate the shared RNG number list (used to keep replays deterministic)"
+   ],
+   [
+    27,
+    "Copy the player's data fields into a local struct"
+   ],
+   [
+    43,
+    "Build the player's deck data"
+   ],
+   [
+    45,
+    "Play modes against the AI also set up the bot opponent"
+   ],
+   [
+    49,
+    "Create empty action logs for both sides"
+   ]
+  ]
+ },
+ "305b2e8": {
+  "summary": "Sets up the bot (AI) opponent. Converts the match type to its bot variant, uses the given enemy deck or a prebuilt bot deck, gives the bot a random name, and randomizes cosmetics and card levels where the mode wants it. Returns false if no bot deck was found.",
+  "comments": [
+   [
+    4,
+    "Bot uses the fixed bot PlayFab id"
+   ],
+   [
+    6,
+    "Map match type to its bot version (Ranked, ClosedDeck, Unranked, FastMode)"
+   ],
+   [
+    28,
+    "No deck given: use a prebuilt bot deck for this match type; otherwise use the given deck"
+   ],
+   [
+    34,
+    "No bot deck found: log an error and fail"
+   ],
+   [
+    45,
+    "Some match types keep a fixed warlord name; the bit masks test that list (decompiler bit test)"
+   ],
+   [
+    63,
+    "Otherwise give the bot a random warlord name"
+   ],
+   [
+    65,
+    "Modes that want it randomize the bot's cosmetics and card levels"
+   ],
+   [
+    70,
+    "Closed deck (draft) mode: the bot gets the player's draft victory count"
+   ],
+   [
+    72,
+    "Null-check failure target"
+   ]
+  ]
+ },
+ "305bce0": {
+  "summary": "Builds the bot's deck data from a prebuilt deck and shuffles its card list, except in tutorials where the order is fixed.",
+  "comments": [
+   [
+    5,
+    "Log which prebuilt deck the AI uses"
+   ],
+   [
+    9,
+    "Tutorial matches keep the scripted card order, so skip the shuffle"
+   ],
+   [
+    14,
+    "Shuffle the bot's card library"
+   ]
+  ]
+ },
+ "305c32c": {
+  "summary": "Returns the next deterministic random int in [min, max) from the stored RNG array, advancing an index so replays and both clients get the same values. The decompiler merged in the start of SetMatchRecording.",
+  "comments": [
+   [
+    6,
+    "No RNG array: log an error and return 0"
+   ],
+   [
+    10,
+    "Range of one value or empty: return the minimum without using a number"
+   ],
+   [
+    13,
+    "Wrap the index around the array length"
+   ],
+   [
+    20,
+    "Take the next number, advance the index, and reduce it to the range with a modulo"
+   ],
+   [
+    30,
+    "From here the code belongs to SetMatchRecording (copies a recording into match data); decompiler merge"
+   ]
+  ]
+ },
+ "305c3e4": {
+  "summary": "Loads a battle recording into the match data for replay: RNG numbers, opponent id, both decks, action logs, first player, environmental cards and mulligans, plus the gameplay data of the active event for that game mode.",
+  "comments": [
+   [
+    5,
+    "Use the recorded RNG numbers so the replay plays out identically"
+   ],
+   [
+    7,
+    "Rebuild both players' deck data from the recording"
+   ],
+   [
+    13,
+    "Restore who went first and both action logs"
+   ],
+   [
+    19,
+    "Restore environmental cards and mulligans, and the recorded match type"
+   ],
+   [
+    27,
+    "Find the active event for the recorded game mode, falling back to Classic if none"
+   ],
+   [
+    58,
+    "Get the event's gameplay data (interface call) and use it for the replay"
+   ],
+   [
+    66,
+    "Null-check failure target"
+   ]
+  ]
+ },
+ "305b26c": {
+  "summary": "Stores the player's id from the battle data, then passes a copy of the player battle data to SetPlayerDeck.",
+  "comments": [
+   [
+    4,
+    "Remember the player's PlayFab id"
+   ],
+   [
+    5,
+    "Copy the struct and build the player's deck"
+   ]
+  ]
+ },
+ "305c6a4": {
+  "summary": "Creates the player's deck data from the chosen deck, stores the player data and hero, and shuffles the card library unless the match is a tutorial.",
+  "comments": [
+   [
+    5,
+    "Build raw battle data from the deck"
+   ],
+   [
+    9,
+    "Attach the player data, and set the deck's hero"
+   ],
+   [
+    13,
+    "Tutorials keep a fixed card order, so skip the shuffle"
+   ],
+   [
+    18,
+    "Shuffle the card library"
+   ]
+  ]
+ }
+}

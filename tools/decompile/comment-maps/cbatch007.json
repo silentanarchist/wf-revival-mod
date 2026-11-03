@@ -1,0 +1,831 @@
+{
+"325d280": {
+"summary": "Predicate lambda used by CardDeck.CardCopiesInDeck: true when a library card has the same original ID as the captured card. The decompiler expanded the string equality into raw memory compares.",
+"comments": [
+[
+4,
+"Both the library card and the captured card must be non-null, otherwise the compiler's null check throws at the end"
+],
+[
+8,
+"Same string object: trivially equal"
+],
+[
+11,
+"One ID is null and the other is not: not equal"
+],
+[
+17,
+"Compare string lengths first (length field at +0x10); different length means different ID"
+],
+[
+21,
+"Inlined string equality: skip the compare if both point at the same character data"
+],
+[
+25,
+"Long strings: compare 8 bytes at a time, then the final word (decompiler output is mangled here)"
+],
+[
+39,
+"Short strings: compare byte by byte until a mismatch or the end"
+],
+[
+59,
+"Reached when the lambda argument or the captured card is null"
+]
+]
+},
+"325d2c8": {
+"summary": "Predicate lambda used by CardDeck.Has: true when a library card's ID string equals the captured card's ID. The decompiler expanded the string equality into raw memory compares.",
+"comments": [
+[
+4,
+"Both cards must be non-null, otherwise the null check at the end throws"
+],
+[
+5,
+"Gets each card's ID through a virtual call (the card ID getter)"
+],
+[
+9,
+"Same string object: equal"
+],
+[
+12,
+"One ID missing: not equal"
+],
+[
+18,
+"Different string lengths: not equal"
+],
+[
+22,
+"Inlined string equality: skip the compare when both share the same character data"
+],
+[
+26,
+"Long strings: compare 8 bytes at a time (decompiler output is mangled here)"
+],
+[
+39,
+"Short strings: compare byte by byte"
+],
+[
+60,
+"Reached when a card is null"
+]
+]
+},
+"3258d1c": {
+"summary": "Property getter: returns the highest-priority active live-ops (custom game mode) event matching this deck's play mode, or null if none. Used by deck-building rules (bans, copy limits, deck size).",
+"comments": [
+[
+4,
+"Get the live-ops manager that knows which events are running"
+],
+[
+8,
+"Capture this deck's play mode (field at +0x74) in a closure for the event filter"
+],
+[
+14,
+"Fetch the events, then filter: first by this play mode (the closure lambda)"
+],
+[
+17,
+"Second filter, a cached static lambda (seems to drop events that are not currently active)"
+],
+[
+25,
+"Sort key lambda: events are sorted by priority, highest first"
+],
+[
+32,
+"Take the first of the sorted events (FirstOrDefault); the rest of the function is that LINQ call inlined"
+],
+[
+44,
+"Fast path check: if the sorted result is already a list, index it directly"
+],
+[
+45,
+"Not a list: walk it with an enumerator and return the first element (decompiler mixes up the delegates)"
+],
+[
+105,
+"List path: if the list has any elements return element 0"
+],
+[
+149,
+"No matching event: return null (no custom game mode active)"
+],
+[
+151,
+"Source sequence was null: LINQ throws ArgumentNullException"
+]
+]
+},
+"3258e38": {
+"summary": "Property getter: returns the deck's army. Uses the hero's army if a hero is set, else the first library card's army, else the stored deck army.",
+"comments": [
+[
+6,
+"No hero chosen yet: fall back to the library"
+],
+[
+7,
+"Army of the first card in the library, if any"
+],
+[
+9,
+"Empty library: use the deck's stored army field"
+],
+[
+15,
+"Hero set: the deck's army is the hero's army"
+]
+]
+},
+"3258ee8": {
+"summary": "Property getter: finds the PrebuiltDeck asset whose ID matches this deck's prebuiltDeckId, or null if the ID is empty or nothing matches. The decompiler garbled this method badly (LINQ First-match plus exception handlers).",
+"comments": [
+[
+4,
+"No prebuilt deck ID set: this is a player-built deck, return null"
+],
+[
+9,
+"Builds a closure holding the ID to look for"
+],
+[
+25,
+"Gets the global asset locator singleton and the list of all PrebuiltDeck assets"
+],
+[
+71,
+"Loop over all prebuilt deck assets (inlined LINQ FirstOrDefault with a predicate)"
+],
+[
+92,
+"MoveNext on the enumerator; false means no asset matched"
+],
+[
+121,
+"Take the current asset and test it with the ID-match predicate; keep looping until one matches"
+],
+[
+129,
+"Cleanup: dispose the enumerator (try/finally in the original)"
+],
+[
+150,
+"Return the matching asset, or null when the loop ran out"
+],
+[
+157,
+"Exception-unwind plumbing from the decompiler; not real game logic"
+],
+[
+177,
+"From here on the output is unrelated compiler helper code (LINQ GroupBy and the like) glued on by the decompiler"
+],
+[
+374,
+"More tail junk: stack-protector failure and an unrelated generic LINQ helper; ignore"
+]
+]
+},
+"3258f50": {
+"summary": "Property getter: returns the maximum deck size from the active custom game mode event's rules. Throws a null reference if there is no active event (the caller is expected to check first).",
+"comments": [
+[
+5,
+"There is an active event for this deck's mode"
+],
+[
+21,
+"Call IPlayEvent's rules getter through the interface"
+],
+[
+22,
+"Rules object exists: read its deck-size field"
+],
+[
+26,
+"No event or no rules: the compiler's null check throws (no default size here, unlike EmptySlotsCount)"
+]
+]
+},
+"3259078": {
+"summary": "Returns a copy of the deck's card list with the hero and defensive card inserted at the front, giving the full set of cards the deck represents. Does not change the deck.",
+"comments": [
+[
+5,
+"Copy the library so the deck's own list is untouched"
+],
+[
+8,
+"If a hero is set, put it at index 0"
+],
+[
+12,
+"If a defensive card is set, put it at index 0 too, so it ends up before the hero"
+]
+]
+},
+"32591a0": {
+"summary": "Initializes a new deck: name, hero, defensive card, army, deck ID (a new GUID if none given) and an empty card list. Called by all CardDeck constructors.",
+"comments": [
+[
+6,
+"Store the deck name"
+],
+[
+7,
+"With a hero, remember it and take the deck's army from the hero; otherwise the army is Neutral"
+],
+[
+18,
+"Store the defensive card and the army"
+],
+[
+20,
+"No ID supplied: generate a fresh GUID string so every deck is uniquely identified"
+],
+[
+26,
+"Start with an empty card library"
+]
+]
+},
+"325951c": {
+"summary": "Constructor that builds a deck from a PrebuiltDeck definition: localized name, hero, optional cardback, play mode and its cards from the collection. Sets the deck ID to the prebuilt deck's ID.",
+"comments": [
+[
+4,
+"Default the string fields to empty"
+],
+[
+8,
+"No collection passed: use the player's whole card collection from PlayerDataManager"
+],
+[
+13,
+"Deck name is a localization lookup keyed by the prebuilt deck ID"
+],
+[
+17,
+"Set up name, hero, army and an empty library"
+],
+[
+18,
+"Use the prebuilt deck's cardback if it specifies one"
+],
+[
+22,
+"Store the deck's play mode (a nullable value)"
+],
+[
+27,
+"Resolve the prebuilt deck's card list from the collection and add all of it to the library"
+]
+]
+},
+"3259a80": {
+"summary": "Constructor that builds a deck from deck info saved on the server (Azure): hero, defense card, cardback, warcry, tag, mode, edit time and each card ID repeated by its copy count.",
+"comments": [
+[
+7,
+"Default the string fields to empty"
+],
+[
+13,
+"Look up the hero card object from its ID via the collection manager"
+],
+[
+16,
+"Look up the defense (defensive) card the same way"
+],
+[
+17,
+"Set up name, ID, hero, army and an empty library"
+],
+[
+18,
+"Copy cosmetic and metadata fields: cardback, warcry, tag, game mode, prebuilt deck ID"
+],
+[
+24,
+"Rebuild the last-edit time from its stored tick value"
+],
+[
+27,
+"The saved deck is a dictionary of card ID to copy count: loop over the IDs"
+],
+[
+43,
+"Repeat once per copy (counter i against the stored count)"
+],
+[
+52,
+"Find the card object for this ID; unknown IDs are skipped"
+],
+[
+55,
+"Add the card to the library (List.Add inlined by the decompiler)"
+],
+[
+83,
+"Null check failure: missing deck info, manager or dictionary"
+]
+]
+},
+"3259f90": {
+"summary": "Constructor for a pack-constructed deck: named 'Pack constructed deck' with the given hero, filled with the cards of each prebuilt pack and an optional pilot card.",
+"comments": [
+[
+8,
+"Basic setup with a fixed name and the chosen hero, no defensive card"
+],
+[
+10,
+"Loop over each prebuilt pack"
+],
+[
+19,
+"Add every card of that pack that exists in the collection"
+],
+[
+25,
+"Optionally add one extra pilot card at the end"
+],
+[
+33,
+"List.Add inlined by the decompiler (with a resize branch)"
+]
+]
+},
+"325a75c": {
+"summary": "Adds a card to the deck's library. If the deck was empty (counting the hero), the deck's army is set to this card's army.",
+"comments": [
+[
+4,
+"Count of cards including the hero"
+],
+[
+5,
+"First card in the deck decides the deck's army"
+],
+[
+9,
+"Append the card to the library (List.Add inlined, with a grow branch)"
+],
+[
+40,
+"Null check failure: null card or null library"
+]
+]
+},
+"325a824": {
+"summary": "Convenience overload: tries to add a card to the deck and throws away the error message. Returns whether the card was added.",
+"comments": [
+[
+5,
+"Call the full TryAddCard with a dummy error output"
+]
+]
+},
+"325a944": {
+"summary": "Checks whether a card can be added to the deck and writes a localized error message if not. Covers defensive cards, heroes (single slot) and normal cards (owned copies, rarity copy limits, army, bans, legendary limit, deck space).",
+"comments": [
+[
+6,
+"Null card: falls to the compiler's null check"
+],
+[
+7,
+"Tactic cards: defensive-card tactics have their own single slot"
+],
+[
+8,
+"Other tactics fall through to the normal card checks below"
+],
+[
+12,
+"Defensive card slot: if one is already set, check whether it is this very card"
+],
+[
+14,
+"Slot is free or holds another card: check ownership and rules"
+],
+[
+15,
+"Compare copies already in the deck with copies the player owns"
+],
+[
+19,
+"Player has a spare copy"
+],
+[
+20,
+"Custom game mode event may ban this card"
+],
+[
+42,
+"Banned by the active event: report ThisCardIsBanned"
+],
+[
+56,
+"Defensive card must match the army of the defensive card already chosen"
+],
+[
+61,
+"Wrong army: report InvalidArmy"
+],
+[
+64,
+"Player does not own another copy: report MissingCopies with the card name"
+],
+[
+69,
+"This card is already the defensive card: report MaxCopiesReached with limit 1"
+],
+[
+78,
+"Store the message, log it, and return false"
+],
+[
+83,
+"Hero cards are handled at the bottom; everything else reaches the general path"
+],
+[
+85,
+"Card must be in the player's inventory or visible in the collection, otherwise InvalidCard"
+],
+[
+89,
+"General path: how many copies are already in the deck"
+],
+[
+108,
+"Event rules give the max copies allowed for this card's rarity"
+],
+[
+111,
+"Under the copy limit for this rarity"
+],
+[
+112,
+"Next compare deck copies with copies the player owns"
+],
+[
+117,
+"Player owns another copy"
+],
+[
+120,
+"Army rule: neutral cards always fit; otherwise the card must match the deck army unless the deck is empty"
+],
+[
+121,
+"Legendary cards get an extra per-deck limit from the event rules"
+],
+[
+123,
+"Card is Legendary: check the legendary limit"
+],
+[
+144,
+"A legendary limit is set (greater than 0)"
+],
+[
+151,
+"Deck already has the maximum legendaries: report MaxLegendayCopiesReached with the limit"
+],
+[
+161,
+"Check the event's ban list for this card"
+],
+[
+186,
+"Banned: report ThisCardIsBanned"
+],
+[
+192,
+"Finally make sure there is a free slot in the deck"
+],
+[
+193,
+"Space left: the card can be added"
+],
+[
+196,
+"No space: report DeckFull tip"
+],
+[
+199,
+"Card army does not match the deck: InvalidArmy"
+],
+[
+202,
+"Look up the localized text for the chosen error key"
+],
+[
+205,
+"Player owns no spare copy: MissingCopies"
+],
+[
+209,
+"Too many copies of this rarity: MaxCopiesReached with the allowed number"
+],
+[
+233,
+"Fill the card name or number into the message"
+],
+[
+235,
+"Write the error out and return false"
+],
+[
+238,
+"Hero path: identical to CanAddHero (single hero slot, ownership, ban, army)"
+],
+[
+241,
+"A hero is already chosen: if it is this card, report MaxCopiesReached with 1"
+],
+[
+244,
+"Check copies in the deck against owned copies"
+],
+[
+249,
+"Check the event ban list"
+],
+[
+271,
+"Banned hero: ThisCardIsBanned"
+],
+[
+289,
+"Hero's army must match the deck hero's army, else InvalidArmy"
+],
+[
+293,
+"Not owned: MissingCopies"
+],
+[
+308,
+"Write the error out, log it and return false"
+]
+]
+},
+"325bca4": {
+"summary": "Sets the deck's hero card and updates the deck army. The decompiler shows the army coming from a static field, but it seems to be the hero's army.",
+"comments": [
+[
+4,
+"Deck army is updated after the hero is set (decompiled as a static read, probably the hero's army)"
+]
+]
+},
+"325b034": {
+"summary": "Checks whether a hero card can be added to the deck. Returns false with a localized error (MaxCopiesReached, MissingCopies, ThisCardIsBanned or InvalidArmy) if not.",
+"comments": [
+[
+7,
+"Is a hero already set and is it this card?"
+],
+[
+9,
+"No conflicting hero: go on to ownership and rules"
+],
+[
+10,
+"Compare copies in the deck with copies the player owns"
+],
+[
+14,
+"Player owns enough"
+],
+[
+15,
+"An active custom event may ban this hero"
+],
+[
+36,
+"Check the event's ban list"
+],
+[
+37,
+"Banned: report ThisCardIsBanned"
+],
+[
+44,
+"Hero's army must match the deck hero's army"
+],
+[
+56,
+"Mismatch: InvalidArmy error"
+],
+[
+59,
+"Not owned: MissingCopies with the card name"
+],
+[
+63,
+"Hero already set to this card: MaxCopiesReached with limit 1"
+],
+[
+72,
+"Fill in the message text"
+],
+[
+74,
+"Store the error, log it and return false"
+]
+]
+},
+"325b440": {
+"summary": "Checks whether a defensive card can be added to the deck. Returns false with a localized error (MaxCopiesReached, MissingCopies, ThisCardIsBanned or InvalidArmy) if not.",
+"comments": [
+[
+7,
+"Is a defensive card already set and is it this card?"
+],
+[
+9,
+"Not a duplicate: go on to ownership and rules"
+],
+[
+10,
+"Compare copies in the deck with copies the player owns"
+],
+[
+14,
+"Player owns enough"
+],
+[
+15,
+"An active custom event may ban this card"
+],
+[
+36,
+"Check the event's ban list"
+],
+[
+37,
+"Banned: report ThisCardIsBanned"
+],
+[
+44,
+"Army must match the existing defensive card's army"
+],
+[
+56,
+"Mismatch: InvalidArmy error"
+],
+[
+59,
+"Not owned: MissingCopies with the card name"
+],
+[
+63,
+"Already the defensive card: MaxCopiesReached with limit 1"
+],
+[
+72,
+"Fill in the message text"
+],
+[
+74,
+"Store the error, log it and return false"
+]
+]
+},
+"325b84c": {
+"summary": "Counts how many copies of a card are in the deck library using a LINQ Count with an ID-match closure. A hero card that is the deck hero counts as 1. The decompiler pasted unrelated LINQ helper code onto the end.",
+"comments": [
+[
+4,
+"Closure capturing the card being counted"
+],
+[
+12,
+"Card type check (seems to be Hero): compare against the deck hero's original ID"
+],
+[
+23,
+"Same hero as the deck's: exactly 1 copy"
+],
+[
+27,
+"Count library cards whose original ID matches (inlined LINQ Count)"
+],
+[
+68,
+"Loop over the library, calling the predicate on each card"
+],
+[
+121,
+"Predicate matched: increment the count"
+],
+[
+132,
+"Exception and cleanup plumbing from the decompiler (dispose enumerator, return count)"
+],
+[
+171,
+"Everything below is unrelated LINQ helper code (Count, DefaultIfEmpty) glued on by the decompiler"
+]
+]
+},
+"325b99c": {
+"summary": "Counts the legendary-rarity cards in the deck library using a cached LINQ Count predicate. Used to enforce the event's legendary card limit. The decompiler pasted unrelated LINQ helper code onto the end.",
+"comments": [
+[
+5,
+"Cached static predicate (seems to test for Legendary rarity)"
+],
+[
+13,
+"LINQ Count over the library"
+],
+[
+50,
+"Loop over the library, counting cards the predicate accepts"
+],
+[
+105,
+"Matched: increment the count (guard against overflow)"
+],
+[
+115,
+"Exception-handling plumbing from the decompiler, not real logic"
+],
+[
+182,
+"Cleanup: dispose the enumerator and return the count"
+],
+[
+211,
+"Everything below is unrelated LINQ helper code glued on by the decompiler"
+]
+]
+},
+"325a6bc": {
+"summary": "Returns the number of cards in the deck library, plus one if countHero is true and a hero is set.",
+"comments": [
+[
+4,
+"Caller asked to include the hero"
+],
+[
+8,
+"Hero present: library size plus 1"
+],
+[
+14,
+"Otherwise just the library size"
+]
+]
+},
+"325ba98": {
+"summary": "Returns how many card slots are still free in the deck: max size (30 by default, or the active live event's deck size) minus current library count.",
+"comments": [
+[
+4,
+"No special game mode: standard deck size of 30 (0x1e)"
+],
+[
+10,
+"Slots left = max size minus cards currently in the library (hero excluded)"
+],
+[
+13,
+"A game mode is set: ask the live-ops manager for its active event"
+],
+[
+17,
+"Get the active event for this deck's mode"
+],
+[
+18,
+"Library missing (decompiler branch): return the event's deck size only"
+],
+[
+41,
+"Normal case: read the event rules' deck size"
+],
+[
+58,
+"Rules available: use the event's deck size as the maximum"
+],
+[
+64,
+"No event or rules: the compiler's null check throws"
+]
+]
+}
+}

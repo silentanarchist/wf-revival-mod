@@ -1,0 +1,677 @@
+{
+ "2f31db8": {
+  "summary": "Animates a card being drawn from the deck into the hand: plays the draw sound, sets the hand state, and tweens scale (bounce ease), rotation and position. Logs an error and aborts if the card is not in the expected starting state.",
+  "comments": [
+   [
+    4,
+    "Guard: the card must be in a state that allows drawing; otherwise log an error naming the card and stop"
+   ],
+   [
+    14,
+    "Play the 'draw card from deck' sound through the sound manager (needs the battle manager's sound collection)"
+   ],
+   [
+    18,
+    "Put the card logically in hand (parents it to the hand anchor, refreshes its UI)"
+   ],
+   [
+    19,
+    "Flag at +0x40 seems to be isPlayer: enemy cards are turned to show their back, own cards just update visibility"
+   ],
+   [
+    26,
+    "Scale the card to the requested hand scale over timeToDraw with an OutBounce ease"
+   ],
+   [
+    29,
+    "Own cards also rotate to zero rotation (face-up, upright) during the draw"
+   ],
+   [
+    33,
+    "Move the card to the hand position; the SetEase call is inlined below, giving the move an OutBounce ease"
+   ],
+   [
+    50,
+    "Shared null-reference exit for any missing manager/sound/UI object"
+   ]
+  ]
+ },
+ "2f32374": {
+  "summary": "Called when the draw animation is ending: refreshes the card UI visibility for its current state and rotates the card to its final orientation over a quarter of the draw time with an InBack ease.",
+  "comments": [
+   [
+    4,
+    "Needs the card UI; refresh which parts (face/back) are visible for the current card state"
+   ],
+   [
+    7,
+    "Rotate to the final orientation over 25% of the draw time"
+   ],
+   [
+    9,
+    "Inlined SetEase(InBack) on the rotate tween; the flash-ease branch is just DOTween library boilerplate"
+   ]
+  ]
+ },
+ "2f32670": {
+  "summary": "Puts the card into the mulligan 'kept' or 'discarded' state, parents a player card to the mulligan anchor, and resets its collider to its original size so it can be clicked during the mulligan.",
+  "comments": [
+   [
+    4,
+    "Only the player's own cards are re-parented to the mulligan manager's anchor"
+   ],
+   [
+    9,
+    "Pick the mulligan state: discarded if toBeDiscarded, otherwise selected (kept)"
+   ],
+   [
+    15,
+    "Collider reset; skipped for cards in the cemetery or removed from game (these states are never mulligan states, so normally runs)"
+   ],
+   [
+    23,
+    "Enable the collider, turn off the 'show big' collider, restore the original box size and offset"
+   ],
+   [
+    47,
+    "Shared null-reference exit"
+   ]
+  ]
+ },
+ "2f326f8": {
+  "summary": "Cleans up the mulligan visuals on a card by destroying its 'selected' frame and its button frame objects. Called when the mulligan finishes.",
+  "comments": [
+   [
+    4,
+    "The card UI must exist"
+   ],
+   [
+    9,
+    "Destroy the 'selected for discard' frame if one was created"
+   ],
+   [
+    14,
+    "Destroy the mulligan button frame's game object as well (the Unity object-destroy call is inlined)"
+   ]
+  ]
+ },
+ "2f320c8": {
+  "summary": "Moves the card into the hand state: parents a player card to the hand anchor, refreshes size and 'created by' text, and switches the card text to hand mode. Heroes (warlord equivalents) are refused with a log message.",
+  "comments": [
+   [
+    4,
+    "Player cards: parent to the player hand object first"
+   ],
+   [
+    9,
+    "Heroes/warlords must never be placed in hand: log 'Trying to put hero in hand. Ignoring' and stop"
+   ],
+   [
+    21,
+    "Mark the card as in hand and refresh its UI"
+   ],
+   [
+    26,
+    "Player card during battle or after the mulligan finished: show its hand version of the text"
+   ],
+   [
+    36,
+    "Re-parent the card under the hand's anchor layout so the hand arranges it"
+   ],
+   [
+    58,
+    "Shared null-reference exit"
+   ]
+  ]
+ },
+ "2f2cbc4": {
+  "summary": "Per-frame update while a card charges to attack: eases its local position toward the 'charged back and up' pose and rotates it to face the attack-targeting reticle. Direction is flipped for the enemy side.",
+  "comments": [
+   [
+    4,
+    "sideSign is +1 for the player's cards and -1 for the enemy's, so the wind-up goes the opposite way for each side"
+   ],
+   [
+    17,
+    "Progress = frame time / charge time, clamped to 0..1 and used as the lerp factor"
+   ],
+   [
+    31,
+    "Lerp the local position toward original position + back offset + up offset (x, y, z computed separately)"
+   ],
+   [
+    34,
+    "Pick the minion manager of the side being attacked, to convert the reticle position between cameras"
+   ],
+   [
+    55,
+    "Convert the reticle position from the HUD camera to the board camera so the card can look at it"
+   ],
+   [
+    59,
+    "Build the look-at rotation toward the reticle, plus an extra tilt about the card's right axis (chargeAttackAngle)"
+   ],
+   [
+    69,
+    "Slerp from the current rotation toward that target and apply it"
+   ],
+   [
+    89,
+    "Shared null-reference exit"
+   ]
+  ]
+ },
+ "2f328e8": {
+  "summary": "Returns true if any active effect on this card is an enchantment of the mutation type (enchantment type 0x82).",
+  "comments": [
+   [
+    10,
+    "Loop over activeEffects; the decompiler re-reads the list each pass"
+   ],
+   [
+    17,
+    "Only effects that carry an enchantment card are candidates"
+   ],
+   [
+    25,
+    "Enchantment type 0x82 appears to be the 'mutation' type; found: return true (i < size)"
+   ],
+   [
+    33,
+    "Reached only if the list is null (null reference)"
+   ]
+  ]
+ },
+ "2f329f0": {
+  "summary": "Returns true if the card already has this single-use mutation among its active effects. Cumulative mutations can stack, so they always return false.",
+  "comments": [
+   [
+    4,
+    "mutationCard must not be null"
+   ],
+   [
+    6,
+    "Cumulative mutations may be applied repeatedly, so they are never 'already present'"
+   ],
+   [
+    12,
+    "Scan active effects for one whose enchantment is exactly this mutation card; return true on first match, false at the end"
+   ]
+  ]
+ },
+ "2f32ae8": {
+  "summary": "Sets the card's state to newState and writes a debug log line naming the state and the card.",
+  "comments": [
+   [
+    5,
+    "Build and write the log message 'SetCardState <state> for <card>'"
+   ],
+   [
+    11,
+    "The actual state change"
+   ]
+  ]
+ },
+ "2f32ce4": {
+  "summary": "Moves the card to the center of the screen to show it being played: sets the 'hand moving' state and sorting layer, scales it up, and tweens it to a position offset toward the player (or away for the enemy). Returns how long the animation takes.",
+  "comments": [
+   [
+    4,
+    "Mark the card as moving from the hand"
+   ],
+   [
+    6,
+    "Draw it above other cards using the HandMoving sorting layer and scale it with an OutBounce ease"
+   ],
+   [
+    13,
+    "Offset toward the viewer differs by side: enemy uses -4 / -12, player uses +4 / +4 (sign flips the direction)"
+   ],
+   [
+    25,
+    "Compute the target position as current position plus the offset along the up vector (decompiler mixes x/y/z)"
+   ],
+   [
+    32,
+    "Player card: rotate to upright and move with an InExpo ease over stepTime; return stepTime"
+   ],
+   [
+    39,
+    "Enemy card: scale up 1.5x, flip it face-up, and move after a delay of stepTime"
+   ],
+   [
+    44,
+    "Enemy path takes the global 'timeToScaleIntoMoving' as move duration; total time is that plus stepTime"
+   ],
+   [
+    53,
+    "Shared null-reference exit"
+   ]
+  ]
+ },
+ "2f330cc": {
+  "summary": "Sends the card to the cemetery: stops in-play animations, dissolves it, resets unit stats, and adds it to the cemetery list (unless it is ephemeral, in which case it is just deactivated).",
+  "comments": [
+   [
+    4,
+    "Stop all in-play effects/animations, then dissolve the whole card over the global dissolve time"
+   ],
+   [
+    8,
+    "State becomes inCemetery"
+   ],
+   [
+    10,
+    "Units get their values reset to the in-hand values (undoing buffs and damage)"
+   ],
+   [
+    14,
+    "Ephemeral cards do not go to the cemetery: they are simply deactivated"
+   ],
+   [
+    29,
+    "Otherwise add to the cemetery manager's list (inlined List.Add with resize)"
+   ],
+   [
+    49,
+    "Parent the card to the cemetery, assign its cemetery slot from the list size, then deactivate its object"
+   ]
+  ]
+ },
+ "2f332d8": {
+  "summary": "Animates the card flying back into its deck: optionally lifts it first, flips it face-down, then moves, scales and rotates it to the deck's reference position. Returns total animation time (delay plus move time).",
+  "comments": [
+   [
+    4,
+    "Stop in-play animations first"
+   ],
+   [
+    7,
+    "Cards that show their back, or armed traps, skip the lift-off delay; others wait 0.3s"
+   ],
+   [
+    15,
+    "A positive fixedTime overrides the default delay"
+   ],
+   [
+    19,
+    "With a delay, set state to inDeck, lift the card slightly (optional vertical offset of 15) and flip it over"
+   ],
+   [
+    44,
+    "Choose the deck of the owner: player deck for own cards, enemy deck otherwise"
+   ],
+   [
+    54,
+    "Read the deck's reference position and scale"
+   ],
+   [
+    75,
+    "Scale so the card matches the deck's reference size, compensating for parent scale differences"
+   ],
+   [
+    92,
+    "If no fixedTime, use the global timeToScaleIntoMoving as the move duration"
+   ],
+   [
+    95,
+    "Scale, rotate and move tweens all start after the delay; return delay + duration"
+   ],
+   [
+    115,
+    "Shared null-reference exit"
+   ]
+  ]
+ },
+ "2f33114": {
+  "summary": "Stops all in-play animations on the card: clears status animations, destroys every animation object in the card UI's activeAnimsInPlay list, stops the summon sickness animation and clears the list. The tail of the decompiled output is List.Clear / Array helper garbage.",
+  "comments": [
+   [
+    4,
+    "Needs the card UI"
+   ],
+   [
+    8,
+    "Remove status animations (frozen, shield etc.)"
+   ],
+   [
+    11,
+    "Destroy each animation object in the list, from the end to the start"
+   ],
+   [
+    19,
+    "Also stop the summon sickness animation"
+   ],
+   [
+    25,
+    "This is the inlined List.Clear; everything after it is decompiler noise from Array.Clear internals"
+   ],
+   [
+    31,
+    "Decompiler lost the structure here: array bounds checks, exceptions and IndexOf/LastIndexOf helper code. Not game logic"
+   ],
+   [
+    245,
+    "Normal end of the function when the list was empty or cleared"
+   ]
+  ]
+ },
+ "2f33818": {
+  "summary": "Handles a click on a card during the mulligan: toggles the player's card between kept and discarded and updates its UI. In a replay (not from a click) it instead shows the 'selected' frame and plays the toggle sound for the opponent's choice.",
+  "comments": [
+   [
+    4,
+    "Need the battle manager; only valid in the mulligan UI state, otherwise log 'No longer choosing mulligan' (dev tools only)"
+   ],
+   [
+    8,
+    "Common tail: log the message if developer tools are enabled"
+   ],
+   [
+    25,
+    "Own card and not the Whispers of Chaos mulligan option: only then the click is a real toggle, and not in a replay"
+   ],
+   [
+    29,
+    "Kept -> discarded: show the discard mark on the card"
+   ],
+   [
+    36,
+    "Discarded -> kept: remove the mark"
+   ],
+   [
+    37,
+    "Any other state is unexpected: log a warning and do nothing"
+   ],
+   [
+    54,
+    "Replay path: nothing to do for real clicks"
+   ],
+   [
+    62,
+    "Replay: create the 'selected' frame from its prefab if the card does not have one yet"
+   ],
+   [
+    84,
+    "Play the Toggle sound to show the replayed choice"
+   ],
+   [
+    96,
+    "Decompiler expanded the audio-cue play call here (null checks, debug log, ConfigureAudioSourceAndPlay); it just plays the sound"
+   ]
+  ]
+ },
+ "2f33a40": {
+  "summary": "Pointer-enter handler for a card. For the player's card in hand it raises and enlarges it, shows its description, tooltips and available targets. For a card on the board it highlights it and previews the combat result (lethal damage icon). Ignored during a right-click or multi-touch.",
+  "comments": [
+   [
+    4,
+    "Ignore hover while right mouse button is held or with more than one finger down"
+   ],
+   [
+    16,
+    "Choosing a resolution target: hover is ignored (logged for dev tools only)"
+   ],
+   [
+    48,
+    "Card not in play: only the player's own hand cards react, if the hand card may be displayed"
+   ],
+   [
+    57,
+    "Spread the other hand cards apart around this card (coroutine) and stop its running tweens"
+   ],
+   [
+    63,
+    "Mark it as showing in hand and remember its original hand position/rotation to restore later"
+   ],
+   [
+    75,
+    "Raise it by the device-specific Y offset (touch input uses its own offset, based on the finger position)"
+   ],
+   [
+    105,
+    "Straighten the rotation and apply the device's shown-in-hand scale"
+   ],
+   [
+    124,
+    "Draw above the others, show full description and tooltips, enlarge colliders, refresh size and 'created by' text"
+   ],
+   [
+    138,
+    "Highlight valid targets for this hand card"
+   ],
+   [
+    144,
+    "The rest is decompiler garbage from a card text layout switch; it only sets the text layout state"
+   ],
+   [
+    219,
+    "On the board: ignore in UI states where hover must not highlight (mask 0x1981)"
+   ],
+   [
+    229,
+    "Card is a valid target: set the 'selected target' highlight and preview combat against the tracked attacker"
+   ],
+   [
+    233,
+    "Plain highlight for ordinary cards: mark selected and, for remnants not owned by the active player, show the original card"
+   ],
+   [
+    255,
+    "Combat preview highlight against the tracked attacker; stop here for active abilities or certain UI states"
+   ],
+   [
+    270,
+    "Not while waiting for a waystone use to resolve"
+   ],
+   [
+    279,
+    "Collect the damage the attacker would take (counter-attack, or tactic damage) with damage types"
+   ],
+   [
+    347,
+    "Ambush hides the outcome (do not reveal it); otherwise if the damage would kill, show the 'Minion Death Icon' animation"
+   ],
+   [
+    403,
+    "Hides the original-remnant card display and the combat icon (cleanup tail)"
+   ],
+   [
+    416,
+    "Shared null-reference exit"
+   ]
+  ]
+ },
+ "2f34200": {
+  "summary": "Pointer-exit handler for a card: stops showing its description, lowers it back into the hand if it was raised, clears combat preview highlights, and returns the highlight frame to its regular or potential-target state with the matching color/scale tweens.",
+  "comments": [
+   [
+    4,
+    "Hide any description being displayed"
+   ],
+   [
+    5,
+    "A player's raised hand card goes back down"
+   ],
+   [
+    12,
+    "Turn off combat preview highlight on this card (and on the tracked attacker below)"
+   ],
+   [
+    16,
+    "If a card is currently tracked (attacking), clear its combat preview too"
+   ],
+   [
+    22,
+    "Selected goes back to regular; selected-as-target goes back to potential target; other states unchanged"
+   ],
+   [
+    34,
+    "Switch the highlight to the new state and animate frame color and scale to match"
+   ],
+   [
+    64,
+    "Board target states: change the frame color and tween the card body scale back (instantly if no animation time)"
+   ],
+   [
+    117,
+    "Tween (or set instantly) the frame highlight color; if the new alpha is 0 the frame is hidden at the end"
+   ]
+  ]
+ },
+ "2f344d4": {
+  "summary": "Touch-down handler for a card: records the click time, shows deck/hand sizes when pressing an enemy hand card or a deck card, and marks an in-play card as selected. Unknown states produce a warning.",
+  "comments": [
+   [
+    4,
+    "Remember when the card was touched; used later to tell a quick click from a hold"
+   ],
+   [
+    9,
+    "Choosing a resolution target: touch-down ignored (logged for dev tools only)"
+   ],
+   [
+    26,
+    "States covered by mask 0x2e108 do nothing"
+   ],
+   [
+    31,
+    "Enemy hand card: pressing it shows both decks' sizes and both hands' sizes (only during battle)"
+   ],
+   [
+    64,
+    "Own board card: set its highlight to selected"
+   ],
+   [
+    76,
+    "Card in deck: show that side's deck size"
+   ],
+   [
+    87,
+    "Unexpected card state: log a warning"
+   ]
+  ]
+ },
+ "2f3474c": {
+  "summary": "Touch-release handler for a card. Uses a waystone on an Aeldari remnant, returns a raised hand card to the hand after a quick click (showing the large card), or displays the large card view with its effects, ambush icon for hidden enemy ambush cards.",
+  "comments": [
+   [
+    4,
+    "Ignored while choosing a resolution target"
+   ],
+   [
+    24,
+    "Branch on card state: hand cards, board/other states, and the large-card view"
+   ],
+   [
+    31,
+    "Aeldari remnant: try to use its waystone, if allowed; otherwise log 'Can't CanUseWaystone'"
+   ],
+   [
+    48,
+    "Not a remnant: remember it is being displayed; large card only when mulligan elements are hidden"
+   ],
+   [
+    56,
+    "Hand card: enemy cards only react if the spell is a Sabotage type"
+   ],
+   [
+    64,
+    "Quick click (under 0.2s since touch-down): show the card enlarged"
+   ],
+   [
+    71,
+    "If still raised, spread hand back, restore original hand position/rotation/scale, restore sorting layer and hide the description"
+   ],
+   [
+    100,
+    "Re-register the card UI's click listener on the hand (decompiler expanded the UnityEvent code)"
+   ],
+   [
+    153,
+    "Other states: only state 0x11 (and a small group of neighbouring states) go on to the large card view; others return"
+   ],
+   [
+    169,
+    "Skip when the UI state does not allow showing a large card"
+   ],
+   [
+    173,
+    "If this card was just clicked as a target, clear that flag and skip showing it"
+   ],
+   [
+    188,
+    "Show the large card with its effects, tier and stats"
+   ],
+   [
+    200,
+    "Enemy in-play ambush cards: show only a hidden placeholder (ambush icon, no texts) instead of the real card"
+   ],
+   [
+    259,
+    "Decompiler lost the control flow here; the rest enables the card effect display for the shown card unless it is an environment effect"
+   ]
+  ]
+ },
+ "2f34930": {
+  "summary": "Drag handler for a card. For a board card it starts an attack (or active ability) once the finger moves far enough; for a hand card it starts moving the card out of the hand when the drag passes a distance/angle threshold. Ignored in replays, right-click, multi-touch and outside the normal battle state.",
+  "comments": [
+   [
+    6,
+    "Ignore right-click or multi-touch"
+   ],
+   [
+    16,
+    "Replays cannot be interacted with"
+   ],
+   [
+    21,
+    "Only allowed in the normal battle UI state, for the player's own cards in play or hand"
+   ],
+   [
+    27,
+    "Board card branch (state is not 8): needs to be dragged farther than a small threshold"
+   ],
+   [
+    38,
+    "Not for cards in states 3 and 0x11"
+   ],
+   [
+    44,
+    "Must be able to attack or use an ability now"
+   ],
+   [
+    63,
+    "Start the attack targeting if the card can attack a card or use an ability"
+   ],
+   [
+    72,
+    "Cleanup flag: clear it, and re-evaluate showing the large card if the UI allows"
+   ],
+   [
+    119,
+    "Hand card branch: compute the drag direction angle against the vertical axis"
+   ],
+   [
+    148,
+    "Angle limit is 65 degrees (70 if a flag is set); beyond it the drag is not a pull-out"
+   ],
+   [
+    153,
+    "The hand card may move only if allowed and the drag moved enough"
+   ],
+   [
+    165,
+    "Start moving: set state to moving (9), play the 'move card into battle' sound, tell the manager to start moving it"
+   ],
+   [
+    181,
+    "Scale the card to its moving scale, then refresh its size on completion; hide the description"
+   ],
+   [
+    201,
+    "Shared null-reference exit"
+   ]
+  ]
+ }
+}

@@ -1,0 +1,1015 @@
+{
+ "30f1d28": {
+  "summary": "Debug test that walks every card in every card collection and logs a warning for each null animation entry inside a card ability's logic lists. Only logs; changes no state.",
+  "comments": [
+   [
+    4,
+    "Start of the sweep: log a marker, then walk each card collection"
+   ],
+   [
+    22,
+    "For each card in this collection (n); the repeated null checks are the decompiler's expanded list indexing"
+   ],
+   [
+    28,
+    "Only cards that have an ability list are scanned"
+   ],
+   [
+    35,
+    "For each ability (k) of the card"
+   ],
+   [
+    40,
+    "Only abilities that have ability logic entries"
+   ],
+   [
+    45,
+    "For each logic entry (j) of the ability"
+   ],
+   [
+    50,
+    "Only logic entries that contain a nested list"
+   ],
+   [
+    56,
+    "For each element (i) of the nested list"
+   ],
+   [
+    62,
+    "A null element is an empty animation pointer: warn with the card's name"
+   ],
+   [
+    93,
+    "Shared null-check failure target; the lines after it are a decompiler-tangled Debug.Log of the finish message"
+   ]
+  ]
+ },
+ "30fccd0": {
+  "summary": "Updates a rebalanced-card view: hides every change marker (cost, attack, health, description, name, race, rarity, art), then shows the marker for each BalanceChangeType in the list. Unknown types log an error.",
+  "comments": [
+   [
+    4,
+    "First hide all change markers so only the changed stats are highlighted"
+   ],
+   [
+    19,
+    "Now go through the list of changed stats, one marker per entry"
+   ],
+   [
+    23,
+    "Branch on the change type: cost, attack, health, description, name, race, rarity, art pick their marker"
+   ],
+   [
+    44,
+    "Show the chosen marker"
+   ],
+   [
+    54,
+    "The active ability changes (1-3) have no marker here and are skipped"
+   ],
+   [
+    66,
+    "Unrecognised change type: log an error"
+   ],
+   [
+    88,
+    "Shared null-check failure target"
+   ]
+  ]
+ },
+ "30ffe00": {
+  "summary": "Static constructor of the compiler-generated closure class: creates its single shared instance.",
+  "comments": []
+ },
+ "30ffe88": {
+  "summary": "Coroutine behind AttemptReconnect: tries to reconnect to Photon and, while Photon is still disconnected, waits 2 seconds and tries again. Ends once connected or the manager is gone.",
+  "comments": [
+   [
+    5,
+    "State 1: resumed after the wait, so retry the connection"
+   ],
+   [
+    12,
+    "State 0: first run, nothing to retry yet"
+   ],
+   [
+    18,
+    "If the manager still exists and Photon is still disconnected, wait and loop"
+   ],
+   [
+    22,
+    "Wait 2 seconds (float 0x40000000) before the next attempt"
+   ],
+   [
+    29,
+    "Connected, or manager destroyed: coroutine ends"
+   ]
+  ]
+ },
+ "30fffa8": {
+  "summary": "Enumerator Reset is not supported for this coroutine; throws NotSupportedException.",
+  "comments": []
+ },
+ "30fffec": {
+  "summary": "Coroutine behind LeaveBattle: leaves the Photon room, then polls every half second (up to 20 times, about 10s) until out of the room, then invokes the onLeft callback.",
+  "comments": [
+   [
+    5,
+    "State 1: resumed after a wait; count down one tick"
+   ],
+   [
+    12,
+    "State 0: first run. If not connected, skip straight to the callback"
+   ],
+   [
+    16,
+    "Leave the room, retaining the player slot, and start a 20 tick countdown"
+   ],
+   [
+    21,
+    "Keep waiting while still in the room, connected and the countdown has not run out"
+   ],
+   [
+    25,
+    "Wait 0.5 seconds (float 0x3f000000)"
+   ],
+   [
+    32,
+    "Left the room, disconnected or timed out: tell the caller via onLeft"
+   ]
+  ]
+ },
+ "310014c": {
+  "summary": "Enumerator Reset is not supported for this coroutine; throws NotSupportedException.",
+  "comments": []
+ },
+ "30fd310": {
+  "summary": "Unity Awake: enforces a single NetworkCustomManager. A duplicate destroys its own GameObject; the first one registers itself as the singleton.",
+  "comments": [
+   [
+    5,
+    "A manager already exists: warn and destroy this duplicate GameObject"
+   ],
+   [
+    16,
+    "First manager: remember it as the singleton"
+   ]
+  ]
+ },
+ "30fd40c": {
+  "summary": "Starts the Photon connection for the user: logs the settings, applies them to PhotonNetwork (resends, alt ports, CRC, background timeout), sets the user id as auth value and player name, then connects. Stores onComplete to call after connecting.",
+  "comments": [
+   [
+    8,
+    "Remember the callback to run once Photon connects to the master server"
+   ],
+   [
+    9,
+    "Build the log string describing the connection settings (decompiler expanded the array bounds checks)"
+   ],
+   [
+    38,
+    "Apply the connection settings to PhotonNetwork"
+   ],
+   [
+    54,
+    "Authenticate with the user id as both auth value and player name"
+   ],
+   [
+    63,
+    "Start the actual connection"
+   ],
+   [
+    75,
+    "Array bounds check failure (decompiler artifact)"
+   ]
+  ]
+ },
+ "30fda58": {
+  "summary": "Unity OnApplicationPause: if connected and set to disconnect on pause, leaves Photon's offline mode and manually reconnects to the master or game server, or signals disconnect. Appears to be an inlined copy of a PhotonNetwork routine.",
+  "comments": [
+   [
+    4,
+    "Bail out if not connected or the disconnect-on-pause option is off"
+   ],
+   [
+    15,
+    "Offline mode: switch it off and rebuild the connection by hand (inlined Photon code)"
+   ],
+   [
+    37,
+    "Clean up room or lobby state depending on which server we were on"
+   ],
+   [
+    45,
+    "Was on a name or master server state: reconnect to the master server"
+   ],
+   [
+    54,
+    "Was on the game server: reconnect to the game server"
+   ],
+   [
+    55,
+    "Otherwise reset to PeerCreated and tell listeners we disconnected from Photon"
+   ]
+  ]
+ },
+ "30fd7b8": {
+  "summary": "Connects to the Photon cloud: switches to the configured protocol, logs, then connects to the configured region with the game version string (including environment and bundles).",
+  "comments": [
+   [
+    6,
+    "Use the protocol configured in the Photon server settings"
+   ],
+   [
+    16,
+    "Connect to the region and version taken from the server config"
+   ]
+  ]
+ },
+ "30fdb14": {
+  "summary": "Leaves the current Photon room depending on connection status: reconnects if disconnected, logs odd states (already in master, in lobby), otherwise hides the room for destruction and calls OpLeaveRoom (or fires OnLeftRoom in offline mode).",
+  "comments": [
+   [
+    5,
+    "Look at the simplified connection status first"
+   ],
+   [
+    9,
+    "Connected to master only: already out of the room, just log if dev tools are on"
+   ],
+   [
+    25,
+    "In the lobby: unexpected, only log it"
+   ],
+   [
+    35,
+    "Any other lower status: log a warning about incorrect Photon status"
+   ],
+   [
+    46,
+    "Disconnected: reconnect to Photon with the configured region (same as ConnectToPhoton)"
+   ],
+   [
+    65,
+    "Statuses other than in-room or changing are not handled here"
+   ],
+   [
+    67,
+    "In a room (or changing): mark it to be destroyed when empty, then leave"
+   ],
+   [
+    71,
+    "Online: leave the room, retaining the player slot if the room has a player TTL"
+   ],
+   [
+    93,
+    "Offline mode: no server round trip, just fire OnLeftRoom locally"
+   ]
+  ]
+ },
+ "30fdd78": {
+  "summary": "Returns the Photon players currently in the room, skipping inactive ones and logging each. The middle part is unrelated code (PrepareToConnectToBattleRoom) that the decompiler merged in; it is never reached normally.",
+  "comments": [
+   [
+    8,
+    "Go through every player in the room"
+   ],
+   [
+    14,
+    "Decompiler merged an inlined PrepareToConnectToBattleRoom after a bounds check; not part of this method"
+   ],
+   [
+    61,
+    "Players with an empty name get an 'Anonymous' label (result unused)"
+   ],
+   [
+    70,
+    "Log the player found"
+   ],
+   [
+    73,
+    "Only active players (flag at +0x28 is false) are added to the list"
+   ]
+  ]
+ },
+ "30fdfb4": {
+  "summary": "Gets the client ready to join a battle room. If in a room it hides the room when we are alone, then leaves it; otherwise it connects if needed. Returns true only when connected and ready.",
+  "comments": [
+   [
+    5,
+    "Still in a room: leave it first (returns false, caller must retry)"
+   ],
+   [
+    14,
+    "We are the only player: hide the room so nobody joins it"
+   ],
+   [
+    21,
+    "Not in a room: make sure Photon is connected"
+   ],
+   [
+    28,
+    "Limbo status: disconnect and retry later (returns false)"
+   ],
+   [
+    30,
+    "Otherwise report whether Photon is connected and ready"
+   ]
+  ]
+ },
+ "30fe214": {
+  "summary": "Creates the LeaveBattle coroutine object that will leave the room and then call onLeft.",
+  "comments": []
+ },
+ "30fe2a8": {
+  "summary": "Reconnects the client to its battle room according to the connection status: rejoin the saved room, leave a wrong room, disconnect if limbo, wait if changing, or connect to Photon.",
+  "comments": [
+   [
+    6,
+    "Log the current connection status and Photon state"
+   ],
+   [
+    17,
+    "Statuses 1 and 2 (master/lobby): can rejoin the saved room directly"
+   ],
+   [
+    22,
+    "Already in a room: warn, and leave it if it is not the saved battle room"
+   ],
+   [
+    42,
+    "Disconnected: reconnect to Photon first"
+   ],
+   [
+    43,
+    "Limbo: disconnect so a clean connect can follow"
+   ],
+   [
+    47,
+    "Status is changing: do nothing, wait for the next callback"
+   ],
+   [
+    51,
+    "Unexpected status: log a warning"
+   ],
+   [
+    62,
+    "Fall through: start a Photon connection"
+   ]
+  ]
+ },
+ "30fd8c4": {
+  "summary": "Maps Photon's detailed ClientState to a simplified ConnectionStatus (the numbers returned are enum values; 5 disconnected, 6 changing, 1 connected to master, 2 lobby, 4 in room, 7 name server). Logs the state.",
+  "comments": [
+   [
+    4,
+    "Log the raw Photon state"
+   ],
+   [
+    11,
+    "Binary search over the Photon state ranges"
+   ],
+   [
+    14,
+    "Handshake/authenticating states: status 6 (changing)"
+   ],
+   [
+    17,
+    "Uninitialized or PeerCreated: status 5 (disconnected)"
+   ],
+   [
+    28,
+    "JoinedLobby: status 2 (lobby)"
+   ],
+   [
+    31,
+    "Joined: status 4 (in room)"
+   ],
+   [
+    45,
+    "ConnectedToMaster: status 1"
+   ],
+   [
+    51,
+    "ConnectedToNameServer: status 7"
+   ],
+   [
+    57,
+    "Unknown state: 0"
+   ]
+  ]
+ },
+ "30fe628": {
+  "summary": "Photon callback when connected to the master server. Without a battle manager it just runs the pending connection callback; otherwise it acts on the battle connection status (reconnect, join a room, finish leaving).",
+  "comments": [
+   [
+    5,
+    "No battle manager (menus): fire and clear the one-shot onConnectionStarted callback"
+   ],
+   [
+    20,
+    "Log the battle connection status"
+   ],
+   [
+    28,
+    "Statuses above 0x28: reconnecting, offline PvP, offline, leaving"
+   ],
+   [
+    30,
+    "Was reconnecting: try to rejoin the battle room"
+   ],
+   [
+    38,
+    "Offline PvP: tell the search manager we finished leaving the search room"
+   ],
+   [
+    53,
+    "Leaving battle: reset status and tell the battle manager we finished leaving"
+   ],
+   [
+    68,
+    "Lower statuses: undefined and connected need nothing"
+   ],
+   [
+    76,
+    "Searching random opponent or practice: now connect to the battle room for the match type"
+   ],
+   [
+    84,
+    "Any other status is unexpected: log an error"
+   ]
+  ]
+ },
+ "30fe6dc": {
+  "summary": "Photon callback when connecting failed. For known battle statuses it just returns; for unknown ones it logs an error; without a battle manager it switches to offline mode and runs the pending callback.",
+  "comments": [
+   [
+    5,
+    "With a battle manager, check which status failed"
+   ],
+   [
+    19,
+    "Bit masks list the statuses that are expected here and ignored"
+   ],
+   [
+    27,
+    "Any other status is unexpected: log an error"
+   ],
+   [
+    34,
+    "No battle manager (menus): treat as offline and run the pending connection callback"
+   ]
+  ]
+ },
+ "30fe7d8": {
+  "summary": "Unity OnDestroy: if still connected, leaves Photon offline mode and rebuilds the connection state by hand (inlined Photon code), reconnecting to the master or game server or signalling disconnect.",
+  "comments": [
+   [
+    4,
+    "Only needed while connected to Photon"
+   ],
+   [
+    8,
+    "Offline mode: switch it off and reset the peer state"
+   ],
+   [
+    30,
+    "Clean up room or lobby state depending on which server we were on"
+   ],
+   [
+    38,
+    "State is a name/master connect state: reconnect to the master server"
+   ],
+   [
+    47,
+    "Not game server either: reset to PeerCreated and notify listeners of disconnect"
+   ],
+   [
+    60,
+    "Was on the game server: reconnect to it"
+   ]
+  ]
+ },
+ "30fe850": {
+  "summary": "Photon callback on connection failure: logs the cause, flips the use-alternative-UDP-ports setting and saves it to player data, so the next attempt tries other ports.",
+  "comments": [
+   [
+    8,
+    "Log the disconnect cause"
+   ],
+   [
+    14,
+    "Toggle alternative UDP ports for the next attempt"
+   ],
+   [
+    22,
+    "Persist the new setting in player data"
+   ]
+  ]
+ },
+ "30fe9dc": {
+  "summary": "Photon callback when disconnected: tells the battle network manager, then starts the AttemptReconnect coroutine by name (Unity StartCoroutine with a string).",
+  "comments": [
+   [
+    4,
+    "Let the battle network manager know we lost the connection"
+   ],
+   [
+    12,
+    "StartCoroutine(\"AttemptReconnect\") expanded by the decompiler, with its argument checks"
+   ],
+   [
+    50,
+    "Error branches of StartCoroutine: empty name or not a MonoBehaviour"
+   ]
+  ]
+ },
+ "30fea78": {
+  "summary": "Creates the AttemptReconnect coroutine object bound to this manager.",
+  "comments": []
+ },
+ "30feb0c": {
+  "summary": "Photon callback when joining a random room failed. Counts matchmaking attempts, then either goes offline (bot match types), or after enough attempts creates a new event room, or tries to join another random event room with relaxed filters.",
+  "comments": [
+   [
+    4,
+    "No battle network manager: nothing to do"
+   ],
+   [
+    19,
+    "Get the current live-ops event being played"
+   ],
+   [
+    23,
+    "Count this failed attempt"
+   ],
+   [
+    29,
+    "Switch on match type: offline types go straight to playing offline"
+   ],
+   [
+    44,
+    "Offline-type match: play against the AI offline"
+   ],
+   [
+    49,
+    "Unknown match type: log an error"
+   ],
+   [
+    58,
+    "Event match types: read the games-lost count and the player's score or rating"
+   ],
+   [
+    69,
+    "The attempt limit is 2 with the new matchmaking disabled, else 6 or 9 (6 if fewer than 2 losses)"
+   ],
+   [
+    79,
+    "Too many failed attempts: create our own room and wait for an opponent, using alliance (guild) id if any"
+   ],
+   [
+    107,
+    "Otherwise try again with another random event room join"
+   ],
+   [
+    114,
+    "Shared null-check failure target"
+   ]
+  ]
+ },
+ "30febb0": {
+  "summary": "Photon callback for a created room; effectively does nothing apart from null checks.",
+  "comments": []
+ },
+ "30fec34": {
+  "summary": "Photon callback on joining a room: logs room name, player count and version, then gives the battle network manager the player names, room name and room custom properties.",
+  "comments": [
+   [
+    6,
+    "Build the log line (decompiler expanded the string array and bounds checks)"
+   ],
+   [
+    29,
+    "Only continue if there is a battle network manager"
+   ],
+   [
+    33,
+    "Convert the list of players to their name strings (cached lambda)"
+   ],
+   [
+    45,
+    "Remember the room name for possible rejoin"
+   ],
+   [
+    52,
+    "Report the joined room to the battle network manager"
+   ]
+  ]
+ },
+ "30fefe8": {
+  "summary": "Photon callback when another player joins the room. Depending on battle status it starts the battle (random search, or friend practice room), confirms an opponent's reconnection, or sends a wrong-room message to an unexpected player.",
+  "comments": [
+   [
+    8,
+    "Log the new player's name"
+   ],
+   [
+    13,
+    "No battle manager: only log in dev mode"
+   ],
+   [
+    35,
+    "Log the status, player and expected opponent id"
+   ],
+   [
+    54,
+    "Status above 0x28: reconnection and offline cases"
+   ],
+   [
+    56,
+    "Waiting for opponent to reconnect"
+   ],
+   [
+    62,
+    "If the joiner is the expected opponent: resume the game and mark connected"
+   ],
+   [
+    79,
+    "Offline PvP, playing offline or leaving: ignore the join"
+   ],
+   [
+    91,
+    "Unexpected status: log an error"
+   ],
+   [
+    101,
+    "Already connected and a third party joins: warn and tell them they are in the wrong room"
+   ],
+   [
+    102,
+    "Random search: a second player joined, so start the battle"
+   ],
+   [
+    106,
+    "Practice (friend) room: ignore ourselves, and ignore if an opponent is already set"
+   ],
+   [
+    119,
+    "Start the battle against this player and hide the room so nobody else joins"
+   ],
+   [
+    130,
+    "Send the wrong-room message to the intruder"
+   ]
+  ]
+ },
+ "30ff0b8": {
+  "summary": "Photon callback when another player leaves. In an active battle it marks the opponent as disconnected if it was the opponent; in a practice (friend) room it cancels the match.",
+  "comments": [
+   [
+    11,
+    "Needs a battle manager and a player"
+   ],
+   [
+    21,
+    "Switch on battle connection status"
+   ],
+   [
+    22,
+    "Reconnecting, offline PvP, offline or leaving: ignore the disconnect"
+   ],
+   [
+    39,
+    "Unexpected status: log an error"
+   ],
+   [
+    51,
+    "Connected battle: only react if the leaver is our opponent"
+   ],
+   [
+    57,
+    "Mark the opponent disconnected (starts reconnection waiting)"
+   ],
+   [
+    62,
+    "Practice room (waiting for a friend): cancel the match, no result"
+   ]
+  ]
+ },
+ "30ff170": {
+  "summary": "Photon callback when joining a room failed. Logs the error code and message; a failed practice room join leaves the room, and a failed reconnect (code 0x7FF6, room does not exist) cancels the search or reports failed reconnect to the battle manager.",
+  "comments": [
+   [
+    7,
+    "Log the error code and message from the argument array"
+   ],
+   [
+    37,
+    "Read the error code again as an int"
+   ],
+   [
+    54,
+    "Practice room join failed: reset status and leave the room"
+   ],
+   [
+    60,
+    "Reconnecting and the room no longer exists: give up reconnecting"
+   ],
+   [
+    65,
+    "Battle manager exists: tell it reconnect failed; otherwise cancel the opponent search"
+   ]
+  ]
+ },
+ "30fe538": {
+  "summary": "Rejoins the saved battle room by name through the Photon peer (online), or enters an offline room. Logs errors if the client is not on the master server, not ready, or the name is empty.",
+  "comments": [
+   [
+    5,
+    "Online mode: need to be on the master server and ready"
+   ],
+   [
+    14,
+    "A room name is required"
+   ],
+   [
+    19,
+    "Build join parameters with the saved room name (the actual join call was lost by the decompiler)"
+   ],
+   [
+    33,
+    "Offline mode: enter an offline room unless already in one"
+   ],
+   [
+    40,
+    "Log the error message chosen above"
+   ]
+  ]
+ },
+ "30ff308": {
+  "summary": "Joins a random room in this event's SQL lobby, filtering by the event's matchmaking filter (based on rating and attempts), expecting 2 players. In offline mode it enters an offline room.",
+  "comments": [
+   [
+    9,
+    "Lobby is named after the event type, as an SQL lobby"
+   ],
+   [
+    14,
+    "Compute how many lost matches to search for, then the SQL filter"
+   ],
+   [
+    17,
+    "Online: must be on the master server and ready"
+   ],
+   [
+    33,
+    "Build random-join parameters: 2 players, serial matching, filter (the join call itself was lost)"
+   ],
+   [
+    52,
+    "Offline mode: enter an offline room unless already in one"
+   ],
+   [
+    59,
+    "Log the error"
+   ]
+  ]
+ },
+ "30ff578": {
+  "summary": "Builds the SQL lobby filter string: rating range on C1, optionally excluding a user (C2) and restricting to a guild/alliance (C3 using the short guild id).",
+  "comments": [
+   [
+    8,
+    "Rating range clause"
+   ],
+   [
+    10,
+    "Exclude a given user, if any"
+   ],
+   [
+    16,
+    "Restrict to a guild, if any"
+   ]
+  ]
+ },
+ "30ff6fc": {
+  "summary": "Joins or creates a two-player friend/casual room by name with PvP room options and a lobby. Decompiler mixed in event-room creation code. In offline mode it enters an offline room.",
+  "comments": [
+   [
+    7,
+    "Room options: 2 players, non-expiring player slot (TTL)"
+   ],
+   [
+    18,
+    "Decompiler merged the DoCreateEventRoom code here; this branch is not the normal path"
+   ],
+   [
+    35,
+    "Expose a FriendRoom custom property to the lobby"
+   ],
+   [
+    39,
+    "Online: must be on the master server and ready, with a room name"
+   ],
+   [
+    60,
+    "Join-or-create parameters with the room options and the lobby (join call lost by decompiler)"
+   ],
+   [
+    83,
+    "Offline mode: enter an offline room unless already in one"
+   ],
+   [
+    91,
+    "Log the error"
+   ]
+  ]
+ },
+ "30ff874": {
+  "summary": "Creates an event room: lobby named after the event type, PvP room options built from rating, user and guild, event custom options, and a room name from player name and server time.",
+  "comments": [
+   [
+    12,
+    "SQL lobby named after the event type"
+   ],
+   [
+    15,
+    "Room options with rating, excluded user and guild properties"
+   ],
+   [
+    16,
+    "Let the event add its own matchmaking properties"
+   ],
+   [
+    19,
+    "Room name is EventRoom_ plus the player name and the server time"
+   ]
+  ]
+ },
+ "30ff4b0": {
+  "summary": "Returns how many lost matches to match against: the event's games lost, lowered as matchmaking attempts grow so opponents get easier to find.",
+  "comments": [
+   [
+    9,
+    "After 3 attempts start relaxing the search"
+   ],
+   [
+    10,
+    "Attempts 4-6: one fewer loss (not below 0)"
+   ],
+   [
+    16,
+    "7 or more attempts: two fewer losses"
+   ]
+  ]
+ },
+ "30ffa74": {
+  "summary": "Creates room options for a 2-player PvP room with custom properties C1 (rating), C2 (user to exclude) and C3 (short guild id), all visible in the lobby.",
+  "comments": [
+   [
+    6,
+    "2 players, no player slot expiry"
+   ],
+   [
+    15,
+    "C1 holds the rating used for matchmaking"
+   ],
+   [
+    21,
+    "C2 holds the user to exclude, or a placeholder if none"
+   ],
+   [
+    30,
+    "C3 holds the short guild id, or a placeholder if none"
+   ],
+   [
+    37,
+    "Expose C1-C5 to the lobby so SQL filters can use them"
+   ],
+   [
+    57,
+    "Unrelated tail from a neighbouring function (newbie rating check) merged by the decompiler"
+   ]
+  ]
+ },
+ "30fe170": {
+  "summary": "Hides the current Photon room (sets its visible flag to false), on the server when online and locally, so no more players can join.",
+  "comments": [
+   [
+    7,
+    "Warn if the room is not the current room"
+   ],
+   [
+    15,
+    "If it was visible and online, tell the server with the visible property (0xFE) set to false"
+   ],
+   [
+    27,
+    "Mark hidden locally"
+   ]
+  ]
+ },
+ "30fe594": {
+  "summary": "Leaves the current Photon room, keeping the player slot reserved if the room has a player TTL; in offline mode clears the offline room and fires OnLeftRoom.",
+  "comments": [
+   [
+    6,
+    "No room: log and stop"
+   ],
+   [
+    18,
+    "Online: decide whether to retain the player slot (based on player TTL), then leave"
+   ],
+   [
+    21,
+    "Warn if Photon has no room"
+   ],
+   [
+    40,
+    "Offline mode: clear the offline room and notify listeners with OnLeftRoom"
+   ]
+  ]
+ },
+ "30fdcb8": {
+  "summary": "Sets the current room's empty-room TTL to zero (locally and on the server), so it gets destroyed as soon as it is empty.",
+  "comments": [
+   [
+    7,
+    "Need a current room"
+   ],
+   [
+    16,
+    "If the TTL was nonzero and online, set room property 0xF5 (empty room TTL) to 0 on the server"
+   ],
+   [
+    27,
+    "Set it locally too"
+   ]
+  ]
+ },
+ "3100820": {
+  "summary": "Returns a deterministic random float in [min, max) for this seed: seeds Unity's Random with start value plus roll count, then restores the global Random state and advances the roll.",
+  "comments": [
+   [
+    4,
+    "Save the global Random state so other systems are not disturbed"
+   ],
+   [
+    5,
+    "Seed from the start value plus the number of rolls so far, so rolls are repeatable"
+   ],
+   [
+    7,
+    "Restore the global state and advance the roll count"
+   ]
+  ]
+ },
+ "3100318": {
+  "summary": "Creates a controlled seed state for the given id and stores it in the static seed table, replacing any previous seed with that id.",
+  "comments": [
+   [
+    6,
+    "Add a new entry or replace the existing one"
+   ]
+  ]
+ },
+ "310054c": {
+  "summary": "Returns a deterministic random int in [min, max) for the named seed, creating a random-option seed if the id is unknown, and advancing that seed's roll count.",
+  "comments": [
+   [
+    6,
+    "Unknown seed id: log and create a new random seed"
+   ],
+   [
+    13,
+    "Seed Unity Random from start value plus roll count, roll, then restore global state"
+   ],
+   [
+    17,
+    "Advance the roll count"
+   ]
+  ]
+ },
+ "31006f4": {
+  "summary": "Returns a deterministic random float in [min, max) for the named seed, creating a random-option seed if the id is unknown, and advancing that seed's roll count.",
+  "comments": [
+   [
+    6,
+    "Unknown seed id: log and create a new random seed"
+   ],
+   [
+    13,
+    "Seed Unity Random from start value plus roll count, roll, then restore global state"
+   ],
+   [
+    17,
+    "Advance the roll count"
+   ]
+  ]
+ },
+ "310089c": {
+  "summary": "Looks up the seed state for an id and returns it together with a found flag.",
+  "comments": []
+ }
+}

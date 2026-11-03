@@ -1,0 +1,1159 @@
+{
+ "2f5d67c": {
+  "summary": "Button callback for confirming the selected card in the choose-card menu. If a card is selected, it stops the auto-process coroutine, hides the choose UI, destroys all card UIs and tells BattleManager which card was chosen.",
+  "comments": [
+   [
+    4,
+    "no card selected yet: the confirm button does nothing"
+   ],
+   [
+    9,
+    "stop the auto-pick timer coroutine since the player chose"
+   ],
+   [
+    17,
+    "hide the card display elements and the buttons/title objects"
+   ],
+   [
+    23,
+    "destroy every choose-card UI (card view and its frame) and empty the list"
+   ],
+   [
+    53,
+    "also destroy any leftover child objects under the menu anchor (enumerating the Transform)"
+   ],
+   [
+    66,
+    "enumeration finished: dispose the enumerator (decompiler inlined the using/finally cleanup)"
+   ],
+   [
+    97,
+    "decompiler-generated interface-map scan for IDisposable; the calls are just Dispose()"
+   ],
+   [
+    110,
+    "report the chosen card to the BattleManager so the pending effect continues"
+   ]
+  ]
+ },
+ "2f5d680": {
+  "summary": "Button callback for confirming (OnDisable variant) the selected card in the choose-card menu. If a card is selected, it stops the auto-process coroutine, hides the choose UI, destroys all card UIs and tells BattleManager which card was chosen.",
+  "comments": [
+   [
+    4,
+    "no card selected yet: the confirm button does nothing"
+   ],
+   [
+    9,
+    "stop the auto-pick timer coroutine since the player chose"
+   ],
+   [
+    17,
+    "hide the card display elements and the buttons/title objects"
+   ],
+   [
+    23,
+    "destroy every choose-card UI (card view and its frame) and empty the list"
+   ],
+   [
+    53,
+    "also destroy any leftover child objects under the menu anchor (enumerating the Transform)"
+   ],
+   [
+    66,
+    "enumeration finished: dispose the enumerator (decompiler inlined the using/finally cleanup)"
+   ],
+   [
+    97,
+    "decompiler-generated interface-map scan for IDisposable; the calls are just Dispose()"
+   ],
+   [
+    110,
+    "report the chosen card to the BattleManager so the pending effect continues"
+   ]
+  ]
+ },
+ "2f5cc4c": {
+  "summary": "Initializes a choose-card entry: wires the select-button frame to the card UI and menu, then copies the card's highlight colour onto its highlight/shadow material. Called when the choose menu builds its card list.",
+  "comments": [
+   [
+    4,
+    "the frame needs its select button before anything can be set up"
+   ],
+   [
+    5,
+    "give the frame the card view and the owning menu so clicks can be routed"
+   ],
+   [
+    8,
+    "fetch the colour changer on the card frame highlight image"
+   ],
+   [
+    10,
+    "re-read the card's own highlight/shadow colour changer"
+   ],
+   [
+    15,
+    "make sure the material instance exists before writing a colour to it"
+   ],
+   [
+    25,
+    "write the highlight colour into the instanced material (decompiler shows only the raw call)"
+   ]
+  ]
+ },
+ "2f5d2fc": {
+  "summary": "Turns the card highlight on or off and sets the select button interactable only when the card is NOT selected. Also clears the UI selection if the button was disabled while focused.",
+  "comments": [
+   [
+    8,
+    "light or unlight the card's highlight frame"
+   ],
+   [
+    12,
+    "button is interactable only when option (selected) is false"
+   ],
+   [
+    14,
+    "nothing changed: no state refresh needed"
+   ],
+   [
+    17,
+    "button became disabled: drop it from the EventSystem selection if it holds focus"
+   ],
+   [
+    36,
+    "inlined button state refresh: 4 = disabled, 2 = pressed, 3 = selected, else normal/highlighted"
+   ]
+  ]
+ },
+ "2f5e008": {
+  "summary": "Awake: registers SelectButtonOnClick as a listener on the select button's onClick event (decompiler inlined AddListener).",
+  "comments": [
+   [
+    4,
+    "only if the select button is assigned"
+   ],
+   [
+    8,
+    "inlined AddListener: append the delegate to the event's persistent call list"
+   ]
+  ]
+ },
+ "2f5e098": {
+  "summary": "OnDestroy: removes the select-button click listener. The decompiler also shows what looks like a re-add of the CardClicked handler to the card's event catcher, which is probably a mangled RemoveListener.",
+  "comments": [
+   [
+    4,
+    "unsubscribe the select button click handler"
+   ],
+   [
+    9,
+    "if a card view is attached, also unhook CardClicked from its event catcher"
+   ],
+   [
+    15,
+    "the code below looks like an add, but is most likely the inlined RemoveListener for CardClicked"
+   ]
+  ]
+ },
+ "2f5dde4": {
+  "summary": "Attaches this selection frame to a card view: stores the card and menu, parents the frame to the card's 2D controller, resets scale and position, applies the highlight colour, starts unselected and subscribes to card clicks.",
+  "comments": [
+   [
+    4,
+    "remember which card and menu this frame belongs to"
+   ],
+   [
+    8,
+    "reparent the frame under the card's 2D controller so it follows the card"
+   ],
+   [
+    11,
+    "reset local scale to one and local position to zero (frame fits the card)"
+   ],
+   [
+    17,
+    "apply the 'selected' colour to the card highlight"
+   ],
+   [
+    18,
+    "start deselected"
+   ],
+   [
+    19,
+    "subscribe CardClicked to the card's click event so clicking the card selects it"
+   ],
+   [
+    23,
+    "inlined AddListener on the click event"
+   ]
+  ]
+ },
+ "2f5dfb0": {
+  "summary": "Highlights or unhighlights the card and enables the select button only when the card is not selected; clears the UI focus if the button was disabled.",
+  "comments": [
+   [
+    4,
+    "need a card view with a 2D controller"
+   ],
+   [
+    5,
+    "toggle the card highlight"
+   ],
+   [
+    8,
+    "button is interactable only when not selected"
+   ],
+   [
+    10,
+    "nothing changed, done"
+   ],
+   [
+    13,
+    "button just became disabled: drop it from the EventSystem selection if focused"
+   ],
+   [
+    32,
+    "inlined button state refresh (4 disabled, 2 pressed, 3 selected, otherwise normal/hover)"
+   ]
+  ]
+ },
+ "2f5e1d4": {
+  "summary": "Click handler for the select button: tells the choose menu this card was selected, lights up its highlight and disables the button so it cannot be picked twice.",
+  "comments": [
+   [
+    4,
+    "menu must exist"
+   ],
+   [
+    7,
+    "tell the menu this card is now the selected choice"
+   ],
+   [
+    9,
+    "show the highlight on the chosen card"
+   ],
+   [
+    12,
+    "set the button non-interactable"
+   ],
+   [
+    16,
+    "disabled: release UI focus if the button held it"
+   ],
+   [
+    35,
+    "inlined button state refresh (4 disabled, 2 pressed, 3 selected, otherwise normal/hover)"
+   ]
+  ]
+ },
+ "2f5e2a0": {
+  "summary": "Start for the turn clock: caches its RectTransform and start X, subscribes to language changes and the end-turn button click, sets the End Turn label, and in replays disables the button and shows 'Replay' as its text.",
+  "comments": [
+   [
+    4,
+    "cache this object's RectTransform and its starting anchored position"
+   ],
+   [
+    8,
+    "register ChangedLanguage so the label is retranslated on language change"
+   ],
+   [
+    14,
+    "show the 'End Turn' label initially"
+   ],
+   [
+    15,
+    "make the clock button end the turn when clicked"
+   ],
+   [
+    26,
+    "clock progress starts at 0"
+   ],
+   [
+    27,
+    "need BattleManager and PlayerDataManager to check the match type"
+   ],
+   [
+    41,
+    "only replays need special handling; other match types return"
+   ],
+   [
+    44,
+    "replay: nobody can end the turn, so disable the button and label it 'Replay'"
+   ]
+  ]
+ },
+ "2f5e69c": {
+  "summary": "Sets the clock text to 'End Turn' (player's turn) or 'Enemy Turn' and resets the hurry-up material. Skipped entirely in replays.",
+  "comments": [
+   [
+    6,
+    "if there is a battle with match data, check whether it is a replay"
+   ],
+   [
+    15,
+    "replays keep their own 'Replay' label, so leave it alone"
+   ],
+   [
+    20,
+    "return the button to its normal (non hurry-up) look"
+   ],
+   [
+    22,
+    "choose the localization term by whose turn it is"
+   ],
+   [
+    28,
+    "translate, uppercase and put it on the clock text (assignment lost by the decompiler)"
+   ]
+  ]
+ },
+ "2f5ed30": {
+  "summary": "Language-change callback: re-translates the clock label, 'End Turn' while the button is interactable (my turn) and 'Enemy Turn' otherwise. Does nothing in replays.",
+  "comments": [
+   [
+    7,
+    "button interactable means it is the player's turn"
+   ],
+   [
+    10,
+    "in a battle with match data, skip replays (they show 'Replay')"
+   ],
+   [
+    24,
+    "reset hurry-up look"
+   ],
+   [
+    26,
+    "pick the term matching the current turn state"
+   ],
+   [
+    32,
+    "translate, uppercase and set the text (assignment lost by the decompiler)"
+   ]
+  ]
+ },
+ "2f5ed68": {
+  "summary": "Switches the clock to the enemy-turn state: sets the 'Enemy Turn' text and makes the clock button non-interactable.",
+  "comments": [
+   [
+    4,
+    "show 'Enemy Turn' label"
+   ],
+   [
+    9,
+    "disable the button"
+   ],
+   [
+    13,
+    "just disabled: release UI focus if the button held it"
+   ],
+   [
+    32,
+    "inlined button state refresh (4 disabled, 2 pressed, 3 selected, otherwise normal/hover)"
+   ]
+  ]
+ },
+ "2f5ee14": {
+  "summary": "Stops the turn clock when the turn ends: clears the running flag, stops all coroutines, removes the countdown animation, switches to the enemy-turn UI, plays the in/out animation and hides the no-actions animation.",
+  "comments": [
+   [
+    5,
+    "clock is no longer running"
+   ],
+   [
+    6,
+    "cancel the clock's timers and countdown coroutines"
+   ],
+   [
+    11,
+    "destroy the countdown animation if one exists"
+   ],
+   [
+    15,
+    "button and text go to the enemy-turn state"
+   ],
+   [
+    16,
+    "spawn the in/out animation effect"
+   ],
+   [
+    19,
+    "hide the no-actions animation if it was shown"
+   ],
+   [
+    25,
+    "countdown is no longer active"
+   ]
+  ]
+ },
+ "2f5ef54": {
+  "summary": "Pauses the turn clock: sets the paused flag and records when the pause began. Logs a debug line when dev tools are on.",
+  "comments": [
+   [
+    4,
+    "paused: Update will accumulate paused time while this is set"
+   ],
+   [
+    6,
+    "remember when the pause started"
+   ],
+   [
+    9,
+    "build a debug message with the pause time and total paused time"
+   ],
+   [
+    14,
+    "log it only if dev tools are enabled (obscured bool)"
+   ]
+  ]
+ },
+ "2f5f000": {
+  "summary": "Unpauses the turn clock: clears the paused flag and the pause start time, logging the accumulated paused time when dev tools are on.",
+  "comments": [
+   [
+    4,
+    "resume the clock"
+   ],
+   [
+    5,
+    "reset the pause start marker"
+   ],
+   [
+    9,
+    "debug message with accumulated paused time"
+   ],
+   [
+    14,
+    "log only if dev tools are enabled (obscured bool)"
+   ]
+  ]
+ },
+ "2f5ea78": {
+  "summary": "Sets up the start-of-turn clock UI: 'End Turn' label, enables the button (except in replays), and spawns the in/out animation plus an optional intro particle effect.",
+  "comments": [
+   [
+    4,
+    "show 'End Turn'"
+   ],
+   [
+    7,
+    "in a real match, give the player control of the button"
+   ],
+   [
+    20,
+    "not a replay: enable the end-turn button"
+   ],
+   [
+    27,
+    "spawn in/out animation"
+   ],
+   [
+    29,
+    "optional intro effect, skipped when particles are disabled in settings"
+   ],
+   [
+    32,
+    "spawn it next to the clock and set its local position"
+   ]
+  ]
+ },
+ "2f5f238": {
+  "summary": "Shows the 'no actions left' animation and plays the out-of-actions sound, once per turn. Skipped in replays, once already triggered, and while the countdown is running.",
+  "comments": [
+   [
+    7,
+    "needs the BattleManager"
+   ],
+   [
+    9,
+    "not a replay, not yet triggered, and the end-of-turn countdown is not running"
+   ],
+   [
+    10,
+    "create the animation if missing"
+   ],
+   [
+    14,
+    "show it unless particles are disabled"
+   ],
+   [
+    19,
+    "play the out-of-actions sound"
+   ],
+   [
+    23,
+    "remember it was triggered so it only plays once"
+   ]
+  ]
+ },
+ "2f5ee68": {
+  "summary": "Same as StopClock but without logging or clearing the running flag: stops coroutines, destroys the countdown animation, shows the enemy-turn UI, plays the in/out animation and hides the no-actions animation.",
+  "comments": [
+   [
+    4,
+    "cancel the clock's timers and countdown coroutines"
+   ],
+   [
+    9,
+    "destroy the countdown animation if present"
+   ],
+   [
+    13,
+    "enemy-turn text and disabled button"
+   ],
+   [
+    15,
+    "hide the no-actions animation if present"
+   ],
+   [
+    23,
+    "countdown no longer active"
+   ]
+  ]
+ },
+ "2f5f654": {
+  "summary": "Creates the countdown animation from its prefab under the countdown parent, if it does not already exist, and sets its local position.",
+  "comments": [
+   [
+    6,
+    "only create when none exists yet"
+   ],
+   [
+    9,
+    "and a prefab is assigned"
+   ],
+   [
+    13,
+    "spawn under the countdown parent"
+   ],
+   [
+    21,
+    "set its local position (value lost in the decompiler)"
+   ]
+  ]
+ },
+ "2f5f41c": {
+  "summary": "Creates the no-actions animation from its prefab if missing, unless particles are disabled; parents it beside the clock and positions it.",
+  "comments": [
+   [
+    6,
+    "create only if none exists"
+   ],
+   [
+    11,
+    "skip when particle effects are disabled"
+   ],
+   [
+    13,
+    "spawn the effect"
+   ],
+   [
+    19,
+    "parent it to the clock's parent and set its local position"
+   ]
+  ]
+ },
+ "2f5f08c": {
+  "summary": "Spawns the given in/out animation prefab next to the clock (same parent) and sets its local position. Does nothing if particles are disabled or no prefab is given.",
+  "comments": [
+   [
+    5,
+    "need a prefab and particles enabled"
+   ],
+   [
+    7,
+    "spawn it"
+   ],
+   [
+    12,
+    "put it under the clock's parent and set local position"
+   ]
+  ]
+ },
+ "2f5ec94": {
+  "summary": "Returns the turn time limit in seconds: Event AI matches use 240, offline practice uses 600, otherwise the scenario's clock time limit (possibly reduced). The decompiler garbled the reduced-time branch.",
+  "comments": [
+   [
+    5,
+    "read the base time limit from the scenario variables"
+   ],
+   [
+    10,
+    "when the 'reduced' flag is set, a reduced value is used; decompiler output is unreliable here"
+   ],
+   [
+    17,
+    "match type decides fixed limits"
+   ],
+   [
+    20,
+    "Event AI matches: 240 seconds"
+   ],
+   [
+    25,
+    "offline practice: 600 seconds"
+   ]
+  ]
+ },
+ "2f5e8fc": {
+  "summary": "Swaps the turn button image's material between its original look and the hurry-up look. The original material is cached on first use.",
+  "comments": [
+   [
+    7,
+    "first use: remember the button's original material"
+   ],
+   [
+    13,
+    "the actual material assignment was lost by the decompiler; it picks hurry-up or original by the flag"
+   ]
+  ]
+ },
+ "2f5f79c": {
+  "summary": "Called when the app is paused or resumed. On pause it records the time; on resume it works out how long the app was away and adds it to the time-in-background and countdown counter (if legitimate). Logs the result.",
+  "comments": [
+   [
+    7,
+    "object destroyed: nothing to do"
+   ],
+   [
+    11,
+    "going to background: remember wall-clock and realtime stamps"
+   ],
+   [
+    17,
+    "coming back: compute how long we were away"
+   ],
+   [
+    23,
+    "anti-cheat style check that the clock time away is plausible vs. realtime"
+   ],
+   [
+    24,
+    "count the time away against the turn; if the countdown is running, reduce its counter"
+   ],
+   [
+    32,
+    "build and log a debug message with the pause state, background time and counter"
+   ]
+  ]
+ },
+ "2f5fb28": {
+  "summary": "Per-frame update of the turn clock during the player's turn. Tracks elapsed time (minus pauses and animations, plus background time), triggers the hurry-up chat once, starts the end-of-turn countdown when time is up, ticks the countdown and ends the turn when it expires.",
+  "comments": [
+   [
+    8,
+    "only the player's own turn runs the clock"
+   ],
+   [
+    12,
+    "also needs the clock running"
+   ],
+   [
+    17,
+    "no clock after the battle is over"
+   ],
+   [
+    21,
+    "paused: accumulate paused time so it is subtracted from elapsed time"
+   ],
+   [
+    27,
+    "elapsed = now - start - paused + background - animation time"
+   ],
+   [
+    29,
+    "player has not acted and is near the limit: send the one-time hurry-up chat message"
+   ],
+   [
+    36,
+    "main time not yet in countdown mode"
+   ],
+   [
+    38,
+    "still within the time limit: update the progress fraction"
+   ],
+   [
+    40,
+    "after no-actions trigger, shorten the clock by pausing-time credit (3x speed)"
+   ],
+   [
+    49,
+    "time is up: start the final countdown"
+   ],
+   [
+    56,
+    "while an animation plays, its time does not count against the player"
+   ],
+   [
+    63,
+    "countdown mode: seconds left = countdown seconds - overtime"
+   ],
+   [
+    70,
+    "countdown hit below zero: play expiry sound, remove animation and force end turn"
+   ],
+   [
+    88,
+    "EndTurnClick(true) forces the turn to end; if accepted, reset the countdown counter"
+   ],
+   [
+    97,
+    "counter already at or below this value; warn if it is out of sync"
+   ],
+   [
+    106,
+    "new second ticked: update counter, notify the battle manager and show the number"
+   ]
+  ]
+ },
+ "2f5fddc": {
+  "summary": "Starts the end-of-turn countdown: sets the counter to the scenario's countdown seconds, notifies the battle manager, shows the number on the clock, hides the no-actions prefab and creates the countdown animation.",
+  "comments": [
+   [
+    9,
+    "counter starts at the scenario's countdown seconds"
+   ],
+   [
+    12,
+    "notify the battle manager of the first tick"
+   ],
+   [
+    16,
+    "show the number on the clock text"
+   ],
+   [
+    21,
+    "hide the no-actions animation prefab"
+   ],
+   [
+    25,
+    "mark that the countdown is active"
+   ]
+  ]
+ },
+ "2f5fedc": {
+  "summary": "Called when the countdown reaches zero: plays the timer-expired sound, destroys the countdown animation and forces the end of the player's turn.",
+  "comments": [
+   [
+    9,
+    "play timer expired sound"
+   ],
+   [
+    12,
+    "remove the countdown animation"
+   ],
+   [
+    18,
+    "force end turn; if it was accepted, reset the counter to the full countdown"
+   ]
+  ]
+ },
+ "2f60038": {
+  "summary": "OnDestroy: removes the clock's language-change callback from the localization event. The remainder is decompiler-merged code from a dropdown localizer (refills dropdown options with translated terms) and is not part of the real method.",
+  "comments": [
+   [
+    4,
+    "unsubscribe ChangedLanguage from the localization event (lock-free delegate removal loop)"
+   ],
+   [
+    14,
+    "everything below is unrelated I2 LocalizeDropdown.OnEnable code merged in by the decompiler"
+   ],
+   [
+    52,
+    "clear dropdown options then re-add each translated term"
+   ]
+  ]
+ },
+ "2f600dc": {
+  "summary": "Constructor: default hurry-up time (the constant 0x420c0000 is a float, 35.0 seconds) and sets the pause timestamp to now.",
+  "comments": [
+   [
+    5,
+    "hurry-up warning threshold: 0x420c0000 as a float is 35 seconds"
+   ],
+   [
+    8,
+    "initial pause timestamp is the current UTC time"
+   ]
+  ]
+ },
+ "2f6014c": {
+  "summary": "Starts a countdown timer of the given length and speed, shows the initial time as m:ss and begins running.",
+  "comments": [
+   [
+    6,
+    "find the text component to display the time"
+   ],
+   [
+    9,
+    "duration as a TimeSpan of the given seconds"
+   ],
+   [
+    15,
+    "format minutes:seconds for the initial display"
+   ],
+   [
+    22,
+    "remember the speed factor and the real start time"
+   ],
+   [
+    28,
+    "reset elapsed time to zero and mark running; the sound has not played yet"
+   ]
+  ]
+ },
+ "2f6031c": {
+  "summary": "Changes the countdown speed: stores the time elapsed so far, restarts the reference clock and applies the new speed.",
+  "comments": [
+   [
+    5,
+    "bank the speed-adjusted time so far as the new baseline"
+   ],
+   [
+    10,
+    "restart wall-clock reference with the new speed"
+   ]
+  ]
+ },
+ "2f603a0": {
+  "summary": "Returns the seconds left: total available time minus speed-adjusted elapsed time.",
+  "comments": [
+   [
+    6,
+    "remaining = timeAvailable - elapsed"
+   ]
+  ]
+ },
+ "2f60420": {
+  "summary": "Per-frame update of the countdown display: computes speed-scaled elapsed time, shows the remaining m:ss (plus one second so it rounds up) and plays a sound once when under five seconds remain.",
+  "comments": [
+   [
+    7,
+    "only while running"
+   ],
+   [
+    9,
+    "real time since last baseline, scaled by the speed factor"
+   ],
+   [
+    16,
+    "elapsed = baseline + scaled time"
+   ],
+   [
+    18,
+    "remaining time, rounded up by one second for display"
+   ],
+   [
+    26,
+    "update the text with minutes:seconds"
+   ],
+   [
+    32,
+    "once under 5 seconds, play the warning sound a single time"
+   ]
+  ]
+ },
+ "2f60c78": {
+  "summary": "IEnumerator.Reset for the AddCardNotDrawnToDeck coroutine; always throws NotSupportedException, as for all compiler-generated iterators.",
+  "comments": []
+ },
+ "2f60660": {
+  "summary": "Returns the Transform of the card back reference object (the position of the deck's card back).",
+  "comments": [
+   [
+    8,
+    "fetch the transform via the Unity binding; the cast and marshal code is decompiler noise"
+   ]
+  ]
+ },
+ "2f607a0": {
+  "summary": "Shows the 'your turn' indicator and hides the 'enemy turn' indicator, or the reverse.",
+  "comments": [
+   [
+    5,
+    "show or hide the your-turn marker"
+   ],
+   [
+    8,
+    "enemy marker is the opposite state"
+   ]
+  ]
+ },
+ "2f607e8": {
+  "summary": "Returns the card back reference's local scale and local rotation as a tuple.",
+  "comments": [
+   [
+    10,
+    "decompiler wrote the tuple into the return buffer piecewise; the values are scale then rotation"
+   ]
+  ]
+ },
+ "2f608a8": {
+  "summary": "Returns the world position of the card back reference object.",
+  "comments": []
+ },
+ "2f608c0": {
+  "summary": "Shows or hides the deck size display. When shown, sets the 'Cards Left' text with the count; otherwise shows the card back and hides the count. Only does anything if the battle allows deck size display.",
+  "comments": [
+   [
+    7,
+    "battle rules decide whether the deck size may be shown"
+   ],
+   [
+    9,
+    "show the deck count"
+   ],
+   [
+    12,
+    "already visible: nothing to do"
+   ],
+   [
+    18,
+    "for the opponent's deck, show the card back preview"
+   ],
+   [
+    22,
+    "text is the 'Cards Left' term followed by the number"
+   ],
+   [
+    33,
+    "hide mode: show the card back container instead and hide the preview"
+   ]
+  ]
+ },
+ "2f60af4": {
+  "summary": "Creates the coroutine (iterator state machine) that adds a card that was not drawn to the deck. The work happens in its MoveNext.",
+  "comments": []
+ },
+ "2f60cb8": {
+  "summary": "Awake: only null-checks the army rating icon object (the rest was optimized away).",
+  "comments": []
+ },
+ "2f60ce4": {
+  "summary": "OnDisable: releases the victory, defeat and draw video addressable assets from the General cache group. The last release is garbled and may warn that the asset was not loaded.",
+  "comments": [
+   [
+    6,
+    "release victory video"
+   ],
+   [
+    9,
+    "release defeat video"
+   ],
+   [
+    12,
+    "draw video: decompiler shows the inlined release; warns if the asset was not loaded"
+   ],
+   [
+    19,
+    "warning when releasing an asset that is not loaded"
+   ]
+  ]
+ },
+ "2f60d6c": {
+  "summary": "OnDestroy: cleans up the render texture used for the end-of-battle video (the release call was optimized out).",
+  "comments": []
+ },
+ "2f60dc8": {
+  "summary": "Prepares the end-of-battle door: logs the winner, picks the video and jingle for victory/defeat/draw, shows rewards, creates a 1920x1080 render texture for the video, fades out, closes all windows and returns the clip length plus 2 seconds.",
+  "comments": [
+   [
+    6,
+    "remember who won"
+   ],
+   [
+    15,
+    "log the match type and winner"
+   ],
+   [
+    17,
+    "show the video image"
+   ],
+   [
+    19,
+    "pick audio and video by winner: draw, enemy (defeat) or player (victory)"
+   ],
+   [
+    40,
+    "hide old rewards then show the new ones if any were granted"
+   ],
+   [
+    44,
+    "play the jingle"
+   ],
+   [
+    46,
+    "create the render texture (0x780 x 0x438 is 1920 x 1080) for the video"
+   ],
+   [
+    56,
+    "initialize it and fade out the screen"
+   ],
+   [
+    63,
+    "close every open window before the door plays"
+   ],
+   [
+    67,
+    "point the image and player at the render texture"
+   ],
+   [
+    70,
+    "load and assign the video clip"
+   ],
+   [
+    75,
+    "return the clip length plus 2 seconds as the door duration"
+   ]
+  ]
+ },
+ "2f6130c": {
+  "summary": "Shows end-of-battle rewards: skulls, reward items, rating or seals, and fades the reward group in. The decompiler spliced a reward-item drawer into the middle.",
+  "comments": [
+   [
+    4,
+    "with no skulls, exit early when there are no rewards and no rating"
+   ],
+   [
+    20,
+    "show the rewards group"
+   ],
+   [
+    23,
+    "show skull holder only if skulls were earned"
+   ],
+   [
+    26,
+    "activate one skull object per skull obtained"
+   ],
+   [
+    37,
+    "holder is shown when there are rewards or earned rating"
+   ],
+   [
+    50,
+    "for each reward: draw its icon and, if it is displayable, spawn a reward holder for it"
+   ],
+   [
+    52,
+    "index out of range error path; code after it is a spliced-in reward icon drawer (icon plus amount)"
+   ],
+   [
+    94,
+    "rating section: only shown when rating changed"
+   ],
+   [
+    98,
+    "no event given: use the live ops active event"
+   ],
+   [
+    103,
+    "use the event's ranking icon if it has one"
+   ],
+   [
+    110,
+    "ranked event: compare current score to legendary threshold"
+   ],
+   [
+    116,
+    "unranked fast-mode events show seals instead of rating"
+   ],
+   [
+    127,
+    "at or above legendary Elo: show rating with the army icon for ranked V2"
+   ],
+   [
+    141,
+    "below legendary: show seals if any were earned, otherwise hide the rating"
+   ],
+   [
+    156,
+    "negative rating or seals use the 'lose' text material"
+   ],
+   [
+    164,
+    "fade the rewards group in after a delay of 2 seconds"
+   ]
+  ]
+ },
+ "2f61210": {
+  "summary": "Hides all reward objects and the rewards group. The decompiler merged in a copy of the reward display code (ShowRewards), so the second half is not part of the real method.",
+  "comments": [
+   [
+    5,
+    "hide the whole rewards group"
+   ],
+   [
+    11,
+    "hide the reward holder prefab, skull holder, rewards holder and rating objects"
+   ],
+   [
+    35,
+    "deactivate each skull object in turn"
+   ],
+   [
+    42,
+    "code from here on is decompiler-merged ShowRewards logic (index error then reward display)"
+   ],
+   [
+    168,
+    "spliced rating display: icon, seals vs rating text, lose material, then fade in"
+   ]
+  ]
+ },
+ "2f61bfc": {
+  "summary": "Starts a DOTween float tween that blends the scenario value toward the target value over the given time, using getter and setter callbacks on this toggler.",
+  "comments": [
+   [
+    4,
+    "getter and setter delegates for the tweened value"
+   ],
+   [
+    7,
+    "target value and duration come from the blend options"
+   ],
+   [
+    16,
+    "get a tweener from the pool and configure it"
+   ],
+   [
+    18,
+    "setup failed: return the tweener to the pool"
+   ]
+  ]
+ },
+ "2f61d14": {
+  "summary": "Initialize: registers this lens flare toggler in the environment conditions manager's list of blendable scenario objects, creating the list if needed.",
+  "comments": [
+   [
+    9,
+    "create the list on first use"
+   ],
+   [
+    17,
+    "inlined List.Add: append this object, growing the array when full"
+   ]
+  ]
+ },
+ "2f61eb4": {
+  "summary": "OnValidate: caches the lens flare component from this object if not already assigned.",
+  "comments": []
+ },
+ "2f61f8c": {
+  "summary": "Initialize: registers this animation blender in the environment conditions manager's list of blendable scenario objects, creating the list if needed.",
+  "comments": [
+   [
+    9,
+    "create the list on first use"
+   ],
+   [
+    17,
+    "inlined List.Add: append this object, growing the array when full"
+   ]
+  ]
+ }
+}

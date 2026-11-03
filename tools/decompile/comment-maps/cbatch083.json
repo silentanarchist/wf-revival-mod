@@ -1,0 +1,213 @@
+{
+"2f6c344": {"summary": "Builds a list of every in-play minion from the left and right minion lists, then returns it sorted by a key delegate (OrderBy then ToList). Used wherever code needs the board's units in positional order. Decompiler output after the first two loops is mostly unrelated inlined LINQ noise.", "comments": [
+[4, "start with an empty result list"],
+[6, "pass 1: copy every in-play minion from the left side of the board"],
+[30, "pass 2: same for the right side (continues at the right-list loop further down)"],
+[36, "common null-check failure target: throws NullReferenceException"],
+[38, "decompiler lost the real flow here; the interface-lookup code below is inlined LINQ generics (ToLookup/Create)"],
+[153, "right-list loop: add each in-play right minion to the result"],
+[176, "sort the collected minions with OrderBy, using a cached key delegate (<>c b__85_0)"],
+[184, "ToList copies the ordered sequence into the returned List"],
+[196, "null source would make LINQ throw ArgumentNullException(\"source\")"],
+[215, "everything from here on is unrelated generic ToList/ToLookup instantiations the decompiler merged in; not game logic"]
+]},
+"2f6c640": {"summary": "Calls RemoveSwarm on every in-play minion on both sides of the board except the given exception card. Used to clear swarm state from the other minions when one card is the source of it.", "comments": [
+[5, "walk the left minion list"],
+[10, "only minions currently in play are touched"],
+[14, "skip the exception card itself"],
+[24, "left side done: switch to the right list"],
+[31, "right-list loop (decompiler placed it after the left loop)"],
+[36, "end of right list: finished"],
+[46, "same rule: not the exception card, in play, then RemoveSwarm"],
+[52, "shared null-check failure target"]
+]},
+"2f6ca0c": {"summary": "Counts the minions on the board that players can interact with: all left and right minions minus those with the summonRift trait. Returns that count.", "comments": [
+[7, "start from the total of left + right minions"],
+[19, "subtract one for each left minion that has the summonRift trait (not interactive)"],
+[10, "left list done: continue with the right list"],
+[27, "subtract one for each right minion with summonRift"],
+[34, "all minions checked: return the count"],
+[39, "shared null-check failure target"]
+]},
+"2f6b7d8": {"summary": "Finds a card on the board and returns its one-based position: negative for the left list, positive for the right list, 0 if it is not on the board. The sign convention matches GetCardInPos.", "comments": [
+[7, "search the left list first"],
+[8, "left list exhausted: search the right list"],
+[28, "left match: return the index negated"],
+[16, "right list: compare each entry with the card"],
+[19, "right match: return the positive one-based index"],
+[14, "not found on either side"],
+[36, "a minion list was null"]
+]},
+"2f6cd48": {"summary": "Returns the minion at a signed board position: negative values index the left list, positive the right list. Logs a warning and returns null for index 0 or an index past the list end.", "comments": [
+[5, "convert one-based index to a zero-based list index (right side)"],
+[9, "indexInPlay <= 0: left side or invalid"],
+[10, "index 0 is invalid: warn that no unit has that index"],
+[19, "left index within the left list's count: ~index maps -1 to 0, -2 to 1, etc."],
+[24, "left index too high: build the warning text"],
+[31, "positive index: use the right list"],
+[39, "in range: fetch the card from the list"],
+[53, "decompiler tail: inlined List get_Item/set_Item bounds checks and cast checks, not part of this method"],
+[85, "right index too high: build the warning text"],
+[92, "assemble the 'GetCardInPos with indexInPlay ... higher than ... Count' message"],
+[94, "log the problem and return null"]
+]},
+"2f6d0c0": {"summary": "Moves the mini tooltip's transform to the given position and stores the same value as its initial position field. Called when the tooltip is set up before showing.", "comments": [
+[5, "set the transform position and remember it as the initial tip position"]
+]},
+"2f6d108": {"summary": "Shows the mini tooltip: sets the title text, moves the tooltip to the requested position (plus stored offset) and activates its game object. Decompiler mangled the parameter names; the text argument is the body text.", "comments": [
+[5, "set the title text on the tooltip's title component"],
+[9, "reposition the tooltip (decompiler shows the position math garbled)"],
+[12, "make the tooltip visible"],
+[25, "null check failure target"]
+]},
+"2f6d220": {"summary": "Hides the mini tooltip by deactivating its game object.", "comments": [
+[5, "turn the tooltip object off"]
+]},
+"2f6d2b4": {"summary": "Per-frame update: hides the tooltip once more than TIME_AFTER_HOVER seconds have passed since it was last hovered.", "comments": [
+[5, "still within the grace period after the last hover: keep showing"],
+[8, "hover timed out: deactivate the tooltip object"]
+]},
+"2f6d308": {"summary": "Prepares a mulligan frame for a card: stores the card, hides the mulligan text, refreshes the Replace/Undo button text and hooks ChangeCardButtonOnClick to the button's click event.", "comments": [
+[4, "remember which card this frame controls"],
+[6, "hide the mulligan text object"],
+[7, "set button label to Replace or Undo"],
+[10, "build the click handler (inlined AddListener on the button's onClick)"],
+[22, "decompiler shows the inlined list append of the persistent call; the result is the button now calls ChangeCardButtonOnClick"]
+]},
+"2f6d448": {"summary": "When the frame is destroyed, removes the ChangeCardButtonOnClick listener from the change-card button (inlined RemoveListener).", "comments": [
+[4, "only if the button still exists"],
+[6, "recreate the delegate so it can be matched against registered listeners"],
+[13, "collect every registered call that matches this target and method"],
+[22, "match found: add to the list of calls to remove"],
+[40, "remove all matching calls, then rebuild the combined call list"],
+[59, "shared null-check failure target"]
+]},
+"2f6d4d8": {"summary": "Click handler for the mulligan change-card button. Toggles the target card's mulligan selection (replace or keep) and then refreshes the button text to Undo or Replace; most of the code is inlined I2 localization.", "comments": [
+[7, "toggle this card's mulligan selection (marks it to be discarded or restores it)"],
+[11, "pick the term: Undo if the card is now discarded, otherwise Replace"],
+[15, "from here the decompiler shows an inlined I2 Localize.SetTerm call that re-translates the label"],
+[35, "bail out early if the localize component has nothing to translate"],
+[56, "look up the translation of the primary term"],
+[68, "look up the translation of the secondary term"],
+[75, "run localize callbacks/events before applying the text"],
+[95, "apply upper/lower/title-case modifiers to the main translation"],
+[120, "add term prefix and suffix text"],
+[139, "insert spaces between characters for languages written without spaces"],
+[160, "right-to-left languages: fix text direction"],
+[173, "same case modifier and RTL handling for the secondary translation"],
+[217, "write the final text into the UI target"],
+[224, "null check failure target"]
+]},
+"2f6d3cc": {"summary": "Updates the mulligan button label to Undo (if the card is marked as discarded) or Replace by re-running an inlined I2 localization. Called when the frame is set up.", "comments": [
+[7, "needs a target card and a localize component for the label"],
+[10, "Undo if the card is currently discarded in the mulligan, otherwise Replace"],
+[14, "decompiler shows the inlined Localize.SetTerm; field names here are mislabeled by the decompiler"],
+[34, "bail out early if there is nothing to translate"],
+[55, "translate the primary term"],
+[67, "translate the secondary term"],
+[74, "run localize callbacks/events"],
+[94, "apply case modifiers (upper, lower, first-upper, title)"],
+[119, "add prefix and suffix"],
+[138, "add spaces for joined-word languages"],
+[159, "right-to-left languages: fix text direction"],
+[172, "case modifier and RTL handling for the secondary text"],
+[216, "write the final text to the UI target"],
+[223, "null check failure target"]
+]},
+"2f6d59c": {"summary": "Initial setup of the mulligan manager: hides the mulligan text object and touches the buttons group. Called when the battle scene starts.", "comments": [
+[6, "hide the mulligan text until the mulligan begins"],
+[7, "buttons group is only null-checked (decompiler shows a leftover pointer check)"]
+]},
+"2f6d5e0": {"summary": "Opens the mulligan UI: shows the buttons group, sets the instruction text and a 'go first' / 'second turn' text, then creates a mulligan button over every card in the player's mulligan hand.", "comments": [
+[8, "show the mulligan buttons group"],
+[10, "set the instruction text term"],
+[12, "choose go-first or second-turn text"],
+[19, "show the mulligan text object"],
+[22, "iterate the starting cards offered for mulligan"],
+[24, "add a replace/undo frame button over each card"],
+[33, "a UI reference was null"]
+]},
+"2f6da50": {"summary": "Called when the player clicks the Done button of the mulligan. If the client is waiting on a reconnect it does nothing (logs only in dev tools); otherwise it hides the mulligan UI, tells the battle manager the mulligan is done and destroys all mulligan frame buttons.", "comments": [
+[10, "blocked while reconnecting: Done must not be sent during a disconnect"],
+[16, "restore card visibility and set the shade back"],
+[18, "hide the buttons group and mulligan text"],
+[23, "report the mulligan as finished to the battle manager (which sends the choice)"],
+[26, "destroy every per-card frame button"],
+[36, "clear the button list"],
+[50, "disconnected case: with dev tools on, log a message; otherwise ignore the click"]
+]},
+"2f6dac0": {"summary": "Finishes the mulligan on the UI side without the reconnect check: restores the display, hides the mulligan UI, notifies the battle manager and destroys and clears the mulligan frame buttons.", "comments": [
+[7, "restore card visibility and shade"],
+[9, "hide the buttons group and mulligan text"],
+[14, "tell the battle manager the mulligan is done"],
+[17, "destroy each per-card frame button"],
+[25, "empty the frame button list"]
+]},
+"2f6df80": {"summary": "Displays the mulligan countdown on the button text, formatted as the seconds left prefixed with '0.0'.", "comments": [
+[6, "build the timer text from the remaining seconds"],
+[9, "write it to the mulligan button"]
+]},
+"2f6e010": {"summary": "Toggles the mulligan UI between visible and hidden (used by a hide/peek button) and fades the dark shade accordingly.", "comments": [
+[8, "flip visibility based on the text object's current state"],
+[11, "show or hide the mulligan text, button and cards"],
+[18, "shade alpha: 0 when hiding, its normal level when showing"],
+[22, "stop any shade tween in progress"],
+[27, "make sure the shade object is active"],
+[31, "set alpha on the shade sprite if it exists, otherwise on the UI image"],
+[48, "null check failure target"]
+]},
+"2f6e04c": {"summary": "Called when the hide button is released: shows the mulligan UI again and restores the shade to its normal alpha.", "comments": [
+[5, "show the mulligan text, button and cards again"],
+[12, "shade goes back to its normal alpha"],
+[13, "stop any shade tween in progress"],
+[22, "set alpha on the shade sprite if there is one, otherwise on the UI image"],
+[39, "null check failure target"]
+]},
+"2f6dcb8": {"summary": "Shows or hides the mulligan text, button and cards, and sets the shade alpha to normal when shown or 0 when hidden.", "comments": [
+[5, "show or hide the mulligan text"],
+[8, "show or hide the mulligan button and the cards"],
+[12, "shade alpha: 0 when hiding, its normal level when showing"],
+[16, "stop any shade tween in progress"],
+[25, "set alpha on the shade sprite if there is one, otherwise on the UI image"],
+[42, "null check failure target"]
+]},
+"2f6d7cc": {"summary": "Creates a mulligan frame button on top of a card (same position and scale), adds it to the button list, sets it up for that card and toggles the card's tooltips to the enableToolTipsOnCard setting.", "comments": [
+[8, "place the frame at the card's world position, no rotation"],
+[15, "instantiate the frame prefab under this manager"],
+[19, "match the frame's scale to the card"],
+[22, "register the frame in mulliganFrameButtons"],
+[37, "link the frame to the card and its click handler"],
+[38, "enable or disable the card's tooltips while in the mulligan"],
+[62, "decompiler appended unrelated shader property ID setup (_ShadowColor, _Outline); not part of this method"],
+[80, "null check failure target"]
+]},
+"2f6dd8c": {"summary": "Activates or deactivates the card objects in the player's mulligan hand and all mulligan frame buttons, depending on showY.", "comments": [
+[12, "loop over the cards in the player's mulligan hand"],
+[17, "show or hide each card's game object"],
+[22, "then show or hide the frame buttons over the cards"],
+[40, "null check failure target"]
+]},
+"2f6ea84": {"summary": "Compiler-generated enumerator Reset for the PlayDelayedEffect coroutine; always throws NotSupportedException.", "comments": [
+[8, "coroutines cannot be reset"]
+]},
+"2f6e0fc": {"summary": "Starts every configured animation effect when the object appears. Zero-delay effects (and type 10) play immediately; the rest run through the PlayDelayedEffect coroutine. The tail of the output is the inlined PlayEffect handling: sprite and text fades, sound, particle prefab and screen shake.", "comments": [
+[4, "do nothing if effects are set to wait for an external trigger"],
+[14, "loop over the animEffects array"],
+[20, "no delay (or type 10): play now; otherwise start a delayed coroutine"],
+[24, "delayed effects run in a coroutine"],
+[35, "decompiler merged the body of PlayEffect from here on; it switches on the effect type"],
+[42, "type 10: fade sprites in with a tween, using each entry's alpha, duration and delay"],
+[87, "type 0x14 (20): spawn a particle prefab, handled further down"],
+[88, "type 0x1e (30) is sound; 0x28 (40) is screen shake"],
+[92, "type 0x28: find the CameraShake object and start its ResolveScreenShake coroutine"],
+[166, "type 0x1e: play a sound clip at the global SoundFxVolume"],
+[169, "sound effects muted"],
+[216, "missing clip: warns 'PlayOneShot was called with a null AudioClip' (dev tools only)"],
+[221, "no audio source: warns 'No audiosource available'"],
+[255, "type 0x14: particle effect"],
+[270, "skip particles if the player disabled them"],
+[291, "spawn the particle prefab at the object's position plus an offset"],
+[331, "no prefab set: warns 'Undefinded anim prefab'"],
+[333, "text fade loop: fade each UI text with a tween like the sprite fade"]
+]}
+}

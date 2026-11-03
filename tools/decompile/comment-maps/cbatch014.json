@@ -1,0 +1,237 @@
+{
+"3259740": {"summary": "Getter for the deck's hero card script. Returns the runtime hero if one was set, otherwise looks up the saved hero reference among the loaded assets (a Linq search the decompiler mangled) and returns null if nothing matches.", "comments": [
+[5, "A hero was already set at runtime (see SetHero): use it directly"],
+[8, "Otherwise fall back to the saved hero reference (a LoadableReference to the hero card id)"],
+[15, "Reference has a cached target? If not, null/empty reference means no hero"],
+[16, "Get the hero card id from the reference, then search the loaded card assets for a matching id"],
+[33, "The decompiler turned the Linq First/Find over the asset list into raw interface-table lookups; the logic is 'find card whose id matches'"],
+[160, "Search finished: if nothing matched, result is null"],
+[186, "No cached reference and no id: no hero"],
+[189, "Everything after this line is decompiler debris (exception cleanup and an unrelated Linq helper), not part of this method"]
+]},
+"32597a4": {"summary": "Builds (and caches in localCardLibrary) the deck's list of card scripts by looking up each stored card id in the given full collection. Ids that no card matches are removed from the deck's id list. Reuses the cache if it is complete.", "comments": [
+[10, "Cache hit: same size as the id list and no null entries, so return the cached library"],
+[12, "Cache missing or stale: rebuild the library from scratch"],
+[15, "Walk the id list backwards so ids can be removed while iterating"],
+[24, "Look the card up by id in the full collection (the predicate compares unique ids)"],
+[27, "Card found: append it to the library"],
+[43, "Card not found (removed or unknown card): drop its id from the deck"],
+[51, "Ids were walked backwards, so reverse to restore the deck order"]
+]},
+"3269ffc": {"summary": "Returns true if the deck's hero or any card in its library is flagged hidden. Used when choosing decks to offer, so hidden cards are not exposed.", "comments": [
+[9, "Hero itself hidden? Then the deck counts as having hidden cards"],
+[11, "Hero is visible: scan every card in the library"],
+[17, "Loop stops at the first hidden card"],
+[25, "Hero hidden: result is true"]
+]},
+"326a1d0": {"summary": "Returns true if any card in the deck's library is banned by the given play event (for example a restricted game mode). Returns false when no event is given.", "comments": [
+[5, "No event means no restrictions"],
+[6, "Get the deck's cards (the event is passed along, apparently a decompiler slip; it should be the card collection)"],
+[14, "Ask the event, through its IPlayEvent interface, whether each card is banned"],
+[34, "First banned card makes the whole deck banned"]
+]},
+"326a0d8": {"summary": "Builds (and caches) the deck's card library using the player's full card collection from PlayerDataManager. Logs an error and returns null if there is no player data manager. Ids that match no card are removed from the deck.", "comments": [
+[6, "No PlayerDataManager in the scene: log an error and give up"],
+[13, "Use every card the game knows about as the lookup pool"],
+[18, "Cache hit: same size as the id list and no null entries, so return the cached library"],
+[21, "Cache missing or stale: rebuild the library from scratch"],
+[25, "Walk the id list backwards so ids can be removed while iterating"],
+[34, "Look the card up by id in the collection"],
+[37, "Card found: append it to the library"],
+[53, "Card not found: drop its id from the deck"],
+[61, "Ids were walked backwards, so reverse to restore the deck order"]
+]},
+"326a318": {"summary": "Finds the cosmetic card back whose unique id equals this deck's cardbackId in the player's full cosmetic collection. Returns null if the player data manager is missing or no item matches.", "comments": [
+[6, "No PlayerDataManager: log an error and return nothing"],
+[11, "Search the whole cosmetics list with a predicate comparing unique ids to this deck's cardback id"],
+[17, "Decompiler inlined List.Find as a forward index loop; first match is returned"],
+[60, "No cosmetic matched: deck has no card back"],
+[64, "Everything from here on is decompiler debris (inlined List helper methods such as FindIndex/FindLast/ForEach), not real logic of this method"]
+]},
+"3269f24": {"summary": "Returns true if the deck's cached card library contains a null entry, meaning some card failed to resolve and the library must be rebuilt.", "comments": [
+[5, "Scan the cached library entry by entry"],
+[9, "Reached the end without finding a null: library is complete (returns false)"],
+[14, "Null entry found: library is incomplete"]
+]},
+"326a4fc": {"summary": "Sets the deck's hero. Stores a loadable reference built from the card's id and keeps the card itself as the runtime hero so DeckHero can return it directly.", "comments": [
+[4, "Wrap the hero's id in a reference so it can be saved, and cache the card itself as the runtime hero"]
+]},
+"326a600": {"summary": "Predicate used by GetDeckCardback: true when a cosmetic item's unique id equals the deck's cardbackId. The string comparison was inlined by the compiler.", "comments": [
+[7, "Compare the item's id to the deck's card back id"],
+[9, "Same string object: equal"],
+[15, "Different lengths mean different strings"],
+[19, "Inlined string equality: compare the characters 8 bytes at a time, then the tail"]
+]},
+"326af68": {"summary": "Predicate used by GetRandomDeck: true when a bot-deck reference's target id equals the id of the captured deck. The string comparison was inlined by the compiler.", "comments": [
+[5, "Compare the reference's target id to the captured deck's id"],
+[8, "Same string object: equal"],
+[17, "Different lengths mean different strings"],
+[18, "Inlined string equality: compare the characters 8 bytes at a time, then the tail"]
+]},
+"326a6b0": {"summary": "Picks a random prebuilt deck for an opponent. Filters out decks of the wrong army, decks not in the selectable bot list (unless new matchmaking is disabled), decks with hidden cards and decks with cards banned by the event, then chooses one at random.", "comments": [
+[8, "Feature flag: when new matchmaking is disabled, the bot-deck list is not used for filtering"],
+[11, "Go through every prebuilt deck in the collection"],
+[26, "No armies given: skip the army filter"],
+[43, "Army filter active: only keep decks whose hero belongs to one of the allowed armies"],
+[58, "Unless new matchmaking is disabled, the deck must be in the selectable bot deck list"],
+[63, "Not in the bot list: skip this deck"],
+[72, "Skip decks containing hidden cards"],
+[77, "Skip decks containing cards banned by the current event"],
+[81, "Deck passed all filters: add it to the candidates"],
+[106, "All decks checked: pick one candidate at random"]
+]},
+"326ab1c": {"summary": "Selects a random deck matching the given difficulty level and play mode. The decompiler lost most of the Linq ElementAtOrDefault call, so the details here are unclear.", "comments": [
+[9, "Filter the decks by difficulty and play mode (the predicate lives in the closure)"],
+[12, "Random index; the range seems to use the unfiltered deck count, so it may miss or overshoot the filtered list"],
+[27, "Negative index: no deck"],
+[34, "Inlined Linq ElementAtOrDefault: take the filtered list's element at that index, or null if out of range"],
+[101, "Index beyond the filtered list: return no deck"],
+[143, "Dispose the enumerator and return the deck found, or null"]
+]},
+"326ac50": {"summary": "Adds a deck to the collection. Decks whose name contains Tutorial are ignored. Bot decks also go in the bot deck list and practice decks also go in the practice deck list.", "comments": [
+[4, "Null deck: nothing to add"],
+[9, "Tutorial decks are never added to the collection"],
+[14, "Add to the main deck list (inlined List.Add)"],
+[29, "Bot-type decks also go into the bot deck list used for opponents"],
+[46, "Practice decks also go into the practice deck list"]
+]},
+"326b37c": {"summary": "Predicate used by PrebuiltPack.GetCardLibrary: true when a card's unique id equals the pack's card id at the closure's current index. The string comparison was inlined by the compiler.", "comments": [
+[7, "Compare the card's id to the pack's card id at the current index"],
+[9, "Same string object: equal"],
+[16, "Different lengths mean different strings"],
+[19, "Inlined string equality: compare the characters 8 bytes at a time, then the tail"]
+]},
+"325a200": {"summary": "Builds a list of cards for this prebuilt pack by looking up each stored card id in the full collection. If no collection is passed it uses the player's full card collection. Ids with no matching card are skipped.", "comments": [
+[8, "No collection given: use the player's full card collection"],
+[14, "Closure index is the position in the pack's id list"],
+[18, "All ids processed: return the cards found"],
+[27, "Look up the card with this id"],
+[30, "Found: add it to the result (missing ids are silently skipped)"],
+[46, "Advance to the next id"]
+]},
+"326afd0": {"summary": "Replaces the pack's card id list with the ids of the cards in the given list. The old ids are cleared first.", "comments": [
+[9, "Clear the existing id list"],
+[15, "Add the id of each given card"],
+[30, "The id is read from the card's field at offset 0x38 (seems to be the unique id)"]
+]},
+"326b3fc": {"summary": "Returns the ranged attack particle effect configured for the given army. If no entry matches the army, falls back to the first entry (or null if the list is empty).", "comments": [
+[9, "Look for the entry whose army matches"],
+[17, "No match: use the first entry as the default, or null if the list is empty"]
+]},
+"3271d58": {"summary": "Static constructor of the compiler-generated closure class: creates the shared singleton instance used by cached lambdas in RawCardScript.", "comments": []},
+"3271dc8": {"summary": "Predicate for GetAvailableSounds: true when an audio clip asset reference has a non-empty key, so only assigned sounds are counted.", "comments": [
+[5, "The asset key is empty for unassigned sound slots; keep only the ones with a key"]
+]},
+"326b4f8": {"summary": "Returns the id of the original card. For an alternate-art card it uses the card the art replaces, otherwise this card's own id.", "comments": [
+[5, "Alternate art: ask the art for its original card, whose id is then returned (the decompiler dropped the id read)"]
+]},
+"326b530": {"summary": "Gets the card's tier from the CardServices tier table using the original card (so alternate art shares its tier). Adds a default entry if the card is missing from the table.", "comments": [
+[5, "Alternate art cards use their original card's tier"],
+[7, "Look the original card up in the tier table"],
+[9, "Not present: store a default tier for it so later lookups succeed"],
+[12, "Decompiler shows 0 here; the real tier is the value read from the table (default 0 if newly added)"]
+]},
+"326b588": {"summary": "Returns a new list holding the card's four related cards (the cards it creates or refers to), in order. Entries may be null.", "comments": [
+[11, "Add relatedCard1 through relatedCard4 in order; null entries are kept"]
+]},
+"326b7e8": {"summary": "Returns whether the reload icon should show on the card: it must have an active ability that needs loading, and either no loading logic or one that needs no minimum hero level.", "comments": [
+[4, "No active ability, or it does not need loading: no reload icon"],
+[7, "No loading logic: show the icon"],
+[15, "With loading logic: only show the icon if it needs no minimum hero level (0)"]
+]},
+"326b870": {"summary": "Makes sure the CardTraits and ShowTraits lists exist, creating empty lists if they are null.", "comments": [
+[4, "Create the card's trait list if missing"],
+[8, "Create the displayed-trait list if missing"]
+]},
+"326b93c": {"summary": "Adds any traits the card gets from its abilities (extra ability traits) to its trait list if they are not already there.", "comments": [
+[7, "Compute the traits implied by the card's type and active ability"],
+[20, "For each implied trait..."],
+[32, "...check whether the card's trait list already has it"],
+[35, "Not present yet: add it to the card's traits"]
+]},
+"326bc18": {"summary": "Builds the list of traits a card gets automatically from its ability types, plus the army's active-ability trait when the card has an active ability.", "comments": [
+[8, "Get the traits that the card's type can grant through ability types"],
+[17, "For each such trait, check whether the card has the matching ability type"],
+[21, "It does: add the trait to the result"],
+[48, "No active ability: finished"],
+[51, "Active ability: also add the army-specific active ability trait"]
+]},
+"326bfc0": {"summary": "Returns whether the card's default trait list contains the given trait.", "comments": [
+[11, "Linear search through the card's own traits; the first match returns true"]
+]},
+"326bfd0": {"summary": "Returns whether the given list of trait data contains the given trait.", "comments": [
+[10, "Linear search; the first entry with this trait returns true"]
+]},
+"326c198": {"summary": "Preloads the animation assets a card needs: its custom ranged attack particles and every animation referenced by its abilities. Called ahead of play so the effects do not stall when triggered.", "comments": [
+[14, "Custom ranged attack particles set? Load that animation and preload its assets"],
+[20, "Now go through each of the card's abilities"],
+[54, "For each ability, go through its groups of animation references"],
+[67, "For each animation reference in the group, load it and preload its assets"],
+[77, "Skip empty references; load the animation and call its PreloadAssets"],
+[93, "Everything below is decompiler exception-handling debris"]
+]},
+"326c7dc": {"summary": "Returns the item class name used for this card: Hero for hero cards, otherwise Card.", "comments": []},
+"326c848": {"summary": "Builds the custom data dictionary for this card, adding its card type and an in-app product id derived from its rarity (individual_card_<rarity>).", "comments": [
+[4, "Start from the base class's custom data"],
+[10, "Record the card type"],
+[13, "Product id used for buying an individual card of this rarity"]
+]},
+"326c9a0": {"summary": "Loads and returns the card's sprite through the addressables system, with reference counting. Uses the reference card's image if there is one, else the card's own image, else the default troop or stratagem image.", "comments": [
+[5, "Prefer the reference card's image if it has one"],
+[8, "Own image reference missing or unassigned: use a default image"],
+[12, "Heroes and minions get the default troop image, other card types the default stratagem image"],
+[47, "Reference null or empty: warn and return no sprite"],
+[53, "Get the reference counter that tracks how many users hold this asset"],
+[73, "Handle already valid and finished with an error: log a warning and return nothing"],
+[93, "Not loaded yet (count 0): load it now and wait for it to finish"],
+[105, "Remember the reference so it can be released later"],
+[107, "Already loaded: reuse the asset"],
+[115, "Count one more user of the asset and return the loaded sprite"]
+]},
+"326cae0": {"summary": "Loads and returns the card's full hero sprite via the addressables system with reference counting. Uses the reference card's reference if it has one; returns null if no sprite is assigned.", "comments": [
+[5, "Prefer the reference card's full hero sprite if it has one"],
+[13, "Own reference unassigned: no sprite"],
+[38, "Reference null or empty: warn and return no sprite"],
+[44, "Get the reference counter that tracks how many users hold this asset"],
+[64, "Handle already valid and finished with an error: log a warning and return nothing"],
+[84, "Not loaded yet (count 0): load it now and wait for it to finish"],
+[96, "Remember the reference so it can be released later"],
+[98, "Already loaded: reuse the asset"],
+[106, "Count one more user of the asset and return the loaded sprite"]
+]},
+"326cbac": {"summary": "Releases the card's full hero sprite addressable reference (the counterpart of get_fullHeroSprite), warning if the asset was not loaded. Uses the reference card's sprite if there is one.", "comments": [
+[5, "Reference card has a full hero sprite? Release that one"],
+[14, "Otherwise release this card's own full hero sprite, if one is assigned"],
+[21, "Ask the addressables manager's cache group whether the asset is loaded"],
+[27, "Not loaded: warn instead of releasing"]
+]},
+"326cca0": {"summary": "Loads and returns the card's event hero sprite via the addressables system with reference counting. Uses the reference card's reference if it has one; returns null if none is assigned.", "comments": [
+[7, "Prefer the reference card's event hero sprite if it has one"],
+[9, "Own reference unassigned: no sprite"],
+[32, "Reference null or empty: warn and return no sprite"],
+[39, "Get the reference counter that tracks how many users hold this asset"],
+[59, "Handle already valid and finished with an error: log a warning and return nothing"],
+[79, "Not loaded yet (count 0): load it now and wait for it to finish"],
+[91, "Remember the reference so it can be released later"],
+[93, "Already loaded: reuse the asset"],
+[101, "Count one more user of the asset and return the loaded sprite"]
+]},
+"326cd70": {"summary": "Called on every card when a card is played with a target. Fires the matching ability triggers: this card played (plus stimulation, spirit stone, faith and teleport handling), other card played, third card in a turn, and while in play.", "comments": [
+[4, "This card is the one that was just played"],
+[6, "Targeted card without a target: log a warning and skip the this-card triggers"],
+[16, "Normal case: fire ThisCardPlayed"],
+[24, "A tactic played onto a unit with Stimulation triggers that unit's Stimulation ability and a stimulation trigger on the manager"],
+[32, "Spirit stone: broadcast usage to the other player if this unit can use one, then fire the trigger"],
+[42, "Tactics and Whispers are faith cards: fire UseFaith"],
+[46, "Played on the turn it was drawn: fire Teleport"],
+[52, "Some other card was played (not this one): fire OtherCardPlayed"],
+[58, "Other card played: if it is the third card this turn, fire PlayedThirdCardInTurn"],
+[70, "Always fire WhileInPlay so continuous abilities react to the play"]
+]},
+"326da48": {"summary": "Fires only the ThisCardPlayed ability trigger when this card is the card played. If the card needs a target but has none, it logs a warning (only when dev tools are on) and does nothing.", "comments": [
+[4, "Only applies when this card is the one that was played"],
+[6, "Targeted card without a target: log a warning in dev mode and skip"],
+[15, "Warning is only logged when dev tools are enabled"],
+[31, "Normal case: fire ThisCardPlayed"]
+]}
+}

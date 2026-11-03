@@ -1,0 +1,68 @@
+{
+"325e264": {"summary": "Shows the card's rarity icon by picking a sprite from the rarity sprite array and assigning it to the rarity Image. Rarity is 1-based and clamped to the array; if the array size differs from maxRarity it logs an error and uses the first sprite.", "comments": [
+[4, "The sprite array must exist; null means the prefab is not set up"],
+[9, "Sanity check: the array must have exactly maxRarity sprites"],
+[10, "Rarity is 1-based: convert to an index and clamp it into 0..maxRarity-1"],
+[29, "Array size does not match maxRarity: log an error and fall back to the first sprite"],
+[36, "Assign the chosen sprite to the Image; the code below is Unity's inlined Image.sprite setter"],
+[40, "Image had no sprite before: refresh layout/material flags for the new one"],
+[79, "Image already has a sprite: only update if the new sprite is a different one"]
+]},
+"325efb4": {"summary": "Static constructor of the compiler-generated lambda holder for CardsCollection. It creates the single shared instance used by the cached LINQ delegates.", "comments": [
+[4, "Create the singleton that hosts the non-capturing lambdas (e.g. the sort key selectors)"]
+]},
+"325f04c": {"summary": "LINQ predicate used by GetCardsInArmy: true when the card is not null and belongs to the captured army.", "comments": [
+[4, "Skip null cards in the library"],
+[12, "Keep only cards whose army matches the army that was passed to GetCardsInArmy"]
+]},
+"325f0dc": {"summary": "LINQ predicate used by CountCopiesOfCard: true when the library entry is the same card as the captured one, using Unity's null-aware equality.", "comments": [
+[5, "Both null counts as equal"],
+[8, "Captured card is null: equal only if x is also a destroyed/null Unity object"],
+[15, "Otherwise compare the two objects by reference"]
+]},
+"325e4a8": {"summary": "Editor-style validation hook: moves new playable cards from the cardsToAdd list into the cardLibrary, logs how many were added and their names, then clears cardsToAdd. Cards already in the library, of type 10, flagged by a virtual check, or with a 0x28 field value are skipped.", "comments": [
+[8, "Nothing to do if no cards are queued"],
+[12, "Create the library list if it does not exist yet"],
+[16, "Collects the cards actually added, for the log message"],
+[25, "Loop over each queued card (decompiler shows the List enumerator by hand)"],
+[31, "Skip cards that are already in the library"],
+[38, "Skip cards with type 10, those a virtual check rejects, and those whose field is 0x28; add the rest"],
+[51, "Append to the library (inlined List.Add)"],
+[62, "Also remember it in the added list"],
+[79, "Done with the queue: log the total number of new cards"],
+[90, "Append each added card's name to the log text"],
+[97, "Print the log message"],
+[98, "Clear the cardsToAdd list so the cards are not added twice"]
+]},
+"325e99c": {"summary": "Returns the library cards belonging to the given army as a new list, filtered by army and sorted by an integer key then by a string key (LINQ Where, OrderBy, ThenBy, ToList). Used to list a faction's cards, e.g. in collection or deck building.", "comments": [
+[4, "Closure captures the requested army for the filter"],
+[13, "Keep only cards of this army (predicate b__0)"],
+[20, "Sort by an integer key (cached lambda b__5_1, seems to be a card cost or order)"],
+[28, "Then sort by a string key (cached lambda b__5_2, seems to be the card name)"],
+[39, "Normal result: ToList builds the list from the sorted sequence"],
+[41, "Decompiler artifact: everything from here on is inlined LINQ internals (ToLookup, exception handlers) and is not real logic"]
+]},
+"325ec30": {"summary": "Counts how many cards in the library match the given card, using LINQ Where, Select and Count. The result is the number of copies of that card in the library.", "comments": [
+[4, "Closure captures the card to look for"],
+[11, "Keep library entries equal to the card (predicate b__0)"],
+[16, "Project the matches (identity-like select)"],
+[17, "Count the matches; the rest of this function is decompiler noise from inlined LINQ Count/DefaultIfEmpty and is not real logic"]
+]},
+"325edbc": {"summary": "Returns the position of the given card in the card library list, or 0 if it is not found (so a missing card is indistinguishable from the first one).", "comments": [
+[5, "Library list must exist"],
+[8, "Reached the end without a match: return 0"],
+[13, "Found the card: return its index"],
+[20, "Reached only when the library list is null"]
+]},
+"325ee98": {"summary": "Looks up a card by its id in the uniqueCards dictionary and returns it, or null when the id is not present.", "comments": [
+[8, "Unknown id: return null"],
+[14, "Dictionary indexer lookup, inlined by the decompiler"],
+[26, "Decompiler artifact: the code after this is a misplaced inlined Dictionary insert routine, not part of GetCard"]
+]},
+"325f5cc": {"summary": "Applies this card text state: turns on every object in objectsToActivate, turns off every object in objectsToDeactivate, and returns the description text component for this state.", "comments": [
+[7, "Enable each object listed in objectsToActivate"],
+[20, "Now disable each object listed in objectsToDeactivate"],
+[28, "Decompiler mixed in code from other CardTextsController methods (initial state, text layout); not part of this method"],
+[91, "Hand back the description text for this state"]
+]}
+}

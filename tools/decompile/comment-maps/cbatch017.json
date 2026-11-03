@@ -1,0 +1,17 @@
+{
+"326e910": {"summary": "Fires death-related ability triggers on this card when a minion dies. If the dead minion is another card it fires OtherUnitDeath; if it is this card it fires ThisUnitDeath and Unstable. Then fires an extra trigger depending on how the minion died (combat as attacker, poison, or ability).", "comments": [
+[6, "Some other minion died: this card's 'other unit death' abilities may react"],
+[10, "This card is the one that died: fire its own death abilities and Unstable"],
+[14, "Pick an extra trigger by cause of death (hex ids are AbilityTrigger values; seem to be combat-attacker, poison, ability death)"],
+[21, "Any other death type (e.g. defender in combat) has no extra trigger: stop here"],
+[26, "Fire the cause-specific abilities with an empty DamageInfo"]]},
+"326ea70": {"summary": "Plays this card's active ability. Chooses the normal or the alternative ability depending on board criteria, plays the activation animation, then runs each ability logic using the pooled AbilityData. Called when the unit's active ability is used.", "comments": [
+[4, "Use the normal ability unless an alternative exists and the normal ability's board criteria are not met"],
+[10, "Fetch the chosen ActiveAbility; null means nothing to play"],
+[12, "Flag seems to mean 'no custom animation': play the standard active ability animation"],
+[17, "Reuse the pooled AbilityData object to avoid allocations; fill it with the card, played card, target and whose turn it is"],
+[22, "Get the ability's list of logics and play each one with the ThisUnitAbilityUsed trigger"],
+[35, "Null checks the compiler inserted; throw NullReferenceException if anything is missing"]]},
+"326eb68": {"summary": "Returns the alternative active ability if the card has one and the normal ability's board criteria are not met, otherwise the normal active ability. Does not play anything.", "comments": [
+[4, "Normal ability unless an alternative exists and the board criteria for the normal one fail"]]}
+}

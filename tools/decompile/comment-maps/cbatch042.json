@@ -1,0 +1,714 @@
+{
+ "3286538": {
+  "summary": "Shows the offensive (environment) card in the card display window: sets it as the current card, then fills in card UI, flavour text, lore, voiceover and tutorial objects. Decompiler output merges several CardDisplayWindow methods, so the flow is unreliable.",
+  "comments": [
+   [
+    4,
+    "nothing to show if no offensive card is set"
+   ],
+   [
+    9,
+    "get the CardDisplayWindow singleton and make the offensive card its current card"
+   ],
+   [
+    22,
+    "from here the decompiler has merged other methods (card init, flavour text, voiceover); order is unreliable"
+   ],
+   [
+    40,
+    "initialize the main card UI and its related cards for display"
+   ],
+   [
+    57,
+    "fetch the card's localized flavour text and show or hide the flavour text object depending on whether it is empty"
+   ],
+   [
+    71,
+    "sets the clan flavour background sprite on an Image (inlined Image.sprite setter: layout/material update flags)"
+   ],
+   [
+    167,
+    "voiceover setup: closure created for the voice-over button callback"
+   ],
+   [
+    176,
+    "remote config can switch troop and warlord voiceovers on or off; the compare on the card type picks which flag"
+   ],
+   [
+    197,
+    "if voiceovers are enabled: clear old button listeners, load the card's available sounds and wire the play callback"
+   ],
+   [
+    257,
+    "open the card display window, then fill it: disable old card UIs, init cards, lore, voiceover, tutorial object"
+   ],
+   [
+    275,
+    "a button object is shown only for certain card types (0 and 10 seem to be unit and warlord)"
+   ],
+   [
+    296,
+    "for specific spell types an extra object is shown and initialized with the card and its drawing options"
+   ],
+   [
+    311,
+    "enable the final component and call its callback with the current card"
+   ],
+   [
+    322,
+    "shared null-check failure exit"
+   ]
+  ]
+ },
+ "3286648": {
+  "summary": "Applies an environment effect card for the given side: lets that side's hero trigger its ability for the card, switches the scenario environment to the card's effect, turns off the previous one and blends registered blendeables.",
+  "comments": [
+   [
+    4,
+    "the hero of the side that played the card"
+   ],
+   [
+    9,
+    "fire the hero's ability reaction to this environment card being played"
+   ],
+   [
+    12,
+    "look up the environment (scene lighting/effect asset) that belongs to this card"
+   ],
+   [
+    18,
+    "no environment found for the card: log it and stop"
+   ],
+   [
+    28,
+    "read the currently active environment"
+   ],
+   [
+    33,
+    "already the active environment: nothing to change"
+   ],
+   [
+    39,
+    "turn off the previous environment first"
+   ],
+   [
+    41,
+    "make the new environment current"
+   ],
+   [
+    43,
+    "enable it, then blend every cached blendeable object toward it"
+   ],
+   [
+    49,
+    "loop over all registered scenario blendeables (lights, fog, etc.)"
+   ]
+  ]
+ },
+ "3286720": {
+  "summary": "Handles the mulligan Done button: stores which cards the player (and the AI, if offline) mulligans in the match data, handles replay and disconnect cases, then starts the first-phase mulligan finish coroutine.",
+  "comments": [
+   [
+    11,
+    "only valid while the UI is in mulligan state"
+   ],
+   [
+    18,
+    "not a replay: record the ids of the player's cards chosen to be thrown back"
+   ],
+   [
+    25,
+    "replay: use the recorded mulligan instead of live choices"
+   ],
+   [
+    28,
+    "all paths join here: run the FinishMulliganFirstPhase coroutine"
+   ],
+   [
+    32,
+    "online match: if the opponent is mid-reconnect, run the disconnect handling first"
+   ],
+   [
+    42,
+    "offline match against AI: have the AI pick its mulligan cards and store them"
+   ],
+   [
+    51,
+    "shared null-check failure exit"
+   ]
+  ]
+ },
+ "3286d08": {
+  "summary": "Builds the list of environment effect cards for the hero's army, optionally starting with the empty offensive card, and adds cards unlocked by the active live event.",
+  "comments": [
+   [
+    7,
+    "hero of the side opposite to playerGoesFirst (seems to be the side that moves second)"
+   ],
+   [
+    10,
+    "remember which army to pick environment cards for"
+   ],
+   [
+    13,
+    "caller wants the offensive option: add the army's empty/default offensive card first"
+   ],
+   [
+    27,
+    "ask live ops for events; find the first event for this army"
+   ],
+   [
+    34,
+    "if found, append the environment cards for that event, filtered by its reward progress"
+   ]
+  ]
+ },
+ "328707c": {
+  "summary": "Builds the list of environment effect cards available to an army, either offensive or defensive. In draft (closed deck) play the count depends on the lower of both players' draft victories; otherwise it depends on rewards collected.",
+  "comments": [
+   [
+    12,
+    "closed-deck (draft) mode: unlocks depend on draft wins"
+   ],
+   [
+    15,
+    "take the player's draft victories"
+   ],
+   [
+    18,
+    "and the enemy's; use the smaller of the two"
+   ],
+   [
+    37,
+    "offensive cards need at least 3 victories; below that return an empty list"
+   ],
+   [
+    43,
+    "loop over all environment entries"
+   ],
+   [
+    52,
+    "only entries for the requested army"
+   ],
+   [
+    53,
+    "defensive: first card always; second at 6+ victories; third at 9+"
+   ],
+   [
+    125,
+    "offensive: first at 3+ victories, second at 6+, third at 9+"
+   ],
+   [
+    183,
+    "non-draft mode: no victory limit, filter by rewards instead"
+   ],
+   [
+    200,
+    "index-check failure: decompiler jumps back into the draft path here; unreliable"
+   ],
+   [
+    205,
+    "loop over all entries for the requested army"
+   ],
+   [
+    210,
+    "offensive cards requested"
+   ],
+   [
+    221,
+    "if justOwnedCards, a card is skipped when rewardsCollected is not above its unlock requirement"
+   ],
+   [
+    250,
+    "defensive cards requested: same logic using the defensive array"
+   ]
+  ]
+ },
+ "3287138": {
+  "summary": "Removes and returns the top card of the player's or enemy's shuffled deck for a mulligan, activating its GameObject. Also activates the next card so it is ready. Logs an error if the deck is empty.",
+  "comments": [
+   [
+    5,
+    "pick the player or enemy shuffled deck field"
+   ],
+   [
+    12,
+    "if two or more cards remain, also activate the next card in line"
+   ],
+   [
+    18,
+    "empty deck: log an error and return nothing"
+   ],
+   [
+    24,
+    "take the top card, activate it and remove it from the deck"
+   ]
+  ]
+ },
+ "32872b8": {
+  "summary": "Builds the localized battle-result share text with the opponent id and requests Android write-storage permission so a screenshot can be shared. Mostly Android JNI plumbing.",
+  "comments": [
+   [
+    4,
+    "localized share message template for the end-of-match result"
+   ],
+   [
+    10,
+    "opponent id in the match data fills the message"
+   ],
+   [
+    23,
+    "if storage permission is already granted, the screenshot share continues from here"
+   ],
+   [
+    27,
+    "not permitted: set callbacks and ask Android for permission"
+   ],
+   [
+    30,
+    "calls the Java PermissionManager requestPermission via JNI"
+   ],
+   [
+    50,
+    "JNI argument marshalling; decompiler output is noisy here"
+   ],
+   [
+    127,
+    "decompiler merged in UniAndroidPermission.OnPermit: runs the permit callback and clears callbacks"
+   ]
+  ]
+ },
+ "3283eac": {
+  "summary": "Called when a hero dies (or the battle ends): ends the battle, tells the opponent the match finished, builds the ranked match result (rating, skulls, duration) and saves the winner. If a disconnect loss is pending it takes the shortcut path instead.",
+  "comments": [
+   [
+    8,
+    "build a long debug log line with the state"
+   ],
+   [
+    40,
+    "already in post-battle: ignore unless a disconnect loss is pending"
+   ],
+   [
+    53,
+    "disconnect loss pending: record enemy win and run the basic end sequence"
+   ],
+   [
+    62,
+    "normal end: enter post-battle stage and stop the battle"
+   ],
+   [
+    65,
+    "online match: tell the opponent the match is finished"
+   ],
+   [
+    69,
+    "lock the UI into the finish sequence and clear the during-battle flag"
+   ],
+   [
+    74,
+    "the enemy hero died: raise a signal with the enemy hero's final health"
+   ],
+   [
+    89,
+    "get the player's rating, from the event leaderboard if in an event, else from player data"
+   ],
+   [
+    114,
+    "work out who won (draw if hero dead or draw pressed)"
+   ],
+   [
+    117,
+    "create the match result from the starting rating and XP"
+   ],
+   [
+    122,
+    "store skull counts for both sides as the milestones"
+   ],
+   [
+    143,
+    "store result and winner, then record the match duration in minutes"
+   ],
+   [
+    153,
+    "player won: flag it; for certain match types (0x14, 0xd2, 0xb4) tell live ops"
+   ],
+   [
+    163,
+    "save the winner (submits results) and finish the battle"
+   ],
+   [
+    185,
+    "array-length check failure"
+   ],
+   [
+    187,
+    "shared null-check failure exit"
+   ]
+  ]
+ },
+ "32876dc": {
+  "summary": "Logs the current match result's winner and, if the battle is in post-battle stage, remembers it as the last tried save and calls ProcessMatchResult to submit it. Logs an error if the match has not finished.",
+  "comments": [
+   [
+    11,
+    "only submit once the battle is in post-battle stage"
+   ],
+   [
+    12,
+    "not yet recorded: remember the winner we are saving"
+   ],
+   [
+    17,
+    "already recorded: warn, but still process (process checks duplicates)"
+   ],
+   [
+    22,
+    "match not finished: log an error"
+   ]
+  ]
+ },
+ "3287b14": {
+  "summary": "Submits the finished match result: through the live ops handler for normal online matches, or the player data manager for tutorial and replay matches. Retries via SaveMatchWinner if the winner changed after a disconnect loss.",
+  "comments": [
+   [
+    5,
+    "not in post-battle stage: log an error and stop"
+   ],
+   [
+    18,
+    "no disconnect-loss pending: go straight to saving"
+   ],
+   [
+    25,
+    "disconnect loss pending but winner differs from last save: log to PlayStream and re-run SaveMatchWinner"
+   ],
+   [
+    80,
+    "log the winner being saved and flag the record as finished"
+   ],
+   [
+    89,
+    "result was already processed: do not submit twice"
+   ],
+   [
+    93,
+    "log match end for the challenge log with win flag and player health"
+   ],
+   [
+    105,
+    "tutorial and replay matches go through ProcessMatchEndResult instead"
+   ],
+   [
+    111,
+    "normal match: send combat result to live ops, with FinishedProcessingMatchResult as the callback"
+   ],
+   [
+    125,
+    "submit via player data manager; ProcessMatchResult is the retry callback after an error"
+   ]
+  ]
+ },
+ "32881c0": {
+  "summary": "Callback after the server returned the online match result: stores it, marks processing finished, updates missions, achievements and alliance trophies, saves analytics and shows the finish screen. Replays skip straight to the finish screen.",
+  "comments": [
+   [
+    13,
+    "keep the server's result on the match result"
+   ],
+   [
+    15,
+    "mark result processing as finished"
+   ],
+   [
+    18,
+    "replays skip progress updates and show the finish screen"
+   ],
+   [
+    19,
+    "decompiler label target: show the finish screen coroutine"
+   ],
+   [
+    24,
+    "update mission progress via live ops"
+   ],
+   [
+    28,
+    "upload pooled achievement progress"
+   ],
+   [
+    32,
+    "upload pooled alliance trophy progress, then send analytics"
+   ]
+  ]
+ },
+ "3288370": {
+  "summary": "Collects match data (type, winner, result, duration, both decks, opponent id, who went first, both heroes' health, turn count) and sends it to the game analytics service.",
+  "comments": [
+   [
+    8,
+    "for AI event matches the enemy warlord name is read (value unused)"
+   ],
+   [
+    22,
+    "winner and result type come from the current match result"
+   ],
+   [
+    23,
+    "whether this was a networked (player vs player) game"
+   ],
+   [
+    36,
+    "opponent id and deck names for the analytics record"
+   ],
+   [
+    50,
+    "final player health"
+   ],
+   [
+    55,
+    "final enemy health, and the turn counter"
+   ],
+   [
+    61,
+    "send everything to the analytics service"
+   ],
+   [
+    74,
+    "shared null-check failure exit"
+   ]
+  ]
+ },
+ "3288744": {
+  "summary": "Closes any open voice-line popup, resets the connection status to Connected (notifying listeners) and hides the active skill description. Decompiler output at the end is unreliable.",
+  "comments": [
+   [
+    5,
+    "no popup is open any more"
+   ],
+   [
+    7,
+    "force the voice lines popup closed"
+   ],
+   [
+    9,
+    "if the connection indicator was not Connected, notify listeners and reset it"
+   ],
+   [
+    16,
+    "hide the active skill description object; decompiler lost the SetActive call"
+   ]
+  ]
+ },
+ "328041c": {
+  "summary": "Subscribes the voice-line popup shown and hidden handlers to the voice lines controller events.",
+  "comments": [
+   [
+    5,
+    "handler for popup shown"
+   ],
+   [
+    11,
+    "add the hidden handler to the controller's event; the loops are the compiler's thread-safe delegate combine"
+   ],
+   [
+    21,
+    "tail is the compiler's exception cleanup, not normal flow"
+   ]
+  ]
+ },
+ "32830f0": {
+  "summary": "Unsubscribes the voice-line popup shown and hidden handlers from the voice lines controller events.",
+  "comments": [
+   [
+    7,
+    "remove the shown handler"
+   ],
+   [
+    11,
+    "remove the hidden handler; the loop is the compiler's thread-safe delegate remove"
+   ]
+  ]
+ },
+ "32887b0": {
+  "summary": "Marks a popup as open and plays the chat-show sound cue through the SoundManager, with debug logging of the sound.",
+  "comments": [
+   [
+    5,
+    "a voice-line popup is now open"
+   ],
+   [
+    8,
+    "get the ChatShow audio cue from the sound collection"
+   ],
+   [
+    17,
+    "cue missing: log an error if the sound manager is set to complain"
+   ],
+   [
+    24,
+    "get a free audio source, configure it from the cue and play it"
+   ],
+   [
+    31,
+    "debug sounds on: log cue, audio source and mixer names first"
+   ],
+   [
+    66,
+    "decompiler merged in SoundManager.Play2D for a clip; not part of this method's real flow"
+   ]
+  ]
+ },
+ "328756c": {
+  "summary": "Works out the battle winner: the opposite of the dying side by default, a draw if the other hero is dead or waiting to die or draw was pressed, and a forced player win in always-win tutorial stages.",
+  "comments": [
+   [
+    5,
+    "default winner is the side that is not dying"
+   ],
+   [
+    9,
+    "hero card of the side that is not dying"
+   ],
+   [
+    12,
+    "hero already waiting to die: treat as a draw"
+   ],
+   [
+    24,
+    "draw if hero health is 0 or less, draw button used, or hero in cemetery"
+   ],
+   [
+    26,
+    "campaign or tutorial matches may force a result"
+   ],
+   [
+    36,
+    "stage flagged playerAlwaysWins: player wins regardless"
+   ]
+  ]
+ },
+ "3288830": {
+  "summary": "Finishes an offline battle. On a player win it stores fixed XP and Elo values and, for campaign matches, advances the campaign stage index and saves it. Then marks the result as saved and processed.",
+  "comments": [
+   [
+    4,
+    "normal battle end handling"
+   ],
+   [
+    8,
+    "player won"
+   ],
+   [
+    10,
+    "offline reward: fixed 30 XP and 30 Elo"
+   ],
+   [
+    15,
+    "campaign match: advance to the next stage"
+   ],
+   [
+    19,
+    "increase the stored campaign stage index"
+   ],
+   [
+    32,
+    "wrap back to the first stage when at the end of the list"
+   ],
+   [
+    53,
+    "save the campaign index to PlayerPrefs"
+   ],
+   [
+    56,
+    "mark the result as saved and processed"
+   ]
+  ]
+ },
+ "3285594": {
+  "summary": "Logs an error and cancels the match with no result: sets the finish UI state, marks the connection Disconnected, tells the player data manager to cancel the match, and notifies desync listeners.",
+  "comments": [
+   [
+    7,
+    "lock the UI into the finish sequence"
+   ],
+   [
+    8,
+    "if not already Disconnected, notify listeners and set it"
+   ],
+   [
+    15,
+    "tell the player data manager to cancel the match with the opponent id and UI state"
+   ],
+   [
+    26,
+    "notify listeners that the opponent desynced"
+   ]
+  ]
+ },
+ "3288b04": {
+  "summary": "Cancels the match. If not won, leaves the battle room (or cancels the search) and returns to the main menu or tutorial. If won, resigns and runs the same end-of-battle flow as DeadHero with result Cancelled. Decompiler merged two methods here.",
+  "comments": [
+   [
+    5,
+    "battle manager already destroyed: nothing to do"
+   ],
+   [
+    9,
+    "not won: leave the battle instead of finishing it"
+   ],
+   [
+    14,
+    "leave the network battle room"
+   ],
+   [
+    20,
+    "no battle manager: only cancel the pending search"
+   ],
+   [
+    30,
+    "stop the wait-for-opponent coroutine and cancel matchmaking"
+   ],
+   [
+    44,
+    "battle already in post-battle: just move the UI to postBattle"
+   ],
+   [
+    66,
+    "left room: free card backs, then go to main menu"
+   ],
+   [
+    74,
+    "first two tutorials done: load the main menu scene"
+   ],
+   [
+    86,
+    "otherwise start the tutorial match against a super-easy AI"
+   ],
+   [
+    105,
+    "match won: register a resignation action"
+   ],
+   [
+    108,
+    "from here the body repeats DeadHero with result Cancelled (merged by the decompiler)"
+   ],
+   [
+    142,
+    "already post-battle: ignore unless a disconnect loss is pending"
+   ],
+   [
+    164,
+    "normal end: stop battle, notify opponent, lock UI"
+   ],
+   [
+    216,
+    "work out the winner, build the ranked match result and skull counts"
+   ],
+   [
+    266,
+    "save the winner and finish the battle"
+   ]
+  ]
+ }
+}

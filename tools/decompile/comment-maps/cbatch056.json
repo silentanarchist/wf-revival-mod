@@ -1,0 +1,489 @@
+{
+ "329556c": {
+  "summary": "Returns every card in both players' hands as a new list, current turn's owner first, filtered and sorted by the cached LINQ delegates. Same pipeline as GetCardsInHandList with all sides and card types included.",
+  "comments": [
+   [
+    4,
+    "Start: empty the reusable cardsInHand list (size 0, version bump, clear items)"
+   ],
+   [
+    16,
+    "Whose turn is it? The turn owner's hand is added to the list first"
+   ],
+   [
+    24,
+    "Second AddCardsInHandToList call adds the other side's hand (arguments all true except weapons)"
+   ],
+   [
+    25,
+    "Build the cached Where/OrderBy delegates once; they are shared with GetCardsInHandList"
+   ],
+   [
+    44,
+    "Normal path: ToList over the ordered sequence and return it"
+   ],
+   [
+    52,
+    "Everything below is decompiler junk: inlined LINQ ArgumentNull throws and generic Lookup/ToList bodies, not real logic"
+   ]
+  ]
+ },
+ "329dacc": {
+  "summary": "Builds a filtered list of cards in hand, choosing sides (player/enemy) and card types (minions, spells, whispers, weapons). The turn owner's hand is listed first, then results are filtered and ordered via cached LINQ delegates and returned.",
+  "comments": [
+   [
+    5,
+    "Reuse the cardsInHand list: clear it before refilling"
+   ],
+   [
+    16,
+    "Whose turn is it? The turn owner's hand is collected first"
+   ],
+   [
+    18,
+    "Player's turn: add the player's hand if requested"
+   ],
+   [
+    21,
+    "Then add the enemy hand if requested (goto label shares the call with the else branch)"
+   ],
+   [
+    28,
+    "Enemy's turn: enemy hand first, then the player's hand"
+   ],
+   [
+    38,
+    "Apply cached Where filter and OrderBy sort delegates (compiler-generated lambdas)"
+   ],
+   [
+    58,
+    "Normal path: ToList over the ordered sequence and return it"
+   ],
+   [
+    66,
+    "Everything below is decompiler junk: inlined LINQ ArgumentNull throws and generic Lookup/ToList bodies, not real logic"
+   ]
+  ]
+ },
+ "329de60": {
+  "summary": "Appends the cards of one hand (player or enemy) that pass IsCardIncluded with the given type and side filters into resultList. Used by GetCardsInHandList and GetAllCardsInHand.",
+  "comments": [
+   [
+    4,
+    "Pick the hand object for the requested side"
+   ],
+   [
+    9,
+    "Hand exists and has a card list: walk it by index"
+   ],
+   [
+    12,
+    "Reached end of the hand: done"
+   ],
+   [
+    16,
+    "Ask the card whether it matches the minion/spell/whisper and player/enemy filters"
+   ],
+   [
+    17,
+    "Matching card: add it to the result list (inlined List.Add with grow fallback)"
+   ],
+   [
+    39,
+    "Reached only when something was null; the compiler's null-check throw"
+   ]
+  ]
+ },
+ "329e204": {
+  "summary": "Returns the units next to a card on its side's board. For the hero, it gets the first unit of each board list; for other cards, the neighbours in the list plus the hero if the card is leftmost. The decompiler duplicated the scan loop.",
+  "comments": [
+   [
+    4,
+    "Need a reference card"
+   ],
+   [
+    5,
+    "Pick the minion manager of the card's side"
+   ],
+   [
+    15,
+    "Look up the hero of that side to compare with the reference card"
+   ],
+   [
+    18,
+    "Reference is a normal unit: find it in the first board list"
+   ],
+   [
+    30,
+    "Found the card at index i: add the unit to its right if there is one"
+   ],
+   [
+    55,
+    "Leftmost unit: its left neighbour is the hero; otherwise add the unit at i-1"
+   ],
+   [
+    23,
+    "Not in the first list: continue scanning the second list (duplicated at the label below)"
+   ],
+   [
+    92,
+    "Reference is the hero: add the first unit of each board list"
+   ],
+   [
+    133,
+    "Shared null-check throw target"
+   ],
+   [
+    138,
+    "Second copy of the scan loop, over the other board list, same adjacent-unit logic"
+   ]
+  ]
+ },
+ "329e238": {
+  "summary": "Returns the unit directly right of the reference card on its side's board, or null if none. The decompiler scrambled the loop variables and tail; the later lines are junk from inlined List accessors.",
+  "comments": [
+   [
+    4,
+    "Need a reference card"
+   ],
+   [
+    5,
+    "Pick the minion manager of the card's side"
+   ],
+   [
+    14,
+    "Scan the first board list for the reference card (the decompiler reuses names awkwardly here)"
+   ],
+   [
+    16,
+    "Not found in the first list: scan the second one"
+   ],
+   [
+    53,
+    "Found: return the neighbouring list element, with bounds check"
+   ],
+   [
+    64,
+    "Below here is decompiler junk from inlined List get_Item/set_Item and a type-cast helper, not real logic"
+   ],
+   [
+    97,
+    "Shared null-check throw target"
+   ]
+  ]
+ },
+ "329e26c": {
+  "summary": "Picks a random valid attack target for the attacker using the match's seeded random numbers (so both clients agree). Returns null if there are no targets.",
+  "comments": [
+   [
+    4,
+    "Collect everything the attacker is allowed to hit"
+   ],
+   [
+    6,
+    "No valid targets: return null"
+   ],
+   [
+    11,
+    "Use the deterministic match RNG so the choice is the same on both clients and in replays"
+   ],
+   [
+    22,
+    "Below here is decompiler junk from inlined List accessors and a cast helper"
+   ],
+   [
+    52,
+    "Shared null-check throw"
+   ]
+  ]
+ },
+ "328b614": {
+  "summary": "Builds a list of all in-play units that the attacker can validly attack. Walks the units-in-play list from last to first.",
+  "comments": [
+   [
+    10,
+    "Iterate backwards over every unit in play"
+   ],
+   [
+    15,
+    "Test whether this unit is a legal attack target (no special attack type)"
+   ],
+   [
+    16,
+    "Legal: add it to the result list (inlined List.Add)"
+   ]
+  ]
+ },
+ "329e314": {
+  "summary": "Returns how many free battlefield slots a side has: capacity minus units on board, plus an extra term from another list. The offsets switch on a flag in the minion manager, so exact meaning is unclear.",
+  "comments": [
+   [
+    3,
+    "Pick the minion manager of the chosen side"
+   ],
+   [
+    11,
+    "A flag in the manager selects which of two capacity lists is used (offsets 0x28 vs 0x38, 0x20 vs 0x30); meaning unclear"
+   ],
+   [
+    21,
+    "Result is capacity minus the two board lists' counts, plus the other capacity list count; seems to be free slots"
+   ]
+  ]
+ },
+ "329e33c": {
+  "summary": "Returns the world position of a side's hero card. For an in-play hero or minion, converts its effect anchor from board to screen to world through the camera; otherwise uses the transform position directly.",
+  "comments": [
+   [
+    4,
+    "Choose the player or enemy hero holder based on the flag (decompiler lost the parameter name)"
+   ],
+   [
+    13,
+    "Get the hero card from the holder"
+   ],
+   [
+    16,
+    "Hero/minion that is in play or dying: use the board-to-screen conversion path"
+   ],
+   [
+    24,
+    "Convert screen position to world using the camera and its plane distance"
+   ],
+   [
+    46,
+    "Not in play: just return the transform's world position"
+   ]
+  ]
+ },
+ "329e368": {
+  "summary": "Like GetHeroPos but can also return an attachment point on the hero (selected by PositionReference bitmask) instead of the card center.",
+  "comments": [
+   [
+    4,
+    "Pick the player or enemy hero holder (parameters are mislabelled by the decompiler)"
+   ],
+   [
+    16,
+    "Hero/minion that is in play or dying: use the board-to-screen conversion path"
+   ],
+   [
+    20,
+    "Reference value below 0x18: bit masks pick which child anchor object overrides the position"
+   ],
+   [
+    41,
+    "Convert board position to screen then to world via the camera"
+   ],
+   [
+    63,
+    "Not in play: just return the transform's world position"
+   ],
+   [
+    80,
+    "Shared null-check throw target"
+   ]
+  ]
+ },
+ "329e560": {
+  "summary": "Compares an obscured value on each hero (the decompile shows the Energy fields, but the name says health) and returns the hero card with the higher value, or null on a tie. Used to find the stronger warlord.",
+  "comments": [
+   [
+    4,
+    "Read the player's hero value through the anti-cheat wrapper"
+   ],
+   [
+    12,
+    "Read the enemy's hero value the same way"
+   ],
+   [
+    18,
+    "Player value not above enemy's: re-read both and test for a tie"
+   ],
+   [
+    33,
+    "Tie: return null"
+   ],
+   [
+    37,
+    "Enemy is higher: return enemy hero (the player's hero is returned in the other branch via decompiler-lost code)"
+   ],
+   [
+    42,
+    "Shared null-check throw"
+   ]
+  ]
+ },
+ "329e6cc": {
+  "summary": "Finds the in-play unit on one side with the lowest current health that would not die from pending damage; defaults to that side's hero. Used for targeting.",
+  "comments": [
+   [
+    5,
+    "Get the side's units in play"
+   ],
+   [
+    6,
+    "Hero is the default result"
+   ],
+   [
+    11,
+    "Walk each unit"
+   ],
+   [
+    13,
+    "Skip units no longer in play"
+   ],
+   [
+    17,
+    "Skip units that pending damage will already kill"
+   ],
+   [
+    21,
+    "Compare obscured current health of this unit to the best so far"
+   ],
+   [
+    33,
+    "Lower health than the best: make this unit the new best"
+   ],
+   [
+    43,
+    "Shared null-check throw"
+   ]
+  ]
+ },
+ "32936e8": {
+  "summary": "Returns the deck manager of the player or the enemy.",
+  "comments": []
+ },
+ "329c83c": {
+  "summary": "Returns the shuffled deck list (cards left to draw) for the player or the enemy.",
+  "comments": []
+ },
+ "329e888": {
+  "summary": "Returns whether the given side has already played a card this turn.",
+  "comments": []
+ },
+ "329e89c": {
+  "summary": "Returns whether the given side has already played a troop (unit) this turn.",
+  "comments": []
+ },
+ "329497c": {
+  "summary": "Returns a deterministic pseudo-random int in [min, max) taken from the match's predefined RandomNumbers array, so both clients and replays agree; advances the array index. Returns min if the range has size 1 or less.",
+  "comments": [
+   [
+    9,
+    "Match data holds the shared random number array"
+   ],
+   [
+    11,
+    "No array: log an error and return 0"
+   ],
+   [
+    15,
+    "Range has at most one value: no random number consumed"
+   ],
+   [
+    18,
+    "Index wraps around the array length by modulo"
+   ],
+   [
+    25,
+    "Take the next array value, advance the index, and reduce it into the range"
+   ],
+   [
+    35,
+    "Everything below is decompiler junk from a neighbouring function (copying event data), not part of GetRandomInt"
+   ]
+  ]
+ },
+ "3284a5c": {
+  "summary": "Returns true if the current match type is a networked (human vs human or live) type: Ranked, Practice, ClosedDeck, Duel, FastMode, or one other type with value 0xD3.",
+  "comments": [
+   [
+    7,
+    "Match type is split by value ranges by the compiler"
+   ],
+   [
+    14,
+    "Mid-range: Duel or the type with value 0xAA"
+   ],
+   [
+    19,
+    "High range: FastMode or the type with value 0xD3"
+   ]
+  ]
+ },
+ "32805c0": {
+  "summary": "Returns whether this match type changes the player's ELO rating. Per the decompile, ranked types return true, and some types return true in the upper range; the logic seems inverted for others, so verify before relying on it.",
+  "comments": [
+   [
+    4,
+    "Above RankedBot: only Tutorial, Campaign and FastModeBot give true here (decompiler output, odd for ELO)"
+   ],
+   [
+    11,
+    "RankedBot or below: true only for Ranked or RankedBot"
+   ]
+  ]
+ },
+ "3296b9c": {
+  "summary": "Returns true if the current match is a tutorial or campaign match. The compiler picked the type values by branch (0x64/0x8C or 0x82/0xBE).",
+  "comments": [
+   [
+    7,
+    "Two candidate match type values depending on a range check; compares against both"
+   ]
+  ]
+ },
+ "329e9b0": {
+  "summary": "Returns whether the match type is in the set of matches played against the expected AI opponent, via bitmask lookup over two ranges.",
+  "comments": [
+   [
+    9,
+    "Low range of match types: bit test on a 64-bit mask"
+   ],
+   [
+    16,
+    "Higher range of match types: second mask"
+   ],
+   [
+    23,
+    "Bit set means the match type is in the set"
+   ]
+  ]
+ },
+ "329ea3c": {
+  "summary": "Returns true if the current match is played against an AI opponent. Uses RankedBot, PracticeOffline, Campaign and TutorialReplay checks plus bitmasks for other types.",
+  "comments": [
+   [
+    7,
+    "Low match types: RankedBot, PracticeOffline, or a bitmask in the middle range"
+   ],
+   [
+    19,
+    "High match types: bitmask over a 31-value window"
+   ],
+   [
+    23,
+    "Campaign and TutorialReplay override the above for low values in this branch"
+   ]
+  ]
+ },
+ "329eadc": {
+  "summary": "Returns true for match types where the player does not choose defence mode: PracticeOffline or ClosedDeck. For a Replay match, it checks the replayed match's own type instead.",
+  "comments": [
+   [
+    8,
+    "Replay: look at the type of the recorded match"
+   ],
+   [
+    12,
+    "Test for PracticeOffline (0x50) or ClosedDeck (0x78)"
+   ],
+   [
+    23,
+    "Normal match: use its own type"
+   ]
+  ]
+ }
+}

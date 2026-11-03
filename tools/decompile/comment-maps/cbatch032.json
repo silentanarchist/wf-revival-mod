@@ -1,0 +1,531 @@
+{
+ "32b69dc": {
+  "summary": "Signal handler for enemy health changes. If health has dropped below the lowest value seen so far, it raises the OnScore UnityEvent with the damage dealt.",
+  "comments": [
+   [
+    5,
+    "First event: the delta comes straight from the signal; later events compare against the lowest health seen"
+   ],
+   [
+    12,
+    "No new damage (health did not drop below the previous lowest): ignore"
+   ],
+   [
+    15,
+    "Remember the new lowest enemy health so the same damage is not scored twice"
+   ],
+   [
+    21,
+    "Invoke OnScore(deltaHealth); the decompiler expanded UnityEvent<int>.Invoke inline into a pile of cast checks"
+   ],
+   [
+    31,
+    "Fallback path: call the listener through the generic InvokableCall with a boxed int argument array"
+   ]
+  ]
+ },
+ "32b6a78": {
+  "summary": "Unity OnDestroy: unregisters OnHealthChange from the EnemyHealthChangeSignal so the destroyed scorer stops receiving events.",
+  "comments": [
+   [
+    4,
+    "Build the delegate for OnHealthChange to unregister"
+   ],
+   [
+    17,
+    "Look up the signal broker and call Unregister through the interface; the decompiler output is mostly interface-dispatch noise"
+   ]
+  ]
+ },
+ "32b705c": {
+  "summary": "Static constructor of BattleScoreManager's compiler-generated closure class; creates its singleton instance used for cached lambdas.",
+  "comments": []
+ },
+ "32b6be4": {
+  "summary": "Sets up the battle score (skull) system: loads the milestone thresholds from the match data, listens for enemy health changes and prepares the skull counter UI.",
+  "comments": [
+   [
+    5,
+    "Needs the BattleManager and its match data; otherwise this falls through to a null-reference throw"
+   ],
+   [
+    6,
+    "Read the health milestones (skull thresholds) for this match"
+   ],
+   [
+    9,
+    "Listen for enemy health changes so CheckThresholds can award skulls"
+   ],
+   [
+    12,
+    "Show the UI elements only if the match has any milestones; decompiler lost some field names here"
+   ],
+   [
+    19,
+    "Counter text starts as x followed by a number (format string \"x{0}\")"
+   ]
+  ]
+ },
+ "32b6d74": {
+  "summary": "Counts how many health thresholds satisfy a cached predicate (inlined LINQ Count). The decompiler output is mostly iterator, interface-cast and exception-unwind noise.",
+  "comments": [
+   [
+    5,
+    "Use the cached predicate delegate from the compiler-generated closure class, creating it on first call"
+   ],
+   [
+    21,
+    "LINQ argument checks: null source or null predicate throws ArgumentNullException"
+   ],
+   [
+    50,
+    "Main loop: step the enumerator and count each threshold the predicate accepts"
+   ],
+   [
+    115,
+    "Everything from here down is decompiler-merged exception handling and unrelated generic LINQ code (DefaultIfEmpty); ignore it"
+   ]
+  ]
+ },
+ "32b6e70": {
+  "summary": "Counts how many thresholds are at or above ownLife, i.e. how many skulls the enemy has earned relative to that life value. Code after the first return is decompiler noise from a neighbouring function.",
+  "comments": [
+   [
+    4,
+    "Loop over all health thresholds"
+   ],
+   [
+    26,
+    "Fetch the threshold; ownLife <= its health value means this threshold counts as one skull"
+   ],
+   [
+    35,
+    "Unreachable-looking tail: the decompiler merged in the start of CheckThresholds; it is not part of this method"
+   ]
+  ]
+ },
+ "32b6ed8": {
+  "summary": "Called on every enemy health change. For each milestone not yet reached, marks it accomplished when current health has fallen to or below its threshold and updates the UI skull count.",
+  "comments": [
+   [
+    7,
+    "Walk every milestone in order"
+   ],
+   [
+    20,
+    "Not yet accomplished and enemy health is at or below the threshold: milestone reached"
+   ],
+   [
+    22,
+    "Mark the milestone as accomplished so it only fires once"
+   ],
+   [
+    24,
+    "Tell the UI to show the new count (index plus one)"
+   ],
+   [
+    12,
+    "Decompiler artifact: out-of-range index check, duplicates the loop bound test"
+   ]
+  ]
+ },
+ "32b6f98": {
+  "summary": "Shows the new skull total on the milestone counter text, as x followed by skullCount plus one.",
+  "comments": []
+ },
+ "32b6fb0": {
+  "summary": "Constructor: initialises the threshold list to an empty array.",
+  "comments": []
+ },
+ "32b6d18": {
+  "summary": "Initialises the milestone counter UI: shows the icon and text only if the match has milestones, and sets the text to x0.",
+  "comments": [
+   [
+    5,
+    "Show the skull icon and counter only if there is at least one milestone"
+   ],
+   [
+    10,
+    "Reset the displayed count to zero"
+   ]
+  ]
+ },
+ "32b7180": {
+  "summary": "Creates one milestone icon per health threshold under the milestones mount point and stores them in the icon list. The decompiler also pasted a copy of the ScoreUpAnimation tween code into the middle.",
+  "comments": [
+   [
+    8,
+    "Iterate the thresholds with a manual enumerator (foreach)"
+   ],
+   [
+    16,
+    "Advance to the next threshold; when done, dispose the enumerator and leave"
+   ],
+   [
+    35,
+    "Decompiler mixed in the ScoreUpAnimation body here: spawn a copy of the icon, punch-scale, rotate and move it to the hero"
+   ],
+   [
+    122,
+    "Get the current HealthThresholdData from the enumerator"
+   ],
+   [
+    126,
+    "Instantiate a milestone icon prefab and configure it for this threshold"
+   ],
+   [
+    131,
+    "Add the new icon to the milestonesIcons list"
+   ]
+  ]
+ },
+ "32b70e0": {
+  "summary": "Updates the milestone counter text to x followed by milestoneIndex plus one (index is zero-based).",
+  "comments": []
+ },
+ "32b6fac": {
+  "summary": "Called when a milestone is reached; sets the counter text to x followed by milestone plus one.",
+  "comments": []
+ },
+ "32b7524": {
+  "summary": "Plays the score-up animation: clones the milestone count icon, moves it from the board hero position toward the counter with punch, rotate and move tweens, then runs onComplete.",
+  "comments": [
+   [
+    4,
+    "Closure object holds the callback and the cloned icon for the tween callbacks"
+   ],
+   [
+    8,
+    "Remember where the counter icon is, then clone it under the same parent"
+   ],
+   [
+    15,
+    "Start the clone at the hero's position (board position converted to UI space) with zero scale"
+   ],
+   [
+    25,
+    "Build a DOTween sequence: punch scale, rotate a full 360 degrees, then ease-move Y and X back to the counter"
+   ],
+   [
+    47,
+    "When the sequence finishes, the callback invokes onComplete"
+   ]
+  ]
+ },
+ "32b6f6c": {
+  "summary": "Returns true the first time the life value falls to or below this threshold, and marks it accomplished so it will not trigger again.",
+  "comments": [
+   [
+    4,
+    "Not yet accomplished and life has reached the threshold: trigger once"
+   ]
+  ]
+ },
+ "32b8c8c": {
+  "summary": "Returns the anchor transform if this entry's position option matches the requested one; uses the opponent anchor when the entry cares about player vs opponent.",
+  "comments": [
+   [
+    3,
+    "Only entries for the requested position option give an anchor"
+   ],
+   [
+    5,
+    "Entries flagged useIsPlayer use the opponent anchor for the enemy side"
+   ]
+  ]
+ },
+ "32b7aa0": {
+  "summary": "Singleton getter for the BattleHud: finds it in the scene on first use and logs an error if it is missing.",
+  "comments": [
+   [
+    6,
+    "Not cached yet: search the scene"
+   ],
+   [
+    10,
+    "Still missing: log an error"
+   ]
+  ]
+ },
+ "32b7bac": {
+  "summary": "Unity Awake: makes this the BattleHud singleton (destroying a duplicate) and adds a click listener to the settings button.",
+  "comments": [
+   [
+    7,
+    "Another hud already exists and it is not this one: destroy this duplicate"
+   ],
+   [
+    16,
+    "No instance yet: claim the singleton slot"
+   ],
+   [
+    22,
+    "Register SettingsButtonOnClick on the settings button; the decompiler expanded AddListener inline"
+   ]
+  ]
+ },
+ "32b7d44": {
+  "summary": "Unity OnDestroy: removes the settings and offensive card button listeners and, if this is the singleton, clears it.",
+  "comments": [
+   [
+    5,
+    "Remove the settings button listener"
+   ],
+   [
+    9,
+    "Clear every listener on the offensive card button"
+   ],
+   [
+    14,
+    "If this hud is the singleton instance, it is dropped; decompiler lost the final assignment"
+   ]
+  ]
+ },
+ "32b7e9c": {
+  "summary": "Per-frame check: pressing Escape during normal battle opens the settings window and records a windowOpen analytics event. Contains an inlined window-manager open routine.",
+  "comments": [
+   [
+    9,
+    "Only in normal battle UI state and only when Escape was pressed this frame"
+   ],
+   [
+    14,
+    "Settings already open: do nothing"
+   ],
+   [
+    19,
+    "Settings window was closed this very frame (same Escape press): do not reopen it"
+   ],
+   [
+    26,
+    "Inlined WindowsManager open: errors if the window is null, brings it to front, hides other windows"
+   ],
+   [
+    105,
+    "Show the window"
+   ],
+   [
+    106,
+    "Record a windowOpen analytics event with window name, previous window and platform"
+   ],
+   [
+    137,
+    "Only logs and sends the event if analytics are not disabled"
+   ]
+  ]
+ },
+ "32b833c": {
+  "summary": "Setup for the hud: checks the replay hud and battle manager and its replay object holder; seems to toggle replay UI by match type, but the decompiler dropped the actual calls.",
+  "comments": [
+   [
+    9,
+    "Needs a BattleManager; otherwise nothing to do"
+   ],
+   [
+    24,
+    "Reads the match type; the replay holder visibility seems to depend on it"
+   ]
+  ]
+ },
+ "32b8354": {
+  "summary": "Returns the world position of the card draw point for the player or the enemy.",
+  "comments": [
+   [
+    4,
+    "Player uses the player draw transform, the enemy uses the enemy one"
+   ]
+  ]
+ },
+ "32b8184": {
+  "summary": "Fills the player and enemy profile UI in battle: names, title, avatar and avatar border, taken from the player data's match data. Tutorial matches use the enemy hero's card name.",
+  "comments": [
+   [
+    7,
+    "Match data holds the opponent's profile information"
+   ],
+   [
+    8,
+    "Set up the player's own profile"
+   ],
+   [
+    15,
+    "Tutorial match: the enemy name is the enemy hero's localized card name"
+   ],
+   [
+    21,
+    "Normal match: the enemy name comes from the opponent profile data"
+   ],
+   [
+    26,
+    "Set the opponent's title if the title asset exists"
+   ],
+   [
+    33,
+    "Set the opponent's avatar from its image reference"
+   ],
+   [
+    36,
+    "Look up the avatar border item and swap it in, releasing the previous border"
+   ]
+  ]
+ },
+ "32b85d4": {
+  "summary": "Shows the offensive card button unless the offensive card is the empty placeholder, and shows the turn-cards holder only if a third card has been played this turn.",
+  "comments": [
+   [
+    7,
+    "Real offensive card (not the empty placeholder): show the button"
+   ],
+   [
+    14,
+    "A third card played in the turn means the turn-cards holder is shown"
+   ],
+   [
+    21,
+    "Otherwise hide the holder"
+   ]
+  ]
+ },
+ "32b8718": {
+  "summary": "Shows the first N turn-card markers and hides the rest, N being the cards played this turn.",
+  "comments": [
+   [
+    7,
+    "First hide all markers"
+   ],
+   [
+    25,
+    "Then activate the first cards markers"
+   ],
+   [
+    31,
+    "Decompiler glued unrelated transform-fetching code here after the index check; ignore"
+   ]
+  ]
+ },
+ "32b87e8": {
+  "summary": "Returns the transform of the offensive card button (decompiled with Unity unmarshalling boilerplate).",
+  "comments": []
+ },
+ "32b86dc": {
+  "summary": "Returns true if the given offensive card id equals the id of the empty placeholder offensive card for this army; inlined string equality.",
+  "comments": [
+   [
+    4,
+    "Get the empty offensive card for this army and read its id (decompiler named the field oddly)"
+   ],
+   [
+    7,
+    "Same string reference: equal"
+   ],
+   [
+    10,
+    "Same length: compare the characters in 8-byte chunks, then the remainder"
+   ]
+  ]
+ },
+ "32b8800": {
+  "summary": "Plays a hud show/hide animation clip, choosing the clip name by whether to show or hide, whether to animate, and whether the hand is included.",
+  "comments": [
+   [
+    4,
+    "Animated: pick the Show or Hide clip, with or without the hand variant"
+   ],
+   [
+    17,
+    "Not animated: pick an instant show or hidden clip"
+   ],
+   [
+    28,
+    "Play the chosen clip on the hud Animation; the rest is string marshalling boilerplate"
+   ]
+  ]
+ },
+ "32b7fa4": {
+  "summary": "Opens the settings window through the windows manager and records a windowOpen analytics event (same logic as the Escape-key path in Update).",
+  "comments": [
+   [
+    10,
+    "Inlined WindowsManager open: errors if the window is null"
+   ],
+   [
+    31,
+    "Bring the window to the front"
+   ],
+   [
+    87,
+    "Show the window"
+   ],
+   [
+    88,
+    "Record a windowOpen analytics event with window and previous window names"
+   ],
+   [
+    118,
+    "Only logs and sends if analytics are not disabled"
+   ]
+  ]
+ },
+ "32b898c": {
+  "summary": "Shows the overtime splash and indicator, fading them in, holding, and fading the splash out, and plays the entering-overtime sound cue.",
+  "comments": [
+   [
+    8,
+    "Activate the splash and indicator objects"
+   ],
+   [
+    12,
+    "Tween sequence: fade both in, wait, fade the splash out, then a callback"
+   ],
+   [
+    22,
+    "Play the entering-overtime sound through the SoundManager"
+   ],
+   [
+    31,
+    "No sound cue assigned: log an error if enabled"
+   ],
+   [
+    44,
+    "Debug sounds on: log which cue, audio source and mixer were used"
+   ],
+   [
+    77,
+    "Decompiler merged the neighbouring Play2D method here; not part of this function"
+   ]
+  ]
+ },
+ "32b89a4": {
+  "summary": "Opens the card display window for the battle manager's offensive card: sets it as the current card, initialises card UI, lore, voice-over and tutorial parts. Decompiler output is heavily merged with other methods.",
+  "comments": [
+   [
+    8,
+    "Only if the battle has an offensive card"
+   ],
+   [
+    21,
+    "Make it the displayed card"
+   ],
+   [
+    29,
+    "Decompiler merged in other CardDisplayWindow code: card UIs, lore and flavour background sprite handling"
+   ],
+   [
+    175,
+    "Voice-over setup: troop or warlord VOs depend on remote config flags"
+   ],
+   [
+    262,
+    "Open the window, then initialise cards, lore, voice-over and tutorial objects"
+   ],
+   [
+    300,
+    "For certain card types, show an extra panel and initialise it"
+   ]
+  ]
+ },
+ "32b8a38": {
+  "summary": "Broadcasts the Unity message ChangedLanguage to this hud and its children so they refresh localized text.",
+  "comments": []
+ }
+}

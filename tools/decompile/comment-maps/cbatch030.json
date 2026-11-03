@@ -1,0 +1,405 @@
+{
+ "32b3e88": {
+  "summary": "Sends a chat message (emote) index to both players through the PUNReceiveChatMessage RPC. The decompiler glued later unrelated functions and Photon internals onto this one; only the first ~22 lines are real.",
+  "comments": [
+   [
+    4,
+    "Real code starts here: box the ChatMessage into a one-element argument array"
+   ],
+   [
+    12,
+    "Boxing/null-check noise from the compiler; non-null case falls to the RPC send below"
+   ],
+   [
+    16,
+    "Send the chat message RPC to everyone (PhotonTargets.All), so it also runs locally"
+   ],
+   [
+    23,
+    "Everything after here is NOT part of SendChatMessage: decompiler merged neighbouring functions into it"
+   ],
+   [
+    24,
+    "This tail is SendCardSeen (PUNReceiveCardSeen RPC with a card id)"
+   ],
+   [
+    50,
+    "This tail is SendMatchFinished (PUNReceiveMatchFinished RPC, no arguments)"
+   ],
+   [
+    66,
+    "Inlined Photon PhotonView.RPC internals: checks network is usable and we are in a room"
+   ],
+   [
+    73,
+    "Not in a room: log that the RPC would only execute locally and give up"
+   ],
+   [
+    86,
+    "Checks the networking peer exists; otherwise logs 'Possible scene loading in progress'"
+   ],
+   [
+    110,
+    "Skips the send if the view's interest group is disabled for this client"
+   ],
+   [
+    114,
+    "Invalid view ID (<1): logs an error with the view and GameObject name"
+   ],
+   [
+    147,
+    "Builds the RPC event data (view id, prefix, server timestamp, method name) and raises event 200"
+   ],
+   [
+    238,
+    "Tail below is Photon NetworkingPeer.SetInterestGroups (remove then add interest groups)"
+   ],
+   [
+    322,
+    "Tail below is a HashSet/dictionary remove helper from Photon's RPC cache, unrelated to chat"
+   ],
+   [
+    437,
+    "Tail below is the matching add/insert helper (collection internals, unrelated to chat)"
+   ]
+  ]
+ },
+ "32b3f7c": {
+  "summary": "Sends the PUNReceiveCardSeen RPC with a card's in-game id to all players, so both clients know the card was revealed. The decompiler also merged in Photon RPC and interest-group internals after the real code.",
+  "comments": [
+   [
+    4,
+    "Real code: box the card id into a one-element argument array"
+   ],
+   [
+    12,
+    "Compiler boxing/null checks; falls through to the RPC send"
+   ],
+   [
+    16,
+    "Send PUNReceiveCardSeen to everyone including ourselves"
+   ],
+   [
+    23,
+    "Everything below is not SendCardSeen: merged SendMatchFinished and Photon helpers"
+   ],
+   [
+    25,
+    "This part is SendMatchFinished (PUNReceiveMatchFinished RPC)"
+   ],
+   [
+    41,
+    "Inlined PhotonView.RPC: checks network is usable and we are in a room"
+   ],
+   [
+    47,
+    "Not in a room: logs that the RPC only executes locally, and returns"
+   ],
+   [
+    82,
+    "Interest-group check: skips send when the view's group is disabled"
+   ],
+   [
+    88,
+    "Invalid view ID (<1): logs an error naming the GameObject"
+   ],
+   [
+    124,
+    "Builds the RPC event payload (view id, prefix, timestamp, method name) and raises event 200"
+   ],
+   [
+    210,
+    "Tail below is Photon NetworkingPeer.SetInterestGroups"
+   ],
+   [
+    297,
+    "Tail below is a collection remove helper from Photon's RPC cache"
+   ],
+   [
+    409,
+    "Tail below is the matching collection add helper"
+   ]
+  ]
+ },
+ "32b4070": {
+  "summary": "Sends the PUNReceiveMatchFinished RPC (no arguments) to all players, telling both clients the match is over. The decompiler expanded the Photon RPC checks and interest-group helpers inline.",
+  "comments": [
+   [
+    4,
+    "Log that we are sending the match-finished notice"
+   ],
+   [
+    14,
+    "RPC name; the empty object array is shared (Array.Empty)"
+   ],
+   [
+    20,
+    "Inlined PhotonView.RPC: bail out if Photon networking cannot be used"
+   ],
+   [
+    26,
+    "Not in a room: logs that the RPC would only run locally and returns"
+   ],
+   [
+    199,
+    "Tail below is Photon NetworkingPeer.SetInterestGroups, merged in by the decompiler"
+   ]
+  ]
+ },
+ "32b4160": {
+  "summary": "Sends the PUNReceiveCardReorder RPC with a card id and its new index to all players, so the card is moved in the other client's hand/board order too. The rest of the listing is merged code from PUNReceiveEnemyMulligan.",
+  "comments": [
+   [
+    6,
+    "Argument array holds the card id and the new index"
+   ],
+   [
+    21,
+    "Send the reorder RPC to everyone (PhotonTargets.All)"
+   ],
+   [
+    29,
+    "Code below is not SendCardReorder: decompiler merged in PUNReceiveEnemyMulligan"
+   ],
+   [
+    43,
+    "Logs which sender sent the mulligan and the current battle stage"
+   ],
+   [
+    48,
+    "Only accept it if the sender is the opponent"
+   ],
+   [
+    52,
+    "Only during the Mulligan stage: hand the opponent's discards and environment card to the battle manager"
+   ]
+  ]
+ },
+ "32b42a8": {
+  "summary": "RPC handler for the opponent's mulligan choice. Logs it and, if it came from the opponent while the match is in the Mulligan stage, passes the discarded card ids and environment card to the battle manager.",
+  "comments": [
+   [
+    6,
+    "Sender info is needed to check who sent this"
+   ],
+   [
+    14,
+    "Log the sender and current battle stage"
+   ],
+   [
+    21,
+    "Ignore messages from anyone who is not the opponent"
+   ],
+   [
+    24,
+    "Only handle it during the Mulligan stage"
+   ],
+   [
+    28,
+    "Give the opponent's discarded cards and environment effect to the battle manager"
+   ],
+   [
+    36,
+    "Shared null-reference failure target for the checks above"
+   ]
+  ]
+ },
+ "32b4404": {
+  "summary": "RPC handler for the opponent asking us to resend our mulligan (their copy was lost). If the sender is the opponent, tells the battle manager to resend it.",
+  "comments": [
+   [
+    5,
+    "Builds the log string: attempt number, sender name, battle stage"
+   ],
+   [
+    28,
+    "Log the request"
+   ],
+   [
+    34,
+    "Only honour it when the sender is the opponent"
+   ],
+   [
+    37,
+    "Warn-log the attempt number"
+   ],
+   [
+    40,
+    "Ask the battle manager to send our mulligan again"
+   ],
+   [
+    52,
+    "Array index failure path (compiler check)"
+   ]
+  ]
+ },
+ "32b4630": {
+  "summary": "RPC handler for the opponent's mulligan acknowledgement. If it is from the opponent during the Mulligan stage, forwards the card ids and environment card to the battle manager.",
+  "comments": [
+   [
+    6,
+    "Sender info is needed to check who sent this"
+   ],
+   [
+    14,
+    "Log the sender and current battle stage"
+   ],
+   [
+    21,
+    "Ignore anyone who is not the opponent"
+   ],
+   [
+    24,
+    "Only handle during the Mulligan stage"
+   ],
+   [
+    28,
+    "Forward the acknowledged mulligan data to the battle manager"
+   ],
+   [
+    36,
+    "Shared null-reference failure target"
+   ]
+  ]
+ },
+ "32b478c": {
+  "summary": "RPC handler for a 'you are in the wrong room' notice. Logs it and, if the sender is neither us nor the opponent, cancels the match without a result.",
+  "comments": [
+   [
+    14,
+    "Log who said we are in the wrong room and the battle stage"
+   ],
+   [
+    20,
+    "Ignore if the notice came from ourselves"
+   ],
+   [
+    28,
+    "Ignore if the notice came from the opponent"
+   ],
+   [
+    32,
+    "Third party told us we are in the wrong room: log an error"
+   ],
+   [
+    46,
+    "Builds a reason with the battle stage and match type"
+   ],
+   [
+    48,
+    "Abort the match without recording a result"
+   ]
+  ]
+ },
+ "32b49c4": {
+  "summary": "RPC handler for an opponent action (play card, attack, etc). It checks the action counter: the next expected one goes to the battle manager as a PlayerAction, an old one is ignored as a duplicate, a gap requests a resend. The listing also contains merged PUNReceiveResendLostActions code.",
+  "comments": [
+   [
+    15,
+    "Only handle actions from the opponent, and only during MatchProper"
+   ],
+   [
+    21,
+    "Sender is not the opponent: ignore"
+   ],
+   [
+    26,
+    "Ignore actions outside the main match stage"
+   ],
+   [
+    29,
+    "Read the stored last received action counter (anti-cheat ObscuredInt)"
+   ],
+   [
+    37,
+    "Counter is newer than the last one we handled; otherwise it is a duplicate (see else below)"
+   ],
+   [
+    46,
+    "Counter is exactly last+1: in order; otherwise we missed some actions"
+   ],
+   [
+    47,
+    "Store this counter as the last action received"
+   ],
+   [
+    56,
+    "Wrap the network values into a PlayerAction stamped with the current game time"
+   ],
+   [
+    64,
+    "Hand the opponent action to the battle manager to execute"
+   ],
+   [
+    70,
+    "Counter jumped ahead: warn that an action was lost"
+   ],
+   [
+    96,
+    "Ask the opponent to resend the lost actions"
+   ],
+   [
+    105,
+    "Counter not newer: duplicate action, log a warning and drop it"
+   ],
+   [
+    142,
+    "Code below is not PUNReceivePlayerAction: merged PUNReceiveResendLostActions"
+   ],
+   [
+    166,
+    "Only honour the resend request if the sender is the opponent"
+   ],
+   [
+    170,
+    "Needs the player actions log; log how many actions it holds"
+   ],
+   [
+    176,
+    "Start the coroutine that resends our recent actions to the opponent"
+   ]
+  ]
+ },
+ "32b4f1c": {
+  "summary": "RPC handler for the opponent asking us to resend actions they missed. If it is from the opponent, logs the log size and starts SyncLastPlayerActions from the given action number.",
+  "comments": [
+   [
+    16,
+    "Log the request and the battle stage"
+   ],
+   [
+    22,
+    "Only honour it when the sender is the opponent"
+   ],
+   [
+    26,
+    "Needs the player actions log to report its size"
+   ],
+   [
+    31,
+    "Warn-log last action received and log count"
+   ],
+   [
+    32,
+    "Start the coroutine that resends the actions after that number"
+   ],
+   [
+    40,
+    "Shared null-reference failure target"
+   ]
+  ]
+ },
+ "32b50d4": {
+  "summary": "Creates the iterator object for the SyncLastPlayerActions coroutine, which resends recent player actions to the opponent. Called via StartCoroutine when a resend is requested.",
+  "comments": [
+   [
+    5,
+    "New coroutine in its initial state"
+   ],
+   [
+    7,
+    "Remember the last action number the opponent has"
+   ]
+  ]
+ }
+}

@@ -1,0 +1,503 @@
+{
+ "326dd3c": {
+  "summary": "Fires one ability of a card: loads trigger context, optionally pays spirit stones, picks the effect (all in order or one at random, optionally chance-gated), gathers targets, then dispatches on effect type to damage, heal, summon, draw, steal, buff or keyword actions queued on the battle manager. The decompiler merged parts of target gathering (GetTargets) into this body, so the tail is unreliable.",
+  "comments": [
+   [
+    4,
+    "Bail out (null check) if there is no battle manager; the pooled ability data is also needed"
+   ],
+   [
+    10,
+    "Fill the shared ability data with this trigger's context: card, played card, target, whose turn, priority"
+   ],
+   [
+    12,
+    "Spirit-stone trigger: the card using it pays the spirit stone cost before the effect resolves"
+   ],
+   [
+    22,
+    "Variable while-in-play trigger: mark the ability data so effects are tagged as extrinsic/variable"
+   ],
+   [
+    28,
+    "Plain while-in-play (aura) trigger: mark the ability data as while-in-play"
+   ],
+   [
+    33,
+    "Remember the damage info that caused this trigger so effects can read it"
+   ],
+   [
+    35,
+    "Continuous auras are silent; every other trigger plays its trait animation first"
+   ],
+   [
+    43,
+    "Record the activation in the match log for this player and trigger type"
+   ],
+   [
+    54,
+    "Normal case: every effect of the ability is played in order"
+   ],
+   [
+    71,
+    "Random ability choice (needs 2+ effects): pick a single effect index with the match RNG"
+   ],
+   [
+    89,
+    "Chance-based effect: values 1-99 take the dice-roll path at the end; anything else always fires"
+   ],
+   [
+    91,
+    "Resolve targets for the chosen effect; this is where an effect that passed its chance roll continues"
+   ],
+   [
+    95,
+    "Work out the repeat multiplier: count of targets, a trait total over targets, or just 1"
+   ],
+   [
+    125,
+    "Reset the list that collects cards created/drawn by this effect so later effects can reuse it"
+   ],
+   [
+    138,
+    "Clear the shared candidate-target list before resolving the second target set"
+   ],
+   [
+    150,
+    "Second target set (e.g. cards to buff/summon) is resolved and stored on the effect"
+   ],
+   [
+    153,
+    "Play the effect animation, except for a few follow-up/reference effect types that skip it"
+   ],
+   [
+    175,
+    "Final repeat count = effect's own multiplier times the value computed above"
+   ],
+   [
+    176,
+    "Giant dispatch on the effect type id; the decompiler flattened the switch into nested range checks"
+   ],
+   [
+    183,
+    "Tangled branch: effect type 0x32 adds a hand effect (buff to cards in hand), skipped for auras on other cards"
+   ],
+   [
+    224,
+    "Branch for a ranged-attack stat buff on this card; creates a fresh copy of the effect and fills its source info"
+   ],
+   [
+    253,
+    "Branch for stat-buff effects: one fresh copy of the buff effect is created and applied to every target"
+   ],
+   [
+    266,
+    "Aura buffs are not re-added if the target already carries the same extrinsic effect"
+   ],
+   [
+    299,
+    "After buffing, variable auras sweep units in play and strip extrinsic effects that no longer apply"
+   ],
+   [
+    322,
+    "Heal effect: amount comes from the effect's value criteria, then one or many characters are healed"
+   ],
+   [
+    335,
+    "Single target: heal one character; several targets: heal them all in one call"
+   ],
+   [
+    352,
+    "Types 0-11 group: draw a card for the caster, the opponent, or both depending on the target setting"
+   ],
+   [
+    374,
+    "Type 3 only logs a VFX-only effect; nothing else happens"
+   ],
+   [
+    381,
+    "Damage effect: amount from criteria, built into a damage record and dealt to every target at once"
+   ],
+   [
+    399,
+    "Sanity check: random damage must be randomised on resolution, otherwise reset to normal damage"
+   ],
+   [
+    409,
+    "Type 12: repeated random-target damage; hits on the same target are summed, then dealt together"
+   ],
+   [
+    441,
+    "Remember the target and its damage record; a repeat on the same target adds to its existing damage"
+   ],
+   [
+    473,
+    "Record pending damage on the target so later targeting sees it"
+   ],
+   [
+    480,
+    "Target was hit earlier in this loop: add this hit to its stored damage, or log an error if lists disagree"
+   ],
+   [
+    497,
+    "Deal all accumulated per-target damage in one networked/queued action"
+   ],
+   [
+    505,
+    "Type 15: damage all targets and then destroy the source card (e.g. self-destruct)"
+   ],
+   [
+    534,
+    "Mid-range types: cost change, summon units, transforms"
+   ],
+   [
+    538,
+    "Type 0x3c: change card Energy cost; the buff is scaled by the repeat count and queued"
+   ],
+   [
+    547,
+    "Summon-unit family of types: repeat for the repeat count, summoning every card the effect yields"
+   ],
+   [
+    563,
+    "Pick which side's minion row receives the summoned unit, then find a free slot"
+   ],
+   [
+    571,
+    "Slot choice depends on the effect's summon position: next to hero, target card, or this card"
+   ],
+   [
+    596,
+    "Look up the board position, then queue the summon with any attached buff"
+   ],
+   [
+    645,
+    "Special summon type that remembers the new unit on the acting card for later reference"
+   ],
+   [
+    663,
+    "Type 0x50: transform the acting card into the first card produced by the effect"
+   ],
+   [
+    675,
+    "Type 0x55: transform with an extra buff applied to the transformed card"
+   ],
+   [
+    703,
+    "Type 0x5a: transform every target into the chosen card"
+   ],
+   [
+    726,
+    "Type 100: create cards in hand for the caster, tracking them in the created-cards list"
+   ],
+   [
+    774,
+    "Type 0x6e: destroy every target unit, skipping invulnerable ones"
+   ],
+   [
+    782,
+    "Pick the destroy reason code: spell, own turn unit, or enemy unit; seems to feed destroy animation/keywords"
+   ],
+   [
+    826,
+    "Type 0x65: create copies of cards in hand, copying their effects onto the new cards"
+   ],
+   [
+    892,
+    "Types 0x88-0xa2: recall to hand (0x8c, 0x96), discard (0xa0), disappear (0xa2)"
+   ],
+   [
+    969,
+    "Type 0x78: jam each target unit"
+   ],
+   [
+    986,
+    "Type 0x82: stun each target unit"
+   ],
+   [
+    1003,
+    "Type 0x87: shuffle the targets and stun up to the repeat count of them"
+   ],
+   [
+    1030,
+    "Type 0xa5: discard whole hands of the affected player(s)"
+   ],
+   [
+    1061,
+    "Type 0xaa: steal the targeted cards from hand"
+   ],
+   [
+    1079,
+    "Type 0xaf: steal the targeted cards from the deck"
+   ],
+   [
+    1096,
+    "Type 0xb4: steal the targeted minions"
+   ],
+   [
+    1117,
+    "Types 0xb9 (steal the acting minion) and 0xbe (exchange self for a chosen minion)"
+   ],
+   [
+    1129,
+    "No target found for exchangeSelfForMinion: log a warning, otherwise swap the minions"
+   ],
+   [
+    1143,
+    "Type 200: steal a minion, or swap with a friendly one if the friendly criteria finds a candidate"
+   ],
+   [
+    1145,
+    "Type 0xd2: copy each targeted unit from the cemetery"
+   ],
+   [
+    1205,
+    "High effect types (0x15a and up): mostly trigger-granting effects and misc actions"
+   ],
+   [
+    1209,
+    "Type 0x17c: remember the targets as this card's referenced cards"
+   ],
+   [
+    1253,
+    "Types 0x177, 0x186, 400, 0x172: make targets trigger Sacrifice, Requiem, Courtesy, Relentless"
+   ],
+   [
+    1309,
+    "Type 0x15e: remove each targeted card from the cemetery"
+   ],
+   [
+    1346,
+    "Type 0x168: play the card picked in the selection; Oath cards also pay their Oath cost first"
+   ],
+   [
+    1356,
+    "Oath card: pay the oath cost, fire the card, and repeat for each double-oath effect"
+   ],
+   [
+    1378,
+    "Not an Oath card: simply trigger the chosen card's play ability"
+   ],
+   [
+    1381,
+    "Clear the pending card now that it has been played"
+   ],
+   [
+    1385,
+    "Types 0x19a-0x1e0: more keyword triggers (Codex, Regiment, Set card to top, Remnant transform)"
+   ],
+   [
+    1463,
+    "Types 0x1b8, 0x1c2: Spirit Stone and Synapse triggers on each target"
+   ],
+   [
+    1501,
+    "Types 0x1cc-0x1d4: Mob, Pray, Ambush, Uprising, Slay, Teleport triggers on each target"
+   ],
+   [
+    1630,
+    "Type 0x1d6: open the show-cards window for the player"
+   ],
+   [
+    1637,
+    "Type 0x1db: reset duty on each target"
+   ],
+   [
+    1654,
+    "Type 0x1e0: highlight a bloodthirst card in the UI for the first target"
+   ],
+   [
+    1666,
+    "Common tail: save this effect's results as the previous ability targets"
+   ],
+   [
+    1670,
+    "Types below 0x123: attacks, resets, hand and board manipulations"
+   ],
+   [
+    1672,
+    "Type 0xdc: reset each target's actions so it can act again"
+   ],
+   [
+    1691,
+    "Types 0xe6-0xee: forced and scripted attacks (force attack, friendly force attack, redirect)"
+   ],
+   [
+    1798,
+    "Type 0xee: scripted forced attack made by the source card; 0xf0 makes targets disappear"
+   ],
+   [
+    1837,
+    "Type 0xfa: auto-play each targeted card from hand"
+   ],
+   [
+    1857,
+    "Type 0x118 reveals orders then spends the enchantment; 0x122 makes the target miss"
+   ],
+   [
+    1898,
+    "Type 0x104: copy targets to a list, then re-trigger each target's other ability per repeat"
+   ],
+   [
+    1931,
+    "Type 0x10e: create cards in the deck for the repeat count and track them"
+   ],
+   [
+    1981,
+    "Types 0x12c/0x12d: recall targets to deck (second variant flagged differently)"
+   ],
+   [
+    2019,
+    "Type 0x140: queue a follow-up action after the current resolution"
+   ],
+   [
+    2029,
+    "Type 0x136: display each targeted card from hand"
+   ],
+   [
+    2050,
+    "Type 0x154: remove active enchantments on this card whose trigger matches"
+   ],
+   [
+    2081,
+    "Type 0x159: remove enchantments the source ability itself placed on each target"
+   ],
+   [
+    2122,
+    "Type 0x145: follow up only if the reference card is a valid target; otherwise play the animation and stop"
+   ],
+   [
+    2178,
+    "Type 0x14a: draw until hands are equal, comparing opponent's and own hand sizes"
+   ],
+   [
+    2191,
+    "Draw for the caster when the opponent has more cards (target 10 means self)"
+   ],
+   [
+    2208,
+    "Positive difference: draw one card per card the opponent leads by"
+   ],
+   [
+    2218,
+    "End of the effect switch; save drawn/created cards as previous ability targets"
+   ],
+   [
+    2224,
+    "Chance roll path: roll 0-99 with match RNG, log it, and only run the effect if below the chance"
+   ],
+   [
+    2268,
+    "Decompiler lost structure here: exception-handler leftovers; the code below is target gathering (GetTargets)"
+   ],
+   [
+    2283,
+    "GetTargets body starts: clear the shared candidate list, then switch on the targeting type"
+   ],
+   [
+    2304,
+    "Target type 0x14: just the acting card itself is the target"
+   ],
+   [
+    2324,
+    "Target type 0x1e: the acting/triggering card; falls to the shared tail"
+   ],
+   [
+    2326,
+    "Generic friendly/enemy flags are computed from whose card the ability is"
+   ],
+   [
+    2339,
+    "Targets scaled by resource: one hero entry per spirit stone (0xa1) or faith (0xa2) point"
+   ],
+   [
+    2462,
+    "Type 0xf5: one hero entry per secret played; type 0xaa: one per total Energy point"
+   ],
+   [
+    2594,
+    "Hero-style targets: 0x5a a single card, 0x78 own hero, 0x82 opposing hero"
+   ],
+   [
+    2609,
+    "Other targeting types: previous ability targets, filtered previous targets, cards in hand, deck, cemetery"
+   ],
+   [
+    2635,
+    "Special cases: 200 uses stored cards, 0xc9 uses stored cards still in play, 0xe6 highest health warlord"
+   ],
+   [
+    2654,
+    "Collect candidate lists from hand, deck, cemetery, units in play, or adjacent units based on type"
+   ],
+   [
+    2766,
+    "Filter pass: remove every candidate that fails the ability's criteria, walking from the end"
+   ],
+   [
+    2790,
+    "Optional extra filter: keep only candidates created by the same enchantment"
+   ],
+   [
+    2823,
+    "Limit results: if more candidates than allowed, choose by ordering mode (lowest, highest, random, etc.)"
+   ],
+   [
+    2873,
+    "Mode 5 takes from the end of the list, mode 7 from the start; other modes pick random targets"
+   ],
+   [
+    2929,
+    "Default selection: pick the requested number of random targets, removing each from the pool"
+   ],
+   [
+    2947,
+    "Type 0xc9: stored cards that are still in play become targets"
+   ],
+   [
+    2969,
+    "Type 0xe6 picks the highest-health warlord, falling back to both heroes; 0xf0 lowest-health unit"
+   ],
+   [
+    2992,
+    "Type 0xa0: one hero entry per unused Energy point on each affected side"
+   ],
+   [
+    3049,
+    "Debug log of how many targets were found for current Energy"
+   ],
+   [
+    3107,
+    "Remaining target types: 0xbe cards played, 0xb4 random card from the full collection, 0xdc"
+   ],
+   [
+    3118,
+    "Type 0xb4: build a pool of creatable cards from the whole collection meeting the criteria"
+   ],
+   [
+    3131,
+    "Cards flagged as not randomly creatable or hidden are left out"
+   ],
+   [
+    3156,
+    "One special card id also drops cards with single-use mutations"
+   ],
+   [
+    3169,
+    "Shared tail for the triggering-card target types"
+   ],
+   [
+    3205,
+    "Decompiler fragment: tail of the follow-up/enchantment loops, adding missing extrinsic effects"
+   ],
+   [
+    3227,
+    "Cleanup: some effect types finish by saving targets as previous ability targets"
+   ],
+   [
+    3232,
+    "Decompiler fragment: loop that re-triggers other cards' abilities once per repeat"
+   ]
+  ]
+ }
+}

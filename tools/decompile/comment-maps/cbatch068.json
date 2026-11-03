@@ -1,0 +1,859 @@
+{
+ "2f37964": {
+  "summary": "Cancels an active ability: puts the card back to in-play and recomputes whether it can act and attack this turn. Sets canAct and canAttack, and refreshes the can-attack glow on the card UI.",
+  "comments": [
+   [
+    5,
+    "card was in an ability/aiming state (bitmask of card states): return it to normal in-play"
+   ],
+   [
+    7,
+    "only the card owner's own turn counts"
+   ],
+   [
+    9,
+    "can't act if: not owner's turn, not in play, already attacked (unless bloodThirst allows a second attack), or stunned"
+   ],
+   [
+    12,
+    "otherwise it can act unless it still has summon sickness"
+   ],
+   [
+    15,
+    "canAct and canAttack both get the same value"
+   ],
+   [
+    18,
+    "ferocity/oath cards may act (use abilities) even while summon sick, so canAct is recomputed without the sickness check"
+   ],
+   [
+    31,
+    "summon-sick card: its attack type is switched to Active"
+   ],
+   [
+    34,
+    "refresh the can-attack glow on the card UI"
+   ],
+   [
+    46,
+    "decompiler merged the null-check failure paths here"
+   ]
+  ]
+ },
+ "2f37d84": {
+  "summary": "Highlights blood thirst on the card UI and plays the trigger animation for each blood thirst trait effect not already showing. Called when a blood thirst card gets its extra attack.",
+  "comments": [
+   [
+    4,
+    "tell the card UI to highlight blood thirst"
+   ],
+   [
+    12,
+    "look up the blood thirst trait definition and its list of visual effects"
+   ],
+   [
+    19,
+    "loop over each trait effect; a closure is built for the animation callback"
+   ],
+   [
+    30,
+    "warlord-equivalent cards only play effects whose flag is set; others play them all"
+   ],
+   [
+    40,
+    "only effect types 3 and 6 have a trigger animation (type numbers are raw enum values)"
+   ],
+   [
+    50,
+    "skip if this trait's trigger animation is already playing"
+   ],
+   [
+    57,
+    "start the trait animation coroutine on the card UI"
+   ],
+   [
+    69,
+    "decompiler merged the null-check failure paths here"
+   ]
+  ]
+ },
+ "2f37dbc": {
+  "summary": "Shows the swarm icon on the card, spawning it from the swarm prefab at the effect anchor if needed. Plays the swarm sound and resets its tweens and position.",
+  "comments": [
+   [
+    7,
+    "swarm icon not created yet: load the prefab and instantiate it at the effect anchor"
+   ],
+   [
+    16,
+    "icon exists: if it is not already switched on, turn it on"
+   ],
+   [
+    27,
+    "stop any running tweens on the icon before showing it"
+   ],
+   [
+    33,
+    "reset to its starting position and activate"
+   ],
+   [
+    37,
+    "play the swarm sound effect"
+   ],
+   [
+    57,
+    "shared failure label: something was missing (null check)"
+   ]
+  ]
+ },
+ "2f2dcf0": {
+  "summary": "Hides the swarm icon: fades it out and slides it back to its original position, then runs a completion callback. Does nothing if no icon exists.",
+  "comments": [
+   [
+    6,
+    "no swarm icon: nothing to hide"
+   ],
+   [
+    14,
+    "only act if the icon is currently showing"
+   ],
+   [
+    23,
+    "fade the sprite out over the icon's off-animation time"
+   ],
+   [
+    25,
+    "slide it back to its original position over the same time"
+   ],
+   [
+    26,
+    "hook up the completion callback (the icon's Toggle callback) to the move tween"
+   ]
+  ]
+ },
+ "2f37cdc": {
+  "summary": "Builds a blood thirst highlight battle action (action type 0x2b) for this card and queues it with instant priority. Used so the highlight is replayed in order for both players.",
+  "comments": [
+   [
+    4,
+    "build a zeroed 0x100-byte BattleAction"
+   ],
+   [
+    6,
+    "action type 0x2b = highlight blood thirst; the card is the action's subject"
+   ],
+   [
+    10,
+    "queue it with the instant priority from the global vars"
+   ]
+  ]
+ },
+ "2f37f5c": {
+  "summary": "Returns the card highlight to its regular color, either with a color tween or instantly. Called when an active ability is no longer being shown.",
+  "comments": [
+   [
+    8,
+    "already in the regular highlight state: nothing to do"
+   ],
+   [
+    11,
+    "switch to the regular state and reset the frame scale"
+   ],
+   [
+    20,
+    "kill any color tween still running"
+   ],
+   [
+    24,
+    "no animation time: set the frame colors immediately"
+   ],
+   [
+    36,
+    "fully transparent regular color: hide the highlight frame objects"
+   ],
+   [
+    58,
+    "animated: tween the frame colors to the regular color"
+   ],
+   [
+    71,
+    "if the target is transparent, add a callback to the sequence that finishes the frame color change"
+   ]
+  ]
+ },
+ "2f35124": {
+  "summary": "Puts the card into the aiming-attack state and, if it is the local player's own initiated attack, starts attack targeting on the battle manager. Then starts the PrepareAttack coroutine.",
+  "comments": [
+   [
+    4,
+    "enter the aiming-attack state"
+   ],
+   [
+    6,
+    "local player's own click: begin dragging the attack arrow from this card"
+   ],
+   [
+    15,
+    "start the PrepareAttack coroutine"
+   ],
+   [
+    17,
+    "decompiler inlined StartCoroutine with its error paths; real behaviour is just starting the coroutine"
+   ]
+  ]
+ },
+ "2f38198": {
+  "summary": "Cancels an attack in progress: clears pending damage and restarts PrepareAttack in cancel mode. Logs a debug message in dev mode if the card was not attacking or the cancel was not player-initiated.",
+  "comments": [
+   [
+    5,
+    "drop any damage recorded for the attack"
+   ],
+   [
+    6,
+    "card is not attacking or aiming: nothing to cancel, just log it"
+   ],
+   [
+    10,
+    "log only when dev tools are on"
+   ],
+   [
+    26,
+    "a player cancel is refused if the attack wasn't started by the player"
+   ],
+   [
+    27,
+    "start the PrepareAttack coroutine to put the card back"
+   ],
+   [
+    29,
+    "decompiler inlined StartCoroutine with its error paths"
+   ]
+  ]
+ },
+ "2f38320": {
+  "summary": "Finishes an active ability. With alternative trait logic, a pray card gives its owner 1 faith Energy and tells the other player. Then restarts PrepareAttack.",
+  "comments": [
+   [
+    4,
+    "need the battle manager and match gameplay data"
+   ],
+   [
+    5,
+    "alternative trait logic rules enabled"
+   ],
+   [
+    7,
+    "card has the pray trait by default"
+   ],
+   [
+    13,
+    "give the owner 1 faith Energy and broadcast it to the opponent"
+   ],
+   [
+    18,
+    "start the PrepareAttack coroutine"
+   ],
+   [
+    20,
+    "decompiler inlined StartCoroutine with its error paths"
+   ]
+  ]
+ },
+ "2f383c4": {
+  "summary": "Plays the card's landing shake and sound, then spawns the landing particles (legendary version for legendary summons) at the card position. Particles are scaled to the owner's minion manager.",
+  "comments": [
+   [
+    5,
+    "shake the card as it lands"
+   ],
+   [
+    11,
+    "play the landing sound in 3D"
+   ],
+   [
+    13,
+    "legendary cards use a different particle prefab"
+   ],
+   [
+    26,
+    "spawn the particles at the card position plus the configured offset"
+   ],
+   [
+    34,
+    "apply scale to the spawned effect"
+   ],
+   [
+    47,
+    "decompiler merged the null-check failure paths here"
+   ]
+  ]
+ },
+ "2f38668": {
+  "summary": "Returns true only if this CardScript and its game object still exist, so a running animation knows it can safely continue.",
+  "comments": [
+   [
+    4,
+    "script destroyed: stop"
+   ],
+   [
+    8,
+    "game object destroyed: stop"
+   ],
+   [
+    23,
+    "fallthrough: cannot continue"
+   ]
+  ]
+ },
+ "2f388a8": {
+  "summary": "Computes a rotation for the movement-disappear animation. If the animation rotates, rotates by an angle around an axis and lerps from the original rotation, scaled by an animation curve; else identity. Decompiler output here is rough.",
+  "comments": [
+   [
+    5,
+    "animation definition flag: does this animation rotate?"
+   ],
+   [
+    6,
+    "no rotation: use identity"
+   ],
+   [
+    11,
+    "build an angle-axis rotation for the current time"
+   ],
+   [
+    13,
+    "scale by the animation curve value over the total time, then lerp from the original rotation"
+   ],
+   [
+    21,
+    "missing animation definition: null reference"
+   ]
+  ]
+ },
+ "2f38a4c": {
+  "summary": "Plays the attack impact effects at an anchor: camera-style shake, hit sound and hit particle prefab, all chosen by the unit size (small, medium, big). Particles are skipped when particles are disabled.",
+  "comments": [
+   [
+    4,
+    "only if a shake component exists"
+   ],
+   [
+    6,
+    "get the unit size to pick effects"
+   ],
+   [
+    8,
+    "medium units: shake amplitude 4, medium sound and particles"
+   ],
+   [
+    13,
+    "big units: amplitude 8, big sound and particles"
+   ],
+   [
+    18,
+    "small units: amplitude 2, small sound and particles"
+   ],
+   [
+    24,
+    "point the shake in the attack direction, set its strength and play it"
+   ],
+   [
+    34,
+    "play the hit sound"
+   ],
+   [
+    38,
+    "skip hit particles when particles are disabled in settings"
+   ],
+   [
+    41,
+    "spawn the particle facing along the attack direction and scale it to match the unit"
+   ],
+   [
+    68,
+    "decompiler merged the null-check failure paths here"
+   ]
+  ]
+ },
+ "2f37ee0": {
+  "summary": "Returns the Transform where visual effects for this card should be attached: the 2D card controller transform for cards in hand-like states, else the effects anchor on the card UI.",
+  "comments": [
+   [
+    5,
+    "card in one of certain states (bitmask of states, likely hand/aiming or similar): use the 2D card"
+   ],
+   [
+    6,
+    "get the 2D card controller from the card UI"
+   ],
+   [
+    12,
+    "fetch its Transform through Unity's native binding; the code is decompiler noise around a type cast"
+   ],
+   [
+    43,
+    "all other states: use the card UI's effects anchor"
+   ]
+  ]
+ },
+ "2f38f80": {
+  "summary": "Plays the sneak attack trigger animation on the card UI and the sneak attack sound from the battle manager's sound collection.",
+  "comments": [
+   [
+    4,
+    "card has UI: show the sneak attack trigger animation"
+   ],
+   [
+    8,
+    "look up the sneak attack sound cue"
+   ],
+   [
+    15,
+    "cue missing: log an error if enabled"
+   ],
+   [
+    20,
+    "get an audio source, set it up with the cue and play it"
+   ],
+   [
+    28,
+    "debug mode: log which cue played on which source"
+   ],
+   [
+    61,
+    "decompiler produced a messy second copy of the sound play code here; the sound call is the same"
+   ]
+  ]
+ },
+ "2f390ec": {
+  "summary": "Called after an attack animation: restores the card's sorting layer, position, rotation and scale. If it survives, goes back to in-play and, if blood thirst applies, queues a highlight action.",
+  "comments": [
+   [
+    5,
+    "animation target still valid"
+   ],
+   [
+    7,
+    "put the card back on the normal board sorting layer"
+   ],
+   [
+    9,
+    "restore the original in-play position, rotation and scale"
+   ],
+   [
+    24,
+    "still alive and not about to die: back to in-play state"
+   ],
+   [
+    27,
+    "blood thirst check: if the card can attack again, send the highlight action to both players"
+   ],
+   [
+    37,
+    "decompiler merged the null-check failure paths here"
+   ]
+  ]
+ },
+ "2f392b0": {
+  "summary": "Plays the hit reaction on a card that was attacked: pushes it back with a punch tween away from the attacker, scaled by attacker size, and returns it to its position when done.",
+  "comments": [
+   [
+    4,
+    "push distance depends on the attacker's unit size"
+   ],
+   [
+    9,
+    "direction from the attacker to this card in the board plane"
+   ],
+   [
+    12,
+    "attacker on top of the card: no direction, use zero"
+   ],
+   [
+    18,
+    "normalize the direction"
+   ],
+   [
+    24,
+    "punch the position away from the attacker"
+   ],
+   [
+    26,
+    "when the punch ends, return the card to its original position"
+   ]
+  ]
+ },
+ "2f39680": {
+  "summary": "Plays a body animation clip on the 3D animation controller. Optionally turns flying off first. Returns false if there is no clip (after calling onFinish immediately).",
+  "comments": [
+   [
+    10,
+    "no clip: call onFinish right away and report nothing played"
+   ],
+   [
+    16,
+    "set up the controller and add the clip"
+   ],
+   [
+    24,
+    "remember callback and clip so the controller can call back at the end"
+   ],
+   [
+    26,
+    "clip needs the unit to stop flying"
+   ],
+   [
+    31,
+    "remember whether the unit was flying so it can be restored later"
+   ],
+   [
+    33,
+    "first time only: listen for the flying toggle to finish, then toggle flying off"
+   ],
+   [
+    89,
+    "not flying or flying not required: start the animation now"
+   ],
+   [
+    91,
+    "returns true when a clip was played"
+   ]
+  ]
+ },
+ "2f396a0": {
+  "summary": "Moves the card back to its original local position in play, if it is in a state where that applies and is not already there.",
+  "comments": [
+   [
+    4,
+    "only for in-play style states (bitmask of states), and not already at the spot"
+   ],
+   [
+    11,
+    "set local position to the stored original in-play position"
+   ]
+  ]
+ },
+ "2f397cc": {
+  "summary": "For hero cards: grants the opponent a skull when the hero's health has dropped enough, unless the hero is already dying from pending damage. Broadcasts the earned skull.",
+  "comments": [
+   [
+    4,
+    "only heroes give skulls"
+   ],
+   [
+    8,
+    "hero about to die from pending damage: skip"
+   ],
+   [
+    23,
+    "ask the score manager how many skulls the enemy should have for this health"
+   ],
+   [
+    25,
+    "new skull earned: remember it and broadcast it to the other player"
+   ]
+  ]
+ },
+ "2f3996c": {
+  "summary": "Applies damage to bastion (a damage-absorbing shield). Walks added bastion enchantments from newest to oldest, then the base trait value. Returns the bastion left.",
+  "comments": [
+   [
+    10,
+    "walk the active effects from last to first"
+   ],
+   [
+    18,
+    "effect that adds the bastion trait"
+   ],
+   [
+    25,
+    "damage smaller than this effect's bastion: reduce it and stop (damage is 0)"
+   ],
+   [
+    32,
+    "damage uses up the effect: subtract its value and remove it"
+   ],
+   [
+    42,
+    "damage left over: take it off the base bastion value"
+   ],
+   [
+    49,
+    "base bastion went negative: clamp to 0"
+   ]
+  ]
+ },
+ "2f3826c": {
+  "summary": "Clears the pending damage list and logs it. Most of the decompiled body is inlined array helper noise (Array.Clear / IndexOf error paths) and can be ignored.",
+  "comments": [
+   [
+    4,
+    "only if there is a pending damage list"
+   ],
+   [
+    7,
+    "log which card is being cleared"
+   ],
+   [
+    13,
+    "empty the list"
+   ],
+   [
+    15,
+    "decompiler inlined Array.Clear and a lot of unrelated Array helper code from here on; behaviour is just clearing the list"
+   ]
+  ]
+ },
+ "2f39b3c": {
+  "summary": "Adds a damage entry to this card's pending damage list (creating the list first if needed) and logs it. Pending damage is used to predict whether the card will die.",
+  "comments": [
+   [
+    6,
+    "log which card is getting pending damage"
+   ],
+   [
+    9,
+    "no list yet: create it"
+   ],
+   [
+    15,
+    "inlined List.Add; grows the list if full"
+   ]
+  ]
+ },
+ "2f2f848": {
+  "summary": "Returns whether the card's pending damage is enough to kill it. Collects the pending damage values and types, then asks EnoughPendingDamageToDieWithDamageValues.",
+  "comments": [
+   [
+    4,
+    "card already waiting to die: treat as dead (returns true at the end)"
+   ],
+   [
+    12,
+    "card has no health and no survivor left: also counts as dead"
+   ],
+   [
+    13,
+    "no pending damage: not dying"
+   ],
+   [
+    16,
+    "copy values and types of every pending damage into two lists"
+   ],
+   [
+    23,
+    "run the damage simulation on the list"
+   ],
+   [
+    63,
+    "already dying"
+   ]
+  ]
+ },
+ "2f39c84": {
+  "summary": "Simulates the pending damage on this card to see if it dies. Handles dodge/shield on the first hit, invulnerable, armour, drop pod, survivor, bastion and vulnerable.",
+  "comments": [
+   [
+    8,
+    "debug: log the check (decompiler places the log first)"
+   ],
+   [
+    10,
+    "already waiting to die: counts as dying"
+   ],
+   [
+    18,
+    "no health and no survivor: counts as dying"
+   ],
+   [
+    19,
+    "nothing to simulate: counts as dying"
+   ],
+   [
+    36,
+    "apply each damage in order"
+   ],
+   [
+    38,
+    "first hit is blocked by dodge or shield; invulnerable blocks all"
+   ],
+   [
+    47,
+    "armour reduces damage, but at least 1 goes through"
+   ],
+   [
+    59,
+    "drop pod absorbs damage first until its health runs out"
+   ],
+   [
+    62,
+    "survivor takes hits instead of health once, if the unit has it"
+   ],
+   [
+    77,
+    "vulnerable adds extra damage, reduced by armour (min 1)"
+   ],
+   [
+    92,
+    "no survivor: dies if health plus bastion is used up"
+   ],
+   [
+    128,
+    "hit goes into the drop pod; unit not damaged"
+   ],
+   [
+    142,
+    "survived all hits"
+   ]
+  ]
+ },
+ "2f3a3c8": {
+  "summary": "Adds a heal entry to the pending healing list, creating the list first if needed, and logs it.",
+  "comments": [
+   [
+    5,
+    "log which card is getting pending healing"
+   ],
+   [
+    8,
+    "no list yet: create it"
+   ],
+   [
+    14,
+    "inlined List.Add; grows the list if full"
+   ]
+  ]
+ },
+ "2f3a51c": {
+  "summary": "Returns whether the sum of all pending healing is enough to bring the card back to full health.",
+  "comments": [
+   [
+    9,
+    "add up heal amounts one by one"
+   ],
+   [
+    14,
+    "stop early as soon as the total covers the damage taken"
+   ]
+  ]
+ },
+ "2f3a9f8": {
+  "summary": "Called when a unit attacks. Fires UnitAttack, then for the attacker itself: Strike, removes until-next-attack effects and clears ambush. For friendly melee or ranged attackers: Mob or Regiment triggers on other cards.",
+  "comments": [
+   [
+    9,
+    "fire this card's UnitAttack ability trigger"
+   ],
+   [
+    11,
+    "this card is not the attacker"
+   ],
+   [
+    14,
+    "is the attacker on the other side?"
+   ],
+   [
+    15,
+    "melee by an ally: Mob; ranged by an ally: Regiment; enemy attacks end here"
+   ],
+   [
+    20,
+    "ranged ally: fire the Regiment trigger"
+   ],
+   [
+    22,
+    "only cards that have regiment continue"
+   ],
+   [
+    28,
+    "tell all units in play, then both players' hands, about this regiment attack"
+   ],
+   [
+    82,
+    "melee ally: fire the Mob trigger"
+   ],
+   [
+    84,
+    "only cards with mob (or mob enchantment) continue"
+   ],
+   [
+    89,
+    "tell all units in play, then both hands, about this mob attack"
+   ],
+   [
+    143,
+    "this card is the attacker: log the state (debug)"
+   ],
+   [
+    173,
+    "remove all effects that last only until the next attack"
+   ],
+   [
+    176,
+    "if the target isn't about to die, fire the Strike trigger"
+   ],
+   [
+    182,
+    "attacker with ambush: when it attacks, ambush ends"
+   ],
+   [
+    186,
+    "only in attack/in-play states"
+   ],
+   [
+    192,
+    "turn ambush off, revealing the card"
+   ],
+   [
+    216,
+    "decompiler pasted part of SetAmbush's code below this point; see SetAmbush"
+   ]
+  ]
+ },
+ "2f3aeac": {
+  "summary": "Toggles ambush. On: the opponent's card is shown face-down with an ambush image. Off: reveals the card, restores stats, shows traits, and fires its Ambush trigger on the right turn.",
+  "comments": [
+   [
+    4,
+    "turning ambush on"
+   ],
+   [
+    5,
+    "opponent's card: replace art with the ambush picture and hide its stats and effects"
+   ],
+   [
+    10,
+    "build a sprite from the ambush trait's texture"
+   ],
+   [
+    24,
+    "set the 3D model material to ambush texture or the real card art, plus its tier matcap"
+   ],
+   [
+    79,
+    "turning ambush off (reveal)"
+   ],
+   [
+    84,
+    "remove the ambush trait and show stats and effect icons again"
+   ],
+   [
+    99,
+    "if no more ambush minions remain, show the Energy display again"
+   ],
+   [
+    105,
+    "tell the cemetery manager to add the exit-ambush action"
+   ],
+   [
+    107,
+    "Ambush trigger fires when it is the owner's turn (decompiled as a two-branch owner/turn check)"
+   ],
+   [
+    126,
+    "fire the Ambush ability trigger on the card"
+   ]
+  ]
+ }
+}

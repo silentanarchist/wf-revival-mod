@@ -1,0 +1,494 @@
+{
+ "326ebac": {
+  "summary": "Returns true if at least one ability in the list can currently be played for the given battle manager and ability data. Called to decide whether a card's standard abilities are usable; changes no state.",
+  "comments": [
+   [
+    4,
+    "Null list means the decompiler's null-reference throw path"
+   ],
+   [
+    8,
+    "Walk the list in order, stopping at the first ability that says it can be played"
+   ],
+   [
+    13,
+    "Found a playable ability: return true"
+   ],
+   [
+    19,
+    "Ran out of abilities without finding one: return false (or empty list)"
+   ]
+  ]
+ },
+ "326ed2c": {
+  "summary": "Returns whether this card has at least one alternate art style that can be shown. Used by the UI to offer art style selection. The tail of the decompiled output is garbled and builds a Card_Name/ term string by mistake.",
+  "comments": [
+   [
+    5,
+    "No alternate arts configured: nothing to offer"
+   ],
+   [
+    9,
+    "Loop over alternate art entries, asking each whether it can be shown with the current config"
+   ],
+   [
+    17,
+    "Decompiler garbled this tail: bounds-failure path merged with GetCardNameTerm code"
+   ],
+   [
+    52,
+    "Ask this alternate art whether it can be shown (e.g. owned/unlocked); first hit means true"
+   ]
+  ]
+ },
+ "326ee0c": {
+  "summary": "Builds the localization term for this card's name: Card_Name/ followed by the reference card's id, else the reference name id, else the card's own unique id. Used to look up the localized card name.",
+  "comments": [
+   [
+    5,
+    "Pick the id: reference card's unique id first"
+   ],
+   [
+    7,
+    "No reference card: use refNameId if set, otherwise this card's uniqueId"
+   ],
+   [
+    19,
+    "Concatenate the Card_Name/ prefix and the id (inlined String.Concat with null/empty handling)"
+   ]
+  ]
+ },
+ "326f184": {
+  "summary": "Returns the localized card description followed by the localized ability text, joined into one string. Uses the card's text reference ids, falling back to the unique id.",
+  "comments": [
+   [
+    5,
+    "No description reference id set: fall back to uniqueId for the Card_Description term"
+   ],
+   [
+    8,
+    "A reference id containing the special marker is used as literal text, not looked up"
+   ],
+   [
+    15,
+    "Look up the Card_Description/<id> translation"
+   ],
+   [
+    19,
+    "Same logic for the ability text: Card_Abilities/<id>"
+   ],
+   [
+    32,
+    "Look up the Card_Abilities/<id> translation"
+   ],
+   [
+    35,
+    "Concatenate description and ability text (inlined String.Concat that skips empty parts)"
+   ]
+  ]
+ },
+ "326f360": {
+  "summary": "Returns the localized card description with all placeholders expanded: modular description pieces, other cards' names, keywords (melee, ranged, reanimate), trait names and Energy sprites. Used when rendering card text; changes no state.",
+  "comments": [
+   [
+    4,
+    "Pick the Card_Description term id: the reference id if set, else the card's uniqueId"
+   ],
+   [
+    9,
+    "A reference id containing the special marker is used as literal text, not translated"
+   ],
+   [
+    16,
+    "Look up the Card_Description/<id> translation"
+   ],
+   [
+    22,
+    "Empty or missing translation: return it as is (or empty string)"
+   ],
+   [
+    32,
+    "Text has a modular placeholder: find each match and look up its Modular_Description term"
+   ],
+   [
+    89,
+    "Placeholder is comma-separated: part 0 is the term id, part 1 fills {0}, part 2 fills $1"
+   ],
+   [
+    127,
+    "Swap the placeholder in the text for the filled-in modular translation"
+   ],
+   [
+    133,
+    "Decompiler output: foreach-dispose/finally cleanup of the regex match enumerator; no game logic"
+   ],
+   [
+    198,
+    "Next, check for card-name placeholders and the other token kinds in turn"
+   ],
+   [
+    207,
+    "Replace Energy cost tokens 0-8 with the matching Energy sprite tag"
+   ],
+   [
+    225,
+    "Keyword tokens (melee, ranged, reanimate): replace with bold, no-break localized keyword names"
+   ],
+   [
+    253,
+    "Loop over every DefinedTrait value and replace its token with the localized trait name"
+   ],
+   [
+    322,
+    "Card-name placeholder branch: each match names another card by id"
+   ],
+   [
+    373,
+    "Start from the Card_Name term for the referenced id"
+   ],
+   [
+    375,
+    "Needs PlayerDataManager to find the card; logs if it is missing"
+   ],
+   [
+    387,
+    "Find the referenced card in the full collection and use its localized name if found"
+   ]
+  ]
+ },
+ "326f564": {
+  "summary": "Returns the localized ability name for this card with all placeholders expanded: modular pieces, other cards' names, keywords, trait names and Energy sprites. Used when showing ability titles; changes no state.",
+  "comments": [
+   [
+    4,
+    "Use the ability text reference id if set, else the card's uniqueId"
+   ],
+   [
+    11,
+    "Look up the Card_Abilities/Ability_Name_<id> translation"
+   ],
+   [
+    17,
+    "Empty or missing translation: return it as is (or empty string)"
+   ],
+   [
+    24,
+    "Text has a modular placeholder: find each match and look up its Modular_Description term"
+   ],
+   [
+    83,
+    "Placeholder is comma-separated: part 0 is the term id, part 1 fills {0}, part 2 fills $1"
+   ],
+   [
+    121,
+    "Swap the placeholder in the text for the filled-in modular translation"
+   ],
+   [
+    127,
+    "Decompiler output: foreach-dispose/finally cleanup of the regex match enumerator; no game logic"
+   ],
+   [
+    192,
+    "Next, check for card-name placeholders and the other token kinds in turn"
+   ],
+   [
+    201,
+    "Replace Energy cost tokens 0-8 with the matching Energy sprite tag"
+   ],
+   [
+    219,
+    "Keyword tokens (melee, ranged, reanimate): replace with bold, no-break localized keyword names"
+   ],
+   [
+    247,
+    "Loop over every DefinedTrait value and replace its token with the localized trait name"
+   ],
+   [
+    316,
+    "Card-name placeholder branch: each match names another card by id"
+   ],
+   [
+    367,
+    "Start from the Card_Name term for the referenced id"
+   ],
+   [
+    369,
+    "Needs PlayerDataManager to find the card; logs if it is missing"
+   ],
+   [
+    381,
+    "Find the referenced card in the full collection and use its localized name if found"
+   ]
+  ]
+ },
+ "326f998": {
+  "summary": "Returns the localized text shown while targeting for this card, with placeholders expanded: modular pieces, other cards' names, keywords, trait names and Energy sprites. Changes no state.",
+  "comments": [
+   [
+    4,
+    "Use the targeting text reference id if set, else the card's uniqueId"
+   ],
+   [
+    11,
+    "Look up the Card_Targeted/<id> translation"
+   ],
+   [
+    17,
+    "Empty or missing translation: return it as is (or empty string)"
+   ],
+   [
+    24,
+    "Text has a modular placeholder: find each match and look up its Modular_Description term"
+   ],
+   [
+    83,
+    "Placeholder is comma-separated: part 0 is the term id, part 1 fills {0}, part 2 fills $1"
+   ],
+   [
+    121,
+    "Swap the placeholder in the text for the filled-in modular translation"
+   ],
+   [
+    127,
+    "Decompiler output: foreach-dispose/finally cleanup of the regex match enumerator; no game logic"
+   ],
+   [
+    192,
+    "Next, check for card-name placeholders and the other token kinds in turn"
+   ],
+   [
+    201,
+    "Replace Energy cost tokens 0-8 with the matching Energy sprite tag"
+   ],
+   [
+    219,
+    "Keyword tokens (melee, ranged, reanimate): replace with bold, no-break localized keyword names"
+   ],
+   [
+    247,
+    "Loop over every DefinedTrait value and replace its token with the localized trait name"
+   ],
+   [
+    316,
+    "Card-name placeholder branch: each match names another card by id"
+   ],
+   [
+    367,
+    "Start from the Card_Name term for the referenced id"
+   ],
+   [
+    369,
+    "Needs PlayerDataManager to find the card; logs if it is missing"
+   ],
+   [
+    381,
+    "Find the referenced card in the full collection and use its localized name if found"
+   ]
+  ]
+ },
+ "326f664": {
+  "summary": "Returns the localized ability description (with the given suffix variant) with all placeholders expanded: modular pieces, other cards' names, keywords, trait names and Energy sprites. Changes no state.",
+  "comments": [
+   [
+    4,
+    "Pick the ability term id: the reference id if set, else the card's uniqueId"
+   ],
+   [
+    9,
+    "A reference id containing the special marker is used as literal text, not translated"
+   ],
+   [
+    16,
+    "Look up Card_Abilities/<id><suffix>; the suffix selects a variant of the ability text"
+   ],
+   [
+    22,
+    "Empty or missing translation: return it as is (or empty string)"
+   ],
+   [
+    30,
+    "Text has a modular placeholder: find each match and look up its Modular_Description term"
+   ],
+   [
+    89,
+    "Placeholder is comma-separated: part 0 is the term id, part 1 fills {0}, part 2 fills $1"
+   ],
+   [
+    127,
+    "Swap the placeholder in the text for the filled-in modular translation"
+   ],
+   [
+    133,
+    "Decompiler output: foreach-dispose/finally cleanup of the regex match enumerator; no game logic"
+   ],
+   [
+    198,
+    "Next, check for card-name placeholders and the other token kinds in turn"
+   ],
+   [
+    207,
+    "Replace Energy cost tokens 0-8 with the matching Energy sprite tag"
+   ],
+   [
+    225,
+    "Keyword tokens (melee, ranged, reanimate): replace with bold, no-break localized keyword names"
+   ],
+   [
+    253,
+    "Loop over every DefinedTrait value and replace its token with the localized trait name"
+   ],
+   [
+    322,
+    "Card-name placeholder branch: each match names another card by id"
+   ],
+   [
+    373,
+    "Start from the Card_Name term for the referenced id"
+   ],
+   [
+    375,
+    "Needs PlayerDataManager to find the card; logs if it is missing"
+   ],
+   [
+    387,
+    "Find the referenced card in the full collection and use its localized name if found"
+   ]
+  ]
+ },
+ "326f7ac": {
+  "summary": "Returns the localized ability description (with suffix variant) with the reload text removed, then expands modular, card-name, keyword, trait and Energy placeholders. Used where the siege part of the text should not show.",
+  "comments": [
+   [
+    4,
+    "Pick the ability term id: ability text reference id if set, else uniqueId (offsets 0x248 / 0x38)"
+   ],
+   [
+    9,
+    "Look up Card_Abilities/<id><suffix>"
+   ],
+   [
+    15,
+    "Strip the reload marker text from the translation; the repeated Replace calls remove each occurrence"
+   ],
+   [
+    24,
+    "Empty or missing translation: return it as is (or empty string)"
+   ],
+   [
+    32,
+    "Text has a modular placeholder: find each match and look up its Modular_Description term"
+   ],
+   [
+    91,
+    "Placeholder is comma-separated: part 0 is the term id, part 1 fills {0}, part 2 fills $1"
+   ],
+   [
+    129,
+    "Swap the placeholder in the text for the filled-in modular translation"
+   ],
+   [
+    135,
+    "Decompiler output: foreach-dispose/finally cleanup of the regex match enumerator; no game logic"
+   ],
+   [
+    200,
+    "Next, check for card-name placeholders and the other token kinds in turn"
+   ],
+   [
+    209,
+    "Replace Energy cost tokens 0-8 with the matching Energy sprite tag"
+   ],
+   [
+    227,
+    "Keyword tokens (melee, ranged, reanimate): replace with bold, no-break localized keyword names"
+   ],
+   [
+    255,
+    "Loop over every DefinedTrait value and replace its token with the localized trait name"
+   ],
+   [
+    324,
+    "Card-name placeholder branch: each match names another card by id"
+   ],
+   [
+    375,
+    "Start from the Card_Name term for the referenced id"
+   ],
+   [
+    377,
+    "Needs PlayerDataManager to find the card; logs if it is missing"
+   ],
+   [
+    389,
+    "Find the referenced card in the full collection and use its localized name if found"
+   ]
+  ]
+ },
+ "326ff58": {
+  "summary": "Looks up the localized custom intro chat line for this card by chat message type and the opponent warlord's army. Builds the term Chat_Messages/<chatId>-Chat<msg><sep><army> and translates it.",
+  "comments": [
+   [
+    5,
+    "Builds a 6-part term string; the decompiler shows the array bounds checks as nested ifs"
+   ],
+   [
+    10,
+    "Chat id comes from GetChatId(true): custom chat id, custom intro id or the unique id"
+   ],
+   [
+    16,
+    "Message type name (e.g. Intro) as text"
+   ],
+   [
+    24,
+    "Army name text; the term ends with the opponent's army so each army can get its own line"
+   ],
+   [
+    27,
+    "Join the parts and fetch the translation"
+   ]
+  ]
+ },
+ "3270170": {
+  "summary": "Returns true if any ability logic on this card's abilities has type 0x14 (cumulative mutation). Scans every card ability and each of its logics.",
+  "comments": [
+   [
+    8,
+    "Outer loop over this card's abilities"
+   ],
+   [
+    16,
+    "Inner loop over the ability logics of the current ability"
+   ],
+   [
+    24,
+    "Logic type 0x14 means cumulative mutation: found, return true"
+   ],
+   [
+    33,
+    "Finished this ability's logics: move to the next ability"
+   ],
+   [
+    40,
+    "Decompiler lost the null-check paths here; reached when a list or ability is null"
+   ]
+  ]
+ },
+ "326fc00": {
+  "summary": "Returns the id used for this card's chat lines: the chat messages reference id if set, else (when customChatsOnly) the custom intro reference id, else the unique id.",
+  "comments": [
+   [
+    5,
+    "Prefer an explicit chat messages reference id"
+   ],
+   [
+    10,
+    "No explicit id: fall back to the card's unique id unless custom chats are wanted"
+   ],
+   [
+    13,
+    "Use the custom intro reference id if one is set"
+   ]
+  ]
+ }
+}

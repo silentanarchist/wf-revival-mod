@@ -1,0 +1,273 @@
+{
+ "3071160": {
+  "summary": "Called when the challenger's start-sync message arrives during matchmaking. Logs it and sends the PUNReceiveAckStartGame RPC with the opponent name. The decompiler merged neighbouring Photon methods into this output.",
+  "comments": [
+   [
+    4,
+    "Log that start-sync arrived from the challenger."
+   ],
+   [
+    6,
+    "Build the argument array holding the opponent name for the RPC."
+   ],
+   [
+    21,
+    "Decompiler lost the RPC call here and spliced in neighbouring methods (SendRandomNumbers, RandomNumbersReceived)."
+   ],
+   [
+    25,
+    "Spliced-in SendRandomNumbers body: logs and sends PUNReceiveRandomNumbers (index, values) to all players."
+   ],
+   [
+    61,
+    "Spliced-in RandomNumbersReceived body: log, then prepare the PUNReceivedRandomNumbers acknowledgement."
+   ],
+   [
+    83,
+    "Below is PhotonView.RPC inlined by the compiler; stack spills are decompiler noise."
+   ],
+   [
+    99,
+    "Photon: bail out if networking cannot be used right now."
+   ],
+   [
+    105,
+    "Not in a room: RPCs only work in rooms, so log an error and do nothing."
+   ],
+   [
+    123,
+    "No networking peer (scene loading?): log an error and give up."
+   ],
+   [
+    156,
+    "Skip sending if this view's interest group is blocked from sending."
+   ],
+   [
+    162,
+    "View ID below 1 means the view is not registered: log an error instead of sending."
+   ],
+   [
+    199,
+    "Verbose logging of the outgoing RPC if the log level is Full."
+   ],
+   [
+    201,
+    "Build the RPC event: view ID, prefix, server timestamp, then method name (or its short index)."
+   ],
+   [
+    225,
+    "Use the compact shortcut index for the RPC name when one is registered."
+   ],
+   [
+    244,
+    "Send the RPC as Photon event 200, reliable, restricted to the view's interest group."
+   ],
+   [
+    246,
+    "Also run the RPC locally for the local player (PhotonTargets.All includes self)."
+   ],
+   [
+    296,
+    "Inlined NetworkingPeer.SetInterestGroups: remove the listed groups from the set of receiving groups."
+   ],
+   [
+    347,
+    "Then add the groups to enable; a null list means enable all groups 0-255."
+   ],
+   [
+    386,
+    "Only forward the group change to the server when not in offline mode."
+   ],
+   [
+    399,
+    "Inlined SetSendingEnabled / HashSet remove path: drops a group from the blocked-sending set."
+   ],
+   [
+    526,
+    "Inlined HashSet<byte>.Add path: insert the group into the blocked-sending set."
+   ],
+   [
+    649,
+    "Collection index/state error exits from the inlined HashSet code (decompiler noise)."
+   ]
+  ]
+ },
+ "3071260": {
+  "summary": "Logs and sends the PUNReceiveRandomNumbers RPC to all players with the match's random numbers index and values, so both sides share the same seed. The rest is inlined Photon code spliced in by the decompiler.",
+  "comments": [
+   [
+    6,
+    "No match data: null-reference error."
+   ],
+   [
+    10,
+    "Log the send, tagged with the challenger's id."
+   ],
+   [
+    13,
+    "Argument array for the RPC: random numbers index and the random numbers themselves."
+   ],
+   [
+    16,
+    "Put the match's randomNumbersIndex (boxed) in slot 0 and the randomNumbers array in slot 1."
+   ],
+   [
+    28,
+    "Send PUNReceiveRandomNumbers to all players (including ourselves) so both sides share the same random numbers."
+   ],
+   [
+    36,
+    "Decompiler spliced RandomNumbersReceived into this function from here on; not part of SendRandomNumbers."
+   ],
+   [
+    39,
+    "Spliced RandomNumbersReceived: log receipt, then send the PUNReceivedRandomNumbers acknowledgement."
+   ],
+   [
+    58,
+    "Inlined PhotonView.RPC: bail out if networking cannot be used."
+   ],
+   [
+    63,
+    "Not in a room: log an error, RPCs only work in rooms."
+   ],
+   [
+    84,
+    "Look up the networking peer; a null peer is a null-reference error."
+   ],
+   [
+    101,
+    "Skip sending if this view's interest group is blocked from sending."
+   ],
+   [
+    109,
+    "View ID below 1 means unregistered view: log an error instead of sending."
+   ],
+   [
+    141,
+    "Build the RPC event: view ID, prefix, server timestamp, method name or shortcut index."
+   ],
+   [
+    163,
+    "Use the compact shortcut index for the RPC name when one is registered."
+   ],
+   [
+    182,
+    "Send as Photon event 200, reliable, within the view's interest group."
+   ],
+   [
+    184,
+    "Also execute the RPC locally for the local player."
+   ],
+   [
+    228,
+    "Inlined NetworkingPeer.SetInterestGroups: disable groups, then enable groups (null means all 0-255)."
+   ],
+   [
+    308,
+    "Only tell the server about the group change when not in offline mode."
+   ],
+   [
+    313,
+    "Decompiler noise: inlined HashSet<byte> Remove code follows."
+   ],
+   [
+    317,
+    "Inlined HashSet<byte>.Remove path (buckets, free list) for the blocked-sending set."
+   ],
+   [
+    413,
+    "Index error exit from the inlined hash set code."
+   ],
+   [
+    415,
+    "Concurrent-modification error thrown by the inlined hash set code."
+   ],
+   [
+    434,
+    "Inlined HashSet<byte>.Add path (resize if full, link new entry into bucket)."
+   ]
+  ]
+ },
+ "30713d0": {
+  "summary": "Called when the challenger's random numbers arrive. Logs it and sends the PUNReceivedRandomNumbers RPC as an acknowledgement. The rest is inlined Photon RPC and hash set code.",
+  "comments": [
+   [
+    4,
+    "No match data: null-reference error."
+   ],
+   [
+    8,
+    "Log that the random numbers from the challenger were received."
+   ],
+   [
+    19,
+    "The RPC to send is the PUNReceivedRandomNumbers acknowledgement, with an empty argument array."
+   ],
+   [
+    23,
+    "Inlined PhotonView.RPC: bail out if networking cannot be used."
+   ],
+   [
+    29,
+    "Not in a room: log an error, RPCs only work in rooms."
+   ],
+   [
+    43,
+    "No networking peer (scene loading?): log an error and give up."
+   ],
+   [
+    66,
+    "Skip sending if this view's interest group is blocked from sending."
+   ],
+   [
+    75,
+    "View ID below 1 means unregistered view: log an error instead of sending."
+   ],
+   [
+    110,
+    "Build the RPC event: view ID, prefix, server timestamp, method name or shortcut index."
+   ],
+   [
+    132,
+    "Use the compact shortcut index for the RPC name when one is registered."
+   ],
+   [
+    151,
+    "Send as Photon event 200, reliable, within the view's interest group."
+   ],
+   [
+    153,
+    "Also execute the RPC locally for the local player."
+   ],
+   [
+    199,
+    "Decompiler lost the end of the RPC; what follows is inlined SetInterestGroups and HashSet code from other methods."
+   ],
+   [
+    202,
+    "Inlined NetworkingPeer.SetInterestGroups: disable groups, then enable groups (null means all 0-255)."
+   ],
+   [
+    282,
+    "Only tell the server about the group change when not in offline mode."
+   ],
+   [
+    287,
+    "Inlined HashSet<byte> Remove path for the blocked-sending set."
+   ],
+   [
+    408,
+    "Inlined HashSet<byte>.Add path (resize if full, link new entry into bucket)."
+   ],
+   [
+    507,
+    "Index error exit from the inlined hash set code."
+   ],
+   [
+    509,
+    "Concurrent-modification error thrown by the inlined hash set code."
+   ]
+  ]
+ }
+}

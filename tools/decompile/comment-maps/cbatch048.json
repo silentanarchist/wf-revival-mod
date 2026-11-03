@@ -1,0 +1,762 @@
+{
+ "328f33c": {
+  "summary": "Resolves a unit-disappear action: hides the target's GameObject (warns if none), then does the shared end-of-action work. That work reassembles minions, ends the battle if a hero is dead, clears the resolving flag and refreshes whose turn it is (hero/minion activation, hand highlighting).",
+  "comments": [
+   [
+    4,
+    "Hide the disappearing unit's object; a missing target only logs a warning"
+   ],
+   [
+    20,
+    "If no actions remain and this wasn't a reorder, queue a reassemble order for any minions out of position"
+   ],
+   [
+    33,
+    "Queue is empty: check whether a hero is waiting to die; the battle-end check is skipped in tutorial/campaign"
+   ],
+   [
+    37,
+    "cardState 5 (waitingToDie) on either hero means the match is over"
+   ],
+   [
+    45,
+    "Build and log a debug string describing the hero death state"
+   ],
+   [
+    78,
+    "Already in PostBattle and not a disconnect loss: nothing more to do"
+   ],
+   [
+    93,
+    "Disconnect-loss flag set: record an Enemy win and run the battle end sequence as a coroutine"
+   ],
+   [
+    102,
+    "Normal end: enter PostBattle, stop the battle, and tell the opponent the match finished if networked"
+   ],
+   [
+    114,
+    "Player won: raise an EnemyHealthChangeSignal carrying the enemy hero's health"
+   ],
+   [
+    154,
+    "Get Elo rating and winner, then create the ranked match result with the current XP"
+   ],
+   [
+    160,
+    "Store skull counts (milestones) in the result; enemy count depends on the player hero's health"
+   ],
+   [
+    186,
+    "Record the match duration and winner; a player win sets matchEndedWithAWin"
+   ],
+   [
+    197,
+    "Certain match types (0x14, 0xd2, 0xb4) also tell LiveOps the player is human"
+   ],
+   [
+    202,
+    "Save the result and call BattleFinished; the battle ends here"
+   ],
+   [
+    225,
+    "Null checks (decompiler merged shared failure paths into this throw)"
+   ],
+   [
+    229,
+    "No hero died: broadcast while-in-play updates so continuous effects are re-evaluated"
+   ],
+   [
+    233,
+    "Action fully resolved: clear the resolving flag"
+   ],
+   [
+    237,
+    "Enemy's turn: deactivate its minions and recompute whether its hero can act/attack"
+   ],
+   [
+    245,
+    "Hero can act only if in play, hasn't attacked (or bloodThirst allows a second), isn't stunned or sick"
+   ],
+   [
+    255,
+    "Ferocity/oath heroes may act while summon-sick, as an Active attack"
+   ],
+   [
+    270,
+    "Show or hide the hero's attack indicator and refresh its ability availability"
+   ],
+   [
+    286,
+    "Player's turn: relight playable cards, activate minions and hero"
+   ],
+   [
+    295,
+    "Queue empty: run a GC pass while idle and resume the clock"
+   ],
+   [
+    309,
+    "If the player has only the end-turn action left, show the no-actions UI hint"
+   ],
+   [
+    319,
+    "Tutorial/scripted match: if a scripted stage is waiting on the player action, continue the scripted turn"
+   ],
+   [
+    342,
+    "Null-check failure target"
+   ]
+  ]
+ },
+ "328f424": {
+  "summary": "Resolves a remove-from-cemetery action: removes the target card from the cemetery (warns if none), then does the shared end-of-action work. That work reassembles minions, ends the battle if a hero is dead, clears the resolving flag and refreshes turn state.",
+  "comments": [
+   [
+    4,
+    "Remove the target card from the cemetery; a missing target only logs a warning"
+   ],
+   [
+    19,
+    "If no actions remain and this wasn't a reorder, queue a reassemble order for any minions out of position"
+   ],
+   [
+    32,
+    "Queue is empty: check whether a hero is waiting to die; the battle-end check is skipped in tutorial/campaign"
+   ],
+   [
+    35,
+    "cardState 5 (waitingToDie) on either hero means the match is over"
+   ],
+   [
+    44,
+    "Build and log a debug string describing the hero death state"
+   ],
+   [
+    77,
+    "Already in PostBattle and not a disconnect loss: nothing more to do"
+   ],
+   [
+    92,
+    "Disconnect-loss flag set: record an Enemy win and run the battle end sequence as a coroutine"
+   ],
+   [
+    101,
+    "Normal end: enter PostBattle, stop the battle, and tell the opponent the match finished if networked"
+   ],
+   [
+    113,
+    "Player won: raise an EnemyHealthChangeSignal carrying the enemy hero's health"
+   ],
+   [
+    153,
+    "Get Elo rating and winner, then create the ranked match result with the current XP"
+   ],
+   [
+    159,
+    "Store skull counts (milestones) in the result; enemy count depends on the player hero's health"
+   ],
+   [
+    185,
+    "Record the match duration and winner; a player win sets matchEndedWithAWin"
+   ],
+   [
+    196,
+    "Certain match types (0x14, 0xd2, 0xb4) also tell LiveOps the player is human"
+   ],
+   [
+    201,
+    "Save the result and call BattleFinished; the battle ends here"
+   ],
+   [
+    224,
+    "Null checks (decompiler merged shared failure paths into this throw)"
+   ],
+   [
+    228,
+    "No hero died: broadcast while-in-play updates so continuous effects are re-evaluated"
+   ],
+   [
+    232,
+    "Action fully resolved: clear the resolving flag"
+   ],
+   [
+    236,
+    "Enemy's turn: deactivate its minions and recompute whether its hero can act/attack"
+   ],
+   [
+    243,
+    "Hero can act only if in play, hasn't attacked (or bloodThirst allows a second), isn't stunned or sick"
+   ],
+   [
+    253,
+    "Ferocity/oath heroes may act while summon-sick, as an Active attack"
+   ],
+   [
+    269,
+    "Show or hide the hero's attack indicator and refresh its ability availability"
+   ],
+   [
+    285,
+    "Player's turn: relight playable cards, activate minions and hero"
+   ],
+   [
+    294,
+    "Queue empty: run a GC pass while idle and resume the clock"
+   ],
+   [
+    308,
+    "If the player has only the end-turn action left, show the no-actions UI hint"
+   ],
+   [
+    318,
+    "Tutorial/scripted match: if a scripted stage is waiting on the player action, continue the scripted turn"
+   ],
+   [
+    340,
+    "Null-check failure target"
+   ]
+  ]
+ },
+ "3295588": {
+  "summary": "Tells every in-play unit and every card in either hand that a trap card was resolved, so their trap-reaction triggers can fire. Called after a trap resolves; changes no state itself.",
+  "comments": [
+   [
+    5,
+    "Walk all units on the board"
+   ],
+   [
+    11,
+    "Only units still in play are notified"
+   ],
+   [
+    20,
+    "Then notify cards in hand (both sides)"
+   ],
+   [
+    26,
+    "Skip the trap card itself"
+   ],
+   [
+    38,
+    "Null-check failure target"
+   ]
+  ]
+ },
+ "329570c": {
+  "summary": "Tells every in-play unit and every card in either hand that a quest card was resolved, so their quest-reaction triggers can fire. Changes no state itself.",
+  "comments": [
+   [
+    5,
+    "Walk all units on the board"
+   ],
+   [
+    11,
+    "Only units still in play are notified"
+   ],
+   [
+    20,
+    "Then notify cards in hand (both sides)"
+   ],
+   [
+    26,
+    "Skip the quest card itself"
+   ],
+   [
+    38,
+    "Null-check failure target"
+   ]
+  ]
+ },
+ "329595c": {
+  "summary": "Notifies all other units in play and both players' hands that a unit used sacrifice, so reacting cards can trigger. Changes no state itself.",
+  "comments": [
+   [
+    5,
+    "Notify every other unit on the board"
+   ],
+   [
+    18,
+    "Current turn player's hand"
+   ],
+   [
+    34,
+    "Then the opponent's hand (turn flag inverted)"
+   ],
+   [
+    54,
+    "Null-check failure target"
+   ]
+  ]
+ },
+ "3295964": {
+  "summary": "Notifies the marked unit itself, every other unit in play and both players' hands that the unit was marked, so reacting cards can trigger. Changes no state itself.",
+  "comments": [
+   [
+    6,
+    "The affected unit reacts first"
+   ],
+   [
+    7,
+    "Then every other unit on the board"
+   ],
+   [
+    21,
+    "Current turn player's hand"
+   ],
+   [
+    37,
+    "Then the opponent's hand (turn flag inverted)"
+   ],
+   [
+    58,
+    "Null-check failure target"
+   ]
+  ]
+ },
+ "329596c": {
+  "summary": "Notifies the hunt-marked unit itself, every other unit in play and both players' hands that the unit was hunt-marked, so reacting cards can trigger. Changes no state itself.",
+  "comments": [
+   [
+    6,
+    "The affected unit reacts first"
+   ],
+   [
+    7,
+    "Then every other unit on the board"
+   ],
+   [
+    21,
+    "Current turn player's hand"
+   ],
+   [
+    37,
+    "Then the opponent's hand (turn flag inverted)"
+   ],
+   [
+    58,
+    "Null-check failure target"
+   ]
+  ]
+ },
+ "3295974": {
+  "summary": "Notifies the markerlighted unit itself, every other unit in play and both players' hands that the unit was markerlighted, so reacting cards can trigger. Changes no state itself.",
+  "comments": [
+   [
+    6,
+    "The affected unit reacts first"
+   ],
+   [
+    7,
+    "Then every other unit on the board"
+   ],
+   [
+    21,
+    "Current turn player's hand"
+   ],
+   [
+    37,
+    "Then the opponent's hand (turn flag inverted)"
+   ],
+   [
+    58,
+    "Null-check failure target"
+   ]
+  ]
+ },
+ "329597c": {
+  "summary": "Notifies the unit itself and every other unit in play that a spirit stone was collected, so their reaction triggers can fire. Hands are not notified. Changes no state itself.",
+  "comments": [
+   [
+    6,
+    "The unit itself reacts first"
+   ],
+   [
+    7,
+    "Then every other unit on the board"
+   ],
+   [
+    24,
+    "Null-check failure target"
+   ]
+  ]
+ },
+ "3295984": {
+  "summary": "Notifies the unit itself and every other unit in play that faith was collected, so their reaction triggers can fire. Hands are not notified. Changes no state itself.",
+  "comments": [
+   [
+    6,
+    "The unit itself reacts first"
+   ],
+   [
+    7,
+    "Then every other unit on the board"
+   ],
+   [
+    24,
+    "Null-check failure target"
+   ]
+  ]
+ },
+ "329598c": {
+  "summary": "Notifies the unit itself and every other unit in play that quest points were collected, so their reaction triggers can fire. Hands are not notified. Changes no state itself.",
+  "comments": [
+   [
+    6,
+    "The unit itself reacts first"
+   ],
+   [
+    7,
+    "Then every other unit on the board"
+   ],
+   [
+    24,
+    "Null-check failure target"
+   ]
+  ]
+ },
+ "329599c": {
+  "summary": "Notifies the unit itself and every other unit in play that a sabotage was created, so their reaction triggers can fire. Hands are not notified. Changes no state itself.",
+  "comments": [
+   [
+    6,
+    "The unit itself reacts first"
+   ],
+   [
+    7,
+    "Then every other unit on the board"
+   ],
+   [
+    24,
+    "Null-check failure target"
+   ]
+  ]
+ },
+ "3295994": {
+  "summary": "Notifies the unit that created a secret and every other unit in play, then raises a CreateSecretSignal on the signal broker for listeners such as UI or stats.",
+  "comments": [
+   [
+    6,
+    "The creating unit reacts first"
+   ],
+   [
+    7,
+    "Then every other unit on the board"
+   ],
+   [
+    21,
+    "Raise CreateSecretSignal; the broker interface-call noise below is decompiler output of the generic Raise"
+   ],
+   [
+    51,
+    "Null-check failure target"
+   ]
+  ]
+ },
+ "32959b4": {
+  "summary": "Triggers the other-card requiem reaction on in-play units (except the caster) and on every card in both players' hands. Called when a unit's requiem fires; changes no state itself.",
+  "comments": [
+   [
+    5,
+    "Notify units on the board"
+   ],
+   [
+    10,
+    "Only units still in play, and not the caster itself, react"
+   ],
+   [
+    23,
+    "Current turn player's hand: all cards react"
+   ],
+   [
+    35,
+    "Then the opponent's hand (turn flag inverted)"
+   ],
+   [
+    51,
+    "Null-check failure target"
+   ]
+  ]
+ },
+ "32959bc": {
+  "summary": "Triggers the other-card mob reaction on in-play units (except the caster) and on every card in both players' hands. Called when a unit's mob fires; changes no state itself.",
+  "comments": [
+   [
+    5,
+    "Notify units on the board"
+   ],
+   [
+    10,
+    "Only units still in play, and not the caster itself, react"
+   ],
+   [
+    23,
+    "Current turn player's hand: all cards react"
+   ],
+   [
+    35,
+    "Then the opponent's hand (turn flag inverted)"
+   ],
+   [
+    51,
+    "Null-check failure target"
+   ]
+  ]
+ },
+ "32959cc": {
+  "summary": "Triggers the other-card regiment reaction on in-play units (except the caster) and on every card in both players' hands. Called when a unit's regiment fires; changes no state itself.",
+  "comments": [
+   [
+    5,
+    "Notify units on the board"
+   ],
+   [
+    10,
+    "Only units still in play, and not the caster itself, react"
+   ],
+   [
+    23,
+    "Current turn player's hand: all cards react"
+   ],
+   [
+    35,
+    "Then the opponent's hand (turn flag inverted)"
+   ],
+   [
+    51,
+    "Null-check failure target"
+   ]
+  ]
+ },
+ "32959d4": {
+  "summary": "Triggers the other-card codex reaction on in-play units (except the unit) and on every card in both players' hands. Called when a unit's codex fires; changes no state itself.",
+  "comments": [
+   [
+    5,
+    "Notify units on the board"
+   ],
+   [
+    10,
+    "Only units still in play, and not the unit itself, react"
+   ],
+   [
+    23,
+    "Current turn player's hand: all cards react"
+   ],
+   [
+    35,
+    "Then the opponent's hand (turn flag inverted)"
+   ],
+   [
+    51,
+    "Null-check failure target"
+   ]
+  ]
+ },
+ "32959f4": {
+  "summary": "Raises a UnitSwarmSignal for the played and buffed units, then triggers swarm reactions on other in-play units and every card in both hands.",
+  "comments": [
+   [
+    4,
+    "Raise the swarm signal for listeners"
+   ],
+   [
+    6,
+    "Notify units on the board"
+   ],
+   [
+    12,
+    "Only in-play units other than the played unit react"
+   ],
+   [
+    25,
+    "Current turn player's hand (decompiler shows the list size as BuffedTroop)"
+   ],
+   [
+    37,
+    "Then the opponent's hand (turn flag inverted)"
+   ],
+   [
+    53,
+    "Null-check failure target"
+   ]
+  ]
+ },
+ "3295a2c": {
+  "summary": "Builds a remove-enchantment BattleAction for a card and its enchantment (action type 0x10) and adds it to the auto action queue at the given priority.",
+  "comments": [
+   [
+    4,
+    "Zero the raw action buffer, then fill type, target card and effect slots"
+   ],
+   [
+    9,
+    "Queue it as an automatic action, resolved later by the battle loop"
+   ]
+  ]
+ },
+ "3290a80": {
+  "summary": "Resolves a transform action: swaps the target card's data for a new card (in play or in hand), re-runs setup, optionally adds an effect, refreshes hands, and updates warlord chat for heroes. Then runs the shared end-of-action work (battle-end check, turn refresh).",
+  "comments": [
+   [
+    6,
+    "Target card present: transform it"
+   ],
+   [
+    8,
+    "Remember whether it was in play before the change"
+   ],
+   [
+    15,
+    "If it was the selected active-ability card, stop displaying that ability"
+   ],
+   [
+    22,
+    "In play: mark it as transforming so removal does not count as death"
+   ],
+   [
+    26,
+    "Tell listeners it left the game, and strip hand effects tied to it"
+   ],
+   [
+    32,
+    "Flag set: remove only own extrinsic effects; otherwise reset to hand values and cancel effects from the old unit"
+   ],
+   [
+    43,
+    "Load the new card data and run card setup for its owner's army"
+   ],
+   [
+    53,
+    "Put it back as an in-play unit (with entry animation) or as a unit in hand"
+   ],
+   [
+    67,
+    "If the action carries an effect, add it to the transformed card"
+   ],
+   [
+    72,
+    "Flag set: refresh figures and replaced ability"
+   ],
+   [
+    78,
+    "In play: update continuous effects, stun, figures, and re-apply ambush if it has the trait"
+   ],
+   [
+    94,
+    "Refresh card effects in both hands and re-check effects on the new card if it is in hand"
+   ],
+   [
+    106,
+    "Finish resolving the action"
+   ],
+   [
+    110,
+    "Transformed hero: update warlord chat lines and show its intro message"
+   ],
+   [
+    142,
+    "Null target path: log an error, then fall into the shared end-of-action code (decompiler merged FinishResolvingAction)"
+   ],
+   [
+    147,
+    "If no actions remain and this wasn't a reorder, queue a reassemble order for any minions out of position"
+   ],
+   [
+    159,
+    "Queue is empty: check whether a hero is waiting to die; the battle-end check is skipped in tutorial/campaign"
+   ],
+   [
+    163,
+    "cardState 5 (waitingToDie) on either hero means the match is over"
+   ],
+   [
+    172,
+    "Build and log a debug string describing the hero death state"
+   ],
+   [
+    205,
+    "Already in PostBattle and not a disconnect loss: nothing more to do"
+   ],
+   [
+    220,
+    "Disconnect-loss flag set: record an Enemy win and run the battle end sequence as a coroutine"
+   ],
+   [
+    229,
+    "Normal end: enter PostBattle, stop the battle, and tell the opponent the match finished if networked"
+   ],
+   [
+    241,
+    "Player won: raise an EnemyHealthChangeSignal carrying the enemy hero's health"
+   ],
+   [
+    281,
+    "Get Elo rating and winner, then create the ranked match result with the current XP"
+   ],
+   [
+    289,
+    "Store skull counts (milestones) in the result; enemy count depends on the player hero's health"
+   ],
+   [
+    312,
+    "Record the match duration and winner; a player win sets matchEndedWithAWin"
+   ],
+   [
+    324,
+    "Certain match types (0x14, 0xd2, 0xb4) also tell LiveOps the player is human"
+   ],
+   [
+    329,
+    "Save the result and call BattleFinished; the battle ends here"
+   ],
+   [
+    352,
+    "Null checks (decompiler merged shared failure paths into this throw)"
+   ],
+   [
+    356,
+    "No hero died: broadcast while-in-play updates so continuous effects are re-evaluated"
+   ],
+   [
+    360,
+    "Action fully resolved: clear the resolving flag"
+   ],
+   [
+    363,
+    "Enemy's turn: deactivate its minions and recompute whether its hero can act/attack"
+   ],
+   [
+    371,
+    "Hero can act only if in play, hasn't attacked (or bloodThirst allows a second), isn't stunned or sick"
+   ],
+   [
+    381,
+    "Ferocity/oath heroes may act while summon-sick, as an Active attack"
+   ],
+   [
+    397,
+    "Show or hide the hero's attack indicator and refresh its ability availability"
+   ],
+   [
+    413,
+    "Player's turn: relight playable cards, activate minions and hero"
+   ],
+   [
+    422,
+    "Queue empty: run a GC pass while idle and resume the clock"
+   ],
+   [
+    436,
+    "If the player has only the end-turn action left, show the no-actions UI hint"
+   ],
+   [
+    446,
+    "Tutorial/scripted match: if a scripted stage is waiting on the player action, continue the scripted turn"
+   ],
+   [
+    468,
+    "Null-check failure target"
+   ]
+  ]
+ }
+}

@@ -1,0 +1,174 @@
+{
+"3036634": {"summary": "Returns the list of cardback cosmetics shown in the deck editor: every cardback defined in the inventory overrides, or only the ones the player owns, filtered by a predicate and sorted by army. Everything after the first return is decompiler junk from inlined LINQ helpers.", "comments": [
+[4, "Show-only-owned toggle is off: list every cardback cosmetic known to the inventory manager"],
+[11, "Toggle is on: take only the cosmetic items the player actually owns"],
+[18, "Keep only cosmetics passing the cached filter lambda (b__35_0)"],
+[26, "Order the filtered cosmetics by army using the cached key selector (b__35_1)"],
+[39, "Normal exit: copy the ordered sequence into a new List and return it"],
+[47, "Everything below is decompiler junk: ArgumentNull error paths and inlined LINQ ToLookup/ToList code placed after the return"],
+[184, "Junk: inlined LINQ ToLookup loop that walks a source enumerator and groups items by key"],
+[260, "Junk: exception unwind/finally handling for the enumerator loop above; never runs as real logic"],
+[469, "Junk: a second inlined LINQ helper with raw stack buffers and stack-canary checks"],
+[734, "Junk: stack-protector failure stub and trailing catch handler emitted by the decompiler"]
+]},
+"3037d30": {"summary": "Called while a card in the collection is being dragged. If the card can be added to the deck and the gesture is not a scroll, it hands the drag over to the deck's drag relay. Otherwise it shows the add-card error (if not scrolling) and resets the relay target.", "comments": [
+[6, "Read the drag delta so we can tell a scroll gesture from a real card drag"],
+[10, "Get the collection card under the pointer and test it against the deck being edited"],
+[14, "Ask the deck whether this card can be added; errorCode receives the reason if not"],
+[15, "Not a scroll gesture: treat it as a deliberate card drag"],
+[16, "Card can be added: end the drag on the collection cell and start a drag on the floating drag copy"],
+[17, "Finish the drag on the source cell so it stops handling the pointer"],
+[19, "Make the floating drag object the pointer's drag target and begin dragging it"],
+[41, "Card cannot be added: show the reason to the player as an error message"],
+[45, "Scroll gesture or rejected card: reset the relay so the list keeps scrolling normally"],
+[53, "Shared null-check failure target for the whole function"]
+]},
+"3038034": {"summary": "Called when a cardback cosmetic is dragged in the collection. If the player owns it and the gesture is not a scroll, it starts dragging a copy and wires the begin/drag/end handlers through EventRelay; otherwise it resets the relay. Much of the tail is decompiler noise from an inlined generic RegisterHandlers.", "comments": [
+[8, "Read the drag delta to tell a scroll gesture from a real drag"],
+[15, "Check the player owns this cosmetic; unowned cardbacks cannot be dragged into the deck"],
+[16, "Clear the pointer-press target so the original cell stops receiving drag events"],
+[17, "Owned and not scrolling: start a cosmetic drag"],
+[21, "Make the floating drag object represent this cardback"],
+[27, "Not draggable (scrolling or not owned): point the relay back at its own object and bail if it is unset"],
+[43, "Set the relay's current target object"],
+[44, "Register the begin-drag, drag and end-drag handlers on the relay so drag events reach the drag object"],
+[70, "Inlined generic RegisterHandlers for the end-drag handler; the decompiler expanded it into raw IL2CPP code"],
+[98, "Loop over matching handler components and add a listener for each to the handler event"],
+[126, "Cleanup: dispose the list enumerator (try/finally lowered by the decompiler)"],
+[142, "Everything below is unrelated decompiler noise from other inlined generic helpers (RegisterListener, stack canary checks)"]
+]},
+"3038210": {"summary": "Refreshes the deck editor card list: applies the deck filter, redraws the cells, then colors the Done button text for a valid or invalid deck. If the deck is valid it plays a sound, enables the button effect and punches its scale.", "comments": [
+[4, "Re-filter the collection to the cards of the deck being edited, then redraw all cells"],
+[14, "Validate the deck; the result picks the 'valid' or 'invalid' text color field"],
+[19, "Read the chosen color (two fixed fields on this window) into a local"],
+[23, "Update the Done button label color"],
+[31, "Deck is valid: play the 'done enabled' sound and switch the button effect on"],
+[37, "Kill any running tween, then punch-scale the button slightly to draw attention"],
+[50, "Deck is invalid: switch the Done button effect off"],
+[56, "Shared null-check failure target"]
+]},
+"3036fd0": {"summary": "Validates the deck being edited and colors the Done button text accordingly. On the first call it just sets the toggle state instantly; later, when the deck becomes valid, it plays a sound, enables the effect and punches the button scale.", "comments": [
+[8, "Validate the deck; the result chooses the valid or invalid text color and the toggle state"],
+[13, "Read the chosen color from one of two fixed color fields on this window"],
+[17, "Apply the color to the Done button label"],
+[25, "First update (window opening): set the toggle state immediately with no animation"],
+[34, "Later update and deck is valid: play the 'done enabled' sound and fade the effect on"],
+[40, "Stop any running tween and give the button a small punch-scale"],
+[53, "Deck invalid: fade the effect off over 0.3 seconds"],
+[63, "Shared null-check failure target"]
+]},
+"3036f18": {"summary": "Filters the collection display to the deck being edited and, if the deck's army changed, updates the wildcard panel: sets the army icon and shows the owned wildcard count for each rarity (common, rare, epic, legendary).", "comments": [
+[4, "Make sure the card display has a filter controller (type check by hand), then filter it to the deck"],
+[8, "Pick the army to show: neutral decks fall back to Ultramarines"],
+[13, "Wildcard panel already shows this army: nothing more to do"],
+[16, "Army changed: set the new army, swap its icon, and recount wildcards"],
+[25, "Get the player's wildcards of this army and index them by rarity"],
+[36, "Common wildcards (rarity 1): show owned count, 0 if none"],
+[49, "Rare wildcards (rarity 2)"],
+[62, "Epic wildcards (rarity 3)"],
+[75, "Legendary wildcards (rarity 4)"],
+[94, "Shared null-check failure target"]
+]},
+"3038244": {"summary": "Called when the player tries to leave the deck editor. If the deck is already synced to the server it returns and the window can close; otherwise it shows a 'discard changes' popup with Cancel and Discard buttons.", "comments": [
+[7, "Deck has no unsaved changes: nothing to confirm"],
+[10, "Unsaved changes: build a Cancel button that just closes the popup"],
+[24, "Build a Discard button bound to this window's discard handler"],
+[29, "Show the 'discard changes' popup via the windows manager with both buttons"],
+[33, "Build the button array; the decompiler duplicated the array construction and cast checks here"],
+[69, "Start the popup's coroutine; the exception paths below are decompiler noise from the inlined StartCoroutine"]
+]},
+"30377ac": {"summary": "Called when the player presses Done/Save. If the deck is valid it uploads it to the server and hides the popup; if invalid it shows an error popup describing the problem with Cancel and Discard buttons. Already-synced decks that exist in the windows manager return early.", "comments": [
+[6, "Deck is already synced: check whether this deck's window is already open and, if so, do nothing"],
+[25, "Build the Cancel button for a possible error popup"],
+[36, "Validate the deck; any problem is stored in 'none' as a DeckError"],
+[37, "Deck is valid: upload to the server and close the popup"],
+[45, "Deck invalid: add a Discard button and show the validation error text with both buttons"]
+]},
+"3038478": {"summary": "Copies the edited deck into the original deck object and uploads it to the server as an unsynced deck. It builds an AzureDeckInfo with a count per card id and sends it to the updatePlayerDecks cloud script. The tail looks like the decompiler merged in PlayerDataManager.DeleteDeck.", "comments": [
+[7, "Find the original deck this window was opened with (type-checked cast of the window data)"],
+[33, "Copy the edited cards and settings back into the original deck object"],
+[45, "Callback invoked when the cloud save finishes"],
+[54, "Seems to be inlined PlayerDataManager.UploadUnsyncedDeck: refuses to upload a null deck"],
+[67, "Only unsynced decks with a warlord can be uploaded; otherwise a warning or error is logged"],
+[96, "Build the deck info record for the server (name, army, warlord, game mode and so on)"],
+[100, "Select each card in the deck library to its card id string"],
+[130, "Count copies: loop over card ids, add 1 if new or increment the existing entry in the cards dictionary"],
+[226, "Decompiler cleanup block: dispose the card id enumerator after the loop"],
+[251, "Serialize the deck info to JSON and send it with the updatePlayerDecks cloud script"],
+[274, "Decompiler exception/finally noise follows"],
+[286, "Seems to be the inlined PlayerDataManager.DeleteDeck: logs the deck name and id"],
+[299, "Delete request: send deck id and play mode to the deletePlayerDeck cloud script"]
+]},
+"303826c": {"summary": "Shows the 'discard changes' confirmation popup with Cancel and Discard buttons. Cancel only closes the popup; Discard runs the window's discard handler.", "comments": [
+[4, "Build the Cancel button; it just dismisses the popup"],
+[18, "Build the Discard button bound to this window's discard handler"],
+[23, "Show the discard-changes popup through the windows manager with both buttons"],
+[27, "Build the button array; the decompiler duplicated the array construction and cast checks"],
+[63, "Start the popup coroutine; the exception paths are decompiler noise from the inlined StartCoroutine"]
+]},
+"3038644": {"summary": "Constructor for DeckEditingWindow. Sets default flags (show only owned cards, default close sound, scale 1.0), creates the empty selected-alternate-art dictionary and installs the default open/close actions from GameWindow.", "comments": [
+[5, "Default flags: two show-only-owned booleans packed into one store (0x101 sets both)"],
+[6, "Create the empty dictionary that remembers which alternate art is chosen per card"],
+[17, "Use GameWindow's shared empty OnOpen and OnCloseWindow actions as defaults"]
+]},
+"30386d4": {"summary": "Filter predicate for the deck editor card list: decides whether a card can be shown. Cards that cannot be added to decks are hidden, except defensive cards, which are shown only if the current event allows them.", "comments": [
+[5, "Debug-logs whether the card is a defensive card"],
+[8, "Card is flagged as not addable to decks"],
+[9, "Defensive cards are the exception: ask the deck's custom game mode event whether it allows them"],
+[28, "Return the event's defensive-card flag"],
+[33, "Other non-addable cards are hidden"],
+[36, "Card is normally addable: show it"],
+[41, "Shared null-check failure target"]
+]},
+"3038838": {"summary": "Filter predicate for alternate-art cards in the deck editor. Plain cards always pass; for a card with art variants it keeps the variant already in the deck, or else the one selected in SelectedAlternateArt (or the default).", "comments": [
+[7, "Card has no alternate art and no art styles: always show it"],
+[10, "Remember the base card id so the lambda can match variants of the same card"],
+[14, "Collect cards already in the deck that share this card's original id"],
+[20, "No variant is in the deck yet: compare against the chosen alternate art for this card"],
+[22, "Look up which art the player selected for this card, or the default"],
+[23, "This card is the selected art: keep it"],
+[32, "Inlined string comparison of the two art ids; the decompiler expanded it into raw block compares"],
+[73, "A variant is already in the deck: keep only the card that is in that set"],
+[77, "Inlined HashSet.Contains (hash, bucket and slot walk); the decompiler output is noisy but the result is the set test"]
+]},
+"3039aec": {"summary": "Static constructor of the compiler-generated lambda holder for DeckEditorCollectionDisplay; creates the shared instance.", "comments": []},
+"3039b5c": {"summary": "Lambda used by CheckFocusedArmy: converts a cell to its RectTransform if the cell is a MonoBehaviour, otherwise fails with a null reference.", "comments": [
+[5, "Check the cell is a MonoBehaviour (hand-expanded type test), then get its transform"],
+[7, "Keep the transform only if it really is a RectTransform"]
+]},
+"3039c04": {"summary": "Lambda used by DrawCell/SetCell to count copies: true when the given card is the same Unity object as the collection card in the closure.", "comments": [
+[7, "Unity-aware equality: a destroyed object compares equal to null, so the null cases are handled by hand"]
+]},
+"303911c": {"summary": "Called when the display is enabled: registers its refresh handler for the CardCollectionUpdatedSignal so the card list redraws when the collection changes.", "comments": [
+[4, "Create a callback bound to this display's refresh method"],
+[17, "Register it with the global signal broker for CardCollectionUpdatedSignal"]
+]},
+"30391a0": {"summary": "Called when the display is disabled: unregisters its handler from the CardCollectionUpdatedSignal so it stops reacting to collection updates.", "comments": [
+[4, "Create the same callback as OnEnable so the broker can match and remove it"],
+[17, "Unregister it from the global signal broker"]
+]},
+"3036558": {"summary": "Sets the deck being edited and caches its custom game mode event data (deck-building rules such as copy limits and bans). The decompiler garbled the deck null checks.", "comments": [
+[4, "Store the deck being edited"],
+[5, "Get the deck's custom game mode event; decompiler output reads the wrong variable but this is the event's rules"],
+[23, "Interface call returning the event's data object, cached for later copy-limit and ban lookups"]
+]},
+"3039224": {"summary": "Sets up one card cell in the deck editor collection list. It computes owned copies, the copy limit allowed by the event, copies already in the deck and whether the card can be added, then updates the banned flag and the 'in deck / allowed' text.", "comments": [
+[4, "Run the base cell setup first"],
+[5, "Cast the cell to a CollectionCard (hand-expanded type test); null if it is not one"],
+[19, "Remember the card for the counting lambda and look up how many copies the player owns"],
+[22, "Fetch the deck's custom game mode event data (copy limits, bans)"],
+[40, "Maximum copies allowed by the event rules for this card"],
+[41, "Allowed copies are the lower of owned and the event maximum"],
+[46, "Count how many copies of this card are already in the deck"],
+[53, "Ask the deck whether another copy can be added"],
+[56, "Show the banned overlay if the event bans this card"],
+[63, "Build the 'in deck / allowed' text and update the card visuals (valid, owned, text)"],
+[75, "Shared null-check failure target"]
+]},
+"30395fc": {"summary": "Refreshes every cell in the deck editor collection list: runs the base refresh, then redraws each cell that is a CollectionCard.", "comments": [
+[7, "Run the base refresh first"],
+[11, "Walk every cell in the list"],
+[18, "Cast each cell to a CollectionCard (hand-expanded type test); non-matching cells become null"],
+[29, "Redraw the cell"]
+]}
+}

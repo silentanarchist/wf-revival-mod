@@ -1,0 +1,777 @@
+{
+ "3164a8c": {
+  "summary": "Stores a card's new description text and writes it into every description label of the card UI. Also re-selects the text layout (name only, name+description, tactic variants) for the new text. The decompiler merged a second layout-choosing method into the tail.",
+  "comments": [
+   [
+    4,
+    "The card's text controller owns the name/description labels and the layout states."
+   ],
+   [
+    8,
+    "Remember the raw description string on the controller."
+   ],
+   [
+    15,
+    "Loop over all description labels and set the new text on each (virtual setter call)."
+   ],
+   [
+    18,
+    "Decompiler glued a different method (CardTextsController SetArmy/SetStartingState) into this loop; ignore the odd bounds-check path."
+   ],
+   [
+    37,
+    "Merged code: picks the starting layout from the card type (0x14 and 0x28 look like tactic/spell types)."
+   ],
+   [
+    73,
+    "Merged layout chooser: tactics pick a layout by spell type, other cards by whether the description is empty."
+   ],
+   [
+    95,
+    "Only change layout if the target state differs from the current one."
+   ],
+   [
+    106,
+    "Find the layout entry whose type matches the target and activate it; remember it as current."
+   ]
+  ]
+ },
+ "3164aa4": {
+  "summary": "Switches the card's text layout for display in the player's hand, following the hand text setting (name only or description only). Called when a card enters or is shown in hand; changes the text controller's current layout state.",
+  "comments": [
+   [
+    8,
+    "Read the player's setting for what text hand cards show."
+   ],
+   [
+    9,
+    "Minion with no description: only the name-only or description-only settings change anything."
+   ],
+   [
+    14,
+    "Minion with a description: pick the matching simplified layout (5 = description only, 6 = name only)."
+   ],
+   [
+    15,
+    "Not a minion layout (a tactic/spell): pick tactic description-only (8) or name-only (7)."
+   ],
+   [
+    36,
+    "Common tail: skip if already in that layout, otherwise find the matching layout entry and toggle it on."
+   ],
+   [
+    66,
+    "The rest is unrelated SetCardTextLayout code the decompiler glued on; it is not part of this method."
+   ]
+  ]
+ },
+ "3164b14": {
+  "summary": "Switches the card to a simplified text layout (name only or description only) when option is true, or back to the initial layout when false. Changes the text controller's current layout state.",
+  "comments": [
+   [
+    10,
+    "Option off: skip straight to restoring the initial layout."
+   ],
+   [
+    11,
+    "Minion without description: simplified view applies only for name-only or description-only settings."
+   ],
+   [
+    17,
+    "Tactic cards: description-only or name-only layout depending on the setting."
+   ],
+   [
+    29,
+    "Minion with description: name-only falls through to the simplified layout; description-only gets its own layout."
+   ],
+   [
+    37,
+    "Minion simplified layout."
+   ],
+   [
+    38,
+    "Common tail: skip if already in that layout, else find the matching entry and toggle it on."
+   ],
+   [
+    68,
+    "Everything after this is unrelated SetCardTextLayout code merged in by the decompiler."
+   ]
+  ]
+ },
+ "3164b30": {
+  "summary": "Turns the simplified card text view on by switching to the simplified layout that matches the card's initial layout. Changes the text controller's current layout state.",
+  "comments": [
+   [
+    8,
+    "Pick the simplified layout for this card kind: 6 for minion without description, 5 for minion with description, 8 for tactics."
+   ],
+   [
+    17,
+    "Common tail: skip if already in that layout, else find the matching entry and toggle it on."
+   ],
+   [
+    46,
+    "Everything after this is unrelated SetCardTextLayout code merged in by the decompiler."
+   ]
+  ]
+ },
+ "3164b50": {
+  "summary": "Turns the simplified card text view off by restoring the card's initial text layout. Changes the text controller's current layout state.",
+  "comments": [
+   [
+    8,
+    "The target is simply the layout the card started with."
+   ],
+   [
+    10,
+    "Skip if already in that layout, else find the matching entry and toggle it on."
+   ],
+   [
+    38,
+    "Everything after this is unrelated SetCardTextLayout code merged in by the decompiler."
+   ]
+  ]
+ },
+ "3164bd4": {
+  "summary": "Returns whether this card can be upgraded, by asking CardServices to check the raw card data. Used by the UI to decide whether to show upgrade options.",
+  "comments": [
+   [
+    6,
+    "Asks the card services if an upgraded version of this card exists; the out value is discarded here."
+   ]
+  ]
+ },
+ "3164c48": {
+  "summary": "Shows the card back (option true, hides the front) or the card front (option false) on the 2D card controller. Called when a card is flipped face down or up.",
+  "comments": [
+   [
+    8,
+    "Show the back: hide the front object and enable the back container."
+   ],
+   [
+    18,
+    "Show the front: enable the front object and disable the back container."
+   ],
+   [
+    27,
+    "Shared tail: the decompiler lost the SetActive call on the back container; it sets it to the backVisible value."
+   ]
+  ]
+ },
+ "3164c64": {
+  "summary": "Runs the pending callback that fires when the description is shown, then clears it so it runs only once.",
+  "comments": [
+   [
+    5,
+    "A callback is waiting: invoke it, then forget it."
+   ]
+  ]
+ },
+ "3164c9c": {
+  "summary": "Enables the card's click collider and stores the click callback (touch-down or normal), plus remembers the collider size and whether touching should show the description.",
+  "comments": [
+   [
+    5,
+    "Needs the GameObject and its BoxCollider2D; enable the collider so the card can be clicked."
+   ],
+   [
+    9,
+    "Choose which callback slot to fill: touch-down callback or regular click callback."
+   ],
+   [
+    15,
+    "Record collider size and the show-description flag for later hit tests."
+   ]
+  ]
+ },
+ "3164ec4": {
+  "summary": "Handles a finger/mouse press on the card: calls the touch-down callback with this card and, if description display is enabled, flags that a click began on a card in play.",
+  "comments": [
+   [
+    5,
+    "Notify whoever registered for touch-down, passing this card's GameObject."
+   ],
+   [
+    9,
+    "If touching shows the description, mark that a click started on this in-play card."
+   ]
+  ]
+ },
+ "3164f1c": {
+  "summary": "Tells every attack-type highlight on the card to refresh for the new attack type. The decompiler also merged in the card-image big/small tween code from a different method; only the loop at the end is this method.",
+  "comments": [
+   [
+    9,
+    "Loop over all attack-type highlight objects."
+   ],
+   [
+    14,
+    "From here to the end of the loop is misplaced code from CardImageController (image big/small change); not part of this method."
+   ],
+   [
+    29,
+    "Image state Big: swap to the instanced material, scale up and enable the mask."
+   ],
+   [
+    49,
+    "Image state Small: restore original scale, clamp range and material."
+   ],
+   [
+    85,
+    "Not instant: tween scale, clamp color and mask strength; instant: set them directly (line 134 on)."
+   ],
+   [
+    159,
+    "Real loop body: each highlight refreshes itself for the attack type."
+   ]
+  ]
+ },
+ "3164f8c": {
+  "summary": "Changes the card image between big and small framing, either instantly or with DOTween tweens of scale, clamp-range color and mask strength. Used when a card image is enlarged or shrunk in its frame.",
+  "comments": [
+   [
+    9,
+    "Nothing to do if the image is already in that size state."
+   ],
+   [
+    15,
+    "Big: use the instanced material, scale to original times the big multiplier, and enable the frame mask."
+   ],
+   [
+    35,
+    "Small (or other): scale back to the original, use the small clamp range; mask is only removed right away if instant."
+   ],
+   [
+    55,
+    "Kill any running tweens on the image, its material and the mask before starting new ones."
+   ],
+   [
+    71,
+    "Instant: set scale, clamp vector and mask strength directly."
+   ],
+   [
+    91,
+    "Animated: tween scale (with a completion callback when shrinking), clamp color and the mask effect strength property."
+   ]
+  ]
+ },
+ "3163d94": {
+  "summary": "Enables or disables opening the full card display on click and adds or removes the card click listener on the UI event catcher accordingly.",
+  "comments": [
+   [
+    4,
+    "Remember the setting."
+   ],
+   [
+    5,
+    "Always remove the existing listener first so it is never added twice."
+   ],
+   [
+    10,
+    "Disabled: stop here, no listener."
+   ],
+   [
+    13,
+    "Enabled: add the CardClicked listener again (decompiler inlined the UnityEvent add)."
+   ]
+  ]
+ },
+ "31642d8": {
+  "summary": "Shows or hides the new-card badge and, when shown with animation, pops it with a short scale tween.",
+  "comments": [
+   [
+    6,
+    "No badge object on this card: nothing to do."
+   ],
+   [
+    10,
+    "Activate or deactivate the badge."
+   ],
+   [
+    14,
+    "Only animate when it is being shown and animation was requested."
+   ],
+   [
+    19,
+    "Scale tween (to about 1.1 over 0.35s) with an InOutSine ease: a small pop."
+   ]
+  ]
+ },
+ "3164fa8": {
+  "summary": "Sets the Unity layer on the card object and all its children, then sets the sorting layer on renderers (the decompiler merged several helper methods into this one).",
+  "comments": [
+   [
+    12,
+    "Set the layer on the root object."
+   ],
+   [
+    19,
+    "Loop over child transforms and set the layer recursively on each."
+   ],
+   [
+    58,
+    "Exception cleanup for the enumerator (decompiler noise)."
+   ],
+   [
+    83,
+    "Merged in: GameStaticData SetSortingLayerRecursively, applying the sorting layer name to the object and children."
+   ],
+   [
+    138,
+    "Merged in: SetSortingLayer on one object, which sets sortingLayerID on sprite/canvas renderers."
+   ],
+   [
+    174,
+    "Look up the layer id from the sorting layer name and apply it to each renderer found."
+   ]
+  ]
+ },
+ "316502c": {
+  "summary": "Sets the card's fade canvas group alpha if the card has one.",
+  "comments": [
+   [
+    5,
+    "Only act if a fade group exists; the alpha write itself was lost in decompilation."
+   ]
+  ]
+ },
+ "31650c0": {
+  "summary": "Tints the card color through its group tint component, instantly if the tint duration is zero, otherwise with a color tween.",
+  "comments": [
+   [
+    5,
+    "No tint group on the card: nothing to do."
+   ],
+   [
+    13,
+    "Make sure the tint component is enabled."
+   ],
+   [
+    14,
+    "Zero duration: set the color immediately."
+   ],
+   [
+    21,
+    "Otherwise kill the old tween and start a DOTween color tween to the new color."
+   ]
+  ]
+ },
+ "316518c": {
+  "summary": "Tweens the card's alpha to a target value over a given time, with an optional start delay.",
+  "comments": [
+   [
+    4,
+    "Getter and setter delegates read and write the card's fade group alpha."
+   ],
+   [
+    6,
+    "Create the float tween toward the target alpha."
+   ],
+   [
+    7,
+    "Apply the delay, either as a sequence interval or as the tween's start delay."
+   ]
+  ]
+ },
+ "31652c4": {
+  "summary": "Starts the coroutine that animates the changed gem amount text, only when origPosition is true. The coins amount is not used by the decompiled code.",
+  "comments": [
+   [
+    4,
+    "Nothing happens unless origPosition is true."
+   ],
+   [
+    7,
+    "Build the coroutine and start it on this MonoBehaviour (null or non-MonoBehaviour cases throw)."
+   ]
+  ]
+ },
+ "31653c4": {
+  "summary": "Compiler-generated getter returning the fade canvas group's current alpha, used as the DOTween getter in FadeCard.",
+  "comments": [
+   [
+    4,
+    "Reads the fade group alpha; the actual return value was lost in decompilation."
+   ]
+  ]
+ },
+ "3256d94": {
+  "summary": "Makes a copy of this board criteria and replaces the count criteria with its own deep copy so the two copies do not share it.",
+  "comments": [
+   [
+    4,
+    "Shallow clone first, then deep-copy the nested count criteria."
+   ]
+  ]
+ },
+ "3256ed0": {
+  "summary": "Shows the card front or the card back by toggling the front object and the back container.",
+  "comments": [
+   [
+    4,
+    "Back: hide the front and show the back container."
+   ],
+   [
+    14,
+    "Front: show the front and hide the back container; any other value does nothing."
+   ],
+   [
+    23,
+    "Shared tail: the SetActive call on the back container was lost in decompilation."
+   ]
+  ]
+ },
+ "3256f40": {
+  "summary": "Fades the card (or card back) highlight on or off by changing the alpha of the outline color, instantly or through a color-changer tween.",
+  "comments": [
+   [
+    4,
+    "Pick the card back shadow image and changer, or the front frame ones."
+   ],
+   [
+    17,
+    "Target alpha is 1 when turning highlight on and 0 when off."
+   ],
+   [
+    25,
+    "Make sure the changer has created its instanced material."
+   ],
+   [
+    28,
+    "Instant: set the color on the material directly."
+   ],
+   [
+    42,
+    "Animated: fill the changer with target and original colors and start a 0.2s fade."
+   ]
+  ]
+ },
+ "3256ff0": {
+  "summary": "Changes the highlight color of the card or card back, instantly or through a timed color changer.",
+  "comments": [
+   [
+    4,
+    "Pick the card back changer or the front frame changer (decompiler lost the parameter names here)."
+   ],
+   [
+    19,
+    "Make sure the instanced material exists."
+   ],
+   [
+    22,
+    "Animated: set up the changer with the new target color and a 0.2s duration."
+   ],
+   [
+    46,
+    "Instant: set the color property on the material directly."
+   ]
+  ]
+ },
+ "325702c": {
+  "summary": "Changes the shadow color of the card or card back, instantly or through a timed color changer.",
+  "comments": [
+   [
+    4,
+    "Pick the card back changer or the front frame changer (decompiler lost the parameter names here)."
+   ],
+   [
+    19,
+    "Make sure the instanced material exists."
+   ],
+   [
+    22,
+    "Animated: set up the changer with the new target color and a 0.2s duration."
+   ],
+   [
+    46,
+    "Instant: set the shadow color property on the material directly."
+   ]
+  ]
+ },
+ "3257068": {
+  "summary": "Fades the card shadow on or off by changing the alpha of its shadow color, instantly or through a color-changer tween.",
+  "comments": [
+   [
+    5,
+    "Read the current shadow color from the frame material."
+   ],
+   [
+    12,
+    "Target alpha is 1 for on and 0 for off."
+   ],
+   [
+    19,
+    "Make sure the changer has created its instanced material."
+   ],
+   [
+    22,
+    "Instant: write the color to the material directly."
+   ],
+   [
+    36,
+    "Animated: set the changer's target and original colors and start a 0.2s fade."
+   ]
+  ]
+ },
+ "32570e0": {
+  "summary": "Sets the card frame sprite on the frame image and the highlight sprite on the highlight/shadow image (Unity's Image sprite setter was inlined).",
+  "comments": [
+   [
+    6,
+    "Assign the frame sprite."
+   ],
+   [
+    9,
+    "Inlined Image.sprite setter for the highlight image: nothing changes if it is the same sprite."
+   ],
+   [
+    29,
+    "Update layout and material flags, set the sprite, mark the image dirty and track it."
+   ]
+  ]
+ },
+ "3257120": {
+  "summary": "Toggles the glitch effect on the card frame. Mostly stubbed in the decompile: it only picks a value and the actual effect call was lost.",
+  "comments": [
+   [
+    6,
+    "Chooses one of two values (on or off) but the set call was lost."
+   ]
+  ]
+ },
+ "3257158": {
+  "summary": "Sets the card back sprite and the card back shadow sprite (the image sprite setter was inlined).",
+  "comments": [
+   [
+    5,
+    "Assign the card back sprite."
+   ],
+   [
+    9,
+    "Skip the shadow part if no shadow sprite was given."
+   ],
+   [
+    12,
+    "Inlined Image.sprite setter for the shadow image: nothing changes if the sprite is the same."
+   ],
+   [
+    32,
+    "Update flags, set the sprite, mark the image dirty and track it."
+   ]
+  ]
+ },
+ "3257200": {
+  "summary": "Enables or disables every tooltip trigger on the card and its text tooltips. The decompiler appended the constructor's shader id code at the end.",
+  "comments": [
+   [
+    5,
+    "Loop over card tooltip triggers and toggle each."
+   ],
+   [
+    18,
+    "Then loop over the text tooltips the same way."
+   ],
+   [
+    26,
+    "Misplaced: this is the Card2DController constructor body (caches shader property ids), not part of this method."
+   ]
+  ]
+ },
+ "32572bc": {
+  "summary": "Constructor: caches the shader property ids for the card's shadow color and outline (highlight) used by the fade code.",
+  "comments": [
+   [
+    4,
+    "Shader property ids are looked up once and reused for highlight and shadow fades."
+   ]
+  ]
+ },
+ "3257348": {
+  "summary": "Decides whether an ability's trigger fires for the given cards: checks the trigger type, that this card is in the right zone, faith or spirit stone cost where relevant, then acting-card, target and board criteria. Called when a game event happens.",
+  "comments": [
+   [
+    6,
+    "Strike trigger: logs the check; fires only if the ability itself is a Strike ability."
+   ],
+   [
+    46,
+    "Trigger type of the event must equal this ability's trigger."
+   ],
+   [
+    49,
+    "These triggers (card played, unit death, codex, sacrifice, enchantment) skip the zone check."
+   ],
+   [
+    53,
+    "High trigger ids: UseFaith and UseSpiritStone need the right zone and enough resource."
+   ],
+   [
+    71,
+    "If this card is the actor, the owner must have at least 1 and at least the trigger value of that resource."
+   ],
+   [
+    84,
+    "All other triggers: this card must be in the zone the ability's context requires."
+   ],
+   [
+    90,
+    "Final checks: acting card, target card and board criteria must all pass."
+   ]
+  ]
+ },
+ "32576ec": {
+  "summary": "Checks whether the card is in the zone the ability's context requires (in play, hand, deck, cemetery, in play or dying, in play or cemetery). Used to decide if a trigger may fire.",
+  "comments": [
+   [
+    5,
+    "Play, Hand and Deck contexts."
+   ],
+   [
+    6,
+    "Play: card must be in play, not about to die from pending damage, and not a remnant."
+   ],
+   [
+    22,
+    "Hand: card must be in hand."
+   ],
+   [
+    29,
+    "Deck: card state must be the deck state (the mask test allows only that state)."
+   ],
+   [
+    36,
+    "Cemetery and combined contexts."
+   ],
+   [
+    37,
+    "In play or dying: true if in play or in the dying state."
+   ],
+   [
+    42,
+    "In play or cemetery: true if in the cemetery, else if in play."
+   ],
+   [
+    44,
+    "Unknown context: logs a warning and never fires."
+   ],
+   [
+    64,
+    "Cemetery: card state must be in cemetery."
+   ]
+  ]
+ },
+ "3258260": {
+  "summary": "Clones this ability and deep-copies its criteria and its list of ability logic so the copy can be changed independently. The decompiler output is partly mangled.",
+  "comments": [
+   [
+    4,
+    "Shallow clone; the type-check mess after it is decompiler noise."
+   ],
+   [
+    15,
+    "Deep-copy the acting-card and target criteria."
+   ],
+   [
+    21,
+    "Build a new ability logic list and copy each logic entry into it."
+   ]
+  ]
+ },
+ "32582e0": {
+  "summary": "Clones this ability and deep-copies its acting-card criteria, target criteria and ability logic list.",
+  "comments": [
+   [
+    4,
+    "Shallow clone first."
+   ],
+   [
+    7,
+    "Deep-copy the acting-card and target criteria."
+   ],
+   [
+    13,
+    "New logic list: each ability logic entry is deep-copied and added."
+   ]
+  ]
+ },
+ "3258524": {
+  "summary": "Sets up a card animation: stores parents and animation info, optionally rotates toward a target, starts position tracking for moving effects, and hands acting and target cards to the VFX component.",
+  "comments": [
+   [
+    5,
+    "Remember where the animation starts and ends and which animation settings to use."
+   ],
+   [
+    12,
+    "With a rotate-towards target, rotate the animation (unless set to orient to velocity)."
+   ],
+   [
+    22,
+    "If the VFX moves between two different parents, enable per-frame updates and record the start position and random offsets."
+   ],
+   [
+    42,
+    "Give the VFX component the acting and target cards so its modules can use them."
+   ]
+  ]
+ },
+ "3258728": {
+  "summary": "Rotates the animated card: toward the middle of the opponent's board (with an InBack tween) or straight at a target transform.",
+  "comments": [
+   [
+    5,
+    "Point-at-board-center option: use the span between the leftmost and rightmost minion on the other side."
+   ],
+   [
+    23,
+    "Compute the angle toward that board center and tween the rotation over the animation time."
+   ],
+   [
+    34,
+    "Apply the animation's start delay to the tween."
+   ],
+   [
+    54,
+    "Otherwise just turn immediately to look at the target transform."
+   ]
+  ]
+ },
+ "3258a48": {
+  "summary": "Per-frame update of a card animation: moves the object from start to end parent along the ease curve, adds random offsets, orients to velocity, and advances the animation clock.",
+  "comments": [
+   [
+    9,
+    "Only move while the clock is inside the animation's moving window."
+   ],
+   [
+    24,
+    "Blend between start and end positions using the eased progress, clamped to 0 to 1."
+   ],
+   [
+    42,
+    "Optionally add curve-driven random offsets on each axis."
+   ],
+   [
+    69,
+    "If set to orient to velocity, face the direction of travel since the last frame."
+   ],
+   [
+    103,
+    "Advance the animation clock by frame time."
+   ]
+  ]
+ },
+ "325d1d4": {
+  "summary": "Static constructor creating the singleton instance of the compiler-generated closure class used by CardDeck lambdas.",
+  "comments": []
+ },
+ "325d244": {
+  "summary": "Lambda used by LegendaryCardsInDeck: true when the card is not a hero and has Legendary rarity.",
+  "comments": [
+   [
+    5,
+    "Heroes never count as legendary here."
+   ]
+  ]
+ }
+}

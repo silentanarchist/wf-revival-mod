@@ -1,0 +1,652 @@
+{
+ "2f7f464": {
+  "summary": "Handles a click on a remnant (Aeldari/Necron body) card. Depending on card state it uses the Waystone, toggles the large card view, or restores a raised hand card; for enemy ambush cards it shows a face-down view. Mostly UI state; no network calls.",
+  "comments": [
+   [
+    4,
+    "Ignore the click if this body has no card attached"
+   ],
+   [
+    13,
+    "Need a BattleManager to know the UI state; a missing one is the compiler's null-check path"
+   ],
+   [
+    16,
+    "Choosing a resolution target: clicks on cards are blocked (only logged when dev tools are on)"
+   ],
+   [
+    33,
+    "Branch on the card's state: in hand, hand-showing, on board, or other"
+   ],
+   [
+    40,
+    "Aeldari remnant on board: a click spends the Waystone instead of opening the card view"
+   ],
+   [
+    46,
+    "Waystone usable: execute it and flag that we are waiting for it to resolve"
+   ],
+   [
+    57,
+    "Not a remnant: mark the card as being displayed and check whether the mulligan screen is visible"
+   ],
+   [
+    64,
+    "Card is raised in the player's hand (inHandShowing)"
+   ],
+   [
+    66,
+    "Hand click: opponent's cards can only be shown if they are Sabotage spells"
+   ],
+   [
+    72,
+    "Second click within 0.2s of the last one opens the large card display"
+   ],
+   [
+    80,
+    "Still raised in hand: put it back down, restore hand position, rotation and scale"
+   ],
+   [
+    96,
+    "Reset sorting layer, hide description and tooltips, and rewire the card's click listener (decompiler noise)"
+   ],
+   [
+    162,
+    "Other states: only a card in the middle of aiming an attack is handled, via the Waystone path above"
+   ],
+   [
+    178,
+    "Only open the large view in allowed UI states (or during the mulligan or tutorial rules)"
+   ],
+   [
+    181,
+    "Card was just clicked as a target: swallow this click so it does not also open the big view"
+   ],
+   [
+    187,
+    "A large card is already shown: leave it alone, otherwise build the card effects shown beside it"
+   ],
+   [
+    197,
+    "Show the card with its tier and the effects list in the large-card display"
+   ],
+   [
+    209,
+    "Enemy card in play with ambush: show it face-down with only the ambush icon, hiding stats and texts"
+   ],
+   [
+    252,
+    "Decompiler lost control flow here; this tail seems to enable the card-effect panel for non-environment cards"
+   ],
+   [
+    276,
+    "Enable the effect panel only if the effects apply, and not for environment cards"
+   ]
+  ]
+ },
+ "2f7f4e4": {
+  "summary": "Handles the pointer (mouse or touch) entering a remnant card. A hand card is raised and enlarged with description and tooltips; a board card gets its highlight changed, and if it is a valid target a combat damage preview and death icon are shown.",
+  "comments": [
+   [
+    4,
+    "Ignore if no card is attached"
+   ],
+   [
+    13,
+    "Ignore hovering while the right mouse button is held or with a multi-finger touch"
+   ],
+   [
+    25,
+    "UI state 0xe (choosing resolution target): hover is blocked, only logged with dev tools"
+   ],
+   [
+    57,
+    "Card state 2 is on board; anything else must be state 1 (in hand) and owned by the local player"
+   ],
+   [
+    62,
+    "Ask the BattleManager whether this hand card may be raised right now"
+   ],
+   [
+    67,
+    "Spread the other hand cards out and start raising this one"
+   ],
+   [
+    81,
+    "Work out the raised position; touch input uses a different Y offset from the mouse"
+   ],
+   [
+    102,
+    "Apply the new position, slightly toward the camera, and zero the rotation"
+   ],
+   [
+    131,
+    "Scale the card up to the device's hand-hover scale"
+   ],
+   [
+    133,
+    "Show description and tooltips, enlarge colliders, and show available targets"
+   ],
+   [
+    153,
+    "Decompiler garbage: the loop here is unrelated stack-pointer noise from inlined helpers; ignore it"
+   ],
+   [
+    228,
+    "Board card: skip hover effects in certain UI states (bitmask of busy states)"
+   ],
+   [
+    236,
+    "Highlight state 0 (regular) becomes selected; state 3 (potential target) goes to the target path below"
+   ],
+   [
+    244,
+    "Only remnant cards continue into the original-remnant card preview"
+   ],
+   [
+    248,
+    "Aeldari remnant: only show the preview on the owner's turn for the owner's cards"
+   ],
+   [
+    259,
+    "Hovering a valid target: mark it as the selected target and show the combat preview"
+   ],
+   [
+    264,
+    "Show the preview highlight on the attacker, unless in a state where it should not appear"
+   ],
+   [
+    279,
+    "Skip the damage preview while a Waystone use is resolving"
+   ],
+   [
+    288,
+    "Collect the damage values and types the attacker would deal to this card"
+   ],
+   [
+    292,
+    "Tactic cards deal their played damage (type 3) to the enemy target"
+   ],
+   [
+    326,
+    "Normal attack: if the target hits back, also add the damage it returns (type 4)"
+   ],
+   [
+    356,
+    "Ambush target: just hide the death icon, since damage is not shown for it"
+   ],
+   [
+    367,
+    "If the pending damage would kill the target, play the Minion Death icon"
+   ],
+   [
+    379,
+    "Finish: restore the original remnant view or clear the icon as needed"
+   ]
+  ]
+ },
+ "2f7f578": {
+  "summary": "Handles the pointer leaving a remnant card. Stops showing its description, puts a raised hand card back, clears combat preview highlights, and fades the highlight frame back to its normal state.",
+  "comments": [
+   [
+    4,
+    "Ignore if no card is attached"
+   ],
+   [
+    13,
+    "Stop showing the card's description"
+   ],
+   [
+    14,
+    "Own card that was raised in hand: lower it back"
+   ],
+   [
+    21,
+    "Clear this card's combat preview highlight"
+   ],
+   [
+    25,
+    "Also clear the preview on the card currently tracked as the attacker or target"
+   ],
+   [
+    31,
+    "Selected goes back to regular; selected-target-on-board goes back to potential target"
+   ],
+   [
+    40,
+    "Already in the target state: nothing to do"
+   ],
+   [
+    43,
+    "Switch the highlight state and show the frames"
+   ],
+   [
+    46,
+    "Per state: reset the frame colour and scale back (decompiler mixed up the variable names)"
+   ],
+   [
+    73,
+    "Potential target on board: recolour the frame and tween the scale back"
+   ],
+   [
+    86,
+    "Kill any running scale tween before starting a new one"
+   ],
+   [
+    126,
+    "Kill any running colour tween before starting a new one"
+   ],
+   [
+    131,
+    "Fade the frame colour back with a tween sequence, or set it straight away if no duration"
+   ],
+   [
+    143,
+    "Hide the overlay objects once the colour reset completes"
+   ]
+  ]
+ },
+ "2f7f6a4": {
+  "summary": "Switches a Necron remnant between its body form and remnant form. With animation it plays a random death animation and sound (to remnant) or the reanimate animation and sound; without animation it just toggles objects and the 3D body. Calls onComplete later.",
+  "comments": [
+   [
+    4,
+    "Store the callback; AnimationResurrectionEnd calls it when reanimation ends"
+   ],
+   [
+    6,
+    "Animated switch"
+   ],
+   [
+    10,
+    "option true: become a remnant (the body dies)"
+   ],
+   [
+    13,
+    "Hide the body model while the death animation plays"
+   ],
+   [
+    17,
+    "Pick a random death animation from the list"
+   ],
+   [
+    19,
+    "Decompiler glued DoDestroy-like code here: plays death sound, spawns death particles, destroys the object"
+   ],
+   [
+    30,
+    "Play the 3D death sound at this position if one is set"
+   ],
+   [
+    36,
+    "Spawn the death particle prefab and match its scale to this object"
+   ],
+   [
+    64,
+    "Use the chosen death animation on the VAT (vertex animation) player"
+   ],
+   [
+    66,
+    "option false: reanimate, so stop the idle remnant particles"
+   ],
+   [
+    72,
+    "Play the reanimate sound if one is set"
+   ],
+   [
+    78,
+    "Play the reanimate animation by name"
+   ],
+   [
+    108,
+    "Instant switch without animation: set the remnant object active or not"
+   ],
+   [
+    114,
+    "Show the 3D body only when not a remnant"
+   ]
+  ]
+ },
+ "2f7f824": {
+  "summary": "Called when a Necron remnant is destroyed. Plays the death sound at its position, spawns the death particle effect at the death particle position, and destroys the object.",
+  "comments": [
+   [
+    5,
+    "Play the death sound if one is set"
+   ],
+   [
+    12,
+    "Spawn the death particle effect at its configured position and rotation"
+   ],
+   [
+    21,
+    "If the effect has a script, hand it the card so it can show it"
+   ],
+   [
+    26,
+    "Match the effect's scale to this object, then destroy this object"
+   ]
+  ]
+ },
+ "2f7f828": {
+  "summary": "Returns the world position of this object's transform, used as the spawn point for death particles.",
+  "comments": []
+ },
+ "2f7f848": {
+  "summary": "Called when the reanimation animation finishes. Makes the Necron body visible again and invokes the completion callback saved by Toggle.",
+  "comments": [
+   [
+    4,
+    "Show the body again"
+   ],
+   [
+    5,
+    "Tell whoever started the toggle that the reanimation is done"
+   ]
+  ]
+ },
+ "2f7f9bc": {
+  "summary": "Runs every frame in a tutorial match. When the player clicks empty space (not UI, not ignored objects), flags the scripted AI manager to skip its current action. Does nothing in replays, non-tutorials, or when a window is open.",
+  "comments": [
+   [
+    4,
+    "Only run once the manager is fully initialised"
+   ],
+   [
+    16,
+    "Skipping is only allowed when the script says so"
+   ],
+   [
+    21,
+    "Never in replays"
+   ],
+   [
+    25,
+    "Only in tutorial matches"
+   ],
+   [
+    31,
+    "Ignore clicks while a window or popup is open"
+   ],
+   [
+    36,
+    "On mobile use the first touch, if it just began; otherwise use -1 for the mouse"
+   ],
+   [
+    50,
+    "Find out whether the pointer is over UI; UI clicks do not count"
+   ],
+   [
+    54,
+    "Only react on the frame the mouse button goes down"
+   ],
+   [
+    66,
+    "Cast a ray from the camera through the click and see if it hits any non-ignored object"
+   ],
+   [
+    72,
+    "Nothing hit: empty space click, so skip the AI's next scripted action"
+   ]
+  ]
+ },
+ "2f7f9d0": {
+  "summary": "Same check as the tutorial manager's per-frame Update: on a click in empty space during a tutorial match, flags the scripted AI to skip its next action.",
+  "comments": [
+   [
+    13,
+    "Skipping is only allowed when the script says so"
+   ],
+   [
+    18,
+    "Never in replays"
+   ],
+   [
+    22,
+    "Only in tutorial matches"
+   ],
+   [
+    28,
+    "Ignore clicks while a window or popup is open"
+   ],
+   [
+    33,
+    "On mobile use the first touch, if it just began; otherwise -1 for the mouse"
+   ],
+   [
+    47,
+    "UI clicks do not count"
+   ],
+   [
+    50,
+    "Only react on the frame the mouse button goes down"
+   ],
+   [
+    62,
+    "Cast a ray from the click point against everything except ignored layers"
+   ],
+   [
+    69,
+    "Nothing hit: empty space, so skip the AI's next scripted action"
+   ]
+  ]
+ },
+ "2f7fce4": {
+  "summary": "Builds the name of a scripted turn, such as 'Player 2' or 'AI 2', from who starts the match and the turn number, and stores it in turnName.",
+  "comments": [
+   [
+    4,
+    "Parity of the turn number (0 or 1)"
+   ],
+   [
+    8,
+    "Round number is turn/2 plus one; the INFINITY test is the float-to-int overflow guard"
+   ],
+   [
+    14,
+    "Default is the AI; the Player prefix is used when the parity matches the starting side"
+   ],
+   [
+    22,
+    "Join the prefix and round number and store it"
+   ]
+  ]
+ },
+ "2f7fe2c": {
+  "summary": "Loads the localized tutorial text for this scripted action and expands its placeholders: modular descriptions, card names, melee/ranged/reanimate keywords, trait names and Energy sprites. Returns the finished string.",
+  "comments": [
+   [
+    4,
+    "Look up the text under TutorialData/ using the reference key (with the PC suffix for PC tips)"
+   ],
+   [
+    10,
+    "Empty text: return as is"
+   ],
+   [
+    19,
+    "Text has modular description markers: expand each one"
+   ],
+   [
+    20,
+    "Find every marker with a regex and loop over the matches (compiler-generated enumerator and dispose code)"
+   ],
+   [
+    69,
+    "Marker holds comma-separated parts: the term name, then optional values"
+   ],
+   [
+    77,
+    "Look up the Modular_Description term and fill in its arguments from parts 1 and 2"
+   ],
+   [
+    115,
+    "Replace the marker in the text with the expanded description"
+   ],
+   [
+    121,
+    "Decompiler dumped the enumerator cleanup (Dispose in finally blocks) here; it is not game logic"
+   ],
+   [
+    186,
+    "Next: card name markers, found by a second regex"
+   ],
+   [
+    190,
+    "Next: keyword markers (melee, ranged, reanimate)"
+   ],
+   [
+    193,
+    "Last: Energy markers, for numbers 0 to 8"
+   ],
+   [
+    196,
+    "Replace each Energy number marker with the matching Energy sprite tag"
+   ],
+   [
+    213,
+    "Keywords: replace each marker with the bold localized word from MainMenu/General"
+   ],
+   [
+    241,
+    "Traits: loop over every DefinedTrait value and replace its marker with the trait's display name"
+   ],
+   [
+    310,
+    "Card markers: loop over matches (decompiler placed this at the end)"
+   ],
+   [
+    361,
+    "Use the localized Card_Name term as a fallback"
+   ],
+   [
+    369,
+    "If the player data is available, find the card in the full card collection and use its localized name"
+   ]
+  ]
+ },
+ "2f7ff20": {
+  "summary": "Returns this action's text reference key, with '-PC' appended when it is a PC-specific tip.",
+  "comments": [
+   [
+    6,
+    "PC tips use a separate text key with the -PC suffix"
+   ],
+   [
+    7,
+    "Empty key: result is just the suffix (or empty)"
+   ],
+   [
+    13,
+    "Concatenate key and suffix (inlined string concat)"
+   ]
+  ]
+ },
+ "2f7ff80": {
+  "summary": "Rebuilds the editor display name (actionType) for a scripted action from its first data entry. Chat, tip and radio actions get their localized text appended; actions by a unit get a unit label; some actions get a target name.",
+  "comments": [
+   [
+    5,
+    "No data: name it Undefined"
+   ],
+   [
+    14,
+    "Start with the name of the action type enum"
+   ],
+   [
+    20,
+    "Text-based types (AI/player chat, big chat, small tip, radio): append the localized text"
+   ],
+   [
+    54,
+    "For certain action types (hex ids; they seem to be unit-acting actions) add who acts"
+   ],
+   [
+    58,
+    "Warlord actors get an Enemy warlord or Player warlord label"
+   ],
+   [
+    70,
+    "Otherwise append the first target's name if there is one"
+   ],
+   [
+    100,
+    "Type 0x8c also appends a target name"
+   ]
+  ]
+ },
+ "2f804fc": {
+  "summary": "Returns true if any entry in this scripted action's data list is of the activate-hand-cards type (0xaa).",
+  "comments": [
+   [
+    9,
+    "Loop through the data entries"
+   ],
+   [
+    17,
+    "Found one of type 0xaa (activate hand cards): stop, i is below _size so the result is true"
+   ]
+  ]
+ },
+ "2f805a4": {
+  "summary": "Checks whether a battle action, with its acting card and target card, matches what this scripted tutorial step expects. Used to decide if the player's move advances the script. Returns true when type, actor and target all fit.",
+  "comments": [
+   [
+    5,
+    "First check the action type: does the real battle action fit the expected scripted type?"
+   ],
+   [
+    7,
+    "PlayCard: must be a card played from hand"
+   ],
+   [
+    11,
+    "If a minion-position rule applies, work out whether the card would land left of the target"
+   ],
+   [
+    20,
+    "Wanted 'left' but it lands elsewhere, or wanted 'not left' but it lands left: no match"
+   ],
+   [
+    28,
+    "Attack: a normal attack or its continuation"
+   ],
+   [
+    34,
+    "Free-mode attack: only a few action types are allowed (bitmask)"
+   ],
+   [
+    46,
+    "Change-to-ranged/melee types: seem to be matched by an attack or an attack change"
+   ],
+   [
+    54,
+    "Active ability, end turn, tap card (Waystone use matches at once)"
+   ],
+   [
+    72,
+    "Now check the actor: Warlord must be a Hero; minion types must be non-Hero and the same unique card"
+   ],
+   [
+    102,
+    "Unexpected actor type: log an error"
+   ],
+   [
+    111,
+    "No target card: matches already"
+   ],
+   [
+    117,
+    "Target Warlord: must be a Hero on the player's or enemy's side as expected"
+   ],
+   [
+    146,
+    "Target minion or hand card: must not be a Hero, and must be the exact card if one is named"
+   ],
+   [
+    170,
+    "Check the side: a player minion must be on the player's side, an enemy minion on the other"
+   ]
+  ]
+ }
+}

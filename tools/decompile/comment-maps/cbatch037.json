@@ -1,0 +1,697 @@
+{
+ "32c6798": {
+  "summary": "Coroutine for the exchange-minions effect: swaps two minions between the players' boards, swaps ownership and tweens positions/scales. After a short wait it refreshes both sides and finishes the action.",
+  "comments": [
+   [
+    5,
+    "Resume point after the swap tween: refresh both boards and hands"
+   ],
+   [
+    8,
+    "Both swapped minions get their summon sickness reset"
+   ],
+   [
+    11,
+    "Re-lay out both boards after the swap"
+   ],
+   [
+    14,
+    "Re-evaluate while-in-play effects for both swapped minions, then notify other cards"
+   ],
+   [
+    28,
+    "First call (state 0): validate the two targets and start the swap"
+   ],
+   [
+    33,
+    "Needs two cards in multiTargetCard"
+   ],
+   [
+    44,
+    "Both minions must belong to different players"
+   ],
+   [
+    49,
+    "Warlords cannot be exchanged; if either is a warlord, jump to the error"
+   ],
+   [
+    59,
+    "Tell the other cards both minions are leaving the game"
+   ],
+   [
+    66,
+    "Remove both minions from both hands' bookkeeping"
+   ],
+   [
+    85,
+    "Put each minion into the other side's MinionManager in place of the other"
+   ],
+   [
+    116,
+    "Flip ownership of each minion"
+   ],
+   [
+    119,
+    "Remember positions/scale so each minion can tween to the other's spot"
+   ],
+   [
+    127,
+    "Tween each minion to the other's position and scale (InSine ease, about 0.8s)"
+   ],
+   [
+    146,
+    "Wait for the tween, then resume in state 1"
+   ],
+   [
+    178,
+    "Warlord exchange attempt: log error and just finish"
+   ],
+   [
+    190,
+    "Finish the action (also reached on validation errors)"
+   ]
+  ]
+ },
+ "32c7040": {
+  "summary": "Always throws NotSupportedException: compiler-generated coroutine enumerators cannot be reset.",
+  "comments": []
+ },
+ "32c70ac": {
+  "summary": "Coroutine that applies fatigue when a player has to draw from an empty deck. It bumps that player's fatigue counter, shows the tip message and deals that much Undersupplied damage to their hero, then waits half a second.",
+  "comments": [
+   [
+    9,
+    "State machine: state 0 yields one frame, state 1 does the work, state 2 just ends"
+   ],
+   [
+    20,
+    "Leftover warning that fatigue 'is not implemented'; the code below still runs"
+   ],
+   [
+    21,
+    "Increase the drawing player's (or the enemy's) fatigue counter by one"
+   ],
+   [
+    56,
+    "Pick the tip text: own fatigue vs the enemy's"
+   ],
+   [
+    62,
+    "Show the localized fatigue message with the amount on screen"
+   ],
+   [
+    69,
+    "Damage equals the new fatigue count, type Undersupplied, aimed at the hero"
+   ],
+   [
+    85,
+    "Deal it through the multi-damage path, then wait 0.5s"
+   ]
+  ]
+ },
+ "32c7510": {
+  "summary": "Always throws NotSupportedException: compiler-generated coroutine enumerators cannot be reset.",
+  "comments": []
+ },
+ "32c757c": {
+  "summary": "Coroutine for a forced attack: the AI picks the best attack for the target card, which is then queued as a scripted attack. Berserk cards show a trigger animation first, then the action finishes.",
+  "comments": [
+   [
+    12,
+    "The card being forced to attack is battleAction.targetCard; it must exist"
+   ],
+   [
+    17,
+    "Use the AI to choose the best attack (target and melee/ranged) for that card"
+   ],
+   [
+    26,
+    "Melee or ranged depending on the chosen action"
+   ],
+   [
+    30,
+    "Only proceed if the chosen target is a valid attack target"
+   ],
+   [
+    43,
+    "Switch the attacker to that attack type"
+   ],
+   [
+    48,
+    "Queue the attack as a scripted attack with instant priority"
+   ],
+   [
+    49,
+    "If extraValue is set, also queue reset actions for the attacker afterwards"
+   ],
+   [
+    56,
+    "Berserk cards show their trigger animation and wait a short delay"
+   ],
+   [
+    75,
+    "No target card: log an error"
+   ],
+   [
+    81,
+    "Finish the action, also when nothing valid was found"
+   ]
+  ]
+ },
+ "32c7890": {
+  "summary": "Always throws NotSupportedException: compiler-generated coroutine enumerators cannot be reset.",
+  "comments": []
+ },
+ "32c78fc": {
+  "summary": "Coroutine for a forced attack on a friendly: picks a random other minion from the forced card's own side and queues a scripted attack on it. Berserk cards play a trigger animation first.",
+  "comments": [
+   [
+    16,
+    "Get the list of minions on the attacker's own side"
+   ],
+   [
+    17,
+    "Remove the attacker itself so it cannot pick itself"
+   ],
+   [
+    34,
+    "Pick a random friendly index (shared random so both players agree)"
+   ],
+   [
+    38,
+    "Make sure the pick is not the attacker"
+   ],
+   [
+    48,
+    "Queue the scripted attack on the chosen friendly"
+   ],
+   [
+    50,
+    "Berserk shows its trigger animation and waits"
+   ],
+   [
+    64,
+    "No target card: log an error"
+   ],
+   [
+    67,
+    "Finish the action"
+   ]
+  ]
+ },
+ "32c7c8c": {
+  "summary": "Always throws NotSupportedException: compiler-generated coroutine enumerators cannot be reset.",
+  "comments": []
+ },
+ "32c7cf8": {
+  "summary": "Coroutine that resolves a heal action on one or several targets. It logs the heal, runs each heal and fires UnitHealed triggers on every unit in play, then finishes the action.",
+  "comments": [
+   [
+    6,
+    "State 2: single target healed; run UnitHealed triggers then finish"
+   ],
+   [
+    11,
+    "Loop over units in play and fire UnitHealed on each still in play"
+   ],
+   [
+    29,
+    "State 1: last multi-target heal done; fire triggers for that target"
+   ],
+   [
+    36,
+    "First call: log the heal and snapshot the units in play"
+   ],
+   [
+    42,
+    "No multi-target list: heal the single target"
+   ],
+   [
+    45,
+    "Target left play: nothing to heal, just finish"
+   ],
+   [
+    50,
+    "Run the heal and wait for it to complete"
+   ],
+   [
+    59,
+    "Multi-target: heal each target that is still in play"
+   ],
+   [
+    70,
+    "Last target: wait for its heal; earlier ones are started without waiting"
+   ],
+   [
+    81,
+    "After a heal: fire UnitHealed on every unit in play for this target"
+   ],
+   [
+    111,
+    "Finish the action"
+   ]
+  ]
+ },
+ "32c8098": {
+  "summary": "Always throws NotSupportedException: compiler-generated coroutine enumerators cannot be reset.",
+  "comments": []
+ },
+ "32c8104": {
+  "summary": "Coroutine that resolves a minion's death. It removes the unit from its board and unitsInPlay, logs the kill, plays the death animation if the object is active, refreshes both hands and finishes the action.",
+  "comments": [
+   [
+    5,
+    "State 1: death animation finished, go refresh hands"
+   ],
+   [
+    20,
+    "Only a card in the waitingToDie state may die; otherwise warn and finish"
+   ],
+   [
+    31,
+    "Remove the minion from its owner's board"
+   ],
+   [
+    34,
+    "Remove it from the list of units in play and queue a board re-layout"
+   ],
+   [
+    40,
+    "Record the kill in the challenge log"
+   ],
+   [
+    43,
+    "Play the death animation (waits for it) if the card object is active"
+   ],
+   [
+    54,
+    "Refresh card effects in both hands (costs or buffs may depend on board)"
+   ],
+   [
+    60,
+    "Finish the action"
+   ]
+  ]
+ },
+ "32c8364": {
+  "summary": "Always throws NotSupportedException: compiler-generated coroutine enumerators cannot be reset.",
+  "comments": []
+ },
+ "32c83d0": {
+  "summary": "Coroutine that deals damage to each card in multiTargetCard in turn, using per-target damage info when given. Damage is broadcast and applied; the last target is awaited with a damage sound, then the action finishes.",
+  "comments": [
+   [
+    11,
+    "No targets: finish immediately"
+   ],
+   [
+    24,
+    "Loop over each target"
+   ],
+   [
+    32,
+    "Per-target damage info if a list exists, else the shared damageInfo"
+   ],
+   [
+    39,
+    "Work out the death type this damage would cause"
+   ],
+   [
+    41,
+    "Target must still be in play"
+   ],
+   [
+    45,
+    "Compute actual damage after adjustments, and broadcast the unit-damaged event"
+   ],
+   [
+    51,
+    "Last target: play the damage sound and wait for it to finish"
+   ],
+   [
+    70,
+    "Earlier targets: start the damage without waiting"
+   ],
+   [
+    73,
+    "Target no longer in play: warn and skip it"
+   ],
+   [
+    85,
+    "Next target"
+   ]
+  ]
+ },
+ "32c87c8": {
+  "summary": "Always throws NotSupportedException: compiler-generated coroutine enumerators cannot be reset.",
+  "comments": []
+ },
+ "32c8834": {
+  "summary": "Coroutine for effects that damage several targets and then destroy the casting card (self-sacrifice). Targets take damage first, then the caster is marked destroyed, runs death actions, goes to the cemetery and the action finishes.",
+  "comments": [
+   [
+    6,
+    "State 2: caster death handled; go on to finish"
+   ],
+   [
+    14,
+    "State 0: set up damage loop, or finish if no targets"
+   ],
+   [
+    33,
+    "State 1: last target's damage done; now destroy the caster"
+   ],
+   [
+    35,
+    "Mark the caster destroyed and trigger its death actions"
+   ],
+   [
+    40,
+    "Queue a board re-layout for the caster's side"
+   ],
+   [
+    41,
+    "The caster becomes both acting and target card for death resolution"
+   ],
+   [
+    46,
+    "Resolve the dead card and broadcast the dead unit"
+   ],
+   [
+    50,
+    "Flag that backlash was already triggered"
+   ],
+   [
+    51,
+    "If the card actually died, wait two seconds before continuing"
+   ],
+   [
+    61,
+    "Per-target damage loop (decompiler nesting is messy here)"
+   ],
+   [
+    77,
+    "Skip targets no longer in play with a warning"
+   ],
+   [
+    89,
+    "Per-target damage info if a list exists, else the shared one"
+   ],
+   [
+    98,
+    "Death type for this damage, then adjust and broadcast damage"
+   ],
+   [
+    106,
+    "Last target: play sound and wait; then state 1 destroys the caster"
+   ],
+   [
+    109,
+    "Other targets: start the damage without waiting"
+   ]
+  ]
+ },
+ "32c9018": {
+  "summary": "Always throws NotSupportedException: compiler-generated coroutine enumerators cannot be reset.",
+  "comments": []
+ },
+ "32c9084": {
+  "summary": "Coroutine that resolves a unit's active ability. It checks readiness and target validity, handles card-pool choices, tells the opponent in networked games, plays the targeting animation and applies the ability, or cancels it if invalid.",
+  "comments": [
+   [
+    4,
+    "State machine: 0 start, 1 after choice, 2 after enemy targeting anim, 3 after attack step"
+   ],
+   [
+    18,
+    "Check that the ability can be used right now"
+   ],
+   [
+    22,
+    "Targeted abilities need a valid target; untargeted ones skip that"
+   ],
+   [
+    25,
+    "Valid: see if the ability needs a card chosen from a pool"
+   ],
+   [
+    34,
+    "Pool choice: let the player choose a card, then continue in state 1"
+   ],
+   [
+    64,
+    "Target invalid: in a network game an invalid opponent action cancels the match"
+   ],
+   [
+    77,
+    "Local player's own invalid target: show an 'invalid target' tip"
+   ],
+   [
+    85,
+    "Cancel the ability and register the cancelled action"
+   ],
+   [
+    94,
+    "Ability not ready: cancel locally or, for opponent in networked game, end the match"
+   ],
+   [
+    134,
+    "Send the action to the opponent over the network"
+   ],
+   [
+    140,
+    "Opponent's targeted ability: show the enemy targeting animation and wait"
+   ],
+   [
+    154,
+    "Local targeted ability: wait the attack step time"
+   ],
+   [
+    173,
+    "States 2 and 3 resume here after the waits"
+   ],
+   [
+    193,
+    "Apply the ability's effect and mark the active ability as used"
+   ],
+   [
+    198,
+    "Clear the waiting flag; local player also stops the ability display"
+   ],
+   [
+    213,
+    "Record the ability in the cemetery log, then finish as success"
+   ]
+  ]
+ },
+ "32c98bc": {
+  "summary": "Always throws NotSupportedException: compiler-generated coroutine enumerators cannot be reset.",
+  "comments": []
+ },
+ "32c9928": {
+  "summary": "Large coroutine that resolves playing a card from hand. It validates the play, removes the card from hand, pays cost, picks targets or pool choices, animates minions or spells, fires card-played triggers, logs, tells the opponent and finishes.",
+  "comments": [
+   [
+    9,
+    "State switch; each case resumes after a yield"
+   ],
+   [
+    19,
+    "State 0 start. Lines up to 81 are a decompiler tangle: acting card null check/error"
+   ],
+   [
+    83,
+    "Ambush cards are set up as ambushing when played"
+   ],
+   [
+    89,
+    "Remember whether this minion will teleport in"
+   ],
+   [
+    92,
+    "Pick the hand and later board of whoever owns the card"
+   ],
+   [
+    103,
+    "Check the card can still be played"
+   ],
+   [
+    108,
+    "Tactics that are targeted must still have a valid spell target"
+   ],
+   [
+    118,
+    "Card played from the enemy's hand: animate it flying in, wait (state 1)"
+   ],
+   [
+    139,
+    "Replay mode: animate the player card and wait (state 2)"
+   ],
+   [
+    158,
+    "Play not allowed: in a network game an invalid opponent card ends the match"
+   ],
+   [
+    173,
+    "Local player's illegal play: return the card to hand and cancel it"
+   ],
+   [
+    182,
+    "Default / states 1-2: take the card out of the hand and set up its board"
+   ],
+   [
+    200,
+    "Cost is not yet paid"
+   ],
+   [
+    202,
+    "Targeted minion with a valid target: enter target-choosing mode, pay later"
+   ],
+   [
+    213,
+    "Otherwise pay the card cost right away"
+   ],
+   [
+    221,
+    "Spell types (Whispers or Tactic)"
+   ],
+   [
+    225,
+    "Targeted spell from the enemy: show enemy targeting animation first (state 0xc)"
+   ],
+   [
+    245,
+    "Spell needs a card chosen from a pool: dissolve card and run the choice (state 0xe)"
+   ],
+   [
+    274,
+    "Non-targeted spell: play sound, run its effect and dissolve the card"
+   ],
+   [
+    293,
+    "Minion card: play sound and move it onto the board"
+   ],
+   [
+    301,
+    "Teleport summon: play teleport trait animation (state 3)"
+   ],
+   [
+    334,
+    "Normal summon: wait for the conversion animation (state 6)"
+   ],
+   [
+    344,
+    "State 3: play minion into the field after teleport"
+   ],
+   [
+    370,
+    "State 4: brief 0.3s pause"
+   ],
+   [
+    377,
+    "States 5 and 7: minion is on the board; count it and add to units in play"
+   ],
+   [
+    411,
+    "Unit needs a target: start the choose-target process (state 8)"
+   ],
+   [
+    441,
+    "Rally or spirit-stone cards may first need a pool choice (state 0xb)"
+   ],
+   [
+    463,
+    "State 6: play minion into the field after the conversion animation"
+   ],
+   [
+    491,
+    "State 8: check the target the player picked"
+   ],
+   [
+    519,
+    "No valid target chosen: return the minion to hand (states 9, 10 follow)"
+   ],
+   [
+    535,
+    "State 9: put the card back into hand at its old index"
+   ],
+   [
+    546,
+    "State 10: re-lay out the board, register the cancel and finish as failed"
+   ],
+   [
+    562,
+    "State 0xb: resumes after the pool choice; weapons skip target check"
+   ],
+   [
+    581,
+    "If cost was postponed, pay it now"
+   ],
+   [
+    589,
+    "Fire the 'card played' reaction on the card and log the troop play"
+   ],
+   [
+    594,
+    "State 0xc: enemy targeting anim done; continue to pool choice or spell resolve"
+   ],
+   [
+    624,
+    "State 0xd: pool choice done; apply the targeted spell"
+   ],
+   [
+    627,
+    "State 0xe: non-targeted spell pool choice done; apply the spell"
+   ],
+   [
+    637,
+    "Apply the targeted spell effect"
+   ],
+   [
+    644,
+    "Secret spells are counted for the player"
+   ],
+   [
+    653,
+    "Common finish: sanity-check UI state, process Tide and Companion keywords"
+   ],
+   [
+    663,
+    "Send the action to the opponent over the network"
+   ],
+   [
+    665,
+    "Increase the cards-played-this-turn counter and update the HUD"
+   ],
+   [
+    688,
+    "Broadcast card-played to other cards; mark that this side played a card (or troop) this turn"
+   ],
+   [
+    708,
+    "Add to the cemetery log and finish the action as success"
+   ]
+  ]
+ },
+ "32cb448": {
+  "summary": "Always throws NotSupportedException: compiler-generated coroutine enumerators cannot be reset.",
+  "comments": []
+ },
+ "32cb4b4": {
+  "summary": "Coroutine that re-lays out one player's minions on the board, waits for the animation time, then finishes the reorderMinionsInPlay action.",
+  "comments": [
+   [
+    6,
+    "State 0: start the re-layout and wait for its duration"
+   ],
+   [
+    18,
+    "State 1: animation done, finish the reorder action"
+   ]
+  ]
+ },
+ "32cb5e0": {
+  "summary": "Always throws NotSupportedException: compiler-generated coroutine enumerators cannot be reset.",
+  "comments": []
+ }
+}

@@ -88,6 +88,21 @@ files into a maps folder and apply them the same way. Only decompiler-made names
 files: field offsets, `obj.field` from offsets, `// interface call`, coroutine state machines, the compiler's
 null checks, what `str_...` identifiers and `*(x + 0x38)` leftovers mean.
 
+### 5b. (Optional) explanatory comments
+
+`comment-maps/` holds the comments an AI wrote for the same 2,746 functions (a 1-3 sentence summary per method
+and a `// ...` line before each meaningful block, in game terms), keyed by address and line number of the
+*named* readable output. Apply them after `apply_names.py`, before `assemble.py`:
+
+```
+python3 apply_comments.py readable/ comment-maps/
+```
+
+For another area: `make_comment_batches.py game-code/ readable/ cbatches/ Menu/` writes numbered batch files;
+give each to an AI with `comment-prompt.txt` (replace BATCHFILE and OUTFILE), collect the JSON files and apply
+them the same way. The line numbers refer to the batch text, so apply on the same readable output the batches
+were made from (apply_comments.py records what it did in `applied.txt` and never comments a function twice).
+
 ## 6. (Optional) the PC build: addresses side by side, Windows-only methods
 
 The PC build (`GameAssembly.dll` + its `global-metadata.dat`, in the Steam install) is the same code; what differs

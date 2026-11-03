@@ -1,0 +1,917 @@
+{
+ "2f67770": {
+  "summary": "Sets the mana (Energy) text of this holder to a single number. Unless silently is set, it also plays the punch tween (if enabled) and calls the virtual value-change VFX hook (TryDOVfx).",
+  "comments": [
+   [
+    8,
+    "Text component exists: write the number into the label"
+   ],
+   [
+    10,
+    "Not silent: animate the label if the holder has tweening turned on"
+   ],
+   [
+    13,
+    "Virtual call through the vtable (seems to be TryDOVfx): spawn value up/down VFX for the new value"
+   ],
+   [
+    17,
+    "No text component assigned: null reference"
+   ]
+  ]
+ },
+ "2f677f0": {
+  "summary": "Plays a DOTween punch-scale on the Energy text. The first time it runs it remembers the text's original scale, and every call resets the text to that scale before punching so repeated punches do not drift.",
+  "comments": [
+   [
+    4,
+    "First use: capture the text's current local scale so it can be restored later"
+   ],
+   [
+    16,
+    "Reset the text to its remembered original scale before starting a new punch"
+   ],
+   [
+    29,
+    "Build a DOTween punch-scale: punch of 20% of Vector3.one, 0.5s, 10 vibrato (inlined DOPunchScale)"
+   ],
+   [
+    44,
+    "Tween was created: tag it with the text transform as its target (debug target-id bookkeeping)"
+   ],
+   [
+    49,
+    "Decompiler mangled the Component cast check below; it just fetches the target's name for debug ids"
+   ]
+  ]
+ },
+ "2f66ff8": {
+  "summary": "Sets the Energy text to the format \"current/total\" (value over value2). Unless silently is set, it plays the punch tween (if enabled) and calls the value-change VFX hook.",
+  "comments": [
+   [
+    9,
+    "Format the label as \"value/value2\" using the shared format string"
+   ],
+   [
+    10,
+    "Text component exists: write it"
+   ],
+   [
+    12,
+    "Not silent: animate and trigger the value-up/down VFX"
+   ],
+   [
+    16,
+    "Virtual call (seems to be TryDOVfx) with the new current value"
+   ]
+  ]
+ },
+ "2f67160": {
+  "summary": "Shows or hides the holder's game object. When shown and an alternate tooltip string is given, it applies that string (localized) to the holder's tooltip component.",
+  "comments": [
+   [
+    6,
+    "Show or hide the whole Energy holder"
+   ],
+   [
+    7,
+    "Hidden, or no alternate tooltip text: nothing more to do"
+   ],
+   [
+    12,
+    "Find the tooltip component on the holder (generic GetComponent, type lost by decompiler)"
+   ],
+   [
+    17,
+    "Replace the tooltip with the alternate localized text, with no title"
+   ]
+  ]
+ },
+ "2f678e0": {
+  "summary": "If VFX on value change is enabled and the value actually changed, loads and spawns the 'value up' or 'value down' effect at this holder's position, then stores the new value as current.",
+  "comments": [
+   [
+    4,
+    "Only react when VFX is enabled and the value differs from the last one shown"
+   ],
+   [
+    5,
+    "Pick the value-up effect when increasing, otherwise the value-down effect"
+   ],
+   [
+    14,
+    "Check the addressable reference is valid before loading"
+   ],
+   [
+    16,
+    "Load the effect prefab (General cache group) and spawn it at the holder's position with the prefab's rotation"
+   ],
+   [
+    22,
+    "Remember the new value for the next comparison"
+   ]
+  ]
+ },
+ "2f673a4": {
+  "summary": "Updates the saved-Energy (accumulation) visuals: shows the 'on' VFX when savedMana is above 0 and the 'off' VFX otherwise, optionally updates the number, and fades the accumulation image in or out with a sound. Decompiler pasted the fade and audio code of ToggleManaAccumulation into this function.",
+  "comments": [
+   [
+    5,
+    "Closure object that captures this and the Energy numbers for the delayed callback"
+   ],
+   [
+    15,
+    "Turn the 'saved Energy' effect on when something is saved, off otherwise"
+   ],
+   [
+    18,
+    "No saved Energy: only a fade-out/number update is needed, and only if useNumberChange"
+   ],
+   [
+    23,
+    "Callback that updates the number after the fade (b__0 of the closure)"
+   ],
+   [
+    27,
+    "Saved Energy exists: if the accumulation image is assigned, show unused-1 / total in the text"
+   ],
+   [
+    33,
+    "Fade target is 'in' (true) for this branch"
+   ],
+   [
+    36,
+    "From here the code is the ToggleManaAccumulation body (shared via merged tail): fade the image"
+   ],
+   [
+    40,
+    "Kill running tweens on the image so the new fade starts clean"
+   ],
+   [
+    42,
+    "Target alpha is 1 when accumulating and 0 when spending"
+   ],
+   [
+    49,
+    "Float compare with tolerance: if the image already has the target alpha, do nothing"
+   ],
+   [
+    66,
+    "Fade the image over 1s after a 0.5s delay, then run the completion callback after 1s"
+   ],
+   [
+    70,
+    "Choose sound: accumulated cue when fading in, accumulated-used cue when fading out"
+   ],
+   [
+    79,
+    "Only play one accumulation sound per frame (several holders may fire at once)"
+   ],
+   [
+    87,
+    "Play the cue through the SoundManager: get an AudioSource, configure it from the cue, then play it"
+   ],
+   [
+    98,
+    "Cue not assigned: optionally log an error"
+   ],
+   [
+    109,
+    "Configuring the audio source failed: skip playing"
+   ],
+   [
+    110,
+    "Sound debugging enabled: build and log a 'Sound played CUE ... AudioSource ... Mixer' message first"
+   ],
+   [
+    145,
+    "Decompiler artefact: the rest is an inlined Play2D(clip) overload with the same source/play logic"
+   ],
+   [
+    189,
+    "Null reference exits"
+   ]
+  ]
+ },
+ "2f67a58": {
+  "summary": "Fades the accumulation image to fully visible (option true) or invisible (false) over 1s, runs OnComplete after the fade through a delayed call, and plays the matching accumulate / accumulate-used sound at most once per frame.",
+  "comments": [
+   [
+    4,
+    "Closure holding the OnComplete callback for the delayed call"
+   ],
+   [
+    8,
+    "Stop any tween already running on the image"
+   ],
+   [
+    10,
+    "Target alpha: 1 when switching on, 0 when switching off"
+   ],
+   [
+    17,
+    "Compare current alpha with target using a relative tolerance; if equal there is nothing to animate"
+   ],
+   [
+    34,
+    "Fade the image over 1s after a 0.5s delay"
+   ],
+   [
+    36,
+    "Schedule OnComplete to fire after 1s"
+   ],
+   [
+    38,
+    "Pick the cue: accumulated when on, accumulated-used when off"
+   ],
+   [
+    47,
+    "Skip if a sound was already played this frame"
+   ],
+   [
+    55,
+    "Play the cue via SoundManager (get audio source, configure from cue, play)"
+   ],
+   [
+    66,
+    "Cue not assigned: log an error if enabled"
+   ],
+   [
+    77,
+    "Cue configuration failed: nothing is played"
+   ],
+   [
+    78,
+    "Debug sounds on: log which cue, source and mixer were used"
+   ],
+   [
+    113,
+    "Decompiler artefact: inlined Play2D(clip) overload merged here"
+   ],
+   [
+    157,
+    "Null reference exits"
+   ]
+  ]
+ },
+ "2f67668": {
+  "summary": "Sets the Energy text to \"current/total\". When activate is false the current part is replaced by a placeholder character instead of the real value (used for a deactivated Energy type).",
+  "comments": [
+   [
+    6,
+    "Active: show the real current value"
+   ],
+   [
+    11,
+    "Deactivated: show a placeholder instead of the current value"
+   ],
+   [
+    16,
+    "Compose \"current/total\" and write it to the label"
+   ]
+  ]
+ },
+ "2f67d30": {
+  "summary": "Debug/test routine: forces the saved-Energy 'on' VFX on and the 'off' VFX off, then plays the accumulation fade-in and sound exactly as ToggleManaAccumulation(true) would. Not used in normal play.",
+  "comments": [
+   [
+    4,
+    "Build the same closure SetSavedMana uses, with fake values of 1 unused / 1 total"
+   ],
+   [
+    10,
+    "Force the 'saved Energy' effect on and its 'off' variant off"
+   ],
+   [
+    15,
+    "Need the accumulation image to continue"
+   ],
+   [
+    19,
+    "Closure for the delayed callback (no OnComplete here)"
+   ],
+   [
+    23,
+    "Stop tweens running on the image"
+   ],
+   [
+    27,
+    "Target alpha is 1: skip if the image is already fully visible"
+   ],
+   [
+    45,
+    "Fade in over 1s with a 0.5s delay, then schedule the completion callback"
+   ],
+   [
+    49,
+    "Use the 'accumulated' sound"
+   ],
+   [
+    54,
+    "One accumulation sound per frame only"
+   ],
+   [
+    62,
+    "Play the cue through the SoundManager"
+   ],
+   [
+    73,
+    "Cue not assigned: log an error if enabled"
+   ],
+   [
+    84,
+    "Cue configuration failed: skip"
+   ],
+   [
+    85,
+    "Debug sounds on: log the cue, source and mixer"
+   ],
+   [
+    120,
+    "Decompiler artefact: inlined Play2D(clip) overload merged here"
+   ],
+   [
+    164,
+    "Null reference exits"
+   ]
+  ]
+ },
+ "2f67d88": {
+  "summary": "Quest-point version of SetMana: calls the base SetMana, then turns off every quest counter object and re-enables the first 'value' counters, animating only the last one to appear unless silent.",
+  "comments": [
+   [
+    5,
+    "Base class sets the text and plays the normal change effects"
+   ],
+   [
+    8,
+    "First pass: switch every quest counter object off without animation"
+   ],
+   [
+    18,
+    "No quest points: leave all counters off"
+   ],
+   [
+    21,
+    "Second pass: switch on one counter per quest point (up to value)"
+   ],
+   [
+    25,
+    "Decompiler merged the body of ToggleCounter here; its tween/ease logic is shown below"
+   ],
+   [
+    27,
+    "Counter exists: show or hide it"
+   ],
+   [
+    32,
+    "Deactivating: scale from one to zero; activating: scale from zero to one"
+   ],
+   [
+    52,
+    "Ease: InOutSine when appearing, InOutExpo when disappearing"
+   ],
+   [
+    58,
+    "Scale tween applied to the counter transform with that ease"
+   ],
+   [
+    78,
+    "Only the newest (last) counter animates; earlier ones appear silently"
+   ],
+   [
+    88,
+    "Null reference exits"
+   ]
+  ]
+ },
+ "2f67e54": {
+  "summary": "Shows or hides one quest-point counter object. Unless silently is set, it also tweens the object's scale (grow in with InOutSine, shrink out with InOutExpo).",
+  "comments": [
+   [
+    4,
+    "Counter object must exist"
+   ],
+   [
+    5,
+    "Activate or deactivate the counter"
+   ],
+   [
+    6,
+    "Silent: no animation"
+   ],
+   [
+    9,
+    "Appearing: tween from scale zero up to one"
+   ],
+   [
+    17,
+    "Disappearing: tween from scale one down to zero"
+   ],
+   [
+    29,
+    "Choose ease: InOutSine in, InOutExpo out"
+   ],
+   [
+    35,
+    "Start scale tween on the counter transform"
+   ],
+   [
+    37,
+    "Set the ease type on the tween (inlined SetEase), including flash-ease amplitude handling"
+   ]
+  ]
+ },
+ "2f6d03c": {
+  "summary": "Static constructor of MinionManager's compiler-generated closure class; creates its shared singleton instance used for lambdas.",
+  "comments": []
+ },
+ "2f680c8": {
+  "summary": "Property getter returning the left slot position array: the weapon layout when the hero has a weapon setup, otherwise the normal layout.",
+  "comments": [
+   [
+    4,
+    "Hero has a weapon: use the weapon slot layout instead"
+   ]
+  ]
+ },
+ "2f680e4": {
+  "summary": "Property getter returning the right slot position array: the weapon layout when the hero has a weapon setup, otherwise the normal layout.",
+  "comments": [
+   [
+    4,
+    "Hero has a weapon: use the weapon slot layout instead"
+   ]
+  ]
+ },
+ "2f68100": {
+  "summary": "Property getter returning how many minion spaces one side of the board has, taken from the length of the left slot position array (weapon or normal layout).",
+  "comments": [
+   [
+    4,
+    "Pick the weapon layout when a weapon is set up"
+   ],
+   [
+    7,
+    "Array length (offset 0x18) is the number of spaces"
+   ]
+  ]
+ },
+ "2f6812c": {
+  "summary": "Unity Awake for the minion manager. Reads the slots-per-side count from the match data when player data exists, builds the slot position arrays and creates empty minion and occupation lists for both sides.",
+  "comments": [
+   [
+    7,
+    "Player data available: take the number of slots per side from the match type"
+   ],
+   [
+    11,
+    "Compute the normal left/right slot offsets"
+   ],
+   [
+    12,
+    "Create empty lists for minions and occupation flags on each side"
+   ],
+   [
+    20,
+    "Check the card shadow object is assigned (only a null check remains)"
+   ]
+  ]
+ },
+ "2f68420": {
+  "summary": "Builds the array of world positions for the minion slots on one side of the hero (direction -1 left, +1 right). Decompiler merged in the gizmo drawing, the slot lookup helpers and the closest-slot search that follow it in memory, so only the first loop is reliable.",
+  "comments": [
+   [
+    4,
+    "One Vector3 per slot on this side"
+   ],
+   [
+    10,
+    "Loop over slots: each is spaced by MinionSeparation plus the extra distance from the hero"
+   ],
+   [
+    18,
+    "Left side counts down from the far end; right side counts up from the hero"
+   ],
+   [
+    27,
+    "Convert the local slot offset into a world position with the manager transform"
+   ],
+   [
+    29,
+    "Out-of-range array write check; decompiler then falls into unrelated code"
+   ],
+   [
+    30,
+    "From here the code is NOT GetSlots: the decompiler merged OnDrawGizmosSelected (draws rays and spheres per slot)"
+   ],
+   [
+    79,
+    "Merged: enumerating the concatenated left and right slot arrays with interface calls"
+   ],
+   [
+    162,
+    "Merged: enumerator Dispose in a finally block"
+   ],
+   [
+    196,
+    "Merged: exception cleanup, then GetSlotPos / GetLeftSlotPos clamping and error logs"
+   ],
+   [
+    324,
+    "Merged: GetClosestAvailableSlot starts here, finding the slot nearest to a screen position"
+   ],
+   [
+    391,
+    "Convert the best slot index into the signed slot number (negative left, positive right)"
+   ],
+   [
+    78,
+    "Normal end of GetSlots: return the filled array"
+   ]
+  ]
+ },
+ "2f68534": {
+  "summary": "Editor gizmo drawing: draws a vertical debug ray and a wire sphere at the hero position plus each left and right slot. The decompiler merged in following functions (slot lookup, error logging and closest-slot search), so only the start is meaningful.",
+  "comments": [
+   [
+    6,
+    "Hero position in world space plus heroExtraOffset"
+   ],
+   [
+    23,
+    "Draw a long upward ray as a marker at that point"
+   ],
+   [
+    28,
+    "Get slots for both sides and enumerate their concatenation"
+   ],
+   [
+    52,
+    "Loop over every slot position"
+   ],
+   [
+    110,
+    "Draw a ray and wire sphere at each slot"
+   ],
+   [
+    120,
+    "Dispose the enumerator (try/finally)"
+   ],
+   [
+    144,
+    "Decompiler merged unrelated code from here: slot position getters with 'slotNum too high' error clamping"
+   ],
+   [
+    265,
+    "Decompiler merged GetClosestAvailableSlot here: nearest slot to a point in screen space"
+   ]
+  ]
+ },
+ "2f68308": {
+  "summary": "Allocates the normal-layout left and right slot offset arrays (slotsPerSide entries) and fills them: right slots are placed at negative X, left slots at positive X, each spaced by MinionSeparation plus extra distance from the hero.",
+  "comments": [
+   [
+    4,
+    "Create both Vector2 arrays sized to the number of slots per side"
+   ],
+   [
+    12,
+    "Loop over the right-side slots"
+   ],
+   [
+    13,
+    "Right side done: now fill the left side the same way"
+   ],
+   [
+    40,
+    "Right slot X is negative: -(separation * index) - extra distance from hero"
+   ],
+   [
+    28,
+    "Left slot X is positive: separation * index + extra distance; Y is 0"
+   ]
+  ]
+ },
+ "2f68a44": {
+  "summary": "Meant to return the position of a slot by number. The decompiler mangled it with GetRightSlotPos, GetLeftSlotPos and GetClosestAvailableSlot (their code is merged), so only the logic inside each piece is reliable.",
+  "comments": [
+   [
+    4,
+    "Right-slot lookup: slotNum (method) above 0 means a right slot at index slotNum-1"
+   ],
+   [
+    25,
+    "Slot number too high: log an error and clamp to the last slot"
+   ],
+   [
+    26,
+    "Error text: Trying to GetRightSlotPos with slotNum too high"
+   ],
+   [
+    59,
+    "Merged GetLeftSlotPos: negative slot numbers are left slots using ~slotNum as index"
+   ],
+   [
+    78,
+    "Slot number too high: log an error and clamp to the last left slot"
+   ],
+   [
+    117,
+    "Merged GetClosestAvailableSlot: build the concatenated left+right slot array"
+   ],
+   [
+    143,
+    "Loop over available slots, tracking the one closest on screen (WorldToScreenPoint distance)"
+   ],
+   [
+    184,
+    "Convert the winning array index back to a signed slot number (left negative, right positive)"
+   ]
+  ]
+ },
+ "2f68b6c": {
+  "summary": "Returns the position of a left slot. If the slot number is beyond the layout size it logs an error and clamps to the last slot. The decompiler merged GetClosestAvailableSlot after it.",
+  "comments": [
+   [
+    6,
+    "Use the weapon layout array when a weapon is set up, otherwise the normal one"
+   ],
+   [
+    19,
+    "Slot number too high: log an error"
+   ],
+   [
+    20,
+    "Error text: Trying to GetLeftSlotPos with slotNum too high"
+   ],
+   [
+    34,
+    "Clamp to the last slot (never below 0)"
+   ],
+   [
+    42,
+    "Decompiler merged GetClosestAvailableSlot here; the code below is not part of GetLeftSlotPos"
+   ],
+   [
+    48,
+    "Work out the range of occupied slot indexes (left count to right count)"
+   ],
+   [
+    69,
+    "Search for the slot whose screen position is nearest to the input position"
+   ],
+   [
+    107,
+    "Convert the best array index into a signed slot number"
+   ]
+  ]
+ },
+ "2f68a68": {
+  "summary": "Returns the position of a right slot. If the slot number is beyond the layout size it logs an error and clamps to the last slot. The decompiler merged GetLeftSlotPos and GetClosestAvailableSlot after it.",
+  "comments": [
+   [
+    9,
+    "Use the weapon layout when a weapon is set up, otherwise the normal one"
+   ],
+   [
+    22,
+    "Slot number too high: log an error"
+   ],
+   [
+    25,
+    "Error text: Trying to GetRightSlotPos with slotNum too high"
+   ],
+   [
+    37,
+    "Clamp to the last slot (never below 0)"
+   ],
+   [
+    45,
+    "Decompiler merged GetLeftSlotPos here (same clamp and error for left slots)"
+   ],
+   [
+    90,
+    "Decompiler merged GetClosestAvailableSlot here"
+   ],
+   [
+    117,
+    "Loop over the slots to find the nearest one on screen"
+   ],
+   [
+    155,
+    "Convert the best index into a signed slot number"
+   ]
+  ]
+ },
+ "2f68c70": {
+  "summary": "Finds the slot nearest to a screen position: builds all left and right slot world positions, projects each to the screen and returns the signed slot number of the closest one (left negative, right positive), or 0 if none.",
+  "comments": [
+   [
+    4,
+    "Get world positions of left (-1) and right (+1) slots and join them into one array"
+   ],
+   [
+    9,
+    "Range of slots to check: starts at the first free left slot (if any)"
+   ],
+   [
+    17,
+    "Ends after the last free right slot (if any)"
+   ],
+   [
+    30,
+    "Loop over each candidate slot"
+   ],
+   [
+    53,
+    "Project the slot to screen space and measure distance to the input position"
+   ],
+   [
+    58,
+    "Keep the smallest distance so far"
+   ],
+   [
+    68,
+    "Found one: convert the array index back to a signed slot number"
+   ],
+   [
+    75,
+    "No candidate slots: return 0"
+   ]
+  ]
+ },
+ "2f68f68": {
+  "summary": "Inserts a minion card into the left or right minion list at the slot given by AdjustedSlot, logs the request, then refreshes the occupation lists. Returns the adjusted slot number used.",
+  "comments": [
+   [
+    7,
+    "Validate the requested slot (may move to the next free slot)"
+   ],
+   [
+    8,
+    "Build a debug log message: InsertMinion <card> at slot N adjusted to M"
+   ],
+   [
+    29,
+    "Negative or zero adjusted slot means the left side, positive means the right side"
+   ],
+   [
+    36,
+    "Left list index is ~slot (slots -1, -2, ... map to 0, 1, ...)"
+   ],
+   [
+    41,
+    "Right list index is slot-1"
+   ],
+   [
+    47,
+    "Insert the card into the chosen list"
+   ],
+   [
+    48,
+    "Rebuild occupation flags and fire the minion-changed event"
+   ],
+   [
+    59,
+    "Decompiler's array bounds check failure branch"
+   ]
+  ]
+ },
+ "2f692e8": {
+  "summary": "Rebuilds the right and left occupation lists with one true entry per minion currently on each side, then raises the OnMinionAddedOrRemoved event if one is subscribed and this is the player's own manager.",
+  "comments": [
+   [
+    9,
+    "Clear the right occupation list and bump its version"
+   ],
+   [
+    13,
+    "Loop adding a true entry for every minion in the right list"
+   ],
+   [
+    18,
+    "Right done: do the same for the left side"
+   ],
+   [
+    49,
+    "Left loop: add a true entry per left minion"
+   ],
+   [
+    72,
+    "Both lists rebuilt: pick the larger count (seems to be used for the event)"
+   ],
+   [
+    77,
+    "Raise OnMinionAddedOrRemoved if anyone is listening"
+   ],
+   [
+    83,
+    "Event only matters when this is the player's own minion manager (compared with the battle manager)"
+   ]
+  ]
+ },
+ "2f69530": {
+  "summary": "Adds one 'occupied' entry to the occupation list of the side the card is on (right if in the right list, left if in the left list), but only when that side still has room. Heroes are ignored.",
+  "comments": [
+   [
+    5,
+    "Next free slot index, used as a side fallback"
+   ],
+   [
+    22,
+    "Heroes do not occupy minion slots"
+   ],
+   [
+    26,
+    "Card is in the right list and the right side has room: use the right occupation list"
+   ],
+   [
+    29,
+    "Otherwise check the left list the same way"
+   ],
+   [
+    10,
+    "Card unknown or not found: choose side by the sign of the next free slot"
+   ],
+   [
+    12,
+    "Left side chosen: needs a free left slot"
+   ],
+   [
+    35,
+    "Right side chosen: needs a free right slot"
+   ],
+   [
+    43,
+    "Append true to the occupation list (inlined List<bool>.Add with resize)"
+   ]
+  ]
+ },
+ "2f69178": {
+  "summary": "Turns a desired slot number into a valid one. Slot 0 picks the less filled side; a full or invalid side falls back to the next free slot on the other side; no free slots logs an error and returns the input unchanged.",
+  "comments": [
+   [
+    6,
+    "How many slots remain free"
+   ],
+   [
+    7,
+    "Board full: log an error and keep the desired slot"
+   ],
+   [
+    14,
+    "Desired 0 means 'anywhere': log a warning"
+   ],
+   [
+    19,
+    "Right side has at least as many minions as left: put it in the next right slot"
+   ],
+   [
+    26,
+    "Otherwise next left slot (negative numbering, ~count)"
+   ],
+   [
+    32,
+    "Negative desired slot: wants the left side"
+   ],
+   [
+    34,
+    "No left slot available: use the next right slot"
+   ],
+   [
+    44,
+    "Desired left slot is beyond the end of the list: use the next free left slot"
+   ],
+   [
+    51,
+    "Positive desired slot: wants the right side"
+   ],
+   [
+    53,
+    "No right slot available: use the next left slot"
+   ],
+   [
+    55,
+    "Desired right slot is beyond the end of the list: use the next free right slot"
+   ],
+   [
+    58,
+    "Desired slot is fine as is"
+   ]
+  ]
+ },
+ "2f68ef8": {
+  "summary": "Returns true when the right side has a free slot, i.e. its occupation list is shorter than the number of right slots in the current (weapon or normal) layout.",
+  "comments": [
+   [
+    7,
+    "Pick the weapon layout when the hero has a weapon, otherwise the normal one"
+   ],
+   [
+    12,
+    "Free slot exists when occupied count is below the layout's slot count"
+   ]
+  ]
+ }
+}

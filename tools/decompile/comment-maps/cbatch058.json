@@ -1,0 +1,942 @@
+{
+ "32a0194": {
+  "summary": "Called when the player clicks an active ability that needs a target. Switches the UI to ability-target mode, highlights valid targets, starts the crosshair at the acting card and colours it as a spell. Most of the later code is inlined DOTween internals that the decompiler mangled.",
+  "comments": [
+   [
+    4,
+    "UI now waits for the player to click a target for the active ability"
+   ],
+   [
+    5,
+    "highlight every card that can legally be targeted by this ability"
+   ],
+   [
+    9,
+    "remember the acting card's board position as the start of the targeting line"
+   ],
+   [
+    18,
+    "show the crosshair (animated, not instant)"
+   ],
+   [
+    22,
+    "crosshair line starts at the acting card"
+   ],
+   [
+    29,
+    "move the crosshair sprite to the acting card's 2D position"
+   ],
+   [
+    39,
+    "ability targeting always uses the Spell attack style for the line"
+   ],
+   [
+    40,
+    "apply the Spell colour to every reticle colour preset"
+   ],
+   [
+    47,
+    "decompiler glitch: an exception handler got merged into the loop; the real loop just recolours each preset"
+   ],
+   [
+    78,
+    "after the loop: stop any running tween on the crosshair sprite, otherwise punch its scale"
+   ],
+   [
+    80,
+    "if the crosshair is already tweening, kill/complete those tweens first"
+   ],
+   [
+    88,
+    "from here the decompiler inlined DOTween's kill-by-target code (TweenManager); not game logic and unreliable"
+   ],
+   [
+    493,
+    "crosshair was not tweening: reset its scale to the original size"
+   ],
+   [
+    501,
+    "play a small DOTween punch-scale on the crosshair sprite as a pop effect"
+   ],
+   [
+    545,
+    "more inlined DOTween TweenManager cleanup (despawn all tweens); unreliable decompiler output"
+   ],
+   [
+    586,
+    "inlined DOTween debug logging loop; not game logic"
+   ],
+   [
+    600,
+    "inlined DOTween despawn/pool code; not game logic"
+   ]
+  ]
+ },
+ "32a0748": {
+  "summary": "Called when the player clicks a target for a pending active ability. If the target is valid (and allowed by the tutorial) the ability runs on it; otherwise an invalid-target tip is shown and targeting is cancelled. Always hides the crosshair and attack selector afterwards.",
+  "comments": [
+   [
+    4,
+    "a click on empty space gives a null target"
+   ],
+   [
+    5,
+    "invalid if no target, not a legal ability target, or the tutorial script forbids it"
+   ],
+   [
+    6,
+    "invalid target: tell the player and cancel targeting"
+   ],
+   [
+    14,
+    "drop the pending ability and clear the card highlights"
+   ],
+   [
+    17,
+    "valid target: carry out the active ability on it"
+   ],
+   [
+    20,
+    "hide the crosshair and the attack type selector in both cases"
+   ],
+   [
+    44,
+    "null-check path from the decompiler"
+   ]
+  ]
+ },
+ "32a0714": {
+  "summary": "Cancels a pending active ability: clears the waiting-to-resolve flag, tells the selected card to cancel its ability and fades out the acting light on the ability description panel.",
+  "comments": [
+   [
+    4,
+    "no longer waiting for the active ability to resolve"
+   ],
+   [
+    6,
+    "tell the card to cancel its active ability"
+   ],
+   [
+    10,
+    "fade out the glow behind the ability description if there is one"
+   ]
+  ]
+ },
+ "32a0898": {
+  "summary": "Tutorial check for using an active ability: outside the player's tutorial turns anything is allowed; in a scripted turn the target must match one of the current scripted actions. Returns false for a null target.",
+  "comments": [
+   [
+    4,
+    "no target means invalid"
+   ],
+   [
+    8,
+    "non-tutorial matches and the opponent's turn have no restriction"
+   ],
+   [
+    12,
+    "copy the obscured turn counter to read it"
+   ],
+   [
+    19,
+    "turn counter below 1 (before the first turn): ability not allowed"
+   ],
+   [
+    24,
+    "find the scripted data for this tutorial turn"
+   ],
+   [
+    25,
+    "turn is not scripted: allow everything"
+   ],
+   [
+    28,
+    "look at the scripted action the tutorial is currently on"
+   ],
+   [
+    41,
+    "check the alternatives allowed at this step"
+   ],
+   [
+    43,
+    "free-choice or hand-activation steps allow the ability"
+   ],
+   [
+    49,
+    "otherwise the ability use must match a scripted playActiveAbility step"
+   ],
+   [
+    61,
+    "allowed"
+   ]
+  ]
+ },
+ "32a0954": {
+  "summary": "Tutorial check for whether attack targets may be highlighted for a card: false on the opponent's turn, and in scripted tutorial turns only if the current step allows an attack by this card.",
+  "comments": [
+   [
+    4,
+    "only the player's own turn shows potential targets"
+   ],
+   [
+    8,
+    "copy the obscured turn counter"
+   ],
+   [
+    15,
+    "before the first turn: nothing allowed"
+   ],
+   [
+    20,
+    "find the scripted data for this tutorial turn"
+   ],
+   [
+    21,
+    "turn is not scripted: allow"
+   ],
+   [
+    24,
+    "look at the scripted action the tutorial is currently on"
+   ],
+   [
+    38,
+    "scan the alternatives allowed at this step"
+   ],
+   [
+    39,
+    "free-choice or hand-activation steps allow it"
+   ],
+   [
+    45,
+    "otherwise it must match a scripted attack-continuation step for this card"
+   ],
+   [
+    57,
+    "allowed"
+   ]
+  ]
+ },
+ "32a0c18": {
+  "summary": "Starts the targeting UI for the selected card's targeted active ability: begins tracking the pointer from the card, sets the UI state and highlights every unit in play that is a valid ability target (player's own cards only).",
+  "comments": [
+   [
+    5,
+    "need the selected card and its transform"
+   ],
+   [
+    7,
+    "start the targeting line from the card"
+   ],
+   [
+    9,
+    "UI now waits for an ability target"
+   ],
+   [
+    11,
+    "only the player's own cards show highlights; the enemy's does nothing"
+   ],
+   [
+    19,
+    "walk all units in play"
+   ],
+   [
+    24,
+    "valid target: show the potential-target highlight on it"
+   ]
+  ]
+ },
+ "3293e28": {
+  "summary": "Hides the target reticle crosshair (optionally instantly) and the attack type selector, and clears the selector's current card.",
+  "comments": [
+   [
+    4,
+    "hide the crosshair"
+   ],
+   [
+    6,
+    "also hide the attack type selector"
+   ],
+   [
+    14,
+    "deactivate the selector object and its buttons"
+   ]
+  ]
+ },
+ "32a0d18": {
+  "summary": "Shows or hides the attack type mark selector for a card and moves it to that card's board position.",
+  "comments": [
+   [
+    4,
+    "selector is the small attack-type picker shown over a unit"
+   ],
+   [
+    11,
+    "toggle the selector object"
+   ],
+   [
+    13,
+    "show just the chosen attack type (melee/ranged) on its buttons"
+   ],
+   [
+    16,
+    "convert the card's board position to 2D world space and place the selector there"
+   ]
+  ]
+ },
+ "32a0d40": {
+  "summary": "Returns true if any action is waiting in the queues or one is being resolved right now.",
+  "comments": [
+   [
+    5,
+    "anything queued counts as busy"
+   ],
+   [
+    8,
+    "otherwise report the obscured 'resolving action' flag"
+   ]
+  ]
+ },
+ "32a0dc4": {
+  "summary": "Debug helper: logs every pending action in the action, instant, interrupt and delayed-instant queues, with the acting card if known.",
+  "comments": [
+   [
+    4,
+    "the first three queues have their own helper"
+   ],
+   [
+    7,
+    "delayed instant queue is logged inline with the same format"
+   ],
+   [
+    15,
+    "no acting card: log just the action type"
+   ],
+   [
+    23,
+    "with acting card: log type and card name"
+   ]
+  ]
+ },
+ "32a0df0": {
+  "summary": "Debug helper: logs every pending action in the given queue, with the acting card name when there is one.",
+  "comments": [
+   [
+    5,
+    "walk the queue"
+   ],
+   [
+    11,
+    "no acting card: log just the action type"
+   ],
+   [
+    19,
+    "with acting card: log type and card name"
+   ]
+  ]
+ },
+ "32a0ff0": {
+  "summary": "Debug helper: logs a compact summary of the interrupt, instant, delayed instant and action queues. The action queue result is only used when dev tools are on.",
+  "comments": [
+   [
+    7,
+    "log the interrupt queue if non-empty"
+   ],
+   [
+    15,
+    "same for the instant queue"
+   ],
+   [
+    23,
+    "same for the delayed instant queue"
+   ],
+   [
+    31,
+    "empty action queue: nothing more to log"
+   ],
+   [
+    37,
+    "the action queue line is only logged when dev tools are enabled"
+   ],
+   [
+    48,
+    "decompiler lost the logger call; it logs the string built above"
+   ]
+  ]
+ },
+ "32a1154": {
+  "summary": "Builds one string summarising a queue, with each action's index, type and acting card name.",
+  "comments": [
+   [
+    10,
+    "loop over every queued action"
+   ],
+   [
+    15,
+    "action has an acting card: include its name (7-part string)"
+   ],
+   [
+    16,
+    "decompiler shows array building of the pieces; the separators are lost"
+   ],
+   [
+    58,
+    "no acting card: shorter 5-part string without the card"
+   ],
+   [
+    77,
+    "append this entry to the running result"
+   ]
+  ]
+ },
+ "3296b34": {
+  "summary": "Returns how many automatic actions (interrupt, instant, delayed instant queues) are waiting; excludes the normal action queue.",
+  "comments": [
+   [
+    6,
+    "all three queues must exist"
+   ],
+   [
+    7,
+    "sum of interrupt, instant and delayed instant queue sizes"
+   ]
+  ]
+ },
+ "32852cc": {
+  "summary": "Returns how many actions are waiting in total across the action, instant, interrupt and delayed instant queues.",
+  "comments": [
+   [
+    6,
+    "all four queues must exist"
+   ],
+   [
+    7,
+    "sum of the four queue sizes"
+   ]
+  ]
+ },
+ "32a151c": {
+  "summary": "Spawns the current turn owner's hero targeted-spell animation prefab at that hero's position, if the hero card defines one, and stores it so it can be destroyed later.",
+  "comments": [
+   [
+    4,
+    "pick the manager of whoever's turn it is"
+   ],
+   [
+    11,
+    "need the hero card's raw data"
+   ],
+   [
+    14,
+    "only if the hero has a targeted spell animation"
+   ],
+   [
+    17,
+    "spawn it at the hero position with zero rotation"
+   ],
+   [
+    23,
+    "keep a reference for StopTargetedSpellAnim"
+   ]
+  ]
+ },
+ "3293e68": {
+  "summary": "Destroys the targeted spell animation object, if any.",
+  "comments": [
+   [
+    8,
+    "destroy the spawned animation object"
+   ]
+  ]
+ },
+ "3285b14": {
+  "summary": "Returns whether it is currently the player's turn, by decrypting the obscured turn flag.",
+  "comments": [
+   [
+    4,
+    "playerTurnFlag is an anti-cheat wrapped bool; decrypt it"
+   ]
+  ]
+ },
+ "328ada8": {
+  "summary": "Returns true if any queued action is a blocking one (type 0x1b or flagged blocking). If it is the player's turn and showTips is set, shows the 'please wait' tip. Always false in replays.",
+  "comments": [
+   [
+    5,
+    "need match data"
+   ],
+   [
+    8,
+    "replays never block"
+   ],
+   [
+    11,
+    "scan the action queue first"
+   ],
+   [
+    24,
+    "action type 0x1b always blocks"
+   ],
+   [
+    29,
+    "any action flagged blocking also blocks"
+   ],
+   [
+    36,
+    "then the instant queue (decompiler split the loops with gotos)"
+   ],
+   [
+    51,
+    "next the interrupt queue"
+   ],
+   [
+    75,
+    "finally the delayed instant queue; flagged actions jump to the report below"
+   ],
+   [
+    100,
+    "blocking action found: on the enemy's turn or without tips just report true"
+   ],
+   [
+    105,
+    "player's turn: show the Please Wait tip"
+   ]
+  ]
+ },
+ "329ebec": {
+  "summary": "Decides whether a card can be played now. Checks that no action is pending, tutorial rules, whose turn it is, blocking actions, Energy, board space for units and a valid target for targeted spells. Shows a tip for the player when it fails and showTips is set.",
+  "comments": [
+   [
+    6,
+    "starting a new action while others are queued is refused"
+   ],
+   [
+    9,
+    "for the player's card show a Please Wait message (enemy cards just fail)"
+   ],
+   [
+    26,
+    "tutorial: the scripted step must permit playing this card"
+   ],
+   [
+    34,
+    "enemy card: needs enemy actions to be allowed (or the turn end resolving)"
+   ],
+   [
+    43,
+    "common checks: blocking actions first"
+   ],
+   [
+    48,
+    "pick the owner's player manager"
+   ],
+   [
+    53,
+    "check Energy including psychic and plasma costs"
+   ],
+   [
+    60,
+    "units also need a free slot on the board"
+   ],
+   [
+    62,
+    "pick the owner's minion manager"
+   ],
+   [
+    81,
+    "targeted spells need at least one valid target"
+   ],
+   [
+    84,
+    "card is playable"
+   ],
+   [
+    86,
+    "no target available: tell the player"
+   ],
+   [
+    95,
+    "not enough Energy: tell the player"
+   ],
+   [
+    106,
+    "player card on a turn where the player may not act"
+   ],
+   [
+    114,
+    "show the chosen tip text via the tip controller"
+   ]
+  ]
+ },
+ "32a17b0": {
+  "summary": "Returns the owner's unused (currently available) Energy, decoded from an obscured int.",
+  "comments": [
+   [
+    4,
+    "choose player or enemy manager"
+   ],
+   [
+    10,
+    "read the raw obscured int pieces of unused Energy and decode them"
+   ]
+  ]
+ },
+ "32a17d8": {
+  "summary": "Returns the owner's total Energy (maximum this turn), decoded from an obscured int.",
+  "comments": [
+   [
+    4,
+    "choose player or enemy manager"
+   ],
+   [
+    10,
+    "read the raw obscured int pieces of total Energy and decode them"
+   ]
+  ]
+ },
+ "32a1800": {
+  "summary": "Pays the Energy cost of a played card, checks whether the Energy running out triggers the player's codex, and raises an EnergySpentSignal (card cost).",
+  "comments": [
+   [
+    5,
+    "pick the card owner's player manager"
+   ],
+   [
+    11,
+    "ambush cards seem to be paid differently via the last flag"
+   ],
+   [
+    13,
+    "spend the Energy"
+   ],
+   [
+    14,
+    "see whether Energy is now zero to trigger the codex"
+   ],
+   [
+    18,
+    "tell listeners that Energy was spent for a card cost"
+   ],
+   [
+    23,
+    "decompiler inlined the signal broker lookup; it just raises the signal"
+   ]
+  ]
+ },
+ "32a1a10": {
+  "summary": "Pays the oath cost of an active ability, checks for codex trigger when Energy runs out, and raises an EnergySpentSignal (ability cost).",
+  "comments": [
+   [
+    5,
+    "pick the card owner's player manager"
+   ],
+   [
+    10,
+    "cost comes from the card's oath trait value"
+   ],
+   [
+    12,
+    "spend the Energy"
+   ],
+   [
+    13,
+    "codex may trigger if no Energy is left"
+   ],
+   [
+    17,
+    "tell listeners Energy was spent on an ability"
+   ],
+   [
+    22,
+    "inlined signal broker lookup; it just raises the signal"
+   ]
+  ]
+ },
+ "32a1b28": {
+  "summary": "When a card with the oath trait is played, spends its oath Energy and queues a trigger-codex action if no Energy is left.",
+  "comments": [
+   [
+    5,
+    "only cards with the oath trait cost extra Energy"
+   ],
+   [
+    9,
+    "pick the card owner's player manager"
+   ],
+   [
+    16,
+    "spend the oath cost"
+   ],
+   [
+    18,
+    "Energy ran out: queue the player's codex trigger"
+   ],
+   [
+    25,
+    "build a triggerPlayerCodex action for this card and add it as an automatic action"
+   ]
+  ]
+ },
+ "32a1934": {
+  "summary": "If Energy left is zero (and, when requested, the card cost something), queues a triggerPlayerCodex action for the card.",
+  "comments": [
+   [
+    4,
+    "codex only triggers when Energy is exactly zero"
+   ],
+   [
+    7,
+    "free cards (cost 0 or less) do not trigger it"
+   ],
+   [
+    13,
+    "build and queue the codex trigger action with the optional target"
+   ],
+   [
+    25,
+    "cost check not requested: queue the action directly"
+   ]
+  ]
+ },
+ "327ee2c": {
+  "summary": "Returns the player's hand or the enemy's hand depending on the flag.",
+  "comments": [
+   [
+    4,
+    "false means enemy"
+   ]
+  ]
+ },
+ "3280fac": {
+  "summary": "Returns the player's or enemy's minion manager (board) depending on the flag.",
+  "comments": [
+   [
+    4,
+    "false means enemy"
+   ]
+  ]
+ },
+ "32809ec": {
+  "summary": "Returns the player's or enemy's player manager depending on the flag.",
+  "comments": [
+   [
+    4,
+    "false means enemy"
+   ]
+  ]
+ },
+ "3291cc0": {
+  "summary": "Checks whether the attacker may attack the target: attack stats, tutorial, turn, targets in play, stealth, precognition, defenders, flying, giant killer, tainted, flank, coward, destroyer, frenzied, rift, stun and pindown. Shows a tip on failure when asked.",
+  "comments": [
+   [
+    9,
+    "no attack type given: use the attacker's current one"
+   ],
+   [
+    13,
+    "melee attacker needs more than 0 melee attack"
+   ],
+   [
+    24,
+    "ranged attacker needs more than 0 ranged attack"
+   ],
+   [
+    37,
+    "no target means invalid"
+   ],
+   [
+    41,
+    "tutorial: the scripted step must allow this attack"
+   ],
+   [
+    46,
+    "must be the attacker owner's turn"
+   ],
+   [
+    54,
+    "cannot attack own side"
+   ],
+   [
+    57,
+    "both must be in play"
+   ],
+   [
+    65,
+    "stealth targets cannot be attacked"
+   ],
+   [
+    74,
+    "precognition targets cannot be attacked (logged only)"
+   ],
+   [
+    81,
+    "the target owner's minion manager, to look for defenders"
+   ],
+   [
+    86,
+    "unstoppable attackers ignore defenders"
+   ],
+   [
+    89,
+    "defender blocks: target must be a defender, else a defender on the board or hero blocks"
+   ],
+   [
+    110,
+    "flying melee target (without vanguard) cannot be hit by a non-flying attacker"
+   ],
+   [
+    112,
+    "giant killer can only attack defenders or heroes"
+   ],
+   [
+    126,
+    "hero attacking a tainted target needs vanguard"
+   ],
+   [
+    139,
+    "summon sickness: only fast units may hit heroes (not auto actions)"
+   ],
+   [
+    140,
+    "coward units cannot attack heroes"
+   ],
+   [
+    142,
+    "destroyer check target scan done: skip the destroyer rule"
+   ],
+   [
+    143,
+    "final checks: summon rift, stun and pindown (melee only)"
+   ],
+   [
+    155,
+    "frenzied attacker that does not kill must not skip a killable target (destroyer rule)"
+   ],
+   [
+    158,
+    "look at other units: if one is a valid kill target the attack is blocked"
+   ],
+   [
+    189,
+    "coward: can't attack hero"
+   ],
+   [
+    195,
+    "flank: summoning sick attacker can't hit heroes"
+   ],
+   [
+    211,
+    "show the chosen tip for the player"
+   ]
+  ]
+ },
+ "32a1be4": {
+  "summary": "Simulates the attacker's melee and ranged damage on the target, including dodge, shield, invulnerable, armour, drop pod, survivor, bastion and vulnerable, to see whether the target would die. Used by the destroyer rule.",
+  "comments": [
+   [
+    4,
+    "damage list plus damage types for the simulation"
+   ],
+   [
+    6,
+    "first simulate the melee damage"
+   ],
+   [
+    32,
+    "if melee alone kills (counting pending damage) return true"
+   ],
+   [
+    36,
+    "reset and simulate ranged damage instead"
+   ],
+   [
+    55,
+    "log debug line about pending damage"
+   ],
+   [
+    57,
+    "target already waiting to die counts as killed"
+   ],
+   [
+    65,
+    "target with no health and no survivor counts as dead"
+   ],
+   [
+    66,
+    "run through each hit in the list"
+   ],
+   [
+    84,
+    "first hit is absorbed by dodge, shield or invulnerable"
+   ],
+   [
+    94,
+    "armour reduces damage but at least 1 gets through"
+   ],
+   [
+    105,
+    "drop pod absorbs damage first until broken"
+   ],
+   [
+    107,
+    "survivor and bastion add to the health that must be removed"
+   ],
+   [
+    124,
+    "vulnerable adds extra damage, also reduced by armour"
+   ],
+   [
+    139,
+    "lethal if damage reaches health plus bastion"
+   ],
+   [
+    175,
+    "drop pod soaked the hit: damage was used up on it"
+   ],
+   [
+    189,
+    "no hit was lethal"
+   ],
+   [
+    194,
+    "debug logging of pending damage and health"
+   ]
+  ]
+ },
+ "32a0a2c": {
+  "summary": "Checks whether the target is a valid target for a targeted spell: both in play, tutorial allows it, correct turn, targeted spell, and not stealth, warded or camouflaged for opposing targets.",
+  "comments": [
+   [
+    4,
+    "null target is invalid"
+   ],
+   [
+    10,
+    "target must be in play"
+   ],
+   [
+    12,
+    "tutorial: the scripted step must allow this spell on the target"
+   ],
+   [
+    17,
+    "spell owner must be the one whose turn it is"
+   ],
+   [
+    24,
+    "enemy cards with stealth cannot be targeted"
+   ],
+   [
+    32,
+    "enemy cards that are warded cannot be targeted"
+   ],
+   [
+    40,
+    "enemy camouflaged cards cannot be targeted"
+   ],
+   [
+    41,
+    "final validity is decided by the spell's own card data (decompiler lost that call)"
+   ]
+  ]
+ }
+}

@@ -1,0 +1,683 @@
+{
+ "329f70c": {
+  "summary": "Checks whether target is a legal target for actingCard's active ability. Used when the player picks a target. Returns false for stealthed enemies, warded enemies, summon rifts, wrong turn, or tutorial-blocked actions.",
+  "comments": [
+   [
+    5,
+    "no target given: invalid"
+   ],
+   [
+    10,
+    "target must be in play, and in the tutorial the scripted step must permit this ability"
+   ],
+   [
+    17,
+    "only the side whose turn it is may use an active ability"
+   ],
+   [
+    20,
+    "opposing-side target: stealth makes it untargetable"
+   ],
+   [
+    29,
+    "enemy target with a ward, or any summon rift, cannot be targeted"
+   ],
+   [
+    32,
+    "picks the acting card's active ability data; the final result of the decompiled return is lost here"
+   ]
+  ]
+ },
+ "32a16f0": {
+  "summary": "Returns true if any unit in play is a valid target for the given targeted spell. Used to decide whether a targeted spell can be cast at all.",
+  "comments": [
+   [
+    9,
+    "loop over every unit in play, stop at the first valid spell target"
+   ],
+   [
+    13,
+    "found a valid target: return true"
+   ],
+   [
+    19,
+    "no unit qualified (decompiler returns the loop flag, which is false here)"
+   ]
+  ]
+ },
+ "32a1ebc": {
+  "summary": "Counts units on the given side in play that have the double oath trait (oathDouble). Called when oath ability limits are checked.",
+  "comments": [
+   [
+    9,
+    "no units in play: count is zero"
+   ],
+   [
+    15,
+    "walk all units in play"
+   ],
+   [
+    18,
+    "only count units on the asked side"
+   ],
+   [
+    21,
+    "add 1 for each unit with the oathDouble trait"
+   ]
+  ]
+ },
+ "32a00d4": {
+  "summary": "Returns true if any unit in play is a valid target for the acting card's active ability. Used to decide whether an active ability is usable.",
+  "comments": [
+   [
+    9,
+    "loop over every unit in play, stop at the first valid ability target"
+   ],
+   [
+    13,
+    "found a valid target: return true"
+   ],
+   [
+    19,
+    "no unit qualified (decompiler returns the loop flag, which is false here)"
+   ]
+  ]
+ },
+ "32a1fa0": {
+  "summary": "Creates a revealed card for the given side and displays it in the centre of the screen using the offensive card display animation. Returns the new card object.",
+  "comments": [
+   [
+    4,
+    "a card must be given"
+   ],
+   [
+    8,
+    "card is spawned under the enemy hand transform and styled with the owner's hero army"
+   ],
+   [
+    13,
+    "activate the new card object so it is visible"
+   ],
+   [
+    16,
+    "shrink the card to 1% scale; the display coroutine presumably scales it up"
+   ],
+   [
+    20,
+    "start the display-in-centre coroutine (0.3s timings) and return the card"
+   ]
+  ]
+ },
+ "32a2178": {
+  "summary": "Shows the large card display for a card with its effect list, depending on UI state and tutorial rules. For an enemy unit in play with ambush, the card is shown hidden as an ambush card.",
+  "comments": [
+   [
+    6,
+    "only certain UI states may open the large view, unless this is a mulligan; tutorial may also block it"
+   ],
+   [
+    10,
+    "this card was just clicked as a target: swallow the display once and clear the flag"
+   ],
+   [
+    16,
+    "large display is already in the requested on/off state: nothing to do"
+   ],
+   [
+    20,
+    "hiding the display: relies on the touch input manager; decompiler lost the hide logic"
+   ],
+   [
+    36,
+    "showing: fill the large card display with this card and its effects"
+   ],
+   [
+    55,
+    "enemy unit in play with ambush: hide its real details"
+   ],
+   [
+    62,
+    "replace stats, stars and texts with blank values and show the ambush trait icon in the image frame"
+   ],
+   [
+    94,
+    "hide the other card variants, lore background and voice-over button"
+   ],
+   [
+    110,
+    "decompiler merged unrelated code below (effect list setup); not reachable from the code above"
+   ]
+  ]
+ },
+ "32a22d8": {
+  "summary": "Unity focus callback. On Android when the app regains focus, it re-hides the system UI (via window decor view), or resets the screen resolution on old SDKs.",
+  "comments": [
+   [
+    5,
+    "ignore unless the app gained focus"
+   ],
+   [
+    10,
+    "only Android needs this"
+   ],
+   [
+    14,
+    "SDK older than 19 (0x13): fall back to resetting the resolution"
+   ],
+   [
+    15,
+    "get the current Android activity and its window and decor view through Java calls"
+   ],
+   [
+    51,
+    "post a runnable to the UI thread to re-apply immersive mode"
+   ],
+   [
+    72,
+    "decompiler lost the try/catch/finally here; code below is merged GetAndroidSDKVersion and cleanup"
+   ],
+   [
+    111,
+    "after the UI thread call, return; otherwise fall back to setting resolution"
+   ],
+   [
+    114,
+    "old SDK fallback: set the resolution to the current size in fullscreen"
+   ]
+  ]
+ },
+ "32a2360": {
+  "summary": "Finds the card under the pointer. First raycasts in 2D from the camera, then falls back to a 3D raycast on the BoardElements layer. Returns the CardScript hit, or null.",
+  "comments": [
+   [
+    6,
+    "2D raycast from the main camera position along the pointer direction"
+   ],
+   [
+    24,
+    "2D hit found: check what it is"
+   ],
+   [
+    54,
+    "hit object has a CardScript: return the card being clicked, unless in certain UI states"
+   ],
+   [
+    58,
+    "UI state 10 or 13: no targeting allowed"
+   ],
+   [
+    66,
+    "hit has no direct card: try a related component on the hit object"
+   ],
+   [
+    99,
+    "no 2D hit: raycast in 3D from the board camera through the touch position"
+   ],
+   [
+    106,
+    "nothing hit: no target"
+   ],
+   [
+    112,
+    "decompiler merged unrelated code (error card check) below"
+   ]
+  ]
+ },
+ "32a2910": {
+  "summary": "Marks a hand card as tracked and, in networked games, sends the PUNReceiveCardSeen RPC to all players with the card's in-game id. The rest is merged Photon library code.",
+  "comments": [
+   [
+    4,
+    "remember this hand card as the tracked one"
+   ],
+   [
+    6,
+    "offline games do not need to notify anyone"
+   ],
+   [
+    16,
+    "send the card id so both sides know this card was seen"
+   ]
+  ]
+ },
+ "32a29dc": {
+  "summary": "Starts dragging a hand card: tracks the card, stores the click position and switches the UI state to moving a hand card.",
+  "comments": []
+ },
+ "32a2a14": {
+  "summary": "Shows deck size and hand size indicators for both players during battle, unless the player is choosing a resolution card.",
+  "comments": [
+   [
+    7,
+    "only while in battle and not choosing a resolution card"
+   ],
+   [
+    9,
+    "show each side's deck count and hand count"
+   ],
+   [
+    16,
+    "remember the indicators are visible"
+   ]
+  ]
+ },
+ "32a2b80": {
+  "summary": "Returns whether the cemetery can be shown: only during battle, and in the tutorial only if the current stage does not hide it.",
+  "comments": [
+   [
+    8,
+    "not in battle: no cemetery"
+   ],
+   [
+    12,
+    "tutorial match: the stage may hide the cemetery"
+   ]
+  ]
+ },
+ "32a2c04": {
+  "summary": "Adds a card to the cemetery list, parents it to the cemetery object and tells it its index there.",
+  "comments": [
+   [
+    9,
+    "append to the cemetery manager's list (inlined List.Add)"
+   ],
+   [
+    23,
+    "move the card under the cemetery transform and set it as cemetery card with its index"
+   ]
+  ]
+ },
+ "328bb58": {
+  "summary": "Returns whether a card can attack right now. Checks tutorial rules, action permissions, stun, summon sickness, attack value, non-combatant traits and UI state. allowAutoActions skips some checks.",
+  "comments": [
+   [
+    5,
+    "tutorial: the player's attack must be allowed by the current step"
+   ],
+   [
+    11,
+    "unless auto actions are allowed, the side's action permission flag must be on"
+   ]
+  ]
+ },
+ "329f3c8": {
+  "summary": "Checks whether a card can use its active ability: right side, actions allowed, unit ready, enough Energy, normal UI, tutorial permission, and duty and oath limits. Shows a tip to the player when appropriate.",
+  "comments": [
+   [
+    5,
+    "card must belong to the side asking"
+   ],
+   [
+    13,
+    "actions disabled for this side: log it and fail"
+   ],
+   [
+    17,
+    "card has acted/is not ready"
+   ],
+   [
+    18,
+    "card must be in play"
+   ],
+   [
+    23,
+    "pick the owner's player manager and check it has enough Energy (also psychic/plasma kinds)"
+   ],
+   [
+    30,
+    "not enough Energy: tip shown only to the player"
+   ],
+   [
+    41,
+    "UI must be normal battle for the player"
+   ],
+   [
+    43,
+    "tutorial may block this ability"
+   ],
+   [
+    46,
+    "another active ability is still resolving"
+   ],
+   [
+    49,
+    "duty trait: ability once only"
+   ],
+   [
+    53,
+    "oath trait: limited by CanUseOathAbility"
+   ],
+   [
+    61,
+    "wrong UI state: log message"
+   ],
+   [
+    73,
+    "unit not ready: tip shown to the player"
+   ]
+  ]
+ },
+ "329f8bc": {
+  "summary": "Checks whether a card can use its waystone: right side, actions allowed, in play, normal UI and tutorial permission. Shows a Not Your Turn tip when blocked.",
+  "comments": [
+   [
+    6,
+    "card must belong to the side asking"
+   ],
+   [
+    11,
+    "actions not allowed: log, and tell the player it is not their turn"
+   ],
+   [
+    21,
+    "card must be in play"
+   ],
+   [
+    22,
+    "player cards also need normal UI state"
+   ],
+   [
+    24,
+    "tutorial may block the waystone"
+   ],
+   [
+    30,
+    "wrong UI state or card not in play: log the reason and fail"
+   ]
+  ]
+ },
+ "32a2c1c": {
+  "summary": "Checks whether a card that is currently attacking can use its active ability: ownership, actions allowed, enough Energy and normal UI state. Shows a tip if Energy is lacking.",
+  "comments": [
+   [
+    5,
+    "card must belong to the asking side"
+   ],
+   [
+    10,
+    "actions disabled for this side"
+   ],
+   [
+    14,
+    "card must be attacking"
+   ],
+   [
+    20,
+    "pick the owner's player manager and check Energy"
+   ],
+   [
+    29,
+    "not enough Energy: tip for the player"
+   ],
+   [
+    45,
+    "UI must be normal battle for the player"
+   ],
+   [
+    54,
+    "not attacking: log message"
+   ],
+   [
+    58,
+    "wrong side: log message"
+   ]
+  ]
+ },
+ "32a2e94": {
+  "summary": "Returns whether a card could attack after a buff effect is applied and the card is in play. Used for buff target hints.",
+  "comments": [
+   [
+    6,
+    "card must be able to act"
+   ],
+   [
+    10,
+    "melee or ranged attack would be above 0 after the buff"
+   ],
+   [
+    11,
+    "and the card must be in play"
+   ]
+  ]
+ },
+ "32a2f18": {
+  "summary": "Converts the mouse position to a world position on the canvas camera, or zero when outside the screen.",
+  "comments": [
+   [
+    5,
+    "mouse is inside the screen: convert using the canvas plane distance"
+   ],
+   [
+    15,
+    "off screen: zero vector"
+   ]
+  ]
+ },
+ "32a2fe4": {
+  "summary": "Raycasts from the touch position through the board camera on the Default layer and returns the hit point. Decompiler merged the neighbouring raycast helper functions here.",
+  "comments": [
+   [
+    6,
+    "draws debug lines for the screen edges"
+   ],
+   [
+    15,
+    "ray from the touch position, drawn for debugging"
+   ],
+   [
+    26,
+    "raycast against the Default layer and return the hit point"
+   ],
+   [
+    32,
+    "decompiler merged following helpers: GetBoardCardMousePos, GetBoardCardPosFrom2DPos, Get2DWorldPosFromBoardPos"
+   ],
+   [
+    55,
+    "BoardCardLimit raycast with an upward offset in screen space"
+   ],
+   [
+    87,
+    "raycast from the 2D position converted to a board ray"
+   ],
+   [
+    111,
+    "converts board position to world position on the canvas camera"
+   ]
+  ]
+ },
+ "32a34b8": {
+  "summary": "Raycasts from the touch position (plus a vertical offset) on the BoardCardLimit layer and returns the hit point. Decompiler merged neighbouring helpers.",
+  "comments": [
+   [
+    12,
+    "shift the touch point upward by yOffset then cast a ray"
+   ],
+   [
+    24,
+    "raycast on the BoardCardLimit layer and return the hit point"
+   ],
+   [
+    30,
+    "decompiler merged following helpers below this point"
+   ],
+   [
+    71,
+    "convert a board position to a world position on the canvas camera"
+   ]
+  ]
+ },
+ "32a36fc": {
+  "summary": "Converts a 2D world position to a screen point, casts a ray from it and returns where it hits the BoardCardLimit layer.",
+  "comments": [
+   [
+    11,
+    "2D camera converts the point to screen space"
+   ],
+   [
+    24,
+    "raycast on BoardCardLimit and return the hit point"
+   ],
+   [
+    30,
+    "decompiler merged the following helper (Get2DWorldPosFromBoardPos) here"
+   ]
+  ]
+ },
+ "32a32e0": {
+  "summary": "Raycasts from a given screen position through the board camera on the Default layer and returns the hit point. Decompiler merged neighbouring helpers.",
+  "comments": [
+   [
+    11,
+    "board camera must exist"
+   ],
+   [
+    23,
+    "raycast against the Default layer and return the hit point"
+   ],
+   [
+    29,
+    "decompiler merged following helpers: board card raycasts and board to canvas conversion"
+   ]
+  ]
+ },
+ "32a38e8": {
+  "summary": "Converts a board position to a screen position and then to a world position on the canvas camera.",
+  "comments": [
+   [
+    4,
+    "board position to screen position"
+   ],
+   [
+    17,
+    "screen to world on the canvas camera at the plane distance"
+   ]
+  ]
+ },
+ "32a3950": {
+  "summary": "Converts a board world position to a viewport point using the board camera.",
+  "comments": [
+   [
+    18,
+    "board camera world to viewport"
+   ]
+  ]
+ },
+ "32a3968": {
+  "summary": "Converts a 2D world position to a viewport point using the 2D camera.",
+  "comments": [
+   [
+    18,
+    "2D camera world to viewport"
+   ]
+  ]
+ },
+ "32a3938": {
+  "summary": "Converts a board world position to a screen position using the board camera.",
+  "comments": [
+   [
+    18,
+    "board camera world to screen"
+   ]
+  ]
+ },
+ "32a3980": {
+  "summary": "Converts the current touch position to a world position at the perspective camera's distance, or zero when off screen.",
+  "comments": [
+   [
+    5,
+    "pointer inside the screen"
+   ],
+   [
+    14,
+    "screen to world at the camera's depth offset"
+   ],
+   [
+    18,
+    "off screen: zero"
+   ]
+  ]
+ },
+ "328b78c": {
+  "summary": "Returns the 2D world position of a card. Units and heroes in play use their effect anchor converted through screen space to the canvas; any other card uses its transform.",
+  "comments": [
+   [
+    5,
+    "minion or hero in play or dying: use the effect anchor"
+   ],
+   [
+    15,
+    "board position to screen position, then onto the canvas camera"
+   ],
+   [
+    37,
+    "other cards: just use the transform position"
+   ]
+  ]
+ },
+ "329e394": {
+  "summary": "Returns the 2D world position of a specific part of a card chosen by a position reference (e.g. attack or health spot), or the card's transform otherwise.",
+  "comments": [
+   [
+    6,
+    "minion or hero in play or dying: pick a part position"
+   ],
+   [
+    10,
+    "position reference below 24: a bitmask picks which UI anchor of the card to use"
+   ],
+   [
+    31,
+    "convert to screen and then to the canvas camera"
+   ],
+   [
+    53,
+    "other cards: just use the transform position"
+   ]
+  ]
+ },
+ "32a3a84": {
+  "summary": "Returns a card's world position from its transform, or zero vector when the card is missing.",
+  "comments": [
+   [
+    5,
+    "no card: zero vector"
+   ],
+   [
+    16,
+    "read the transform position"
+   ]
+  ]
+ },
+ "32a304c": {
+  "summary": "Debug helper: draws lines along the screen edges and the matching world rectangle for the board camera.",
+  "comments": [
+   [
+    12,
+    "screen edge lines"
+   ],
+   [
+    19,
+    "world corner points at the cards' depth"
+   ]
+  ]
+ },
+ "328c9f8": {
+  "summary": "Increments the anti-cheat counter of player actions taken this turn when an action is registered.",
+  "comments": [
+   [
+    10,
+    "increment the obscured counter"
+   ]
+  ]
+ },
+ "32a3b78": {
+  "summary": "Decrements the anti-cheat counter of player actions taken this turn when an action is cancelled.",
+  "comments": [
+   [
+    10,
+    "decrement the obscured counter"
+   ]
+  ]
+ }
+}

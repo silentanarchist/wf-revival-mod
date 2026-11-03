@@ -1,0 +1,929 @@
+{
+ "3270e58": {
+  "summary": "Decides whether targetCard is a legal target for thisCard's active ability. Rejects enemy warded/stealthed targets, tainted enemy heroes and cards not in play, then runs the ability's target criteria (inlined FilterMethods.CheckIfMeetsCriteria). Logs an error and returns false if the card has no active ability.",
+  "comments": [
+   [
+    4,
+    "No source card: decompiler null check, ends in a NullReferenceException"
+   ],
+   [
+    5,
+    "Card has no active ability or no ability data: this is a setup error, so log it and fail"
+   ],
+   [
+    11,
+    "Builds the long error message piece by piece (card name, flags, card type, target name); decompiler bounds checks clutter it"
+   ],
+   [
+    52,
+    "Normal path: the card does have an active ability"
+   ],
+   [
+    56,
+    "Ward: an enemy unit that is currently warded cannot be targeted by this ability"
+   ],
+   [
+    59,
+    "Stealth: enemy units with stealth cannot be targeted either"
+   ],
+   [
+    63,
+    "Tainted: enemy tainted targets (without vanguard cover) cannot be targeted by a Hero-type source"
+   ],
+   [
+    67,
+    "Target must currently be in play"
+   ],
+   [
+    71,
+    "Below this the target criteria are evaluated; the decompiler inlined the filter closure with the evaluated card"
+   ],
+   [
+    77,
+    "No criteria on the ability: log an error"
+   ],
+   [
+    81,
+    "targetsAffected picks the rule: special values compare against self, the previous ability targets or referenced cards"
+   ],
+   [
+    109,
+    "Generic case: the evaluated card must exist"
+   ],
+   [
+    111,
+    "Values 0x50 mean any target is accepted, 0x96/0x8c test membership in the previous ability targets"
+   ],
+   [
+    134,
+    "Whispers/self-type rules (0x46): the target must be this very card"
+   ],
+   [
+    159,
+    "Value 0x5a: the target must not be the previously stored card"
+   ],
+   [
+    177,
+    "Picks the friendly or enemy allow flag depending on which side the target is on"
+   ],
+   [
+    183,
+    "If that side is allowed, check the self-exclusion flags (can target self or not)"
+   ],
+   [
+    193,
+    "Warlord exclusion: a flagged warlord-equivalent card on either side is rejected, with a debug log"
+   ],
+   [
+    206,
+    "Card type, army, keyword, condition and trait filters must all pass"
+   ],
+   [
+    220,
+    "Stat filters: attack, health (with bastion value), cost and rarity compared against the criteria"
+   ],
+   [
+    260,
+    "Specific-card list, excluded enchantments and army criteria"
+   ],
+   [
+    265,
+    "Value 100 means the target must be adjacent to the source: finds it among the source's adjacent units"
+   ],
+   [
+    278,
+    "Any other value: the criteria are met"
+   ],
+   [
+    310,
+    "Value 200: target must be one of the source card's referenced cards"
+   ],
+   [
+    324,
+    "Value 0xc9: referenced card must also still be in play"
+   ],
+   [
+    336,
+    "Value 0xeb: compares the target's conditions against the owner's hero talent card; the byte loop is a decompiled list compare"
+   ],
+   [
+    403,
+    "Final result: criteria failed (false)"
+   ],
+   [
+    406,
+    "Return the criteria result"
+   ],
+   [
+    408,
+    "Error path when there was no target card: logs a shorter message and returns false"
+   ],
+   [
+    437,
+    "Decompiler fall-through for failed index/cast checks"
+   ],
+   [
+    438,
+    "Shared null-reference throw target"
+   ]
+  ]
+ },
+ "32713d0": {
+  "summary": "Builds the list of units in play that this card can validly target, by calling the virtual per-target validity check on every unit. Returns null (and logs an error) if the card has no target criteria.",
+  "comments": [
+   [
+    4,
+    "No target criteria on this card: log an error and return no list"
+   ],
+   [
+    9,
+    "Start an empty result list"
+   ],
+   [
+    14,
+    "Test every unit in play"
+   ],
+   [
+    18,
+    "Virtual call to the card's own validity check (thisCard, candidate); keep the candidate if it passes"
+   ],
+   [
+    27,
+    "Inlined List.Add: append in place or grow the list"
+   ]
+  ]
+ },
+ "3271584": {
+  "summary": "Returns every unit in play that satisfies the given TargetCriteria relative to thisCard and targetCard, using FilterMethods.CheckIfMeetsCriteria.",
+  "comments": [
+   [
+    4,
+    "Fresh result list"
+   ],
+   [
+    8,
+    "Loop over all units in play"
+   ],
+   [
+    10,
+    "Run the full criteria filter on this candidate"
+   ],
+   [
+    13,
+    "Inlined List.Add for matches"
+   ],
+   [
+    32,
+    "Null-check failure target"
+   ]
+  ]
+ },
+ "32718d4": {
+  "summary": "Returns true if any of the card's abilities uses ability type 200, the trigger-once kind. Scans the cardAbilities list.",
+  "comments": [
+   [
+    8,
+    "Walk the ability list by index"
+   ],
+   [
+    17,
+    "Type 200 marks a trigger-once ability: stop and report found (i < size)"
+   ],
+   [
+    24,
+    "Decompiler null-reference fallback"
+   ]
+  ]
+ },
+ "3271974": {
+  "summary": "Returns true if any ability on this card has type 0xf (the play-third-card-in-turn kind). Abilities that carry a buff enchantment are followed into the enchantment card and searched the same way.",
+  "comments": [
+   [
+    4,
+    "Restart point: search the current card's ability list (also re-entered for an enchantment card)"
+   ],
+   [
+    16,
+    "Ability type 0xf is the third-card-in-turn trigger: found"
+   ],
+   [
+    17,
+    "Otherwise, take the first ability logic's buff effect"
+   ],
+   [
+    18,
+    "If the buff creates an enchantment, descend into that enchantment's own abilities"
+   ],
+   [
+    26,
+    "Null-reference failure"
+   ],
+   [
+    28,
+    "Switch 'this' to the enchantment card and search it (loop via goto)"
+   ]
+  ]
+ },
+ "3271ae8": {
+  "summary": "Returns true for Whispers-type cards whose spell type is in a fixed set that needs the special mini description.",
+  "comments": [
+   [
+    3,
+    "Only Whispers cards, spell types 0x78..0x96; the constant is a bit mask of which of those need the special text"
+   ],
+   [
+    6,
+    "Everything else uses the normal mini description"
+   ]
+  ]
+ },
+ "3271b40": {
+  "summary": "Finds the knight criteria whose id matches pilotId and returns its transformed knight id, or an empty string if none matches or there are no criteria.",
+  "comments": [
+   [
+    5,
+    "No knight criteria at all: return an empty string"
+   ],
+   [
+    12,
+    "Scan the knight criteria array for the pilot id"
+   ],
+   [
+    22,
+    "Match on pilot id: return that entry's transformed knight id"
+   ],
+   [
+    39,
+    "Null-check failure"
+   ]
+  ]
+ },
+ "3271e40": {
+  "summary": "Copies the active ability and duplicates its target criteria, targets counter and ability logic list so the copy shares no mutable data. The decompiler output is garbled (stray Monitor.Exit calls are cast-check artifacts).",
+  "comments": [
+   [
+    4,
+    "MemberwiseClone gives a shallow copy first"
+   ],
+   [
+    8,
+    "Type cast check for ActiveAbility (decompiler junk)"
+   ],
+   [
+    17,
+    "Deep copy target criteria"
+   ],
+   [
+    20,
+    "Deep copy targetsAvailableCounter"
+   ],
+   [
+    23,
+    "New logic list, then deep copy every AbilityLogic into it"
+   ],
+   [
+    35,
+    "Inlined List.Add for each copied logic"
+   ],
+   [
+    55,
+    "Cast-check failure path, not real logic"
+   ]
+  ]
+ },
+ "3271ec0": {
+  "summary": "Creates a full copy of the active ability, deep-copying its target criteria, targets-available counter and each AbilityLogic in activeAbilityLogic. Used so copies of a card do not share ability data.",
+  "comments": [
+   [
+    4,
+    "Shallow clone first, then replace the reference fields with copies"
+   ],
+   [
+    9,
+    "Deep copy target criteria"
+   ],
+   [
+    12,
+    "Deep copy targetsAvailableCounter"
+   ],
+   [
+    15,
+    "New logic list; each AbilityLogic is deep-copied into it"
+   ],
+   [
+    27,
+    "Inlined List.Add for each copied logic"
+   ],
+   [
+    47,
+    "Cast-check failure path from the decompiler"
+   ]
+  ]
+ },
+ "32723a4": {
+  "summary": "Sets the Unity sorting layer of the Spoil of War UI object and of all its children by name. The decompiled output contains merged code from a neighbouring function (exception handling, renderer sorting layer).",
+  "comments": [
+   [
+    8,
+    "Nothing to do if the UI object is missing"
+   ],
+   [
+    12,
+    "Set the layer on the root object"
+   ],
+   [
+    16,
+    "Iterate over every child transform"
+   ],
+   [
+    52,
+    "Apply the layer recursively to each child"
+   ],
+   [
+    56,
+    "Cleanup of the foreach enumerator (dispose), as compiler-generated finally"
+   ],
+   [
+    66,
+    "Exception-handler glue; mostly decompiler noise"
+   ],
+   [
+    92,
+    "Merged tail: sets sortingLayerID/sortingLayerName on renderers of a GameObject; not clearly part of this method"
+   ]
+  ]
+ },
+ "3272420": {
+  "summary": "Sets the physics/render layer number on the Spoil of War UI object and all children. The decompiler merged in the sorting-layer code from SetSortingLayer after the exception handler.",
+  "comments": [
+   [
+    7,
+    "Nothing to do if the UI object is missing"
+   ],
+   [
+    12,
+    "Set the layer on the root object"
+   ],
+   [
+    15,
+    "Iterate over every child transform"
+   ],
+   [
+    51,
+    "Apply the layer recursively to each child"
+   ],
+   [
+    59,
+    "Compiler-generated enumerator disposal"
+   ],
+   [
+    79,
+    "From here the decompiled code is the sorting-layer routine appended by mistake (shared exception-handler code)"
+   ],
+   [
+    94,
+    "Sets the sorting layer on the object and its children, then on its renderers"
+   ]
+  ]
+ },
+ "32720c8": {
+  "summary": "Clones this TargetCriteria and gives the clone its own copies of the filterSpecificCards and excludeEnchantments lists, so changes to one copy do not affect the other.",
+  "comments": [
+   [
+    4,
+    "Shallow clone first"
+   ],
+   [
+    6,
+    "Cast check (decompiler noise)"
+   ],
+   [
+    11,
+    "Copy the specific-card filter list"
+   ],
+   [
+    15,
+    "Copy the excluded-enchantments list"
+   ]
+  ]
+ },
+ "32724ac": {
+  "summary": "Sets up the tooltip lookup: clears the dictionary, then registers a builder for every DefinedTrait name plus spiritStone, faith, questPoints, sabotage, ranged and melee. Called on Awake.",
+  "comments": [
+   [
+    11,
+    "Start from an empty tooltip dictionary"
+   ],
+   [
+    14,
+    "Get all DefinedTrait enum names"
+   ],
+   [
+    17,
+    "Register the trait tooltip builder under each trait name"
+   ],
+   [
+    36,
+    "Special non-trait tooltips, added only if the key is not already present"
+   ],
+   [
+    64,
+    "Last entry (melee): the decompiler inlined Dictionary.TryAdd here, which is the hash-table code below"
+   ],
+   [
+    234,
+    "Dictionary internal failure path"
+   ]
+  ]
+ },
+ "3272894": {
+  "summary": "Turns tooltip handling on or off. When turned off while hovering, hides the tooltip and forgets the current link.",
+  "comments": [
+   [
+    4,
+    "Enable or disable event registration and the component"
+   ],
+   [
+    10,
+    "Text only receives pointer raycasts while enabled"
+   ],
+   [
+    11,
+    "Being disabled while a tooltip is showing: hide it and clear the link ID"
+   ]
+  ]
+ },
+ "32729c4": {
+  "summary": "Pointer-down handler. Finds the text link under the mouse using the UI camera and shows its tooltip, or hides any tooltip if the click is not on a link. Does nothing if events are not registered.",
+  "comments": [
+   [
+    4,
+    "Ignored while tooltip events are off"
+   ],
+   [
+    7,
+    "Mark as hovering"
+   ],
+   [
+    10,
+    "The while(true) is the decompiler's tangled flow; it runs once in practice"
+   ],
+   [
+    22,
+    "Find which link in the text is under the mouse"
+   ],
+   [
+    24,
+    "Negative: no link under the mouse, hide tooltip and clear current link"
+   ],
+   [
+    46,
+    "Look up the link's ID string"
+   ],
+   [
+    55,
+    "Only act if the link changed since last time"
+   ],
+   [
+    61,
+    "Find the tooltip builder for this ID and build the data"
+   ],
+   [
+    72,
+    "Builder gave nothing: log it"
+   ],
+   [
+    77,
+    "Loop-back junk from the decompiler"
+   ]
+  ]
+ },
+ "3272b44": {
+  "summary": "Selection handler (e.g. gamepad focus). Finds the text link under the mouse and shows its tooltip, or hides it if there is none. Same logic as OnPointerDown.",
+  "comments": [
+   [
+    8,
+    "Ignored while tooltip events are off"
+   ],
+   [
+    11,
+    "Mark as hovering"
+   ],
+   [
+    23,
+    "Find which link in the text is under the mouse"
+   ],
+   [
+    24,
+    "None under the mouse: hide tooltip, clear link (code at the end)"
+   ],
+   [
+    30,
+    "Read the link ID"
+   ],
+   [
+    38,
+    "Only act if the link changed"
+   ],
+   [
+    44,
+    "Look up the tooltip builder and show its data"
+   ],
+   [
+    55,
+    "Builder gave nothing: log it"
+   ],
+   [
+    70,
+    "No link: hide the tooltip manager's tooltip"
+   ]
+  ]
+ },
+ "3272b5c": {
+  "summary": "Deselect handler: stops hovering, hides the tooltip and clears the current link. Does nothing if events are not registered.",
+  "comments": [
+   [
+    4,
+    "Ignored while tooltip events are off"
+   ],
+   [
+    8,
+    "Hide the shared tooltip if the manager exists"
+   ],
+   [
+    17,
+    "Forget the current link"
+   ]
+  ]
+ },
+ "3272b70": {
+  "summary": "Disable handler: stops hovering, hides the tooltip and clears the current link. Does nothing if events are not registered.",
+  "comments": [
+   [
+    4,
+    "Ignored while tooltip events are off"
+   ],
+   [
+    8,
+    "Hide the shared tooltip if the manager exists"
+   ],
+   [
+    17,
+    "Forget the current link"
+   ]
+  ]
+ },
+ "32728f8": {
+  "summary": "Hides the shared tooltip (if the manager exists) and clears the current link ID.",
+  "comments": [
+   [
+    4,
+    "Hide the shared tooltip if the manager exists"
+   ],
+   [
+    13,
+    "Forget the current link"
+   ]
+  ]
+ },
+ "3272a34": {
+  "summary": "Checks which text link is under the mouse: shows that link's tooltip if it changed, or hides the tooltip if the mouse is not on a link.",
+  "comments": [
+   [
+    6,
+    "The loop is decompiler flow noise; the logic runs once"
+   ],
+   [
+    19,
+    "Find the link under the mouse using the UI camera"
+   ],
+   [
+    20,
+    "No link: hide the tooltip and clear the current link"
+   ],
+   [
+    43,
+    "Read the link ID"
+   ],
+   [
+    51,
+    "Only act if the link changed"
+   ],
+   [
+    57,
+    "Look up the tooltip builder and show its data"
+   ],
+   [
+    68,
+    "Builder gave nothing: log it"
+   ]
+  ]
+ },
+ "32724b0": {
+  "summary": "Registers all tooltip builders (every DefinedTrait name plus spiritStone, faith, questPoints, sabotage, ranged, melee) after clearing the dictionary. Same code as Awake.",
+  "comments": [
+   [
+    11,
+    "Start from an empty tooltip dictionary"
+   ],
+   [
+    14,
+    "Get all DefinedTrait enum names"
+   ],
+   [
+    17,
+    "Register the trait tooltip builder under each trait name"
+   ],
+   [
+    36,
+    "Special non-trait tooltips, added only if the key is not already present"
+   ],
+   [
+    64,
+    "Last entry (melee): the decompiler inlined Dictionary.TryAdd here, which is the hash-table code below"
+   ],
+   [
+    234,
+    "Dictionary internal failure path"
+   ]
+  ]
+ },
+ "3272b8c": {
+  "summary": "Called with a link ID. If it differs from the last one, remembers it, looks up the matching tooltip builder, builds the tooltip data and shows it.",
+  "comments": [
+   [
+    5,
+    "Only act when the link changed"
+   ],
+   [
+    11,
+    "Find the builder for this link ID"
+   ],
+   [
+    15,
+    "Call the builder (delegate invoke) to get title, description and icon"
+   ],
+   [
+    21,
+    "No builder result: log it"
+   ]
+  ]
+ },
+ "3272d5c": {
+  "summary": "Builds the tooltip data object (title, description, anchor, offset, icon) from toolTipData and asks the tooltip manager to show it near the text.",
+  "comments": [
+   [
+    4,
+    "Needs the text component"
+   ],
+   [
+    6,
+    "Compute where to show it, near the mouse"
+   ],
+   [
+    13,
+    "Apply the controller's offset"
+   ],
+   [
+    17,
+    "Hand the data to the tooltip manager with this object as trigger"
+   ]
+  ]
+ },
+ "3272ebc": {
+  "summary": "Converts the current mouse position to a world position with the UI camera, using the given z distance plus 10.",
+  "comments": [
+   [
+    6,
+    "UI camera is needed for the conversion"
+   ],
+   [
+    10,
+    "Depth for the world point is the requested z plus 10"
+   ],
+   [
+    20,
+    "Screen to world conversion"
+   ]
+  ]
+ },
+ "3272f18": {
+  "summary": "Builds tooltip data for a trait: parses the link ID as a DefinedTrait, gets its display name and localized description (alt text if the alternate trait config is on) and its icon.",
+  "comments": [
+   [
+    5,
+    "Needs player data for the alternate trait text setting"
+   ],
+   [
+    7,
+    "Link ID is the trait enum name"
+   ],
+   [
+    9,
+    "Title without inline image, description chosen by alt config"
+   ],
+   [
+    11,
+    "Resolve localization markup in the description"
+   ],
+   [
+    12,
+    "Trait entry supplies the icon"
+   ]
+  ]
+ },
+ "3273238": {
+  "summary": "Builds tooltip data for the faith resource: localized title, description (the Alt version if the alternate trait config is on) and faith icon.",
+  "comments": [
+   [
+    5,
+    "Alt trait config setting"
+   ],
+   [
+    7,
+    "Pick the normal or Alt description term"
+   ],
+   [
+    14,
+    "Faith icon from the trait collection"
+   ]
+  ]
+ },
+ "32733c8": {
+  "summary": "Builds tooltip data for quest points: localized title, description (the Alt version if the alternate trait config is on) and quest points icon.",
+  "comments": [
+   [
+    5,
+    "Alt trait config setting"
+   ],
+   [
+    7,
+    "Pick the normal or Alt description term"
+   ],
+   [
+    14,
+    "Quest points icon from the trait collection"
+   ]
+  ]
+ },
+ "32738d0": {
+  "summary": "Editor-time validation: if the text field is not assigned, fetches it from this GameObject.",
+  "comments": [
+   [
+    5,
+    "Only fills the field when it is empty"
+   ]
+  ]
+ },
+ "327409c": {
+  "summary": "Applies the instanced material to the image and sets its greyscale amount (0 = colour, 1 = grey) on the shader property.",
+  "comments": [
+   [
+    7,
+    "Put the per-image instanced material on the image"
+   ],
+   [
+    13,
+    "Set the greyscale shader float on that material (call is lost by the decompiler)"
+   ]
+  ]
+ },
+ "32743f0": {
+  "summary": "Cleans up the instanced material created for this image (destroys it). The decompiled body is mostly empty.",
+  "comments": [
+   [
+    8,
+    "The material's destroy call is lost; seems to just release the instanced material"
+   ]
+  ]
+ },
+ "3273a74": {
+  "summary": "Switches all images to greyscale or back. First initializes each image/material pair once. Then either swaps materials instantly (time 0) or starts a timed fade by setting targetTime and enabling Update.",
+  "comments": [
+   [
+    7,
+    "First use: initialize every image/material pair"
+   ],
+   [
+    27,
+    "Turning on: skip if already fully grey (float compare with tolerance)"
+   ],
+   [
+    41,
+    "Turning off: skip if already fully colour"
+   ],
+   [
+    44,
+    "Timed fade requested: jump to the fade setup below"
+   ],
+   [
+    54,
+    "Instant change: set grey material (on) or original material (off) on every image"
+   ],
+   [
+    46,
+    "Fade: positive time fades to grey, negative fades to colour; enabling the component runs Update"
+   ]
+  ]
+ },
+ "3273e90": {
+  "summary": "Per-frame fade: moves the greyscale value toward grey or colour by deltaTime / targetTime, clamps it to 0..1, updates all images, and disables itself when it reaches 0 or 1.",
+  "comments": [
+   [
+    9,
+    "Step the value; the sign of targetTime sets direction"
+   ],
+   [
+    10,
+    "Clamp to 0..1"
+   ],
+   [
+    19,
+    "Push the new value to every image's material"
+   ],
+   [
+    31,
+    "Not exactly 0 and not within tolerance of 1: still fading, keep running"
+   ],
+   [
+    45,
+    "Finished: disable and switch to the non-instanced materials"
+   ]
+  ]
+ },
+ "3274138": {
+  "summary": "Sets every image to the shared greyscale material (option true) or the original material (false), without using instanced materials.",
+  "comments": [
+   [
+    7,
+    "Walk every image/material pair"
+   ],
+   [
+    21,
+    "option true: use the greyscale material, otherwise the original one"
+   ]
+  ]
+ },
+ "32742c4": {
+  "summary": "On destroy, cleans up the instanced material of every image/material pair.",
+  "comments": [
+   [
+    7,
+    "Clean each pair so instanced materials are not leaked"
+   ]
+  ]
+ },
+ "327468c": {
+  "summary": "Fills the active skill button from a card: Energy cost, ability name (falls back to card name), description, extra text about available targets, and lights the background when the ability is usable now.",
+  "comments": [
+   [
+    5,
+    "No card: log an error and stop"
+   ],
+   [
+    19,
+    "Needs an active ability card with ability data, else log an error"
+   ],
+   [
+    25,
+    "Remember the card and show the current ability cost"
+   ],
+   [
+    35,
+    "Use the ability's own localized name, or the card name if it has none"
+   ],
+   [
+    43,
+    "Cost icon sprite (the Energy icon; field still named mana)"
+   ],
+   [
+    46,
+    "No target limits, or any target allowed: plain description"
+   ],
+   [
+    50,
+    "Otherwise count the targets currently available"
+   ],
+   [
+    58,
+    "Debug log of the available target count"
+   ],
+   [
+    61,
+    "Exactly one possible target: append text naming that target"
+   ],
+   [
+    70,
+    "Several (or zero) targets: append text with the count"
+   ],
+   [
+    78,
+    "Set the description text"
+   ],
+   [
+    80,
+    "Show the highlight light only if the ability can be used right now"
+   ]
+  ]
+ }
+}

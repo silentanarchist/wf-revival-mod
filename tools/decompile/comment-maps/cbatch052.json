@@ -1,0 +1,704 @@
+{
+ "3290700": {
+  "summary": "Handles the spirit stone battle action: if the target card is still in play or dying it fires its spirit stone trigger. It then runs the shared end-of-action tail: reorder minions, check for a dead hero and end the match, refresh turn state and UI.",
+  "comments": [
+   [
+    12,
+    "Only trigger the spirit stone if the card is still in play or dying"
+   ],
+   [
+    21,
+    "Action queue is empty: re-seat any minions that ended up out of position"
+   ],
+   [
+    33,
+    "No automatic actions left in the queue: check whether the match has ended"
+   ],
+   [
+    35,
+    "Dead-hero check is skipped in tutorial and campaign matches"
+   ],
+   [
+    37,
+    "Either hero in waitingToDie state (5) means the match is over; isPlayerDead records which one"
+   ],
+   [
+    46,
+    "Builds a debug line for DeadHeroAfterActionsEnd (hero state, UI state, stage); decompiler unrolled the string array"
+   ],
+   [
+    79,
+    "Already in post-battle stage: warn and bail out unless a disconnect loss is pending"
+   ],
+   [
+    94,
+    "Disconnect-loss flag set: record a result with the enemy as winner and run the normal battle end sequence"
+   ],
+   [
+    103,
+    "Normal end: enter post-battle stage, stop the battle, and tell the other client the match finished if networked"
+   ],
+   [
+    110,
+    "Lock the UI into the finish-battle sequence and clear the during-battle flag"
+   ],
+   [
+    116,
+    "Player won: raise a signal with the enemy hero's final health"
+   ],
+   [
+    131,
+    "Get the player's Elo rating (from the leaderboard event if any) and XP to build the ranked match result"
+   ],
+   [
+    161,
+    "Fill in skull milestones, record the result and winner, and the match length in minutes"
+   ],
+   [
+    198,
+    "Player won: flag the win; match types 0x14, 0xd2, 0xb4 also tell LiveOps the opponent was human"
+   ],
+   [
+    204,
+    "Save the winner and finish the battle; returns here instead of reaching the normal tail"
+   ],
+   [
+    230,
+    "Neither hero is dying: let in-play listeners react before finishing"
+   ],
+   [
+    235,
+    "Action finished: clear the resolving-action flag"
+   ],
+   [
+    237,
+    "Enemy's turn: deactivate enemy minions and recompute whether the enemy hero can act or attack"
+   ],
+   [
+    255,
+    "Ferocity/oath heroes may act even while summon-sick: recompute canAct and switch attack type"
+   ],
+   [
+    271,
+    "Show or hide the enemy hero's attack button according to whether it can attack now"
+   ],
+   [
+    288,
+    "Player's turn: light up playable cards and activate the player's minions and hero"
+   ],
+   [
+    296,
+    "Queue empty: run a GC pass while idle and unpause the turn clock"
+   ],
+   [
+    310,
+    "If the player only has end turn available, show the no-actions UI"
+   ],
+   [
+    320,
+    "Scripted (tutorial/campaign) turn: resume scripted actions after the player's manual step"
+   ],
+   [
+    335,
+    "Reset the manual-action marker for the next sequence"
+   ]
+  ]
+ },
+ "32907a8": {
+  "summary": "Handles the swarm battle action: if the acting and target cards are both in play, spawns the swarm effect object at the acting card and flies it to the target. The tail is the shared end-of-action handling, which the decompiler has merged in from the effect's completion callback.",
+  "comments": [
+   [
+    4,
+    "Closure object captures this manager and a copy of the battle action for the completion callback"
+   ],
+   [
+    13,
+    "Both target and acting card must still be in play, else skip the animation"
+   ],
+   [
+    28,
+    "Look up the swarm trait; its custom object is the effect prefab"
+   ],
+   [
+    45,
+    "Spawn the swarm effect at the acting card's position, scaled like the card"
+   ],
+   [
+    71,
+    "Decompiler merged the callback's end-of-action tail here; it runs once the effect finishes"
+   ],
+   [
+    75,
+    "Action queue is empty: re-seat any minions that ended up out of position"
+   ],
+   [
+    87,
+    "No automatic actions left in the queue: check whether the match has ended"
+   ],
+   [
+    89,
+    "Dead-hero check is skipped in tutorial and campaign matches"
+   ],
+   [
+    91,
+    "Either hero in waitingToDie state (5) means the match is over; isPlayerDead records which one"
+   ],
+   [
+    98,
+    "Builds a debug line for DeadHeroAfterActionsEnd (hero state, UI state, stage); decompiler unrolled the string array"
+   ],
+   [
+    130,
+    "Already in post-battle stage: warn and bail out unless a disconnect loss is pending"
+   ],
+   [
+    145,
+    "Disconnect-loss flag set: record a result with the enemy as winner and run the normal battle end sequence"
+   ],
+   [
+    154,
+    "Normal end: enter post-battle stage, stop the battle, and tell the other client the match finished if networked"
+   ],
+   [
+    161,
+    "Lock the UI into the finish-battle sequence and clear the during-battle flag"
+   ],
+   [
+    166,
+    "Player won: raise a signal with the enemy hero's final health"
+   ],
+   [
+    182,
+    "Get the player's Elo rating (from the leaderboard event if any) and XP to build the ranked match result"
+   ],
+   [
+    232,
+    "Fill in skull milestones, record the result and winner, and the match length in minutes"
+   ],
+   [
+    249,
+    "Player won: flag the win; match types 0x14, 0xd2, 0xb4 also tell LiveOps the opponent was human"
+   ],
+   [
+    255,
+    "Save the winner and finish the battle; returns here instead of reaching the normal tail"
+   ],
+   [
+    281,
+    "Neither hero is dying: let in-play listeners react before finishing"
+   ],
+   [
+    286,
+    "Action finished: clear the resolving-action flag"
+   ],
+   [
+    288,
+    "Enemy's turn: deactivate enemy minions and recompute whether the enemy hero can act or attack"
+   ],
+   [
+    307,
+    "Ferocity/oath heroes may act even while summon-sick: recompute canAct and switch attack type"
+   ],
+   [
+    322,
+    "Show or hide the enemy hero's attack button according to whether it can attack now"
+   ],
+   [
+    338,
+    "Player's turn: light up playable cards and activate the player's minions and hero"
+   ],
+   [
+    347,
+    "Queue empty: run a GC pass while idle and unpause the turn clock"
+   ],
+   [
+    361,
+    "If the player only has end turn available, show the no-actions UI"
+   ],
+   [
+    371,
+    "Scripted (tutorial/campaign) turn: resume scripted actions after the player's manual step"
+   ],
+   [
+    386,
+    "Reset the manual-action marker for the next sequence"
+   ]
+  ]
+ },
+ "3291184": {
+  "summary": "Resolves a jam action: if the unit is in play or dying it reacts to being jammed, broadcasts the jam, cancels queued effects it caused and refreshes both hands. Then runs the shared end-of-action tail with the hero death and match-end checks.",
+  "comments": [
+   [
+    4,
+    "No unit on the action: null check"
+   ],
+   [
+    5,
+    "Only react if the jammed unit is still in play or dying"
+   ],
+   [
+    15,
+    "Remove queued actions this unit would have caused (destroy actions kept)"
+   ],
+   [
+    17,
+    "Refresh card highlight effects in both hands now the unit is gone"
+   ],
+   [
+    25,
+    "Action queue is empty: re-seat any minions that ended up out of position"
+   ],
+   [
+    37,
+    "No automatic actions left in the queue: check whether the match has ended"
+   ],
+   [
+    39,
+    "Dead-hero check is skipped in tutorial and campaign matches"
+   ],
+   [
+    41,
+    "Either hero in waitingToDie state (5) means the match is over; isPlayerDead records which one"
+   ],
+   [
+    53,
+    "Builds a debug line for DeadHeroAfterActionsEnd (hero state, UI state, stage); decompiler unrolled the string array"
+   ],
+   [
+    83,
+    "Already in post-battle stage: warn and bail out unless a disconnect loss is pending"
+   ],
+   [
+    98,
+    "Disconnect-loss flag set: record a result with the enemy as winner and run the normal battle end sequence"
+   ],
+   [
+    107,
+    "Normal end: enter post-battle stage, stop the battle, and tell the other client the match finished if networked"
+   ],
+   [
+    114,
+    "Lock the UI into the finish-battle sequence and clear the during-battle flag"
+   ],
+   [
+    119,
+    "Player won: raise a signal with the enemy hero's final health"
+   ],
+   [
+    136,
+    "Get the player's Elo rating (from the leaderboard event if any) and XP to build the ranked match result"
+   ],
+   [
+    185,
+    "Fill in skull milestones, record the result and winner, and the match length in minutes"
+   ],
+   [
+    202,
+    "Player won: flag the win; match types 0x14, 0xd2, 0xb4 also tell LiveOps the opponent was human"
+   ],
+   [
+    208,
+    "Save the winner and finish the battle; returns here instead of reaching the normal tail"
+   ],
+   [
+    234,
+    "Neither hero is dying: let in-play listeners react before finishing"
+   ],
+   [
+    239,
+    "Action finished: clear the resolving-action flag"
+   ],
+   [
+    241,
+    "Enemy's turn: deactivate enemy minions and recompute whether the enemy hero can act or attack"
+   ],
+   [
+    259,
+    "Ferocity/oath heroes may act even while summon-sick: recompute canAct and switch attack type"
+   ],
+   [
+    275,
+    "Show or hide the enemy hero's attack button according to whether it can attack now"
+   ],
+   [
+    292,
+    "Player's turn: light up playable cards and activate the player's minions and hero"
+   ],
+   [
+    300,
+    "Queue empty: run a GC pass while idle and unpause the turn clock"
+   ],
+   [
+    314,
+    "If the player only has end turn available, show the no-actions UI"
+   ],
+   [
+    324,
+    "Scripted (tutorial/campaign) turn: resume scripted actions after the player's manual step"
+   ],
+   [
+    339,
+    "Reset the manual-action marker for the next sequence"
+   ]
+  ]
+ },
+ "3295d78": {
+  "summary": "Removes queued actions caused by a disappearing (jammed/removed) unit from the action, instant, interrupt and delayed-instant queues, optionally keeping destroy actions. Called when a unit leaves play so its pending effects do not fire.",
+  "comments": [
+   [
+    4,
+    "Clean the three main queues with the shared helper"
+   ],
+   [
+    7,
+    "The delayed-instant queue is scanned inline, from the back so removals keep indexes valid"
+   ],
+   [
+    22,
+    "Never cancel action type 1 (seems to be a plain attack)"
+   ],
+   [
+    23,
+    "No target filter given: any action by this unit matches; otherwise the target must match"
+   ],
+   [
+    36,
+    "Matched: some actions are protected and stop the scan"
+   ],
+   [
+    38,
+    "Type 0x2d with subtype 0x28 is protected; decompiler returns, ending the whole scan"
+   ],
+   [
+    42,
+    "Type 0x1a is protected as well"
+   ],
+   [
+    45,
+    "Caller asked to keep destroy actions (type 0x2d)"
+   ],
+   [
+    58,
+    "Log the removal, then drop the action from the queue"
+   ],
+   [
+    69,
+    "Null queue: compiler's null check"
+   ]
+  ]
+ },
+ "3295010": {
+  "summary": "Cancels queued animation actions (type 0xb) belonging to a unit across the action, instant, interrupt and delayed-instant queues. Used when a unit leaves play so its animations do not run on a missing card.",
+  "comments": [
+   [
+    4,
+    "Clean the three main queues with the shared helper"
+   ],
+   [
+    7,
+    "Scan the delayed-instant queue inline"
+   ],
+   [
+    14,
+    "Walk the queue backwards so removals do not shift unvisited entries"
+   ],
+   [
+    25,
+    "Only animation actions (type 0xb) are cancelled"
+   ],
+   [
+    26,
+    "Cancel when the action has no target or this card has none; log it and remove from queue"
+   ],
+   [
+    43,
+    "Remove the action from the queue"
+   ]
+  ]
+ },
+ "3295df4": {
+  "summary": "Walks one queue backwards and removes actions caused by the jammed unit, matching an optional target card and skipping protected action types. Called per queue by CancelEffectsFromDisappearingUnit.",
+  "comments": [
+   [
+    4,
+    "Null queue falls through to the null-reference throw"
+   ],
+   [
+    8,
+    "Walk backwards so removals keep indexes valid"
+   ],
+   [
+    18,
+    "Never cancel action type 1 (seems to be a plain attack)"
+   ],
+   [
+    19,
+    "No target filter given: any action by this unit matches; otherwise the target must match"
+   ],
+   [
+    33,
+    "Matched: some action types are protected"
+   ],
+   [
+    34,
+    "Type 0x2d with subtype 0x28 is protected; the decompiler returns, ending the scan"
+   ],
+   [
+    38,
+    "Type 0x1a is protected as well"
+   ],
+   [
+    41,
+    "Caller asked to keep destroy actions (type 0x2d)"
+   ],
+   [
+    54,
+    "Log the removal, then drop the action from the queue"
+   ]
+  ]
+ },
+ "3296118": {
+  "summary": "Walks one queue backwards and removes animation actions (type 0xb) belonging to the given unit. Called per queue by CancelAnimsFromUnit.",
+  "comments": [
+   [
+    8,
+    "Walk backwards so removals keep indexes valid"
+   ],
+   [
+    21,
+    "Only animation actions (type 0xb) are cancelled"
+   ],
+   [
+    22,
+    "Cancel when the action has no target or this card has none"
+   ],
+   [
+    36,
+    "Log the removal, then drop the action from the queue"
+   ]
+  ]
+ },
+ "3296378": {
+  "summary": "Removes the action at an index from a queue, first cancelling an attack in progress or hiding the target object depending on the action type. Logs an error if the index is invalid.",
+  "comments": [
+   [
+    5,
+    "Bad queue or index out of range: log an error and do nothing"
+   ],
+   [
+    12,
+    "Action type 1 (attack): cancel the attacker's attack first"
+   ],
+   [
+    20,
+    "Action type 0x17: hide its target object so it does not linger"
+   ],
+   [
+    30,
+    "Finally take the action out of the queue"
+   ]
+  ]
+ },
+ "3291228": {
+  "summary": "Applies a mana buff action to the friendly and/or enemy player: adds or removes Energy slots, refills Energy, or adds spirit stone, faith or quest points, then raises collect signals. Runs the finish callbacks when done.",
+  "comments": [
+   [
+    4,
+    "Closure captures this manager and the battle action for the finish callbacks"
+   ],
+   [
+    11,
+    "Buff applies to the friendly player: process it via ProcessManaBuff"
+   ],
+   [
+    19,
+    "Buff applies to the enemy player too; otherwise done"
+   ],
+   [
+    25,
+    "Pick the target manager: the other side's from the acting player's view"
+   ],
+   [
+    33,
+    "Not spirit stone: check faith, quest points, then plain Energy"
+   ],
+   [
+    34,
+    "Quest points: add them and broadcast one collect event per point"
+   ],
+   [
+    54,
+    "Positive amount: create new Energy slots or refill spent ones"
+   ],
+   [
+    72,
+    "Negative amount: destroy Energy slots or spend Energy"
+   ],
+   [
+    89,
+    "Faith Energy: add it, raise the collect signal and broadcast to the hero"
+   ],
+   [
+    101,
+    "Spirit stone Energy: add it and raise the collect signal"
+   ],
+   [
+    112,
+    "Null manager or missing callback: compiler's null check"
+   ]
+  ]
+ },
+ "329144c": {
+  "summary": "Resolves an end-turn action: first makes pending berserker units auto-attack, then finishes the action with the dead-hero check, sends the action to the opponent, broadcasts turn end and starts the next turn.",
+  "comments": [
+   [
+    6,
+    "On the player's turn, any pending berserk units must attack before the turn ends"
+   ],
+   [
+    22,
+    "AI picks the best attack for the berserker; no target means a warning and skip"
+   ],
+   [
+    47,
+    "Queue the berserk attack"
+   ],
+   [
+    52,
+    "Re-queue the end turn so it runs after the berserk attacks, then run the shared tail"
+   ],
+   [
+    57,
+    "Action queue is empty: re-seat any minions that ended up out of position"
+   ],
+   [
+    69,
+    "No automatic actions left in the queue: check whether the match has ended"
+   ],
+   [
+    71,
+    "Dead-hero check is skipped in tutorial and campaign matches"
+   ],
+   [
+    74,
+    "Either hero in waitingToDie state (5) means the match is over; isPlayerDead records which one"
+   ],
+   [
+    83,
+    "Builds a debug line for DeadHeroAfterActionsEnd (hero state, UI state, stage); decompiler unrolled the string array"
+   ],
+   [
+    113,
+    "Already in post-battle stage: warn and bail out unless a disconnect loss is pending"
+   ],
+   [
+    135,
+    "Normal end: enter post-battle stage, stop the battle, and tell the other client the match finished if networked"
+   ],
+   [
+    142,
+    "Lock the UI into the finish-battle sequence and clear the during-battle flag"
+   ],
+   [
+    148,
+    "Player won: raise a signal with the enemy hero's final health"
+   ],
+   [
+    164,
+    "Get the player's Elo rating (from the leaderboard event if any) and XP to build the ranked match result"
+   ],
+   [
+    187,
+    "Fill in skull milestones, record the result and winner, and the match length in minutes"
+   ],
+   [
+    233,
+    "Player won: flag the win; match types 0x14, 0xd2, 0xb4 also tell LiveOps the opponent was human"
+   ],
+   [
+    236,
+    "Save the winner and finish the battle; returns here instead of reaching the normal tail"
+   ],
+   [
+    262,
+    "Neither hero is dying: let in-play listeners react before finishing"
+   ],
+   [
+    267,
+    "Action finished: clear the resolving-action flag"
+   ],
+   [
+    269,
+    "Enemy's turn: deactivate enemy minions and recompute whether the enemy hero can act or attack"
+   ],
+   [
+    287,
+    "Ferocity/oath heroes may act even while summon-sick: recompute canAct and switch attack type"
+   ],
+   [
+    303,
+    "Show or hide the enemy hero's attack button according to whether it can attack now"
+   ],
+   [
+    320,
+    "Player's turn: light up playable cards and activate the player's minions and hero"
+   ],
+   [
+    328,
+    "Queue empty: run a GC pass while idle and unpause the turn clock"
+   ],
+   [
+    342,
+    "If the player only has end turn available, show the no-actions UI"
+   ],
+   [
+    352,
+    "Scripted (tutorial/campaign) turn: resume scripted actions after the player's manual step"
+   ],
+   [
+    367,
+    "Reset the manual-action marker for the next sequence"
+   ],
+   [
+    378,
+    "No berserkers: continue with the real end of turn"
+   ],
+   [
+    379,
+    "Send the end-turn action to the other player"
+   ],
+   [
+    381,
+    "Block both players' actions during turn change"
+   ],
+   [
+    384,
+    "Broadcast turn-before-end then turn-end to triggers; low bit of the action type is who ends"
+   ],
+   [
+    387,
+    "Campaign-like matches also resolve end-of-turn enchantments"
+   ],
+   [
+    405,
+    "Notify both managers (heroes, cards) that the turn ended"
+   ],
+   [
+    409,
+    "Stop tracking and refresh card effects in both hands"
+   ],
+   [
+    414,
+    "Turn-end by the enemy: stop highlighting playable hand cards"
+   ],
+   [
+    423,
+    "Finish the action, then start the next turn coroutine"
+   ],
+   [
+    430,
+    "Decompiler garbage from the coroutine start helper; real call is StartCoroutine(NextTurn)"
+   ]
+  ]
+ }
+}

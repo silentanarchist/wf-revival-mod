@@ -1,0 +1,621 @@
+{
+ "3292ebc": {
+  "summary": "Silently destroys a unit: marks it destroyed, removes it from its side's minion manager and the units-in-play list, hides its 3D body and queues a minion reassemble. Then strips hand effects (on the enemy hand) whose enchanting card is no longer valid. Used when a unit leaves play without a death animation.",
+  "comments": [
+   [
+    5,
+    "unit exists: mark it destroyed and drop effects it was applying to others"
+   ],
+   [
+    7,
+    "pick the minion manager for the unit's side (player or enemy)"
+   ],
+   [
+    13,
+    "remove it from the board and the in-play list, then queue a minion re-layout for that side"
+   ],
+   [
+    18,
+    "hide the card's 3D body and refresh the player's hand effects"
+   ],
+   [
+    23,
+    "walk the enemy hand's active effects from last to first"
+   ],
+   [
+    31,
+    "builds a debug log line 'Enchanting card <name> id=<id> <state>'; the decompiler mangled the string array"
+   ],
+   [
+    85,
+    "effect has an enchanting card that is no longer in play: log that its hand effect will be removed"
+   ],
+   [
+    99,
+    "same check for an enchanting card with the jam trait"
+   ],
+   [
+    113,
+    "further log-only checks on effects belonging to the other side"
+   ],
+   [
+    128,
+    "decide whether to remove this hand effect (RemoveHandEffectAt) based on the checks above; decompiler tangled this"
+   ],
+   [
+    158,
+    "decompiler fragment: second copy of the effect scan, for the player-side hand; logic matches the first"
+   ],
+   [
+    205,
+    "if the effect's enchanting card is the card being removed, drop the hand effect"
+   ],
+   [
+    219,
+    "decompiler fragment: finds a skipCardDraw hand effect and uses up one of its uses, removing it at zero"
+   ]
+  ]
+ },
+ "3292fac": {
+  "summary": "Queues an automatic 'reassemble minions' action (re-lays out a side's minions on the board) at instant priority for the given side.",
+  "comments": [
+   [
+    4,
+    "needs global vars for the instant priority value"
+   ],
+   [
+    7,
+    "order type 7 is the reassemble-minions auto action"
+   ],
+   [
+    10,
+    "push the order onto the auto-action queue"
+   ]
+  ]
+ },
+ "3293018": {
+  "summary": "Picks the UnitDeathType (death animation/cause code) for a unit dying in an action, based on whether a spell caused it, the damage type, and whose turn it is. Returns the action's own death type for destroyUnit actions otherwise.",
+  "comments": [
+   [
+    4,
+    "damageInfo is expected; just log an error if missing"
+   ],
+   [
+    7,
+    "if the action's first card is a spell, the death is a spell death (0x1e)"
+   ],
+   [
+    17,
+    "same check for the action's second card"
+   ],
+   [
+    27,
+    "ability-type damage kills use death type 0x14"
+   ],
+   [
+    42,
+    "combat damage while vulnerable: result depends on who attacked and whose turn it is"
+   ],
+   [
+    48,
+    "acting card's owner vs current turn: 0xf if they match the turn side, otherwise 10; a guess at attacker/defender death"
+   ],
+   [
+    60,
+    "destroyUnit actions carry their own death type; everything else is a normal death"
+   ]
+  ]
+ },
+ "32927ac": {
+  "summary": "Broadcasts a unit-damaged event to listeners, records the damage in the challenge log for the attacker's side, and raises a DamageSignal on the Scaffold event bus. Called when a unit takes damage.",
+  "comments": [
+   [
+    4,
+    "tell battle listeners the unit was damaged"
+   ],
+   [
+    6,
+    "only damage with a source card is logged and signalled"
+   ],
+   [
+    11,
+    "add the damage amount to the challenge statistics for the acting card's side"
+   ],
+   [
+    18,
+    "raise a DamageSignal so other systems (UI, achievements) can react"
+   ],
+   [
+    20,
+    "decompiler expansion of the generic Signal.Raise call; not meaningful logic"
+   ],
+   [
+    48,
+    "missing data: logs 'Can't LogDamage'"
+   ]
+  ]
+ },
+ "3293244": {
+  "summary": "Returns true when the match is a replay and replay playback is currently active, meaning animations can be skipped.",
+  "comments": [
+   [
+    5,
+    "only replay matches can skip animations"
+   ]
+  ]
+ },
+ "32932bc": {
+  "summary": "Returns how long the game waits when the enemy plays a card: 0.2 seconds while skipping replay animations, otherwise 0.6 seconds.",
+  "comments": [
+   [
+    5,
+    "short delay when replay animations are being skipped"
+   ]
+  ]
+ },
+ "32933c8": {
+  "summary": "Maps a PositionOption (hero, hand, deck, board center, next minion slot, self or target card) to the Transform where an animation should start or end. Logs an error and falls back to the player's hero anchor for unknown options.",
+  "comments": [
+   [
+    4,
+    "options at or above enemyHand are hand/deck anchors"
+   ],
+   [
+    6,
+    "option 1 or 2: anchor on the target card's UI effects anchor"
+   ],
+   [
+    11,
+    "self: anchor on the acting card's effects anchor"
+   ],
+   [
+    12,
+    "friendly hero: uses the hero effect anchor from the player manager (shares code with enemy hero)"
+   ],
+   [
+    26,
+    "hero and board-center options"
+   ],
+   [
+    34,
+    "board center uses a fixed anchor"
+   ],
+   [
+    39,
+    "next friendly minion spot: build a temporary empty object at the next free slot; destroyed after 10 seconds"
+   ],
+   [
+    57,
+    "friendly hand: hand anchor depends on whether the acting card is the player's"
+   ],
+   [
+    65,
+    "unknown option: log an error and use the player's hero as a fallback"
+   ],
+   [
+    75,
+    "hand and deck options: friendly/enemy mapping flips by the acting card's owner"
+   ],
+   [
+    95,
+    "choose player or enemy anchor object, then fetch its Transform (decompiler shows raw Unity binding code)"
+   ]
+  ]
+ },
+ "32938ec": {
+  "summary": "Loads an animation prefab, instantiates it at the start parent's position, copies the prefab scale, runs the optional callback on it, and adds and initializes a CardAnimController. Returns null if the prefab or parents are missing.",
+  "comments": [
+   [
+    8,
+    "load the animation prefab from the addressables cache"
+   ],
+   [
+    15,
+    "spawn at the start parent's position with the prefab's local rotation"
+   ],
+   [
+    22,
+    "keep the prefab's original scale"
+   ],
+   [
+    24,
+    "let the caller tweak the new object"
+   ],
+   [
+    27,
+    "attach the anim controller and start it with start/end points and cards"
+   ]
+  ]
+ },
+ "3293b60": {
+  "summary": "Like CreateAnim, but looks up the start and end Transforms from the AnimInfo position options via GetAnimTransform. Spawns the prefab, runs the callback and initializes its CardAnimController.",
+  "comments": [
+   [
+    7,
+    "resolve where the animation starts and ends from its position options"
+   ],
+   [
+    10,
+    "load the prefab; bail out with null if prefab or either anchor is missing"
+   ],
+   [
+    17,
+    "spawn at the start anchor with the prefab's rotation and scale"
+   ],
+   [
+    25,
+    "optional caller callback on the new object"
+   ],
+   [
+    28,
+    "initialize the controller (end anchor is also used as the rotate-towards target)"
+   ]
+  ]
+ },
+ "328e838": {
+  "summary": "Finishes a blood thirst animation action: activates and highlights blood thirst on the card, then finishes the action. When the queue is empty it reassembles minions, checks for a dead hero and ends the battle, then re-enables hero and minions for whoever's turn it is.",
+  "comments": [
+   [
+    8,
+    "activate blood thirst on the acting card and highlight it if it changed"
+   ],
+   [
+    16,
+    "if nothing else is queued, re-layout any side whose minions are out of position"
+   ],
+   [
+    29,
+    "no auto actions left: check whether a hero died"
+   ],
+   [
+    33,
+    "tutorial and campaign matches skip the dead-hero check; otherwise look at both hero states (5 = dead)"
+   ],
+   [
+    39,
+    "hero is dead: logs a long debug line with battle state"
+   ],
+   [
+    75,
+    "if already in post-battle, ignore (unless a disconnect loss is pending)"
+   ],
+   [
+    90,
+    "disconnect loss pending: record an enemy win and run the battle end sequence"
+   ],
+   [
+    99,
+    "normal end: enter post-battle, stop the battle and tell the opponent the match finished"
+   ],
+   [
+    106,
+    "lock the UI and clear the during-battle flag"
+   ],
+   [
+    111,
+    "enemy hero died: raise an EnemyHealthChange signal with health 0"
+   ],
+   [
+    126,
+    "build the match result (Elo/XP, skulls/milestones), record winner and match duration"
+   ],
+   [
+    187,
+    "player won: flag the win; some event match types notify live-ops that the player is human"
+   ],
+   [
+    200,
+    "save the result and finish the battle"
+   ],
+   [
+    226,
+    "nobody died: broadcast the while-in-play check"
+   ],
+   [
+    230,
+    "action is done: clear the resolving flag"
+   ],
+   [
+    233,
+    "enemy turn: refresh enemy minions and the hero's ability to act/attack"
+   ],
+   [
+    241,
+    "hero can act when alive, in play, not stunned, and not summon-sick (blood thirst allows one use)"
+   ],
+   [
+    252,
+    "ferocity or oath heroes: recompute canAct; summon-sick ones switch to the active attack type"
+   ],
+   [
+    267,
+    "show or hide the hero ability button based on whether it can attack now"
+   ],
+   [
+    283,
+    "player turn: light up playable hand cards, activate minions and the hero"
+   ],
+   [
+    291,
+    "queue is empty: run GC in the background and unpause the clock"
+   ],
+   [
+    297,
+    "if the player has almost no actions left, show the 'no actions' clock UI"
+   ],
+   [
+    316,
+    "after a manual player action, continue scripted tutorial turns if they were waiting for it"
+   ]
+  ]
+ },
+ "3293e00": {
+  "summary": "Called each tick of the choose-card countdown. Auto-picks a random option if the player has not chosen, updates the timer, and at 2 seconds or less hides the choice UI, destroys the cards and confirms the selection via ClickChosenCardDone.",
+  "comments": [
+   [
+    4,
+    "only active while choosing a resolution card"
+   ],
+   [
+    14,
+    "nothing selected yet: pick a random option so the choice is never empty"
+   ],
+   [
+    26,
+    "show the remaining time"
+   ],
+   [
+    27,
+    "more than 2 seconds left: nothing else to do"
+   ],
+   [
+    35,
+    "time nearly up: hide the choice elements and buttons"
+   ],
+   [
+    41,
+    "destroy every choice card UI object, then empty the list"
+   ],
+   [
+    71,
+    "also destroy any leftover children of the menu anchor"
+   ],
+   [
+    115,
+    "decompiler cleanup code for the enumerator Dispose; not game logic"
+   ],
+   [
+    128,
+    "confirm the chosen card with the battle manager"
+   ]
+  ]
+ },
+ "328b284": {
+  "summary": "Cancels any in-progress card play, minion attack or target selection, returning a played card to hand and clearing highlights. Returns true if something was cancelled, false if the UI was idle.",
+  "comments": [
+   [
+    5,
+    "UI states 2-5 are the card-being-played states"
+   ],
+   [
+    10,
+    "if a card is tracked and it is the player's card in hand, animate it out of the play area"
+   ],
+   [
+    18,
+    "stop tracking, drop any targeted spell animation and potential target highlights"
+   ],
+   [
+    22,
+    "re-layout minions, move the card back to hand and release the hand"
+   ],
+   [
+    33,
+    "minion attacking: cancel the attack"
+   ],
+   [
+    34,
+    "choosing an ability/unit target: just stop showing potential targets"
+   ],
+   [
+    35,
+    "any other state: nothing to cancel"
+   ]
+  ]
+ },
+ "3293f64": {
+  "summary": "Sets up and shows the choose-a-card menu when a card ability needs a choice. Builds the options, titles the menu, and in replays auto-selects the recorded choice. Starts the countdown-end routine if the clock is nearly out.",
+  "comments": [
+   [
+    8,
+    "stop the clock pause for animations, cancel pending actions and enter the resolution card choice state"
+   ],
+   [
+    13,
+    "close voice-line popups and fade out the active skill description"
+   ],
+   [
+    17,
+    "get the options shown and the full pool; actionValue indexes the choice that was actually made"
+   ],
+   [
+    22,
+    "show the choose-card menu and read the current countdown value"
+   ],
+   [
+    28,
+    "reset the selection, enable buttons and set the title from the card's unique id"
+   ],
+   [
+    41,
+    "button text uses the localized 'Done' term"
+   ],
+   [
+    44,
+    "offensive/defensive choices use a different layout without the menu anchor"
+   ],
+   [
+    53,
+    "build the choice card UIs (coroutine)"
+   ],
+   [
+    59,
+    "replay: pre-select the card the original player chose, and auto-finish unless replay play is active"
+   ],
+   [
+    70,
+    "with 1 second or less left, finish the selection after a delay"
+   ],
+   [
+    76,
+    "rest is decompiler StartCoroutine plumbing and exception noise"
+   ]
+  ]
+ },
+ "32940b8": {
+  "summary": "Builds the list of choice options shown for a choose-a-card ability: randomly draws up to the maximum number of choices from the full pool, tops up from the leftovers if needed, and sorts by cost and name for human players.",
+  "comments": [
+   [
+    5,
+    "full pool of valid options, plus a working copy"
+   ],
+   [
+    8,
+    "maxTargets from the card's choices definition is how many options to show"
+   ],
+   [
+    10,
+    "cap at the pool size"
+   ],
+   [
+    14,
+    "draw random distinct options using the battle's shared random number generator"
+   ],
+   [
+    40,
+    "remove the drawn card from the pool so it cannot repeat"
+   ],
+   [
+    48,
+    "fewer picks than wanted (duplicates removed): fill from the unused leftover copy"
+   ],
+   [
+    54,
+    "remove already chosen cards from the leftover copy"
+   ],
+   [
+    65,
+    "append leftover cards until the maximum is reached"
+   ],
+   [
+    87,
+    "sort by cost then name, except for bot (non-replay) choices"
+   ]
+  ]
+ },
+ "32944f4": {
+  "summary": "Gets the full pool of choice cards for a card's choicesDefinition: finds the targets, converts to RawCardScripts, filters them, sorts by name and returns a new list. Most of the code below is decompiler-expanded LINQ internals.",
+  "comments": [
+   [
+    9,
+    "find the cards that match the card's choice criteria"
+   ],
+   [
+    11,
+    "convert to raw card data (or use the stored chosen-resolution list)"
+   ],
+   [
+    18,
+    "filter with a cached lambda, then order by name and copy to a list"
+   ],
+   [
+    31,
+    "the rest of the function is decompiled LINQ library code (OrderBy/ToLookup); the calls above are the real logic"
+   ]
+  ]
+ },
+ "3294aec": {
+  "summary": "Turns a list of CardScripts into a list of their RawCardScripts. For choiceResolution targets, uses the given list or, if empty, the stored cardsTargetedInChosenResolution list.",
+  "comments": [
+   [
+    4,
+    "choiceResolution: reuse the provided raw list, or the saved chosen-resolution list if none given"
+   ],
+   [
+    9,
+    "otherwise build a new list from each card's raw card data"
+   ]
+  ]
+ },
+ "3294c60": {
+  "summary": "Called when a card is chosen in a selection or mulligan menu. Records the choice, and in a mulligan stores it in match data, sends mulligan cards to the opponent (network) or has the AI pick its environment effect (offline), then starts the finish routine.",
+  "comments": [
+   [
+    6,
+    "regular card selection (not env effect): remember the choice, return to normal battle and release the shade and clock pause"
+   ],
+   [
+    21,
+    "selecting an environment effect: clear the flag; only proceed if in mulligan state"
+   ],
+   [
+    25,
+    "mulligan done for the player: store the chosen card id in match data"
+   ],
+   [
+    36,
+    "online game: wait for the opponent if their mulligan has not arrived"
+   ],
+   [
+    42,
+    "enemy mulligan not received yet: show the wait text, finish the player's mulligan phase and return to normal battle UI"
+   ],
+   [
+    61,
+    "send the mulligan cards to the opponent and start a fallback countdown in case they never answer"
+   ],
+   [
+    66,
+    "if the opponent is reconnecting, handle it as a disconnect"
+   ],
+   [
+    70,
+    "offline game: AI picks its environment effect card and it is stored in match data"
+   ],
+   [
+    95,
+    "remove the shade and run the finish-mulligan routine as a coroutine"
+   ],
+   [
+    104,
+    "rest is decompiler StartCoroutine plumbing"
+   ]
+  ]
+ },
+ "328eafc": {
+  "summary": "Changes a card's base attack to a new value (logging it), then marks the changeAttack action as finished.",
+  "comments": [
+   [
+    5,
+    "target must exist"
+   ],
+   [
+    10,
+    "apply the new base attack, then end the action"
+   ]
+  ]
+ },
+ "328ebd0": {
+  "summary": "Changes a card's max health to a new value (logging it), then marks the changeHealth action as finished.",
+  "comments": [
+   [
+    5,
+    "target must exist"
+   ],
+   [
+    10,
+    "apply the new max health, then end the action"
+   ]
+  ]
+ }
+}

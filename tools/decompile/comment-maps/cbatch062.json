@@ -1,0 +1,212 @@
+{
+"2f496a4": {"summary": "Queues a heads-up tip message on the battle screen unless it duplicates the last queued tip. Drops the oldest queued tip if the queue is full, and starts the DisplayTip coroutine if the tip panel is currently hidden.", "comments": [
+[7, "Same text as the newest queued tip: ignore it so the player is not spammed"],
+[10, "Queue is at its configured limit: remove an old entry (index 1) to make room"],
+[15, "Append the new tip text to the queue (inlined List.Add, with a resize when full)"],
+[33, "Tip panel is already showing: the running coroutine will pick up the queued tip"],
+[38, "Panel hidden: start the coroutine that shows the queued tips"],
+[40, "Decompiler tangle: Unity's StartCoroutine null / non-MonoBehaviour checks; the call is just StartCoroutine"]
+]},
+"2f497f0": {"summary": "Returns true if the new tip text is identical to the most recently queued tip, so the same tip is not shown twice in a row. Does a reference check, then a length check, then a manual character-by-character string compare.", "comments": [
+[5, "Nothing queued yet, so it cannot be a repeat"],
+[13, "Take the last tip in the queue"],
+[14, "Not the same string object: fall back to comparing contents"],
+[21, "Different lengths mean different strings"],
+[27, "Inlined string.Equals: compares the characters in 8-byte chunks, then the remainder"]
+]},
+"2f49880": {"summary": "Returns true when the tip queue has reached the configured maximum length (tipQueueSize in the global vars) and holds more than one tip. Used by ShowHeadsUpMessage to decide whether to drop an old tip.", "comments": [
+[10, "Queue still below the configured maximum size: not too many"],
+[15, "At the limit: only counts as too many if more than one tip is waiting"]
+]},
+"2f49984": {"summary": "Returns true if the heads-up tip queue contains at least one tip.", "comments": []},
+"2f498f8": {"summary": "Builds the DisplayTip coroutine enumerator for the heads-up tip panel, storing the controller and the two background options (opaque, red). Nothing runs until the coroutine is started.", "comments": []},
+"2f49d2c": {"summary": "Checks whether a BoardCriteria condition is currently true: whose turn it is, an optional random chance, or how many cards match a target filter compared against a reference value. Returns true when there is no criteria to check.", "comments": [
+[5, "No criteria or no count filter: nothing to check, so the condition passes"],
+[12, "Criteria needs it to be the card owner's turn: fail if the turn owner differs"],
+[20, "Criteria needs it to be the opponent's turn: fail if it is the owner's turn"],
+[25, "Random-chance criteria (unless ignored) with a positive reference value: handled at the bottom"],
+[28, "Target filter accepts any target: nothing to count, passes"],
+[31, "Collect all cards that match the count filter"],
+[34, "EnemiesMinusAllies mode: count becomes enemy cards minus allied cards among the matches"],
+[53, "Compare the count against the reference value using the chosen comparison"],
+[56, "EqualTo"],
+[61, "EqualOrHigher"],
+[69, "EqualOrLower"],
+[75, "RandomChance reached here only when the roll is skipped: treat as met"],
+[80, "Unknown comparison option: log an error and treat the criteria as met"],
+[91, "Random chance: roll 0-99 and succeed when the roll is below the reference value (a percentage)"],
+[93, "Builds and logs a debug message with the card name, reference value and roll"]
+]},
+"2f4a13c": {"summary": "Checks whether a card library satisfies a transformed warlord's deck criteria. Filters a copy of the library down to cards matching the criteria filter, then compares the matching count with the required number.", "comments": [
+[5, "No warlord given: criteria cannot be met"],
+[9, "Warlord has no transformed warlord id: no deck criteria applies, so fail"],
+[18, "Filter list is empty: no restriction, so the deck qualifies"],
+[21, "Work on a copy of the library so the original list is untouched"],
+[26, "Walk the copy backwards and remove every card that does not match the filter"],
+[36, "Number of cards that match"],
+[41, "Comparison code 3 (EqualOrLower): fail if there are more matches than allowed"],
+[46, "Comparison code 2 (EqualOrHigher): fail if there are fewer matches than required"],
+[51, "Comparison code 1 (EqualTo): fail unless the count matches exactly"],
+[56, "Unknown comparison: log an error and let the deck pass"]
+]},
+"2f4a3a4": {"summary": "Returns the Energy a side currently has left (an anti-cheat ObscuredInt). Reads it from the player's or enemy's manager depending on isPlayer.", "comments": [
+[7, "Pick the player's side manager (offset 0xc0) or the enemy's (offset 200)"],
+[13, "Copy the three obscured fields and decode them into the plain int result"]
+]},
+"2f4a3bc": {"summary": "Returns a side's total Energy (maximum this turn, an anti-cheat ObscuredInt). Reads it from the player's or enemy's manager depending on isPlayer.", "comments": [
+[7, "Pick the player's side manager (offset 0xc0) or the enemy's (offset 200)"],
+[13, "Copy the three obscured fields and decode them into the plain int result"]
+]},
+"2f4a508": {"summary": "Sets up a board trait icon: assigns the sprite to every icon renderer, uses the normal or greyed-out material depending on whether the trait is enabled, toggles the inactive-state icons, and updates the counter text.", "comments": [
+[7, "Loop over all icon renderers and give each the trait sprite"],
+[11, "Disabled trait uses the disabled material, otherwise the original one"],
+[21, "Remember the renderer's original material the first time through"],
+[33, "Show the 'trait not active' overlay icons only when the trait is not enabled"],
+[40, "Decompiler jumbled this block: it is the counter update (set counter text, show it only when positive)"],
+[63, "Normal path: update the counter display"]
+]},
+"2f4a688": {"summary": "Sets the trait icon's counter text to the given number and shows the counter only when the number is positive.", "comments": [
+[6, "Number becomes the counter label"],
+[10, "Positive counter shows the with-counter variant, otherwise the plain icon"]
+]},
+"2f4a6e8": {"summary": "Switches the trait icon between its with-counter and without-counter game objects.", "comments": [
+[5, "Show the counter version and hide the plain one"],
+[23, "Hide the counter version and show the plain one"]
+]},
+"2f4a744": {"summary": "Starts a DOTween float tween that fades the trait icon to a target alpha over the given time. The tween uses getter/setter lambdas on this icon.", "comments": [
+[4, "Getter and setter delegates that read and write the icon's alpha"],
+[13, "Create the tweener and set it up; despawn it if setup fails"]
+]},
+"2f4a850": {"summary": "Plays a quick scale pulse (up and back, yoyo) on the trait icon to highlight it, first killing any previous pulse and restoring the original size.", "comments": [
+[5, "A previous highlight tween exists: kill it and reset the scale to the original size"],
+[12, "Scale up by the highlight factor, loop once back (yoyo) with an ease-in"]
+]},
+"2f4a958": {"summary": "Tween setter used by DOFade: sets the nested fade group's alpha and recalculates its effective (total) alpha by multiplying with its parent group's total alpha.", "comments": [
+[8, "Store the new alpha from the tween"],
+[11, "Default parent alpha of 1 when there is no parent group"],
+[22, "Hand-expanded NestedFadeGroup alpha update: refresh references and handle queued component-added setup"],
+[28, "Groups marked exclude ignore the parent's alpha"],
+[31, "Total alpha is own alpha times parent alpha, then times an extra alpha factor"]
+]},
+"2f4d43c": {"summary": "Pointer-enter handler for a card's collider. Forwards the event to the parent scroll rect, tells the card a touch entered, and if the mouse button is held starts a drag on this card by sending BeginDrag to its handlers.", "comments": [
+[6, "Cards inside a scroll view: pass the enter event up to the scroll rect"],
+[13, "Collider has no card attached: nothing more to do"],
+[17, "Tell the card the pointer entered (hover/touch feedback)"],
+[20, "Mouse not held: just hovering, done"],
+[24, "Mouse held while entering: remember where the press is and take over the drag"],
+[30, "Already the drag target: nothing to do"],
+[37, "Make this card the pointer drag target"],
+[47, "Inlined ExecuteEvents.Execute: send BeginDrag to every handler on this game object"],
+[139, "Decompiler appended unreliable exception and cleanup code from here on (inlined generic ExecuteEvents); ignore it"]
+]},
+"2f4d6c8": {"summary": "Pointer-exit handler for a card's collider. Ends any drag, hides the card description, shrinks a hand card back, clears combat preview highlights, and restores the card highlight state and frame colours when it had been selected.", "comments": [
+[6, "Cards inside a scroll view: pass the exit event up to the scroll rect"],
+[14, "Pointer left, so a later release must not count as a click"],
+[21, "Mouse held while leaving: end the drag that this card was receiving"],
+[28, "Send a touch drag update with the stored press position"],
+[33, "Clear the drag target and send EndDrag to this card"],
+[46, "Stop showing the large card description"],
+[47, "Player's card raised in hand: lower it back into the hand"],
+[54, "Remove the combat preview highlight on this card"],
+[58, "A tracked card exists on the board: also clear its combat preview highlight"],
+[64, "Selected card goes back to regular; a selected board target goes back to potential target"],
+[73, "Highlight already in that state: nothing to change"],
+[76, "Apply the new highlight state and restore the frame colours"],
+[119, "Stop any running colour tween before starting a new one"],
+[164, "Decompiler output is jumbled here: this is the tween that fades frame and stat colours back to normal"]
+]},
+"2f4d928": {"summary": "Drag handler for a card's collider. Forwards to the scroll rect; for a card in play it starts an attack or ability aim once dragged far enough, and for a card in hand it starts moving the card toward the board when the drag points far enough upward.", "comments": [
+[6, "Cards inside a scroll view: pass the drag event up to the scroll rect"],
+[23, "Ignore drags while right mouse is held or multi-touch is used"],
+[33, "Match data state 0xa0 means input is not allowed (seems to be a locked state)"],
+[37, "Only allow dragging during normal battle UI"],
+[41, "Only the player's own cards in hand (showing) or in play can be dragged"],
+[44, "Card is in play, not in hand: dragging means starting an attack or ability"],
+[49, "Moved far enough and the card is not already attacking or aiming, and it can attack or use an ability"],
+[59, "Card can attack: begin aiming the attack"],
+[63, "Clear the 'displaying card' flag; this block decides whether to cancel the large card view"],
+[110, "Card is in hand: measure how far the drag moved from the press point"],
+[114, "Convert both positions to viewport space, then take the angle from straight up"],
+[139, "Max angle from vertical: 65 degrees, or 70 if the card can currently be played"],
+[146, "Dragged near upward and far enough, in the right hand state: start moving the card"],
+[150, "Otherwise on touch devices do nothing; on PC fall through to start moving"],
+[154, "Start moving the hand card: set the moving state, play the move sound, scale the card"],
+[179, "Reset rotation target to zero while moving"]
+]},
+"2f4da8c": {"summary": "End-drag handler for a card's collider. If the card sits inside a scroll rect, forwards the EndDrag event to the scroll rect's handlers.", "comments": [
+[5, "No scroll rect: nothing to forward"],
+[21, "Inlined ExecuteEvents.Execute: send EndDrag to every handler on the scroll rect object"],
+[111, "Decompiler appended unreliable exception and cleanup code from here on (inlined generic ExecuteEvents); ignore it"]
+]},
+"2f4dba8": {"summary": "Begin-drag handler for a card's collider. Forwards BeginDrag to the scroll rect and records the current frame number for the card.", "comments": [
+[6, "Cards inside a scroll view: pass the begin-drag event up"],
+[15, "Remember the frame the drag began, so other handlers can ignore a click in the same frame"]
+]},
+"2f4dd04": {"summary": "Pointer-down handler for a card's collider. Forwards to the scroll rect, records the press position and time, then reacts by card state: shows the enemy deck/hand size for a hidden hand card, selects a card in play, or shows deck size for a card in the deck.", "comments": [
+[6, "Cards inside a scroll view: pass the press event up"],
+[13, "Allow a following pointer-up to count as a click"],
+[24, "Remember where and when the press happened (used for click and drag tests)"],
+[33, "Choosing a resolution target: touches on cards are blocked; logs a message only when dev tools are on"],
+[51, "Choose behaviour by card state; some states are ignored (bitmask test)"],
+[56, "Card in hand: only an enemy card does anything here"],
+[63, "Enemy hand card pressed: show both sides' deck and hand sizes during battle"],
+[89, "Card in play: select it (regular highlight becomes selected)"],
+[101, "Card in the deck: show the deck size for its side"],
+[112, "Unknown card state: log a warning"]
+]},
+"2f4de78": {"summary": "Pointer-up handler for a card's collider. If the card sits inside a scroll rect, forwards the PointerUp event to the scroll rect's handlers.", "comments": [
+[5, "No scroll rect: nothing to forward"],
+[21, "Inlined ExecuteEvents.Execute: send PointerUp to every handler on the scroll rect object"],
+[111, "Decompiler appended unreliable exception and cleanup code from here on (inlined generic ExecuteEvents); ignore it"]
+]},
+"2f4df94": {"summary": "Click handler for a card's collider. Forwards to the scroll rect, then by card state: uses a waystone on an Aeldari remnant card, raises or lowers a hand card, or opens the large card view with its effect list (and a special ambush view for hidden enemy cards).", "comments": [
+[6, "Cards inside a scroll view: pass the click up"],
+[13, "No card, or the press did not start on this collider: ignore the click"],
+[24, "Choosing a resolution target: clicks on cards are blocked; logs a message only when dev tools are on"],
+[42, "Card in a hand or in-play type state: pick the matching branch"],
+[48, "Aeldari remnant card in play: a click uses its waystone ability"],
+[53, "Waystone usable: execute it and wait for it to resolve; otherwise log that it cannot be used"],
+[65, "Not a remnant: this click should open the large card view (unless the mulligan screen is up)"],
+[74, "Card in hand: enemy cards respond only if they are Sabotage spells"],
+[81, "Quick second click on a hand card (under 0.2 s): show it large"],
+[88, "Card was raised in hand: put it back in the hand slot with hand position, rotation and scale"],
+[117, "Re-register the card UI click listener on the card button"],
+[170, "Card in play states: continue to large view for the player's cards"],
+[186, "Large card view not allowed in this UI state or tutorial: stop"],
+[189, "Card was just clicked as a target: swallow this click"],
+[195, "Large card view is not already open: show it with the card's effect list"],
+[216, "Show the card with its tier and effects in the large view"],
+[217, "Enemy card in play with Ambush: show a face-down ambush card instead of its real details"],
+[260, "Disable the other cards and board sounds/environment while the large view is up"],
+[276, "Decompiler lost the control flow here; the code below builds the effect panel for the clicked card"],
+[284, "Show effect lines for the card; hide the effects panel for environment effect cards"]
+]},
+"2f4e100": {"summary": "Returns the box collider's original size, running Initialize first if the stored size is still zero (not set up yet).", "comments": [
+[7, "Size is effectively zero: collider not initialised yet, so set it up now"]
+]},
+"2f4e1d4": {"summary": "Setter for the stored original box collider size.", "comments": []},
+"2f4e1e4": {"summary": "Setter for the stored original box collider offset.", "comments": []},
+"2f4e180": {"summary": "Stores the box collider's original size and offset, disables the big-view collider, and then shrinks the collider to the in-hand height. Called lazily the first time the original size is needed.", "comments": [
+[6, "Save the collider's authored size and offset"],
+[16, "The enlarged-view collider starts disabled"],
+[21, "Scale the height by the in-hand multiplier"],
+[29, "Shift the offset so the shortened collider stays aligned with the card's bottom edge"]
+]},
+"2f4e24c": {"summary": "Restores the card collider to its normal full size and offset when the card is not in hand, and turns off the big-view collider. Does nothing for cards in the cemetery or removed from the game.", "comments": [
+[4, "Dead or removed cards keep whatever collider they have"],
+[11, "Enable the collider, turn off the big-view one, and restore the original size and offset"]
+]},
+"2f4e314": {"summary": "Sets the box collider to the shorter in-hand size, using the height multiplier, and shifts the offset so the collider stays at the card's bottom edge.", "comments": [
+[8, "Shrink the height by the in-hand multiplier"],
+[16, "Move the offset by half the lost height"]
+]},
+"2f4e1ec": {"summary": "Turns the big-view collider on or off. When on, the main collider returns to its full original size and offset; when off, it is set to the shorter in-hand size.", "comments": [
+[7, "Enable or disable the enlarged-view collider"],
+[8, "Enlarged view: use the full original size and offset"],
+[30, "Not enlarged: set in-hand height and shift the offset to match"]
+]},
+"2f4e450": {"summary": "Shows the damage counter object on a card, sets its text to the damage number and plays its animation.", "comments": [
+[6, "Activate the counter and write the damage number into the text"],
+[11, "Play the pop-up animation"]
+]}
+}

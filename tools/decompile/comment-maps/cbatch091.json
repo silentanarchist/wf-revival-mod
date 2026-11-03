@@ -1,0 +1,588 @@
+{
+ "2f84474": {
+  "summary": "Closes the radio-style voice line box: stops its audio, marks no voice line playing, hides the box and blanks its chat text. Called when the radio message should disappear.",
+  "comments": [
+   [
+    7,
+    "Find the chat box used for Radio voice lines"
+   ],
+   [
+    9,
+    "Stop any audio still playing in the box and clear the playing flag"
+   ],
+   [
+    12,
+    "Turn off the audio wave equalizer animation"
+   ],
+   [
+    15,
+    "Hide the whole chat box object"
+   ],
+   [
+    19,
+    "Blank the text; the tail is TextMeshPro mesh-refresh noise from the decompiler"
+   ]
+  ]
+ },
+ "2f84348": {
+  "summary": "Builds the VoiceLineData (text, hero portrait, audio clip, duration, card type) for a chat message sent by the player or opponent. Uses that side's hero card; throws if the battle or hero is missing.",
+  "comments": [
+   [
+    8,
+    "Get the hero (warlord) card of the side that is talking"
+   ],
+   [
+    9,
+    "Localized chat text for this message"
+   ],
+   [
+    11,
+    "Take the hero's portrait sprite (raw field read)"
+   ],
+   [
+    12,
+    "Pick the chat audio clip and remember it so its length can be measured"
+   ],
+   [
+    14,
+    "Duration is clip length plus padding, with a 2 second minimum"
+   ]
+  ]
+ },
+ "2f8383c": {
+  "summary": "Builds a VoiceLineData from an already chosen audio clip, message text, speaker sprite and card type. Remembers the clip as the current one to compute its display duration.",
+  "comments": [
+   [
+    4,
+    "Remember the clip so GetCurrentClipLength can measure it"
+   ],
+   [
+    7,
+    "Package everything into the voice line data object"
+   ]
+  ]
+ },
+ "2f82e10": {
+  "summary": "Returns whether a chat message may be shown right now. Requires a battle in progress; the player's side also needs the popup shown flag, the opponent's side needs chat not muted. Logs a failure message otherwise.",
+  "comments": [
+   [
+    8,
+    "Chat only works while a battle is running"
+   ],
+   [
+    10,
+    "Local player's own chat"
+   ],
+   [
+    11,
+    "Allowed when the flag is set"
+   ],
+   [
+    16,
+    "Opponent's chat"
+   ],
+   [
+    17,
+    "Allowed unless the player has muted chat"
+   ],
+   [
+    26,
+    "Refused: log the reason (same text is used for all refusal paths)"
+   ]
+  ]
+ },
+ "2f8448c": {
+  "summary": "Loads the audio clip for a chat message from the speaking warlord. Intro uses a custom intro (by warlord or army) or the mirror-match line; other messages use the warlord's per-emote sound. Falls back to the default chat sound if none loads.",
+  "comments": [
+   [
+    6,
+    "Work out which warlord is speaking (player or opponent)"
+   ],
+   [
+    7,
+    "Non-intro messages: pick the sound straight from the warlord's card"
+   ],
+   [
+    11,
+    "Follow the chat audio reference chain to the card that really holds the sounds"
+   ],
+   [
+    21,
+    "Map the ChatMessage value to the matching sound field on the warlord"
+   ],
+   [
+    47,
+    "Unknown message: log a warning and load nothing"
+   ],
+   [
+    84,
+    "Load the chosen sound asset into the General addressable cache"
+   ],
+   [
+    93,
+    "Nothing loaded: fall back to the warlord's default chat sound"
+   ],
+   [
+    102,
+    "Intro message: check whether both sides use the same warlord"
+   ],
+   [
+    104,
+    "Opponent has the same warlord as the player: use the mirror-match line instead"
+   ],
+   [
+    111,
+    "Look for a custom intro for the opposing warlord, first by card, then by army"
+   ],
+   [
+    119,
+    "No custom intro: use the warlord's normal intro sound"
+   ],
+   [
+    125,
+    "Rest is an inlined addressable load; decompiler output is unreliable here"
+   ],
+   [
+    143,
+    "Bad or empty asset key: warn and return no clip"
+   ],
+   [
+    169,
+    "Load already failed: log the addressable failure"
+   ],
+   [
+    185,
+    "Not yet loaded: block until the load finishes, then cast the result to an AudioClip"
+   ]
+  ]
+ },
+ "2f83354": {
+  "summary": "Returns how long a voice line should stay on screen: the current clip length plus 0.3 seconds, but never less than 2 seconds. Returns 2 when there is no clip.",
+  "comments": [
+   [
+    6,
+    "Default duration is 2 seconds"
+   ],
+   [
+    7,
+    "With a clip: use its length plus 0.3s padding, if longer than the default"
+   ]
+  ]
+ },
+ "2f8449c": {
+  "summary": "Returns the length of the given chat sound clip plus 0.3 seconds of padding.",
+  "comments": []
+ },
+ "2f83244": {
+  "summary": "Sends a chat/emote message to the other player with a Photon RPC (PUNReceiveChatMessage, target All) in networked games. The decompiler merged in unrelated Photon RPC and collection code after the first return.",
+  "comments": [
+   [
+    11,
+    "Only networked games that are still connected send chats"
+   ],
+   [
+    13,
+    "Messages before Bored (such as Intro) are never sent over the network"
+   ],
+   [
+    19,
+    "Box the ChatMessage into an object array as the RPC argument"
+   ],
+   [
+    30,
+    "Send the chat to everyone in the room, including this client"
+   ],
+   [
+    37,
+    "Everything below is merged code from other methods (card seen RPC, match finished RPC, Photon internals)"
+   ],
+   [
+    55,
+    "Other method: sends PUNReceiveCardSeen to all"
+   ],
+   [
+    64,
+    "Other method: SendMatchFinished, sends PUNReceiveMatchFinished"
+   ],
+   [
+    80,
+    "Photon's generic RPC send; checks network and room first"
+   ],
+   [
+    256,
+    "Other method: Photon SetInterestGroups, removing then adding interest groups"
+   ],
+   [
+    343,
+    "Other method: HashSet byte Remove (inlined collection code)"
+   ],
+   [
+    455,
+    "Other method: HashSet byte Add (inlined collection code)"
+   ]
+  ]
+ },
+ "2f832e8": {
+  "summary": "Creates the coroutine object for SetChatButtonOnCooldown, which keeps the chat button disabled for a while after use. The cooldown logic is in the state machine's MoveNext.",
+  "comments": []
+ },
+ "2f833ec": {
+  "summary": "When playing against the AI, may start a delayed AI chat reply. Skips messages before Bored, and checks config (reply to emote, or emote after action) unless new matchmaking is disabled. Starts the ChatAIResponse coroutine with the configured delay.",
+  "comments": [
+   [
+    9,
+    "Only AI matches get automatic AI chats"
+   ],
+   [
+    10,
+    "Messages before Bored (e.g. Intro) get no AI reaction"
+   ],
+   [
+    13,
+    "Unless new matchmaking is disabled, check the AI config"
+   ],
+   [
+    15,
+    "This chat is a reply to the player's emote"
+   ],
+   [
+    18,
+    "Config decides whether the AI answers an emote"
+   ],
+   [
+    23,
+    "Otherwise config decides whether the AI emotes after an action"
+   ],
+   [
+    29,
+    "Look up the delay before the AI speaks"
+   ],
+   [
+    35,
+    "Create and start the delayed reply coroutine"
+   ],
+   [
+    36,
+    "Decompiler mangled the StartCoroutine null and MonoBehaviour checks; the call is still the same"
+   ]
+  ]
+ },
+ "2f845f4": {
+  "summary": "Creates the coroutine object for ChatAIResponse, storing the delay (chatDuration). The state machine waits that time and then makes the AI send its chat reply.",
+  "comments": []
+ },
+ "2f84698": {
+  "summary": "Seems to pick a random ChatMessage value from all enum values. The decompiler lost the random selection, so only the enum length is visible.",
+  "comments": [
+   [
+    6,
+    "Get all ChatMessage enum values"
+   ],
+   [
+    8,
+    "The random index and value pick were lost by the decompiler"
+   ]
+  ]
+ },
+ "2f8351c": {
+  "summary": "Returns true when an enemy chat should trigger the one-time tip about muting chat. Never true for the player's own chats or Intro, once the tip was shown, or when chat is already muted.",
+  "comments": [
+   [
+    4,
+    "Own chats never trigger the tip"
+   ],
+   [
+    8,
+    "Not an Intro, and tip not shown yet"
+   ],
+   [
+    9,
+    "Only worth showing if chat is not already muted"
+   ]
+  ]
+ },
+ "2f835e8": {
+  "summary": "Records a chat message as a PlayerAction (type 0x37) in the replay action log of whoever's turn it is, so replays can show it. Skipped for replays and for some message values.",
+  "comments": [
+   [
+    8,
+    "Skip this message value (mask test) and never log while watching a replay"
+   ],
+   [
+    12,
+    "Use the unique in-game ID of the card that spoke"
+   ],
+   [
+    15,
+    "Timestamp is the current game time in whole seconds (int min if infinite)"
+   ],
+   [
+    21,
+    "Build the action: type 0x37 (chat), card ID, message, side, and timestamp"
+   ],
+   [
+    24,
+    "Choose the log by whose turn it is"
+   ],
+   [
+    28,
+    "Player's turn: append to the player action log"
+   ],
+   [
+    33,
+    "Enemy's turn: append to the enemy action log"
+   ],
+   [
+    38,
+    "Inlined List.Add"
+   ]
+  ]
+ },
+ "2f8473c": {
+  "summary": "Creates the coroutine object for ShowHeroIntroMessage, storing which side (isPlayer) is greeting. The state machine shows that hero's intro voice line.",
+  "comments": []
+ },
+ "2f83f68": {
+  "summary": "Thread-safe add of a handler to the OnHide event of the voice line popup. The compiler's compare-exchange retry loop; the rest is merged neighbouring event code.",
+  "comments": [
+   [
+    4,
+    "Standard lock-free event add: combine delegates and swap with compare-exchange, retrying on conflict"
+   ],
+   [
+    13,
+    "Everything below is merged code from neighbouring methods (other event adds/removes, button disable)"
+   ]
+  ]
+ },
+ "2f84150": {
+  "summary": "Thread-safe removal of a handler from the OnHide event of the voice line popup. Contains merged code from neighbouring event methods.",
+  "comments": [
+   [
+    4,
+    "Standard lock-free event remove with compare-exchange retry"
+   ],
+   [
+    13,
+    "Merged code from other methods follows"
+   ]
+  ]
+ },
+ "2f83ecc": {
+  "summary": "Thread-safe add of a handler to the OnShow event of the voice line popup. Contains merged code from neighbouring event methods.",
+  "comments": [
+   [
+    4,
+    "Standard lock-free event add with compare-exchange retry"
+   ],
+   [
+    13,
+    "Merged code from neighbouring event methods follows"
+   ]
+  ]
+ },
+ "2f840b4": {
+  "summary": "Thread-safe removal of a handler from the OnShow event of the voice line popup. Contains merged code from neighbouring event methods.",
+  "comments": [
+   [
+    4,
+    "Standard lock-free event remove with compare-exchange retry"
+   ],
+   [
+    13,
+    "Merged code from neighbouring event methods follows"
+   ]
+  ]
+ },
+ "2f84004": {
+  "summary": "Thread-safe add of a handler to the OnVoiceLinePressed event (receives the pressed ChatMessage). Contains merged code from neighbouring event methods.",
+  "comments": [
+   [
+    4,
+    "Lock-free event add: combine delegates and swap with compare-exchange"
+   ],
+   [
+    13,
+    "Decompiler merged in remove code for the other popup events and a button disable"
+   ]
+  ]
+ },
+ "2f841ec": {
+  "summary": "Thread-safe removal of a handler from the OnVoiceLinePressed event of the voice line popup.",
+  "comments": [
+   [
+    4,
+    "Lock-free event remove with compare-exchange retry"
+   ],
+   [
+    13,
+    "Merged tail from a neighbouring method that disables a button"
+   ]
+  ]
+ },
+ "2f84d08": {
+  "summary": "On destroy, unsubscribes the ClickChat handler from every chat button's OnPressed. The code after the loop is merged from Awake (it computes the popup's off-screen position and moves it).",
+  "comments": [
+   [
+    8,
+    "Walk all chat buttons"
+   ],
+   [
+    13,
+    "Bounds check failed: decompiler jumps into merged code of the next method (Awake)"
+   ],
+   [
+    17,
+    "Merged Awake code: cache the RectTransform and the original on-screen position"
+   ],
+   [
+    27,
+    "Off-screen position is the original x minus 1.5 times x"
+   ],
+   [
+    34,
+    "Move the popup to the off-screen position"
+   ],
+   [
+    45,
+    "Remove this selector's ClickChat handler from the button"
+   ]
+  ]
+ },
+ "2f84de4": {
+  "summary": "Caches the popup's RectTransform, stores its on-screen position, computes an off-screen position (x moved by -1.5 times x), and starts the popup there.",
+  "comments": [
+   [
+    5,
+    "Needs the canvas group to exist"
+   ],
+   [
+    7,
+    "Cache the RectTransform of the popup"
+   ],
+   [
+    11,
+    "Remember the on-screen position"
+   ],
+   [
+    15,
+    "Off-screen position: slide x by -1.5 times its value"
+   ],
+   [
+    22,
+    "Start hidden at the off-screen position"
+   ]
+  ]
+ },
+ "2f82b10": {
+  "summary": "Sets up each chat button from the player's deck warlord (or its secret identity): subscribes the click handler, sets the voice line text, and enables the button depending on match type and whether the line exists.",
+  "comments": [
+   [
+    4,
+    "Match data and the player's deck warlord are required"
+   ],
+   [
+    13,
+    "Use the secret identity card's voice lines if there is one, else the warlord itself"
+   ],
+   [
+    18,
+    "List of match types for which the extra voice lines are allowed"
+   ],
+   [
+    23,
+    "Loop over all chat buttons"
+   ],
+   [
+    34,
+    "Initialize the button and hook up the click handler"
+   ],
+   [
+    40,
+    "Buttons map to ChatMessage values starting at 5"
+   ],
+   [
+    42,
+    "Extra (non-default) voice lines: need an allowed match type and non-empty text"
+   ],
+   [
+    50,
+    "Default voice lines are always available"
+   ],
+   [
+    55,
+    "Set button text and enabled state, and remember its message type"
+   ],
+   [
+    68,
+    "No deck warlord: log an error"
+   ]
+  ]
+ },
+ "2f84f4c": {
+  "summary": "Refreshes the text of all chat buttons from the player's warlord (or secret identity), e.g. after a transform. The decompiler also merged in lots of unrelated LINQ helper code after the loop.",
+  "comments": [
+   [
+    6,
+    "Need the battle manager, match data and the player's deck warlord"
+   ],
+   [
+    9,
+    "Use the secret identity's voice lines if it exists"
+   ],
+   [
+    16,
+    "Loop over the chat buttons"
+   ],
+   [
+    23,
+    "Buttons map to ChatMessage values starting at 5"
+   ],
+   [
+    36,
+    "Set each button's text to the localized voice line"
+   ],
+   [
+    44,
+    "Everything below is merged LINQ code (Any, Append) from other methods, not part of this one"
+   ],
+   [
+    686,
+    "Merged tail: IEnumerator and IDisposable handling for a LINQ loop"
+   ]
+  ]
+ },
+ "2f83d70": {
+  "summary": "Updates chat button texts to the voice lines of a transformed warlord and, if updateAvailable, enables each extra voice line only for allowed match types. Decompiler lost parts of the allowed match type array.",
+  "comments": [
+   [
+    6,
+    "Needs a selected warlord"
+   ],
+   [
+    8,
+    "Build the allowed match type list (two entries are visible)"
+   ],
+   [
+    22,
+    "Loop over the chat buttons"
+   ],
+   [
+    33,
+    "Buttons map to ChatMessage values starting at 5"
+   ],
+   [
+    34,
+    "Extra voice lines: set enabled state from the match type"
+   ],
+   [
+    42,
+    "Set the button text from the warlord's localized voice line"
+   ],
+   [
+    50,
+    "Failed null checks fall through to the NullReferenceException"
+   ]
+  ]
+ }
+}

@@ -1,0 +1,276 @@
+{
+"32798f0": {"summary": "AI scoring helper: how valuable it is for the AI to deal the given damage to a unit. Returns a flat score for special traits (ambush, long range, drop pod), otherwise scales the unit's value in play by how much of it the hit removes (or most of it if lethal), then adds the card's extra damaging/killing scores. Used by ScoreFromCriteria.", "comments": [
+[4, "Empty CardEffect: this variant has no buff, so its healthChange is 0"],
+[8, "Ambush units get a flat high score of 10, so the AI is drawn to hitting them"],
+[12, "Bastion counts as extra effective health"],
+[19, "Invulnerable units cannot be hurt: score stays at -10"],
+[23, "Max health of 0 or less would divide by zero: log an error and score 0"],
+[33, "Dodge or shield may negate the hit: score is melee attack / 3 plus 1"],
+[40, "Long range units get a flat score of 3"],
+[44, "Drop pod units (not yet landed) get a flat low score of 0.5"],
+[48, "Vulnerable adds to damage taken, unless this damage type already counts as vulnerable damage"],
+[57, "Copy the anti-cheat wrapped health into locals to read the real current health"],
+[66, "Minion: score depends on whether the hit kills it"],
+[67, "Non-lethal: 60% of value in play, scaled by the share of max health removed"],
+[71, "Lethal: 80% of value in play if the unit has survivor, otherwise the full value"],
+[82, "Hero (warlord): per-damage score, higher (1.8 vs 1.2) when it would be left under 16 health"],
+[92, "Lethal on a hero is worth a huge 1e6 (wins the game)"],
+[97, "Add the card's own extra score for being damaged; if the hit is lethal also add the kill bonus"],
+[105, "Shared tail for the dodge/shield branch: add the extra score"]
+]},
+"3279450": {"summary": "Same scoring as ScoreFromDamagingUnit but with an explicit buff effect applied to the target's health. Options let the caller ignore the drop pod penalty and choose whether bastion counts toward health. Returns how valuable it is to deal this damage to the unit.", "comments": [
+[7, "Ambush units get a flat high score of 10"],
+[11, "Optionally count the damaged unit's bastion as extra effective health"],
+[21, "Effective max health includes bastion and the hypothetical buff's health change"],
+[23, "Invulnerable units cannot be hurt: score stays at -10"],
+[27, "Max health of 0 or less would divide by zero: log an error and score 0"],
+[37, "Dodge or shield may negate the hit: score is melee attack / 3 plus 1"],
+[44, "Long range units get a flat score of 3"],
+[48, "Drop pod units get a flat low score unless the caller asked to ignore drop pods"],
+[52, "Vulnerable adds to damage taken, unless this damage type already counts as vulnerable damage"],
+[61, "Copy the anti-cheat wrapped health into locals to read the real current health"],
+[70, "Minion: score depends on whether the hit kills it"],
+[71, "Non-lethal: 60% of value in play, scaled by the share of max health removed"],
+[75, "Lethal: 80% of value in play if the unit has survivor, otherwise the full value"],
+[86, "Hero (warlord): per-damage score, higher (1.8 vs 1.2) when it would be left under 16 health"],
+[96, "Lethal on a hero is worth a huge 1e6 (wins the game)"],
+[101, "Add the card's own extra score for being damaged; if the hit is lethal also add the kill bonus"],
+[109, "Shared tail for the dodge/shield branch: add the extra score"]
+]},
+"3279964": {"summary": "AI scoring helper: how valuable it is to heal a unit by the given amount. The heal is capped at the damage the unit actually has; heroes score double when below 11 health, minions score by their value in play per share of max health healed.", "comments": [
+[5, "Only damage actually missing can be healed: cap the heal at the unit's current damage"],
+[10, "Nothing to heal means a score of 0"],
+[12, "Hero: 1 point per health healed, doubled when the hero is at 10 health or less"],
+[13, "Copy the anti-cheat wrapped health into locals to read the real current health"],
+[27, "Minion: value in play scaled by the fraction of max health restored"],
+[29, "Max health of 0 or less would divide by zero: log an error and score 0"],
+[37, "Add the card's own extra score for being healed"]
+]},
+"3279ac4": {"summary": "AI scoring helper: finds the best attack score a card could get among all attacks it could make with the given buffs. Called while scoring buff effects (see ScoreFromCriteria option 5).", "comments": [
+[6, "Build the list of attacks the card could make under the acting buff"],
+[9, "Try each potential attack and remember the best score (starting at 0)"],
+[14, "Score the attack as if both the attacker and the target had their buffs"]
+]},
+"32797cc": {"summary": "AI scoring helper: how valuable it is to poison a target. Returns 0 for targets already poisoned, resistant or a warlord; otherwise a fraction of the target's value in play, higher if it is stunned, lower if it will die soon.", "comments": [
+[7, "Already poisoned: nothing to gain"],
+[11, "Resistant units ignore poison"],
+[15, "Warlords cannot be poisoned (or the AI does not try)"],
+[19, "Not stunned: check the other cases; stunned targets use 0.8 below"],
+[20, "A unit that cannot attack is worth the middle factor 0.5"],
+[22, "Copy the anti-cheat wrapped health into locals to read the real current health"],
+[29, "Under 3 health: seems to die soon anyway, so poison is worth only 20% of its value"],
+[34, "Default factor 0.5"],
+[37, "Stunned targets get the highest factor 0.8"],
+[40, "Score is the chosen factor times the target's value in play"]
+]},
+"327a170": {"summary": "AI scoring helper: how valuable it is to return a card to its owner's hand. Combines the card's cost with the drop in value versus its reference value, and reduces the score for cards with rally or codex traits.", "comments": [
+[4, "Reference value in play: what the card would be worth as a fresh copy"],
+[8, "Check whether the card has the rally trait (worth 2)"],
+[14, "Check whether the card has the codex trait (worth another 2)"],
+[20, "Cost plus 1.5 times the value lost by returning it, minus the trait bonus"]
+]},
+"327a218": {"summary": "AI scoring helper: how valuable it is to give a card charge. If it cannot act now because of summoning sickness, the score is its melee attack; otherwise 0.", "comments": [
+[5, "Charge only matters if the card cannot act right now"],
+[7, "Summoning sick and not able to act: charge lets it attack, so score its melee attack value"]
+]},
+"327a25c": {"summary": "AI scoring helper: how valuable a cost reduction (Energy buff) is. Counts cards in hand, the hero ability and unit active abilities that are unaffordable now but become affordable with the cost change.", "comments": [
+[5, "Total Energy this turn and Energy left, for the card's owner"],
+[9, "Energy that would be available after the cost change is applied"],
+[10, "If the result exceeds the total Energy for the turn, the buff is worth nothing"],
+[13, "Cards in hand of the card's owner"],
+[15, "Count hand cards not affordable now that become affordable after the buff"],
+[32, "Hero's active ability: same check (cost field read directly by offset)"],
+[46, "Look at the owner's minions on the board for active abilities"],
+[57, "Loop over board units: if the unit has an active ability, apply the same affordability check"]
+]},
+"327a4dc": {"summary": "AI scoring helper for effects that buff cards in hand. Splits the targets into friendly and enemy hands, finds the best card that becomes newly playable with the cost change, penalises cards that were already playable, then scales by the number of affected cards. Decompiler output for the list handling is messy.", "comments": [
+[5, "No hand effect means nothing to score"],
+[11, "Two lists: targets in the same side's hand as the acting card, and the other side's"],
+[17, "Inlined List.Add: put each target in the friendly or enemy list by its owner"],
+[58, "Energy left for the card's owner"],
+[67, "Loop over friendly hand cards, skipping the acting card itself"],
+[73, "Cards not affordable now but affordable after the cost change: score playing them, keep best"],
+[88, "Count cards already affordable without the buff"],
+[101, "Already playable cards waste the buff: subtract 3 for each"],
+[105, "A flag on the hand effect: if set, return just the play score"],
+[108, "Unlimited uses: bonus scaled by card counts and multiplier (decompiler vectorised math)"],
+[116, "Limited uses: the number of cards counted is capped by the number of uses"]
+]},
+"327a950": {"summary": "AI scoring helper: how valuable it is to draw a card. If the deck is empty the score is a negative based on the fatigue counter; otherwise the given score adjusted by the room left in the hand.", "comments": [
+[7, "Need the card, manager and the owner's deck"],
+[8, "Pick the fatigue counter of the card's owner (enemy or player)"],
+[18, "Deck size and current fatigue value (read via raw offsets and the anti-cheat wrapper)"],
+[26, "Room in hand: max hand size minus cards in hand"],
+[27, "Empty deck: drawing costs fatigue damage, so the score is -2 minus fatigue"],
+[28, "Deck not empty: given score plus the spare hand slots (max - hand - 1)"]
+]},
+"3276e70": {"summary": "AI helper: sums a value for the active effects (enchantments) on a card. Stat-change effects add half of their summed stat changes; certain other effect types add 1, or -2 when the effect carries a particular linked object.", "comments": [
+[8, "Loop over all active effects on the card"],
+[13, "Skip effects where this flag is set (seems to mean not currently active)"],
+[17, "Effect type below 4: only type 1 (stat change) counts"],
+[18, "Stat change: add the sum of its three stat fields divided by 2"],
+[30, "Other effect types selected by a bit mask (types 12, 15 and 16) count as a flat 1"],
+[37, "If the effect has a linked object with id 0x3c, it counts as -2 instead"]
+]},
+"3279c18": {"summary": "AI helper: sums the AI score of every current trait on a card, using the trait collection lookup.", "comments": [
+[8, "Iterate the card's current traits"],
+[17, "Look up the trait definition by id and add its AI score"]
+]},
+"3278e58": {"summary": "AI scoring helper: how good it is to play a card now. For a targeted card with a target, sums the card's target scoring criteria that match the target; then sums its non-target scoring criteria. Decompiler control flow here is partly broken.", "comments": [
+[5, "Targeted card with a chosen target: score its target criteria first"],
+[14, "Loop over cardTargetScoringCriteria (the count is shown under a wrong field name)"],
+[18, "Only criteria whose filter matches this target apply"],
+[22, "Score the matching criteria and add it to the total"],
+[30, "Decompiler jump: after the target loop it seems to return the total"],
+[33, "Non-target criteria: always scored, once per entry"],
+[37, "Loop over nonTargetScoringCriteria and add each score"]
+]},
+"327aa8c": {"summary": "AI decision: should the AI play this card as part of a combo? True when the combo partner card is in hand, both cards fit in the unused Energy, and either the first combo card was already played or this is allowed to go first (and score is at least 2 if not yet played).", "comments": [
+[5, "No combo card defined: never a combo play"],
+[8, "Look at the AI side's hand (false = not the human player)"],
+[10, "The combo partner card must be in hand"],
+[11, "Energy still unused this turn"],
+[13, "Both costs must fit in the unused Energy, and either the first combo card was played or this one may go first"],
+[14, "True if the score is at least 2 or the first combo card was already played"]
+]},
+"327aba4": {"summary": "AI scoring helper: how valuable it is to keep a card in hand rather than play it. Returns the card's extra keep score times a bonus from the turn number (early turns) and the hand size (small hands).", "comments": [
+[5, "Read the current turn counter (anti-cheat wrapped)"],
+[12, "Early game (turn 10 or lower): bonus grows with the turn number, wrapping at 10"],
+[22, "Later turns give no turn bonus"],
+[26, "Use the hand of the side that owns the card"],
+[37, "Number of cards in hand"],
+[41, "Small hands (under 4 cards) add a bonus of hand size mod 3"],
+[44, "Extra keep score from the card data times the combined bonus"]
+]},
+"3277f0c": {"summary": "Main AI scoring function for one ScoringCriteria on a card (with optional target). Starts from a base value for friend or enemy target, counts targets to get a multiplier, then switches on the scoring option (damage, heal, buffs, draw, stun, poison and more) and adds weighted per-target scores. Returns the total.", "comments": [
+[7, "No criteria means no score"],
+[10, "Codex effect: only score it if the card can be played with codex now"],
+[13, "Cannot be played with codex: log it and score 0"],
+[23, "Base value depends on whether the target is on the same side as the card (friend) or not (enemy)"],
+[33, "Multiplier: 1 for any target, otherwise the number of targets matching the multiplier criteria"],
+[51, "Get the cards the criteria would affect"],
+[52, "Switch on the scoring option; most cases sum a friend/enemy weight times a per-target score"],
+[53, "Option 1: count matching friendly and enemy targets with two filters and weight each count"],
+[62, "Option 2: weight by each target's value in play"],
+[69, "Offsets 0x1c and 0x18 are multiplyByEnemy and multiplyByFriend (decompiler shows raw offsets)"],
+[82, "Option 3: damage; use average damage and score hurting each target"],
+[112, "Option 4: heal; use average heal value and score healing each target"],
+[137, "Option 5: attack buff; best attack score with the buff minus without it, for units that can act"],
+[167, "Option 6: weight by each target's current melee attack"],
+[187, "Option 7: jam score of each target"],
+[207, "Option 8: random score from 0 to 100"],
+[212, "Option 9: base friend value only if the number of targets exceeds the enemy base value"],
+[218, "Option 10: base friend value only if the number of targets is below the enemy base value"],
+[226, "Option 11 (0xb): buff score of each target"],
+[245, "Option 12 (0xc): buff to cards in hand"],
+[248, "Option 13 (0xd): Energy cost buff"],
+[253, "Option 14 (0xe): stun score of each target"],
+[273, "Option 20 (0x14): poison score of each target"],
+[293, "Option 25 (0x19): return-to-hand score of each target"],
+[313, "Option 30 (0x1e): charge score of each target"],
+[333, "Option 35 (0x23): draw card score for the acting card's owner"],
+[346, "Option 40 (0x28): add the weight for each target whose card data has max health 0"],
+[366, "Return the accumulated score"]
+]},
+"327ad1c": {"summary": "Returns the unique id of a randomly chosen environment effect card from the list, or an empty string if the list is empty. Uses the battle manager's random number so results stay in sync.", "comments": [
+[5, "Empty list: return an empty string"],
+[10, "Pick a random index using the battle manager's shared random generator"],
+[15, "Return the chosen card's uniqueId"]
+]},
+"32a6960": {"summary": "Compiler-generated predicate for AiScripted.ExecuteAction: true if the card's uniqueId equals the scripted action's radio speaker card id. The string comparison is inlined by the decompiler.", "comments": [
+[9, "Same string reference: equal"],
+[16, "Different lengths: not equal"],
+[19, "Inlined string comparison loop comparing the characters; decompiler shows raw pointer math"]
+]},
+"32a6988": {"summary": "Second compiler-generated predicate for AiScripted.ExecuteAction: true if the card's uniqueId equals the scripted action's radio speaker card id. The string comparison is inlined by the decompiler.", "comments": [
+[9, "Same string reference: equal"],
+[16, "Different lengths: not equal"],
+[19, "Inlined string comparison loop comparing the characters; decompiler shows raw pointer math"]
+]},
+"32a69dc": {"summary": "Coroutine that waits for the time of a scripted action. If the action cannot be skipped it waits the full time; if it can, it ticks a timer each frame and stops early when the player skips, enabling the tutorial manager's skip flag meanwhile.", "comments": [
+[6, "State 2: resuming after a frame yield in the skippable wait"],
+[11, "State 1: the plain wait finished, so the coroutine ends"],
+[15, "State 0 (start): finish at once if the wait time is zero"],
+[18, "Check whether the action may be skipped"],
+[19, "Not skippable: wait the full time with WaitForSeconds"],
+[27, "Skippable: enable the tutorial manager's skip flag and reset the timer"],
+[35, "Keep waiting each frame until the time is up or skipNextAction is set"],
+[38, "Add the frame time and yield until next frame"],
+[45, "Done or skipped: turn the tutorial skip flag off again"]
+]},
+"32a6bc0": {"summary": "Required by IEnumerator but unsupported: always throws NotSupportedException because this coroutine cannot be reset.", "comments": [
+[5, "Create and throw the exception"]
+]},
+"327b388": {"summary": "Returns whether the current scripted action can be skipped, judged by the action type of its first data entry. Returns false if there is no current action.", "comments": [
+[5, "Needs the current action and its first data entry"],
+[8, "Bit mask test: action types 0x3c, 0x41 and 0x5a are skippable"],
+[11, "Chat style actions (player chat, big chat) below 0x38 are skippable"]
+]},
+"327b398": {"summary": "Returns the scripted action at the current action counter in the turn data, or null if the counter is out of range. Decompiler expanded the inlined ElementAtOrDefault call into messy interface-lookup code.", "comments": [
+[4, "Inlined Linq ElementAtOrDefault on the list of scripted actions"],
+[23, "Negative index returns null"],
+[28, "Decompiler expansion: lookup of the list interface; the generic path walks an enumerator instead"],
+[49, "Fallback path: step the enumerator to the wanted index"],
+[94, "List path: if the counter is below the list size, return that item"],
+[118, "Out of range: null"]
+]},
+"327b3f0": {"summary": "Static version of the skip check: returns whether the given scripted action can be skipped, judged by the action type of its first data entry.", "comments": [
+[11, "First data entry of the action"],
+[15, "Bit mask test: action types 0x3c, 0x41 and 0x5a are skippable"],
+[18, "Action types 0x32 and 0x37 (the chat actions) are also skippable"]
+]},
+"327d204": {"summary": "Returns the delay of the current scripted action: the delay before it, or the wait after it (taken from the previous action once the counter has moved on). Returns 0 if out of range or without data.", "comments": [
+[8, "Wait-after uses the previous action (counter - 1) when the counter is above 0"],
+[9, "Index must be inside the scripted action list"],
+[16, "Only if the action has at least one data entry"],
+[22, "Delay before: read from the action (field shown under a misleading name)"],
+[30, "Otherwise the wait-after time of the action"]
+]},
+"327d324": {"summary": "Returns whether a scripted action has at least one action data entry.", "comments": [
+[5, "No data list counts as no data"]
+]},
+"327d388": {"summary": "Returns true when the action counter has reached or passed the number of scripted actions in the turn data, meaning the turn script is finished.", "comments": [
+[7, "Counter at or beyond the list size means all actions are done"]
+]},
+"327d3f4": {"summary": "Used by the tutorial: returns true if the current scripted action is a player action that is waiting for the given card to be clicked. Looks at each data entry of action types 110 or 120 and compares the acting card.", "comments": [
+[4, "Out of range or no list: not waiting"],
+[9, "Only player actions wait for input"],
+[19, "Loop over the data entries of the current action"],
+[26, "Action type 110 or 120 (a click on a card)"],
+[30, "Find the card this entry says must be clicked"],
+[35, "Match: the clicked card is the expected one (returns true)"]
+]},
+"327d808": {"summary": "Used by the tutorial: returns true if the current scripted action is a player action waiting for the given card to use its ability (action type 40).", "comments": [
+[4, "Out of range or no list: not waiting"],
+[9, "Only player actions wait for input"],
+[19, "Loop over the data entries of the current action"],
+[26, "Action type 40 means use the card's ability"],
+[29, "Find the card expected to use the ability"],
+[34, "Match: the selected card is the expected one (returns true)"]
+]},
+"327da1c": {"summary": "Used by the tutorial: returns true if the current scripted action is a player action waiting for the given card to change its desired attack type to melee (type 0x24) or ranged (type 0x23).", "comments": [
+[5, "Out of range or no list: not waiting"],
+[10, "Only player actions wait for input"],
+[20, "Loop over the data entries of the current action"],
+[27, "Melee choice pairs with action type 0x24, ranged with 0x23"],
+[31, "Find the card expected to change its attack"],
+[36, "Match: the selected card is the expected one (returns true)"]
+]},
+"327b528": {"summary": "Tutorial helper: shows the on-screen hint for a scripted player action. It shows the action's small tip text if any, then depending on the action type starts a tutorial pointer arrow between the acting card and its target (or the warlord, clock or ability), and highlights the element if requested.", "comments": [
+[5, "No action data: log a message when dev tools are on and give up"],
+[22, "Use the first data entry to find the card that acts"],
+[25, "No acting card is only allowed for action type 100 (clock button); otherwise log and stop"],
+[38, "If the action has tip text, build a small tip at its position and show it with skipping disabled"],
+[61, "Branch on the action type of the first data entry"],
+[63, "Type 0x14: play a card from hand; light up playable cards and point from the hand card to the target"],
+[107, "Types 0x1e and 0x1f: point from the acting card to the target card"],
+[126, "Types 0x23 and 0x24: point from the card to the warlord health and show the attack type mark"],
+[144, "Type 0x28: use an ability; show the ability icon and point at the target if it is targeted"],
+[175, "Unsupported action type: log a warning"],
+[188, "Action types from 0x29 up: 100 is the clock button, 0x6e a card click, 0x78 the warlord ability, 0x96 a tip only"],
+[202, "Type 100: point at the clock button"],
+[216, "Type 0x78: show the warlord active ability and point at it"],
+[217, "Type 0x96: tip only, no pointer"],
+[263, "Highlight the tutorial element if the action asks for it"]
+]}
+}

@@ -1,0 +1,64 @@
+{
+"3269058": {"summary": "Returns whether a card's army passes an army filter: any army, only the chosen army, chosen army or neutral, or anything except the chosen army. Used by card filters (e.g. collection/deck building). Unknown criteria log an error and pass.", "comments": [
+[5, "Criteria below ExcludeChosenArmy: the simple cases (any army / only the chosen army)"],
+[6, "AnyArmy: every card passes the filter"],
+[9, "OnlyChosenArmy: card must be exactly the filter army"],
+[14, "Criteria is ExcludeChosenArmy or higher: neutral-aware and exclusion modes"],
+[15, "Chosen army or neutral: accept the exact army match first"],
+[18, "Otherwise check whether the card's army is in GameStaticData.neutralArmies (inlined LINQ Contains, mostly noise)"],
+[29, "Fast path if the list is an ICollection; else it walks an enumerator comparing each army (decompiler noise)"],
+[189, "Decompiler lost the end of Contains: its boolean result is what is returned for the neutral check"],
+[210, "ExcludeChosenArmy: card passes only if its army differs from the filter army"],
+[214, "Unknown ArmyFilterOptions value: log an error and let the card pass"],
+[221, "Everything below is unreachable decompiler debris: inlined LINQ Contains/Count bodies and exception cleanup"],
+[382, "Orphaned finally/cleanup blocks that dispose enumerators; not real game logic"],
+[553, "More inlined LINQ Count<T> fragments with try/finally cleanup; ignore"]
+]},
+"3269918": {"summary": "Returns a (found, sprite) pair for the given army. If this entry's army matches and its background asset reference is valid, it loads the flavour background sprite (General cache group). Called while searching the flavour background list.", "comments": [
+[4, "Only entries for the requested army can supply the sprite"],
+[10, "Asset reference must be valid (assigned) before loading"],
+[13, "Load the background sprite through the addressables cache"],
+[18, "Wrong army or invalid reference: report not found with no sprite"],
+[21, "Build and return the (found, sprite) tuple"]
+]},
+"3269ac8": {"summary": "Releases this entry's flavour background asset if the entry is for the given army and has a valid asset reference. Returns true if it released, false otherwise.", "comments": [
+[4, "Not this army's entry: nothing to release"],
+[9, "Asset reference not valid (never loaded): nothing to release"],
+[14, "Release the addressable asset from the General cache group and report success"]
+]},
+"3269804": {"summary": "Finds the flavour text background sprite for an army by asking each entry in the flavourBackgrounds list. If none match, logs a warning and loads the default background instead.", "comments": [
+[5, "Loop over every army-specific background entry"],
+[10, "Decompiler glitch: the bounds-check branch contains an inlined copy of GetSprite; ignore it"],
+[41, "Ask the entry whether it matches this army and can supply its sprite"],
+[43, "Match found: return its sprite"],
+[49, "No entry matched: warn that the flavour background is missing"],
+[53, "Fall back to the default background sprite"]
+]},
+"32699ec": {"summary": "Releases the loaded flavour background asset for an army by asking each entry to release it. Logs a warning if no entry had a loaded background for that army. Called when flavour art is no longer needed.", "comments": [
+[12, "Try each entry in turn; TryRelease only acts on the matching army"],
+[14, "Decompiler glitch: inlined copy of TryRelease appears in the bounds-check branch; ignore it"],
+[33, "An entry released its asset: stop searching"],
+[38, "No entry released anything: warn that no background was found for this army"]
+]},
+"3269c74": {"summary": "Computes a minion's scale from its board position using the scale curve, divided by the curve's last key value so it is normalised. Decompiler output is badly garbled; parameter names are not reliable.", "comments": [
+[4, "For one side (the flag parameter) the position is first mirrored via GetInversedPos"],
+[8, "Sample the scale curve at the position"],
+[10, "Start from a Vector3 of ones as the base scale"],
+[40, "Last keyframe's value is the normaliser for the curve"],
+[41, "Result scale = base * curve value * (factor / last key value); applied to X and Y"]
+]},
+"3269da0": {"summary": "Mirrors a position along the scale curve: returns the time of the curve's last keyframe plus the given Z. Used by GetScale for the other side of the board.", "comments": [
+[5, "Needs a scale curve assigned"],
+[10, "Find the last keyframe index (curve length - 1)"],
+[13, "Last keyframe's time plus the Z value gives the inverted position"],
+[21, "Missing curve or keys: null reference error"]
+]},
+"326a620": {"summary": "Predicate for a compiler-generated closure in PrebuiltDeck.GetCardLibrary: true when a card script's uniqueId equals the cardLibraryIds entry at the closure's index i.", "comments": [
+[4, "Null checks on the script, the deck and its library id list"],
+[9, "Same string reference: equal"],
+[12, "Inlined string equality begins: null or length mismatch means not equal"],
+[22, "Decompiler expanded the character-by-character comparison; compares memory in 8-char blocks then the tail"],
+[40, "Short strings: compare one char at a time"],
+[55, "All characters matched: ids are equal"]
+]}
+}

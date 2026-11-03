@@ -1,0 +1,1236 @@
+{
+ "3262f20": {
+  "summary": "Checks the deck's warlord hero: it must exist, be a Hero card of the deck's army, and not be banned by the custom game mode. Writes a DeckError code (0 ok, 2 missing, 3 banned, 4 wrong type/army) and returns true if valid.",
+  "comments": [
+   [
+    4,
+    "No deck: compiler null check"
+   ],
+   [
+    7,
+    "A warlord is set: validate it"
+   ],
+   [
+    10,
+    "Wrong card type (not Hero) or wrong army: error code 4"
+   ],
+   [
+    16,
+    "Deck is in a custom game mode event: ask it whether this hero is banned (interface lookup is decompiler noise)"
+   ],
+   [
+    40,
+    "Hero banned by the custom event: error code 3"
+   ],
+   [
+    46,
+    "Hero passes all checks: error code 0, valid"
+   ],
+   [
+    50,
+    "No warlord chosen: error code 2"
+   ],
+   [
+    54,
+    "Write the error code to the out parameter and return validity"
+   ]
+  ]
+ },
+ "3263088": {
+  "summary": "Validates every card in the deck library against the army, the custom game mode's bans and its per-card copy limits. Writes a DeckError code (0 ok, 3 banned, 4 invalid) and returns true only if all cards pass.",
+  "comments": [
+   [
+    13,
+    "Custom game mode event is needed for these rules; without it the deck is invalid (error 4)"
+   ],
+   [
+    19,
+    "Walk every card in the deck's library"
+   ],
+   [
+    30,
+    "Reached the end of the list with no problems: error 0, deck is valid"
+   ],
+   [
+    37,
+    "Card must be from the deck's army and have the expected type/rarity values (raw offsets, seems so); otherwise error 4"
+   ],
+   [
+    45,
+    "Ask the custom event whether this card is banned (interface lookup is decompiler noise)"
+   ],
+   [
+    66,
+    "Banned card: error code 3"
+   ],
+   [
+    70,
+    "Ask the custom event for the max copies allowed for this card's rarity and type"
+   ],
+   [
+    97,
+    "A negative max means no limit; otherwise compare how many copies the deck holds"
+   ],
+   [
+    104,
+    "Too many copies or invalid card: error 4"
+   ],
+   [
+    106,
+    "Write the error code and clean up the enumerator"
+   ]
+  ]
+ },
+ "3262d74": {
+  "summary": "Returns true if the player owns at least as many copies of every card as the deck library requires. Called when validating a saved deck against the player's inventory.",
+  "comments": [
+   [
+    9,
+    "No library: compiler null check"
+   ],
+   [
+    13,
+    "Loop over each card and its required count"
+   ],
+   [
+    18,
+    "Look up how many copies the player owns via the InventoryManager"
+   ],
+   [
+    23,
+    "Keep going while owned >= required; stop at the first card the player lacks"
+   ],
+   [
+    25,
+    "True only if the loop finished (every card was owned in sufficient number)"
+   ]
+  ]
+ },
+ "3262b34": {
+  "summary": "Builds a dictionary of card to number of copies in the deck, from the deck's full card list. Used by deck validation and clean-up.",
+  "comments": [
+   [
+    8,
+    "Deck must not be null"
+   ],
+   [
+    9,
+    "Full list of cards in the deck, one entry per copy"
+   ],
+   [
+    13,
+    "Count each card"
+   ],
+   [
+    21,
+    "First copy of a card: add with count 1"
+   ],
+   [
+    25,
+    "Further copy: increment the stored count"
+   ],
+   [
+    30,
+    "Reached when the dictionary was null: null check"
+   ]
+  ]
+ },
+ "3263864": {
+  "summary": "Removes copies of cards from the deck that the player does not own enough of, recording each removed card. Returns true if anything was removed.",
+  "comments": [
+   [
+    10,
+    "Walk the card/count dictionary backwards so removals do not disturb unvisited entries"
+   ],
+   [
+    22,
+    "How many copies the player actually owns"
+   ],
+   [
+    23,
+    "Owns fewer than the deck uses: remove the surplus copies one at a time"
+   ],
+   [
+    29,
+    "Remember that at least one card was removed"
+   ]
+  ]
+ },
+ "32639c0": {
+  "summary": "Removes the deck's warlord if it is not a Hero-type card, recording it in the removed list. Returns true if it removed it.",
+  "comments": [
+   [
+    7,
+    "Deck has a warlord set"
+   ],
+   [
+    12,
+    "Not a Hero card: remove it from the deck"
+   ],
+   [
+    17,
+    "Nothing removed"
+   ]
+  ]
+ },
+ "3263a6c": {
+  "summary": "Sweeps the deck library from the end and removes invalid cards: wrong type or army, not in the player's collection, over the custom mode's copy limit, or hidden. Returns true if any card was removed.",
+  "comments": [
+   [
+    7,
+    "Iterate backwards so removal is safe"
+   ],
+   [
+    17,
+    "Card must be a Tactic or Minion, inventory-owned, shown in collection and of the deck's army"
+   ],
+   [
+    18,
+    "If a custom game mode applies, enforce its copy limit"
+   ],
+   [
+    39,
+    "Ask the custom event for max copies by rarity and card type (interface lookup is decompiler noise)"
+   ],
+   [
+    42,
+    "Over the limit: remove it"
+   ],
+   [
+    44,
+    "Hidden cards are not allowed either"
+   ],
+   [
+    48,
+    "Failed a check: remove one copy and note it"
+   ]
+  ]
+ },
+ "3263c78": {
+  "summary": "Removes one copy of a card from the deck, appends it to the removed-cards list, and lowers its count in the card dictionary by one. The long tail is inlined Dictionary code.",
+  "comments": [
+   [
+    9,
+    "Remove the card from the deck itself"
+   ],
+   [
+    10,
+    "Append the card to the removed-cards list"
+   ],
+   [
+    25,
+    "Only touch the dictionary if the card is in it"
+   ],
+   [
+    32,
+    "Set the count to current minus one"
+   ],
+   [
+    39,
+    "From here the decompiler shows Dictionary set_Item internals (hash lookup, insert); they only store the new count"
+   ]
+  ]
+ },
+ "3263e58": {
+  "summary": "Returns the card's name from its raw card data, or the string \"card\" if none.",
+  "comments": [
+   [
+    4,
+    "No raw data: fall back to \"card\""
+   ]
+  ]
+ },
+ "3263eec": {
+  "summary": "Returns the card type from raw card data, defaulting to Minion if there is none.",
+  "comments": [
+   [
+    4,
+    "No raw data: default to Minion"
+   ]
+  ]
+ },
+ "32642ec": {
+  "summary": "Computes the entity's current Energy cost: base cost plus all cost-change effects, clamped at zero. A set-cost effect replaces the base cost, though other cost modifiers still add to it.",
+  "comments": [
+   [
+    13,
+    "First pass over active effects"
+   ],
+   [
+    29,
+    "Effect type 2 is a cost modifier: add it up"
+   ],
+   [
+    32,
+    "Effect type 0x5f sets the cost outright: stop and use its value"
+   ],
+   [
+    37,
+    "Second pass: still add the other cost modifiers on top of the override"
+   ],
+   [
+    52,
+    "Clamp to zero so the cost never goes negative"
+   ],
+   [
+    56,
+    "No override was found: base card cost plus modifiers, clamped to zero"
+   ]
+  ]
+ },
+ "3264584": {
+  "summary": "Computes the current melee attack: base melee attack plus addStats bonuses, or a set-melee-attack effect's value if one exists. Clamped to zero.",
+  "comments": [
+   [
+    11,
+    "Sum the attack bonuses of all active effects"
+   ],
+   [
+    27,
+    "Add-stats effect: add its attack change (field named oddly by the decompiler)"
+   ],
+   [
+    30,
+    "Set-attack effect: it wins immediately"
+   ],
+   [
+    36,
+    "Base attack (anti-cheat wrapper) plus bonus, clamped to zero"
+   ]
+  ]
+ },
+ "32646ac": {
+  "summary": "Computes the current ranged attack: zero if the unit is blind, a set-ranged-attack effect if present, otherwise base ranged attack plus effect bonuses, clamped to zero.",
+  "comments": [
+   [
+    5,
+    "Blind units have no ranged attack"
+   ],
+   [
+    22,
+    "Add-stats effects add to the bonus"
+   ],
+   [
+    25,
+    "Set-ranged-attack effect overrides everything"
+   ],
+   [
+    31,
+    "Base ranged attack plus bonus, clamped to zero"
+   ]
+  ]
+ },
+ "32647ec": {
+  "summary": "Computes the attack used in combat: drop pod attack while in a drop pod, zero for remnants, otherwise ranged or melee attack with effect bonuses. Same logic as GetCombatDamage using the current attack type.",
+  "comments": [
+   [
+    4,
+    "Unit in a drop pod uses its drop pod attack"
+   ],
+   [
+    15,
+    "The decompiler repeats the drop pod check here"
+   ],
+   [
+    27,
+    "A remnant (dead unit's husk) deals no damage unless it is leaving"
+   ],
+   [
+    28,
+    "Attack type 2 is ranged; anything else uses melee"
+   ],
+   [
+    33,
+    "Melee path: add bonuses or take a set-melee-attack effect"
+   ],
+   [
+    62,
+    "Ranged path: blind units deal 0"
+   ],
+   [
+    82,
+    "Ranged bonuses or a set-ranged-attack override"
+   ],
+   [
+    102,
+    "Remnant: attack of 0"
+   ]
+  ]
+ },
+ "3264abc": {
+  "summary": "Returns current health minus the health added by intrinsic (non-extrinsic) addStats effects, so the base health with only temporary buffs removed.",
+  "comments": [
+   [
+    7,
+    "Effects list required"
+   ],
+   [
+    26,
+    "Only active intrinsic add-stats effects count"
+   ],
+   [
+    14,
+    "Finished: base health minus the summed buffs"
+   ]
+  ]
+ },
+ "3264c64": {
+  "summary": "Getter: copies the anti-cheat obscured currentHealth value out of the entity.",
+  "comments": [
+   [
+    4,
+    "Copy the three words of the ObscuredInt"
+   ]
+  ]
+ },
+ "3264c78": {
+  "summary": "Setter: stores an anti-cheat obscured value into currentHealth.",
+  "comments": [
+   [
+    4,
+    "Copy the ObscuredInt fields in"
+   ]
+  ]
+ },
+ "3264c8c": {
+  "summary": "Getter: copies the obscured currentBaseMeleeAttack value out of the entity.",
+  "comments": [
+   [
+    4,
+    "Copy the three words of the ObscuredInt"
+   ]
+  ]
+ },
+ "3264ca0": {
+  "summary": "Setter: stores an obscured value into currentBaseMeleeAttack.",
+  "comments": [
+   [
+    4,
+    "Copy the ObscuredInt fields in"
+   ]
+  ]
+ },
+ "3264cb4": {
+  "summary": "Getter: copies the obscured currentBaseRangedAttack value out of the entity.",
+  "comments": [
+   [
+    4,
+    "Copy the three words of the ObscuredInt"
+   ]
+  ]
+ },
+ "3264cc8": {
+  "summary": "Setter: stores an obscured value into currentBaseRangedAttack.",
+  "comments": [
+   [
+    4,
+    "Copy the ObscuredInt fields in"
+   ]
+  ]
+ },
+ "3264cdc": {
+  "summary": "Getter: copies the obscured currentMaxHealth value out of the entity.",
+  "comments": [
+   [
+    4,
+    "Copy the three words of the ObscuredInt"
+   ]
+  ]
+ },
+ "3264cf0": {
+  "summary": "Setter: stores an obscured value into currentMaxHealth.",
+  "comments": [
+   [
+    4,
+    "Copy the ObscuredInt fields in"
+   ]
+  ]
+ },
+ "3264d04": {
+  "summary": "Computes the displayed max health: base max health plus intrinsic and extrinsic health changes, where a set-health effect replaces the running total.",
+  "comments": [
+   [
+    16,
+    "Pass 1 (backwards): intrinsic add-stats effects add to max health"
+   ],
+   [
+    34,
+    "Pass 2: extrinsic effects"
+   ],
+   [
+    48,
+    "Extrinsic add-stats effects are tallied separately"
+   ],
+   [
+    59,
+    "Set-health effect overrides the base and intrinsic total"
+   ],
+   [
+    68,
+    "Result: extrinsic total plus the (possibly overridden) base"
+   ]
+  ]
+ },
+ "3264f70": {
+  "summary": "Getter: copies the obscured currentArmourValue out of the entity.",
+  "comments": [
+   [
+    4,
+    "Copy the three words of the ObscuredInt"
+   ]
+  ]
+ },
+ "3264f84": {
+  "summary": "Setter: stores an obscured value into currentArmourValue.",
+  "comments": [
+   [
+    4,
+    "Copy the ObscuredInt fields in"
+   ]
+  ]
+ },
+ "3264f98": {
+  "summary": "Getter: copies the obscured currentDropPodHealth out of the entity.",
+  "comments": [
+   [
+    4,
+    "Copy the three words of the ObscuredInt"
+   ]
+  ]
+ },
+ "3264fac": {
+  "summary": "Setter: stores an obscured value into currentDropPodHealth.",
+  "comments": [
+   [
+    4,
+    "Copy the ObscuredInt fields in"
+   ]
+  ]
+ },
+ "3264fc0": {
+  "summary": "Getter: copies the obscured currentDropPodAttack out of the entity.",
+  "comments": [
+   [
+    4,
+    "Copy the three words of the ObscuredInt"
+   ]
+  ]
+ },
+ "3264fd4": {
+  "summary": "Setter: stores an obscured value into currentDropPodAttack.",
+  "comments": [
+   [
+    4,
+    "Copy the ObscuredInt fields in"
+   ]
+  ]
+ },
+ "3264fe8": {
+  "summary": "Returns the current Maintenance trait value: the card's base value plus all addTrait effects granting it, clamped to zero.",
+  "comments": [
+   [
+    10,
+    "Base trait lookup (result unused here)"
+   ],
+   [
+    15,
+    "Add up trait value from effects that grant this trait"
+   ],
+   [
+    19,
+    "Only addTrait effects for this trait count"
+   ],
+   [
+    25,
+    "Final value: current trait value plus bonuses, never negative"
+   ]
+  ]
+ },
+ "32650d8": {
+  "summary": "Returns the current Psyker trait value: the card's base value plus all addTrait effects granting it, clamped to zero.",
+  "comments": [
+   [
+    10,
+    "Base trait lookup (result unused here)"
+   ],
+   [
+    15,
+    "Add up trait value from effects that grant this trait"
+   ],
+   [
+    19,
+    "Only addTrait effects for this trait count"
+   ],
+   [
+    25,
+    "Final value: current trait value plus bonuses, never negative"
+   ]
+  ]
+ },
+ "32650e0": {
+  "summary": "Returns the current Reactor trait value: the card's base value plus all addTrait effects granting it, clamped to zero.",
+  "comments": [
+   [
+    10,
+    "Base trait lookup (result unused here)"
+   ],
+   [
+    15,
+    "Add up trait value from effects that grant this trait"
+   ],
+   [
+    19,
+    "Only addTrait effects for this trait count"
+   ],
+   [
+    25,
+    "Final value: current trait value plus bonuses, never negative"
+   ]
+  ]
+ },
+ "32650e8": {
+  "summary": "Returns the current Blast trait value: the card's base value plus all addTrait effects granting it, clamped to zero.",
+  "comments": [
+   [
+    10,
+    "Base trait lookup (result unused here)"
+   ],
+   [
+    15,
+    "Add up trait value from effects that grant this trait"
+   ],
+   [
+    19,
+    "Only addTrait effects for this trait count"
+   ],
+   [
+    25,
+    "Final value: current trait value plus bonuses, never negative"
+   ]
+  ]
+ },
+ "32650f0": {
+  "summary": "Returns the current Survivor trait value: the card's base value plus all addTrait effects granting it, clamped to zero.",
+  "comments": [
+   [
+    10,
+    "Base trait lookup (result unused here)"
+   ],
+   [
+    15,
+    "Add up trait value from effects that grant this trait"
+   ],
+   [
+    19,
+    "Only addTrait effects for this trait count"
+   ],
+   [
+    25,
+    "Final value: current trait value plus bonuses, never negative"
+   ]
+  ]
+ },
+ "32650f8": {
+  "summary": "Returns the current Bastion trait value: the card's base value plus all addTrait effects granting it, clamped to zero.",
+  "comments": [
+   [
+    10,
+    "Base trait lookup (result unused here)"
+   ],
+   [
+    15,
+    "Add up trait value from effects that grant this trait"
+   ],
+   [
+    19,
+    "Only addTrait effects for this trait count"
+   ],
+   [
+    25,
+    "Final value: current trait value plus bonuses, never negative"
+   ]
+  ]
+ },
+ "3265100": {
+  "summary": "Returns the current Vulnerable trait value: the card's base value plus all addTrait effects granting it, clamped to zero.",
+  "comments": [
+   [
+    10,
+    "Base trait lookup (result unused here)"
+   ],
+   [
+    15,
+    "Add up trait value from effects that grant this trait"
+   ],
+   [
+    19,
+    "Only addTrait effects for this trait count"
+   ],
+   [
+    25,
+    "Final value: current trait value plus bonuses, never negative"
+   ]
+  ]
+ },
+ "3265108": {
+  "summary": "Returns the current Tide trait value: the card's base value plus all addTrait effects granting it, clamped to zero.",
+  "comments": [
+   [
+    10,
+    "Base trait lookup (result unused here)"
+   ],
+   [
+    15,
+    "Add up trait value from effects that grant this trait"
+   ],
+   [
+    19,
+    "Only addTrait effects for this trait count"
+   ],
+   [
+    25,
+    "Final value: current trait value plus bonuses, never negative"
+   ]
+  ]
+ },
+ "3265110": {
+  "summary": "Returns the current Companion trait value: the card's base value plus all addTrait effects granting it, clamped to zero.",
+  "comments": [
+   [
+    10,
+    "Base trait lookup (result unused here)"
+   ],
+   [
+    15,
+    "Add up trait value from effects that grant this trait"
+   ],
+   [
+    19,
+    "Only addTrait effects for this trait count"
+   ],
+   [
+    25,
+    "Final value: current trait value plus bonuses, never negative"
+   ]
+  ]
+ },
+ "3265118": {
+  "summary": "Returns the current MarksOfChaos trait value: the card's base value plus all addTrait effects granting it, clamped to zero.",
+  "comments": [
+   [
+    10,
+    "Base trait lookup (result unused here)"
+   ],
+   [
+    15,
+    "Add up trait value from effects that grant this trait"
+   ],
+   [
+    19,
+    "Only addTrait effects for this trait count"
+   ],
+   [
+    25,
+    "Final value: current trait value plus bonuses, never negative"
+   ]
+  ]
+ },
+ "3265120": {
+  "summary": "Returns the current Shuriken trait value: the card's base value plus all addTrait effects granting it, clamped to zero.",
+  "comments": [
+   [
+    10,
+    "Base trait lookup (result unused here)"
+   ],
+   [
+    15,
+    "Add up trait value from effects that grant this trait"
+   ],
+   [
+    19,
+    "Only addTrait effects for this trait count"
+   ],
+   [
+    25,
+    "Final value: current trait value plus bonuses, never negative"
+   ]
+  ]
+ },
+ "3265128": {
+  "summary": "Returns the current Sentry trait value: the card's base value plus all addTrait effects granting it, clamped to zero.",
+  "comments": [
+   [
+    10,
+    "Base trait lookup (result unused here)"
+   ],
+   [
+    15,
+    "Add up trait value from effects that grant this trait"
+   ],
+   [
+    19,
+    "Only addTrait effects for this trait count"
+   ],
+   [
+    25,
+    "Final value: current trait value plus bonuses, never negative"
+   ]
+  ]
+ },
+ "3265130": {
+  "summary": "Returns the current Markerlight trait value: the card's base value plus all addTrait effects granting it, clamped to zero.",
+  "comments": [
+   [
+    10,
+    "Base trait lookup (result unused here)"
+   ],
+   [
+    15,
+    "Add up trait value from effects that grant this trait"
+   ],
+   [
+    19,
+    "Only addTrait effects for this trait count"
+   ],
+   [
+    25,
+    "Final value: current trait value plus bonuses, never negative"
+   ]
+  ]
+ },
+ "3265138": {
+  "summary": "Returns the current HuntMark trait value: the card's base value plus all addTrait effects granting it, clamped to zero.",
+  "comments": [
+   [
+    10,
+    "Base trait lookup (result unused here)"
+   ],
+   [
+    15,
+    "Add up trait value from effects that grant this trait"
+   ],
+   [
+    19,
+    "Only addTrait effects for this trait count"
+   ],
+   [
+    25,
+    "Final value: current trait value plus bonuses, never negative"
+   ]
+  ]
+ },
+ "3264898": {
+  "summary": "Returns the combat damage this entity deals for the given attack type: drop pod attack in a pod, zero for remnants, otherwise melee or ranged attack with effect bonuses or set-attack overrides.",
+  "comments": [
+   [
+    4,
+    "In a drop pod: use the drop pod attack"
+   ],
+   [
+    15,
+    "Remnants deal nothing unless they are leaving"
+   ],
+   [
+    16,
+    "Anything not ranged uses melee"
+   ],
+   [
+    35,
+    "Set-melee-attack effect wins outright"
+   ],
+   [
+    50,
+    "Ranged: blind units deal 0"
+   ],
+   [
+    73,
+    "Set-ranged-attack effect wins outright"
+   ],
+   [
+    90,
+    "Remnant: 0 damage"
+   ]
+  ]
+ },
+ "32651d8": {
+  "summary": "Returns combat damage for the given attack type: drop pod attack, zero for remnants, otherwise ranged (zero if blind) or melee attack with effect bonuses and set-attack overrides.",
+  "comments": [
+   [
+    4,
+    "In a drop pod: use the drop pod attack"
+   ],
+   [
+    15,
+    "Remnants deal nothing unless they are leaving"
+   ],
+   [
+    16,
+    "Ranged attack branch"
+   ],
+   [
+    17,
+    "Blind units deal 0"
+   ],
+   [
+    40,
+    "Set-ranged-attack effect wins outright"
+   ],
+   [
+    57,
+    "Melee branch: sum bonuses"
+   ],
+   [
+    75,
+    "Set-melee-attack effect wins outright"
+   ],
+   [
+    90,
+    "Remnant: 0 damage"
+   ]
+  ]
+ },
+ "32652bc": {
+  "summary": "Estimates the damage this card's active ability or play abilities will deal by summing damage values in their logic. Uses the active ability logic if the card has one, else its abilities, and the decompiler appended a ThisCardPlayed fallback.",
+  "comments": [
+   [
+    15,
+    "Card has no active ability: scan its normal abilities instead"
+   ],
+   [
+    25,
+    "For each ability, walk its logic entries"
+   ],
+   [
+    42,
+    "Logic type bitmask 0x9400 selects damage-like logic; value 0x1e is the damage effect (seems so)"
+   ],
+   [
+    50,
+    "Add the damage amount"
+   ],
+   [
+    56,
+    "Decompiler merged exception cleanup here; the sum is returned when no exception is pending"
+   ],
+   [
+    74,
+    "Decompiler glued on a second routine (ThisCardPlayed damage sum) that matches GetThisCardPlayedDamage"
+   ],
+   [
+    94,
+    "Only count abilities whose criteria match the evaluated card"
+   ],
+   [
+    104,
+    "Logic trigger types 10, 12 and 15 contribute their amount"
+   ],
+   [
+    134,
+    "Active ability path: sum damage-type logic entries"
+   ],
+   [
+    164,
+    "No raw card data: null check"
+   ]
+  ]
+ },
+ "32656c8": {
+  "summary": "Totals the friendly-unit counts of this card's ThisCardPlayed ability logic (OtherCardPlayed, PlayedThirdCardInTurn or trigger 12) when the ability's target criteria match the given card. Used to estimate play damage.",
+  "comments": [
+   [
+    4,
+    "Get the card's ThisCardPlayed abilities"
+   ],
+   [
+    12,
+    "A target card is required"
+   ],
+   [
+    25,
+    "Does the target meet the ability's target criteria?"
+   ],
+   [
+    35,
+    "Logic with these triggers carries a friendly-units count"
+   ],
+   [
+    39,
+    "Add that count to the total"
+   ],
+   [
+    60,
+    "Null check"
+   ]
+  ]
+ },
+ "3265c90": {
+  "summary": "Returns whether the entity has an active enchantment with the same unique ID as the given enchantment.",
+  "comments": [
+   [
+    5,
+    "No enchantments list: none"
+   ],
+   [
+    16,
+    "Compare the stored enchantment ID with the given card's uniqueId"
+   ],
+   [
+    18,
+    "Match found"
+   ]
+  ]
+ },
+ "3265df8": {
+  "summary": "Looks up the active effect created by a given secret enchantment, if the entity has secret orders. Returns that effect or null.",
+  "comments": [
+   [
+    5,
+    "Entity has no secret orders: nothing to find"
+   ],
+   [
+    18,
+    "Only enchantment effects can match"
+   ],
+   [
+    22,
+    "Same enchantment card as requested"
+   ],
+   [
+    26,
+    "Decompiler inlined list indexer and unrelated generic code from here; it just returns the matching effect"
+   ]
+  ]
+ },
+ "3265fd8": {
+  "summary": "Returns true if this is a quest card (not suppressed by the jam trait) with no quests remaining.",
+  "comments": [
+   [
+    5,
+    "Jam trait blocks completion"
+   ],
+   [
+    9,
+    "Quest card with zero quests left: completed"
+   ]
+  ]
+ },
+ "3266024": {
+  "summary": "Clears the secret flag on the effect belonging to the given secret enchantment, revealing it. Logs \"Could find secret to reveal\" if no match is found.",
+  "comments": [
+   [
+    5,
+    "No secret orders: nothing to reveal"
+   ],
+   [
+    13,
+    "Ran out of effects without a match: log it"
+   ],
+   [
+    31,
+    "Check enchantment effects only"
+   ],
+   [
+    35,
+    "Same enchantment as requested"
+   ],
+   [
+    38,
+    "Still secret: clear the flag"
+   ],
+   [
+    52,
+    "Remaining lines are inlined logger interface lookup"
+   ]
+  ]
+ },
+ "32661ac": {
+  "summary": "Builds the list of card effects to show on the card: copies normal effects, but merges Mark of Chaos effects into one entry per god (Khorne, Nurgle, Slaanesh, Tzeentch) with summed values. Hides cost changes of zero and oath trait effects.",
+  "comments": [
+   [
+    12,
+    "Go through every active effect"
+   ],
+   [
+    18,
+    "Plain effect (no mark of chaos type) or a mark: handled below"
+   ],
+   [
+    22,
+    "Mark of Chaos trait: merge into one display entry per god"
+   ],
+   [
+    29,
+    "Mark type 10: Khorne"
+   ],
+   [
+    55,
+    "Mark type 0x14: Nurgle"
+   ],
+   [
+    82,
+    "Mark type 0x1e: Slaanesh"
+   ],
+   [
+    108,
+    "Mark type 0x28: Tzeentch"
+   ],
+   [
+    137,
+    "Zero cost changes are not shown"
+   ],
+   [
+    142,
+    "Oath double / in-all-turns / triple activation traits are hidden"
+   ],
+   [
+    153,
+    "Everything else is shown as is"
+   ],
+   [
+    169,
+    "Random mark or mark trait: use the merging path"
+   ]
+  ]
+ },
+ "3266848": {
+  "summary": "Marks a matching single-use or choice enchantment effect as spent, logging a message when dev tools are active.",
+  "comments": [
+   [
+    8,
+    "End of list without a match: done"
+   ],
+   [
+    15,
+    "Effect belongs to the given enchantment"
+   ],
+   [
+    17,
+    "Single-use enchantment that is not yet used"
+   ],
+   [
+    20,
+    "Mark it as spent"
+   ],
+   [
+    24,
+    "Log only if dev tools are enabled"
+   ],
+   [
+    45,
+    "Otherwise check for a choice enchantment of the same card"
+   ],
+   [
+    51,
+    "Choice enchantment not yet used: mark as spent"
+   ],
+   [
+    62,
+    "Remaining lines are inlined logger lookup"
+   ]
+  ]
+ },
+ "3266a4c": {
+  "summary": "Returns whether the effect for the given enchantment has already been spent (used). Returns true if none is found.",
+  "comments": [
+   [
+    9,
+    "List exhausted: nothing unspent found, so treat as spent"
+   ],
+   [
+    16,
+    "Effect of this enchantment"
+   ],
+   [
+    19,
+    "Not yet used: return false"
+   ]
+  ]
+ },
+ "3266b4c": {
+  "summary": "Increments a quest card's counter and returns true once the quest's required number of times has been reached (or the card is not a multi-step quest).",
+  "comments": [
+   [
+    5,
+    "A Whispers card of type Quest that needs more than one completion"
+   ],
+   [
+    9,
+    "Not enough yet: refresh the card figures and report not reached"
+   ],
+   [
+    14,
+    "Single-step quest or counter reached"
+   ]
+  ]
+ },
+ "3266e64": {
+  "summary": "Returns a list of all enchantments currently on the entity that are Mutation spells.",
+  "comments": [
+   [
+    16,
+    "Effect carries an enchantment"
+   ],
+   [
+    18,
+    "Only Mutation-type spells count"
+   ],
+   [
+    25,
+    "Add to the result list"
+   ]
+  ]
+ },
+ "326712c": {
+  "summary": "Returns whether the given damage, reduced by the target's armour (minimum 1 damage), would kill the target.",
+  "comments": [
+   [
+    11,
+    "Armour reduces damage"
+   ],
+   [
+    12,
+    "At least 1 damage always gets through"
+   ],
+   [
+    17,
+    "Dead if health is at or below the damage"
+   ]
+  ]
+ },
+ "32673bc": {
+  "summary": "Returns true if this entity is a Tactic card of the PlasmaPower spell type (it uses plasma energy).",
+  "comments": [
+   [
+    5,
+    "Only Tactics can be plasma spells"
+   ]
+  ]
+ },
+ "32673f8": {
+  "summary": "Returns the card that holds the active ability: the referenced active ability card if set, otherwise the entity's own raw card data.",
+  "comments": [
+   [
+    7,
+    "No reference: use the entity's own card data (field offset 0x28)"
+   ]
+  ]
+ },
+ "3267470": {
+  "summary": "Returns whether the entity's active ability costs psychic energy.",
+  "comments": [
+   [
+    7,
+    "Active ability exists: read its psychic cost flag"
+   ]
+  ]
+ },
+ "3267508": {
+  "summary": "Returns whether the entity's active ability costs plasma energy.",
+  "comments": [
+   [
+    7,
+    "Active ability exists: read its plasma cost flag"
+   ]
+  ]
+ }
+}

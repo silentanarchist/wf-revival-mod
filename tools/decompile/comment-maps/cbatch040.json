@@ -1,0 +1,215 @@
+{
+"32822b4": {"summary": "Returns the starting Energy for one side from the match gameplay data. The player who goes second gets the startingManaSecond value, the first player gets startingMana.", "comments": [
+[7, "Combine who goes first with which side is asked: the second player's side uses the second-player value"],
+[11, "Side is the second player: read the second-player starting Energy"],
+[15, "Side is the first player: read the normal starting Energy"],
+[17, "Null check on match data or gameplay data"]
+]},
+"328230c": {"summary": "Updates the tutorial pointer and tip for the current scripted tutorial action. It shows the action's tip text and aims the pointer arrow at the acting card, target card, warlord, clock button or ability. Does nothing outside tutorial matches.", "comments": [
+[5, "Only tutorial matches use scripted pointers"],
+[13, "Pointer object is hidden: nothing to update"],
+[16, "Fetch the scripted action for the current step of this turn's script"],
+[18, "Action does not want a pointer: bail out"],
+[24, "No tip data on the action: only dev tools get a log message, then stop"],
+[42, "Find the card that must act in this step"],
+[45, "Acting card is missing: warn (unless the action type is 100, the clock button) and carry on"],
+[57, "If the action has tip text, build a SmallTipData and show it in the tutorial tip box"],
+[73, "Pointer start position is the acting card; the tip type decides where the arrow ends"],
+[80, "Switch on the scripted action type (0x14 = play a card, 0x1e/0x1f = attack, 0x28 = ability, ...)"],
+[82, "Play a card from hand: highlight playable hand and point from the card to its drop position"],
+[98, "Pointer end X is offset left or right depending on the voice-line controller value (0x1f or 0x20)"],
+[126, "Attack actions: point from the attacker to the target card"],
+[145, "Attack-type actions (0x25-0x27): point from the card to the enemy warlord health and mark attack type"],
+[163, "Activate an ability: show its icon and animation, point at the target if the ability is targeted"],
+[193, "Unknown action type: log a warning that the pointer cannot be shown"],
+[207, "Action type 100 (and 0x6e) range"],
+[221, "Action 100: point at the clock (end turn) button"],
+[236, "Action 0x96: only shows a tip box, no pointer arrow"],
+[260, "Action 0x78: show the warlord active ability for the tutorial and point at the card"],
+[266, "Unless this is campaign step 0x32, also show the ability icon"],
+[280, "Start the pointer arrow from start to end"],
+[282, "If the action asks for it, also highlight the tutorial UI element"]
+]},
+"32815cc": {"summary": "Spawns the warlord's starting troops into play for one side, then re-lays out that side's minions on the board. Called during match setup; the decompiler lost parts of the loops but the calls are right.", "comments": [
+[4, "Get this side's warlord card"],
+[6, "Warlord has no starting troops list: nothing to do"],
+[11, "Empty list: nothing to create"],
+[19, "Create each starting troop in play"],
+[26, "Pick this side's minion manager (player or enemy)"],
+[33, "Hide the card shadow, then reposition minions if there are any"],
+[35, "No minions on either side of the board: done"],
+[43, "Loop over left-side minions: compute each slot position and move the minion there"],
+[83, "Second loop (decompiler split it out) does the same for right-side minions"]
+]},
+"3282720": {"summary": "Returns the localized warcry text for a side. It looks up the warcry cosmetic chosen in the deck data and uses its translation key, or the default warcry key.", "comments": [
+[4, "Choose the player's or the enemy's deck data from the match data"],
+[17, "Look up the selected warcry cosmetic"],
+[20, "No cosmetic selected: use the default warcry translation key"],
+[23, "Cosmetic found: build the key from its id"],
+[27, "Translate the key with the localization system"]
+]},
+"3282904": {"summary": "Returns the pair of cardback sprites for a side from its selected cardback cosmetic. If none is selected or it is not a cardback item, returns an empty pair.", "comments": [
+[4, "Choose the player's or the enemy's deck data from the match data"],
+[18, "Look up the selected cardback cosmetic"],
+[19, "Type check: the item must really be a cardback cosmetic, otherwise treat it as none"],
+[30, "No cardback: return an empty sprite pair"],
+[35, "Load the cardback sprites from the General addressables cache group"]
+]},
+"3282ac8": {"summary": "Releases the cardback assets of both the player and the enemy once the battle is left. Called from FinishedLeavingBattle.", "comments": [
+[4, "Find the player's cardback cosmetic (null if not a cardback type)"],
+[18, "Do the same for the enemy's cardback"],
+[33, "Unload the player's cardback references"],
+[41, "Enemy cardback: release its image reference through the addressables manager by hand"],
+[52, "If the asset is not in the cache, warn that it is being released without being loaded"]
+]},
+"3281bac": {"summary": "Instantiates the full hero (daimyo/warlord) card for a side from the deck data, adds it to unitsInPlay and sets up the side's player manager. In the tutorial it also cancels the warlord active ability.", "comments": [
+[5, "Create the daimyo prefab and get its card script"],
+[7, "Use the warlord's secret identity card data if it has one"],
+[12, "Set the raw card data and run card setup for this side"],
+[14, "Add the hero to the list of units in play"],
+[29, "Pick the player's or the enemy's player manager"],
+[33, "Let the player manager register this hero"],
+[36, "Not a tutorial: done"],
+[39, "Tutorial: the warlord active ability is cancelled (decompiler dropped the actual call)"]
+]},
+"3282e1c": {"summary": "Loads and returns the card animation used for a trait effect (trait, trigger, army) through addressables. Returns null if there is no effect, or the load fails.", "comments": [
+[5, "Look up the trait effect definition for this trait and trigger"],
+[7, "No effect for this trait: nothing to play"],
+[9, "Get the animation asset reference for this army"],
+[24, "Reference is null or invalid: warn and return nothing"],
+[52, "Check if a previous load already failed; if so log a warning and give up"],
+[72, "Not loaded yet: load synchronously and wait for completion"],
+[93, "Loaded: bump the reference count and return the animation (type-checked)"]
+]},
+"3282e30": {"summary": "Preloads the animation assets of every trait effect defined for a trait and army, so they are ready when the trait triggers.", "comments": [
+[7, "Get all effects defined for this trait"],
+[15, "For each effect, load its animation for this army and preload its assets"]
+]},
+"3282fdc": {"summary": "Unity OnDestroy for the BattleManager. Releases the General addressables group, removes voice-line listeners and clears the singleton instance.", "comments": [
+[7, "Release all addressables loaded for the battle"],
+[14, "Stop listening to voice lines"],
+[15, "Clear the singleton so nothing uses a dead BattleManager"]
+]},
+"32831c8": {"summary": "Called when the player has finished leaving a battle. After a finished battle it just sets the post-battle UI state; otherwise it leaves the room, releases cardbacks and loads the main menu, or starts the tutorial match if the first tutorials are not complete.", "comments": [
+[5, "Battle already in PostBattle stage: just go to the postBattle UI state"],
+[32, "Make sure we have actually left the network room"],
+[34, "Still connected: warn and leave the room now"],
+[38, "Free cardback assets"],
+[40, "Has the player finished the first two tutorials?"],
+[41, "Yes: reload the scene into the main menu"],
+[53, "No: set up the tutorial match and start it against the AI at super easy difficulty"]
+]},
+"3283564": {"summary": "Network handler: receives the opponent's mulligan choices (card ids to discard) and environment card. Stores them in match data, confirms receipt to the opponent and hides the mulligan waiting text.", "comments": [
+[5, "Parameter check: a null mulligan list only logs a warning"],
+[9, "Remember the enemy's discarded cards"],
+[12, "Remember the enemy's environment effect card"],
+[14, "Send back an acknowledgement so the opponent stops resending"],
+[16, "Mark that the enemy mulligan has arrived"],
+[17, "Hide the waiting-for-opponent text (the SetActive call was lost by the decompiler)"],
+[32, "Null param path: log warning"]
+]},
+"3283690": {"summary": "Network handler: the opponent acknowledged our mulligan. Sets receivedMulliganAck and logs whether the enemy mulligan has also been received.", "comments": [
+[9, "Stop resending our mulligan: the opponent has it"],
+[12, "Log the acknowledgement together with the enemy mulligan state"]
+]},
+"3283754": {"summary": "Converts a local BattleAction into a PlayerAction ready to send over the network. It copies type, actor and target ids, packs the board position, adds the running action counter and a timestamp.", "comments": [
+[8, "Redirected and scripted attacks are sent as plain attacks"],
+[11, "Actions that count: bump the total sent action counter (anti-cheat int)"],
+[23, "Stamp the action with the current counter so the other side can order and resend actions"],
+[33, "Actor card: send its unique id"],
+[38, "Target card: send its unique id and set the has-target flag"],
+[50, "Playing a card: pack the board position as column + row * 10 (column offset by the board size)"],
+[58, "Using an active ability: pack the position as column + row * 10"],
+[62, "Timestamp from game time (int min value if time is infinite)"],
+[67, "Record the action type of the actor, or undefined if none"]
+]},
+"32839e0": {"summary": "Converts a received PlayerAction back into a local BattleAction. It looks up cards by unique id and unpacks positions. An unknown action type cancels the match with a parse error.", "comments": [
+[7, "Log the action being parsed"],
+[14, "Branch on the action type number"],
+[15, "Type 1: attack. Find attacker and target, set the attack type, mark as targeted"],
+[31, "Type 5: play a card from hand. Find card and optional target, unpack position (column offset by board size)"],
+[50, "Type 0xe: needs no extra data"],
+[53, "Types 0x1e and 0x4c: use an active ability on an optional target at a packed position (row = pos / 10, col = pos % 10)"],
+[70, "Type 0x36: forfeit. Mark the hero of the acting card's side as dead with a Forfeit result"],
+[89, "Type 0x37: copy two raw fields from the message"],
+[108, "Unknown action type: cancel the match as a parse error"],
+[116, "Return the finished BattleAction"]
+]},
+"3284884": {"summary": "Logs a BattleAction in the right action log and, in networked games, sends it to the opponent as the PUNReceivePlayerAction RPC. Called for every action taken during a match.", "comments": [
+[5, "Convert to the network PlayerAction form"],
+[7, "Enemy action: only log it in the enemy log for non-network, non-replay games"],
+[14, "Replays do not log anything"],
+[58, "Our own action: add it to the player action log unless this is a replay"],
+[79, "Only networked games send it"],
+[86, "Pack the 7 action fields into an RPC array (type, actor, target, has target, position, counter, actor action type)"],
+[119, "Send the RPC to everyone in the room (the opponent handles it)"]
+]},
+"3284ac8": {"summary": "Network handler for a received action. It logs the action in the enemy action log (unless in replay mode) and queues it as a remote action to run on this client.", "comments": [
+[8, "Replay: skip logging, go straight to queueing"],
+[20, "Add the received action to the enemy action log"],
+[10, "Build a remote-action BattleAction (type 0x24) wrapping the received action"],
+[15, "Queue it so the action runs in order"]
+]},
+"3284b9c": {"summary": "Wraps a received PlayerAction in a remote-action BattleAction (type 0x24) and adds it to the auto action queue.", "comments": [
+[5, "0x24 is the remote action type"],
+[9, "Queue it for execution"]
+]},
+"3284ea0": {"summary": "Called when a disconnect happens during a battle. In PostBattle it may show the disconnect popup and set shouldLoseIfDisconnectEnd; during mulligan or play it shows the popup, or first waits for the opponent's last actions.", "comments": [
+[10, "Log the stage we disconnected in"],
+[13, "Mulligan or match proper are the normal cases; others fall through below"],
+[14, "After the battle: only matters if the result is not yet processed"],
+[29, "Opponent disconnected after a processed result: nothing to do"],
+[33, "Result already processed: nothing to do"],
+[36, "Show the popup and mark that we lose if the disconnect lasts"],
+[41, "Unexpected stage: log a warning and treat it like a normal disconnect"],
+[49, "Our own disconnect, or nothing pending from the opponent: show the popup straight away"],
+[53, "Opponent disconnected but still has actions to deliver: wait for them first"]
+]},
+"32851d0": {"summary": "Returns true if the opponent claims the match is finished or there are still actions in the queue, meaning we should wait before reacting to their disconnect.", "comments": [
+[7, "Opponent says it finished: wait to receive its last actions"],
+[8, "Otherwise wait only if actions are still queued"]
+]},
+"3285344": {"summary": "Stops the WaitOpponentLastActions and ForfeitDisconnectedEnemy coroutines. Called when the opponent comes back.", "comments": [
+[4, "Stop waiting for the opponent's last actions"],
+[5, "Stop the forfeit timer by name (the rest is inlined Unity string-span code)"]
+]},
+"3285104": {"summary": "Updates the connection status shown to the player after a disconnect and starts the matching coroutine. The local player gets AttemptReconnect; for the opponent it pauses the clock and starts ForfeitDisconnectedEnemy.", "comments": [
+[4, "Own disconnect = Reconnecting, opponent disconnect = WaitingForOtherPlayerToReconnect"],
+[9, "Status changed: notify listeners and store it"],
+[16, "Own disconnect: try to reconnect"],
+[19, "Opponent disconnect: pause the turn clock and start the forfeit countdown"],
+[24, "Restart the coroutine by name (stop, then start; the rest is inlined Unity checks)"]
+]},
+"3285430": {"summary": "Called when reconnecting fails. If the match had started, it resigns the local player and marks the hero dead by disconnect; otherwise it cancels the match without a result.", "comments": [
+[5, "Stop trying to reconnect"],
+[6, "Switch to the Disconnected status"],
+[15, "Match already started: resign for the player and end as a disconnect loss"],
+[19, "Still trying to reconnect: show the disconnected-after-trying status"],
+[30, "Match never started: cancel it without a result"],
+[35, "Go to the finish-battle UI state"],
+[43, "Tell the player data manager to cancel the match against this opponent"],
+[54, "Notify desync listeners"]
+]},
+"3285908": {"summary": "Called after a successful reconnect. Restores the Connected status, resumes the clock, and resends the mulligan or lost actions as needed.", "comments": [
+[4, "Stop the reconnect attempt"],
+[5, "Opponent reconnected: stop waiting for them"],
+[14, "Set the Connected status and notify listeners"],
+[24, "Resume the turn clock"],
+[28, "Mulligan was already finished: resend it, the opponent may have missed it"],
+[32, "Not our turn: ask to resend the actions lost during the disconnect"]
+]},
+"3285a88": {"summary": "Sends the player's mulligan card choices and environment card to the opponent via the PUNReceiveEnemyMulligan RPC. The rest of the decompiled body is Photon RPC, HashSet and logging code merged in from neighbouring functions.", "comments": [
+[7, "Mulligan not finished yet: log it and do not send"],
+[23, "Build the data to send from the mulligan and environment effect"],
+[33, "Log how many mulligan cards are being sent"],
+[38, "Pack the mulligan card ids and environment card into an RPC array"],
+[46, "Send the RPC to the opponent"],
+[54, "From here the decompiler runs on into other functions (resend request, Ack, wrong room)"],
+[57, "BattleCommsManager.RequestMulliganResend: asks for the mulligan to be resent"],
+[86, "BattleCommsManager.ConfirmMulliganReceived: sends PUNReceiveMulliganAck"],
+[119, "BattleCommsManager.SendWrongRoomMessage: sends PUNReceiveWrongRoom"],
+[153, "Below is inlined Photon PhotonView.RPC code, not game logic"],
+[339, "Photon NetworkingPeer interest-group code merged in, not game logic"],
+[439, "Photon callback list (removal/insertion) code merged in, not game logic"]
+]}
+}

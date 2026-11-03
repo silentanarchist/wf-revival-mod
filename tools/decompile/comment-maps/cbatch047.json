@@ -1,0 +1,752 @@
+{
+ "328ee10": {
+  "summary": "Called after an effect finishes that clears end-of-turn effects on the acting card: clears them, then runs the shared post-action cleanup. The cleanup queues minion reassembly, ends the battle if a hero is dying, and re-enables the current turn owner's units and UI.",
+  "comments": [
+   [
+    4,
+    "Only clear end-of-turn effects if an acting card was supplied."
+   ],
+   [
+    13,
+    "Count pending queued actions; the cleanup below only runs when the queue is drained."
+   ],
+   [
+    14,
+    "Queue empty: if either side's minions have drifted out of position, queue a reassemble order for them."
+   ],
+   [
+    26,
+    "No automatic follow-up actions pending: safe to check whether a hero has died."
+   ],
+   [
+    28,
+    "Tutorial and campaign matches skip the hero-death check here."
+   ],
+   [
+    32,
+    "Card state 5 appears to mean waitingToDie; if neither hero is dying, jump to the normal in-play broadcast."
+   ],
+   [
+    36,
+    "A hero is dying; remember whether it was the local player's (player lost) or the enemy's."
+   ],
+   [
+    39,
+    "Builds a debug log line 'called DeadHeroAfterActionsEnd ...' (inlined; decompiler bloat with array bounds checks)."
+   ],
+   [
+    72,
+    "Battle already in PostBattle: warn and return, unless the disconnect-loss flag is set."
+   ],
+   [
+    83,
+    "Disconnect-loss flag set: record an enemy victory and run the battle end sequence coroutine instead."
+   ],
+   [
+    96,
+    "Normal battle end: enter PostBattle stage and stop the battle."
+   ],
+   [
+    98,
+    "In a networked game, tell the other player the match has finished."
+   ],
+   [
+    103,
+    "Lock the UI into the finish-battle sequence and clear the during-battle flag."
+   ],
+   [
+    108,
+    "Player won: raise an enemy-health-change signal showing the enemy hero's health being brought to 0."
+   ],
+   [
+    123,
+    "Build a RankedMatchResult from Elo rating (event leaderboard or player data) and XP, plus skull milestones."
+   ],
+   [
+    148,
+    "Work out the winner from who lost and the battle result."
+   ],
+   [
+    184,
+    "Record the match duration; if the player won, flag the win in player data and update the live-ops handler."
+   ],
+   [
+    197,
+    "Persist the match winner and finish the battle; the cleanup below is not reached in this path."
+   ],
+   [
+    219,
+    "Decompiler artifact: an index/cast failure path after the nested checks."
+   ],
+   [
+    223,
+    "No hero is dying: broadcast while-in-play effects so continuous effects are re-evaluated."
+   ],
+   [
+    227,
+    "Action fully resolved: clear the resolving-action flag."
+   ],
+   [
+    229,
+    "Whose turn is it? Enemy's turn refreshes the enemy side, player's turn refreshes the player side."
+   ],
+   [
+    231,
+    "Enemy turn: activate enemy minions and recompute whether the enemy hero can act or attack."
+   ],
+   [
+    238,
+    "Hero can act only if it is in play, hasn't attacked (or has bloodthirst and attacked once), is not stunned, and isn't summon-sick."
+   ],
+   [
+    248,
+    "Ferocity or oath heroes get canAct set again, and switch to an active attack type if summon-sick."
+   ],
+   [
+    264,
+    "Show or hide the hero's can-attack animation on its card UI depending on whether it can attack now."
+   ],
+   [
+    280,
+    "Player's turn: highlight playable cards and re-activate the player's minions and hero."
+   ],
+   [
+    286,
+    "Check how many actions remain in the queue."
+   ],
+   [
+    287,
+    "Queue empty: start garbage collection while idle and unpause the turn clock."
+   ],
+   [
+    292,
+    "If the player may act, gather the available actions."
+   ],
+   [
+    300,
+    "Only one action (end turn) left and not forced by tutorial: show the 'no actions left' UI on the clock."
+   ],
+   [
+    309,
+    "Re-check the queue after the above."
+   ],
+   [
+    311,
+    "Scripted (tutorial/AI-script) stage: if the script is waiting for a player action, continue the scripted turn."
+   ],
+   [
+    321,
+    "Reset the flag that remembers a manual player action happened in this action sequence."
+   ]
+  ]
+ },
+ "328eea0": {
+  "summary": "Resolves a stun battle action: applies the stun to the target unit and, if it worked, broadcasts that the unit was stunned. It then calls FinishResolvingAction for the action type. Called when a queued stun action is processed.",
+  "comments": [
+   [
+    4,
+    "Copy the action (0x100 bytes) and apply the stun to the target unit for the current turn owner."
+   ],
+   [
+    10,
+    "Stun succeeded: broadcast the unit-stunned event so abilities can react."
+   ],
+   [
+    15,
+    "Mark the action as resolved and let the queue continue."
+   ],
+   [
+    18,
+    "Null target in the action: decompiler's null-check throw."
+   ]
+  ]
+ },
+ "328ef34": {
+  "summary": "Resets the target card's actions (so it can act again this turn), then runs the shared post-action cleanup. The cleanup queues minion reassembly, ends the battle if a hero is dying, and refreshes the current turn owner's UI.",
+  "comments": [
+   [
+    7,
+    "Give the target its actions back for this turn."
+   ],
+   [
+    10,
+    "Count pending queued actions; the cleanup below only runs when the queue is drained."
+   ],
+   [
+    11,
+    "Queue empty: if either side's minions have drifted out of position, queue a reassemble order for them."
+   ],
+   [
+    23,
+    "No automatic follow-up actions pending: safe to check whether a hero has died."
+   ],
+   [
+    25,
+    "Tutorial and campaign matches skip the hero-death check here."
+   ],
+   [
+    29,
+    "Card state 5 appears to mean waitingToDie; if neither hero is dying, jump to the normal in-play broadcast."
+   ],
+   [
+    33,
+    "A hero is dying; remember whether it was the local player's (player lost) or the enemy's."
+   ],
+   [
+    36,
+    "Builds a debug log line 'called DeadHeroAfterActionsEnd ...' (inlined; decompiler bloat with array bounds checks)."
+   ],
+   [
+    69,
+    "Battle already in PostBattle: warn and return, unless the disconnect-loss flag is set."
+   ],
+   [
+    80,
+    "Disconnect-loss flag set: record an enemy victory and run the battle end sequence coroutine instead."
+   ],
+   [
+    93,
+    "Normal battle end: enter PostBattle stage and stop the battle."
+   ],
+   [
+    95,
+    "In a networked game, tell the other player the match has finished."
+   ],
+   [
+    100,
+    "Lock the UI into the finish-battle sequence and clear the during-battle flag."
+   ],
+   [
+    105,
+    "Player won: raise an enemy-health-change signal showing the enemy hero's health being brought to 0."
+   ],
+   [
+    120,
+    "Build a RankedMatchResult from Elo rating (event leaderboard or player data) and XP, plus skull milestones."
+   ],
+   [
+    145,
+    "Work out the winner from who lost and the battle result."
+   ],
+   [
+    181,
+    "Record the match duration; if the player won, flag the win in player data and update the live-ops handler."
+   ],
+   [
+    194,
+    "Persist the match winner and finish the battle; the cleanup below is not reached in this path."
+   ],
+   [
+    216,
+    "Decompiler artifact: an index/cast failure path after the nested checks."
+   ],
+   [
+    220,
+    "No hero is dying: broadcast while-in-play effects so continuous effects are re-evaluated."
+   ],
+   [
+    224,
+    "Action fully resolved: clear the resolving-action flag."
+   ],
+   [
+    226,
+    "Whose turn is it? Enemy's turn refreshes the enemy side, player's turn refreshes the player side."
+   ],
+   [
+    228,
+    "Enemy turn: activate enemy minions and recompute whether the enemy hero can act or attack."
+   ],
+   [
+    235,
+    "Hero can act only if it is in play, hasn't attacked (or has bloodthirst and attacked once), is not stunned, and isn't summon-sick."
+   ],
+   [
+    245,
+    "Ferocity or oath heroes get canAct set again, and switch to an active attack type if summon-sick."
+   ],
+   [
+    261,
+    "Show or hide the hero's can-attack animation on its card UI depending on whether it can attack now."
+   ],
+   [
+    277,
+    "Player's turn: highlight playable cards and re-activate the player's minions and hero."
+   ],
+   [
+    283,
+    "Check how many actions remain in the queue."
+   ],
+   [
+    284,
+    "Queue empty: start garbage collection while idle and unpause the turn clock."
+   ],
+   [
+    289,
+    "If the player may act, gather the available actions."
+   ],
+   [
+    297,
+    "Only one action (end turn) left and not forced by tutorial: show the 'no actions left' UI on the clock."
+   ],
+   [
+    306,
+    "Re-check the queue after the above."
+   ],
+   [
+    308,
+    "Scripted (tutorial/AI-script) stage: if the script is waiting for a player action, continue the scripted turn."
+   ],
+   [
+    318,
+    "Reset the flag that remembers a manual player action happened in this action sequence."
+   ]
+  ]
+ },
+ "328ef64": {
+  "summary": "Marks the target card's active ability as unused again (its duty can be reused), refreshes its figures, then runs the shared post-action cleanup. The cleanup queues minion reassembly, ends the battle if a hero is dying, and refreshes the turn owner's UI.",
+  "comments": [
+   [
+    7,
+    "Clear the used-active-ability flag so the ability can be used again, then refresh the card's numbers."
+   ],
+   [
+    11,
+    "Count pending queued actions; the cleanup below only runs when the queue is drained."
+   ],
+   [
+    12,
+    "Queue empty: if either side's minions have drifted out of position, queue a reassemble order for them."
+   ],
+   [
+    24,
+    "No automatic follow-up actions pending: safe to check whether a hero has died."
+   ],
+   [
+    26,
+    "Tutorial and campaign matches skip the hero-death check here."
+   ],
+   [
+    30,
+    "Card state 5 appears to mean waitingToDie; if neither hero is dying, jump to the normal in-play broadcast."
+   ],
+   [
+    34,
+    "A hero is dying; remember whether it was the local player's (player lost) or the enemy's."
+   ],
+   [
+    37,
+    "Builds a debug log line 'called DeadHeroAfterActionsEnd ...' (inlined; decompiler bloat with array bounds checks)."
+   ],
+   [
+    70,
+    "Battle already in PostBattle: warn and return, unless the disconnect-loss flag is set."
+   ],
+   [
+    81,
+    "Disconnect-loss flag set: record an enemy victory and run the battle end sequence coroutine instead."
+   ],
+   [
+    94,
+    "Normal battle end: enter PostBattle stage and stop the battle."
+   ],
+   [
+    96,
+    "In a networked game, tell the other player the match has finished."
+   ],
+   [
+    101,
+    "Lock the UI into the finish-battle sequence and clear the during-battle flag."
+   ],
+   [
+    106,
+    "Player won: raise an enemy-health-change signal showing the enemy hero's health being brought to 0."
+   ],
+   [
+    121,
+    "Build a RankedMatchResult from Elo rating (event leaderboard or player data) and XP, plus skull milestones."
+   ],
+   [
+    146,
+    "Work out the winner from who lost and the battle result."
+   ],
+   [
+    182,
+    "Record the match duration; if the player won, flag the win in player data and update the live-ops handler."
+   ],
+   [
+    195,
+    "Persist the match winner and finish the battle; the cleanup below is not reached in this path."
+   ],
+   [
+    217,
+    "Decompiler artifact: an index/cast failure path after the nested checks."
+   ],
+   [
+    221,
+    "No hero is dying: broadcast while-in-play effects so continuous effects are re-evaluated."
+   ],
+   [
+    225,
+    "Action fully resolved: clear the resolving-action flag."
+   ],
+   [
+    227,
+    "Whose turn is it? Enemy's turn refreshes the enemy side, player's turn refreshes the player side."
+   ],
+   [
+    229,
+    "Enemy turn: activate enemy minions and recompute whether the enemy hero can act or attack."
+   ],
+   [
+    236,
+    "Hero can act only if it is in play, hasn't attacked (or has bloodthirst and attacked once), is not stunned, and isn't summon-sick."
+   ],
+   [
+    246,
+    "Ferocity or oath heroes get canAct set again, and switch to an active attack type if summon-sick."
+   ],
+   [
+    262,
+    "Show or hide the hero's can-attack animation on its card UI depending on whether it can attack now."
+   ],
+   [
+    278,
+    "Player's turn: highlight playable cards and re-activate the player's minions and hero."
+   ],
+   [
+    284,
+    "Check how many actions remain in the queue."
+   ],
+   [
+    285,
+    "Queue empty: start garbage collection while idle and unpause the turn clock."
+   ],
+   [
+    290,
+    "If the player may act, gather the available actions."
+   ],
+   [
+    298,
+    "Only one action (end turn) left and not forced by tutorial: show the 'no actions left' UI on the clock."
+   ],
+   [
+    307,
+    "Re-check the queue after the above."
+   ],
+   [
+    309,
+    "Scripted (tutorial/AI-script) stage: if the script is waiting for a player action, continue the scripted turn."
+   ],
+   [
+    319,
+    "Reset the flag that remembers a manual player action happened in this action sequence."
+   ]
+  ]
+ },
+ "328ef98": {
+  "summary": "Makes the target card miss its actions (it loses its attacks/actions), then runs the shared post-action cleanup. The cleanup queues minion reassembly, ends the battle if a hero is dying, and refreshes the turn owner's UI.",
+  "comments": [
+   [
+    7,
+    "Make the target miss its remaining actions."
+   ],
+   [
+    10,
+    "Count pending queued actions; the cleanup below only runs when the queue is drained."
+   ],
+   [
+    11,
+    "Queue empty: if either side's minions have drifted out of position, queue a reassemble order for them."
+   ],
+   [
+    23,
+    "No automatic follow-up actions pending: safe to check whether a hero has died."
+   ],
+   [
+    25,
+    "Tutorial and campaign matches skip the hero-death check here."
+   ],
+   [
+    29,
+    "Card state 5 appears to mean waitingToDie; if neither hero is dying, jump to the normal in-play broadcast."
+   ],
+   [
+    33,
+    "A hero is dying; remember whether it was the local player's (player lost) or the enemy's."
+   ],
+   [
+    36,
+    "Builds a debug log line 'called DeadHeroAfterActionsEnd ...' (inlined; decompiler bloat with array bounds checks)."
+   ],
+   [
+    69,
+    "Battle already in PostBattle: warn and return, unless the disconnect-loss flag is set."
+   ],
+   [
+    80,
+    "Disconnect-loss flag set: record an enemy victory and run the battle end sequence coroutine instead."
+   ],
+   [
+    93,
+    "Normal battle end: enter PostBattle stage and stop the battle."
+   ],
+   [
+    95,
+    "In a networked game, tell the other player the match has finished."
+   ],
+   [
+    100,
+    "Lock the UI into the finish-battle sequence and clear the during-battle flag."
+   ],
+   [
+    105,
+    "Player won: raise an enemy-health-change signal showing the enemy hero's health being brought to 0."
+   ],
+   [
+    120,
+    "Build a RankedMatchResult from Elo rating (event leaderboard or player data) and XP, plus skull milestones."
+   ],
+   [
+    145,
+    "Work out the winner from who lost and the battle result."
+   ],
+   [
+    181,
+    "Record the match duration; if the player won, flag the win in player data and update the live-ops handler."
+   ],
+   [
+    194,
+    "Persist the match winner and finish the battle; the cleanup below is not reached in this path."
+   ],
+   [
+    216,
+    "Decompiler artifact: an index/cast failure path after the nested checks."
+   ],
+   [
+    220,
+    "No hero is dying: broadcast while-in-play effects so continuous effects are re-evaluated."
+   ],
+   [
+    224,
+    "Action fully resolved: clear the resolving-action flag."
+   ],
+   [
+    226,
+    "Whose turn is it? Enemy's turn refreshes the enemy side, player's turn refreshes the player side."
+   ],
+   [
+    228,
+    "Enemy turn: activate enemy minions and recompute whether the enemy hero can act or attack."
+   ],
+   [
+    235,
+    "Hero can act only if it is in play, hasn't attacked (or has bloodthirst and attacked once), is not stunned, and isn't summon-sick."
+   ],
+   [
+    245,
+    "Ferocity or oath heroes get canAct set again, and switch to an active attack type if summon-sick."
+   ],
+   [
+    261,
+    "Show or hide the hero's can-attack animation on its card UI depending on whether it can attack now."
+   ],
+   [
+    277,
+    "Player's turn: highlight playable cards and re-activate the player's minions and hero."
+   ],
+   [
+    283,
+    "Check how many actions remain in the queue."
+   ],
+   [
+    284,
+    "Queue empty: start garbage collection while idle and unpause the turn clock."
+   ],
+   [
+    289,
+    "If the player may act, gather the available actions."
+   ],
+   [
+    297,
+    "Only one action (end turn) left and not forced by tutorial: show the 'no actions left' UI on the clock."
+   ],
+   [
+    306,
+    "Re-check the queue after the above."
+   ],
+   [
+    308,
+    "Scripted (tutorial/AI-script) stage: if the script is waiting for a player action, continue the scripted turn."
+   ],
+   [
+    318,
+    "Reset the flag that remembers a manual player action happened in this action sequence."
+   ]
+  ]
+ },
+ "328f19c": {
+  "summary": "Destroys a unit: if it is in the waiting-to-die state it triggers backlash and, if needed, queues a transform into a remnant. Then runs the shared post-action cleanup: minion reassembly, hero death/battle end, and re-enabling the turn owner's units and UI.",
+  "comments": [
+   [
+    4,
+    "Unit to destroy (named isPlayer by the decompiler, but it is a CardScript); missing unit means the null-check path."
+   ],
+   [
+    9,
+    "Card state 5 (waitingToDie) is required to destroy; otherwise log a warning at the else-branch below."
+   ],
+   [
+    10,
+    "Some units turn into a remnant instead of simply dying."
+   ],
+   [
+    14,
+    "If this flag byte is non-zero, skip the remnant transform and just trigger backlash."
+   ],
+   [
+    15,
+    "Unit is dying: trigger its backlash actions, then queue the transform into a remnant."
+   ],
+   [
+    21,
+    "No remnant: only trigger backlash actions for the dying unit."
+   ],
+   [
+    30,
+    "Wrong state: log 'Can't DestroyUnit <name> because state is ...' and do nothing."
+   ],
+   [
+    39,
+    "Remember the action type; reorderMinionsInPlay must not queue another reassemble."
+   ],
+   [
+    43,
+    "Queue empty (and not already a reorder): queue reassembly for any misplaced minions on either side."
+   ],
+   [
+    55,
+    "No automatic actions pending: check whether a hero has died."
+   ],
+   [
+    57,
+    "Tutorial and campaign matches skip the hero-death check here."
+   ],
+   [
+    61,
+    "Card state 5 appears to be waitingToDie; if neither hero is dying, skip to the in-play broadcast."
+   ],
+   [
+    65,
+    "A hero is dying; record whether the local player lost."
+   ],
+   [
+    71,
+    "Builds a debug log line 'called DeadHeroAfterActionsEnd ...' (decompiler bloat)."
+   ],
+   [
+    101,
+    "Battle already in PostBattle: warn and return unless the disconnect-loss flag is set."
+   ],
+   [
+    116,
+    "Disconnect-loss flag set: record an enemy victory and run the battle end sequence coroutine."
+   ],
+   [
+    125,
+    "Normal battle end: enter PostBattle stage and stop the battle."
+   ],
+   [
+    127,
+    "In a networked game, tell the other player the match has finished."
+   ],
+   [
+    132,
+    "Lock the UI into the finish-battle sequence and clear the during-battle flag."
+   ],
+   [
+    137,
+    "Player won: raise an enemy-health-change signal showing the enemy hero's health going to 0."
+   ],
+   [
+    152,
+    "Build a RankedMatchResult from Elo rating and XP, plus skull milestones."
+   ],
+   [
+    177,
+    "Work out the winner from who lost and the battle result."
+   ],
+   [
+    211,
+    "Record match duration; if the player won, flag the win in player data and update the live-ops handler."
+   ],
+   [
+    226,
+    "Persist the match winner and finish the battle; the cleanup below is not reached in this path."
+   ],
+   [
+    248,
+    "Decompiler artifact: an index/cast failure path after the nested checks."
+   ],
+   [
+    252,
+    "No hero is dying: broadcast while-in-play effects so continuous effects are re-evaluated."
+   ],
+   [
+    256,
+    "Action fully resolved: clear the resolving-action flag."
+   ],
+   [
+    258,
+    "Whose turn is it? Enemy's turn refreshes the enemy side, player's turn refreshes the player side."
+   ],
+   [
+    261,
+    "Enemy turn: activate enemy minions and recompute whether the enemy hero can act or attack."
+   ],
+   [
+    267,
+    "Hero can act only if in play, hasn't attacked (or has bloodthirst and attacked once), not stunned, and not summon-sick."
+   ],
+   [
+    277,
+    "Ferocity or oath heroes get canAct set again, and switch to an active attack type if summon-sick."
+   ],
+   [
+    293,
+    "Show or hide the hero's can-attack animation depending on whether it can attack now."
+   ],
+   [
+    309,
+    "Player's turn: highlight playable cards and re-activate the player's minions and hero."
+   ],
+   [
+    315,
+    "Check how many actions remain in the queue."
+   ],
+   [
+    318,
+    "Queue empty: start garbage collection while idle and unpause the turn clock."
+   ],
+   [
+    322,
+    "If the player may act, gather the available actions."
+   ],
+   [
+    332,
+    "Only the end-turn action is left and not forced by tutorial: show the 'no actions left' UI on the clock."
+   ],
+   [
+    339,
+    "Re-check the queue after the above."
+   ],
+   [
+    342,
+    "Scripted stage (not on end turn): if the script is waiting for a player action, continue the scripted turn."
+   ],
+   [
+    357,
+    "Reset the flag that remembers a manual player action happened in this action sequence."
+   ]
+  ]
+ }
+}

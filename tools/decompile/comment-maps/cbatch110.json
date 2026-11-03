@@ -1,0 +1,210 @@
+{
+"310b744": {"summary": "Cancels a pending practice (challenge) invitation by sending a RemovePractice private chat message to the current opponent over Photon Chat. Called when the challenger backs out or the flow fails.", "comments": [
+[4, "Needs the PlayerDataManager singleton to reach the chat manager"],
+[7, "Message type RemovePractice tells the opponent to drop the invitation"],
+[9, "Serialize the message to JSON; this is the text sent to the opponent"],
+[17, "Inlined ChatClient.SendPrivateMessage: state 7 means connected to the front end server"],
+[21, "Bad parameters (null/empty json or id): log a warning through the chat listener instead of sending"],
+[38, "Valid message: build the Photon parameter dictionary (key 0xE1 = recipient, key 3 = message JSON)"],
+[45, "Sent reliably through the chat peer; the opponent receives it as a private message"],
+[55, "Not connected: log an error through the listener (if debug output is on) and do not send"]
+]},
+"310b898": {"summary": "Starts a practice invitation: sets the duel state to SendingDuel and sends a Practice private chat message carrying the player's name, the play-first flag and the classic flag to the opponent.", "comments": [
+[5, "Remember that we are now sending the duel invitation"],
+[9, "Fetch the local PlayerDataManager singleton (static access); the player name comes from it"],
+[16, "Payload: our name, whether we play first, and whether the match uses the classic ruleset"],
+[23, "Inlined ChatClient.SendPrivateMessage: only works while connected to the front end chat server (state 7)"],
+[30, "Bad parameters (null/empty json or opponent id): log a warning instead of sending"],
+[46, "Valid message: build the Photon dictionary (key 0xE1 = recipient PlayFab id, key 3 = JSON) and send reliably"],
+[64, "Not connected: log an error through the chat listener and give up"]
+]},
+"310a6e0": {"summary": "Starts a practice (challenge) duel match. Cancels any search, picks the event deck (falling back to the first library deck if invalid), selects the practice event, and calls MatchMakerManager.FindMatch for a Duel. Shows an invalid-deck popup if no deck is found; returns true when matchmaking started.", "comments": [
+[19, "Stop any matchmaking search that is already running"],
+[21, "Practice room name is derived from our PlayFab id so both players join the same private room"],
+[22, "If we play first, the first-player name is our id; otherwise it is empty"],
+[31, "Ask the event for its deck and check it is valid"],
+[33, "Deck missing or invalid: pick the first deck from the asset library instead"],
+[43, "Ranked V3 events (classic) use the PracticeEventClassic event; everything else uses PracticeEvent"],
+[53, "Look up that live-ops event and mark it as the one currently being played"],
+[59, "No usable deck at all: show the localized invalid-deck popup with an OK button and return false"],
+[69, "Build the player's battle data (copied by value) and start matchmaking in Duel mode"],
+[83, "Null singleton/handler: decompiled as a NullReferenceException"]
+]},
+"310b9e4": {"summary": "Compiler-generated callback from StartChallengeWithUser, used when the waiting popup is cancelled. Cancels the practice invitation (if one was sent) and the search; the popup message is empty so nothing is shown in practice.", "comments": [
+[4, "Not currently in a practice challenge: nothing to cancel"],
+[12, "Duel states 3 and 4 (invitation sent/waiting): tell the opponent the practice is removed"],
+[16, "Stop the matchmaking search"],
+[17, "Message is the empty string, so the function returns here and the popup code below is not reached"],
+[21, "Dead path: would show an OK popup via WindowsManager.ShowPopUp and start its coroutine"],
+[61, "Decompiler mangled the coroutine start (StartCoroutine on the popup routine); ignore the register juggling"]
+]},
+"310b9ec": {"summary": "Compiler-generated callback from StartChallengeWithUser, called when the PlayFab lookup of the opponent's id finishes. On success it stores the id and asks the opponent over chat whether they are online; on failure it cancels and shows a user-not-found or not-online popup.", "comments": [
+[4, "Lookup succeeded: the opponent's PlayFab id is known"],
+[7, "Next step of the challenge flow: check the opponent is online"],
+[17, "Callback CheckIfPlayerOnline will receive the online/offline answer"],
+[23, "Send a CheckUserOnline private chat message to the opponent"],
+[27, "Lookup failed"],
+[28, "Challenge was already cancelled: do nothing"],
+[37, "Invitation already sent (states 3-4): withdraw it"],
+[41, "Failed while checking online: show the user-not-online message"],
+[45, "Failed while checking the user: show the user-not-found message"],
+[51, "Hide the waiting popup and stop the search"],
+[58, "Show the error in an OK popup, if there is a message"],
+[100, "Decompiler mangled the popup coroutine start; the real call is StartCoroutine on the popup routine"]
+]},
+"310ba24": {"summary": "Compiler-generated callback for CheckIfPlayerOnline. If the opponent is online, sends them the Practice invitation over private chat (name, play-first, classic); otherwise cancels the challenge and shows a not-online error popup.", "comments": [
+[4, "Opponent answered the online check: send the practice invitation"],
+[6, "Challenge state moves to sending the duel invitation"],
+[17, "Payload: our player name, play-first flag and classic flag"],
+[24, "Inlined SendPrivateMessage: needs a connected chat client (state 7)"],
+[30, "Bad parameters: log a warning instead of sending"],
+[46, "Build the Photon dictionary (0xE1 = recipient id, 3 = JSON) and send it reliably"],
+[62, "Not connected: log an error through the chat listener"],
+[83, "Opponent not online: error path. Skip if the challenge was already cancelled"],
+[92, "Invitation states 3-4: withdraw the invitation"],
+[96, "Pick the error text: user not online while checking online, user not found while checking the user"],
+[111, "Hide the waiting popup and stop searching"],
+[113, "Show the error text in an OK popup if there is one"],
+[154, "Decompiler mangled the popup coroutine start; ignore the register juggling"]
+]},
+"313559c": {"summary": "Applies the cosmetic cardback's sprite to the SDF test image (an ordinary Image setSprite expanded inline), updating size and material-skip flags and marking the Image dirty so it redraws.", "comments": [
+[5, "Needs the cosmetic item and the cardback image"],
+[9, "Needs the SDF image too"],
+[13, "Inlined Image.sprite setter: only does work when the new sprite differs from the current one"],
+[25, "Compare sprite rect size to the old one: if same size the layout update is skipped"],
+[31, "Skip material update only if the texture is unchanged and secondary textures did not change"],
+[44, "Store sprite and mark the Image dirty (SetAllDirty) so it redraws"],
+[48, "Track the image for atlas-less sprites so it can refresh when textures change"],
+[73, "Null reference path: decompiler could not resolve the sprite load result"]
+]},
+"3137fe4": {"summary": "Unity OnEnable: if autoInitialize is set and the golden avatar border cosmetic is unlocked, loads its sprite and shows it on the border image.", "comments": [
+[4, "Only act when auto-initialize is enabled"],
+[11, "Golden border not unlocked by the player: show nothing"],
+[16, "Load the border's sprite from Addressables (General cache group)"],
+[26, "Inlined Image.sprite setter: first branch is when the image has no sprite yet"],
+[34, "Flag whether the sprite is the same size as before (affects layout updates)"],
+[41, "Skip material update if the sprite has no secondary textures"],
+[46, "Assign the sprite and mark the Image dirty so it redraws"],
+[66, "Image already had a sprite: only update when the new sprite is different"],
+[86, "Compare textures so the material only updates when the texture changed"]
+]},
+"3137ff4": {"summary": "Shows the golden avatar border: if the cosmetic is unlocked, loads its sprite from Addressables and applies it to the border image. Same logic as OnEnable without the auto-initialize check.", "comments": [
+[7, "Golden border cosmetic must exist"],
+[9, "Not unlocked by the player: do nothing"],
+[18, "Load the border sprite from Addressables (General cache group)"],
+[23, "Inlined Image.sprite setter: first branch is for an image with no sprite yet"],
+[31, "Flag whether the new sprite has the same size (affects layout updates)"],
+[38, "Skip material update when the sprite has no secondary textures"],
+[43, "Assign the sprite and mark the Image dirty so it redraws"],
+[63, "Image already had a sprite: only update when the new sprite is different"],
+[83, "Compare textures so the material only updates when the texture changed"]
+]},
+"3138090": {"summary": "Shows the golden avatar border for a player: if the border cosmetic is unlocked, loads its sprite and applies it to the border image. The playerInfo argument appears unused by this decompiled code.", "comments": [
+[8, "Check that the golden border cosmetic is unlocked"],
+[18, "Load the border sprite from Addressables (General cache group)"],
+[23, "Inlined Image.sprite setter: first branch is for an image with no sprite yet"],
+[31, "Flag whether the new sprite has the same size as before"],
+[38, "Skip material update when the sprite has no secondary textures"],
+[43, "Assign the sprite and mark the Image dirty so it redraws"],
+[63, "Image already had a sprite: only update when the new sprite is different"],
+[83, "Compare textures so the material only updates when the texture changed"]
+]},
+"3139480": {"summary": "Updates the owned-copies counter for a card in the collection UI. Gets the owned count and the active ranked event's max copies per deck; shows xN for the usable copies and a second spare-copies counter when the player owns more than allowed.", "comments": [
+[5, "Ask the inventory how many copies of this card the player owns"],
+[8, "Find the currently active ranked event to get its deck-building rules"],
+[13, "Max copies allowed in a deck depends on card rarity and type"],
+[15, "Shown count is capped at the deck limit"],
+[18, "Owned more than the limit: show the duplicate counter with spare copies"],
+[23, "Main counter shows the usable copies as xN"],
+[30, "Second counter shows how many extra copies the player has"],
+[42, "No spares: show only the single counter"],
+[48, "Counter text is xN where N is the owned count (capped)"]
+]},
+"31397bc": {"summary": "Shows the single card counter (hides the duplicate counter) and sets its text to xN.", "comments": [
+[4, "Switch the UI to single-counter mode"],
+[11, "Text is the count formatted as xN"]
+]},
+"3139694": {"summary": "Shows the duplicate card counter UI: the main counter reads xN for the usable copies and a second label shows the number of spare copies. Hides the single counter.", "comments": [
+[4, "Switch the UI to duplicate-counter mode"],
+[11, "Main counter text is xN"],
+[17, "Second label shows the spare copy count (format string is garbled in the decompile)"]
+]},
+"31403a8": {"summary": "Fills card effect slots with the given effects: enables each slot, loads the effect for the player or opponent view, and disables slots whose text is empty. Advances the shared slot index and returns how many slots ended up with text.", "comments": [
+[5, "Continue from the next unused slot (shared index across calls)"],
+[8, "Loop over effects to display, one slot each"],
+[11, "Ran out of slots: stop and return what was filled"],
+[24, "Turn the slot on and load the effect text/icon into it"],
+[27, "Effect has no displayable text: hide the slot again, otherwise count it"],
+[35, "Move to the next slot"],
+[46, "Decompiler garbage after the real code: out-of-range handling that does not run in normal flow"]
+]},
+"31404c8": {"summary": "Disables every remaining card effect slot from the current slot index to the end of the slot array, hiding unused slots.", "comments": [
+[7, "Walk from the current index to the end of the slot array"],
+[23, "Hide this unused slot and move on to the next"]
+]},
+"314d7b4": {"summary": "Sets up one energy-cost row in the deck cost chart: remembers the bar's original color, sets or tweens the slider to the normalized quantity, and updates the card count and cost texts.", "comments": [
+[7, "First call: cache the fill image's original color so it can be restored after the flash"],
+[19, "Mark as initialized and cancel any running tweens on this object"],
+[23, "Instant mode: set the slider value directly"],
+[28, "Animated mode: first check if the new value differs from the current one beyond a small tolerance"],
+[39, "Value changed: tween the slider over 0.2s, flash the fill color, then ease back to the original color"],
+[50, "Update the number of cards text"],
+[55, "Cost at the max (8) gets a suffix appended, presumably a plus sign for 8 and up"]
+]},
+"314daec": {"summary": "Constructor: sets the maximum cost shown to 8 (higher costs are grouped into that row) and the while-updating color to opaque white.", "comments": [
+[4, "Color (1,1,1,1) = white"]
+]},
+"314e39c": {"summary": "Static constructor of the compiler-generated closure class; creates the shared instance used by cached lambdas in DeckEnergyCostDrawer.", "comments": []},
+"314db04": {"summary": "Fills the energy cost chart from a PrebuiltDeck: counts cards per energy cost, removing filtered cards first, clamps each count/10 to 0-1, and initializes each cost row. Decompiler output is heavily mangled by try/finally enumerator code.", "comments": [
+[4, "Needs the PlayerDataManager singleton; otherwise it logs a can't-find-PlayerDataManager error"],
+[29, "Get the deck's card library"],
+[59, "Make one counter and one normalized value per row (cost bucket)"],
+[92, "Enumerates the filtered cards (foreach); decompiler expanded the iterator and try/finally"],
+[102, "Last row catches every cost at or above its index"],
+[153, "Each card's energy cost is used as the row index, clamped to the last row"],
+[167, "Exception/finally handling for the enumerator; the decompiler lost the loop structure around here"],
+[229, "Reset rows when requested, then remove cards filtered out by the lambda from the list"],
+[254, "No cards case: initialize every row with zeros"],
+[274, "For each row: fraction = count/10 clamped to 0-1 (full bar at 10 cards)"],
+[294, "Row shows the card count, its cost and the normalized fill"]
+]},
+"314e148": {"summary": "Fills the energy cost chart from a CardDeck: optionally resets rows, removes filtered cards, counts cards per cost, clamps count/10 to 0-1, and initializes each cost row. Decompiler output is heavily mangled by enumerator try/finally code.", "comments": [
+[15, "Needs the PlayerDataManager singleton; otherwise logs an error"],
+[18, "Optional reset of the chart rows before drawing"],
+[24, "Take the deck's card library and drop cards the filter lambda rejects"],
+[59, "Empty library: initialize every row with zeros"],
+[70, "Make one counter and one normalized value per row (cost bucket)"],
+[102, "Enumerates the filtered cards (foreach); decompiler expanded the iterator and try/finally"],
+[112, "Last row catches every cost at or above its index"],
+[163, "Each card's energy cost is the row index, clamped to the last row"],
+[177, "Exception/finally handling for the enumerator; the decompiler lost the loop structure here"],
+[231, "Error exit shared by all paths: logs that the PlayerDataManager was not found"],
+[249, "Zero-initialize loop for the empty case"],
+[269, "For each row: fraction = count/10 clamped to 0-1 (full bar at 10 cards)"],
+[286, "Row shows the card count, its cost and the normalized fill"]
+]},
+"314dbec": {"summary": "Fills the energy cost chart from any collection of cards: counts cards per energy cost, clamps count/10 to 0-1 and initializes each cost row. Decompiler output is heavily mangled by enumerator try/finally code.", "comments": [
+[21, "Needs the PlayerDataManager singleton; otherwise logs an error"],
+[25, "No cards given: initialize every row with zeros"],
+[36, "Make one counter and one normalized value per row (cost bucket)"],
+[68, "Enumerates the cards (foreach); decompiler expanded the iterator and try/finally"],
+[78, "Last row catches every cost at or above its index"],
+[129, "Each card's energy cost is the row index, clamped to the last row"],
+[143, "Exception/finally handling for the enumerator; the decompiler lost the loop structure here"],
+[233, "Error exit shared by all paths: logs that the PlayerDataManager was not found"],
+[251, "Zero-initialize loop for the empty case"],
+[271, "For each row: fraction = count/10 clamped to 0-1 (full bar at 10 cards)"],
+[288, "Row shows the card count, its cost and the normalized fill"]
+]},
+"314e430": {"summary": "Unity Awake: registers click listeners on the card-in-deck info, deck general info and warlord text buttons.", "comments": [
+[5, "Card-in-deck info button click"],
+[9, "Deck general info button click"],
+[14, "Warlord text button click: the listener add is expanded inline here (event call list internals)"]
+]},
+"314e568": {"summary": "Unity OnDestroy: removes the click listeners from the deck info buttons and clears the warlord button's runtime listener list.", "comments": [
+[8, "Remove the card-in-deck info listener"],
+[13, "Remove the deck general info listener"],
+[14, "Warlord button: instead of RemoveListener, the runtime call list is cleared inline"],
+[24, "Clears the runtime call list and rebuilds the executing list from the persistent calls"]
+]}
+}

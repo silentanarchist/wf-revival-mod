@@ -1,0 +1,259 @@
+{
+ "3285b7c": {
+  "summary": "Re-sends the mulligan state to the opponent after a reconnect: resends our own mulligan cards if we already finished, and re-sends the Mulligan Ack RPC if the enemy's mulligan was received. The rest of the output is Photon RPC and interest-group code the decompiler merged in.",
+  "comments": [
+   [
+    4,
+    "we already finished our own mulligan: send our chosen cards to the opponent again"
+   ],
+   [
+    10,
+    "stop unless the enemy's mulligan has been received; there is nothing to acknowledge yet"
+   ],
+   [
+    14,
+    "read the enemy mulligan data and environmental effect from matchData (null = broken match state)"
+   ],
+   [
+    24,
+    "build the 2-element RPC payload: enemy mulligan data and enemy environmental effect"
+   ],
+   [
+    41,
+    "RPC name sent to the opponent: PUNReceiveMulliganAck"
+   ],
+   [
+    46,
+    "unreachable decompiler artifact (array check failure path); merged with the PUNReceiveWrongRoom sender"
+   ],
+   [
+    72,
+    "from here on the code is Photon's inlined PhotonView.RPC (send to all), not game logic"
+   ],
+   [
+    89,
+    "abort silently if Photon cannot be used right now"
+   ],
+   [
+    94,
+    "not in a room: RPCs cannot be sent, so a log message is built instead"
+   ],
+   [
+    112,
+    "networking peer missing (scene loading): log 'Could not execute RPC' instead"
+   ],
+   [
+    151,
+    "view id below 1 means the PhotonView is invalid: log 'Illegal view ID' error"
+   ],
+   [
+    184,
+    "verbose Photon logging is optional; then the RPC event data is built"
+   ],
+   [
+    186,
+    "fill the event hashtable: view id, prefix, server timestamp, method name, parameters"
+   ],
+   [
+    229,
+    "send the RPC as Photon event code 200 (reliable), tagged with the view's interest group"
+   ],
+   [
+    273,
+    "decompiler merged an unrelated function here: NetworkingPeer.SetInterestGroups"
+   ],
+   [
+    292,
+    "first remove the listed interest groups (group 0 is invalid and logged as an error)"
+   ],
+   [
+    328,
+    "then add the groups to subscribe to; a null list means subscribe to every group 0-255"
+   ],
+   [
+    367,
+    "send the group change to the server unless in offline mode"
+   ],
+   [
+    372,
+    "another merged function: NetworkingPeer.SetSendingEnabled, with an inlined HashSet<byte> remove/add"
+   ],
+   [
+    380,
+    "enabling sending: add the group to the set (else branch below), disabling: remove it"
+   ],
+   [
+    507,
+    "adding branch: HashSet.Add, finding the bucket and growing the table if full"
+   ]
+  ]
+ },
+ "3285c38": {
+  "summary": "Called when the opponent forfeits. It sets the connection status to EnemyForfeit and ends the battle with the player as winner, filling in a ranked match result (Elo, XP, skull counts, minutes played). It then saves the winner, or goes through the normal end sequence if the match is set to count as a loss on disconnect.",
+  "comments": [
+   [
+    4,
+    "stop waiting for the opponent to reconnect; they left on purpose"
+   ],
+   [
+    5,
+    "only change the connection status once and notify listeners of the old and new status"
+   ],
+   [
+    13,
+    "remember that the opponent says the match is over"
+   ],
+   [
+    15,
+    "playerLost is false here: the opponent forfeited, so we won"
+   ],
+   [
+    18,
+    "build a debug log line of state (isPlayer, battleResult, UIstate, battleStage)"
+   ],
+   [
+    51,
+    "already in post battle stage: nothing to do unless the disconnect-loss flag is set"
+   ],
+   [
+    60,
+    "shouldLoseIfDisconnectEnd set: record a forfeit result for the enemy and run the normal end sequence"
+   ],
+   [
+    73,
+    "normal path: move to the PostBattle stage and stop the battle"
+   ],
+   [
+    75,
+    "in a networked game tell the opponent the match is finished"
+   ],
+   [
+    80,
+    "UI set to the finish battle sequence and the 'during battle' flag cleared"
+   ],
+   [
+    85,
+    "player won: tell UI the enemy hero health is now 0"
+   ],
+   [
+    100,
+    "look up Elo rating: from the event's leaderboard if the current event has one, else the player's rating"
+   ],
+   [
+    125,
+    "work out the winner for a forfeit result"
+   ],
+   [
+    128,
+    "create the ranked match result with the current Elo and XP"
+   ],
+   [
+    133,
+    "store the player's skull count (milestone) in the result"
+   ],
+   [
+    138,
+    "get the enemy skull count given the player's remaining hero health (0 if we lost)"
+   ],
+   [
+    154,
+    "write forfeit and winner into the result and record how many minutes the match lasted"
+   ],
+   [
+    161,
+    "player won: flag the win and, for certain match types (0x14, 0xb4, 0xd2), tell LiveOps the opponent was human"
+   ],
+   [
+    173,
+    "save the winner and finish the battle"
+   ],
+   [
+    196,
+    "decompiler fallthrough (check failure); not real game logic"
+   ]
+  ]
+ },
+ "3285ce8": {
+  "summary": "Called when the opponent's client reports a desync. It marks the match as cancelled by desync and sends the onDesyncByEnemy PlayFab cloud script request with the opponent id and game state, so the win is recorded. The rest of the output is unrelated PlayFab API stubs that the decompiler merged in.",
+  "comments": [
+   [
+    7,
+    "flag the match as cancelled because of a desync"
+   ],
+   [
+    12,
+    "get the opponent's id from the match data"
+   ],
+   [
+    14,
+    "snapshot the current game state to send along for debugging"
+   ],
+   [
+    16,
+    "this is PlayerDataManager.RecordMatchWonByCancelEnemy inlined"
+   ],
+   [
+    18,
+    "cloud script request onDesyncByEnemy with the opponent id and game state as parameters"
+   ],
+   [
+    25,
+    "callbacks: success handler is cached, failure handler is created per call"
+   ],
+   [
+    40,
+    "send only if logged in to PlayFab"
+   ],
+   [
+    45,
+    "not logged in: PlayFab throws NotLoggedIn. Below this line is merged, unrelated code"
+   ],
+   [
+    53,
+    "from here the decompiler merged many PlayFabClientAPI methods; each checks login then makes an API call"
+   ],
+   [
+    1001,
+    "last merged stub (GetTitleNews / GetTitlePublicKey); no game logic"
+   ]
+  ]
+ },
+ "3286020": {
+  "summary": "Called when the opponent tells us their match has finished. Only records that claim by setting opponentClaimsMatchFinished to true.",
+  "comments": []
+ },
+ "328625c": {
+  "summary": "Starts the TimedCampaignStartSequence coroutine, which lands the warlords at the start of a campaign match. Called by the campaign setup.",
+  "comments": [
+   [
+    4,
+    "create the start sequence coroutine"
+   ],
+   [
+    5,
+    "coroutine is null: Unity's StartCoroutine would throw 'routine is null'"
+   ],
+   [
+    12,
+    "check this is a MonoBehaviour before starting the coroutine"
+   ],
+   [
+    19,
+    "decompiler merged in Unity's StartCoroutine internals; the real call is just StartCoroutine"
+   ]
+  ]
+ },
+ "32862f0": {
+  "summary": "Returns true if the match type is Campaign or Scene, which are treated as scripted story matches.",
+  "comments": [
+   [
+    6,
+    "Campaign matches count immediately"
+   ],
+   [
+    10,
+    "otherwise it counts only if the match type is Scene"
+   ]
+  ]
+ }
+}

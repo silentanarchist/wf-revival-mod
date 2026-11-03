@@ -1,0 +1,970 @@
+{
+ "325f150": {
+  "summary": "Overload without race/army: stores card type and spell type, writes the name and description text, clears race and army text, then picks the starting layout state. Called when a card's texts are first filled in.",
+  "comments": [
+   [
+    4,
+    "Keep a copy of the description; race and army will be set to an empty string in this overload."
+   ],
+   [
+    8,
+    "Remember the card type and spell type; they decide which text layout is used."
+   ],
+   [
+    10,
+    "Null check on the name text array."
+   ],
+   [
+    16,
+    "If there are name text components, write the name into each; otherwise skip to the race/description/army setters."
+   ],
+   [
+    27,
+    "Loop over the name text components and set the card name on each."
+   ],
+   [
+    36,
+    "Decompiler lost the loop structure; inlined SetRace/SetDescription/SetArmy bodies follow, same effect."
+   ],
+   [
+    133,
+    "Starting layout: Tactic/Whispers use Tactic (with-race if spell not Normal); minions depend on description."
+   ],
+   [
+    145,
+    "Minion with an empty description uses the 'without description' layout; the result is stored as initialState."
+   ],
+   [
+    150,
+    "Switch the visuals to the chosen state (inlined SetStartingState)."
+   ],
+   [
+    155,
+    "Already in that layout: nothing to do."
+   ],
+   [
+    168,
+    "Find the toggle entry for this layout and activate it."
+   ],
+   [
+    178,
+    "Decompiler artifact: inlined SetCardTextLayout follows, which recomputes the layout from card type and description."
+   ],
+   [
+    186,
+    "Tactic: Tactic layout, next variant if spell not Normal; minion: with/without description."
+   ]
+  ]
+ },
+ "325f1cc": {
+  "summary": "Full overload: stores card type and spell type, writes name, race, description and army text on all text components, then picks the starting layout state. Called when a card's texts are first filled in.",
+  "comments": [
+   [
+    4,
+    "Keep a copy of the description."
+   ],
+   [
+    7,
+    "Remember the card type and spell type; they decide which text layout is used."
+   ],
+   [
+    9,
+    "Null check on the name text array."
+   ],
+   [
+    15,
+    "If there are name text components, write the name into each; otherwise skip to the race/description/army setters."
+   ],
+   [
+    25,
+    "Loop over the name text components and set the card name on each."
+   ],
+   [
+    34,
+    "Decompiler lost the loop structure; inlined SetRace/SetDescription/SetArmy bodies follow, same effect."
+   ],
+   [
+    131,
+    "Starting layout: Tactic/Whispers use Tactic (with-race if spell not Normal); minions depend on description."
+   ],
+   [
+    143,
+    "Store the chosen layout as initialState."
+   ],
+   [
+    148,
+    "Switch the visuals to the chosen state (inlined SetStartingState)."
+   ],
+   [
+    153,
+    "Already in that layout: nothing to do."
+   ],
+   [
+    166,
+    "Find the toggle entry for this layout and activate it."
+   ],
+   [
+    176,
+    "Decompiler artifact: inlined SetCardTextLayout follows, which recomputes the layout from card type and description."
+   ],
+   [
+    184,
+    "Tactic: Tactic layout, next variant if spell not Normal; minion: with/without description."
+   ]
+  ]
+ },
+ "325f494": {
+  "summary": "Switches the card text between the full layout and a simplified in-hand view (name only or description only), chosen by the in-hand text option and the card's initial layout. If the option is off it goes back to the initial layout.",
+  "comments": [
+   [
+    6,
+    "Simplified view disabled: target is just the initial layout."
+   ],
+   [
+    7,
+    "Minion without description: only the name-only simplified view exists; other option values do nothing."
+   ],
+   [
+    13,
+    "Tactic cards: pick the tactic name-only or description-only layout."
+   ],
+   [
+    25,
+    "Minion with description: OnlyName gets the simplified name view, OnlyDescription the description-only one."
+   ],
+   [
+    33,
+    "Name-only simplified minion layout."
+   ],
+   [
+    34,
+    "Common tail: switch to the chosen layout unless it is already current."
+   ],
+   [
+    51,
+    "Find the toggle entry whose type matches the target layout and activate it."
+   ],
+   [
+    64,
+    "Decompiler artifact: inlined SetCardTextLayout code follows; not part of the real flow."
+   ]
+  ]
+ },
+ "325f430": {
+  "summary": "Picks the starting text layout from card type, spell type and description (Tactic, Tactic with race, or minion with/without description), stores it as initialState and switches to it.",
+  "comments": [
+   [
+    6,
+    "Tactic and Whispers cards use the Tactic layouts; every other card type is treated as a minion."
+   ],
+   [
+    7,
+    "Minion with no description text uses the 'without description' layout."
+   ],
+   [
+    13,
+    "Tactic layout, or the with-race variant when the spell type is not Normal."
+   ],
+   [
+    18,
+    "Remember the starting layout so it can be restored later."
+   ],
+   [
+    20,
+    "Switch visuals to that layout (inlined ChangeState)."
+   ],
+   [
+    24,
+    "Already showing this layout: nothing to do."
+   ],
+   [
+    35,
+    "Find the toggle entry for this layout and activate it."
+   ],
+   [
+    48,
+    "Decompiler artifact: inlined SetCardTextLayout code follows; not part of the real flow."
+   ]
+  ]
+ },
+ "325f324": {
+  "summary": "Stores the card's original description, writes it into every description text component, then recomputes which text layout (with or without description) should be shown.",
+  "comments": [
+   [
+    8,
+    "Keep the unmodified description text."
+   ],
+   [
+    15,
+    "Write the description into each description text component."
+   ],
+   [
+    19,
+    "Decompiler glue: bounds-check failure path, then inlined SetArmy/SetStartingState code from other methods."
+   ],
+   [
+    74,
+    "After the texts are set, recompute the layout (inlined SetCardTextLayout)."
+   ],
+   [
+    78,
+    "Tactic card: Tactic layout; minion: with description, or without when the text is empty."
+   ],
+   [
+    87,
+    "Variant layout: a tactic with a non-Normal spell type, or a minion with an empty description, moves one state further."
+   ],
+   [
+    96,
+    "Already showing this layout: nothing to do."
+   ],
+   [
+    108,
+    "Find the toggle entry for this layout and activate it."
+   ]
+  ]
+ },
+ "325f2ac": {
+  "summary": "Sets the race text on every race text component. The decompiler output continues into inlined SetDescription, SetArmy and layout helpers that are not part of this method.",
+  "comments": [
+   [
+    14,
+    "Write the race string into each race text component."
+   ],
+   [
+    24,
+    "Decompiler glue: from here the code is inlined SetDescription/SetArmy/layout logic from neighbouring methods."
+   ],
+   [
+    70,
+    "Inlined starting-state/layout recomputation (see SetStartingState)."
+   ],
+   [
+    143,
+    "Falls into the inlined layout recompute (SetCardTextLayout)."
+   ]
+  ]
+ },
+ "325f500": {
+  "summary": "Switches the card text layout to the requested state by activating the matching toggle entry, unless it is already the current state.",
+  "comments": [
+   [
+    11,
+    "Already in the requested state: nothing to do."
+   ],
+   [
+    21,
+    "Look through the state entries for the one with this layout type and activate it."
+   ],
+   [
+    34,
+    "Decompiler artifact: inlined SetCardTextLayout code that recomputes the state from card type and description."
+   ],
+   [
+    40,
+    "Tactic layout (3)."
+   ],
+   [
+    44,
+    "Minion with description (1); an empty description or non-Normal spell moves it one state further."
+   ]
+  ]
+ },
+ "325f688": {
+  "summary": "Returns the card text layout to the one saved as initialState, activating the matching toggle entry.",
+  "comments": [
+   [
+    10,
+    "Already in the initial layout: nothing to do."
+   ],
+   [
+    21,
+    "Look through the state entries for the initial layout and activate it."
+   ],
+   [
+    34,
+    "Decompiler artifact: inlined SetCardTextLayout code follows; not part of the real flow."
+   ]
+  ]
+ },
+ "325f584": {
+  "summary": "Works out the right text layout from card type, spell type and description (Tactic/TacticWithRace or minion with/without description) and switches to it if it is not already current.",
+  "comments": [
+   [
+    10,
+    "Tactic cards use the Tactic layout; spells with a non-Normal type get the next variant (with race)."
+   ],
+   [
+    14,
+    "Minions: with-description layout, or the next variant when the description is empty."
+   ],
+   [
+    25,
+    "Already in this layout: nothing to do."
+   ],
+   [
+    36,
+    "Find the toggle entry for this layout and activate it."
+   ],
+   [
+    49,
+    "Decompiler artifact: the failed-index path re-enters this logic; real flow ends above."
+   ]
+  ]
+ },
+ "325f3b8": {
+  "summary": "Sets the army text on every army text component. The decompiler output also includes inlined starting-state and layout code from neighbouring methods.",
+  "comments": [
+   [
+    9,
+    "Write the army string into each army text component."
+   ],
+   [
+    11,
+    "Decompiler glue: bounds-check failure path, followed by inlined SetStartingState/layout code from other methods."
+   ],
+   [
+    15,
+    "Tactic/Whispers cards use Tactic layouts, others minion layouts (inlined SetStartingState)."
+   ],
+   [
+    30,
+    "Switch to the chosen layout by activating the matching toggle entry."
+   ],
+   [
+    62,
+    "Inlined SetCardTextLayout: tactic or minion layout depending on type and description."
+   ]
+  ]
+ },
+ "325f6a8": {
+  "summary": "Sets the clan frame sprite for a card's army and tier on its 2D card controller, and updates the frame highlight/shadow image with the matching sprite.",
+  "comments": [
+   [
+    4,
+    "Do nothing without a card and a frames asset."
+   ],
+   [
+    5,
+    "Look up the clan frame sprites for this card's army, tier and card type."
+   ],
+   [
+    9,
+    "Put the frame sprite on the card's frame image."
+   ],
+   [
+    10,
+    "Now update the highlight/shadow image with the matching sprite."
+   ],
+   [
+    12,
+    "Decompiler inlined the Image.sprite setter: the rest only swaps the sprite and refreshes the image."
+   ],
+   [
+    15,
+    "The image had no sprite before: set the new one if any."
+   ],
+   [
+    22,
+    "Skip layout update when the sprite rect is effectively unchanged."
+   ],
+   [
+    33,
+    "Assign the sprite and mark the image dirty so it redraws."
+   ],
+   [
+    47,
+    "Sprite has no texture (atlas sprite): register the image for atlas tracking."
+   ],
+   [
+    55,
+    "The image had a sprite: only act when it differs from the new one."
+   ],
+   [
+    73,
+    "Layout update is skipped when old and new sprite rects are equal."
+   ],
+   [
+    83,
+    "Material update is skipped when the textures and secondary textures are unchanged."
+   ]
+  ]
+ },
+ "325f6ac": {
+  "summary": "Sets the clan frame sprite for a card's army and tier on its 2D card controller, and updates the frame highlight/shadow image with the matching sprite.",
+  "comments": [
+   [
+    4,
+    "Do nothing without a card and a frames asset."
+   ],
+   [
+    5,
+    "Look up the clan frame sprites for this card's army, tier and card type."
+   ],
+   [
+    9,
+    "Put the frame sprite on the card's frame image."
+   ],
+   [
+    10,
+    "Now update the highlight/shadow image with the matching sprite."
+   ],
+   [
+    12,
+    "Decompiler inlined the Image.sprite setter: the rest only swaps the sprite and refreshes the image."
+   ],
+   [
+    15,
+    "The image had no sprite before: set the new one if any."
+   ],
+   [
+    22,
+    "Skip layout update when the sprite rect is effectively unchanged."
+   ],
+   [
+    33,
+    "Assign the sprite and mark the image dirty so it redraws."
+   ],
+   [
+    47,
+    "Sprite has no texture (atlas sprite): register the image for atlas tracking."
+   ],
+   [
+    55,
+    "The image had a sprite: only act when it differs from the new one."
+   ],
+   [
+    73,
+    "Layout update is skipped when old and new sprite rects are equal."
+   ],
+   [
+    83,
+    "Material update is skipped when the textures and secondary textures are unchanged."
+   ]
+  ]
+ },
+ "325f72c": {
+  "summary": "Returns the card trait's custom addressable object, loading it synchronously if needed and increasing its reference count. Returns null if the reference is invalid or the load fails.",
+  "comments": [
+   [
+    5,
+    "No custom object reference configured."
+   ],
+   [
+    9,
+    "Reference not valid (no asset assigned): return null."
+   ],
+   [
+    17,
+    "Get the addressables manager singleton to track references."
+   ],
+   [
+    29,
+    "Reference is null or empty: warn and return null."
+   ],
+   [
+    35,
+    "Get the reference counter for this asset in the General cache group."
+   ],
+   [
+    55,
+    "Inlined Addressables handle checks: if the load already finished with an error, log a warning and return null."
+   ],
+   [
+    75,
+    "No reference yet (count 0) or a different asset: start a blocking load and wait for completion."
+   ],
+   [
+    87,
+    "Remember the loaded asset reference on the counter."
+   ],
+   [
+    96,
+    "Increase the reference count and return the loaded object cast to its type."
+   ]
+  ]
+ },
+ "325f87c": {
+  "summary": "Static helper: returns true if the card currently shows (non-hidden) the given trait among its current traits.",
+  "comments": [
+   [
+    4,
+    "Null checks on the card and its current trait list."
+   ],
+   [
+    13,
+    "Look at each current trait entry."
+   ],
+   [
+    14,
+    "A visible (not hidden) entry of the requested trait means the card shows it."
+   ],
+   [
+    18,
+    "Loop ends with false if no entry matched."
+   ]
+  ]
+ },
+ "3260404": {
+  "summary": "Builds a dictionary from defined trait to the ability trigger that produces it, for a given card type.",
+  "comments": [
+   [
+    7,
+    "Get the trait/ability pairs defined for raw cards of this type."
+   ],
+   [
+    11,
+    "Walk every pair and add it to the dictionary, keyed by trait."
+   ]
+  ]
+ },
+ "32605a4": {
+  "summary": "Builds a dictionary from ability trigger to the defined trait it represents, for a given card type (the reverse of the trait-to-ability map).",
+  "comments": [
+   [
+    7,
+    "Get the trait/ability pairs defined for raw cards of this type."
+   ],
+   [
+    11,
+    "Walk every pair and add it to the dictionary, keyed by ability trigger."
+   ]
+  ]
+ },
+ "3260744": {
+  "summary": "Converts an ability trigger into the matching defined trait. Three triggers are special cases; others are matched by name with a lowercase first letter, and unmatched ones give 'none'.",
+  "comments": [
+   [
+    6,
+    "ThisCardPlayed is shown as the Rally trait."
+   ],
+   [
+    9,
+    "ThisUnitDeath is shown as the Backlash trait."
+   ],
+   [
+    12,
+    "Unstable maps to the unstable trait."
+   ],
+   [
+    15,
+    "Otherwise try to parse the trigger name, lowercased first letter, as a trait name."
+   ],
+   [
+    30,
+    "Name is not a trait: result is none."
+   ]
+  ]
+ },
+ "32608dc": {
+  "summary": "Returns the shared CardTraitCollection, loading the unique asset the first time it is needed.",
+  "comments": [
+   [
+    6,
+    "First access: load the collection asset and cache it."
+   ]
+  ]
+ },
+ "326099c": {
+  "summary": "Builds the static lookup from defined trait to its CardTrait configuration from the TraitCollection list.",
+  "comments": [
+   [
+    7,
+    "Create a fresh dictionary that replaces any previous one."
+   ],
+   [
+    11,
+    "Add each CardTrait from the collection list, keyed by its trait id."
+   ]
+  ]
+ },
+ "3260b74": {
+  "summary": "Looks up the CardTrait configuration for a defined trait; returns null if not registered. The decompiled code includes the dictionary indexer and an inlined insert routine that is not part of the real logic.",
+  "comments": [
+   [
+    9,
+    "Unknown trait: return null."
+   ],
+   [
+    15,
+    "Fetch the CardTrait stored for this trait."
+   ],
+   [
+    19,
+    "Dictionary lookup failed unexpectedly: throws KeyNotFound."
+   ],
+   [
+    28,
+    "Return the value stored at the found entry."
+   ],
+   [
+    31,
+    "Decompiler artifact: everything below is the inlined Dictionary insert code; not reached in normal use."
+   ]
+  ]
+ },
+ "3260c28": {
+  "summary": "Returns the list of trait effects of a defined trait, or null if the trait is not registered.",
+  "comments": [
+   [
+    8,
+    "Only registered traits have effects."
+   ],
+   [
+    13,
+    "Fetch the CardTrait and return its effect list."
+   ]
+  ]
+ },
+ "3260ce0": {
+  "summary": "Finds the effect of a trait whose trigger type matches the requested one, or returns null.",
+  "comments": [
+   [
+    8,
+    "Get all effects of this trait."
+   ],
+   [
+    14,
+    "Scan the effects for one with the requested trigger type."
+   ]
+  ]
+ },
+ "3260e2c": {
+  "summary": "Finds the trait effect for a trait and trigger type, picks the animation for the card's army, and returns the loaded CardAnim (loading it synchronously and ref-counting it). Returns null if none.",
+  "comments": [
+   [
+    5,
+    "Find the effect matching trait and trigger type."
+   ],
+   [
+    9,
+    "Get the army-specific CardAnim addressable reference."
+   ],
+   [
+    14,
+    "Get the addressables manager to track references."
+   ],
+   [
+    26,
+    "Reference empty: warn and return null."
+   ],
+   [
+    32,
+    "Get the reference counter for this animation in the General cache group."
+   ],
+   [
+    52,
+    "Inlined Addressables handle checks: if the load already failed, log a warning and return null."
+   ],
+   [
+    72,
+    "Not loaded yet: start a blocking load and wait for completion."
+   ],
+   [
+    84,
+    "Remember the asset reference on the counter."
+   ],
+   [
+    93,
+    "Increase the reference count and return the loaded animation."
+   ]
+  ]
+ },
+ "3260f30": {
+  "summary": "Creates the list of traits that are always loaded by default: three fixed trait ids (100, 200 and 0x82).",
+  "comments": [
+   [
+    4,
+    "New empty list."
+   ],
+   [
+    13,
+    "Add trait id 100."
+   ],
+   [
+    26,
+    "Add trait id 200."
+   ],
+   [
+    39,
+    "Add trait id 0x82 (130)."
+   ]
+  ]
+ },
+ "32610d4": {
+  "summary": "Builds the list of trait icon entries to show on a card from its raw trait data: only visible traits that are registered, have an icon and a sprite.",
+  "comments": [
+   [
+    11,
+    "Walk all the raw card's traits."
+   ],
+   [
+    31,
+    "Skip hidden traits."
+   ],
+   [
+    35,
+    "Skip traits with no registered configuration."
+   ],
+   [
+    44,
+    "Skip traits configured without an icon."
+   ],
+   [
+    45,
+    "Skip traits whose icon sprite is missing."
+   ],
+   [
+    48,
+    "Add a trait/config pair to the result list."
+   ]
+  ]
+ },
+ "3261460": {
+  "summary": "Builds the list of trait icons to show on a card in play: visible current traits flagged for in-play icons, plus traits implied by active enchantment abilities. Duplicates are not added.",
+  "comments": [
+   [
+    9,
+    "Walk the card's current traits."
+   ],
+   [
+    22,
+    "Skip hidden traits."
+   ],
+   [
+    35,
+    "Only traits that have an icon and are flagged to show while in play."
+   ],
+   [
+    68,
+    "No enchantments: done."
+   ],
+   [
+    72,
+    "Get the map from ability trigger to trait for this card type."
+   ],
+   [
+    76,
+    "Go through each active enchantment and each of its abilities."
+   ],
+   [
+    86,
+    "If the ability corresponds to a trait, build a temporary visible trait entry for it."
+   ],
+   [
+    101,
+    "Look up the trait config; skip if the trait is already in the list."
+   ],
+   [
+    112,
+    "Add it only if it has an in-play icon."
+   ]
+  ]
+ },
+ "3261bc0": {
+  "summary": "Returns the rich-text sprite tag string for a trait's icon (sprite name is Atlas_trait_icon_ plus the trait name).",
+  "comments": [
+   [
+    7,
+    "Convert the trait enum value to its name."
+   ],
+   [
+    8,
+    "Build the TextMeshPro sprite tag."
+   ]
+  ]
+ },
+ "3261d80": {
+  "summary": "Duty trait check: it is active if there is no card, or the card has not yet used its active ability.",
+  "comments": [
+   [
+    5,
+    "No card given: treated as active."
+   ],
+   [
+    12,
+    "Otherwise active only while the active ability is unused."
+   ]
+  ]
+ },
+ "3261e24": {
+  "summary": "Oath trait check: whether the oath ability can still be used. Depends on being played this turn and on the oath variants (all turns, triple activation) and how often it has been used.",
+  "comments": [
+   [
+    5,
+    "With no card the trait is simply active."
+   ],
+   [
+    8,
+    "Inactive if: not played this turn (and not oath in all turns); or ability already used (no variant)."
+   ],
+   [
+    9,
+    "Also inactive for triple activation after 3 uses, or oath in all turns after one use this turn."
+   ],
+   [
+    12,
+    "None of the blocking cases applied: active."
+   ]
+  ]
+ },
+ "3261ec4": {
+  "summary": "Returns whether the given army matches this override and the effect animation reference to use (null when it does not match).",
+  "comments": [
+   [
+    4,
+    "Override applies only to its own army."
+   ],
+   [
+    6,
+    "Army mismatch: no effect animation."
+   ],
+   [
+    13,
+    "Return a (matches, animation) pair."
+   ]
+  ]
+ },
+ "3263de4": {
+  "summary": "Predicate for HasDefensiveCards: true if the card is a tactic of the deck hero's army whose spell type is DefensiveCard.",
+  "comments": [
+   [
+    5,
+    "Must be the same army as the deck's hero and a Tactic."
+   ],
+   [
+    6,
+    "Defensive when the spell type is DefensiveCard."
+   ]
+  ]
+ },
+ "3262864": {
+  "summary": "Returns the localization term for a deck error's short message, falling back to the generic invalid-deck short term if no specific term exists.",
+  "comments": [
+   [
+    4,
+    "No error: use the default term."
+   ],
+   [
+    10,
+    "Build the term name from the error."
+   ],
+   [
+    12,
+    "Use the specific term only if the localization has it."
+   ],
+   [
+    18,
+    "Otherwise fall back to the generic invalid-deck short message."
+   ]
+  ]
+ },
+ "32626c0": {
+  "summary": "Returns the localization term for a deck error's full message, falling back to the generic invalid-deck term if no specific term exists.",
+  "comments": [
+   [
+    5,
+    "No error: use the default term."
+   ],
+   [
+    10,
+    "Build the term name from the error."
+   ],
+   [
+    12,
+    "Use the specific term only if the localization has it."
+   ],
+   [
+    20,
+    "Otherwise fall back to the generic invalid-deck message."
+   ]
+  ]
+ },
+ "3262978": {
+  "summary": "Validates a deck in order: card ownership (optional), warlord, cards, then card count (30 normally, or the custom game mode's count). A blank deck name is set to the hero's name. Writes a DeckError code and returns true if valid.",
+  "comments": [
+   [
+    8,
+    "Optionally check that the player owns the cards; failing gives error 1."
+   ],
+   [
+    9,
+    "Then check the warlord (hero) and the cards themselves; those checks write their own error."
+   ],
+   [
+    15,
+    "Normal decks need 30 cards."
+   ],
+   [
+    19,
+    "Custom game mode: the event decides how many cards a deck needs."
+   ],
+   [
+    41,
+    "Count the cards in the deck."
+   ],
+   [
+    42,
+    "Right count: fill in a default name if needed and report no error."
+   ],
+   [
+    46,
+    "Deck name blank: use the hero's localized card name."
+   ],
+   [
+    57,
+    "Wrong card count: error 5."
+   ],
+   [
+    63,
+    "Warlord or card validation failed (error already written)."
+   ],
+   [
+    66,
+    "Ownership check failed: error 1."
+   ]
+  ]
+ },
+ "3263404": {
+  "summary": "Returns true if any card in the deck's library is banned by the deck's custom game mode event (false if there is no event).",
+  "comments": [
+   [
+    19,
+    "Go through every card in the deck library."
+   ],
+   [
+    24,
+    "No custom game mode event: nothing can be banned for this card."
+   ],
+   [
+    30,
+    "Call the event's IsCardBanned through the IPlayEvent interface."
+   ],
+   [
+    51,
+    "Stop at the first banned card, or at the end of the list."
+   ]
+  ]
+ },
+ "326360c": {
+  "summary": "Checks whether the deck hero's army has defensive tactic cards in the player's inventory, returning a tri-state value (any / none / 2 = cached or unknown).",
+  "comments": [
+   [
+    4,
+    "Closure holds the deck for the predicate."
+   ],
+   [
+    10,
+    "If instance data is not already present, query the player's inventory."
+   ],
+   [
+    16,
+    "Any inventory card that is a defensive tactic of the hero's army?"
+   ],
+   [
+    20,
+    "Other branch returns 2, meaning the check is not needed (cached instances)."
+   ]
+  ]
+ }
+}

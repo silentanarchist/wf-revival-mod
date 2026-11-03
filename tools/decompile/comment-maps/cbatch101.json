@@ -1,0 +1,1131 @@
+{
+"303becc": {
+"summary": "Builds the shareable text for the deck: the serialized deck, the warlord name, then each unique card with its copy count. Called by ShareDeck when the player exports a deck.",
+"comments": [
+[
+10,
+"Null context check; jumps to a null-reference throw"
+],
+[
+14,
+"Serialized deck code, appended at the very end of the string"
+],
+[
+15,
+"Seven-part string array: name, label, warlord term, warlord card name, with separators (decompiler shows them as odd characters)"
+],
+[
+25,
+"Localized word for Warlord used as a label in the share text"
+],
+[
+31,
+"Index 4 of the deck is the warlord card; its localized name goes in the text"
+],
+[
+41,
+"List of cards already written, so each card appears only once"
+],
+[
+48,
+"Walk every card in the deck's card list"
+],
+[
+59,
+"No more cards: return the card lines followed by the serialized deck"
+],
+[
+66,
+"Skip cards already listed (copies are shown as a count)"
+],
+[
+69,
+"Inlined List.Add: remember this card as listed"
+],
+[
+81,
+"Append one line: copy count, 'x ', localized card name"
+],
+[
+132,
+"Decompiler artifact: bounds-check failure path for the string array"
+]
+]
+},
+"303c514": {
+"summary": "Copies the deck share string to the system clipboard and shows the 'export successful' toast in the message controller. Called from the Share button in the deck info popup.",
+"comments": [
+[
+4,
+"Build the shareable text for this deck"
+],
+[
+5,
+"Put it on the clipboard"
+],
+[
+7,
+"Show the toast through the shared message controller"
+],
+[
+18,
+"Empty term would log an error instead of showing a message"
+],
+[
+21,
+"Use the current message slot and show it in the message color"
+],
+[
+24,
+"There are 5 message slots; advance to the next one, wrapping to 0"
+],
+[
+29,
+"Re-layout every message item so the stack stays tidy"
+],
+[
+44,
+"Error path: logs that a null or empty message was requested"
+]
+]
+},
+"303a810": {
+"summary": "Opens an options panel with 'share on alliance' and 'share on global chat' buttons, each enabled only if the player is allowed to chat there. The decompiler also appended the body of DeckInfoPopup.Open (setup of the popup from its data) to this method.",
+"comments": [
+[
+5,
+"Is the player banned from global chat?"
+],
+[
+7,
+"Is the player banned from alliance chat?"
+],
+[
+9,
+"Two buttons: alliance and global"
+],
+[
+15,
+"Alliance sharing needs an alliance membership and no alliance chat ban"
+],
+[
+28,
+"Global sharing is only disabled by a global chat ban"
+],
+[
+36,
+"Build the options panel context with title and mount point, then show it"
+],
+[
+46,
+"Everything below is the merged DeckInfoPopup.Open code; it is not reached from the code above"
+],
+[
+55,
+"Open: the data given to the popup must be a DeckInfoContext"
+],
+[
+62,
+"Check the player owns the deck's item"
+],
+[
+65,
+"Initialize the popup controller (buttons) with the ownership result"
+],
+[
+66,
+"Show the deck name"
+],
+[
+69,
+"Show the warlord name and portrait"
+],
+[
+79,
+"Show the army icon of the deck"
+],
+[
+83,
+"Fill the deck info drawer and the card list drawer"
+],
+[
+86,
+"Card list checks card ownership according to the context"
+],
+[
+93,
+"Clicking a card in the list calls CardSelected"
+],
+[
+100,
+"Close button and background both close the popup"
+],
+[
+112,
+"Show the game mode icon (hidden if the deck has none)"
+],
+[
+132,
+"Finally open the window"
+],
+[
+167,
+"Null reference throw target"
+]
+]
+},
+"303c5dc": {
+"summary": "Duplicates the deck and uploads the copy to the server through the updatePlayerDecks cloud script. The decompiler merged PlayerDataManager.UploadUnsyncedDeck and DeleteDeck into this method, so the control flow is unreliable.",
+"comments": [
+[
+4,
+"Closure object that carries this popup into the save callback"
+],
+[
+9,
+"Make a copy of the deck being shown"
+],
+[
+13,
+"From here the code is the merged UploadUnsyncedDeck of PlayerDataManager"
+],
+[
+19,
+"The new deck starts as not synced to the server"
+],
+[
+25,
+"OnSave callback runs when the upload finishes"
+],
+[
+34,
+"Null deck: log and stop"
+],
+[
+47,
+"Only unsynced decks are uploaded"
+],
+[
+50,
+"A deck needs a warlord to be uploaded"
+],
+[
+52,
+"Gather the deck fields: name, slot, edit time, game mode, defense card"
+],
+[
+76,
+"Create the Azure deck info record that is sent to the server"
+],
+[
+88,
+"Decompiler-expanded loop over the card ids of the deck"
+],
+[
+166,
+"Count copies per card id: add with 1 or increase the existing count"
+],
+[
+187,
+"Error: warlord missing"
+],
+[
+190,
+"Warning: deck was already synced"
+],
+[
+207,
+"Loop cleanup: dispose the enumerator (decompiler try/finally)"
+],
+[
+232,
+"Serialize the deck info to JSON"
+],
+[
+236,
+"Arguments for the cloud script: deck JSON, id and game mode"
+],
+[
+240,
+"Send the updatePlayerDecks cloud script request to the server"
+],
+[
+245,
+"Exception handling blocks produced by the decompiler"
+],
+[
+261,
+"From here the code is PlayerDataManager.DeleteDeck merged in"
+],
+[
+280,
+"Log which deck is being deleted"
+],
+[
+285,
+"Custom event decks pass their event play mode"
+],
+[
+294,
+"Send the deletePlayerDeck cloud script request"
+]
+]
+},
+"303c780": {
+"summary": "Constructor of the deck info popup: default close sound on, extra small-screen scale of 1.0, and default empty OnOpen/OnCloseWindow delegates from GameWindow.",
+"comments": [
+[
+5,
+"Use the default close sound if none is set"
+],
+[
+7,
+"0x3f800000 is the float 1.0: no extra scaling on small screens"
+],
+[
+12,
+"Cached no-op delegates shared by all windows; created once"
+],
+[
+18,
+"Default OnOpen callback"
+],
+[
+25,
+"Default OnCloseWindow callback"
+]
+]
+},
+"303c788": {
+"summary": "Delete button handler: closes the popup, removes the deck from the player's inventory and asks the server to delete it. Calls the failure callback if the request fails.",
+"comments": [
+[
+4,
+"Close the popup"
+],
+[
+6,
+"Remove the deck (1 copy) from the inventory immediately"
+],
+[
+11,
+"Failure callback: re-adds the deck and shows an error"
+],
+[
+17,
+"Closure for the server request"
+],
+[
+19,
+"No deck: nothing to delete"
+],
+[
+26,
+"Log which deck is being deleted"
+],
+[
+29,
+"Custom event decks also carry an event play mode"
+],
+[
+35,
+"Arguments: deck id and play mode name"
+],
+[
+40,
+"Send the deletePlayerDeck cloud script request to the server"
+],
+[
+46,
+"Null reference throw target"
+]
+]
+},
+"303c78c": {
+"summary": "Local function version of the delete handler: closes the popup, removes the deck from inventory and sends a deletePlayerDeck cloud script request.",
+"comments": [
+[
+4,
+"Close the popup"
+],
+[
+6,
+"Remove the deck (1 copy) from the inventory immediately"
+],
+[
+11,
+"Failure callback: re-adds the deck and shows an error"
+],
+[
+17,
+"Closure for the server request"
+],
+[
+19,
+"No deck: nothing to delete"
+],
+[
+26,
+"Log which deck is being deleted"
+],
+[
+29,
+"Custom event decks also carry an event play mode"
+],
+[
+35,
+"Arguments: deck id and play mode name"
+],
+[
+40,
+"Send the deletePlayerDeck cloud script request to the server"
+],
+[
+46,
+"Null reference throw target"
+]
+]
+},
+"303c8b8": {
+"summary": "Callback when deleting a deck on the server fails: shows a 'failed to delete' error, marks the deck unsynced and puts it back in the inventory.",
+"comments": [
+[
+8,
+"Tell the player the delete failed"
+],
+[
+10,
+"The deck is no longer in sync with the server"
+],
+[
+11,
+"Re-add the deck to the inventory (undo the local removal)"
+],
+[
+23,
+"Register the deck instance id in the inventory"
+],
+[
+43,
+"Add the deck object to the inventory of its type"
+],
+[
+50,
+"Null reference throw target"
+]
+]
+},
+"303c9ac": {
+"summary": "Handler of the 'share on alliance' button: sends the serialized deck to the alliance chat, closes the popup and opens the alliance chat panel.",
+"comments": [
+[
+8,
+"Id of the player's current alliance group (used as chat channel)"
+],
+[
+10,
+"Banned players cannot post"
+],
+[
+15,
+"Serialize the deck as text to be posted"
+],
+[
+18,
+"Post the deck to the alliance chat"
+],
+[
+19,
+"Close the deck popup"
+],
+[
+21,
+"Open the chat panel on the alliance room"
+],
+[
+25,
+"Window lookup (decompiler-expanded generic code) finds the ChatPanel"
+],
+[
+48,
+"Open the found chat panel window"
+],
+[
+64,
+"No such window registered: log an error"
+]
+]
+},
+"303cb78": {
+"summary": "Handler of the 'share on global chat' button: sends the serialized deck to global chat, closes the popup and opens the global chat panel.",
+"comments": [
+[
+4,
+"Global chat channel name"
+],
+[
+6,
+"Banned players cannot post"
+],
+[
+11,
+"Serialize the deck as text to be posted"
+],
+[
+14,
+"Post the deck to global chat"
+],
+[
+15,
+"Close the deck popup"
+],
+[
+17,
+"Open the chat panel on the global room"
+],
+[
+21,
+"Window lookup (decompiler-expanded generic code) finds the ChatPanel"
+],
+[
+44,
+"Open the found chat panel window"
+],
+[
+60,
+"No such window registered: log an error"
+]
+]
+},
+"303ca10": {
+"summary": "Shared local function for sharing the deck to a chat channel: sends the serialized deck to the channel unless the player is banned there, closes the popup and opens the chat panel.",
+"comments": [
+[
+5,
+"Banned from this chat room: do nothing"
+],
+[
+10,
+"Serialize the deck as text to be posted"
+],
+[
+13,
+"Post the deck to the given channel"
+],
+[
+14,
+"Close the deck popup"
+],
+[
+16,
+"Open the chat panel for that room type"
+],
+[
+20,
+"Window lookup (decompiler-expanded generic code) finds the ChatPanel"
+],
+[
+43,
+"Open the found chat panel window"
+],
+[
+60,
+"No such window registered: log an error"
+]
+]
+},
+"303fee0": {
+"summary": "Static constructor of the compiler-generated closure class: creates the shared singleton instance used by cached lambdas.",
+"comments": []
+},
+"303ff8c": {
+"summary": "Sort key for the deck list: the card's localized name, with its 'modular name' format applied if it has one. Returns an empty string if nothing is found.",
+"comments": [
+[
+4,
+"Null item or card: throws"
+],
+[
+6,
+"Look up the localized card name by its term"
+],
+[
+9,
+"No translation: fall back to the Card_Name/<id> term"
+],
+[
+13,
+"Modular cards wrap the name in a format such as a prefix"
+],
+[
+19,
+"Never return null so sorting stays safe"
+]
+]
+},
+"303ffb4": {
+"summary": "Predicate used with LINQ on the deck list: true when a list item's card is the same card captured by the closure.",
+"comments": [
+[
+4,
+"Item must exist; a null item is a bug and throws"
+],
+[
+9,
+"Both cards null counts as equal"
+],
+[
+12,
+"Unity object equality: compares via native pointers, a destroyed object equals null"
+]
+]
+},
+"3040024": {
+"summary": "Predicate used with LINQ on the deck list: true when a list item's card is the same card captured by the closure.",
+"comments": [
+[
+4,
+"Item must exist; a null item is a bug and throws"
+],
+[
+9,
+"Both cards null counts as equal"
+],
+[
+12,
+"Unity object equality: compares via native pointers, a destroyed object equals null"
+]
+]
+},
+"3040094": {
+"summary": "Predicate used with LINQ on the deck list: true when a list item's card is the same card captured by the closure.",
+"comments": [
+[
+4,
+"Item must exist; a null item is a bug and throws"
+],
+[
+9,
+"Both cards null counts as equal"
+],
+[
+12,
+"Unity object equality: compares via native pointers, a destroyed object equals null"
+]
+]
+},
+"3040104": {
+"summary": "Predicate used with LINQ on the deck list: true when a list item's card is the same card captured by the closure.",
+"comments": [
+[
+4,
+"Item must exist; a null item is a bug and throws"
+],
+[
+9,
+"Both cards null counts as equal"
+],
+[
+12,
+"Unity object equality: compares via native pointers, a destroyed object equals null"
+]
+]
+},
+"3034354": {
+"summary": "Adds a handler to the OnCardSelected event with a thread-safe compare-exchange loop. The decompiler also merged DeckEditingPanel.Initialize code at the end, which is unrelated.",
+"comments": [
+[
+5,
+"Current handler list"
+],
+[
+7,
+"Combine with the new handler"
+],
+[
+17,
+"Unreachable-looking cast failure path; the code after it is the merged DeckEditingPanel.Initialize"
+],
+[
+27,
+"Merged code: deck card count label, like 'n/30'"
+],
+[
+34,
+"Merged code: custom game mode decks also show the event's own count"
+],
+[
+50,
+"Try to store the combined list; retry if another thread changed it"
+],
+[
+53,
+"Success: done"
+],
+[
+76,
+"Merged code: initialize the editing panel's sub-views with the deck"
+],
+[
+87,
+"Merged code: show deck name"
+],
+[
+96,
+"Merged code: show the empty-deck hint when it has no cards"
+]
+]
+},
+"303b1a8": {
+"summary": "Removes a handler from the OnCardSelected event using a thread-safe compare-exchange loop.",
+"comments": [
+[
+6,
+"Remove the handler from the current list"
+],
+[
+18,
+"Store the new list; retry if another thread changed it meanwhile"
+]
+]
+},
+"30346e0": {
+"summary": "Initializes the drawer from a CardDeck: remembers the deck and its game mode, applies options, clears old items, adds each library card (skipping the warlord unless shown) and reorders. The decompiler appended unrelated catch/prebuilt-deck code at the end.",
+"comments": [
+[
+4,
+"Remember the deck being shown"
+],
+[
+8,
+"All cards of the deck, including copies"
+],
+[
+10,
+"Game mode used by the card items (for rules and visuals)"
+],
+[
+22,
+"Apply optional show-warlord, check-ownership and stack options"
+],
+[
+26,
+"Remove items from any previous deck"
+],
+[
+28,
+"Show or hide the defensive-card and hero placeholders"
+],
+[
+30,
+"Without showWarlord, filter the warlord out of the list"
+],
+[
+63,
+"Decompiler-expanded foreach over the cards"
+],
+[
+93,
+"Add each card to the list without reordering or animation"
+],
+[
+97,
+"Loop cleanup: dispose the enumerator"
+],
+[
+119,
+"Sort the items once everything is added"
+],
+[
+131,
+"Rest is the decompiler's merged PrebuiltDeck initialize path with the goto back to the start"
+],
+[
+141,
+"Prebuilt deck variant: get its card library from all cards"
+],
+[
+146,
+"Add the deck hero to the library if it is missing"
+],
+[
+172,
+"Jump back to the start of Initialize using the prebuilt deck"
+]
+]
+},
+"303ecac": {
+"summary": "Initializes the drawer from a PrebuiltDeck: builds its card library, adds the hero if missing, then lists each card and reorders. Decompiler duplicated the shared body from the other Initialize overloads.",
+"comments": [
+[
+15,
+"Prebuilt decks are looked up in the player's card collection"
+],
+[
+16,
+"Card library of the prebuilt deck"
+],
+[
+18,
+"Remember the game mode of the deck"
+],
+[
+20,
+"Make sure the hero is part of the library"
+],
+[
+46,
+"Apply optional display options"
+],
+[
+49,
+"Clear old items"
+],
+[
+51,
+"Show or hide placeholder slots"
+],
+[
+53,
+"Without showWarlord, filter the warlord out"
+],
+[
+87,
+"Decompiler-expanded foreach over the cards"
+],
+[
+117,
+"Add each card to the list"
+],
+[
+123,
+"Loop cleanup: dispose the enumerator"
+],
+[
+148,
+"Sort the items"
+],
+[
+166,
+"Jump back to the start (decompiler control flow)"
+]
+]
+},
+"303e8f4": {
+"summary": "Initializes the drawer from a plain list of cards: applies options, clears old items, adds each card (skipping the warlord unless shown) and reorders. Decompiler appended unrelated prebuilt-deck code at the end.",
+"comments": [
+[
+14,
+"Apply optional show-warlord, check-ownership and stack options"
+],
+[
+18,
+"Remove items from any previous list"
+],
+[
+20,
+"Show or hide placeholder slots"
+],
+[
+22,
+"Without showWarlord, filter the warlord out of the list"
+],
+[
+55,
+"Decompiler-expanded foreach over the cards"
+],
+[
+85,
+"Add each card without reordering"
+],
+[
+89,
+"Loop cleanup: dispose the enumerator"
+],
+[
+111,
+"Sort the items"
+],
+[
+126,
+"Rest is merged prebuilt-deck code the decompiler attached here"
+],
+[
+164,
+"Jump back to the start (decompiler control flow)"
+]
+]
+},
+"303ee00": {
+"summary": "Copies the options given (show warlord, check ownership, stack copies) into the drawer, only for those that have a value.",
+"comments": [
+[
+6,
+"Option is a nullable bool; only used when it has a value"
+],
+[
+10,
+"Whether the warlord card is listed"
+],
+[
+14,
+"Whether the list greys out cards the player does not own"
+],
+[
+19,
+"Whether duplicate cards share one row with a count"
+],
+[
+23,
+"Null options: throws"
+]
+]
+},
+"303eedc": {
+"summary": "Destroys all child card items in the container except the template prefabs, then clears the card item list. Called before the drawer is refilled.",
+"comments": [
+[
+10,
+"Walk through every child of the cards container"
+],
+[
+26,
+"Current child as a Transform"
+],
+[
+33,
+"Keep the card prefab template"
+],
+[
+87,
+"Keep the hero card prefab template"
+],
+[
+98,
+"Keep the defensive card prefab template"
+],
+[
+109,
+"Any other child is an old card item: destroy it"
+],
+[
+46,
+"Cleanup: dispose the enumerator (decompiler try/finally)"
+],
+[
+56,
+"Clear the list of tracked items"
+],
+[
+118,
+"Merged ConfigPrefab code below: hides the template prefab if it is in a scene"
+]
+]
+},
+"30350dc": {
+"summary": "Adds one card to the list: with stacking, increases the count of an existing row, otherwise spawns a new row. Then updates the counter and placeholder visibility.",
+"comments": [
+[
+11,
+"Stacking is off: always spawn a new item"
+],
+[
+19,
+"Stacking on: look for an existing item with this card"
+],
+[
+25,
+"Not found: spawn a new item"
+],
+[
+27,
+"Found: just increase its count by one"
+],
+[
+32,
+"Update the card counter text"
+],
+[
+33,
+"Hide the defensive-card placeholder if the deck has one"
+],
+[
+43,
+"Hide the hero placeholder once the deck has a hero"
+],
+[
+66,
+"Null reference throw target"
+]
+]
+},
+"303faa4": {
+"summary": "Creates the UI item for a card, picking the hero, defensive-card or normal prefab, optionally slides it in, initializes it and adds it to the item list.",
+"comments": [
+[
+6,
+"Hero cards use the hero prefab if there is one"
+],
+[
+17,
+"Defensive card tactics use their own prefab"
+],
+[
+25,
+"Everything else uses the normal prefab"
+],
+[
+29,
+"Create the item under the cards container"
+],
+[
+30,
+"Animate: slide in from 500 units to the left"
+],
+[
+38,
+"Initialize with card, game mode, count 1 and ownership check"
+],
+[
+40,
+"Clicking the item calls SpawnCardInfo's click handler"
+],
+[
+46,
+"Show the item"
+],
+[
+48,
+"Track it in the item list (inlined List.Add)"
+],
+[
+80,
+"Null reference throw target"
+]
+]
+},
+"303f638": {
+"summary": "Sorts the card items by their order then by localized name, sets their sibling indexes to match, and puts the hero item first and the defensive card item second.",
+"comments": [
+[
+11,
+"Sort by order key, then by name"
+],
+[
+27,
+"Walk the sorted list and assign positions"
+],
+[
+30,
+"Remember the hero item"
+],
+[
+35,
+"Card type id 0x14 is a Tactic; remember the defensive card item"
+],
+[
+45,
+"Place the item at its sorted position in the UI"
+],
+[
+51,
+"Hero item goes first"
+],
+[
+56,
+"Defensive card placeholder goes second"
+],
+[
+62,
+"Defensive card item goes right after"
+],
+[
+80,
+"Null reference throw target"
+]
+]
+},
+"3035280": {
+"summary": "Removes one copy of a card from the list UI: decreases its count, or destroys the item at zero, then refreshes counter and placeholders.",
+"comments": [
+[
+12,
+"Is the card in the list?"
+],
+[
+15,
+"Find its item"
+],
+[
+19,
+"Count after removing one copy"
+],
+[
+20,
+"Last copy: destroy the item and drop it from the list"
+],
+[
+26,
+"More copies remain: just lower the count"
+],
+[
+30,
+"Update the counter text"
+],
+[
+31,
+"Show the defensive-card placeholder again if the deck has none"
+],
+[
+41,
+"Show the hero placeholder again if the deck has no hero"
+],
+[
+64,
+"Null reference throw target"
+]
+]
+},
+"303f554": {
+"summary": "Updates the card counter text with the deck's card count and maximum size.",
+"comments": [
+[
+6,
+"No counter label: nothing to do"
+],
+[
+11,
+"Maximum deck size"
+],
+[
+13,
+"Format the text like 'count/max'"
+]
+]
+},
+"303f42c": {
+"summary": "Shows or hides the defensive card and hero placeholder slots depending on whether the deck already has those cards.",
+"comments": [
+[
+6,
+"Defensive card slot exists"
+],
+[
+12,
+"Show the placeholder only if the deck has no defensive card"
+],
+[
+16,
+"Hero slot exists"
+],
+[
+26,
+"Show the placeholder only if the deck has no hero"
+],
+[
+37,
+"Null reference throw target"
+]
+]
+}
+}

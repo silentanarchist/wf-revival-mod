@@ -1,0 +1,743 @@
+{
+ "3158e7c": {
+  "summary": "Resolves one ability effect: rolls its chance, finds targets and a repeat multiplier, plays the animation, then performs the AbilityEffect (buffs, heal, damage, draw, summon, transform, destroy, recall, steal, keyword triggers) by queueing actions on the BattleManager. The tail of this listing is the fused AbilityLogic.GetTargets target-selection code.",
+  "comments": [
+   [
+    15,
+    "Chance roll: a value of 1-99 means a random check is needed (rolled near the end); 0 or 100+ always fires."
+   ],
+   [
+    16,
+    "Ability fires: first work out the multiplier (how many times the effect repeats, e.g. per unit/trait counted)."
+   ],
+   [
+    21,
+    "'Any' targets count as 1; trait-count criteria sum a trait over matching targets; otherwise count the targets."
+   ],
+   [
+    25,
+    "Counts a trait value over each filtered target and adds it up (e.g. 'gain +1 per Armour on your units')."
+   ],
+   [
+    47,
+    "Plain case: multiplier is simply the number of targets found by the multiplier criteria."
+   ],
+   [
+    51,
+    "Reset the list that remembers this ability's targets (used by later 'previous ability targets' effects)."
+   ],
+   [
+    54,
+    "furtherMultiplier is a repeat count set on the ability; values below 2 mean once."
+   ],
+   [
+    64,
+    "Clear the shared pooled target list before collecting the real targets for this effect."
+   ],
+   [
+    73,
+    "Collect the actual targets of the effect from its target criteria; stored in possibleTargets."
+   ],
+   [
+    79,
+    "Play the effect animation/VFX on the targets, except for effects that animate themselves (random multi-damage etc.)."
+   ],
+   [
+    101,
+    "Total repeat count = ability repeat count * counted multiplier."
+   ],
+   [
+    102,
+    "Big dispatch on AbilityEffect. Decompiler made nested range compares with reused names; trust the calls."
+   ],
+   [
+    108,
+    "buffSelf / buffHand / doHeal / buffOthers family (effect ids 0x10-0x32)."
+   ],
+   [
+    111,
+    "buffHand: an enchantment that buffs cards in hand. A while-in-play version only applies for the card itself."
+   ],
+   [
+    120,
+    "Clone the hand buff and register it as a hand effect for own hand, enemy hand or both, per playersAffected."
+   ],
+   [
+    149,
+    "buffSelf: apply a copy of the buff effect to the casting card, scaled by the repeat count."
+   ],
+   [
+    164,
+    "Stamp the clone with its source card, owner and enchantment, then scale its numbers by the multiplier."
+   ],
+   [
+    167,
+    "Extrinsic (while-in-play) buffs are not stacked twice; otherwise queue the effect on the card."
+   ],
+   [
+    174,
+    "Remember the caster as this ability's saved target."
+   ],
+   [
+    179,
+    "Not doHeal: this is the buffOthers family; apply the buff to every target."
+   ],
+   [
+    185,
+    "For each target make a fresh copy of the buff, scale it, and tag its source/owner/enchantment."
+   ],
+   [
+    192,
+    "If the ability is a while-in-play aura the buff is marked extrinsic so it is removed when the source leaves."
+   ],
+   [
+    207,
+    "Extrinsic buffs skip targets that already carry this source's buff; others are always added to the target."
+   ],
+   [
+    225,
+    "After the loop, an aura (while-in-play variable) also queues a removeExtrinsic effect to re-check existing holders."
+   ],
+   [
+    248,
+    "doHeal: evaluate the heal amount from healCriteria (may scale with board state)."
+   ],
+   [
+    261,
+    "One target heals via HealOneCharacter, several via HealMultipleCharacters (both queue a networked action)."
+   ],
+   [
+    277,
+    "Simple effect ids below 0x32 continue here: drawCard, VFX only, and the damage family."
+   ],
+   [
+    278,
+    "drawCard: draw cards for the caster's side, the enemy side, or both."
+   ],
+   [
+    300,
+    "doOnlyVfx: nothing is changed, only the animation (already played above) is shown."
+   ],
+   [
+    307,
+    "Single-hit damage: compute the amount from damageCriteria and build a DamageInfo."
+   ],
+   [
+    325,
+    "Sanity check: random damage must be randomised on resolution, otherwise it would roll twice; disable it."
+   ],
+   [
+    331,
+    "Deal the damage to all targets at once (doDamageFast uses a quicker animation)."
+   ],
+   [
+    335,
+    "doDamageMultiRandom: repeat N times, each time re-picking targets and adding damage to one random victim."
+   ],
+   [
+    349,
+    "Each repeat: compute damage, wrap it in a DamageInfo marked as ability damage."
+   ],
+   [
+    367,
+    "New victim: add to the list and record the pending damage on it so later logic sees it coming."
+   ],
+   [
+    401,
+    "Victim already hit by an earlier repeat: add this hit's damage to its existing DamageInfo."
+   ],
+   [
+    422,
+    "Apply all accumulated damage in one go."
+   ],
+   [
+    427,
+    "Another damage variant shares the single-hit code above."
+   ],
+   [
+    428,
+    "Damage and destroy self (e.g. a suicide attack): same damage setup, then DealMultiDamageAndDestroySelf."
+   ],
+   [
+    460,
+    "Effect ids 0x46-0x55: summon and transform family; 0x3c is the Energy buff handled at the label below."
+   ],
+   [
+    463,
+    "0x3c: Energy buff (changes card costs); clones the mana buff, scales by multiplier and queues AddManaBuff."
+   ],
+   [
+    473,
+    "Bit test picks the summon-unit variants (summonUnit, delayed, with trigger, with set-ref)."
+   ],
+   [
+    477,
+    "Repeat the whole summon once per multiplier."
+   ],
+   [
+    480,
+    "Work out which card(s) to create from the summon criteria (fixed, random, copy of target, ...)."
+   ],
+   [
+    487,
+    "Pick which side's minion manager gets the new unit (own or enemy board, per isForEnemy)."
+   ],
+   [
+    494,
+    "Reserve a board slot for the new unit: next free slot, or next to the hero / target / summoner."
+   ],
+   [
+    521,
+    "Get the spawn position (for the animation) and start the summon variant."
+   ],
+   [
+    526,
+    "summonUnitDelayed: unit arrives with a buff effect attached that is applied after it appears."
+   ],
+   [
+    547,
+    "Plain summonUnit, or summonUnitAndTriggerEffect which passes the buff's enchantment along."
+   ],
+   [
+    570,
+    "Queue the summon action in the battle manager (networked), then optionally record the unit."
+   ],
+   [
+    571,
+    "summonUnitAndSetRef: the summoner remembers the new unit as its referenced card."
+   ],
+   [
+    589,
+    "Transform (0x50): replace the acting card with the created card, optionally keeping its effects."
+   ],
+   [
+    602,
+    "Transform with buff (0x55): like transform but also attaches a buff effect to the result."
+   ],
+   [
+    622,
+    "Shared exit for summon/transform: store the acting card as saved target."
+   ],
+   [
+    628,
+    "Effect ids around 0x5a-0x65: transform targets and create cards in hand."
+   ],
+   [
+    629,
+    "0x5a: transform every target into a created card."
+   ],
+   [
+    652,
+    "0x64: create new cards in hand for the caster (or enemy) from the summon criteria."
+   ],
+   [
+    700,
+    "0x6e: destroy the targets. First decide how the death is attributed (spell, or attack on a Warlord)."
+   ],
+   [
+    711,
+    "If the acting card is a spell, the death counts as spell damage; if a unit attacking/damaged, as combat."
+   ],
+   [
+    731,
+    "Destroy each target unless it has the invulnerable trait."
+   ],
+   [
+    752,
+    "0x65: create copies of existing cards in hand, copying their active effects onto the new cards."
+   ],
+   [
+    783,
+    "Copy every active enchantment/effect from the original card to the new hand copy."
+   ],
+   [
+    816,
+    "Effect ids 0x78-0xd2: hand/board manipulation (recall, discard, stun, steal, exchange)."
+   ],
+   [
+    820,
+    "0x8c: return targets to their owner's hand."
+   ],
+   [
+    838,
+    "0x96: return targets to the caster's hand (acting card's owner)."
+   ],
+   [
+    858,
+    "0xa0: discard targets from hand."
+   ],
+   [
+    874,
+    "0xa2: make targets disappear from hand (removed without going to the graveyard)."
+   ],
+   [
+    895,
+    "0x78: jam targeted units (they can't act)."
+   ],
+   [
+    912,
+    "0x82: stun targeted units."
+   ],
+   [
+    929,
+    "0x87: stun a random subset of targets (shuffled using the match's seeded random)."
+   ],
+   [
+    956,
+    "0xa5: discard every card in hand for the affected player(s)."
+   ],
+   [
+    985,
+    "0xaa: steal cards from enemy hand."
+   ],
+   [
+    1005,
+    "0xaf: steal cards from deck."
+   ],
+   [
+    1021,
+    "0xb4: steal enemy minions."
+   ],
+   [
+    1043,
+    "0xb9: steal the acting minion; 0xbe: swap the acting minion for a target."
+   ],
+   [
+    1054,
+    "exchangeSelfForMinion: swap places with the first target; warn if none was found."
+   ],
+   [
+    1070,
+    "0xd2: copy a unit from the cemetery."
+   ],
+   [
+    1089,
+    "200: swap with a friendly minion if available, otherwise just steal the target."
+   ],
+   [
+    1094,
+    "Find a friendly minion to swap with."
+   ],
+   [
+    1122,
+    "Record swapped minion as saved target."
+   ],
+   [
+    1126,
+    "Shared tail: add card to this ability's saved targets."
+   ],
+   [
+    1131,
+    "Effect ids 0x15a and up: keyword triggers and misc."
+   ],
+   [
+    1135,
+    "0x17c: store the targets as this card's referenced cards."
+   ],
+   [
+    1179,
+    "0x177: give targets a Sacrifice trigger."
+   ],
+   [
+    1198,
+    "0x186: trigger Requiem on targets."
+   ],
+   [
+    1215,
+    "400 (0x190): trigger Courtesy on targets."
+   ],
+   [
+    1235,
+    "0x15e: remove targets from the cemetery."
+   ],
+   [
+    1253,
+    "0x172: trigger Relentless; 0x168 (below) plays the card chosen in a selection."
+   ],
+   [
+    1272,
+    "0x168: play the card the player picked from a choice screen; Oath cards also pay their Oath cost."
+   ],
+   [
+    1283,
+    "Oath card: pay its cost and run its ThisCardPlayed trigger, repeated for double-Oath effects."
+   ],
+   [
+    1303,
+    "Non-Oath card: just run its ThisCardPlayed trigger."
+   ],
+   [
+    1313,
+    "0x19a Codex, 0x19b Regiment, 0x1a4 set card to top of deck, 0x1ae transform from remnant."
+   ],
+   [
+    1378,
+    "transformFromRemnant: flag is true for the last target only."
+   ],
+   [
+    1389,
+    "0x1b8 Spirit Stone and 0x1c2 Synapse triggers."
+   ],
+   [
+    1428,
+    "0x1cc/0x1cd Mob, 0x1ce Pray, 0x1d1 Ambush, 0x1d2 Uprising triggers."
+   ],
+   [
+    1518,
+    "0x1d3 Slay and 0x1d4 Teleport triggers."
+   ],
+   [
+    1555,
+    "0x1d6: open a window showing a list of cards to the player."
+   ],
+   [
+    1562,
+    "0x1db: reset Duty on targets."
+   ],
+   [
+    1580,
+    "0x1e0: highlight Bloodthirst on the first target (UI only, sent to opponent)."
+   ],
+   [
+    1593,
+    "Effect ids 0xdc-0x158."
+   ],
+   [
+    1595,
+    "0xdc: reset actions (targets can act again)."
+   ],
+   [
+    1612,
+    "0xe6-0xf0: force attack / scripted attack family."
+   ],
+   [
+    1615,
+    "0xe6: force enemy units to attack."
+   ],
+   [
+    1632,
+    "0xe7: force attack variant with a second flag set."
+   ],
+   [
+    1654,
+    "0xe9: force friendly units to attack."
+   ],
+   [
+    1678,
+    "0xeb: scripted attack of caster onto first target."
+   ],
+   [
+    1691,
+    "0xec: redirect an attack onto the first target."
+   ],
+   [
+    1702,
+    "0xed/0xee: scripted force attacks using target or caster as attacker."
+   ],
+   [
+    1743,
+    "0xf0: make targets disappear from play."
+   ],
+   [
+    1761,
+    "0xfa: auto-play cards from hand."
+   ],
+   [
+    1780,
+    "0x118: reveal orders to targets and spend the enchantment; 0x122: make targets miss."
+   ],
+   [
+    1821,
+    "0x104: gather targets, then have each trigger another card's ability (see label near the end)."
+   ],
+   [
+    1857,
+    "0x10e: create new cards in the deck at a position, repeated by the multiplier."
+   ],
+   [
+    1901,
+    "Done: save targets as 'previous ability targets' for follow-up effects."
+   ],
+   [
+    1903,
+    "Effect ids 0x12c-0x159."
+   ],
+   [
+    1906,
+    "0x12c: return targets to the deck."
+   ],
+   [
+    1923,
+    "0x12d: return targets to the deck and shuffle."
+   ],
+   [
+    1944,
+    "0x140: queue a follow-up ability after this one resolves."
+   ],
+   [
+    1953,
+    "0x136: show targets from hand (reveal)."
+   ],
+   [
+    1975,
+    "0x154: remove this card's enchantments whose condition matches the trigger."
+   ],
+   [
+    1984,
+    "Only enchantments with condition type 15 or 16 whose trigger matches are removed."
+   ],
+   [
+    2005,
+    "0x159: remove the specific enchantment (buffEffect's) from every target."
+   ],
+   [
+    2047,
+    "0x145: follow up only if the reference card is still among the targets."
+   ],
+   [
+    2102,
+    "0x14a: draw until equal; draw cards so hand sizes match."
+   ],
+   [
+    2106,
+    "cardAdvantage = enemy hand size - own hand size."
+   ],
+   [
+    2115,
+    "Positive advantage: caster draws that many cards."
+   ],
+   [
+    2131,
+    "Negative advantage: enemy draws the difference."
+   ],
+   [
+    2142,
+    "Common exit: remember the targets so the next ability can reference them."
+   ],
+   [
+    2148,
+    "Chance roll path: ability had a 1-99 chance; roll 0-99 and log it."
+   ],
+   [
+    2180,
+    "Fires only if the roll is below the chance, then continues to the effect logic at the top."
+   ],
+   [
+    2192,
+    "Decompiler junk: exception handler fused with the next method. Everything below is AbilityLogic.GetTargets."
+   ],
+   [
+    2211,
+    "Start of GetTargets: pick the entities an ability affects from its TargetCriteria."
+   ],
+   [
+    2216,
+    "Clear the pooled result list."
+   ],
+   [
+    2227,
+    "Dispatch on the criteria's targetsAffected kind."
+   ],
+   [
+    2228,
+    "self: the card itself."
+   ],
+   [
+    2248,
+    "target: the chosen target card."
+   ],
+   [
+    2250,
+    "Read the friendly/enemy side flags for the remaining kinds."
+   ],
+   [
+    2263,
+    "Counting kinds: adds the Warlord once per point of a counter (Energy, spirit stones, faith, secrets)."
+   ],
+   [
+    2264,
+    "currentSpiritStone: one Warlord entry per spirit stone."
+   ],
+   [
+    2322,
+    "currentFaith: one Warlord entry per faith."
+   ],
+   [
+    2385,
+    "maxMana: one Warlord entry per max Energy; secretsPlayed: per secret played."
+   ],
+   [
+    2518,
+    "Mid-range ids: single hero/card selectors."
+   ],
+   [
+    2520,
+    "Adds the single acting/target card if it exists."
+   ],
+   [
+    2526,
+    "Adds the friendly or enemy Warlord."
+   ],
+   [
+    2532,
+    "Next group: attacker, ability owner, previous targets, acting card."
+   ],
+   [
+    2536,
+    "attacker/abilityOwner are not valid here; only logs an error."
+   ],
+   [
+    2542,
+    "previousAbilityTargets: reuse the targets of the earlier ability in the chain."
+   ],
+   [
+    2561,
+    "previousAbilityFiltered: reuse previous targets, then filter them below."
+   ],
+   [
+    2571,
+    "referencedCardInThisCard: use cards this card has stored as references."
+   ],
+   [
+    2579,
+    "Zone-based kinds: collect candidates from hand/deck/cemetery/board and filter later."
+   ],
+   [
+    2586,
+    "any: every unit in play."
+   ],
+   [
+    2592,
+    "inHandAndDeckFiltered: hand cards plus deck cards."
+   ],
+   [
+    2602,
+    "inHandAndPlayFiltered: hand cards plus units on the board."
+   ],
+   [
+    2615,
+    "inCemeteryFiltered: cards in the graveyard."
+   ],
+   [
+    2621,
+    "inDeckFiltered: cards in the deck."
+   ],
+   [
+    2627,
+    "allFiltered: all units in play on the relevant side."
+   ],
+   [
+    2638,
+    "inPlayOrDyingFiltered: includes units currently dying."
+   ],
+   [
+    2643,
+    "Adjacent kinds: units next to self, previous target, acting card, target, or either Warlord."
+   ],
+   [
+    2690,
+    "Filter pass: walk the list backwards and drop anything that fails the criteria."
+   ],
+   [
+    2699,
+    "Keep it only if it meets the criteria (and isn't a same-card duplicate when excludeSimilarCards is set)."
+   ],
+   [
+    2714,
+    "selectFromChooseResolution: keep only cards from the same source as the chosen one."
+   ],
+   [
+    2747,
+    "If more candidates than maxTargets, trim the list according to targetSelectMethod."
+   ],
+   [
+    2753,
+    "highestAttack / highestValueInPlay / lowestValueInPlay: sort and take the first maxTargets."
+   ],
+   [
+    2797,
+    "lastAdded: take the most recently added entries."
+   ],
+   [
+    2819,
+    "Sorted-by-key selection, then take maxTargets."
+   ],
+   [
+    2830,
+    "First maxTargets entries in list order."
+   ],
+   [
+    2853,
+    "Default: pick maxTargets distinct random targets using the match's seeded random."
+   ],
+   [
+    2870,
+    "Result list replaces the pooled list."
+   ],
+   [
+    2871,
+    "0xc9: referenced cards of this card that are still in play."
+   ],
+   [
+    2892,
+    "0xe6: the Warlord with highest health (or both Warlords if tied); 0xf0: lowest health unit."
+   ],
+   [
+    2915,
+    "Other single-selectors: enemy Warlord and unused Energy."
+   ],
+   [
+    2916,
+    "0xa0: one Warlord entry per unused Energy point."
+   ],
+   [
+    3031,
+    "Remaining kinds: cards played, random card from the whole collection."
+   ],
+   [
+    3032,
+    "0xbe: cards played this game, filtered."
+   ],
+   [
+    3041,
+    "0xb4: build a pool of raw card definitions matching criteria, skipping non-randomizable and hidden ones."
+   ],
+   [
+    3080,
+    "Mutation cards: remove options the mutation already used (single-use mutation)."
+   ],
+   [
+    3093,
+    "target kind joins here: add the target to the pool."
+   ],
+   [
+    3111,
+    "Tail of the aura buff code (decompiler moved it here): re-add the extrinsic buff to targets that lost it."
+   ],
+   [
+    3118,
+    "If the target already has an extrinsic effect from this source, re-queue the buff on it."
+   ],
+   [
+    3134,
+    "Only buffOthers needs its targets saved afterwards."
+   ],
+   [
+    3137,
+    "Save current targets as previous ability targets."
+   ],
+   [
+    3140,
+    "Loop for effect 0x104: each gathered card triggers another card's ability, repeated by the multiplier."
+   ],
+   [
+    3163,
+    "Backwards loop removing targets already affected by a single-use mutation."
+   ],
+   [
+    3182,
+    "End of target selection: store the final list."
+   ]
+  ]
+ }
+}

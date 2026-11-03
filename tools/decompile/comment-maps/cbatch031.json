@@ -1,0 +1,430 @@
+{
+ "32b5178": {
+  "summary": "Handles the opponent's forfeit message from Photon. Marks the connection as EnemyForfeit, then either ends the battle as a forced loss for the enemy or builds the ranked match result (Forfeit, winner) and finishes the battle. Sent by the other client when they resign.",
+  "comments": [
+   [
+    4,
+    "Ignore forfeit messages unless the sender is this match's opponent"
+   ],
+   [
+    18,
+    "Record a resign action for the opponent (replay) and stop waiting for their reconnect"
+   ],
+   [
+    25,
+    "Switch the connection status to EnemyForfeit, notifying listeners of the old status first"
+   ],
+   [
+    33,
+    "Flag that the opponent claims the match is finished"
+   ],
+   [
+    38,
+    "Debug log of the isPlayer, battle result, UI state and stage values (array building is decompiler noise)"
+   ],
+   [
+    71,
+    "If already in PostBattle, only continue when shouldLoseIfDisconnectEnd is set; otherwise nothing more to do"
+   ],
+   [
+    84,
+    "shouldLoseIfDisconnectEnd set: score a Forfeit win for the enemy side and run the normal battle end sequence"
+   ],
+   [
+    93,
+    "Normal path: move to PostBattle and stop the battle"
+   ],
+   [
+    95,
+    "Online match: tell the opponent's client the match is finished"
+   ],
+   [
+    100,
+    "Lock the UI into the finish-battle state and clear the during-battle flag"
+   ],
+   [
+    105,
+    "Raise an enemy hero health signal with health 0 so UI and scorers react to the dead hero"
+   ],
+   [
+    121,
+    "Read the current Elo from the event leaderboard if the event has one, else from player data"
+   ],
+   [
+    145,
+    "Work out who won after a forfeit, and build the RankedMatchResult with Elo and XP"
+   ],
+   [
+    152,
+    "Store skull counts and the enemy milestone in the match result"
+   ],
+   [
+    174,
+    "Set Forfeit result and winner, and record match length in minutes since matchStartTime"
+   ],
+   [
+    181,
+    "If the player won, flag matchEndedWithAWin and tell LiveOps for certain match types (0x14, 0xd2, 0xb4) that the opponent was human"
+   ],
+   [
+    194,
+    "Save the winner and finish the battle (rewards, end screen)"
+   ],
+   [
+    216,
+    "Decompiler fallthrough: only reached when the locals-array bounds checks failed"
+   ]
+  ]
+ },
+ "32b5230": {
+  "summary": "Handles the opponent's 'desync' message: flags the match as cancelled by desync, then sends the PlayFab cloud script onDesyncByEnemy to record a win by cancel against the opponent. Everything after the first return is unrelated PlayFab API wrapper code that the decompiler merged in.",
+  "comments": [
+   [
+    4,
+    "Only act on messages whose sender is the opponent of this match"
+   ],
+   [
+    20,
+    "Mark the match as cancelled by desync"
+   ],
+   [
+    29,
+    "Log and prepare the PlayFab cloud script request onDesyncByEnemy with opponent id and game state"
+   ],
+   [
+    38,
+    "Cache the success callback delegate once in a static field; failure handler is bound to PlayerDataManager"
+   ],
+   [
+    53,
+    "Only call PlayFab when logged in, otherwise an exception is created below"
+   ],
+   [
+    55,
+    "Send the ExecuteCloudScript call to record the match won by cancel; this is the real end of the method"
+   ],
+   [
+    58,
+    "Not logged in: build a NotLoggedIn PlayFabException (this method never throws it in practice)"
+   ],
+   [
+    63,
+    "Everything from here down is decompiler spill from neighbouring PlayFab client API wrappers (GetAccountInfo, GetAdPlacements, ...)"
+   ],
+   [
+    1034,
+    "Null reference exception path shared by the null checks above"
+   ]
+  ]
+ },
+ "32b52d4": {
+  "summary": "Handles the opponent's 'match finished' message. If the sender is the opponent it sets opponentClaimsMatchFinished to true on the BattleManager, which later lets the local client end the battle cleanly.",
+  "comments": [
+   [
+    4,
+    "Log the message and verify the sender is the opponent; messages from anyone else are ignored"
+   ],
+   [
+    17,
+    "Remember that the opponent says the match is over"
+   ]
+  ]
+ },
+ "32b5378": {
+  "summary": "Handles an emote/chat message from the opponent. If chat is allowed it shows the voice line box, and after several received chats it shows a tip about muting enemy chat. It also logs the message to the replay.",
+  "comments": [
+   [
+    4,
+    "Ignore the message unless it came from the opponent"
+   ],
+   [
+    15,
+    "isOwnMessage is false here: this is the enemy's chat line"
+   ],
+   [
+    25,
+    "Only show the chat if the chat system allows it (not muted or on cooldown)"
+   ],
+   [
+    28,
+    "Build the voice line data and show its speech box"
+   ],
+   [
+    30,
+    "Own-message branch (never taken for a network receive): start the chat cooldown and let the AI respond"
+   ],
+   [
+    37,
+    "Look up the enemy hero so the tip can show its portrait"
+   ],
+   [
+    43,
+    "After 5 enemy chats in one turn (index 0 excluded), show a one-time 'mute enemy chat' tip"
+   ],
+   [
+    52,
+    "Tip lasts 4 seconds (float 0x40800000)"
+   ],
+   [
+    54,
+    "Localized text for Battle/Tips/MuteEnemyChat shown as a radio message with the hero art"
+   ],
+   [
+    73,
+    "Add the chat message to the replay log"
+   ]
+  ]
+ },
+ "32b53e4": {
+  "summary": "Handles the opponent reporting that a card was seen. Finds the matching card by uniqueInGameID in a list reached from the original player warlord data and starts its ShowEnemyCardInHand coroutine. Decompiled list names look unreliable.",
+  "comments": [
+   [
+    4,
+    "Only accept the message from the opponent"
+   ],
+   [
+    14,
+    "Get the card list to search (names are mislabeled by the decompiler)"
+   ],
+   [
+    17,
+    "Loop over the cards looking for the matching unique in-game ID"
+   ],
+   [
+    20,
+    "Match found: play the reveal animation of that card in the enemy hand"
+   ]
+  ]
+ },
+ "32b5444": {
+  "summary": "Handles the opponent reordering a card in their hand. Finds the card in the enemy hand by uniqueInGameID and moves it to the new index. Returns the result of the last move.",
+  "comments": [
+   [
+    4,
+    "Only accept the message from the opponent"
+   ],
+   [
+    15,
+    "Walk the enemy hand's current cards"
+   ],
+   [
+    21,
+    "Matching card: move it to newIndex in the enemy hand"
+   ]
+  ]
+ },
+ "32b54ac": {
+  "summary": "Constructor for BattleCommsManager. Sets lastActionCounterReceived (an anti-cheat obscured int) to 0 and calls the base constructor.",
+  "comments": [
+   [
+    4,
+    "Initialise lastActionCounterReceived to 0"
+   ]
+  ]
+ },
+ "32b5768": {
+  "summary": "Called when the battle screen starts. Remembers the camera's original sensor size, lens shift and the hand area scale, then switches to the mobile layout if the game or editor setting asks for it.",
+  "comments": [
+   [
+    4,
+    "Save the board camera's original sensor size"
+   ],
+   [
+    11,
+    "Save the virtual camera's original lens shift (virtual call)"
+   ],
+   [
+    15,
+    "Save the hand area's original scale"
+   ],
+   [
+    20,
+    "Outside the editor the forceMobileSize debug flag is cleared"
+   ],
+   [
+    26,
+    "Use the mobile layout when the global setting or forceMobileSize is on"
+   ]
+  ]
+ },
+ "32b586c": {
+  "summary": "Switches the battle screen between mobile and original layout. Sets camera sensor size, lens shift and hand area scale from the mobile values (option true) or the saved originals (false).",
+  "comments": [
+   [
+    5,
+    "Pick the mobile or saved original sensor size (decompiler shows field offsets)"
+   ],
+   [
+    12,
+    "Pick the mobile or saved original lens shift"
+   ],
+   [
+    21,
+    "Pick the mobile hand scale or the saved original hand scale"
+   ],
+   [
+    33,
+    "Apply the new local scale to the hand area"
+   ]
+  ]
+ },
+ "32b5930": {
+  "summary": "Fills in one player's panel on the battle end screen: name (Guest if empty), clan, guild badge, troops dead, tactics, damage done, quote and rank badge. Hides rank texts until they are set later.",
+  "comments": [
+   [
+    4,
+    "Pick the player's own result data or the enemy's"
+   ],
+   [
+    15,
+    "Show the name or the localized Guest text if it is empty"
+   ],
+   [
+    24,
+    "Show the clan, hidden when empty, with its guild badge"
+   ],
+   [
+    35,
+    "Stats lines: troops dead, tactics and damage done from the stats object"
+   ],
+   [
+    55,
+    "Quote text and rank badge sprite"
+   ],
+   [
+    60,
+    "Hide rank and sub-rank texts for now (shown later by SetRank and SetupSubRank)"
+   ],
+   [
+    91,
+    "Null reference exception path"
+   ]
+  ]
+ },
+ "32b5cd8": {
+  "summary": "Shows the rank text on the end screen and sets it to the given rank value rounded to the nearest integer.",
+  "comments": [
+   [
+    7,
+    "Make the rank text object visible"
+   ],
+   [
+    13,
+    "Inlined rounding code: rounds to nearest, ties go to even (Math.Round behaviour)"
+   ],
+   [
+    32,
+    "Convert to int (out of range gives int.MinValue) and show as string"
+   ]
+  ]
+ },
+ "32b5e18": {
+  "summary": "Shows how a player's rank changed. Unchanged rank clears the text; otherwise it shows an up or down marker plus the difference between start and end rank.",
+  "comments": [
+   [
+    5,
+    "Make the sub-rank text visible"
+   ],
+   [
+    7,
+    "Choose the own or enemy result data"
+   ],
+   [
+    18,
+    "Rank unchanged: clear the text and possibly update the cant-lose-rank text for the player"
+   ],
+   [
+    40,
+    "Rank changed: pick an up or down arrow depending on direction and append the difference"
+   ]
+  ]
+ },
+ "32b5fd4": {
+  "summary": "Setup for BattleEventsController. Finds both hero cards, creates the enemy and player health signals and stores starting health so Update can detect health changes.",
+  "comments": [
+   [
+    4,
+    "Cache the player's hero and then the enemy's hero"
+   ],
+   [
+    12,
+    "Create the enemy health change signal and store enemy starting health"
+   ],
+   [
+    25,
+    "Create the player health change signal and store the player's starting health"
+   ]
+  ]
+ },
+ "32b61fc": {
+  "summary": "Runs every frame. Compares each hero's current health with the last seen value and raises EnemyHealthChangeSignal or PlayerHealthChangeSignal with the health difference.",
+  "comments": [
+   [
+    6,
+    "Enemy hero: has health changed since last frame?"
+   ],
+   [
+    16,
+    "Changed: store the new health and delta (old minus new) in the signal, then raise it"
+   ],
+   [
+    37,
+    "Same check for the player hero; return when there is no player hero"
+   ],
+   [
+    51,
+    "Unchanged: nothing to do"
+   ],
+   [
+    63,
+    "Changed: set delta, remember the new health and raise PlayerHealthChangeSignal"
+   ],
+   [
+    77,
+    "Null reference exception path"
+   ]
+  ]
+ },
+ "32b6200": {
+  "summary": "Same logic as Update, called on demand: detects changes in each hero's health and raises the enemy or player health change signal with the delta.",
+  "comments": [
+   [
+    6,
+    "Enemy hero: has health changed since the last check?"
+   ],
+   [
+    16,
+    "Changed: store the new health and delta (old minus new) in the signal, then raise it"
+   ],
+   [
+    37,
+    "Same check for the player hero; return when there is no player hero"
+   ],
+   [
+    51,
+    "Unchanged: nothing to do"
+   ],
+   [
+    63,
+    "Changed: set delta, remember the new health and raise PlayerHealthChangeSignal"
+   ],
+   [
+    77,
+    "Null reference exception path"
+   ]
+  ]
+ },
+ "32b6948": {
+  "summary": "Setup for EnemyHeroDamageScorer. Registers OnHealthChange as a handler for EnemyHealthChangeSignal with the signal broker. The generic interface dispatch is mangled by the decompiler.",
+  "comments": [
+   [
+    4,
+    "Create the delegate for OnHealthChange"
+   ],
+   [
+    17,
+    "Fetch the signal broker and call its Register method through an interface lookup (decompiler output is garbled here)"
+   ]
+  ]
+ }
+}

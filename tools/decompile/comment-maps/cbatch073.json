@@ -1,0 +1,567 @@
+{
+ "2f41ac8": {
+  "summary": "Removes a CardEffect from the card's active effects and undoes what it changed (stats, traits, active ability, enchantment record). Then refreshes the health/attack/cost/trait UI and runs a death check for units. The decompiler merged in the tails of CheckIfDead, ToggleTraitIcons and CleanStatusAnims.",
+  "comments": [
+   [
+    4,
+    "Closure object captures removedEffect for the list predicates used below"
+   ],
+   [
+    9,
+    "Seems to bail out early when the effect has a flag set at offset 0x74 (nothing is undone)"
+   ],
+   [
+    12,
+    "Drop the effect from the card's active effect list"
+   ],
+   [
+    18,
+    "Branch on the effect's type id; each type undoes a different kind of change"
+   ],
+   [
+    20,
+    "Effect type 0x2d: a drop pod stat buff; only that type is handled in this branch"
+   ],
+   [
+    23,
+    "Effect carried a health bonus: subtract it from the drop pod health"
+   ],
+   [
+    39,
+    "Effect carried an attack bonus: subtract it from the drop pod attack"
+   ],
+   [
+    54,
+    "Redraw the attack/health figures on the card"
+   ],
+   [
+    57,
+    "Effect types 0xc, 0xf, 0x10 (enchantment-linked) or 0x28 (active ability)"
+   ],
+   [
+    58,
+    "Enchantment-linked effect: find and remove the matching ActiveEnchantment record"
+   ],
+   [
+    68,
+    "Removed enchantment was a quest (ids 0x28/0x78) and not jammed: broadcast quest resolved, reset counter"
+   ],
+   [
+    83,
+    "Type 0x28: restore the card's default active ability flag and clear the active ability ref"
+   ],
+   [
+    91,
+    "Clear status animations on the card UI and rebuild its trait icons (inlined UpdateTraitIcons)"
+   ],
+   [
+    195,
+    "Effect types 1 and 2 (stat changes) and 3, 5, 10 handled below"
+   ],
+   [
+    197,
+    "Type 1: health buff removed, so clamp current health down to the new max health"
+   ],
+   [
+    216,
+    "If the effect granted armour, take that armour away again"
+   ],
+   [
+    227,
+    "Type 5: reset attack and max health to the card's printed values, then clamp current health"
+   ],
+   [
+    258,
+    "Effect type 0x5a: falls into the trait removal code below"
+   ],
+   [
+    262,
+    "Trait-granting effect removed (types 3, 0x5a): drop the trait if nothing else still provides it"
+   ],
+   [
+    267,
+    "Trait is not a printed default trait and no other active effect grants it: remove it"
+   ],
+   [
+    279,
+    "Trait 0xe6 (drop pod): if the card no longer has drop pod, remove the drop pod"
+   ],
+   [
+    286,
+    "Trait 0x262 (pack): if the card no longer has pack, forget the last pack troops"
+   ],
+   [
+    295,
+    "Refresh health, attack, cost and trait icons after any change"
+   ],
+   [
+    302,
+    "Only units need a death check; other cards return here"
+   ],
+   [
+    306,
+    "Start of an inlined CheckIfDead: builds a debug log string, then checks whether the unit should die"
+   ],
+   [
+    328,
+    "Cards with zero starting health are ignored by the death check"
+   ],
+   [
+    334,
+    "Drop pod card in play with drop pod health at or below zero: destroy the drop pod instead of the card"
+   ],
+   [
+    361,
+    "Health still above zero: nothing dies"
+   ],
+   [
+    364,
+    "Card is not in a play state: warn and skip"
+   ],
+   [
+    371,
+    "Survivor charges left: use one (sacrifice trigger first if it is our turn) instead of dying"
+   ],
+   [
+    384,
+    "Card should become a remnant: run backlash actions and queue the transform instead of dying"
+   ],
+   [
+    393,
+    "Otherwise mark the card as waitingToDie and hide its can-attack glow"
+   ],
+   [
+    416,
+    "Decompiler jump target; calls here are the end of the inlined CheckIfDead"
+   ],
+   [
+    418,
+    "Decompiler glue: from here the code is the tail of BattleCardUI.ToggleTraitIcons (show/hide every icon)"
+   ],
+   [
+    447,
+    "Decompiler glue: from here the code is BattleCardUI.CleanStatusAnims, which clears status effect objects"
+   ],
+   [
+    470,
+    "Destroy or stop each matching status animation in the first dictionary"
+   ],
+   [
+    530,
+    "Same cleanup for the second status animation dictionary"
+   ],
+   [
+    591,
+    "Destroy the codex object unless the card still has quests (or clearAll was requested), then stop showing codex"
+   ]
+  ]
+ },
+ "2f2d7d4": {
+  "summary": "Removes a trait from the card's current and showing trait lists without triggering any game effects. Cleans up the trait's frame effects on the card UI, plays its exit animation, and updates the flying display.",
+  "comments": [
+   [
+    4,
+    "Closure captures the trait to remove for the Find predicate"
+   ],
+   [
+    14,
+    "Look up the trait data; if the card does not have it, nothing to do"
+   ],
+   [
+    19,
+    "Remove it from the current traits, and from the displayed traits if present"
+   ],
+   [
+    32,
+    "Fetch the trait's config (visual effects) from the trait collection"
+   ],
+   [
+    34,
+    "Stop and remove the looping frame effect for this trait on the card UI"
+   ],
+   [
+    56,
+    "Same for the one-shot trigger frame effect"
+   ],
+   [
+    80,
+    "If the trait config exists, play its exit effects"
+   ],
+   [
+    93,
+    "Effect kind 1 seems to be an exit effect: start the trait animation as a coroutine on the card UI"
+   ],
+   [
+    116,
+    "After removal, keep the flying visual in sync: losing flying turns it off"
+   ],
+   [
+    120,
+    "Losing vanguard only matters if the card still has flying"
+   ],
+   [
+    128,
+    "Card still has flying so the flying visual is turned back on"
+   ],
+   [
+    134,
+    "Update the card UI's flying display"
+   ]
+  ]
+ },
+ "2f3b994": {
+  "summary": "Adds a trait to the card's current and showing trait lists without triggering effects, unless the card already has it. The trait is created with the given hidden flag and default value.",
+  "comments": [
+   [
+    9,
+    "Check whether the card already has this trait"
+   ],
+   [
+    11,
+    "Already present: do nothing"
+   ],
+   [
+    14,
+    "Create a fresh trait data object"
+   ],
+   [
+    16,
+    "Add it to CurrentTraits (inlined List.Add)"
+   ],
+   [
+    31,
+    "Also add it to CurrentShowingTraits (inlined List.Add with resize)"
+   ],
+   [
+    64,
+    "Decompiler null check on a list or array"
+   ]
+  ]
+ },
+ "2f3e86c": {
+  "summary": "Removes a trait from the card's trait lists, logs it, and refreshes the card UI. Warns and does nothing if the card has no such trait.",
+  "comments": [
+   [
+    11,
+    "Find the trait entry; a missing entry or id 0 means there is no logic for it"
+   ],
+   [
+    13,
+    "Trait not found: log a warning and stop"
+   ],
+   [
+    21,
+    "Log the removal"
+   ],
+   [
+    27,
+    "Remove from current traits and from the showing traits if present"
+   ],
+   [
+    35,
+    "Remove the trait's status animation from the card UI"
+   ],
+   [
+    38,
+    "Trait id 0x3cf: redraw the attack/health figures"
+   ],
+   [
+    42,
+    "Trait ids 0x1cc and 0x28: update summon sickness animation and can-act state"
+   ],
+   [
+    45,
+    "Rebuild trait icons"
+   ],
+   [
+    52,
+    "Decompiler null check jump target"
+   ]
+  ]
+ },
+ "2f2f764": {
+  "summary": "Removes every active effect that grants the given trait, then removes the trait itself from the card (an inlined RemoveTrait). Refreshes the card UI afterwards.",
+  "comments": [
+   [
+    11,
+    "Remove all active effects tied to this trait"
+   ],
+   [
+    13,
+    "Inlined RemoveTrait from here on"
+   ],
+   [
+    20,
+    "Find the trait entry; missing means nothing to remove"
+   ],
+   [
+    22,
+    "Trait not found: warn and stop"
+   ],
+   [
+    30,
+    "Log the removal"
+   ],
+   [
+    36,
+    "Remove from current traits and from showing traits if present"
+   ],
+   [
+    44,
+    "Remove the trait status animation from the card UI"
+   ],
+   [
+    47,
+    "Trait id 0x3cf: redraw the attack/health figures"
+   ],
+   [
+    51,
+    "Trait ids 0x1cc and 0x28: update summon sickness animation and can-act state"
+   ],
+   [
+    54,
+    "Rebuild trait icons"
+   ]
+  ]
+ },
+ "2f2f658": {
+  "summary": "Starts or stops the summon-sickness animation and recomputes canAct and canAttack for the card. Also updates the can-attack glow. Ferocity and oath cards may act even while summon sick.",
+  "comments": [
+   [
+    6,
+    "Show or hide the summon-sickness animation on the card UI"
+   ],
+   [
+    17,
+    "Is it this card owner's turn?"
+   ],
+   [
+    18,
+    "Cannot act if it is not the owner's turn, not in play, already attacked (unless bloodthirst allows a second), or stunned"
+   ],
+   [
+    22,
+    "Otherwise it can act only when it is not summon sick"
+   ],
+   [
+    25,
+    "Store the result as both canAct and canAttack"
+   ],
+   [
+    28,
+    "Ferocity or oath cards can use abilities while summon sick, so canAct is recomputed without the sickness check"
+   ],
+   [
+    30,
+    "Same turn, in play and attack count rules, and not stunned"
+   ],
+   [
+    39,
+    "Summon sick ferocity/oath card: switch its attack type to Active"
+   ],
+   [
+    44,
+    "Show the can-attack glow only if the card can attack now"
+   ],
+   [
+    50,
+    "Ability availability is also queried here; result seems unused"
+   ]
+  ]
+ },
+ "2f43e90": {
+  "summary": "Returns whether the card has an extrinsic (granted by another card) effect from the given enchanting card, optionally matching the buff type and base enchantment card.",
+  "comments": [
+   [
+    4,
+    "No enchanting card given: nothing can match"
+   ],
+   [
+    11,
+    "Scan all active effects"
+   ],
+   [
+    18,
+    "Only extrinsic effects (those applied by another card) count"
+   ],
+   [
+    24,
+    "Effect's source card must be the given enchanting card"
+   ],
+   [
+    27,
+    "If a buff type was requested it must match"
+   ],
+   [
+    32,
+    "Base enchantment card must also match; then we have found one"
+   ],
+   [
+    40,
+    "No match, try the next effect"
+   ]
+  ]
+ },
+ "2f45718": {
+  "summary": "Returns whether the card already has an active effect equal to the given effect (same source). Used to avoid applying the same effect twice.",
+  "comments": [
+   [
+    5,
+    "Effects without an enchanting source card never count as duplicates"
+   ],
+   [
+    13,
+    "Compare against each active effect"
+   ],
+   [
+    20,
+    "IsSameEffect decides equality; heroCheck changes how heroes are compared"
+   ]
+  ]
+ },
+ "2f45814": {
+  "summary": "Returns whether the card has any of a fixed list of protective traits (ids 0xf0, 0x50, 0x136, 0xe6, 0x1ae), via the trait criteria filter. Builds the list on every call.",
+  "comments": [
+   [
+    4,
+    "Build the list of protective trait ids (each Add is inlined with resize handling)"
+   ],
+   [
+    13,
+    "Trait ids added: 0xf0, 0x50, 0x136, 0xe6 (drop pod), 0x1ae"
+   ],
+   [
+    76,
+    "Loop over the traits; once one matches, the flag stays true and later checks are skipped"
+   ],
+   [
+    82,
+    "Check whether this card meets the trait criteria for the current trait"
+   ],
+   [
+    91,
+    "Decompiler null check target"
+   ]
+  ]
+ },
+ "2f45a9c": {
+  "summary": "Returns true if the card died on the current turn, comparing its turnDied value with the battle manager's turn counter.",
+  "comments": [
+   [
+    7,
+    "Needs a battle manager to read the turn counter"
+   ],
+   [
+    15,
+    "Turn counter is an anti-cheat ObscuredInt copied out; compare with the card's turnDied"
+   ]
+  ]
+ },
+ "2f45b3c": {
+  "summary": "Returns true if the card died on the current turn or on the turn just before it.",
+  "comments": [
+   [
+    14,
+    "Died this turn"
+   ],
+   [
+    17,
+    "Otherwise re-read the turn counter and check whether it died exactly one turn ago"
+   ]
+  ]
+ },
+ "2f44078": {
+  "summary": "Returns the extrinsic effect on the card that came from the given enchanting card, or null if there is none.",
+  "comments": [
+   [
+    7,
+    "Scan active effects; returns null when the end is reached"
+   ],
+   [
+    13,
+    "Only extrinsic effects (applied by other cards) count"
+   ],
+   [
+    17,
+    "Effect needs a source card, and it must be the given enchanting card"
+   ],
+   [
+    22,
+    "Match: return this effect from the list (inlined List indexer)"
+   ],
+   [
+    35,
+    "Decompiler glued unrelated code after this point (List set_Item and a type-check helper); ignore it"
+   ],
+   [
+    67,
+    "No match, try the next effect"
+   ]
+  ]
+ },
+ "2f3c058": {
+  "summary": "Refreshes the trait icons on the card's board UI: hides all icons, then shows one per trait in the in-play ability list with its counter value. This is an inlined copy of BattleCardUI.UpdateTraitIcons; only units are updated.",
+  "comments": [
+   [
+    5,
+    "Clear existing status animations on the card UI first"
+   ],
+   [
+    12,
+    "Only units show trait icons on the board"
+   ],
+   [
+    19,
+    "Hide every trait icon slot first"
+   ],
+   [
+    31,
+    "Ambush on the opponent's card is hidden from us: stop here without showing icons"
+   ],
+   [
+    38,
+    "Get the list of traits to show while in play and store it on the UI"
+   ],
+   [
+    49,
+    "Loop over each trait in that list, assigning icon slots in order"
+   ],
+   [
+    65,
+    "Find the card's current trait data matching this list entry"
+   ],
+   [
+    71,
+    "If found, get its value with modifiers and turn on the counter on that icon"
+   ],
+   [
+    90,
+    "Initialize the icon with the trait sprite, value, and whether the trait is active"
+   ],
+   [
+    107,
+    "Decompiler glue: index out of range target; the code after is the tail of ToggleTraitIcons"
+   ],
+   [
+    126,
+    "Show or hide every icon according to a flag"
+   ],
+   [
+    137,
+    "Decompiler glue: from here the code is BattleCardUI.CleanStatusAnims"
+   ],
+   [
+    150,
+    "Destroy or stop each matching status animation in the first dictionary"
+   ],
+   [
+    208,
+    "Same cleanup for the second status animation dictionary"
+   ],
+   [
+    266,
+    "Destroy the codex object unless the card still has quests (or clearAll was requested), then stop showing codex"
+   ]
+  ]
+ }
+}

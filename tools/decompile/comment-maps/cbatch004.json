@@ -1,0 +1,583 @@
+{
+ "315e7c4": {
+  "summary": "Builds the list of card definitions an ability will summon. It uses the card chosen in selection, a random match from the full collection, valid targets in play (e.g. cemetery), or a fixed unit list. The tail is unrelated position-lookup code the decompiler stitched on.",
+  "comments": [
+   [
+    8,
+    "No target criteria: nothing to resolve, falls to the null-reference failure at the end."
+   ],
+   [
+    10,
+    "Criteria says summon the card the player picked during choose-resolution."
+   ],
+   [
+    12,
+    "Use the card chosen in the selection UI if there is one, add it to the result and clear it."
+   ],
+   [
+    34,
+    "Nothing chosen on the manager: fall back to the first card of the pool the player chose from."
+   ],
+   [
+    48,
+    "Add the pool card's source card to the result list."
+   ],
+   [
+    66,
+    "Otherwise use the summon criteria's own fixed unit list."
+   ],
+   [
+    69,
+    "Unit list is empty: either pick cards at random or take them from play."
+   ],
+   [
+    70,
+    "Not choosing from cards in play: scan the whole card collection for cards meeting the target criteria."
+   ],
+   [
+    76,
+    "Keep cards that meet the criteria, need no target selection, and pass one more card-level check."
+   ],
+   [
+    102,
+    "Choose-card-in-play mode: gather valid targets from the board/cemetery as the summon candidates."
+   ],
+   [
+    134,
+    "Summoning from the cemetery: take the card out of the cemetery so it can't be reused."
+   ],
+   [
+    146,
+    "Unless every target is summoned, keep only one candidate chosen with the shared match RNG."
+   ],
+   [
+    165,
+    "Fixed unit list is not empty and summonAllTargets is set: summon every unit in it."
+   ],
+   [
+    193,
+    "Otherwise pick one unit from the fixed list using the match's synced random number."
+   ],
+   [
+    205,
+    "From here the decompiler glued in an unrelated function (a position/anchor lookup, like GetPos); ignore."
+   ],
+   [
+    206,
+    "Garbage tail: dispatches on a position option to find a UI anchor Transform; not part of summoning."
+   ],
+   [
+    464,
+    "Part of the glued-in position lookup: basic cases return the acting card, target card or hero."
+   ],
+   [
+    656,
+    "Shared failure target: any null along the way ends up throwing a null reference."
+   ]
+  ]
+ },
+ "315f5e8": {
+  "summary": "Returns the CardScripts an ability will summon: the card chosen in the pool, or every valid target in play. If the summon criteria asks for it, cards found in the cemetery are removed from it so they can be re-summoned. Throws if inputs are null.",
+  "comments": [
+   [
+    8,
+    "Not a choose-resolution summon: gather targets from the board using the target criteria."
+   ],
+   [
+    13,
+    "Find all valid targets for this ability, including cards in the cemetery."
+   ],
+   [
+    17,
+    "Debug log of how many valid targets were found."
+   ],
+   [
+    23,
+    "Add each valid target to the result list (decompiler inlined the list add)."
+   ],
+   [
+    36,
+    "Summon criteria wants cemetery cards pulled out of the cemetery when they are used."
+   ],
+   [
+    53,
+    "Choose-resolution summon: use the first card the player chose from the pool, if any."
+   ],
+   [
+    80,
+    "Common failure target for null references."
+   ]
+  ]
+ },
+ "315efa4": {
+  "summary": "Returns the Transform an ability effect or animation should use for a PositionOption: Energy/resource displays, decks, hands, hero, HUD anchors, a free minion slot or a card's effect anchor. 'Friendly'/'enemy' is decided from the acting card's owner.",
+  "comments": [
+   [
+    4,
+    "Big dispatch on the position option; the decompiler split the enum ranges into nested ifs."
+   ],
+   [
+    7,
+    "Enemy side of the psychic Energy display: transform next to it."
+   ],
+   [
+    20,
+    "Friendly plasma Energy display text: use its cached Transform."
+   ],
+   [
+    27,
+    "Enemy plasma Energy display text (owner flag flipped)."
+   ],
+   [
+    36,
+    "Gets the text's Transform, caching it on first use."
+   ],
+   [
+    47,
+    "Friendly 'next to plasma Energy' anchor."
+   ],
+   [
+    55,
+    "High options: hand positions in world space and the HUD showcase anchors."
+   ],
+   [
+    59,
+    "Enemy hand: move its anchor to the hand's spot, converting between board and HUD cameras."
+   ],
+   [
+    99,
+    "Friendly hand: same placement using the player's hand."
+   ],
+   [
+    135,
+    "'Next to plasma Energy' anchor of the chosen side's Energy manager."
+   ],
+   [
+    149,
+    "HUD anchor positions (e.g. stratagem showcase) looked up in the HUD's anchor list."
+   ],
+   [
+    159,
+    "Scan the HUD anchor list for an entry matching this position (friendly or enemy variant)."
+   ],
+   [
+    187,
+    "No anchor found: log an error and fall back to the HUD's own Transform."
+   ],
+   [
+    203,
+    "Spirit stone and psychic Energy displays; the decompiler reused some variables here."
+   ],
+   [
+    234,
+    "Decks: the friendly or enemy deck Transform, or psychic Energy text."
+   ],
+   [
+    255,
+    "Remaining basic options: the acting card, the target card, board centre, minion slots, hand, hero."
+   ],
+   [
+    258,
+    "Option 0: the acting card itself."
+   ],
+   [
+    262,
+    "Option 1: the target card."
+   ],
+   [
+    267,
+    "Option 2: the ability's target if given, else the target card, else the acting card."
+   ],
+   [
+    285,
+    "Option 5: the centre-of-battle anchor."
+   ],
+   [
+    289,
+    "Several HUD anchor options share the generic anchor lookup above."
+   ],
+   [
+    295,
+    "Friendly Energy HUD anchor via the anchor list."
+   ],
+   [
+    301,
+    "Enemy Energy HUD anchor via the anchor list."
+   ],
+   [
+    309,
+    "Next free slot on a minion row: build a temporary empty object there (see CreateTempAbilityTransform)."
+   ],
+   [
+    367,
+    "Specific slot numbers 2 and 3 on the minion row."
+   ],
+   [
+    379,
+    "Player's or opponent's hand."
+   ],
+   [
+    391,
+    "Default: the owner's hero (also friendly deck handled just before)."
+   ],
+   [
+    403,
+    "Found a card: return its effects anchor or its 2D card transform depending on its state."
+   ],
+   [
+    406,
+    "Card state test (bit mask): cards in hand/play/etc. use the 2D controller's transform."
+   ],
+   [
+    444,
+    "Other states use the card UI's effects anchor."
+   ],
+   [
+    449,
+    "Common failure target for null references."
+   ]
+  ]
+ },
+ "316255c": {
+  "summary": "Makes a temporary empty GameObject parented under a minion manager, placed at the next free minion slot, and returns its Transform for ability visuals. The object is destroyed after about 10 seconds.",
+  "comments": [
+   [
+    5,
+    "Pick which side's minion row to use; getEnemyPos flips the side relative to isPlayer."
+   ],
+   [
+    17,
+    "Ask the row for the next free slot position."
+   ],
+   [
+    20,
+    "Create the temporary anchor object."
+   ],
+   [
+    29,
+    "Parent it under the row, set its position and scale to match the row."
+   ],
+   [
+    41,
+    "Schedule it to be destroyed after 10 seconds."
+   ],
+   [
+    47,
+    "Any null reference ends here."
+   ]
+  ]
+ },
+ "315dca0": {
+  "summary": "Computes an ability's number from a ChooseValueOptions setting: a plain or random value, or a stat of this/target/reference card (attack, health, damage, bastion, marks of chaos, Energy cost, faith). Called when an ability resolves; changes no state except advancing the match RNG for random values.",
+  "comments": [
+   [
+    7,
+    "Dispatch on the value option; the decompiler split the enum into nested range checks."
+   ],
+   [
+    10,
+    "Normal: fixed value, or a random value between min and max."
+   ],
+   [
+    14,
+    "Random roll uses the match's shared random-number array so both players get the same result."
+   ],
+   [
+    24,
+    "Random numbers missing: log an error and return 0."
+   ],
+   [
+    47,
+    "Decompiler glued unrelated code here (match recording copy and live-ops lookups); ignore until the next label."
+   ],
+   [
+    108,
+    "Target card's melee attack."
+   ],
+   [
+    111,
+    "Min value 0 means no multiplier: compute attack from base plus active effects."
+   ],
+   [
+    122,
+    "Walk the card's effects: add stat buffs, but a set-attack effect overrides everything."
+   ],
+   [
+    134,
+    "Result is clamped to zero from below."
+   ],
+   [
+    141,
+    "Otherwise use the card's current attack and multiply by the min value."
+   ],
+   [
+    144,
+    "Target card's ranged attack."
+   ],
+   [
+    152,
+    "Target card's current health."
+   ],
+   [
+    176,
+    "This card's melee attack."
+   ],
+   [
+    191,
+    "Damage on the card (max health minus health) times the min value."
+   ],
+   [
+    196,
+    "Min plus max times the multiplier factor."
+   ],
+   [
+    205,
+    "A multiplier below 2 counts as 1."
+   ],
+   [
+    213,
+    "This card's ranged attack or health."
+   ],
+   [
+    242,
+    "Ranged attack with no multiplier: blind units have 0."
+   ],
+   [
+    263,
+    "Add ranged-attack buffs; a set-ranged-attack effect overrides."
+   ],
+   [
+    287,
+    "Higher option numbers: cost, hero attack, bastion, marks of chaos, faith and reference cards."
+   ],
+   [
+    289,
+    "Target card's Energy cost, or cost computed from effects."
+   ],
+   [
+    299,
+    "Hero's melee attack times the multiplier factor."
+   ],
+   [
+    306,
+    "Target card's bastion."
+   ],
+   [
+    324,
+    "Sum bastion trait buffs from active effects, add the current trait value, clamp at zero."
+   ],
+   [
+    345,
+    "Sum of marks of chaos over all friendly units; the decompiler lost the loop."
+   ],
+   [
+    362,
+    "This card's shuriken count times max, plus min."
+   ],
+   [
+    368,
+    "Faith value of the card owner's player."
+   ],
+   [
+    375,
+    "Excess damage: how far the target's health is below zero, times the min value."
+   ],
+   [
+    402,
+    "Marks of chaos on this card or the other (target) card, times max, plus min."
+   ],
+   [
+    417,
+    "Target card's health minus attack."
+   ],
+   [
+    446,
+    "Self bastion."
+   ],
+   [
+    456,
+    "Reference-card options use the card the ability references."
+   ],
+   [
+    479,
+    "Melee attack of the card this one was copied from."
+   ],
+   [
+    492,
+    "Reference card's health."
+   ],
+   [
+    509,
+    "Reference card's Energy cost."
+   ],
+   [
+    517,
+    "Cost: sum cost-change effects, then add to the base cost and clamp at zero (loop is a decompiler mess)."
+   ],
+   [
+    575,
+    "Tail is more glued-in unrelated code (event handler lookup); ignore."
+   ]
+  ]
+ },
+ "315e5c0": {
+  "summary": "Scales the numeric stat-change fields of a CardEffect from a value option, multiplier and the ability's context. Only runs for buff types that change stats or traits; others are left alone.",
+  "comments": [
+   [
+    6,
+    "Check the effect's buff type against a bit mask of stat-changing types; others return unchanged."
+   ],
+   [
+    10,
+    "Recompute each of the five stat-change fields (attack, health, etc.) through NewBuffStat."
+   ],
+   [
+    34,
+    "Null effect data."
+   ]
+  ]
+ },
+ "315f994": {
+  "summary": "Multiplies a ManaBuff's Energy amount by the given multiplier, e.g. when an ability value is scaled by a count.",
+  "comments": [
+   [
+    6,
+    "Scale the Energy buff's value in place."
+   ]
+  ]
+ },
+ "31627a0": {
+  "summary": "Works out how much of a stat buff to give, from a value option (fixed, random, a card stat, marks of chaos, faith) times the multiplier. Logs an error and returns 0 if the option needs a target card that is missing.",
+  "comments": [
+   [
+    7,
+    "No ability data: null failure."
+   ],
+   [
+    11,
+    "Options that read the target card but there is none: log an error and give 0."
+   ],
+   [
+    23,
+    "Min value below 2 counts as 1, then times the multiplier."
+   ],
+   [
+    28,
+    "Handle higher-numbered value options first; low ones are further down."
+   ],
+   [
+    34,
+    "Randomized on resolution: roll between min and altvalue using the match RNG."
+   ],
+   [
+    50,
+    "Damage taken by the target card or this card."
+   ],
+   [
+    65,
+    "Marks of chaos and related options."
+   ],
+   [
+    83,
+    "Target's health minus attack, times the multiplier."
+   ],
+   [
+    98,
+    "Sum marks of chaos over all friendly units (loop partly lost by decompiler)."
+   ],
+   [
+    117,
+    "This card's shuriken count."
+   ],
+   [
+    125,
+    "Faith value of the card owner's player."
+   ],
+   [
+    137,
+    "Common null failure."
+   ],
+   [
+    140,
+    "Bastion of target (0x96) or of this card (0xa0)."
+   ],
+   [
+    156,
+    "Low options: fixed value, then target or this card's attack, ranged attack and health."
+   ],
+   [
+    157,
+    "Normal: just multiplier times min."
+   ],
+   [
+    187,
+    "Target card health."
+   ],
+   [
+    198,
+    "This card ranged attack, or its health."
+   ],
+   [
+    216,
+    "Stat read from the card times the multiplier."
+   ]
+  ]
+ },
+ "3162d4c": {
+  "summary": "Estimates an average value for a value option, e.g. for AI or tooltips: the card's actual stat for stat-based options, or the rounded mean of min and max otherwise. Does not roll randomness or change state.",
+  "comments": [
+   [
+    5,
+    "Dispatch on the value option in nested ranges."
+   ],
+   [
+    8,
+    "Target or this card melee attack."
+   ],
+   [
+    10,
+    "Add up attack buffs from active effects; a set-attack effect wins outright."
+   ],
+   [
+    31,
+    "Add the base attack, clamp at zero."
+   ],
+   [
+    45,
+    "Ranged attack: blind units count as 0."
+   ],
+   [
+    65,
+    "Sum ranged buffs; a set-ranged-attack effect wins."
+   ],
+   [
+    92,
+    "Target health, attack-type options for this card."
+   ],
+   [
+    118,
+    "This card's health."
+   ],
+   [
+    134,
+    "Damage: max health minus current health."
+   ],
+   [
+    151,
+    "Min plus multiplier times max, or bastion for the target."
+   ],
+   [
+    161,
+    "Self bastion: sum bastion trait buffs plus current trait value, clamp at zero."
+   ],
+   [
+    191,
+    "Target health minus melee attack."
+   ],
+   [
+    206,
+    "Everything else: mean of min and max, rounded half away from zero (decompiled as float math)."
+   ]
+  ]
+ }
+}

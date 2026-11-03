@@ -1,0 +1,698 @@
+{
+ "30714cc": {
+  "summary": "Sends the local player's serialized deck and warlord to the opponent through the PUNReceiveDeckData Photon RPC. The decompiler glued inlined SearchOpponent/ValidateDeck code and Photon internals (RPC send, interest groups, HashSet) onto it, so most of the listing is not this method's own logic.",
+  "comments": [
+   [
+    4,
+    "Match data must exist; the decompiler's null-check gotos all land on a NullReferenceException"
+   ],
+   [
+    9,
+    "Log which challenger the deck is being sent to"
+   ],
+   [
+    12,
+    "Serialize the local player's deck and warlord into a string; this is the RPC payload"
+   ],
+   [
+    21,
+    "Decompiler pasted inlined SearchOpponent code here (to line 157); it is not the real flow of this method"
+   ],
+   [
+    58,
+    "Inlined deck check: a malformed deck cancels the search and shows the ErrorLoadDeck message"
+   ],
+   [
+    70,
+    "Deck is well formed: now validate it with the server (ValidateDeck logic inlined)"
+   ],
+   [
+    77,
+    "If the play mode requires owned cards, count copies of each card id and send them to the cloud script"
+   ],
+   [
+    135,
+    "Mode needs no ownership check: just log it and call the callback with true"
+   ],
+   [
+    158,
+    "Real flow resumes: put the serialized deck in the single RPC argument"
+   ],
+   [
+    163,
+    "RPC name sent to the opponent; they handle it in PUNReceiveDeckData"
+   ],
+   [
+    166,
+    "Inlined PhotonView.RPC: give up silently if Photon cannot be used or we are not in a room"
+   ],
+   [
+    194,
+    "Inlined Photon check for server-side master client; both branches just fetch the networking peer"
+   ],
+   [
+    208,
+    "Skip sending if this view's interest group is blocked"
+   ],
+   [
+    212,
+    "Invalid view id (below 1): log an error instead of sending"
+   ],
+   [
+    248,
+    "Verbose logging only at full log level, then build the RPC event payload"
+   ],
+   [
+    258,
+    "Write timestamp, optional prefix and the method name into the event data, then group and send"
+   ],
+   [
+    287,
+    "Raise Photon event 200 (the RPC event); the local copy is executed too, so this seems to target everyone"
+   ],
+   [
+    333,
+    "Everything below is unrelated inlined Photon code (SetInterestGroups, HashSet Remove/Add) attached by mistake"
+   ],
+   [
+    348,
+    "SetInterestGroups: remove each listed group from the set of blocked sending groups"
+   ],
+   [
+    380,
+    "Then add each group from the second list; a null list means every group 0-255"
+   ],
+   [
+    416,
+    "Tell the server about the new interest groups unless in offline mode"
+   ],
+   [
+    421,
+    "HashSet<byte>.Remove inlined: finds the bucket entry and unlinks it"
+   ],
+   [
+    536,
+    "HashSet<byte>.Add inlined: adds the value to a bucket if it is not already present"
+   ]
+  ]
+ },
+ "30715e8": {
+  "summary": "Starts an opponent search: stores the manager, callbacks and match data, sets the stage to SearchingOpponent, then validates the player's deck (server cloud script when cards must be owned). Called when the player begins matchmaking.",
+  "comments": [
+   [
+    4,
+    "Closure object that captures this manager and the play event for the validation callback"
+   ],
+   [
+    7,
+    "Store the matchmaking manager and callbacks for later use"
+   ],
+   [
+    12,
+    "Inlined interface call: gets the current play event's data (the decompiler output here is unreliable)"
+   ],
+   [
+    37,
+    "Stage is now SearchingOpponent"
+   ],
+   [
+    39,
+    "Ranked Friendly and Classic modes need a locally well-formed deck first"
+   ],
+   [
+    43,
+    "Bad deck: cancel the search and report the ErrorLoadDeck message through OnError"
+   ],
+   [
+    52,
+    "Prepare to validate the deck on the server with the PlayFab id"
+   ],
+   [
+    59,
+    "Modes that require owning the cards: count copies of each card id, then ask the cloud script"
+   ],
+   [
+    88,
+    "Send warlord id and card counts to the ValidatePlayerDeck cloud script; the callback gets the result"
+   ],
+   [
+    114,
+    "Mode needs no ownership check: log it and report success to the callback"
+   ]
+  ]
+ },
+ "3071d44": {
+  "summary": "Creates the coroutine that waits waitTime seconds and then starts a match against a bot. The work happens in the d__22 MoveNext, not here.",
+  "comments": []
+ },
+ "3071df0": {
+  "summary": "Called when an opponent is found: logs it, records the opponent name, moves to LoadingOpponent, and sets whether this client is the first player in the room. The first player starts syncing match data, the other waits to receive it.",
+  "comments": [
+   [
+    5,
+    "Builds a debug string with the opponent, stage and first-player flag (decompiler array code)"
+   ],
+   [
+    26,
+    "Tell the network manager an opponent was found"
+   ],
+   [
+    30,
+    "Remember the opponent's name in player data"
+   ],
+   [
+    35,
+    "Store the opponent id and move the search to LoadingOpponent"
+   ],
+   [
+    38,
+    "Not first in room: mark match data as second player and wait for the other side's data"
+   ],
+   [
+    43,
+    "First in room: mark match data as first player and start sending match data"
+   ],
+   [
+    59,
+    "Reached when an array-bounds check failed in the string building"
+   ]
+  ]
+ },
+ "30720b4": {
+  "summary": "Builds the enemy's deck data from the blob received over the network, then marks the room property to show we are ready. Notifies the connected callback and schedules CheckStartProp to run after a delay.",
+  "comments": [
+   [
+    6,
+    "Parse the opponent's deck blob into deck and warlord data"
+   ],
+   [
+    9,
+    "Opponent data is ready"
+   ],
+   [
+    13,
+    "Set our room property to 1 to tell the other client our data is ready"
+   ],
+   [
+    15,
+    "Could not set the room property: cancel the search and reset the stage"
+   ],
+   [
+    24,
+    "Tell listeners the battle is connected with the opponent id"
+   ],
+   [
+    29,
+    "Reset the retry counter used by CheckStartProp"
+   ],
+   [
+    30,
+    "Prepares to call InvokeDelayed on the string 'CheckStartProp' (about 0.5s delay, repeating every 1s)"
+   ],
+   [
+    59,
+    "Unity InvokeDelayed: schedule CheckStartProp; the decompiler shows the string span setup"
+   ]
+  ]
+ },
+ "30722dc": {
+  "summary": "Polled by InvokeRepeating. Reads the opponent's ready flag from the room; when it is 1, picks who goes first, picks the arena and loads the battle scene. After 10 failed polls it shows a sync error.",
+  "comments": [
+   [
+    4,
+    "Read the opponent's ready flag from the room properties"
+   ],
+   [
+    9,
+    "Opponent is ready: stop polling"
+   ],
+   [
+    15,
+    "Random 0 or 1 decides who goes first (shared seed, so both clients agree)"
+   ],
+   [
+    18,
+    "Use the warlord's army to pick the battle arena"
+   ],
+   [
+    20,
+    "Reads the replay match type for replays, otherwise the normal match type"
+   ],
+   [
+    25,
+    "Special first-player scenario: if the player goes first by initiative, use the enemy warlord's army instead"
+   ],
+   [
+    33,
+    "Look up the arena for this army and load the battle scene"
+   ],
+   [
+    51,
+    "Not ready yet: count a retry"
+   ],
+   [
+    53,
+    "Fewer than 10 tries so far: wait for the next poll"
+   ],
+   [
+    56,
+    "Gave up: clear our room flag, cancel the search and close popups"
+   ],
+   [
+    67,
+    "Tell the current play event that sync failed (interface call)"
+   ],
+   [
+    86,
+    "Show the SyncError popup, then stop the repeating CheckStartProp"
+   ]
+  ]
+ },
+ "3072514": {
+  "summary": "Randomly decides who goes first, picks the battle arena from the player's warlord army, and loads the battle scene. Same logic as the success path of CheckStartProp.",
+  "comments": [
+   [
+    8,
+    "Random 0 or 1 decides who goes first"
+   ],
+   [
+    11,
+    "Use the warlord's army to choose the arena"
+   ],
+   [
+    13,
+    "Replay matches use the replay match type, others the normal type"
+   ],
+   [
+    18,
+    "Special first-player scenario: initiative decides, then use the enemy's army for the arena"
+   ],
+   [
+    26,
+    "Load the battle scene for that arena"
+   ]
+  ]
+ },
+ "3072248": {
+  "summary": "Returns the room-property key ('FirstPlayer' or 'SecondPlayer') for the local side, or for the enemy side when enemyString is true, depending on who is first in the room.",
+  "comments": [
+   [
+    5,
+    "Enemy key is the opposite of ours"
+   ],
+   [
+    14,
+    "Local key: FirstPlayer if we are first in room, otherwise SecondPlayer"
+   ],
+   [
+    20,
+    "Pick the key matching the first-in-room flag"
+   ]
+  ]
+ },
+ "30719f8": {
+  "summary": "Validates a deck by counting copies of each card id and sending the counts and warlord to the ValidatePlayerDeck cloud script. If the play mode needs no ownership check, it just calls callback with true.",
+  "comments": [
+   [
+    5,
+    "Only some play modes require the player to own the cards"
+   ],
+   [
+    8,
+    "Dictionary of card id to number of copies"
+   ],
+   [
+    16,
+    "Count each card in the shuffled library"
+   ],
+   [
+    35,
+    "Wrap the callback in a closure and send the counts to the cloud script"
+   ],
+   [
+    59,
+    "No ownership check in this mode: skip validation and report success"
+   ]
+  ]
+ },
+ "3072700": {
+  "summary": "Logs that the enemy's deck failed validation, then cancels the battle search and resets the search stage.",
+  "comments": [
+   [
+    9,
+    "Log an error naming the opponent"
+   ],
+   [
+    11,
+    "Stop waiting for a human opponent and leave the search room"
+   ]
+  ]
+ },
+ "30727b8": {
+  "summary": "Returns how many seconds to wait for a human opponent before falling back to a bot. Depends on play mode, the no-bots setting, config by games lost, and a global variable.",
+  "comments": [
+   [
+    5,
+    "Default wait is 12 seconds"
+   ],
+   [
+    11,
+    "Humans allowed: default to waiting essentially forever unless a rule below shortens it"
+   ],
+   [
+    12,
+    "Only apply the timed wait if bots are not disabled by mod tools or the no-bots mode"
+   ],
+   [
+    16,
+    "Practice and Duel use the long wait; other types use the configured wait based on games lost"
+   ],
+   [
+    19,
+    "If the new matchmaking is disabled, use the global wait value instead"
+   ]
+  ]
+ },
+ "30728fc": {
+  "summary": "Creates the coroutine that waits for a human opponent, taking into account the number of games lost. The work happens in the d__35 MoveNext.",
+  "comments": []
+ },
+ "30729a0": {
+  "summary": "Called once the client has left the search room: notifies the battle-connected callback, marks matchmaking inactive, cancels the search and starts a bot battle after a 1 second delay.",
+  "comments": [
+   [
+    5,
+    "Tell the callback with an empty string, meaning no human opponent was connected"
+   ],
+   [
+    13,
+    "Matchmaking is no longer searching"
+   ],
+   [
+    14,
+    "Log that a bot battle is starting"
+   ],
+   [
+    19,
+    "Start the delayed bot battle as a coroutine on the matchmaker"
+   ],
+   [
+    22,
+    "Inlined StartCoroutine checks; the decompiler output is garbled here"
+   ]
+  ]
+ },
+ "3072a0c": {
+  "summary": "Handles the start-game RPC from the other player. If addressed to this player while searching and the play mode matches, it starts the battle as second player; on a mismatch it replies with a wrong-play-mode RPC. The decompiler also pasted the ack handler after it.",
+  "comments": [
+   [
+    5,
+    "Builds a debug message from the RPC arguments"
+   ],
+   [
+    38,
+    "Ignore the message if it is for someone else or we are not currently searching"
+   ],
+   [
+    47,
+    "Compare sender's play mode with ours"
+   ],
+   [
+    49,
+    "Modes match: begin the battle as the non-first player"
+   ],
+   [
+    61,
+    "Play modes differ: log an error"
+   ],
+   [
+    64,
+    "Reply to everyone with PUNReceiveWrongPlayMode carrying the sender's name and our play mode"
+   ],
+   [
+    75,
+    "The code below is the PUNReceiveAckStartGame handler, inlined by the decompiler"
+   ],
+   [
+    110,
+    "Ack is for us and we are loading the opponent: send our random numbers"
+   ],
+   [
+    125,
+    "Reached when an array-bounds check failed in the string building"
+   ]
+  ]
+ },
+ "3072ed0": {
+  "summary": "Handles the ack of the start-game RPC. If it is addressed to this player and the stage is LoadingOpponent, it sends the shared random numbers.",
+  "comments": [
+   [
+    4,
+    "Builds a debug message from the RPC arguments"
+   ],
+   [
+    33,
+    "Ignore acks meant for someone else"
+   ],
+   [
+    34,
+    "Right stage: send the random numbers to the opponent"
+   ]
+  ]
+ },
+ "3073158": {
+  "summary": "Handles the wrong-play-mode RPC. If it is addressed to this player, leaves the battle and cancels the search.",
+  "comments": [
+   [
+    4,
+    "Builds a debug message with the opponent's play mode and the expected one"
+   ],
+   [
+    46,
+    "Only react if the message names us"
+   ],
+   [
+    49,
+    "Play modes disagree: leave the battle room and stop searching"
+   ]
+  ]
+ },
+ "30734cc": {
+  "summary": "Handles the random-numbers RPC from the opponent. Only accepted from the matched opponent during LoadingOpponent; stores the numbers and index in match data, then sends our own player data.",
+  "comments": [
+   [
+    4,
+    "Builds a debug message with opponent, sender and stage"
+   ],
+   [
+    27,
+    "Accept only from the matched opponent while loading"
+   ],
+   [
+    31,
+    "Store the shared random numbers and index in match data so both clients stay in sync"
+   ],
+   [
+    33,
+    "Mark the numbers as received, then send our deck data"
+   ]
+  ]
+ },
+ "30736e8": {
+  "summary": "Handles the confirmation that the opponent received our random numbers. If it is from the matched opponent during LoadingOpponent, it sends the player data.",
+  "comments": [
+   [
+    4,
+    "Builds a debug message with opponent, sender and stage"
+   ],
+   [
+    28,
+    "Only act on the matched opponent while loading"
+   ]
+  ]
+ },
+ "30738d4": {
+  "summary": "Handles the RPC carrying the opponent's deck. If it comes from the matched opponent during LoadingOpponent, it processes the enemy deck.",
+  "comments": [
+   [
+    4,
+    "Builds a debug message with opponent, sender and stage"
+   ],
+   [
+    29,
+    "Only the matched opponent, and only while loading, may supply the deck"
+   ],
+   [
+    30,
+    "Build the enemy deck data and signal readiness"
+   ]
+  ]
+ },
+ "3073ad0": {
+  "summary": "Handles a lost connection during search: shows the internet-unreachable popup, marks matchmaking inactive and cancels the search.",
+  "comments": [
+   [
+    5,
+    "Tell the player the internet is unreachable"
+   ],
+   [
+    8,
+    "Reset matchmaking and cancel the search"
+   ],
+   [
+    11,
+    "Notify the search-cancelled callback if one is set (call hidden by the decompiler)"
+   ]
+  ]
+ },
+ "3087468": {
+  "summary": "Static constructor that creates the single shared instance of the compiler-generated closure class for MainMenuMatchResultData.",
+  "comments": []
+ },
+ "30b5e34": {
+  "summary": "Looks for a sound clip by name in every loaded asset bundle and returns it, or null if none holds it. Used by scripted campaign actions to play bundled audio.",
+  "comments": [
+   [
+    9,
+    "First checks a local clip (always null here); the decompiler lost the earlier local lookup"
+   ],
+   [
+    18,
+    "Not found locally: search the loaded asset bundles"
+   ],
+   [
+    29,
+    "Loop over the bundle list, trying LoadAsset on each until a clip is found"
+   ],
+   [
+    42,
+    "Dispose the enumerator and return the clip found (null if none)"
+   ],
+   [
+    51,
+    "No bundle manager or no links: return null"
+   ]
+  ]
+ },
+ "30d32f4": {
+  "summary": "Draws a prebuilt deck, then shows the deck's cardback in the cardback drawer if one is set.",
+  "comments": [
+   [
+    4,
+    "Draw the deck itself with the base drawer"
+   ],
+   [
+    7,
+    "Only continue when a cardback drawer is assigned"
+   ],
+   [
+    10,
+    "Draw the deck's cardback and make sure the drawer object is active"
+   ]
+  ]
+ },
+ "30d35a8": {
+  "summary": "Constructor for the deck-and-cardback drawer; turns on ownership checking.",
+  "comments": []
+ },
+ "30d35fc": {
+  "summary": "On click, opens the deck info popup in View mode for this deck, finding the popup window through the temporary window dictionary.",
+  "comments": [
+   [
+    5,
+    "Build a deck object and the popup context in View state"
+   ],
+   [
+    9,
+    "Generic OpenWindow<DeckInfoPopup> setup; the decompiler shows raw class init"
+   ],
+   [
+    34,
+    "Find the DeckInfoPopup entry in the temporary window dictionary"
+   ],
+   [
+    36,
+    "Found: open the window with the deck context"
+   ],
+   [
+    50,
+    "Not found: log an error that the window type could not be found"
+   ]
+  ]
+ },
+ "30d33d4": {
+  "summary": "Draws a prebuilt deck: sets the army icon, the hero's card image and the game mode icon (shown only if a sprite exists).",
+  "comments": [
+   [
+    6,
+    "Look up the army icon from the deck hero's army"
+   ],
+   [
+    10,
+    "Load the hero card image and show it"
+   ],
+   [
+    13,
+    "Set the game mode icon from the deck's mode"
+   ],
+   [
+    20,
+    "Show the mode icon only if it has a sprite"
+   ]
+  ]
+ },
+ "30d36f0": {
+  "summary": "Returns the localized name of a prebuilt deck, or an empty string if the item is missing.",
+  "comments": [
+   [
+    6,
+    "Look up the translation of 'PrebuiltDecks/' plus the deck id"
+   ]
+  ]
+ },
+ "30d35ac": {
+  "summary": "Constructor for the deck drawer; turns on ownership checking.",
+  "comments": []
+ },
+ "30f1d24": {
+  "summary": "Test routine that scans every card in every collection and logs a warning for any null animation entry in an ability's logic. Logs start and finish.",
+  "comments": [
+   [
+    4,
+    "Test start marker"
+   ],
+   [
+    8,
+    "Loop over card collections"
+   ],
+   [
+    22,
+    "Loop over cards in the collection (n)"
+   ],
+   [
+    28,
+    "Only cards with abilities (k loop)"
+   ],
+   [
+    39,
+    "Only abilities with logic lists (j loop)"
+   ],
+   [
+    50,
+    "Inner loop (i) over each logic entry's animations"
+   ],
+   [
+    62,
+    "Null entry found: warn with the card name (empty animation pointer)"
+   ],
+   [
+    93,
+    "Real flow ends here after the loops; null-check failures land on a NullReferenceException"
+   ],
+   [
+    95,
+    "Logger finish call: interface lookup for 'Finished TestEmptyArrays' (decompiler spilled it here)"
+   ]
+  ]
+ }
+}

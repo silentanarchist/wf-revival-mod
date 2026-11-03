@@ -1,0 +1,102 @@
+{
+"329eb3c": {"summary": "Called when the app is closing. In a networked match with a comms manager, it sends the PUNReceiveEnemyForfeit RPC to the opponent through Photon so they win by forfeit. The rest is inlined Photon RPC code plus unrelated Photon/collection code the decompiler merged in.",
+"comments": [
+[5, "only act in a networked match; offline games have no opponent to notify"],
+[8, "need the comms manager (it owns the PhotonView used for RPCs)"],
+[17, "inlined PhotonView.RPC: sends PUNReceiveEnemyForfeit with no arguments (empty object array)"],
+[32, "inlined PhotonNetwork checks: bail out if networking is not usable"],
+[38, "not in a room: Photon logs that RPCs can only be sent in rooms and the call stays local"],
+[52, "networking peer missing (scene loading): Photon logs that it could not execute the RPC"],
+[79, "view ID below 1 is illegal: Photon logs an error with the game object name"],
+[116, "verbose Photon logging path; either way the code continues to build the RPC event"],
+[118, "build the RPC event: view ID, prefix, server timestamp and the method name (or its shortcut index)"],
+[154, "send as Photon event 200 (the RPC event) to the view's interest group, then run the RPC locally too"],
+[208, "decompiler glitch: code from here on belongs to other Photon methods (SetInterestGroups etc.) merged into this one"],
+[223, "inlined SetInterestGroups: first remove the groups to disable (group 0 is invalid and logged)"],
+[255, "then add the groups to enable; an empty array means all groups 1-255"],
+[291, "send the group change to the server unless in offline mode"],
+[296, "decompiler glitch: another unrelated inlined routine (HashSet/Dictionary remove-by-key) starts here"],
+[410, "unrelated inlined routine: the matching insert (add an entry, growing the table if full)"]
+]},
+"3296be0": {"summary": "Builds the list of every legal action for one side: playing cards from hand (with each valid target), melee/ranged attacks, active abilities (with targets), Aeldari waystone clicks, and ending the turn. Used by the AI and by validation; results go into a reused temp list.",
+"comments": [
+[4, "reset the reused temp lists (actions, valid targets, friendly units) before filling them"],
+[28, "unless auto actions are allowed, respect the player/enemy 'actions allowed' flag; if off, return the (empty) list"],
+[37, "pick the acting side's hand (offsets are playerHand or enemyHand)"],
+[46, "cards in hand: add a play action for every card that can be played"],
+[51, "untargeted card: a single playCard action costing the card's current cost"],
+[74, "targeted card: add one playCard action per valid target"],
+[114, "gather the side's own units in play that can act"],
+[122, "add each unit's melee/ranged attack actions"],
+[133, "active abilities of those units"],
+[135, "only units with an active ability that can currently be used"],
+[143, "targeted ability: one action for each valid unit target"],
+[183, "untargeted ability: a single action costing the ability cost"],
+[214, "second pass over the units, this time for waystone use"],
+[222, "only Aeldari Remnant units have a waystone to click"],
+[253, "always add the end-turn action last"]
+]},
+"329efe4": {"summary": "Builds the list of attack actions the given unit can perform against enemy units in play: a melee attack and a ranged attack per valid target. Targets already facing lethal pending damage are skipped.",
+"comments": [
+[4, "reset the reused temp lists for actions and enemy units"],
+[21, "collect the enemy side's units in play as potential targets"],
+[29, "for each enemy unit, consider melee first, then ranged"],
+[30, "melee: attacker must be able to attack at all and the target must be valid for melee"],
+[38, "skip targets that will already die from pending damage; melee also needs attack above 0 and no pindown trait"],
+[62, "ranged: same checks but with the ranged attack type"],
+[71, "skip doomed targets; ranged needs a ranged attack value above 0"]
+]},
+"329fae8": {"summary": "Starts aiming from a board position with an attack type: turns on the crosshair/target reticle, moves it to the position, sets reticle colors for the attack type and draws the trail. The output is badly mangled by inlined DOTween (tween manager) code, so most of the body is unreliable.",
+"comments": [
+[7, "show the crosshair (target reticle) and hand it the board position and attack type"],
+[19, "move the reticle's target object to the 2D world position of the board position"],
+[28, "update the aiming trail for this attack type"],
+[33, "recolor the reticle parts using each color preset for this attack type"],
+[41, "decompiler lost control flow here; the code below is an inlined color/material set (Material.SetColor)"],
+[73, "if the reticle is already tweening, DOTween Complete/Kill is inlined here; the tween loop is the library's, not the game's"],
+[407, "decompiler failed on this switch: DOTween's per-tween operation (complete, pause, play, rewind, restart...)"],
+[533, "game code resumes: reset the scale, then play a punch-scale tween on the reticle as a pop effect"],
+[584, "everything after this is unrelated inlined DOTween internals (despawn, remove tween, clear arrays); ignore"]
+]},
+"329fb64": {"summary": "Sets the player's card currently tracked by the mouse (being dragged or aimed). Warns and ignores opponent cards, stops the in-hand display of the previously tracked card, and records the current mouse position.",
+"comments": [
+[5, "only the local player's cards can be tracked"],
+[6, "opponent card: log a warning and do nothing"],
+[18, "if a different card was tracked before and was shown in hand, stop showing it"],
+[30, "remember the new tracked card and the current mouse position in canvas space"]
+]},
+"329fc9c": {"summary": "Begins casting a spell from a card: sets it as the tracked card, starts the targeting line, and highlights every unit that is a valid spell target (only for targeted spells).",
+"comments": [
+[4, "track this card with the mouse and start the aiming line (no attack type)"],
+[12, "walk the units in play and highlight each valid target of a targeted spell"],
+[22, "valid target: switch its highlight to the 'potential target' state"]
+]},
+"329fe74": {"summary": "Begins an attack or ability from a card: tracks the card, starts the targeting line and highlights valid targets among units in play. The check used depends on the card's action type (attack, spell or active ability). In tutorial matches it can skip highlighting while the script waits.",
+"comments": [
+[4, "track the card and show the targeting UI"],
+[10, "only highlight targets when the player initiated this (not for scripted/remote starts)"],
+[14, "tutorial match: ask the scripted AI whether the tutorial is holding back this attack"],
+[21, "tutorial is waiting: reset all unit highlights to regular and stop"],
+[39, "choose the target test by action kind (4 = active ability, 1 = spell, else attack)"],
+[48, "active ability: highlight units that are valid ability targets"],
+[58, "spell: only targeted spells highlight valid spell targets"],
+[67, "plain attack: highlight valid attack targets"],
+[52, "valid target: set the 'potential target' highlight"]
+]},
+"32a01e8": {"summary": "Queues an active-ability action (action type 0x1e) for a unit with its target. Ignored with a warning if the unit has left play or will die, or if the player is blocked by another action in progress; otherwise it is added to the auto-action queue at player priority.",
+"comments": [
+[7, "unit gone from play or doomed by pending damage: ignore the ability and clean up the display"],
+[16, "enemy cards skip the blocking check"],
+[20, "player card while another blocking action is running: cancel the ability attempt"],
+[26, "fade out the 'acting light' on the ability display"],
+[43, "build the BattleAction (type 0x1e = active ability) with the acting card and its target"],
+[49, "queue it with the player action priority, then hide the usable light and set up the ability"]
+]},
+"32a0440": {"summary": "Queues a use-waystone action (action type 0x4c) for a unit if it is allowed to and no waystone use is already resolving; otherwise logs a warning and clears the waiting flag.",
+"comments": [
+[5, "can this unit use its waystone now, and is no other waystone use pending?"],
+[8, "build the BattleAction (type 0x4c = use waystone) targeting the unit itself"],
+[16, "queue it at player action priority"],
+[23, "not allowed: warn, and clear the waiting flag so the game does not hang"]
+]}
+}

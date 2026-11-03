@@ -1,0 +1,47 @@
+{
+"3163274": {"summary": "Static constructor of the compiler-generated lambda holder for AbilityLogic. It just creates the single shared instance used by the cached lambdas.", "comments": []},
+"31632f8": {"summary": "Lambda used by GetTargets to read a unit's effective attack. It uses melee attack when melee is at least ranged, otherwise ranged attack (0 if the unit is blind), including buffs from active effects, never below 0.", "comments": [
+[4, "null unit: compiler null check"],
+[7, "read the unit's current ranged and melee attack"],
+[9, "melee is the higher (or equal) attack: compute the melee value"],
+[18, "sum melee changes from active effects; a 'set melee attack' effect overrides everything and returns at once"],
+[29, "base melee attack plus summed buff changes, clamped so it never goes below 0"],
+[41, "ranged is higher: a blind unit counts as 0 attack"],
+[57, "same effect loop for ranged; 'set ranged attack' effect returns its value directly"],
+[68, "base ranged attack plus buff total, clamped to at least 0"]
+]},
+"3163310": {"summary": "Lambda used by GetTargets that returns a unit's current health minus the summed value of certain active effects. The flag/value checks are raw memory reads, so which effects count (seems damage-like) is unclear.", "comments": [
+[7, "set up the enumerator over the unit's active effects"],
+[15, "walk every active effect on the unit"],
+[17, "end of list: return current health minus the accumulated effect total"],
+[29, "only effects passing two raw field checks are summed (seems to be an enabled flag and a specific type)"]
+]},
+"3163328": {"summary": "Lambda used by GetTargets that gives the AI a value score for a unit: in-play card value plus enchantment value, reduced when damaged and cut by 20% when stunned or pinned down.", "comments": [
+[7, "get the battle's AI manager (decompiler shows a second unset AI variable; the calls are the same manager)"],
+[16, "base AI value of this card on the board, plus value of its enchantments"],
+[22, "add enchantment value to the base value"],
+[28, "damaged unit: scale value by roughly half to full according to remaining health fraction"],
+[39, "stunned or pinned down units are worth 20% less"]
+]},
+"3163340": {"summary": "Second lambda used by GetTargets with the same logic as its sibling: AI value of a unit including enchantments, reduced when damaged and cut by 20% when stunned or pinned down.", "comments": [
+[7, "get the battle's AI manager (decompiler shows a second unset AI variable; the calls are the same manager)"],
+[16, "base AI value of this card on the board, plus value of its enchantments"],
+[22, "add enchantment value to the base value"],
+[28, "damaged unit: scale value by roughly half to full according to remaining health fraction"],
+[39, "stunned or pinned down units are worth 20% less"]
+]},
+"315876c": {"summary": "Makes a copy of this ability's logic so edits to the copy do not affect the original. It shallow-clones, then gives the copy its own animation list and its own copies of target, multiplier, damage, heal, hand-buff and Energy-buff criteria.", "comments": [
+[4, "shallow clone first; reference fields still point at the original's objects"],
+[6, "decompiler type-check noise confirming the clone is an AbilityLogic"],
+[7, "give the copy its own animation list"],
+[10, "deep copy each criteria/buff object into the clone (nested nulls skip the rest in the output; the intent is each copied if present)"],
+[28, "animation list copied again; decompiler duplicate"],
+[39, "unreachable-looking error/cleanup path left by the decompiler"]
+]},
+"3158b58": {"summary": "Returns the first card in the static list of previous ability targets, or null if the list is empty. The code after the first return is decompiler garbage and is not real behaviour.", "comments": [
+[4, "the list of targets chosen by the previous ability"],
+[6, "list has at least one entry: fetch element 0"],
+[17, "everything below is decompiler noise (list setter and type-check code), not reachable logic"],
+[47, "no previous targets: no reference card"]
+]}
+}

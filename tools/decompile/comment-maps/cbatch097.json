@@ -1,0 +1,394 @@
+{
+ "3033dcc": {
+  "summary": "Sets up the deck's cardback image. If the deck has no cardback id, it looks for an owned cardback item for the deck (falling back to the default Ultramarines one) and then shows the deck's cardback sprite in the cosmetic image. Called by DeckEditingPanel when a deck is opened or edited.",
+  "comments": [
+   [
+    5,
+    "compiler closure capturing the deck for the inventory lookup lambda"
+   ],
+   [
+    8,
+    "deck has no cardback id stored yet: pick one"
+   ],
+   [
+    12,
+    "look through the player's owned cardback items for the one matching this deck"
+   ],
+   [
+    18,
+    "none found: use the default Ultramarines cardback"
+   ],
+   [
+    23,
+    "store the chosen cardback on the deck"
+   ],
+   [
+    26,
+    "show the deck's cardback sprite in the cosmetic image"
+   ],
+   [
+    32,
+    "inlined Image.sprite setter: image had no sprite yet, so set it and mark the graphic dirty"
+   ],
+   [
+    72,
+    "image already has a sprite: only update if it is a different sprite"
+   ]
+  ]
+ },
+ "3035a5c": {
+  "summary": "Static constructor for the compiler-generated closure holder of DeckEditingPanel; creates the singleton instance used for cached lambdas.",
+  "comments": []
+ },
+ "303402c": {
+  "summary": "Adds a handler to the OnCardSelected event using a lock-free compare-exchange loop. The decompiler merged the code of DeckEditingPanel.Start onto the end of this method, so the tail is not part of the real event adder.",
+  "comments": [
+   [
+    5,
+    "standard thread-safe event add: combine delegates and compare-exchange until it sticks"
+   ],
+   [
+    27,
+    "from here the output is DeckEditingPanel.Start code merged in by the decompiler"
+   ],
+   [
+    38,
+    "Start: subscribe UpdateDrawers to OnDeckEdited"
+   ],
+   [
+    48,
+    "Start: listen for begin-drag on the event relay (CheckCardSlotDrag)"
+   ],
+   [
+    54,
+    "Start: subscribe to the deck list's OnCardSelected"
+   ],
+   [
+    56,
+    "Start: call ChangeName when the deck name field's value changes"
+   ]
+  ]
+ },
+ "30340dc": {
+  "summary": "Removes a handler from the OnCardSelected event using a lock-free compare-exchange loop. The decompiler merged the code of DeckEditingPanel.Start into the tail, so that part is not really in the event remover.",
+  "comments": [
+   [
+    5,
+    "standard thread-safe event remove: remove delegate and compare-exchange until it sticks"
+   ],
+   [
+    14,
+    "from here the output is DeckEditingPanel.Start code merged in by the decompiler"
+   ],
+   [
+    15,
+    "Start: subscribe UpdateDrawers to OnDeckEdited"
+   ],
+   [
+    26,
+    "Start: listen for begin-drag on the event relay (CheckCardSlotDrag)"
+   ],
+   [
+    32,
+    "Start: subscribe to the deck list's OnCardSelected"
+   ],
+   [
+    34,
+    "Start: call ChangeName when the deck name field's value changes"
+   ]
+  ]
+ },
+ "303418c": {
+  "summary": "Unity Start for the deck editing panel. Wires up its events: UpdateDrawers on OnDeckEdited, the card-slot drag check on the event relay, card selection on the deck list, and ChangeName on the deck name field.",
+  "comments": [
+   [
+    4,
+    "subscribe UpdateDrawers so the counter/cost/cosmetic drawers refresh whenever the deck is edited"
+   ],
+   [
+    15,
+    "listen for drag starts on card slots through the event relay"
+   ],
+   [
+    20,
+    "forward deck list card selection to this panel's OnCardSelected"
+   ],
+   [
+    22,
+    "call ChangeName whenever the deck name input changes"
+   ]
+  ]
+ },
+ "3034404": {
+  "summary": "Sets the deck being edited and refreshes the whole panel: the card count text, the deck list, the counter, cost and cosmetic drawers, the name field and the empty-deck warning. Called when a deck is opened for editing.",
+  "comments": [
+   [
+    4,
+    "remember which deck is being edited"
+   ],
+   [
+    6,
+    "show the current card count in the deck counter text"
+   ],
+   [
+    13,
+    "deck belongs to a custom game mode: append the mode's limit text to the counter"
+   ],
+   [
+    45,
+    "rebuild the card list and the counter, cost and cosmetic drawers for this deck"
+   ],
+   [
+    55,
+    "show the deck name in the input field"
+   ],
+   [
+    57,
+    "show the empty-deck warning only when the deck has no cards"
+   ]
+  ]
+ },
+ "3034a84": {
+  "summary": "Drop handler for a card dragged onto the panel: adds it to the editing deck with animation and marks the deck as not synced to the server.",
+  "comments": [
+   [
+    5,
+    "ignore null drops"
+   ],
+   [
+    10,
+    "deck changed locally: it must be saved to the server again"
+   ]
+  ]
+ },
+ "3034a8c": {
+  "summary": "Drop handler for a card dropped onto the panel: adds it to the editing deck, optionally animated, and marks the deck as not synced to the server.",
+  "comments": [
+   [
+    5,
+    "ignore null drops"
+   ],
+   [
+    10,
+    "deck changed locally: it must be saved to the server again"
+   ]
+  ]
+ },
+ "3034d14": {
+  "summary": "Drop handler for a cosmetic item (cardback) dropped on the panel: stores its id as the deck's cardback, marks the deck unsynced, and refreshes the counter text and drawers.",
+  "comments": [
+   [
+    5,
+    "nothing was dropped"
+   ],
+   [
+    9,
+    "copy the cosmetic item's id into the deck's cardback id"
+   ],
+   [
+    14,
+    "deck changed locally: it must be saved to the server again"
+   ],
+   [
+    16,
+    "refresh the card count text"
+   ],
+   [
+    24,
+    "custom game mode deck: append the mode's limit text to the counter"
+   ],
+   [
+    57,
+    "refresh counter, cost and cosmetic drawers so the new cardback shows"
+   ]
+  ]
+ },
+ "3034b20": {
+  "summary": "Tries to add a card to the editing deck. Shows the deck's error message if the card is not allowed; a new hero or defensive card replaces the existing one. Then updates the deck list, fires OnDeckEdited and updates the empty warning.",
+  "comments": [
+   [
+    7,
+    "ask the deck whether this card may be added; it returns an error text if not"
+   ],
+   [
+    8,
+    "card rejected: show the error to the player and stop"
+   ],
+   [
+    17,
+    "adding a hero: a deck holds only one, so remove the existing hero first"
+   ],
+   [
+    33,
+    "adding a defensive card (tactic): only one allowed, so remove the existing one first"
+   ],
+   [
+    43,
+    "actually add the card, then update the list display"
+   ],
+   [
+    47,
+    "notify listeners that the deck was edited"
+   ],
+   [
+    51,
+    "show the empty-deck warning only when the deck has no cards"
+   ]
+  ]
+ },
+ "3034ff8": {
+  "summary": "Removes a card from the editing deck and the deck list, marks the deck unsynced, fires OnDeckEdited and updates the empty-deck warning. Decompiler output for the end of the method is garbled.",
+  "comments": [
+   [
+    7,
+    "deck changed locally: it must be saved to the server again"
+   ],
+   [
+    9,
+    "remove the card's row from the visible deck list"
+   ],
+   [
+    11,
+    "notify listeners that the deck was edited"
+   ],
+   [
+    15,
+    "empty-deck warning update; decompiler garbled the SetActive call at the end"
+   ]
+  ]
+ },
+ "3035494": {
+  "summary": "Drag handler for a card slot in the deck list. A mostly vertical drag lifts the card out of the deck into the draggable and removes it from the deck. A scroll-like drag instead hands the drag to the scroll view. The tail of the output is decompiler junk from merged generic EventRelay code.",
+  "comments": [
+   [
+    8,
+    "check whether the drag movement looks like a scroll gesture"
+   ],
+   [
+    14,
+    "not a scroll gesture: the player is pulling the card out of the deck"
+   ],
+   [
+    15,
+    "cancel the drag on the slot, then start it on the floating draggable instead"
+   ],
+   [
+    22,
+    "show the draggable as this card and make the event relay follow it"
+   ],
+   [
+    30,
+    "the card is removed from the deck as soon as it is lifted; deck is now unsynced"
+   ],
+   [
+    36,
+    "update the deck list display"
+   ],
+   [
+    41,
+    "update the empty-deck warning; decompiler garbled the end of this path"
+   ],
+   [
+    70,
+    "scroll gesture: redirect the drag to the scroll view through the event relay"
+   ],
+   [
+    75,
+    "register begin-drag, drag and end-drag handlers on the scroll view (cached lambdas)"
+   ],
+   [
+    157,
+    "decompiler junk from here: exception cleanup and merged generic EventRelay code, not real logic"
+   ]
+  ]
+ },
+ "3034dd4": {
+  "summary": "Refreshes the panel's deck counter text (with the custom game mode limit if any) and re-initializes the counter, cost and cosmetic drawers for the editing deck. Subscribed to OnDeckEdited.",
+  "comments": [
+   [
+    5,
+    "show the current card count"
+   ],
+   [
+    13,
+    "custom game mode deck: append the mode's limit text to the counter"
+   ],
+   [
+    46,
+    "refresh the counter, cost and cosmetic drawers"
+   ]
+  ]
+ },
+ "3035714": {
+  "summary": "Switches the panel to the deck list view: shows the deck list and hides the cost, counter and cosmetic drawers.",
+  "comments": [
+   [
+    5,
+    "show the deck list"
+   ],
+   [
+    7,
+    "hide the cost, counter and cosmetic drawers; the end of the output is decompiler null-check noise"
+   ]
+  ]
+ },
+ "30357a4": {
+  "summary": "Switches the panel to the deck info view: hides the deck list and shows the cost and counter drawers (the cosmetic drawer is only null-checked).",
+  "comments": [
+   [
+    5,
+    "hide the deck list"
+   ],
+   [
+    7,
+    "show the cost and counter drawers; the end of the output is decompiler null-check noise"
+   ]
+  ]
+ },
+ "3035834": {
+  "summary": "Switches the panel to the cosmetics view: hides the deck list and the cost and counter drawers so the cosmetic drawer stands alone.",
+  "comments": [
+   [
+    5,
+    "hide the deck list"
+   ],
+   [
+    7,
+    "hide the cost and counter drawers; the end of the output is decompiler null-check noise"
+   ]
+  ]
+ },
+ "3038b28": {
+  "summary": "Static constructor for the compiler-generated closure holder of DeckEditingWindow; creates the singleton instance used for cached lambdas.",
+  "comments": []
+ },
+ "3038b98": {
+  "summary": "Filter used when building the card collection in the deck editor: returns true for cards shown always, and for OnlyIfOwned cards only if the player's inventory holds at least one copy. The huge middle of the output is inlined LINQ Any/Append code from the decompiler.",
+  "comments": [
+   [
+    5,
+    "card is shown regardless of ownership: keep it"
+   ],
+   [
+    8,
+    "OnlyIfOwned card: ask the inventory manager whether the player owns it"
+   ],
+   [
+    17,
+    "look up the card by its id"
+   ],
+   [
+    27,
+    "decompiler inlined LINQ Any over the inventory items here; it is noise, not game logic"
+   ],
+   [
+    587,
+    "real logic resumes: fetch the inventory item for this card id"
+   ],
+   [
+    609,
+    "owned if the item's count is greater than zero"
+   ]
+  ]
+ }
+}

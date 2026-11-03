@@ -1,0 +1,755 @@
+{
+ "328c854": {
+  "summary": "Shows a 'big chat' speech bubble for a speaker card: rejects empty text or a missing card (logging only when dev tools are on), then loads the speaker's full hero sprite through the Addressables reference counter. The decompiled tail is mangled, but it loads the sprite synchronously and bumps a ref count.",
+  "comments": [
+   [
+    4,
+    "Empty chat text is rejected."
+   ],
+   [
+    7,
+    "Empty text: warn only if the dev tools flag is on, then bail out."
+   ],
+   [
+    23,
+    "No speaker card given: log a warning and return."
+   ],
+   [
+    35,
+    "Get the speaker's raw card data (null checks are compiler-generated)."
+   ],
+   [
+    38,
+    "Prefer the sprite reference on the card's reference card (e.g. a copied card); else use the card's own."
+   ],
+   [
+    48,
+    "If the sprite reference is not valid there is nothing to load, so return."
+   ],
+   [
+    59,
+    "Start the Addressables load: look up the manager and its ref counter for this sprite."
+   ],
+   [
+    72,
+    "Null/empty sprite reference: warn and give up."
+   ],
+   [
+    78,
+    "Reference has no address or is invalid: same warning path."
+   ],
+   [
+    98,
+    "Check whether this reference already has a load handle."
+   ],
+   [
+    104,
+    "Previous load failed (status check): log 'Failed to Load Addressable' and stop."
+   ],
+   [
+    118,
+    "No cached ref count: load synchronously and wait for completion, then remember the asset."
+   ],
+   [
+    139,
+    "Already loaded: just increment the ref count and reuse the asset (decompiler lost the final use of the sprite)."
+   ]
+  ]
+ },
+ "328c930": {
+  "summary": "Sprite overload of DisplayBigChat. It only validates its inputs: empty text or a null sprite just logs a warning (and only when dev tools are on for the empty-text case). The actual bubble display is not visible in this decompiled output.",
+  "comments": [
+   [
+    4,
+    "Reject empty chat text."
+   ],
+   [
+    6,
+    "Text is fine: now check the speaker sprite."
+   ],
+   [
+    9,
+    "Sprite present: nothing more to validate here, return."
+   ],
+   [
+    12,
+    "No sprite: log a warning via Unity's logger."
+   ],
+   [
+    21,
+    "Empty text path: only log when the dev tools flag is enabled."
+   ]
+  ]
+ },
+ "3284c1c": {
+  "summary": "Queues a BattleAction into one of four queues by priority (0 normal, 1 instant, 2 interrupt, 3 delayed instant). Normal actions are also logged by the clock manager as a player action; during the tutorial it first stops the tutorial pointer and tip.",
+  "comments": [
+   [
+    6,
+    "In the tutorial on the player's turn, any new action dismisses the pointer and tip."
+   ],
+   [
+    14,
+    "Priority 0 or 1 handled here; 2 and 3 pick their queue below."
+   ],
+   [
+    15,
+    "Priority 0 (normal): append to the main action queue (inlined List.Add with a 0x100-byte struct copy)."
+   ],
+   [
+    34,
+    "Record the action with the clock manager and register it as a player action."
+   ],
+   [
+    45,
+    "Priority 1: instant queue."
+   ],
+   [
+    46,
+    "Unknown priority: log an error and drop the action."
+   ],
+   [
+    54,
+    "Priority 2: interrupt queue."
+   ],
+   [
+    57,
+    "Priority 3: delayed instant queue, anything else is an error."
+   ],
+   [
+    61,
+    "Append to the chosen queue (inlined List.Add, grows when full)."
+   ]
+  ]
+ },
+ "328ca94": {
+  "summary": "Central dispatcher for battle actions: skips actions whose caster left play or got jammed, pauses the clock for animation, then switches on the action type to call the matching Resolve* method (or handles simple ones inline). Finishing cases run the common tail: reassemble minions, check hero death and end the battle, re-enable the turn UI and scripted turns.",
+  "comments": [
+   [
+    4,
+    "Undefined actions are ignored and the resolving flag is cleared."
+   ],
+   [
+    10,
+    "Action has a caster that must still be in play (flag at +0x34)."
+   ],
+   [
+    14,
+    "Check the caster is still valid; a null caster ends in a null-reference throw."
+   ],
+   [
+    15,
+    "Caster must still be in play."
+   ],
+   [
+    21,
+    "Caster's current attack type must still match the action's attack type."
+   ],
+   [
+    27,
+    "A jammed caster cannot act unless this is a forced attack."
+   ],
+   [
+    40,
+    "Caster left play: log 'no longer has caster in play so is ignored' and finish the action."
+   ],
+   [
+    52,
+    "Action is valid: pause the clock while animations play."
+   ],
+   [
+    59,
+    "Dispatch on BattleActionType; most cases copy the 0x100-byte action and call the Resolve* method."
+   ],
+   [
+    60,
+    "Attack types (normal, scripted, redirected, etc.) go to ResolveAttack."
+   ],
+   [
+    67,
+    "Unknown action type: log an error."
+   ],
+   [
+    114,
+    "Remove an effect from the card, cancel its animations and destroyable anims."
+   ],
+   [
+    130,
+    "Change max health of the card (logged)."
+   ],
+   [
+    143,
+    "Change base attack of the card (logged)."
+   ],
+   [
+    222,
+    "Reset the card's actions for the turn."
+   ],
+   [
+    243,
+    "Destroy-unit action."
+   ],
+   [
+    261,
+    "Make the card miss its actions."
+   ],
+   [
+    271,
+    "Hero death: remembers the dead side and jumps to the DeadHero logic."
+   ],
+   [
+    275,
+    "Warlord chat message through the voice lines controller."
+   ],
+   [
+    300,
+    "Clear the card's end-of-turn effects."
+   ],
+   [
+    342,
+    "Codex trigger (card codex ability)."
+   ],
+   [
+    352,
+    "Transform into or out of a remnant depending on the toRemnant flag."
+   ],
+   [
+    380,
+    "Mob trigger: the two cases differ only in a flag passed to ResolveTriggerMob."
+   ],
+   [
+    404,
+    "Continuation of a multi-step attack is queued."
+   ],
+   [
+    410,
+    "Show a multi-card view: collect the raw cards into a list and display them for the local player."
+   ],
+   [
+    450,
+    "Reset the card's duty counter and refresh its figures."
+   ],
+   [
+    459,
+    "Common tail for simple actions: after resolving, check what is left in the queue."
+   ],
+   [
+    462,
+    "Queue empty: if either side's minions are out of position, queue a reassemble."
+   ],
+   [
+    474,
+    "No automatic actions left: check whether a hero has died."
+   ],
+   [
+    476,
+    "Not in tutorial or campaign: hero state 5 means waiting to die."
+   ],
+   [
+    486,
+    "DeadHero: build a debug log line, then end the battle (win, loss or disconnect)."
+   ],
+   [
+    522,
+    "Already in post-battle stage: warn and do nothing unless a forced disconnect loss is pending."
+   ],
+   [
+    537,
+    "Disconnect-loss flag set: record an enemy victory and run the basic battle end sequence."
+   ],
+   [
+    546,
+    "Normal end: enter PostBattle, stop the battle and tell the opponent the match finished if networked."
+   ],
+   [
+    553,
+    "Lock the UI into the finish-battle sequence and clear the during-battle flag."
+   ],
+   [
+    560,
+    "Enemy hero dead: raise the enemy health change signal with zero health."
+   ],
+   [
+    575,
+    "Get the Elo rating from the event leaderboard or the player's saved rating."
+   ],
+   [
+    600,
+    "Work out the winner and create the ranked match result with Elo and XP."
+   ],
+   [
+    608,
+    "Fill in skull counts (milestones) for both sides."
+   ],
+   [
+    629,
+    "Save the battle result and the elapsed match time in minutes."
+   ],
+   [
+    636,
+    "A player win marks the match as won; some match types also notify the live-ops handler."
+   ],
+   [
+    649,
+    "Persist the match winner and finish the battle."
+   ],
+   [
+    671,
+    "Decompiler artifact: index/cast failure guard."
+   ],
+   [
+    675,
+    "No hero died: broadcast the while-in-play update."
+   ],
+   [
+    679,
+    "Done resolving: clear the resolving flag."
+   ],
+   [
+    682,
+    "Enemy's turn: update the enemy minions and hero action state."
+   ],
+   [
+    690,
+    "Enemy hero can act only if alive, in play, within attack count, not stunned and not summon sick."
+   ],
+   [
+    700,
+    "Ferocity or oath heroes can still act while summon sick, so recompute canAct."
+   ],
+   [
+    716,
+    "Update the hero's can-attack indicator and ability button."
+   ],
+   [
+    732,
+    "Player's turn: light up playable cards, minions and hero."
+   ],
+   [
+    740,
+    "Queue empty: collect garbage while idle and unpause the clock."
+   ],
+   [
+    746,
+    "If the player has no available actions besides end turn, show the no-actions UI."
+   ],
+   [
+    762,
+    "Still no actions queued: resume the scripted tutorial turn if it waits for the player."
+   ],
+   [
+    780,
+    "Reset the 'player acted manually' flag."
+   ],
+   [
+    806,
+    "Decompiler garbage: leftover StartCoroutine null-check code; not real game logic."
+   ]
+  ]
+ },
+ "32918a4": {
+  "summary": "Returns the top card of the player's or enemy's shuffled deck, or the given targetCard if it is in that deck beyond the top. The card to draw is activated and set up in the deck; if only one card remains the top card is returned.",
+  "comments": [
+   [
+    4,
+    "Pick the player's (0x310) or enemy's (0x318) shuffled deck list."
+   ],
+   [
+    10,
+    "The default draw is the top card (index 0)."
+   ],
+   [
+    12,
+    "A specific target card in the deck below the top is drawn instead."
+   ],
+   [
+    13,
+    "Only one card left: return it without activating another."
+   ],
+   [
+    16,
+    "Otherwise the next card (index 1) is activated and set up as the visible deck card."
+   ],
+   [
+    28,
+    "Target card found deeper in the deck: activate and set it up, and return it."
+   ]
+  ]
+ },
+ "3291a84": {
+  "summary": "Removes a drawn card from the player's or enemy's shuffled deck list if it is in there.",
+  "comments": [
+   [
+    4,
+    "Choose the player's (0x310) or enemy's (0x318) shuffled deck."
+   ],
+   [
+    10,
+    "Find the card's position in the deck."
+   ],
+   [
+    11,
+    "Only remove it if it was found."
+   ]
+  ]
+ },
+ "32908e0": {
+  "summary": "Moves a card to the top of the player's or enemy's shuffled deck (the old copy is removed), then finishes the action: reassembles minions, checks for a dead hero and ends the battle if so, and re-enables the turn UI and scripted turns.",
+  "comments": [
+   [
+    4,
+    "Default to the enemy's shuffled deck; the action's flag selects the player's."
+   ],
+   [
+    13,
+    "Find the card's current position in the deck."
+   ],
+   [
+    14,
+    "If found: activate it, insert it at the top and remove the old copy."
+   ],
+   [
+    21,
+    "Start of the common finish-action tail (same as ResolveAction's end)."
+   ],
+   [
+    25,
+    "Queue empty: queue a reassemble if either side's minions are out of position."
+   ],
+   [
+    37,
+    "No automatic actions left: check whether a hero has died."
+   ],
+   [
+    41,
+    "Hero state 5 means waiting to die; otherwise skip to the in-play broadcast."
+   ],
+   [
+    50,
+    "Build a debug log line for DeadHero."
+   ],
+   [
+    83,
+    "Already in post-battle stage: warn and stop unless a disconnect loss is pending."
+   ],
+   [
+    98,
+    "Disconnect-loss flag set: record an enemy victory and run the battle end sequence."
+   ],
+   [
+    107,
+    "Enter PostBattle, stop the battle, and tell the opponent if networked."
+   ],
+   [
+    114,
+    "Lock the UI into the finish-battle sequence and clear the during-battle flag."
+   ],
+   [
+    119,
+    "Enemy hero dead: raise the enemy health change signal with zero health."
+   ],
+   [
+    134,
+    "Get the Elo rating from the event leaderboard or the player's saved rating."
+   ],
+   [
+    159,
+    "Work out the winner and create the ranked match result with Elo and XP."
+   ],
+   [
+    188,
+    "Save the result and elapsed minutes; a player win marks the match as won."
+   ],
+   [
+    202,
+    "Some match types also notify the live-ops handler."
+   ],
+   [
+    207,
+    "Persist the match winner and finish the battle."
+   ],
+   [
+    230,
+    "Decompiler artifact: index/cast failure guard."
+   ],
+   [
+    234,
+    "No hero died: broadcast the while-in-play update."
+   ],
+   [
+    238,
+    "Done resolving: clear the resolving flag."
+   ],
+   [
+    241,
+    "Enemy's turn: update the enemy minions and hero action state."
+   ],
+   [
+    249,
+    "Enemy hero can act only if alive, in play, within attack count, not stunned and not summon sick."
+   ],
+   [
+    259,
+    "Ferocity or oath heroes can still act while summon sick, so recompute canAct."
+   ],
+   [
+    275,
+    "Update the hero's can-attack indicator and ability button."
+   ],
+   [
+    291,
+    "Player's turn: light up playable cards, minions and hero."
+   ],
+   [
+    299,
+    "Queue empty: collect garbage while idle and unpause the clock."
+   ],
+   [
+    305,
+    "If the player has no available actions besides end turn, show the no-actions UI."
+   ],
+   [
+    321,
+    "Still no actions queued: resume the scripted tutorial turn if it waits for the player."
+   ],
+   [
+    339,
+    "Reset the 'player acted manually' flag."
+   ]
+  ]
+ },
+ "3291af8": {
+  "summary": "Checks whether an attack action may still resolve. Scripted and redirected attacks always pass; otherwise the attacker must be able to attack, the target must be valid, and the attacker must be in attack state. On failure it logs and stores cancelAttackReason and returns false.",
+  "comments": [
+   [
+    4,
+    "Scripted and redirected attacks skip all checks."
+   ],
+   [
+    10,
+    "Extra-value flag set: also allowed."
+   ],
+   [
+    13,
+    "The attacking unit must be able to attack."
+   ],
+   [
+    15,
+    "The target must be a valid attack target."
+   ],
+   [
+    22,
+    "Enemy attackers, attackers already attacking, and replays pass without the state check."
+   ],
+   [
+    26,
+    "Player attacker not in attack state: log and store the reason with its actual state."
+   ],
+   [
+    41,
+    "Failure: log 'Invalid attack target' or 'Unit can't attack' and store it as cancelAttackReason."
+   ]
+  ]
+ },
+ "3292594": {
+  "summary": "Returns true if the acting card has Stomp, there is at least one adjacent unit, and the target's health fell below 0 (overkill damage can spill over).",
+  "comments": [
+   [
+    5,
+    "Only cards with the stomp trait qualify."
+   ],
+   [
+    9,
+    "Read the target's obscured health."
+   ],
+   [
+    16,
+    "Needs adjacent units and negative health (excess damage) to trigger."
+   ]
+  ]
+ },
+ "3292a78": {
+  "summary": "Builds a list of units in play that have an ability cancelling the given attack. Jammed units are skipped and each unit is listed once.",
+  "comments": [
+   [
+    9,
+    "Walk through every unit in play."
+   ],
+   [
+    19,
+    "Does this unit have an ability that cancels this attack?"
+   ],
+   [
+    22,
+    "Jammed units cannot cancel attacks."
+   ],
+   [
+    30,
+    "Skip units already in the list."
+   ],
+   [
+    39,
+    "Add the unit (inlined List.Add, grows when full)."
+   ],
+   [
+    56,
+    "Decompiler: failed null check falls through here."
+   ]
+  ]
+ },
+ "3292d2c": {
+  "summary": "Returns true if the card is a player-owned Minion with a targeted effect, meaning the player must choose a target. Returns false when match data holds the special value 0xa0 (seems to be a match type that skips target picking).",
+  "comments": [
+   [
+    8,
+    "Only the player's own minions count."
+   ],
+   [
+    10,
+    "The minion must have a targeted effect."
+   ],
+   [
+    13,
+    "Match type 0xa0 disables the choose-target step (meaning not confirmed)."
+   ]
+  ]
+ },
+ "3292d88": {
+  "summary": "Returns the number of cards played so far this turn, decrypted from the anti-cheat ObscuredInt counter.",
+  "comments": [
+   [
+    10,
+    "Decrypt the Obscured counter to a plain int."
+   ]
+  ]
+ },
+ "328e208": {
+  "summary": "Resolves the follow-up after a card's resolution by telling the action's card to play its follow-up against the target, then finishes the action: reassembles minions, checks for a dead hero and ends the battle, and re-enables the turn UI and scripted turns.",
+  "comments": [
+   [
+    4,
+    "The action's card must exist."
+   ],
+   [
+    11,
+    "Log the card and optional target, then run its follow-up resolution."
+   ],
+   [
+    23,
+    "Card plays its follow-up against the target."
+   ],
+   [
+    26,
+    "No card: log an error."
+   ],
+   [
+    28,
+    "Start of the common finish-action tail (same as ResolveAction's end)."
+   ],
+   [
+    32,
+    "Queue empty: queue a reassemble if either side's minions are out of position."
+   ],
+   [
+    44,
+    "No automatic actions left: check whether a hero has died."
+   ],
+   [
+    50,
+    "Hero state 5 means waiting to die; otherwise skip to the in-play broadcast."
+   ],
+   [
+    57,
+    "Build a debug log line for DeadHero."
+   ],
+   [
+    90,
+    "Already in post-battle stage: warn and stop unless a disconnect loss is pending."
+   ],
+   [
+    105,
+    "Disconnect-loss flag set: record an enemy victory and run the battle end sequence."
+   ],
+   [
+    114,
+    "Enter PostBattle, stop the battle, and tell the opponent if networked."
+   ],
+   [
+    121,
+    "Lock the UI into the finish-battle sequence and clear the during-battle flag."
+   ],
+   [
+    126,
+    "Enemy hero dead: raise the enemy health change signal with zero health."
+   ],
+   [
+    141,
+    "Get the Elo rating from the event leaderboard or the player's saved rating."
+   ],
+   [
+    166,
+    "Work out the winner and create the ranked match result with Elo and XP."
+   ],
+   [
+    195,
+    "Save the result and elapsed minutes; a player win marks the match as won."
+   ],
+   [
+    209,
+    "Some match types also notify the live-ops handler."
+   ],
+   [
+    214,
+    "Persist the match winner and finish the battle."
+   ],
+   [
+    237,
+    "Decompiler artifact: index/cast failure guard."
+   ],
+   [
+    241,
+    "No hero died: broadcast the while-in-play update."
+   ],
+   [
+    245,
+    "Done resolving: clear the resolving flag."
+   ],
+   [
+    248,
+    "Enemy's turn: update the enemy minions and hero action state."
+   ],
+   [
+    256,
+    "Enemy hero can act only if alive, in play, within attack count, not stunned and not summon sick."
+   ],
+   [
+    266,
+    "Ferocity or oath heroes can still act while summon sick, so recompute canAct."
+   ],
+   [
+    282,
+    "Update the hero's can-attack indicator and ability button."
+   ],
+   [
+    298,
+    "Player's turn: light up playable cards, minions and hero."
+   ],
+   [
+    306,
+    "Queue empty: collect garbage while idle and unpause the clock."
+   ],
+   [
+    312,
+    "If the player has no available actions besides end turn, show the no-actions UI."
+   ],
+   [
+    328,
+    "Still no actions queued: resume the scripted tutorial turn if it waits for the player."
+   ],
+   [
+    346,
+    "Reset the 'player acted manually' flag."
+   ]
+  ]
+ }
+}

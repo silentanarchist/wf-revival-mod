@@ -1,0 +1,368 @@
+{
+ "32b2608": {
+  "summary": "Shows or hides the stat counters (health, armour, melee/ranged attack, cost) on a card's UI. When showing, it refreshes the health/attack/cost texts and trait icons, then for units runs the dead-unit check: destroys a drop pod at 0 health, uses a survivor charge, turns the unit into a remnant, or marks it waitingToDie.",
+  "comments": [
+   [
+    5,
+    "Hiding the stats: hide each counter that exists; null checks that fail jump to the compiler's NullReferenceException"
+   ],
+   [
+    11,
+    "Armour counter is hidden together with its frame object"
+   ],
+   [
+    31,
+    "Cost counter is blanked by hand: flagged hidden, amount reset to -1 and every text component set to an empty string"
+   ],
+   [
+    63,
+    "Showing the stats: un-hide health, armour (frame follows activateArmour), melee, ranged and cost counters"
+   ],
+   [
+    95,
+    "Refresh all texts on the card script so the numbers shown are current"
+   ],
+   [
+    107,
+    "Only units can die from 0 health; spells and other card types stop here"
+   ],
+   [
+    113,
+    "Debug log line 'CheckIfDead called for <card> with cardState <state> and damageInfo ...' is built here"
+   ],
+   [
+    137,
+    "Card has no starting health (data field is 0): nothing to check, skip"
+   ],
+   [
+    143,
+    "Drop pod unit in a play state (state bitmask 0x2800C): if its drop pod health is 0 or less, the pod is destroyed"
+   ],
+   [
+    161,
+    "Copy the obscured (anti-cheat) current health into a plain int for the check"
+   ],
+   [
+    168,
+    "Still has health left: nothing more to do"
+   ],
+   [
+    171,
+    "Unit is not in an in-play state: log a warning and ignore the death check"
+   ],
+   [
+    177,
+    "Survivor charges left: the unit survives lethal damage by spending one instead of dying"
+   ],
+   [
+    179,
+    "Sacrifice-trait unit on its owner's turn also fires its sacrifice trigger first"
+   ],
+   [
+    191,
+    "No survivor: units that must become a remnant (and are not hidden) fire backlash actions then queue the remnant transform"
+   ],
+   [
+    199,
+    "Otherwise the unit is dead: mark it waitingToDie so the death is processed later"
+   ],
+   [
+    204,
+    "Hide the can-attack glow and ability animation, then fire the unit's death (backlash) actions"
+   ],
+   [
+    214,
+    "Decompiler leftover: unreachable null-reference throw for failed null checks"
+   ]
+  ]
+ },
+ "32b5534": {
+  "summary": "Coroutine step for SyncLastPlayerActions. Walks the logged player actions from lastActionReceived onward and resends each one to the opponent with RemoteSendPlayerAction, waiting a short delay (about 0.3 s) between sends. Used to catch up the opponent after a reconnect or missed message.",
+  "comments": [
+   [
+    7,
+    "State 1: resumed after the wait; move on to the next logged action index"
+   ],
+   [
+    11,
+    "State 0: first entry; start at the last action number the opponent confirmed receiving"
+   ],
+   [
+    12,
+    "Any other state means the coroutine is finished"
+   ],
+   [
+    19,
+    "Stop when the index passes the end of the manager's player action log"
+   ],
+   [
+    23,
+    "Decompiler garbled the index-to-string conversion here; it just builds the 'Resend action <i> <type>' log text"
+   ],
+   [
+    31,
+    "Log which action number and BattleActionType is being resent"
+   ],
+   [
+    36,
+    "Send this logged action again over the network to the opponent"
+   ],
+   [
+    37,
+    "Wait about 0.3 seconds (float 0x3e99999a) before the next resend, then yield and resume at state 1"
+   ],
+   [
+    45,
+    "Null check failure path (battle comms, manager or action log missing)"
+   ]
+  ]
+ },
+ "32b5728": {
+  "summary": "Throws NotSupportedException: this compiler-generated coroutine enumerator (SyncLastPlayerActions) cannot be reset. Never called by game logic.",
+  "comments": [
+   [
+    4,
+    "Standard compiler-generated Reset for iterator classes: always throws"
+   ]
+  ]
+ },
+ "32b345c": {
+  "summary": "Sends the local player's mulligan result (array of discarded card ids plus the environment card) to all players via the PUNReceiveEnemyMulligan RPC, after logging the count. The rest of the decompiled body is inlined Photon RPC and interest-group code that the decompiler merged in; it is not game logic.",
+  "comments": [
+   [
+    9,
+    "Count of discarded cards, used in the log message"
+   ],
+   [
+    14,
+    "Pack the discard ids and environment card into the RPC arguments"
+   ],
+   [
+    23,
+    "The real work: broadcast the mulligan to everyone (PhotonTargets.All); the other player handles it in PUNReceiveEnemyMulligan"
+   ],
+   [
+    31,
+    "Everything below is NOT part of this method: the decompiler appended neighbouring code (RequestMulliganResend, ConfirmMulliganReceived, Photon internals)"
+   ],
+   [
+    34,
+    "Start of the merged RequestMulliganResend code: sends PUNReceiveRequestMulliganResend with an attempt count"
+   ],
+   [
+    61,
+    "Start of merged ConfirmMulliganReceived code: logs and sends the PUNReceiveMulliganAck RPC"
+   ],
+   [
+    96,
+    "Start of merged SendWrongRoomMessage code: sends PUNReceiveWrongRoom"
+   ],
+   [
+    131,
+    "Inlined PhotonNetwork.RPC: abort silently if the network cannot be used"
+   ],
+   [
+    136,
+    "Not in a Photon room: RPCs cannot be sent, log a warning and give up"
+   ],
+   [
+    155,
+    "Networking peer missing (scene loading?): log 'Could not execute RPC' and give up"
+   ],
+   [
+    188,
+    "Skip the RPC if the view's interest group is disabled for sending"
+   ],
+   [
+    194,
+    "Invalid (non-positive) view id: log an error with the method name and game object"
+   ],
+   [
+    228,
+    "Valid view: optionally log the send, then build the Photon RPC event data"
+   ],
+   [
+    231,
+    "If log level is Full, log 'Sending RPC <name> to target ... or player'"
+   ],
+   [
+    233,
+    "Build the event: view id, prefix, server timestamp, method name (or short index) and parameters"
+   ],
+   [
+    276,
+    "Send the event on Photon event code 200 (RPC), reliable; also run locally if target includes this client"
+   ],
+   [
+    324,
+    "Start of inlined PhotonNetwork.SetInterestGroups: first remove listed groups from the disabled set"
+   ],
+   [
+    343,
+    "Groups to remove: group 0 is invalid and logs an error; otherwise remove from the set"
+   ],
+   [
+    379,
+    "Groups to enable: if the list is null every group 0-255 is added"
+   ],
+   [
+    418,
+    "Tell the server about the interest group change unless in offline mode"
+   ],
+   [
+    423,
+    "Merged dictionary code (Photon internals, likely callback removal): decompiler output unreliable"
+   ],
+   [
+    558,
+    "Merged dictionary code (hash-set add or insert): decompiler output unreliable, not game logic"
+   ]
+  ]
+ },
+ "32b35bc": {
+  "summary": "Asks the other player to resend their mulligan result by sending the PUNReceiveRequestMulliganResend RPC with the attempt count to all players. Used when the mulligan info was not received. The remainder of the body is inlined Photon RPC and interest-group code from neighbouring methods.",
+  "comments": [
+   [
+    4,
+    "Box the attempt count as the single RPC argument"
+   ],
+   [
+    16,
+    "The real work: broadcast the resend request (PhotonTargets.All) with the attempt count"
+   ],
+   [
+    23,
+    "Everything below is merged neighbouring code (ConfirmMulliganReceived, SendWrongRoomMessage, Photon internals), not this method"
+   ],
+   [
+    30,
+    "Merged ConfirmMulliganReceived: logs 'Sending Mulligan received Ack' then sends PUNReceiveMulliganAck"
+   ],
+   [
+    58,
+    "Merged SendWrongRoomMessage code: sends PUNReceiveWrongRoom"
+   ],
+   [
+    94,
+    "Inlined PhotonNetwork.RPC: abort if the network cannot be used"
+   ],
+   [
+    99,
+    "Not in a Photon room: log a warning and give up"
+   ],
+   [
+    118,
+    "Networking peer missing (scene loading?): log 'Could not execute RPC'"
+   ],
+   [
+    151,
+    "Skip the RPC if the view's interest group is disabled for sending"
+   ],
+   [
+    157,
+    "Invalid (non-positive) view id: log an error with the method name and game object"
+   ],
+   [
+    194,
+    "At Full log level, log 'Sending RPC <name> to target ...'"
+   ],
+   [
+    239,
+    "Send the RPC as Photon event 200, reliable; also executed locally if the target includes this client"
+   ],
+   [
+    287,
+    "Start of inlined SetInterestGroups: remove listed groups from the disabled set (group 0 logs an error)"
+   ],
+   [
+    342,
+    "Enable groups: a null list means all groups 0-255"
+   ],
+   [
+    381,
+    "Tell the server about the group change unless in offline mode"
+   ],
+   [
+    386,
+    "Merged dictionary code (Photon internals): decompiler output unreliable, not game logic"
+   ],
+   [
+    538,
+    "Merged dictionary code (hash-set add or insert): not game logic"
+   ]
+  ]
+ },
+ "32b36b0": {
+  "summary": "Logs 'Sending Mulligan received Ack' and sends the PUNReceiveMulliganAck RPC to all players with the discarded card ids and environment card, confirming the mulligan was received. Most of the decompiled body is inlined Photon RPC and interest-group code merged in by the decompiler.",
+  "comments": [
+   [
+    4,
+    "Log that an acknowledgement is being sent"
+   ],
+   [
+    6,
+    "Pack the discard ids and environment card as the RPC arguments"
+   ],
+   [
+    21,
+    "The real work: set up the PUNReceiveMulliganAck call on this object's PhotonView"
+   ],
+   [
+    25,
+    "Unreachable-looking merged code: SendWrongRoomMessage (PUNReceiveWrongRoom) was folded in by the decompiler"
+   ],
+   [
+    52,
+    "From here on is the inlined PhotonNetwork.RPC send path, not game-specific logic"
+   ],
+   [
+    68,
+    "Abort if the network cannot be used"
+   ],
+   [
+    73,
+    "Not in a Photon room: log a warning and give up"
+   ],
+   [
+    92,
+    "Networking peer missing (scene loading?): log 'Could not execute RPC'"
+   ],
+   [
+    125,
+    "Skip the RPC if the view's interest group is disabled for sending"
+   ],
+   [
+    131,
+    "Invalid (non-positive) view id: log an error with the method name and game object"
+   ],
+   [
+    165,
+    "At Full log level, log 'Sending RPC <name> to target ...'"
+   ],
+   [
+    210,
+    "Send the RPC as Photon event 200, reliable; also executed locally if the target includes this client"
+   ],
+   [
+    254,
+    "Start of merged SetInterestGroups: remove listed groups from the disabled set (group 0 logs an error)"
+   ],
+   [
+    309,
+    "Enable groups: a null list means all groups 0-255"
+   ],
+   [
+    348,
+    "Tell the server about the group change unless in offline mode"
+   ],
+   [
+    353,
+    "Merged dictionary code (Photon internals): decompiler output unreliable, not game logic"
+   ],
+   [
+    503,
+    "Merged dictionary code (hash-set add or insert): not game logic"
+   ]
+  ]
+ }
+}

@@ -1,0 +1,601 @@
+{
+ "32b2ac0": {
+  "summary": "Callback run when a trait's trigger animation object has been created. Only for trigger-on-play effects, it destroys any previous animation stored for that trait and saves the new one in TraitFrameEffectsTrigger.",
+  "comments": [
+   [
+    4,
+    "Compiler-generated closure: null checks on traitEffect and the captured outer card UI"
+   ],
+   [
+    8,
+    "Only trigger-on-play trait effects keep their animation object; other trigger types are ignored"
+   ],
+   [
+    14,
+    "An animation already stored for this trait: destroy it so the old one does not linger"
+   ],
+   [
+    26,
+    "Store the new animation object under this trait (the inlined Dictionary indexer set follows)"
+   ],
+   [
+    35,
+    "Decompiler expanded the Dictionary add/replace logic (hash, bucket walk, resize); it just sets dict[trait] = traitAnim"
+   ]
+  ]
+ },
+ "32b2ecc": {
+  "summary": "Throws NotSupportedException: compiler-generated coroutine iterators do not support Reset; the game never calls it.",
+  "comments": []
+ },
+ "32b2f10": {
+  "summary": "Coroutine for the card destroy visual. Scales the card up 1.2x and waits the dissolve time, then hides all trait counters, stops in-play animations and waits 1.5 seconds before finishing.",
+  "comments": [
+   [
+    8,
+    "Step 2: dissolve wait is over, hide the counters on every board trait icon"
+   ],
+   [
+    14,
+    "All icons handled: call a virtual on the card (seems to be a dissolve/fade at 0.5), stop animations and wait 1.5s"
+   ],
+   [
+    39,
+    "Step 1: start by scaling the card up to 1.2x and waiting the globalVars dissolve time"
+   ],
+   [
+    64,
+    "Step 3 done: the coroutine ends"
+   ]
+  ]
+ },
+ "32b3124": {
+  "summary": "Throws NotSupportedException: compiler-generated coroutine iterators do not support Reset; the game never calls it.",
+  "comments": []
+ },
+ "32b3168": {
+  "summary": "Coroutine that fades the vanguard (front line) frame images to a target alpha: about 0.4 when stealth is active, otherwise fully opaque. Optionally waits about 0.7 seconds first so a flicker can finish.",
+  "comments": [
+   [
+    7,
+    "First run: work out the target alpha and collect the frame's images"
+   ],
+   [
+    20,
+    "Target alpha: 1.0 normally, about 0.4 (0x3ecccccd) when the card has active stealth"
+   ],
+   [
+    28,
+    "Caller asked to wait for the flicker animation: pause about 0.7s, then resume at the fade"
+   ],
+   [
+    36,
+    "Fade each image to the target alpha over 0.2 seconds"
+   ],
+   [
+    38,
+    "No images found under the vanguard frame"
+   ]
+  ]
+ },
+ "32b3330": {
+  "summary": "Throws NotSupportedException: compiler-generated coroutine iterators do not support Reset; the game never calls it.",
+  "comments": []
+ },
+ "32ace5c": {
+  "summary": "Property getter returning the shared VarsGlobal settings object via PlayerDataManager, or null if the manager is not present. Throws if the card has no script or battle manager.",
+  "comments": [
+   [
+    4,
+    "Card must be attached to a script that belongs to a battle"
+   ],
+   [
+    8,
+    "Use the PlayerDataManager singleton if it exists"
+   ]
+  ]
+ },
+ "32acea8": {
+  "summary": "Initializes the battle card UI from a CardScript. Creates the trait effect dictionaries, fills the card data, creates a remnant body if needed, sets the health, armour, melee and ranged counters and the race text, shows the card art and hides the in-battle id text.",
+  "comments": [
+   [
+    4,
+    "Fresh dictionaries for trait frame effects (play-type and trigger-type animations)"
+   ],
+   [
+    11,
+    "Fill in the generic card display using the script's tier and current max health"
+   ],
+   [
+    17,
+    "Cards that must turn into a remnant get their 3D remnant body now"
+   ],
+   [
+    22,
+    "Cache the traits that should show as icons on the card"
+   ],
+   [
+    26,
+    "Health counter: use the script's current max health, or the base card value if none is set"
+   ],
+   [
+    35,
+    "Armour counter from the base card data"
+   ],
+   [
+    41,
+    "Melee attack counter from the base card data"
+   ],
+   [
+    47,
+    "Ranged attack counter from the base card data"
+   ],
+   [
+    56,
+    "Show the race text, then hide board objects until the card is placed"
+   ],
+   [
+    61,
+    "Only units show stat counters; armour is shown only when non-zero"
+   ],
+   [
+    73,
+    "Show the card art, or a placeholder if the card has no sprite"
+   ],
+   [
+    86,
+    "Also apply the art to the 3D minion model if it exists"
+   ],
+   [
+    91,
+    "Hide the in-battle id debug text"
+   ]
+  ]
+ },
+ "32ad2a4": {
+  "summary": "Creates the 3D remnant body for this card if it does not exist. Loads the remnant prefab, instantiates it under the card, scales it to match the minion model and copies its highlight to the card frame.",
+  "comments": [
+   [
+    5,
+    "Already has a remnant body: nothing to do"
+   ],
+   [
+    9,
+    "Card data must have a remnant body prefab and it must be ready (loaded)"
+   ],
+   [
+    15,
+    "Load the prefab and instantiate it at the card's position"
+   ],
+   [
+    31,
+    "Initialise the remnant body with this card's script"
+   ],
+   [
+    34,
+    "Match the remnant's scale to the minion 3D renderer"
+   ],
+   [
+    37,
+    "Hand the remnant's highlight to the card frame and tint it to the frame highlight colour"
+   ]
+  ]
+ },
+ "32ad8e0": {
+  "summary": "Destroys the card's remnant 3D body, if there is one, after toggling it off, and clears the reference.",
+  "comments": [
+   [
+    5,
+    "Only act if a remnant body exists"
+   ]
+  ]
+ },
+ "32ad9cc": {
+  "summary": "For an enemy's hidden secret card, replaces the visible name and description with trap or secret order text plus 'classified', and swaps the clan frame sprite to the tier frame. Does nothing for other cards.",
+  "comments": [
+   [
+    5,
+    "Only hidden enemy secrets are masked; return for everything else"
+   ],
+   [
+    10,
+    "Use the trap name for traps, otherwise the secret order name"
+   ],
+   [
+    15,
+    "Show 'classified' as the description so the opponent learns nothing"
+   ],
+   [
+    21,
+    "Also replace the clan frame for this army, tier and card type"
+   ],
+   [
+    34,
+    "Rest is the inlined Unity Image.sprite setter: it only assigns the sprite and marks the image dirty"
+   ]
+  ]
+ },
+ "32adb80": {
+  "summary": "Blanks the card's name, race, description and army texts and sets the text layout for an ambush card (the card is shown face-down style). Decompiler output is mangled with code from neighbouring CardTextsController methods.",
+  "comments": [
+   [
+    4,
+    "Needs a card script and text controller"
+   ],
+   [
+    17,
+    "Clear every name text component"
+   ],
+   [
+    25,
+    "Clear the race, description and army texts"
+   ],
+   [
+    43,
+    "From here the decompiler merged in the following CardTextsController methods (SetRace, SetDescription, SetArmy, SetStartingState, SetCardTextLayout); not real flow of this method"
+   ],
+   [
+    139,
+    "Pick the starting text layout state: with or without description depending on card type and text"
+   ],
+   [
+    157,
+    "Switch to the chosen layout state by toggling the matching state entry"
+   ]
+  ]
+ },
+ "32ad730": {
+  "summary": "Shows the minion or tactic placeholder sprite in the card image when the card has no art. Sets the image scale, the mask (none for tactics), offsets the position, and assigns the sprite using a per-card material copy.",
+  "comments": [
+   [
+    8,
+    "Units use the minion placeholder sprite, other cards the tactic one"
+   ],
+   [
+    17,
+    "Remember the original image position the first time (sentinel -1111 means unset)"
+   ],
+   [
+    36,
+    "Scale the card image per card type; big-size mode enlarges heroes and minions"
+   ],
+   [
+    54,
+    "Tactics: no alpha mask and an extra offset; others: mask with the placeholder's texture"
+   ],
+   [
+    69,
+    "Move the image to its original position plus the offset"
+   ],
+   [
+    73,
+    "Make a private material copy so changes do not affect other cards"
+   ],
+   [
+    86,
+    "Rest is the inlined Image.sprite setter: assign the sprite and mark the image dirty"
+   ]
+  ]
+ },
+ "32adc0c": {
+  "summary": "Sets the card back sprite and its shadow sprite on the 2D card controller, using the cardback chosen for the player or the enemy in the battle manager.",
+  "comments": [
+   [
+    5,
+    "Ask the battle manager which cardback this side uses"
+   ],
+   [
+    9,
+    "Apply the cardback sprite to the back image"
+   ],
+   [
+    11,
+    "Only set the shadow if the cardback has a shadow sprite"
+   ],
+   [
+    16,
+    "The rest is the inlined Image.sprite setter for the shadow image"
+   ]
+  ]
+ },
+ "32ad5e8": {
+  "summary": "Sets the race text (for example the minion race) on all race labels of a minion or asset card. The tail of the decompiled body is merged-in code from other CardTextsController methods.",
+  "comments": [
+   [
+    5,
+    "Only minions and assets show a race"
+   ],
+   [
+    11,
+    "Turn the card's race keyword into display text"
+   ],
+   [
+    24,
+    "Write the race text to every race label"
+   ],
+   [
+    34,
+    "Decompiler merged in the following CardTextsController methods (SetDescription, SetArmy, SetStartingState, SetCardTextLayout); not real flow"
+   ]
+  ]
+ },
+ "32adc58": {
+  "summary": "Called when the language changes. Logs it, refreshes card texts and, for cards in hand, switches the name/description display state to match the player's 'text in hand' setting.",
+  "comments": [
+   [
+    4,
+    "Log which card is being updated"
+   ],
+   [
+    7,
+    "Re-translate all texts except the stat counters"
+   ],
+   [
+    11,
+    "Only cards in hand change their name/description display"
+   ],
+   [
+    19,
+    "Pick the target display state (5 to 8) from the current layout and the hand text setting (name only or description only)"
+   ],
+   [
+    46,
+    "Switch the text controller to that state unless already there; the code after the throw at 76 is merged-in SetCardTextLayout"
+   ]
+  ]
+ },
+ "32add00": {
+  "summary": "Returns the sort order of the card's canvas (draw order in the UI).",
+  "comments": [
+   [
+    4,
+    "Canvas must exist"
+   ]
+  ]
+ },
+ "32ade70": {
+  "summary": "Applies visibility for a new card state: shows the front or back of the 2D card, shows or hides the 3D body, effects, highlight and trait icons, and shows the 'created by' text for generated cards in the opponent's hand.",
+  "comments": [
+   [
+    4,
+    "Decide if the card should show its back, depending on the new state"
+   ],
+   [
+    6,
+    "Bit mask over state numbers; states above 17 or with the low bit set count as 'high' states"
+   ],
+   [
+    8,
+    "Show the card back"
+   ],
+   [
+    18,
+    "In cemetery or removed from game: hide the 2D card"
+   ],
+   [
+    37,
+    "Show the 3D body only for cards that are not remnants and are not in a high state"
+   ],
+   [
+    41,
+    "Highlight only a playable card of the local player"
+   ],
+   [
+    50,
+    "Trait icons shown when the front is visible, hidden otherwise"
+   ],
+   [
+    56,
+    "High states also clear status animations"
+   ],
+   [
+    59,
+    "Created-by text starts hidden"
+   ],
+   [
+    68,
+    "Show it only for the card in hand showing, or an opponent's card being played"
+   ],
+   [
+    80,
+    "Build the 'created by <name>' text from the source card; the final set of the text was lost by the decompiler"
+   ]
+  ]
+ },
+ "32ae428": {
+  "summary": "Switches every board trait icon on or off. The rest of the decompiled body is merged-in code from CleanStatusAnims, which clears status animation frames and the quest frame.",
+  "comments": [
+   [
+    14,
+    "Toggle each board trait icon"
+   ],
+   [
+    24,
+    "From here the decompiler merged in CleanStatusAnims; the next block is not part of ToggleTraitIcons"
+   ],
+   [
+    33,
+    "Clean the first status frame dictionary: remove entries matching the filter, exiting or destroying each"
+   ],
+   [
+    91,
+    "Same cleanup for the second dictionary"
+   ],
+   [
+    149,
+    "Destroy the quest frame if clearing everything or if no quests remain"
+   ],
+   [
+    163,
+    "Stop showing the codex"
+   ]
+  ]
+ },
+ "32aed34": {
+  "summary": "For the player's card in hand being shown, appends the list of available targets to the description (the single target's name or a count) in italics and switches the text state.",
+  "comments": [
+   [
+    9,
+    "Only the local player's showing card that can have targets available"
+   ],
+   [
+    15,
+    "Exactly one possible target: show its name, hiding enemy traps and secret orders behind generic names"
+   ],
+   [
+    56,
+    "Several targets: show a target count instead"
+   ],
+   [
+    65,
+    "Build description + italic tag + targets text and set it on the text controller"
+   ],
+   [
+    86,
+    "From here the decompiler merged in code from other CardTextsController methods (SetArmy, SetStartingState, SetCardTextLayout); not real flow"
+   ]
+  ]
+ },
+ "32ad68c": {
+  "summary": "Sets the 2D card to front view and toggles the 3D body on or off. The 2D object is toggled inversely; the final call was lost in decompilation.",
+  "comments": [
+   [
+    5,
+    "Always show the front of the card"
+   ],
+   [
+    8,
+    "Toggle the 3D body if there is one"
+   ],
+   [
+    12,
+    "2D object is the opposite of show; the activation call itself is missing from the output"
+   ]
+  ]
+ },
+ "32ad780": {
+  "summary": "Puts the card art texture on the 3D minion's material and applies the card tier mat-cap texture. Ambush cards use the texture from the ambush trait instead of the art.",
+  "comments": [
+   [
+    5,
+    "Ambush cards hide their real art: use the texture from the ambush trait"
+   ],
+   [
+    19,
+    "Otherwise use the card's own sprite texture"
+   ],
+   [
+    29,
+    "Set the _CardImage texture on the 3D renderer's material"
+   ],
+   [
+    32,
+    "Apply the mat-cap (shiny look) for the card's tier through the material helper"
+   ]
+  ]
+ },
+ "32af194": {
+  "summary": "Switches the card to or from remnant form. Makes sure a remnant body exists, toggles it with a callback, then hides the minion light, can-attack animation, damage counter and heal text.",
+  "comments": [
+   [
+    7,
+    "Create the remnant body if it does not exist yet"
+   ],
+   [
+    10,
+    "Going back from remnant: restore the original card"
+   ],
+   [
+    15,
+    "Toggle the remnant body; onComplete runs when finished"
+   ],
+   [
+    16,
+    "Hide lights, attack animation, damage counter and heal text while in remnant form"
+   ]
+  ]
+ },
+ "32adfc8": {
+  "summary": "Shows or hides the 3D body, and the effects anchor with it. Effects stay hidden for ambush cards.",
+  "comments": [
+   [
+    6,
+    "Toggle the 3D body"
+   ],
+   [
+    7,
+    "Optional second value for the effects anchor; if absent use the body value"
+   ],
+   [
+    11,
+    "Ambush cards never show the effects anchor"
+   ]
+  ]
+ },
+ "32af2e0": {
+  "summary": "Creates and returns the DestroyCard coroutine (state machine) for this card.",
+  "comments": []
+ },
+ "32af388": {
+  "summary": "Plays the trigger-type effect animations of a trait on the card. Returns true if any animation was started. Used when a trait triggers.",
+  "comments": [
+   [
+    8,
+    "Look up the trait definition; no definition means nothing to play"
+   ],
+   [
+    27,
+    "Warlord cards only play it if the effect allows warlords"
+   ],
+   [
+    37,
+    "Only effect types 3 and 6 are trigger animations"
+   ],
+   [
+    44,
+    "Card must be active in the scene"
+   ],
+   [
+    47,
+    "Skip if an animation for this trait is already stored"
+   ],
+   [
+    52,
+    "Start the animation; the callback saves the object in the trigger dictionary"
+   ]
+  ]
+ },
+ "32af730": {
+  "summary": "Plays or refreshes the status animation for a trait. Effect type 0 starts a one-shot animation, type 2 shows or updates a persistent frame effect. Flying and vanguard toggle the flying state.",
+  "comments": [
+   [
+    17,
+    "Loop over each effect of the trait"
+   ],
+   [
+    31,
+    "Type 0: play a one-shot trait animation"
+   ],
+   [
+    56,
+    "Type 2: persistent frame effect"
+   ],
+   [
+    60,
+    "Frame effect exists: reposition, activate it and update its value"
+   ],
+   [
+    110,
+    "Does not exist yet: create it, with a callback that stores it"
+   ],
+   [
+    171,
+    "Decompiler try/finally for the enumerator disposal"
+   ],
+   [
+    188,
+    "Flying sets flying unless vanguard; vanguard turns it off if flying"
+   ]
+  ]
+ }
+}

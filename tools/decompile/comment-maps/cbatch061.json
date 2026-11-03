@@ -1,0 +1,1221 @@
+{
+ "32d4328": {
+  "summary": "Logs the turn setup, then calls OnTurnSetup on every in-play unit and on both players' hands. Called at the start of a turn so cards can refresh turn-based state.",
+  "comments": [
+   [
+    4,
+    "Copy the flag into a one-element buffer (decompiler boxing artifact) so it can be logged and passed on"
+   ],
+   [
+    9,
+    "Loop over all units on the board"
+   ],
+   [
+    14,
+    "Only units still in play get the turn setup; second arg false means 'not in hand'"
+   ],
+   [
+    24,
+    "Hand of the player whose turn it is: cards in hand also get OnTurnSetup (second arg true)"
+   ],
+   [
+    36,
+    "Then the other player's hand gets the same call"
+   ],
+   [
+    51,
+    "Shared null-check failure target: any null manager, list or card ends up here"
+   ]
+  ]
+ },
+ "32d49d8": {
+  "summary": "Tells every other in-play unit and both hands that a unit triggered Requiem, via TriggerOtherCardRequiem. The triggering caster itself is skipped on the board.",
+  "comments": [
+   [
+    4,
+    "Walk all units on the board"
+   ],
+   [
+    11,
+    "Skip the caster so it does not react to its own Requiem"
+   ],
+   [
+    23,
+    "Active player's hand: every card hears about the Requiem"
+   ],
+   [
+    35,
+    "Opponent's hand gets the same notification"
+   ],
+   [
+    51,
+    "Shared null-check failure target"
+   ]
+  ]
+ },
+ "32d4bd0": {
+  "summary": "Tells every other in-play unit and both hands that a unit triggered Mob, via TriggerOtherCardMob. The caster itself is skipped on the board.",
+  "comments": [
+   [
+    4,
+    "Walk all units on the board"
+   ],
+   [
+    11,
+    "Skip the caster so it does not react to its own Mob"
+   ],
+   [
+    23,
+    "Active player's hand: every card hears about the Mob"
+   ],
+   [
+    35,
+    "Opponent's hand gets the same notification"
+   ],
+   [
+    51,
+    "Shared null-check failure target"
+   ]
+  ]
+ },
+ "32d4f5c": {
+  "summary": "Tells every other in-play unit and both hands that a unit triggered Regiment, via TriggerOtherCardRegiment. The caster itself is skipped on the board.",
+  "comments": [
+   [
+    4,
+    "Walk all units on the board"
+   ],
+   [
+    11,
+    "Skip the caster so it does not react to its own Regiment"
+   ],
+   [
+    23,
+    "Active player's hand: every card hears about the Regiment"
+   ],
+   [
+    35,
+    "Opponent's hand gets the same notification"
+   ],
+   [
+    51,
+    "Shared null-check failure target"
+   ]
+  ]
+ },
+ "32d5154": {
+  "summary": "Tells every other in-play unit and both hands that a unit triggered Codex, via TriggerOtherCardCodex. The Codex unit itself is skipped on the board.",
+  "comments": [
+   [
+    4,
+    "Walk all units on the board"
+   ],
+   [
+    11,
+    "Skip the Codex unit itself"
+   ],
+   [
+    23,
+    "Active player's hand: every card hears about the Codex trigger"
+   ],
+   [
+    35,
+    "Opponent's hand gets the same notification"
+   ],
+   [
+    51,
+    "Shared null-check failure target"
+   ]
+  ]
+ },
+ "32d58ac": {
+  "summary": "Raises a UnitSwarmSignal for the played and buffed units, then calls TriggeredSwarm on every other in-play unit and on both hands.",
+  "comments": [
+   [
+    4,
+    "Publish a global Swarm signal first (UI/other listeners)"
+   ],
+   [
+    6,
+    "Walk all units on the board"
+   ],
+   [
+    13,
+    "Skip the played unit so it does not react to its own Swarm"
+   ],
+   [
+    25,
+    "Active player's hand; BuffedTroop is a decompiler mislabel of the list's _size field"
+   ],
+   [
+    37,
+    "Opponent's hand gets the same notification"
+   ],
+   [
+    53,
+    "Shared null-check failure target"
+   ]
+  ]
+ },
+ "32ce5a0": {
+  "summary": "Tells in-play units and both hands that one or two units were removed from the game (RemoveFromGameCard). The removed units themselves are not notified.",
+  "comments": [
+   [
+    4,
+    "Walk all units on the board"
+   ],
+   [
+    11,
+    "Only in-play units that are neither of the removed units react"
+   ],
+   [
+    21,
+    "The second removed unit is optional; also report it if present"
+   ],
+   [
+    33,
+    "Active player's hand: same exclusion of the removed units"
+   ],
+   [
+    59,
+    "Opponent's hand gets the same treatment"
+   ],
+   [
+    89,
+    "Shared null-check failure target"
+   ]
+  ]
+ },
+ "32cbf40": {
+  "summary": "Tells every other unit on the board and both hands that a unit was jammed (ReactToUnitJammed). The jammed unit itself is skipped.",
+  "comments": [
+   [
+    4,
+    "Walk all units on the board"
+   ],
+   [
+    9,
+    "Skip the jammed unit itself"
+   ],
+   [
+    18,
+    "Active player's hand reacts too"
+   ],
+   [
+    34,
+    "Opponent's hand reacts too"
+   ],
+   [
+    54,
+    "Shared null-check failure target"
+   ]
+  ]
+ },
+ "32d62cc": {
+  "summary": "Resolves 'unit attacked' reactions: first on the target, then the attacker, then every other in-play unit and both hands. Called after an attack with the attack type.",
+  "comments": [
+   [
+    4,
+    "Needs a manager and a target; the attacker may be null (e.g. spell or effect damage)"
+   ],
+   [
+    6,
+    "The attacked unit reacts first"
+   ],
+   [
+    7,
+    "The attacker reacts second, if there is one"
+   ],
+   [
+    12,
+    "Everyone else on the board, excluding target and attacker"
+   ],
+   [
+    24,
+    "Only units still in play react"
+   ],
+   [
+    35,
+    "Active player's hand gets the attack notification"
+   ],
+   [
+    47,
+    "Opponent's hand gets it too"
+   ],
+   [
+    64,
+    "Shared null-check failure target"
+   ]
+  ]
+ },
+ "32d6578": {
+  "summary": "Tells every other unit on the board and both hands that a unit used Sacrifice (ReactToUnitUsedSacrifice). The sacrificing unit is skipped.",
+  "comments": [
+   [
+    4,
+    "Walk all units on the board"
+   ],
+   [
+    9,
+    "Skip the sacrificing unit itself"
+   ],
+   [
+    18,
+    "Active player's hand reacts too"
+   ],
+   [
+    34,
+    "Opponent's hand reacts too"
+   ],
+   [
+    54,
+    "Shared null-check failure target"
+   ]
+  ]
+ },
+ "32d67bc": {
+  "summary": "Raises a UnitReanimatedSignal, then calls ReactToUnitReanimated on in-play units and both hands for a unit that came back via reanimation.",
+  "comments": [
+   [
+    4,
+    "Publish a global reanimated signal first"
+   ],
+   [
+    6,
+    "Board units are all notified, including the reanimated unit itself"
+   ],
+   [
+    16,
+    "Active player's hand; the reanimated unit is skipped"
+   ],
+   [
+    32,
+    "Opponent's hand gets the same notification"
+   ],
+   [
+    52,
+    "Shared null-check failure target"
+   ]
+  ]
+ },
+ "32d6a10": {
+  "summary": "Tells the marked unit first, then all other in-play units and both hands, that a unit obtained a Mark (ReactToUnitMarked).",
+  "comments": [
+   [
+    4,
+    "Needs a manager and the marked unit"
+   ],
+   [
+    6,
+    "The marked unit reacts first"
+   ],
+   [
+    10,
+    "Then every other unit on the board"
+   ],
+   [
+    21,
+    "Active player's hand reacts"
+   ],
+   [
+    37,
+    "Opponent's hand reacts"
+   ],
+   [
+    58,
+    "Shared null-check failure target"
+   ]
+  ]
+ },
+ "32d6c68": {
+  "summary": "Tells the marked unit first, then all other in-play units and both hands, that a unit obtained a Hunt Mark (ReactToUnitHuntMarked).",
+  "comments": [
+   [
+    4,
+    "Needs a manager and the marked unit"
+   ],
+   [
+    6,
+    "The marked unit reacts first"
+   ],
+   [
+    10,
+    "Then every other unit on the board"
+   ],
+   [
+    21,
+    "Active player's hand reacts"
+   ],
+   [
+    37,
+    "Opponent's hand reacts"
+   ],
+   [
+    58,
+    "Shared null-check failure target"
+   ]
+  ]
+ },
+ "32d6ec0": {
+  "summary": "Tells the marked unit first, then all other in-play units and both hands, that a unit obtained a Markerlight (ReactToUnitMarkerlight).",
+  "comments": [
+   [
+    4,
+    "Needs a manager and the marked unit"
+   ],
+   [
+    6,
+    "The marked unit reacts first"
+   ],
+   [
+    10,
+    "Then every other unit on the board"
+   ],
+   [
+    21,
+    "Active player's hand reacts"
+   ],
+   [
+    37,
+    "Opponent's hand reacts"
+   ],
+   [
+    58,
+    "Shared null-check failure target"
+   ]
+  ]
+ },
+ "32d7118": {
+  "summary": "Tells the collecting unit first, then all other in-play units, that a Spirit Stone was collected. Hands are not notified.",
+  "comments": [
+   [
+    4,
+    "Needs a manager and the collecting unit"
+   ],
+   [
+    6,
+    "The collector reacts first"
+   ],
+   [
+    10,
+    "Then every other unit on the board (no hand notification here)"
+   ],
+   [
+    24,
+    "Shared null-check failure target"
+   ]
+  ]
+ },
+ "32d722c": {
+  "summary": "Tells the collecting unit first, then all other in-play units, that Faith was collected. Hands are not notified.",
+  "comments": [
+   [
+    4,
+    "Needs a manager and the collecting unit"
+   ],
+   [
+    6,
+    "The collector reacts first"
+   ],
+   [
+    10,
+    "Then every other unit on the board (no hand notification here)"
+   ],
+   [
+    24,
+    "Shared null-check failure target"
+   ]
+  ]
+ },
+ "32d7340": {
+  "summary": "Tells the collecting unit first, then all other in-play units, that quest points were collected. Hands are not notified.",
+  "comments": [
+   [
+    4,
+    "Needs a manager and the collecting unit"
+   ],
+   [
+    6,
+    "The collector reacts first"
+   ],
+   [
+    10,
+    "Then every other unit on the board (no hand notification here)"
+   ],
+   [
+    24,
+    "Shared null-check failure target"
+   ]
+  ]
+ },
+ "32d7454": {
+  "summary": "Tells the secret's unit, then all other in-play units, that a Secret was created, then raises a CreateSecretSignal with the owner flag.",
+  "comments": [
+   [
+    4,
+    "Needs a manager and the secret's card"
+   ],
+   [
+    6,
+    "The new secret reacts first"
+   ],
+   [
+    10,
+    "Then every other unit on the board"
+   ],
+   [
+    21,
+    "Build the global signal carrying the card and whether the player owns it"
+   ],
+   [
+    24,
+    "Everything from here to the end is the decompiler's expansion of Signal.Raise<CreateSecretSignal>; it just publishes the signal"
+   ],
+   [
+    51,
+    "Shared null-check failure target"
+   ]
+  ]
+ },
+ "32d75b8": {
+  "summary": "Tells the sabotage's unit first, then all other in-play units, that a Sabotage was created (ReactToSabotageCreated).",
+  "comments": [
+   [
+    4,
+    "Needs a manager and the sabotage card"
+   ],
+   [
+    6,
+    "The new sabotage reacts first"
+   ],
+   [
+    10,
+    "Then every other unit on the board"
+   ],
+   [
+    24,
+    "Shared null-check failure target"
+   ]
+  ]
+ },
+ "2f46e74": {
+  "summary": "Unity Start: makes this the singleton BattleNetworkManager (destroying any duplicate) and links it back from the NetworkCustomManager.",
+  "comments": [
+   [
+    5,
+    "First instance becomes the singleton; a later duplicate destroys its own GameObject"
+   ],
+   [
+    13,
+    "Give the network manager a back-reference to this battle network manager"
+   ]
+  ]
+ },
+ "2f46f74": {
+  "summary": "Called when entering a battle: stores the match data, maps the match type to a BattleConnectionStatus (offline, practice, random opponent), prepares the room connection and connects if the match is online.",
+  "comments": [
+   [
+    4,
+    "Remember the search manager and attach the match data to the player data"
+   ],
+   [
+    13,
+    "Log the current status and match type"
+   ],
+   [
+    20,
+    "Map MatchType (numeric enum values) to a connection status; bot, tutorial and AI matches are offline"
+   ],
+   [
+    24,
+    "Ranked and closed-deck human matches search for a random opponent"
+   ],
+   [
+    37,
+    "Unknown match type: log an error, then fall through to offline"
+   ],
+   [
+    45,
+    "Offline play (tutorial, events vs AI, etc.)"
+   ],
+   [
+    54,
+    "Practice (friend) matches use the practice status"
+   ],
+   [
+    64,
+    "Bot matches that behave like PvP offline use playingOfflinePvp"
+   ],
+   [
+    76,
+    "Ranked, closed deck and fast mode matches search for a random opponent"
+   ],
+   [
+    80,
+    "Store the chosen status"
+   ],
+   [
+    85,
+    "Online only: connect to the Photon battle room once the network manager is ready"
+   ]
+  ]
+ },
+ "2f475f8": {
+  "summary": "Leaves the Photon battle room (or ends the offline room) and sets the status to leavingBattle. Optionally keeps the room alive for the opponent; does nothing for offline games.",
+  "comments": [
+   [
+    7,
+    "Mark that we are leaving the battle"
+   ],
+   [
+    9,
+    "No battle manager: we may be in the search screen instead"
+   ],
+   [
+    16,
+    "Offline/non-networked games have no room to leave"
+   ],
+   [
+    21,
+    "In a battle: only networked games need to leave a room"
+   ],
+   [
+    27,
+    "Unless asked to keep the room alive, tell the network manager to remove the room after leaving"
+   ],
+   [
+    36,
+    "Nothing to leave if there is no current room"
+   ],
+   [
+    50,
+    "Real online mode: leave the Photon room (ttl flag keeps the player slot open when the room has a player TTL)"
+   ],
+   [
+    71,
+    "Offline mode: fake the leave by resetting the peer and sending the OnLeftRoom message"
+   ]
+  ]
+ },
+ "2f4771c": {
+  "summary": "Leaves the room and the battle. From the search screen it cancels the search; from a finished battle it returns to the main menu, or starts the tutorial match if the first tutorials are not done.",
+  "comments": [
+   [
+    5,
+    "Leave the Photon room first and mark the status as leaving"
+   ],
+   [
+    10,
+    "No battle manager: we were only searching for an opponent"
+   ],
+   [
+    18,
+    "Stop waiting for a human opponent and cancel the battle search"
+   ],
+   [
+    29,
+    "In a battle"
+   ],
+   [
+    34,
+    "Battle already ended (PostBattle): just move the UI to its post-battle state"
+   ],
+   [
+    60,
+    "Safety net: if the room was not left yet, leave it now"
+   ],
+   [
+    66,
+    "Free the card-back resources used in the battle"
+   ],
+   [
+    69,
+    "Tutorials finished: go back to the main menu scene"
+   ],
+   [
+    80,
+    "Tutorials not finished: set up and start the tutorial match against an easy AI"
+   ],
+   [
+    93,
+    "Shared null-check failure target (decompiler output here is partly unreliable)"
+   ]
+  ]
+ },
+ "2f47824": {
+  "summary": "Cancels a battle search. Depending on the Photon connection status it leaves the room, reconnects to the Photon region, or does nothing.",
+  "comments": [
+   [
+    4,
+    "Reset the status to undefined"
+   ],
+   [
+    6,
+    "Only a logged-in player has anything to cancel"
+   ],
+   [
+    14,
+    "Check where we are in the Photon connection"
+   ],
+   [
+    17,
+    "Before being in a room: connected, lobby or disconnected"
+   ],
+   [
+    18,
+    "Connected to master already: nothing to do (only dev tools log it)"
+   ],
+   [
+    34,
+    "Already in the lobby: nothing to do besides a log"
+   ],
+   [
+    44,
+    "Unexpected state: log a warning"
+   ],
+   [
+    53,
+    "In a room or changing: leave it; if fully disconnected, reconnect to the Photon region instead"
+   ],
+   [
+    55,
+    "Disconnected: switch protocol and reconnect to the configured region with the game version"
+   ],
+   [
+    76,
+    "In a room: ask the network manager to remove the room, then leave via Photon"
+   ],
+   [
+    80,
+    "Real online mode: OpLeaveRoom, keeping the slot if the room has a player TTL"
+   ],
+   [
+    102,
+    "Offline mode: reset the peer state and send the OnLeftRoom message by hand"
+   ]
+  ]
+ },
+ "2f47870": {
+  "summary": "Logs a reconnect attempt, asks the network manager to reconnect to the battle room unless skipReconnectAttempt is set, and bumps the attempt counter.",
+  "comments": [
+   [
+    5,
+    "Sanity check: this should only run while the status is tryingToReconnect"
+   ],
+   [
+    13,
+    "Log the attempt number and the skip flag"
+   ],
+   [
+    17,
+    "Skipped when the caller knows a reconnect is already in progress"
+   ],
+   [
+    23,
+    "Count this attempt"
+   ]
+  ]
+ },
+ "2f479cc": {
+  "summary": "Builds the practice (friend match) room name as 'Practice_' followed by the first player's id.",
+  "comments": [
+   [
+    5,
+    "String.Concat inlined by the decompiler: prefix plus id, handling null/empty parts"
+   ]
+  ]
+ },
+ "2f47258": {
+  "summary": "Joins the correct Photon room for a match type: the casual room for practice matches, or a random event room (using the event score) for ranked, closed deck and fast mode. Offline and bot types return without joining.",
+  "comments": [
+   [
+    5,
+    "Reset the matchmaking attempt counter"
+   ],
+   [
+    12,
+    "Get the live-ops handler to find the active ranked event"
+   ],
+   [
+    13,
+    "Switch on the match type; many types are offline/bot and need no room"
+   ],
+   [
+    39,
+    "Ranked: need the active event, which should have a leaderboard score"
+   ],
+   [
+    63,
+    "Practice: join the room named in the match data"
+   ],
+   [
+    81,
+    "Unknown match type: log an error"
+   ],
+   [
+    91,
+    "Closed deck and fast mode ranked use the match data's active event"
+   ],
+   [
+    93,
+    "The event score is used as the Elo for matchmaking"
+   ],
+   [
+    94,
+    "Join (or create) a random event room matching that score"
+   ],
+   [
+    98,
+    "Shared null-check failure target"
+   ]
+  ]
+ },
+ "2f47a18": {
+  "summary": "Sets an integer custom property on the current Photon room, which syncs to everyone in the room. Returns true if a room existed.",
+  "comments": [
+   [
+    4,
+    "Only works when we are in a room"
+   ],
+   [
+    9,
+    "Build a one-entry property table with the boxed int"
+   ],
+   [
+    16,
+    "Write the property to the room"
+   ],
+   [
+    24,
+    "Return whether there was a room"
+   ]
+  ]
+ },
+ "2f47b44": {
+  "summary": "Reads an integer custom property from the current Photon room, returning -1 when there is no room or no such property. The decompiled tail also contains merged unrelated code.",
+  "comments": [
+   [
+    5,
+    "No room: return -1"
+   ],
+   [
+    10,
+    "Property missing: return -1"
+   ],
+   [
+    16,
+    "Unbox the stored int; the decompiler turned this into odd Monitor calls"
+   ],
+   [
+    20,
+    "Decompiler output after this point is merged from HideCurrentRoom (hides the room); not part of the real function"
+   ]
+  ]
+ },
+ "2f47c40": {
+  "summary": "Hides the current Photon room by setting its visible property to false so no one else can join, e.g. once an opponent has been found or a bot match started.",
+  "comments": [
+   [
+    9,
+    "If we are in a room, hide it; otherwise log that there is nothing to hide"
+   ],
+   [
+    21,
+    "Online mode: tell the server the room is no longer visible (property key 0xfe)"
+   ],
+   [
+    33,
+    "Update the local room object too"
+   ]
+  ]
+ },
+ "2f47c9c": {
+  "summary": "Handles the Photon 'joined room' event, acting by battle connection status: leave stray rooms, hide the room for online bot games, confirm a reconnection, or leave if the practice room is wrong.",
+  "comments": [
+   [
+    5,
+    "Null player list is a bug: the decompiler shows a thrown exception and the disconnect handler merged in"
+   ],
+   [
+    23,
+    "Log the status and player count"
+   ],
+   [
+    32,
+    "Status below 0x29: idle, connected, searching or practice"
+   ],
+   [
+    34,
+    "Searching for a random opponent: only care about our own room (named after our user id)"
+   ],
+   [
+    45,
+    "Practice room: leave if it is already occupied by another player"
+   ],
+   [
+    71,
+    "Not in a battle (undefined): leave the room we should not be in"
+   ],
+   [
+    72,
+    "Connected: hide the room if the opponent is an online bot"
+   ],
+   [
+    103,
+    "Trying to reconnect: look for the opponent in the room"
+   ],
+   [
+    112,
+    "Opponent found: the reconnection succeeded"
+   ],
+   [
+    125,
+    "Opponent not found: still fine if the opponent is an online bot"
+   ],
+   [
+    142,
+    "Otherwise report failure and mark the opponent disconnected"
+   ],
+   [
+    152,
+    "Offline modes should never join a room: just log it"
+   ],
+   [
+    161,
+    "Leaving the battle: leave the room again"
+   ],
+   [
+    170,
+    "Any other status is unexpected: log an error"
+   ]
+  ]
+ },
+ "2f48318": {
+  "summary": "Handles connecting to the Photon master server by battle connection status: continue a reconnect, connect to the room, finish leaving a battle or search, or ignore.",
+  "comments": [
+   [
+    11,
+    "Branch on status (numeric compares of the enum)"
+   ],
+   [
+    14,
+    "Trying to reconnect: rejoin the battle room"
+   ],
+   [
+    21,
+    "Offline PvP: the search screen finished leaving its room"
+   ],
+   [
+    34,
+    "Offline play: nothing to do"
+   ],
+   [
+    37,
+    "Leaving a battle: reset the status and tell the battle manager it finished leaving"
+   ],
+   [
+    52,
+    "Idle or connected: nothing to do"
+   ],
+   [
+    60,
+    "Searching or practice: now that we are on master, connect to the battle room"
+   ],
+   [
+    67,
+    "Unexpected status: log an error"
+   ]
+  ]
+ },
+ "2f4852c": {
+  "summary": "Handles another player joining the battle room: confirms an opponent's reconnection, starts the match when the second player arrives, or tells an unexpected player they are in the wrong room.",
+  "comments": [
+   [
+    4,
+    "Build a debug message from several parts (array bounds checks make this look tangled)"
+   ],
+   [
+    25,
+    "Branch on the connection status"
+   ],
+   [
+    28,
+    "Waiting for opponent to come back"
+   ],
+   [
+    34,
+    "It is our opponent: log and resume the battle as connected"
+   ],
+   [
+    43,
+    "Resume the battle without treating this as a fresh reconnect"
+   ],
+   [
+    51,
+    "Offline PvP: ignore"
+   ],
+   [
+    56,
+    "Offline play and leaving: ignore"
+   ],
+   [
+    63,
+    "Unexpected status: log an error"
+   ],
+   [
+    73,
+    "Not yet connected: second player arrived, start the game"
+   ],
+   [
+    78,
+    "Practice: only start when the joiner is our friend and no room name was set"
+   ],
+   [
+    92,
+    "Start the battle remotely and hide the room so nobody else joins"
+   ],
+   [
+    99,
+    "Already connected: a stranger joined, so tell them they are in the wrong room"
+   ],
+   [
+    113,
+    "Decompiler artifact: array index check failure"
+   ]
+  ]
+ },
+ "2f48964": {
+  "summary": "Logs a failed connection to the Photon server and logs an error for connection statuses it does not expect.",
+  "comments": [
+   [
+    11,
+    "Bit-mask test over the status enum values for which this event is acceptable"
+   ],
+   [
+    19,
+    "Status not in the expected set: log an error"
+   ]
+  ]
+ },
+ "2f48aa4": {
+  "summary": "Handles failing to join a room: leaves practice rooms, or cancels search/battle when a reconnect room no longer exists.",
+  "comments": [
+   [
+    10,
+    "Practice room join failed: reset the status and leave"
+   ],
+   [
+    16,
+    "Reconnect target room is gone"
+   ],
+   [
+    20,
+    "No battle manager: cancel the opponent search instead"
+   ],
+   [
+    28,
+    "In a battle: tell the battle manager the reconnect failed"
+   ]
+  ]
+ },
+ "2f48c44": {
+  "summary": "Reacts to a network disconnect by connection status: leaves the battle, starts or continues reconnecting, or cancels the search.",
+  "comments": [
+   [
+    12,
+    "Status below 0x29: idle, connected, searching, waiting for opponent, practice"
+   ],
+   [
+    17,
+    "Connected during a battle: begin reconnecting"
+   ],
+   [
+    21,
+    "Waiting for a random opponent: give up and leave"
+   ],
+   [
+    36,
+    "Higher statuses: waiting for friend leaves the battle; reconnect states retry"
+   ],
+   [
+    45,
+    "Switch to tryingToReconnect and tell the battle manager we dropped"
+   ],
+   [
+    51,
+    "Already reconnecting or no battle manager: retry without a new attempt"
+   ],
+   [
+    60,
+    "Offline play ignores disconnects"
+   ],
+   [
+    64,
+    "Leaving the battle: finish leaving"
+   ],
+   [
+    77,
+    "Searching or offline PvP: cancel the search because of the disconnect"
+   ]
+  ]
+ },
+ "2f48ea8": {
+  "summary": "After a random join fails, goes offline for bot modes; for human modes it keeps joining random event rooms until enough attempts have failed, then creates its own event room.",
+  "comments": [
+   [
+    8,
+    "Count this failed attempt"
+   ],
+   [
+    16,
+    "Bot match types fall back to offline play"
+   ],
+   [
+    43,
+    "Human matches: need the active event"
+   ],
+   [
+    44,
+    "Games lost in the event raise the attempt limit"
+   ],
+   [
+    45,
+    "Use the event score as Elo if available, otherwise the player's rating"
+   ],
+   [
+    56,
+    "Attempt limit: 6 or 9 depending on losses, or 2 if the new matchmaking is disabled"
+   ],
+   [
+    64,
+    "Too many failed joins: create a room ourselves, tagged with alliance group id"
+   ],
+   [
+    92,
+    "Otherwise try another random room"
+   ]
+  ]
+ },
+ "2f492e8": {
+  "summary": "Returns true when enough matchmaking attempts have failed that the client should create its own room instead of joining one.",
+  "comments": [
+   [
+    5,
+    "Limit is 6 (few losses) or 9 (2+ losses); 2 if the new matchmaking is disabled"
+   ]
+  ]
+ },
+ "2f49334": {
+  "summary": "Handles a Photon player-disconnected event: marks the opponent disconnected while connected, or cancels a practice match.",
+  "comments": [
+   [
+    11,
+    "Higher statuses: reconnect-wait and offline states ignore this event"
+   ],
+   [
+    37,
+    "Idle: nothing to do"
+   ],
+   [
+    40,
+    "In a battle: only react if the player who left is our opponent"
+   ],
+   [
+    51,
+    "Practice (friend) match: cancel without a result"
+   ]
+  ]
+ },
+ "2f48268": {
+  "summary": "Marks the opponent as disconnected, tells the battle manager, and waits for the opponent to reconnect.",
+  "comments": [
+   [
+    5,
+    "Inform the battle manager (UI shows a disconnect message)"
+   ],
+   [
+    13,
+    "Now waiting for the opponent to come back"
+   ]
+  ]
+ },
+ "2f49a0c": {
+  "summary": "Coroutine body for showing battle tips: shows the tip panel with a red or normal background, waits tipDuration per tip, removes shown tips, and hides the panel when the queue is empty.",
+  "comments": [
+   [
+    5,
+    "State 1: the wait finished, so drop the tip that was just shown"
+   ],
+   [
+    14,
+    "State 0 (first run): remember the background colour and show the panel"
+   ],
+   [
+    31,
+    "Red background is used for error-style tips such as 'can't do that'"
+   ],
+   [
+    37,
+    "Make the panel visible"
+   ],
+   [
+    41,
+    "Set background alpha: 0.6 normally, 1.0 when opaque"
+   ],
+   [
+    50,
+    "More tips queued: show the next one and wait for the tip duration"
+   ],
+   [
+    67,
+    "Queue empty: hide the panel and restore the original colour; coroutine ends"
+   ]
+  ]
+ },
+ "2f49cec": {
+  "summary": "Compiler-generated IEnumerator.Reset for the DisplayTip coroutine; always throws NotSupportedException.",
+  "comments": []
+ },
+ "2f49534": {
+  "summary": "Returns the global game-variables object from the player data manager, or null when that manager does not exist.",
+  "comments": [
+   [
+    4,
+    "Requires a live BattleManager instance"
+   ],
+   [
+    8,
+    "Read the global vars only if the player data manager exists"
+   ]
+  ]
+ },
+ "2f49644": {
+  "summary": "Shows a 'can't do that' tip: plays the voice line if none is playing, queues the text (limiting spam and queue size), and starts the tip display coroutine if the panel is hidden.",
+  "comments": [
+   [
+    8,
+    "Play the 'I can't do that' voice line unless another line is playing"
+   ],
+   [
+    15,
+    "Ignore repeated identical tips"
+   ],
+   [
+    19,
+    "If too many tips are queued, drop the oldest waiting one"
+   ],
+   [
+    28,
+    "Add the tip text to the queue"
+   ],
+   [
+    43,
+    "Panel already showing: the running coroutine will pick up the new tip"
+   ],
+   [
+    47,
+    "Panel hidden: start the DisplayTip coroutine (decompiled StartCoroutine plumbing is tangled below)"
+   ]
+  ]
+ }
+}

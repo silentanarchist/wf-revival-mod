@@ -1,0 +1,795 @@
+{
+ "2f3b20c": {
+  "summary": "Reacts to damage dealt to a card, called on every card in play. Handles syphon, poisonous, rage, cruelty, ecstasy, damage triggers, ambush reveal, low-life invulnerability and concussive stun. Adds effects and fires triggers.",
+  "comments": [
+   [
+    4,
+    "null damageInfo: the decompiler routes this to the NullReferenceException at the end"
+   ],
+   [
+    5,
+    "damage was absorbed or zero: nothing to react to"
+   ],
+   [
+    11,
+    "this card was the source of the damage: handle attacker-side traits"
+   ],
+   [
+    17,
+    "syphon: when this card deals Attack damage it heals its owner's hero (amount seems to be 1)"
+   ],
+   [
+    25,
+    "poisonous: Attack damage to a non-warlord minion adds a lethal poison-type effect to the victim"
+   ],
+   [
+    42,
+    "this card is the one that was damaged: handle rage"
+   ],
+   [
+    46,
+    "rage applies if the card has it by default, currently, or via a Rage enchantment: fire the Rage trigger"
+   ],
+   [
+    55,
+    "double rage: fire the Rage trigger a second time"
+   ],
+   [
+    63,
+    "cruelty: on its owner's turn, damaging a surviving enemy fires the Cruelty trigger"
+   ],
+   [
+    76,
+    "work out health after this hit (damage minus armour, at least 1) to test the ecstasy threshold"
+   ],
+   [
+    94,
+    "warn: a unit already waiting to die is still receiving damage triggers"
+   ],
+   [
+    99,
+    "fire the generic UnitDamaged trigger for this card"
+   ],
+   [
+    102,
+    "this card took the damage: stop praying and run self-only reactions"
+   ],
+   [
+    106,
+    "ambush is broken when the unit is hurt (state bitmask = in-play states)"
+   ],
+   [
+    110,
+    "player's own card at 10 or less health with the low-life flag becomes invulnerable"
+   ],
+   [
+    123,
+    "split by damage type: ability/normal damage vs attack/blast damage"
+   ],
+   [
+    130,
+    "attack or blast damage: fire UnitDamagedByAttack"
+   ],
+   [
+    133,
+    "concussive: if this card was the attacking card and has concussive, stun the damaged card for 1 turn"
+   ],
+   [
+    138,
+    "shared null-check failure target"
+   ]
+  ]
+ },
+ "2f3b858": {
+  "summary": "Returns true when this card has the ecstasy trait and a hit would drop it from above the ecstasy health threshold to at or below it, without killing it. Used by ResolveDamageDealt.",
+  "comments": [
+   [
+    4,
+    "only the damaged card itself can trigger ecstasy"
+   ],
+   [
+    8,
+    "needs the ecstasy trait by default and must survive the hit"
+   ],
+   [
+    17,
+    "threshold test: currently above the trait value but ending at or below it"
+   ]
+  ]
+ },
+ "2f3bba0": {
+  "summary": "Runs when any card is played: fires the card-played trigger, checks combo and summon reactions, and for the played card itself clears the in-hand glow, records the turn played and queues swarm with a matching right neighbour.",
+  "comments": [
+   [
+    4,
+    "fire the card-played trigger (with target) for this card, then combo and summon checks"
+   ],
+   [
+    11,
+    "reactions to other cards stop here; the rest only applies to the card that was played"
+   ],
+   [
+    15,
+    "clear the in-hand reflected frame, drop ephemeral, and store the current turn as turnPlayed"
+   ],
+   [
+    29,
+    "swarm: if the unit to the right also has swarm and is the same card, queue a swarm execution"
+   ]
+  ]
+ },
+ "2f3c08c": {
+  "summary": "Spawns the swarm visual effect at this card's position and hooks a callback that finishes the swarm buff on the other unit. Called when a swarm pair is executed.",
+  "comments": [
+   [
+    4,
+    "closure object holds this card, the buffed unit and the finish callback"
+   ],
+   [
+    10,
+    "the swarm trait's configured custom object is the effect prefab"
+   ],
+   [
+    19,
+    "only use the custom object if it is a GameObject"
+   ],
+   [
+    25,
+    "instantiate the effect at this card's position and copy the card's scale"
+   ],
+   [
+    36,
+    "callback to run when the effect finishes (decompiler dropped the call that registers it)"
+   ]
+  ]
+ },
+ "2f36870": {
+  "summary": "Destroys the reflected frame object (the in-hand glow frame) on this card's UI if one exists.",
+  "comments": [
+   [
+    8,
+    "destroy the reflected frame game object if present"
+   ]
+  ]
+ },
+ "2f3c32c": {
+  "summary": "Processes the tide trait: plays a creation animation near the Energy area and adds an ephemeral copy of this card to hand with its effects copied and tide counter reduced by 1.",
+  "comments": [
+   [
+    4,
+    "needs the tide trait and a non-zero tide counter"
+   ],
+   [
+    8,
+    "find the owner's hand spawn point next to the psychic Energy display"
+   ],
+   [
+    12,
+    "if mobile variables exist, play the reflected-creation animation from this card"
+   ],
+   [
+    18,
+    "mark the new card as an ephemeral copy"
+   ],
+   [
+    31,
+    "add the copy to the owner's hand"
+   ],
+   [
+    36,
+    "copy this card's effects onto the copy, skipping flagged ones and one effect type"
+   ],
+   [
+    54,
+    "the copy has one less tide charge"
+   ]
+  ]
+ },
+ "2f3debc": {
+  "summary": "Processes the companion trait: plays a creation animation and adds an ephemeral companion card to hand, with the companion counter reduced by 1.",
+  "comments": [
+   [
+    4,
+    "only continue if a companion should be spawned"
+   ],
+   [
+    8,
+    "find the owner's hand spawn point next to the psychic Energy display"
+   ],
+   [
+    12,
+    "if mobile variables exist, play the reflected-creation animation"
+   ],
+   [
+    18,
+    "mark the new card as an ephemeral copy"
+   ],
+   [
+    24,
+    "cards with the companion trait spawn their related card instead of a copy of themselves"
+   ],
+   [
+    34,
+    "add the card to hand, flag it as a companion and give it counter minus 1"
+   ]
+  ]
+ },
+ "2f3e0c0": {
+  "summary": "Returns true if this card should spawn a companion: it has the companion trait with a related card, or its companion counter is above zero.",
+  "comments": [
+   [
+    4,
+    "companion trait plus a related card always spawns"
+   ],
+   [
+    15,
+    "otherwise spawn while the companion counter is positive"
+   ]
+  ]
+ },
+ "2f3bd94": {
+  "summary": "Fires the summon-related triggers on this card when a card is played: other unit summoned, this unit summoned, faith, support for friendly units and uprising.",
+  "comments": [
+   [
+    4,
+    "skip all if this card is already waiting to die"
+   ],
+   [
+    6,
+    "another unit was played: fire OtherUnitSummoned"
+   ],
+   [
+    16,
+    "this card itself was summoned as a minion: fire ThisUnitSummoned and UseFaith"
+   ],
+   [
+    27,
+    "a friendly unit was played: fire Support"
+   ],
+   [
+    39,
+    "uprising: this card entered play this same turn and a friendly minion was just played"
+   ],
+   [
+    53,
+    "shared null-check failure target"
+   ]
+  ]
+ },
+ "2f3e1e0": {
+  "summary": "Resolves a unit's active ability when used. Marks it used, handles loading abilities (two-step) and oath double triggers, then refreshes the trait icons. Inlined UI helpers appear at the end.",
+  "comments": [
+   [
+    4,
+    "no active ability: only logs when dev tools are on, then bails"
+   ],
+   [
+    23,
+    "record that the active ability was used and bump the per-turn use count"
+   ],
+   [
+    25,
+    "duty, ferocity or oath cards pick their attack type automatically"
+   ],
+   [
+    31,
+    "abilities that need loading act in two stages: first use loads, second use fires"
+   ],
+   [
+    36,
+    "first use: mark the ability as loaded"
+   ],
+   [
+    41,
+    "no loading enchantment: just play the activation sound"
+   ],
+   [
+    46,
+    "otherwise trigger the loading enchantment (field names are unreliable here)"
+   ],
+   [
+    49,
+    "oath: repeat the trigger once per extra double-oath effect"
+   ],
+   [
+    71,
+    "normal path: resolve the active ability now"
+   ],
+   [
+    72,
+    "prefer a separate ability reference, else use the card's own data"
+   ],
+   [
+    75,
+    "oath with double-oath effects: resolve the ability extra times"
+   ],
+   [
+    100,
+    "resolve via the card's own data"
+   ],
+   [
+    102,
+    "resolve via the ability reference, with the same oath repeat"
+   ],
+   [
+    126,
+    "after resolving, a loading ability goes back to unloaded"
+   ],
+   [
+    134,
+    "refresh the UI: clear status animations, then rebuild trait icons (inlined UpdateTraitIcons)"
+   ],
+   [
+    141,
+    "only units show board trait icons"
+   ],
+   [
+    152,
+    "first hide every trait icon"
+   ],
+   [
+    161,
+    "enemy ambush card stays hidden: no icons"
+   ],
+   [
+    168,
+    "rebuild the icon list from current traits, with counters and icon sprites"
+   ],
+   [
+    237,
+    "from here the decompiler appended inlined helpers (ToggleTraitIcons, CleanStatusAnims)"
+   ],
+   [
+    267,
+    "CleanStatusAnims helper: removes status animation objects tracked in the card UI"
+   ],
+   [
+    338,
+    "same cleanup for the second status animation dictionary"
+   ],
+   [
+    396,
+    "destroy the codex frame object unless quests remain"
+   ]
+  ]
+ },
+ "2f2f6b8": {
+  "summary": "Removes the drop pod trait with a camera shake (bigger if destroyed) and refreshes the card UI, then runs an inlined death check on units, which may destroy the pod again, use survivor, make a remnant or mark the unit waiting to die.",
+  "comments": [
+   [
+    4,
+    "strip the drop pod trait from the card"
+   ],
+   [
+    6,
+    "camera shake strength: big when the pod was destroyed, small otherwise"
+   ],
+   [
+    12,
+    "play the removal animation and refresh health, attack, cost and trait icons"
+   ],
+   [
+    23,
+    "non-units stop here"
+   ],
+   [
+    27,
+    "inlined CheckIfDead from here on"
+   ],
+   [
+    53,
+    "cards with no starting health are ignored"
+   ],
+   [
+    59,
+    "drop pod still on with zero pod health: it is destroyed (recurses with destroyed = true)"
+   ],
+   [
+    77,
+    "unit still has health: nothing dies"
+   ],
+   [
+    87,
+    "not in an in-play state: warn and stop"
+   ],
+   [
+    93,
+    "survivor charges left: sacrifice first if on own turn, then revive via UseSurvivor"
+   ],
+   [
+    107,
+    "should become a remnant: run backlash and queue the remnant transform"
+   ],
+   [
+    115,
+    "otherwise mark as waiting to die and hide the can-attack and ability animations"
+   ]
+  ]
+ },
+ "2f3eae8": {
+  "summary": "Removes the tainted (duplicitous) trait and refreshes the card text, then runs an inlined death check on units, which may use survivor, make a remnant or mark the unit waiting to die.",
+  "comments": [
+   [
+    4,
+    "strip the tainted trait"
+   ],
+   [
+    6,
+    "refresh health, attack, cost and trait icons"
+   ],
+   [
+    13,
+    "non-units stop here"
+   ],
+   [
+    17,
+    "inlined CheckIfDead from here on"
+   ],
+   [
+    43,
+    "cards with no starting health are ignored"
+   ],
+   [
+    49,
+    "drop pod still on with zero pod health: destroy the pod"
+   ],
+   [
+    67,
+    "unit still has health: nothing dies"
+   ],
+   [
+    77,
+    "not in an in-play state: warn and stop"
+   ],
+   [
+    83,
+    "survivor charges left: sacrifice first if on own turn, then revive via UseSurvivor"
+   ],
+   [
+    97,
+    "should become a remnant: run backlash and queue the remnant transform"
+   ],
+   [
+    105,
+    "otherwise mark as waiting to die and hide the can-attack and ability animations"
+   ]
+  ]
+ },
+ "2f3eb10": {
+  "summary": "Activates the survivor trait: sets health to the survivor value (capped at max health), swaps survivor for survivorSpent, plays effects, fires the Survivor trigger and announces the heal.",
+  "comments": [
+   [
+    4,
+    "new health is the survivor value, capped at max health"
+   ],
+   [
+    12,
+    "remove the survivor trait"
+   ],
+   [
+    14,
+    "highlight the icon and play the trigger animation"
+   ],
+   [
+    19,
+    "log the activated trigger for replays or history"
+   ],
+   [
+    22,
+    "play the survivor sound effect"
+   ],
+   [
+    25,
+    "replace survivor with the spent marker so it cannot fire again"
+   ],
+   [
+    28,
+    "fire the Survivor trigger and broadcast the heal to other cards"
+   ]
+  ]
+ },
+ "2f3ed70": {
+  "summary": "Turns the card into a remnant: sets fixed remnant health from static game data and removes every current trait, then updates the card UI.",
+  "comments": [
+   [
+    6,
+    "flag as remnant; max and current health are set to the configured remnant health"
+   ],
+   [
+    18,
+    "remove every trait, iterating backwards"
+   ],
+   [
+    36,
+    "switch the card visuals to the remnant look"
+   ]
+  ]
+ },
+ "2f3ef58": {
+  "summary": "Turns a card back from a remnant: clears the flag, plays the UI change, then refreshes health and armour displays and the hidden-ambush armour display.",
+  "comments": [
+   [
+    5,
+    "no longer a remnant"
+   ],
+   [
+    9,
+    "UI plays the transformation; onComplete is called when it finishes"
+   ],
+   [
+    13,
+    "show drop pod health if a drop pod is active, otherwise normal health"
+   ],
+   [
+    29,
+    "decompiler artifact: orphan else; the health text update follows"
+   ],
+   [
+    32,
+    "update the health text with current, max and original max values"
+   ],
+   [
+    57,
+    "update the armour text and show the armour frame only when armour is above 0"
+   ],
+   [
+    83,
+    "an enemy ambush card stays hidden: hide its armour display"
+   ],
+   [
+    90,
+    "refresh the bastion display"
+   ]
+  ]
+ },
+ "2f3f34c": {
+  "summary": "Triggers the sacrifice trait: plays effects, fires the Sacrifice trigger, then tells every other unit and both players' hands that this unit sacrificed.",
+  "comments": [
+   [
+    7,
+    "play the trigger animation and sound"
+   ],
+   [
+    14,
+    "fire the Sacrifice trigger on this card"
+   ],
+   [
+    17,
+    "every other unit in play reacts"
+   ],
+   [
+    31,
+    "then cards in the current player's hand react"
+   ],
+   [
+    47,
+    "then cards in the other player's hand react"
+   ]
+  ]
+ },
+ "2f3f4c4": {
+  "summary": "Triggers this card's codex ability against a target (itself if none given).",
+  "comments": [
+   [
+    11,
+    "no target given: target itself"
+   ],
+   [
+    15,
+    "fire the Codex trigger with an empty damage info"
+   ]
+  ]
+ },
+ "2f3fa10": {
+  "summary": "Checks whether a unit is dead. Handles drop pod destruction, survivor, remnant transformation, or marks it waiting to die and runs backlash. Called after health changes.",
+  "comments": [
+   [
+    9,
+    "build and log the debug string"
+   ],
+   [
+    30,
+    "cards with no starting health are ignored"
+   ],
+   [
+    36,
+    "drop pod still on with zero pod health: destroy the pod instead of the unit"
+   ],
+   [
+    54,
+    "unit still has health: nothing dies"
+   ],
+   [
+    64,
+    "not in an in-play state: warn and stop"
+   ],
+   [
+    70,
+    "survivor charges left: sacrifice first if on own turn, then revive via UseSurvivor"
+   ],
+   [
+    84,
+    "remember the acting card from the damage info for backlash"
+   ],
+   [
+    87,
+    "should become a remnant: run backlash and queue the remnant transform"
+   ],
+   [
+    95,
+    "otherwise mark as waiting to die and hide the can-attack and ability animations"
+   ]
+  ]
+ },
+ "2f3ffa0": {
+  "summary": "Queues a backlash death action (type 0xd) for the unit and records the turn it died. May flag backlash resolution as disabled if an ability's criteria are not met.",
+  "comments": [
+   [
+    4,
+    "build the BattleAction in a local buffer: type 0xd, this card, acting card, death type"
+   ],
+   [
+    9,
+    "backlash trait: check the criteria of each ThisUnitDeath ability"
+   ],
+   [
+    19,
+    "criteria not met: flag backlash to be disabled later"
+   ],
+   [
+    27,
+    "record the turn of death and queue the action with the backlash priority"
+   ]
+  ]
+ },
+ "2f401c4": {
+  "summary": "Queues an action (type 0x1b) that transforms this card into the owner's warlord starting weapon; logs an error if none is defined, and sets the state to transforming.",
+  "comments": [
+   [
+    5,
+    "look up the original warlord's first starting troop/weapon"
+   ],
+   [
+    8,
+    "no starting weapon defined: log and stop"
+   ],
+   [
+    21,
+    "build the transform action with the weapon and queue it"
+   ],
+   [
+    34,
+    "card is now in the transforming state"
+   ]
+  ]
+ },
+ "2f40388": {
+  "summary": "Queues a unit death action (type 4) for non-hero cards. For warlords it only logs when dev tools are on.",
+  "comments": [
+   [
+    6,
+    "not a hero: build the death action and queue it at the given priority"
+   ],
+   [
+    20,
+    "warlord: no death action is added, only a dev log"
+   ]
+  ]
+ },
+ "2f404bc": {
+  "summary": "Marks the unit as waiting to die if it is in an in-play state, otherwise logs a warning.",
+  "comments": [
+   [
+    4,
+    "not in an in-play state: warn and leave it"
+   ],
+   [
+    14,
+    "mark as waiting to die (dev-tools-only log follows)"
+   ]
+  ]
+ },
+ "2f405ec": {
+  "summary": "Sets the card state to transforming, with a warning when attacking or aiming and an error for other states (it still sets the state).",
+  "comments": [
+   [
+    8,
+    "inPlay and already transforming are fine without a message"
+   ],
+   [
+    10,
+    "attacking or aiming an attack: warn but proceed"
+   ],
+   [
+    11,
+    "any other state: log an error, return without changing the state"
+   ],
+   [
+    32,
+    "set the transforming state"
+   ]
+  ]
+ },
+ "2f40778": {
+  "summary": "Handles a minion's death from this card's viewpoint: hunt mark damage and heal, OtherUnitDeath or ThisUnitDeath and Unstable triggers, and a slay-style trigger chosen by death type.",
+  "comments": [
+   [
+    4,
+    "this card died with a hunt mark: damage its owner's hero by the mark value"
+   ],
+   [
+    24,
+    "play the hunt mark particles toward the hero, then deal the damage"
+   ],
+   [
+    29,
+    "and heal the opposing hero by the mark value (seems to be the marker's side)"
+   ],
+   [
+    33,
+    "fire death triggers"
+   ],
+   [
+    38,
+    "another unit died: OtherUnitDeath"
+   ],
+   [
+    41,
+    "this unit died: ThisUnitDeath and Unstable"
+   ],
+   [
+    46,
+    "pick a follow-up trigger id by death type: combat attacker, poison or ability"
+   ],
+   [
+    58,
+    "fire that trigger's abilities (ids 0xaf, 0xaa, 0xb4 are not named in the decompile)"
+   ]
+  ]
+ },
+ "2f40ca0": {
+  "summary": "Resolves a dead-card battle action for this card: death triggers, removal of extrinsic effects, Slay for the killer, Requiem for adjacent units, Sacrifice for itself, or the end of the battle if the warlord died.",
+  "comments": [
+   [
+    8,
+    "normal card (or a card other than this hero) died"
+   ],
+   [
+    14,
+    "for this card's own death, take the skip-backlash flag from the action"
+   ],
+   [
+    19,
+    "fire death triggers unless it is a remnant or backlash already ran"
+   ],
+   [
+    25,
+    "another card died: remove effects it was granting to this card"
+   ],
+   [
+    27,
+    "slay: this card killed it by ability or as defender, on its own turn, not a hero or remnant"
+   ],
+   [
+    41,
+    "requiem: an adjacent living unit died (not a hero)"
+   ],
+   [
+    65,
+    "this card itself died: sacrifice triggers on its owner's turn"
+   ],
+   [
+    71,
+    "hero path: warlord death handling"
+   ],
+   [
+    79,
+    "warlord health at 0: end the battle (decompiled condition looks inverted; as written it needs tutorial/campaign)"
+   ],
+   [
+    91,
+    "warlord still has health: error and cancel"
+   ]
+  ]
+ }
+}

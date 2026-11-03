@@ -1,0 +1,387 @@
+{
+ "32b37e4": {
+  "summary": "Sends the PUNReceiveWrongRoom RPC to all players in the room (including ourselves), seemingly to tell clients they are in the wrong room. Called from BattleCommsManager; the rest is inlined Photon RPC sending code plus interest-group and event-cache helpers the decompiler glued on.",
+  "comments": [
+   [
+    4,
+    "Set up an empty argument list and the RPC name PUNReceiveWrongRoom; this RPC carries no parameters."
+   ],
+   [
+    19,
+    "Photon safety checks: do nothing if the network cannot be used right now."
+   ],
+   [
+    24,
+    "Not inside a room: log 'RPCs can only be sent in rooms' and give up."
+   ],
+   [
+    39,
+    "No networking peer yet (e.g. scene loading): log an error and give up."
+   ],
+   [
+    60,
+    "Skip the send if this view's interest group is blocked for sending."
+   ],
+   [
+    66,
+    "View ID is not valid (< 1): log 'Illegal view ID' error, the RPC is not sent."
+   ],
+   [
+    103,
+    "Only builds the verbose 'Sending RPC' log string when log level is Full; both paths continue at the event build."
+   ],
+   [
+    105,
+    "Build the Photon RPC event: view ID, optional prefix, server timestamp, then the method name or its short id."
+   ],
+   [
+    127,
+    "If the RPC name has a registered shortcut, send the compact id instead of the full name."
+   ],
+   [
+    141,
+    "Raise Photon event 200 (RPC) reliably on the view's interest group; this reaches every player in the room."
+   ],
+   [
+    148,
+    "PhotonTargets.All also runs the RPC locally, so execute it for our own actor too."
+   ],
+   [
+    156,
+    "Shared failure target: a null reference somewhere in the send path ends here."
+   ],
+   [
+    159,
+    "Verbose-log path: builds 'Sending RPC <name> to target ...' and logs it, then rejoins the send code."
+   ],
+   [
+    195,
+    "Decompiler run-on: the code below is a different inlined method, NetworkingPeer.SetInterestGroups, not part of this send."
+   ],
+   [
+    210,
+    "Groups to remove: an empty array clears all; otherwise remove each valid group (0 is rejected) from the set."
+   ],
+   [
+    242,
+    "Groups to add: an empty array means subscribe to every group 0-255; otherwise add each valid group."
+   ],
+   [
+    278,
+    "Outside offline mode, forward the new group lists to the server."
+   ],
+   [
+    282,
+    "Decompiler run-on: below is another inlined method, an event-cache hash lookup (remove/add of a cache entry)."
+   ],
+   [
+    287,
+    "Remove branch: find the entry by hash in the bucket chain and unlink it onto the free list."
+   ],
+   [
+    397,
+    "Add branch: look for an existing entry first; if absent, take a free slot (growing the table if full) and insert."
+   ]
+  ]
+ },
+ "32b3cf8": {
+  "summary": "Sends the PUNReceiveEnemyForfeit RPC to all players so the opponent learns we forfeited the match. Called when the local player forfeits; the rest is inlined Photon RPC sending code plus glued-on interest-group and event-cache helpers.",
+  "comments": [
+   [
+    4,
+    "Set up an empty argument list and the RPC name PUNReceiveEnemyForfeit; this RPC carries no parameters."
+   ],
+   [
+    19,
+    "Photon safety checks: do nothing if the network cannot be used right now."
+   ],
+   [
+    24,
+    "Not inside a room: log 'RPCs can only be sent in rooms' and give up."
+   ],
+   [
+    39,
+    "No networking peer yet (e.g. scene loading): log an error and give up."
+   ],
+   [
+    60,
+    "Skip the send if this view's interest group is blocked for sending."
+   ],
+   [
+    66,
+    "View ID is not valid (< 1): log 'Illegal view ID' error, the RPC is not sent."
+   ],
+   [
+    103,
+    "Only builds the verbose 'Sending RPC' log string when log level is Full; both paths continue at the event build."
+   ],
+   [
+    105,
+    "Build the Photon RPC event: view ID, optional prefix, server timestamp, then the method name or its short id."
+   ],
+   [
+    127,
+    "If the RPC name has a registered shortcut, send the compact id instead of the full name."
+   ],
+   [
+    141,
+    "Raise Photon event 200 (RPC) reliably on the view's interest group; this reaches every player in the room."
+   ],
+   [
+    148,
+    "PhotonTargets.All also runs the RPC locally, so execute it for our own actor too."
+   ],
+   [
+    156,
+    "Shared failure target: a null reference somewhere in the send path ends here."
+   ],
+   [
+    159,
+    "Verbose-log path: builds 'Sending RPC <name> to target ...' and logs it, then rejoins the send code."
+   ],
+   [
+    195,
+    "Decompiler run-on: the code below is a different inlined method, NetworkingPeer.SetInterestGroups, not part of this send."
+   ],
+   [
+    210,
+    "Groups to remove: an empty array clears all; otherwise remove each valid group (0 is rejected) from the set."
+   ],
+   [
+    242,
+    "Groups to add: an empty array means subscribe to every group 0-255; otherwise add each valid group."
+   ],
+   [
+    278,
+    "Outside offline mode, forward the new group lists to the server."
+   ],
+   [
+    282,
+    "Decompiler run-on: below is another inlined method, an event-cache hash lookup (remove/add of a cache entry)."
+   ],
+   [
+    287,
+    "Remove branch: find the entry by hash in the bucket chain and unlink it onto the free list."
+   ],
+   [
+    397,
+    "Add branch: look for an existing entry first; if absent, take a free slot (growing the table if full) and insert."
+   ]
+  ]
+ },
+ "32b3dc0": {
+  "summary": "Sends the PUNReceiveEnemyDesync RPC to all players to tell the opponent this client detected a desync. Called when a desync is found; the rest is inlined Photon RPC sending code plus glued-on interest-group and event-cache helpers.",
+  "comments": [
+   [
+    4,
+    "Set up an empty argument list and the RPC name PUNReceiveEnemyDesync; this RPC carries no parameters."
+   ],
+   [
+    19,
+    "Photon safety checks: do nothing if the network cannot be used right now."
+   ],
+   [
+    24,
+    "Not inside a room: log 'RPCs can only be sent in rooms' and give up."
+   ],
+   [
+    39,
+    "No networking peer yet (e.g. scene loading): log an error and give up."
+   ],
+   [
+    60,
+    "Skip the send if this view's interest group is blocked for sending."
+   ],
+   [
+    66,
+    "View ID is not valid (< 1): log 'Illegal view ID' error, the RPC is not sent."
+   ],
+   [
+    103,
+    "Only builds the verbose 'Sending RPC' log string when log level is Full; both paths continue at the event build."
+   ],
+   [
+    105,
+    "Build the Photon RPC event: view ID, optional prefix, server timestamp, then the method name or its short id."
+   ],
+   [
+    127,
+    "If the RPC name has a registered shortcut, send the compact id instead of the full name."
+   ],
+   [
+    141,
+    "Raise Photon event 200 (RPC) reliably on the view's interest group; this reaches every player in the room."
+   ],
+   [
+    148,
+    "PhotonTargets.All also runs the RPC locally, so execute it for our own actor too."
+   ],
+   [
+    156,
+    "Shared failure target: a null reference somewhere in the send path ends here."
+   ],
+   [
+    159,
+    "Verbose-log path: builds 'Sending RPC <name> to target ...' and logs it, then rejoins the send code."
+   ],
+   [
+    195,
+    "Decompiler run-on: the code below is a different inlined method, NetworkingPeer.SetInterestGroups, not part of this send."
+   ],
+   [
+    210,
+    "Groups to remove: an empty array clears all; otherwise remove each valid group (0 is rejected) from the set."
+   ],
+   [
+    242,
+    "Groups to add: an empty array means subscribe to every group 0-255; otherwise add each valid group."
+   ],
+   [
+    278,
+    "Outside offline mode, forward the new group lists to the server."
+   ],
+   [
+    282,
+    "Decompiler run-on: below is another inlined method, an event-cache hash lookup (remove/add of a cache entry)."
+   ],
+   [
+    287,
+    "Remove branch: find the entry by hash in the bucket chain and unlink it onto the free list."
+   ],
+   [
+    397,
+    "Add branch: look for an existing entry first; if absent, take a free slot (growing the table if full) and insert."
+   ]
+  ]
+ },
+ "32b38ac": {
+  "summary": "Sends a PlayerAction to everyone (including ourselves) by packing its seven fields into an object array and calling the PUNReceivePlayerAction RPC. Called whenever the local player performs a game action that must be replayed on the opponent's client.",
+  "comments": [
+   [
+    5,
+    "Array of 7 RPC arguments, in the order the receiver expects."
+   ],
+   [
+    7,
+    "Argument 0 is typ (the action type); then act, tget, tgtd (target data, boxed), pos, num, at follow in order."
+   ],
+   [
+    10,
+    "Each store is bounds-checked by the compiler; running out of space ends at the InvalidOperationException below."
+   ],
+   [
+    37,
+    "Send as PUNReceivePlayerAction to PhotonTargets.All, so the action also executes locally via Photon."
+   ],
+   [
+    49,
+    "Array index/cast check failure path."
+   ],
+   [
+    54,
+    "Null reference path (action, array or photonView was null)."
+   ]
+  ]
+ },
+ "32b3b78": {
+  "summary": "Logs the last action counter received and sends it via the PUNReceiveResendLostActions RPC to all players, asking the sender to resend actions we missed. Called when the client notices a gap in the action sequence. The decompiler then runs on into the body of SendForfeit.",
+  "comments": [
+   [
+    7,
+    "Log a warning with the last action counter we received (the anti-cheat wrapped value is read out)."
+   ],
+   [
+    11,
+    "One RPC argument: our last received action counter, boxed."
+   ],
+   [
+    21,
+    "Box check from the decompiler; the normal path stores the counter and sends the RPC."
+   ],
+   [
+    25,
+    "Ask for lost actions: PUNReceiveResendLostActions to all, carrying our last received counter."
+   ],
+   [
+    32,
+    "Decompiler run-on: from here the code is the start of SendForfeit (PUNReceiveEnemyForfeit), not part of this method."
+   ],
+   [
+    49,
+    "Photon safety check: do nothing if the network cannot be used."
+   ],
+   [
+    55,
+    "Not in a room: log 'RPCs can only be sent in rooms' and give up."
+   ],
+   [
+    69,
+    "No networking peer yet: log an error and give up."
+   ],
+   [
+    90,
+    "Skip the send if the view's interest group is blocked for sending."
+   ],
+   [
+    96,
+    "View ID invalid (< 1): log 'Illegal view ID' error and do not send."
+   ],
+   [
+    130,
+    "Verbose logging only when log level is Full; both paths continue at the event build."
+   ],
+   [
+    132,
+    "Build the Photon RPC event: view ID, prefix, server timestamp, method name or shortcut id."
+   ],
+   [
+    154,
+    "Use the registered RPC shortcut id if one exists for this name."
+   ],
+   [
+    168,
+    "Raise event 200 (RPC) reliably on the view's interest group."
+   ],
+   [
+    175,
+    "Also execute the RPC locally for our own actor."
+   ],
+   [
+    183,
+    "Shared null reference failure path."
+   ],
+   [
+    186,
+    "Verbose-log path: builds the 'Sending RPC ... to target' string, logs it and rejoins."
+   ],
+   [
+    218,
+    "Decompiler run-on: below is inlined NetworkingPeer.SetInterestGroups."
+   ],
+   [
+    233,
+    "Groups to remove: empty array clears all, else remove each valid group from the set."
+   ],
+   [
+    265,
+    "Groups to add: empty array subscribes to groups 0-255, else add each valid group."
+   ],
+   [
+    301,
+    "Outside offline mode, forward the group changes to the server."
+   ],
+   [
+    305,
+    "Decompiler run-on: below is an inlined event-cache hash lookup (remove/add entry)."
+   ],
+   [
+    310,
+    "Remove branch: find the entry by hash in its bucket chain and move it to the free list."
+   ],
+   [
+    420,
+    "Add branch: look for an existing entry; otherwise take a free slot (growing if needed) and insert."
+   ]
+  ]
+ }
+}

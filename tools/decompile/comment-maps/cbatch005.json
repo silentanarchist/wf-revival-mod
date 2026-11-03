@@ -1,0 +1,732 @@
+{
+ "31633f4": {
+  "summary": "Estimates how much damage a DamageCriteria will deal. Depending on its value option it reads a card's attack, health, damage taken or bastion; otherwise it returns the rounded mean of min and max. Used when the AI/UI needs a preview number; changes no state.",
+  "comments": [
+   [
+    4,
+    "Read the configured value mode and the fixed min/max damage numbers."
+   ],
+   [
+    8,
+    "Mode below 0x2a: stat modes that read a card's attack, health or damage taken."
+   ],
+   [
+    10,
+    "Mode: target's melee attack (also reached for ThisCardAttack via the shared label below)."
+   ],
+   [
+    12,
+    "Shared melee path: total the buffs on the card, then add its base melee attack."
+   ],
+   [
+    25,
+    "A stat-adding buff contributes its melee bonus to the running total."
+   ],
+   [
+    28,
+    "A 'set melee attack' buff overrides everything, so its value is returned immediately."
+   ],
+   [
+    34,
+    "Base melee plus buff total, clamped to 0 (the shift/xor trick is max(x,0))."
+   ],
+   [
+    48,
+    "Mode: target's ranged attack (also used for ThisCardAttackRanged)."
+   ],
+   [
+    51,
+    "A blind unit has no ranged attack; this path ends up returning 0 (enum Normal is 0)."
+   ],
+   [
+    71,
+    "Same as melee: ranged bonuses from stat buffs add up, a set-ranged-attack buff overrides."
+   ],
+   [
+    80,
+    "Base ranged attack plus buff total, clamped to 0."
+   ],
+   [
+    95,
+    "Mode: target's current health."
+   ],
+   [
+    108,
+    "ThisCardAttack/ThisCardAttackRanged: reuse the target code but on the card that owns the ability."
+   ],
+   [
+    121,
+    "Modes 0x2a-0x46: this card's health and 'damage taken' modes."
+   ],
+   [
+    137,
+    "Target damage taken = max health minus current health."
+   ],
+   [
+    148,
+    "ThisCardDamage: same calculation on the source card."
+   ],
+   [
+    154,
+    "Modes 0x47-0x96: scaled-by-multiplier mode (0x50) and target bastion (0x96)."
+   ],
+   [
+    156,
+    "Mode 0x50: base plus multiplierFactor times the max value (decompiler lost part of this)."
+   ],
+   [
+    163,
+    "Modes 0x97 and up: self bastion and 'target health minus attack'."
+   ],
+   [
+    168,
+    "Bastion total: sum bastion-trait buffs from active effects plus the card's own bastion value."
+   ],
+   [
+    190,
+    "Bastion result clamped to 0."
+   ],
+   [
+    194,
+    "Target health minus its current melee attack."
+   ],
+   [
+    209,
+    "No special mode: average of min and max, rounded half to even (Math.Round style)."
+   ]
+  ]
+ },
+ "3163490": {
+  "summary": "Same logic as DamageCriteria's average: returns a value for healing criteria from the chosen value option (attack, health, damage taken, bastion) or the rounded mean of min and max. Read-only; used to estimate heal amounts.",
+  "comments": [
+   [
+    4,
+    "Read the configured value mode and the fixed min/max numbers."
+   ],
+   [
+    8,
+    "Mode below 0x2a: stat modes that read a card's attack, health or damage taken."
+   ],
+   [
+    10,
+    "Mode: target's melee attack (also reached for ThisCardAttack via the shared label below)."
+   ],
+   [
+    12,
+    "Shared melee path: total the buffs on the card, then add its base melee attack."
+   ],
+   [
+    25,
+    "A stat-adding buff contributes its melee bonus to the running total."
+   ],
+   [
+    28,
+    "A 'set melee attack' buff overrides everything, so its value is returned immediately."
+   ],
+   [
+    34,
+    "Base melee plus buff total, clamped to 0 (the shift/xor trick is max(x,0))."
+   ],
+   [
+    48,
+    "Mode: target's ranged attack (also used for ThisCardAttackRanged)."
+   ],
+   [
+    51,
+    "A blind unit has no ranged attack; this path ends up returning 0 (enum Normal is 0)."
+   ],
+   [
+    71,
+    "Same as melee: ranged bonuses from stat buffs add up, a set-ranged-attack buff overrides."
+   ],
+   [
+    80,
+    "Base ranged attack plus buff total, clamped to 0."
+   ],
+   [
+    95,
+    "Mode: target's current health."
+   ],
+   [
+    108,
+    "ThisCardAttack/ThisCardAttackRanged: reuse the target code but on the card that owns the ability."
+   ],
+   [
+    121,
+    "Modes 0x2a-0x46: this card's health and 'damage taken' modes."
+   ],
+   [
+    137,
+    "Target damage taken = max health minus current health."
+   ],
+   [
+    148,
+    "ThisCardDamage: same calculation on the source card."
+   ],
+   [
+    154,
+    "Modes 0x47-0x96: scaled-by-multiplier mode (0x50) and target bastion (0x96)."
+   ],
+   [
+    156,
+    "Mode 0x50: base plus multiplierFactor times the max value (decompiler lost part of this)."
+   ],
+   [
+    163,
+    "Modes 0x97 and up: self bastion and 'target health minus attack'."
+   ],
+   [
+    168,
+    "Bastion total: sum bastion-trait buffs from active effects plus the card's own bastion value."
+   ],
+   [
+    190,
+    "Bastion result clamped to 0."
+   ],
+   [
+    194,
+    "Target health minus its current melee attack."
+   ],
+   [
+    209,
+    "No special mode: average of min and max, rounded half to even (Math.Round style)."
+   ]
+  ]
+ },
+ "3163544": {
+  "summary": "Makes a shallow copy of a SummonCriteria and returns it as a SummonCriteria. Called when an ability's criteria must be duplicated so edits do not affect the original.",
+  "comments": [
+   [
+    4,
+    "Shallow-clone this criteria object."
+   ],
+   [
+    6,
+    "Decompiler inlined the type cast check here (and a bogus Monitor.Exit); the result is the clone cast to SummonCriteria."
+   ]
+  ]
+ },
+ "3163790": {
+  "summary": "Unity OnEnable: caches the transform and records its current position as the last-seen position, so the first Update has a baseline for measuring motion.",
+  "comments": [
+   [
+    4,
+    "Cache the transform for cheap access in Update."
+   ],
+   [
+    6,
+    "Store the starting position as lastPosition."
+   ]
+  ]
+ },
+ "31637e0": {
+  "summary": "Per-frame update that tilts a card in the direction it is moving, then eases it back to flat shortly after it stops. Changes the card's local rotation and lastPosition.",
+  "comments": [
+   [
+    8,
+    "Has the transform moved since last reset? If not and the settle timer has run out, nothing to do."
+   ],
+   [
+    15,
+    "Card moved: restart the 'keep tilting after movement' timer."
+   ],
+   [
+    17,
+    "Tick the settle timer down by frame time."
+   ],
+   [
+    23,
+    "Movement since last frame on each axis becomes a clamped tilt angle (see GetRotation)."
+   ],
+   [
+    34,
+    "Decompiler turned the quaternion multiply into raw NEON vector ops; it combines the X and Y tilts into targetRotation."
+   ],
+   [
+    67,
+    "Blend the card's local rotation toward the target tilt."
+   ],
+   [
+    76,
+    "Remember this frame's position for the next frame's movement delta."
+   ],
+   [
+    93,
+    "Null-reference fallthrough from the decompiler."
+   ]
+  ]
+ },
+ "3163a94": {
+  "summary": "Converts a movement amount along one axis into a rotation quaternion, with the angle clamped to plus or minus the max angle. Helper for AutoCardRotation.Update; the decompiler garbled its parameters.",
+  "comments": [
+   [
+    4,
+    "Scale movement into an angle (decompiler garbled this; seems to be translation times a factor)."
+   ],
+   [
+    13,
+    "Clamp the angle to the allowed range on both sides."
+   ],
+   [
+    17,
+    "Build a rotation of that angle around the axis."
+   ],
+   [
+    18,
+    "Quaternion multiply with identity written into the output struct (decompiler shows it as raw offsets)."
+   ]
+  ]
+ },
+ "3256cb8": {
+  "summary": "Coroutine body for SetChangedAmountTextUp: waits one WaitForEndOfFrame and then ends. Runs after a card's stat-change text is set.",
+  "comments": [
+   [
+    5,
+    "First step: yield and wait until the end of the frame."
+   ],
+   [
+    11,
+    "Second step: resume and finish the coroutine."
+   ]
+  ]
+ },
+ "3256d54": {
+  "summary": "Compiler-generated IEnumerator.Reset for the SetChangedAmountTextUp coroutine; always throws NotSupportedException.",
+  "comments": [
+   [
+    4,
+    "Coroutines cannot be reset, so this always throws."
+   ]
+  ]
+ },
+ "3163d8c": {
+  "summary": "Unity OnEnable: re-registers the CardClicked handler on the card's click catcher, but only if tap-to-open card display is allowed.",
+  "comments": [
+   [
+    6,
+    "If there is a click catcher, first remove any existing CardClicked listener to avoid duplicates."
+   ],
+   [
+    11,
+    "Tap-to-open disabled: leave without re-adding."
+   ],
+   [
+    14,
+    "Add the CardClicked listener again."
+   ],
+   [
+    18,
+    "Decompiler inlined UnityEvent.AddListener (list append plus resize); the effect is just adding the listener."
+   ]
+  ]
+ },
+ "3163e94": {
+  "summary": "Click handler: opens the card display window showing this card's raw data at its tier.",
+  "comments": [
+   [
+    4,
+    "Open the shared card detail window for this card and tier."
+   ]
+  ]
+ },
+ "3163f28": {
+  "summary": "Unity OnDisable: removes the CardClicked handler from the click event so a hidden card cannot open the card window.",
+  "comments": [
+   [
+    4,
+    "If there is a click catcher, remove our listener from its click event."
+   ],
+   [
+    13,
+    "Decompiler inlined UnityEvent.RemoveListener: collect matching calls into a list, then remove them."
+   ],
+   [
+    40,
+    "Delete the matching calls and rebuild the combined call list."
+   ]
+  ]
+ },
+ "3163fb8": {
+  "summary": "Fills a BasicCardUI from raw card data: tier, texts, armour, health, attacks and cost, shows or hides each counter by card type, and sets art and rarity stars. Used for collection, deck and tooltip card views.",
+  "comments": [
+   [
+    7,
+    "Hide the 'new card' badge."
+   ],
+   [
+    9,
+    "No tier supplied: use the card's own tier."
+   ],
+   [
+    18,
+    "Warlord (hero-like) cards do not show a mana cost."
+   ],
+   [
+    19,
+    "Set name, description, race and army texts."
+   ],
+   [
+    24,
+    "Only hero cards get the warlord health modifier."
+   ],
+   [
+    27,
+    "No override: show the card's own max health plus modifier."
+   ],
+   [
+    34,
+    "Max health override given (e.g. upgraded warlord): use it instead."
+   ],
+   [
+    41,
+    "Fill attack and cost counters."
+   ],
+   [
+    51,
+    "Cost shows only if not a warlord and mana cost is non-negative (sign bit clear)."
+   ],
+   [
+    56,
+    "Update tier decoration."
+   ],
+   [
+    60,
+    "Only unit cards show health and attack counters."
+   ],
+   [
+    64,
+    "Armour shows only for units that actually have armour."
+   ],
+   [
+    74,
+    "Clear the banned marker, then set art and rarity stars."
+   ]
+  ]
+ },
+ "31645f4": {
+  "summary": "Shows or hides all stat counters (health, armour, melee, ranged, cost) on the card UI.",
+  "comments": [
+   [
+    5,
+    "Show: reset the hide state on each counter."
+   ],
+   [
+    34,
+    "Cost counter is just un-hidden."
+   ],
+   [
+    41,
+    "Hide: hide each stat counter; armour is also toggled off."
+   ],
+   [
+    67,
+    "Cost counter: mark hidden, reset amount and blank its texts."
+   ]
+  ]
+ },
+ "3164524": {
+  "summary": "Sets the card art from the raw card data's sprite: positions and scales the image for the card type, applies a mask, makes a per-card material instance, and assigns the sprite to the Image.",
+  "comments": [
+   [
+    4,
+    "Need a raw card with an art sprite, otherwise nothing to do."
+   ],
+   [
+    25,
+    "Card type decides scale and mask."
+   ],
+   [
+    28,
+    "Position of -1111 is a 'not saved yet' marker: record the image's original position the first time."
+   ],
+   [
+    46,
+    "Apply the per-card-type scale."
+   ],
+   [
+    58,
+    "Big-frame heroes and minions get an extra size multiplier."
+   ],
+   [
+    64,
+    "Tactic cards: no alpha mask and an offset position."
+   ],
+   [
+    71,
+    "Other cards: the sprite texture doubles as the alpha mask."
+   ],
+   [
+    79,
+    "Move image to original position plus type offset."
+   ],
+   [
+    83,
+    "Create an instanced material once so shared material is not changed."
+   ],
+   [
+    96,
+    "Decompiler inlined Image.sprite setter: swaps the sprite and marks the Image dirty when it changed."
+   ]
+  ]
+ },
+ "316489c": {
+  "summary": "Sets the card art to the given sprite: positions and scales it for the card type, applies a mask, makes a per-card material instance, and assigns the sprite.",
+  "comments": [
+   [
+    4,
+    "No sprite given: nothing to do."
+   ],
+   [
+    11,
+    "Card type decides scale and mask."
+   ],
+   [
+    13,
+    "Position of -1111 is a 'not saved yet' marker: record the image's original position the first time."
+   ],
+   [
+    32,
+    "Apply the per-card-type scale."
+   ],
+   [
+    44,
+    "Big-frame heroes and minions get an extra size multiplier."
+   ],
+   [
+    50,
+    "Tactic cards: no alpha mask and an offset position."
+   ],
+   [
+    57,
+    "Other cards: the sprite texture doubles as the alpha mask."
+   ],
+   [
+    65,
+    "Move image to original position plus type offset."
+   ],
+   [
+    69,
+    "Create an instanced material once so shared material is not changed."
+   ],
+   [
+    82,
+    "Decompiler inlined Image.sprite setter: swaps the sprite and marks the Image dirty when it changed."
+   ]
+  ]
+ },
+ "3164490": {
+  "summary": "Shows or hides the 'banned' icon on the card if one exists. The decompiler dropped the actual SetActive call.",
+  "comments": [
+   [
+    4,
+    "Only act if a banned icon object is assigned."
+   ],
+   [
+    13,
+    "Decompiler lost the SetActive(state) call; it toggles the icon."
+   ]
+  ]
+ },
+ "3164938": {
+  "summary": "Called after a language change: refreshes the card's localized name, description, race and army texts and re-picks the name/description layout. Decompiler output is heavily tangled here.",
+  "comments": [
+   [
+    4,
+    "Log which card is being updated."
+   ],
+   [
+    9,
+    "Fetch the localized name, description, race and army strings."
+   ],
+   [
+    17,
+    "Tell the text controller the card and spell type, then fill the text fields."
+   ],
+   [
+    28,
+    "No name texts: set race, description and army directly."
+   ],
+   [
+    35,
+    "Write the localized name into every name text."
+   ],
+   [
+    48,
+    "Decompiler fused the inlined helpers (SetRace, SetDescription, SetArmy, layout) with fake stack code; the calls are right."
+   ],
+   [
+    50,
+    "Write race into all race texts."
+   ],
+   [
+    83,
+    "Write description into all description texts."
+   ],
+   [
+    110,
+    "Write army into all army texts."
+   ],
+   [
+    145,
+    "Choose starting layout: 1 minion with text, 2 no description, 3/4 for tactics and whispers."
+   ],
+   [
+    167,
+    "Switch to the layout state if not already in it."
+   ],
+   [
+    198,
+    "Tactics pick 3 (normal spell) or 4; others pick 1 with description or 2 without."
+   ]
+  ]
+ },
+ "31643c0": {
+  "summary": "Sets the card's localized name, description, race and army texts and picks the matching name/description layout state. Called from SetRawCardData.",
+  "comments": [
+   [
+    5,
+    "Fetch localized name, description, race and army strings."
+   ],
+   [
+    13,
+    "Tell the text controller the card and spell type, then fill the text fields."
+   ],
+   [
+    24,
+    "No name texts: set race, description and army directly."
+   ],
+   [
+    31,
+    "Write the localized name into every name text."
+   ],
+   [
+    44,
+    "Decompiler fused the inlined helpers (SetRace, SetDescription, SetArmy, layout) with fake stack code; the calls are right."
+   ],
+   [
+    46,
+    "Write race into all race texts."
+   ],
+   [
+    79,
+    "Write description into all description texts."
+   ],
+   [
+    106,
+    "Write army into all army texts."
+   ],
+   [
+    141,
+    "Choose starting layout: 1 minion with text, 2 no description, 3/4 for tactics and whispers."
+   ],
+   [
+    163,
+    "Switch to the layout state if not already in it."
+   ],
+   [
+    194,
+    "Tactics pick 3 (normal spell) or 4; others pick 1 with description or 2 without."
+   ]
+  ]
+ },
+ "31649a4": {
+  "summary": "Looks up the clan frame sprite for the card's army, tier and type and assigns it to the card's frame and highlight image. Used when a card's tier changes.",
+  "comments": [
+   [
+    4,
+    "Needs the tier UI, card data and frame set."
+   ],
+   [
+    10,
+    "Get the frame sprite for this army, tier and card type."
+   ],
+   [
+    14,
+    "Assign it to the main frame image."
+   ],
+   [
+    15,
+    "Decompiler inlined the Image.sprite setter for the highlight/shadow image; sets the same frame sprite."
+   ]
+  ]
+ },
+ "3164a38": {
+  "summary": "Sets the card art to the given sprite for a given card type: positions and scales it, applies a mask, makes a per-card material instance, and assigns the sprite.",
+  "comments": [
+   [
+    9,
+    "Position of -1111 is a 'not saved yet' marker: record the image's original position the first time."
+   ],
+   [
+    28,
+    "Apply the per-card-type scale."
+   ],
+   [
+    40,
+    "Big-frame heroes and minions get an extra size multiplier."
+   ],
+   [
+    46,
+    "Tactic cards: no alpha mask and an offset position."
+   ],
+   [
+    53,
+    "Other cards: the sprite texture doubles as the alpha mask."
+   ],
+   [
+    61,
+    "Move image to original position plus type offset."
+   ],
+   [
+    65,
+    "Create an instanced material once so shared material is not changed."
+   ],
+   [
+    78,
+    "Decompiler inlined Image.sprite setter: swaps the sprite and marks the Image dirty when it changed."
+   ]
+  ]
+ },
+ "31645c4": {
+  "summary": "Sets the rarity star image to the sprite matching the card's rarity level; logs an error if the sprite count does not equal max rarity.",
+  "comments": [
+   [
+    14,
+    "Sprite count must equal max rarity."
+   ],
+   [
+    15,
+    "Sprite index is rarity minus 1, clamped between 0 and max minus 1."
+   ],
+   [
+    33,
+    "Mismatch: log an error and fall back to the first sprite."
+   ],
+   [
+    42,
+    "Decompiler inlined the Image.sprite setter; swaps the sprite and marks the Image dirty."
+   ]
+  ]
+ },
+ "3164a50": {
+  "summary": "Sets the rarity star image to the first (empty) rarity sprite.",
+  "comments": [
+   [
+    11,
+    "Sprite count must equal max rarity."
+   ],
+   [
+    19,
+    "Mismatch: log an error."
+   ],
+   [
+    27,
+    "Use the first sprite, the empty-stars one."
+   ],
+   [
+    31,
+    "Decompiler inlined the Image.sprite setter; swaps the sprite and marks the Image dirty."
+   ]
+  ]
+ }
+}

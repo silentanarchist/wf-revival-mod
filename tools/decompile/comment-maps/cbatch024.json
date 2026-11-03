@@ -1,0 +1,754 @@
+{
+ "327ccd8": {
+  "summary": "Runs one scripted campaign AI action in a battle: shows a hero chat box, big chat, radio message or lands the warlords, then plays the action's sound. Called by the campaign script runner; only changes UI and audio.",
+  "comments": [
+   [
+    4,
+    "Closure object captures the action for the card-lookup lambdas used further down"
+   ],
+   [
+    12,
+    "Log which scripted action type is running"
+   ],
+   [
+    18,
+    "Fetch the sound clip and the localized chat text for this action before choosing how to show it"
+   ],
+   [
+    23,
+    "Dispatch on the action type: 0x32/0x3c chat box, 0x37/0x41 big chat, 0x5a radio, 0xa0 land warlords"
+   ],
+   [
+    25,
+    "Type 0x32: small chat box spoken by the player's hero, with the voice clip"
+   ],
+   [
+    36,
+    "Type 0x37: big chat with the player's hero, using the hero card's full portrait looked up in the card collection"
+   ],
+   [
+    54,
+    "Type 0x3c: no text means the warlord's default intro line; otherwise a chat box from the enemy hero"
+   ],
+   [
+    65,
+    "Type 0x41: big chat from the enemy hero; empty text falls back to the intro chat message"
+   ],
+   [
+    74,
+    "Type 0x5a: radio message; builds the tip data and shows it with the speaker card's portrait"
+   ],
+   [
+    93,
+    "Type 0xa0: put the warlords on the board for the campaign"
+   ],
+   [
+    97,
+    "Play the action's sound clip, if any (chat-box paths jump to the label below)"
+   ]
+  ]
+ },
+ "327c098": {
+  "summary": "Runs one scripted tutorial action in a battle. Depending on the position reference it queues an auto action (play card, attack, ability), draws, changes attack type, shows chat/radio/tips, or highlights a UI element. Called by the tutorial script runner.",
+  "comments": [
+   [
+    4,
+    "Clear the 0x100-byte auto-action buffer that describes a scripted move to queue"
+   ],
+   [
+    8,
+    "Log the action type and its delays before and after"
+   ],
+   [
+    17,
+    "Everything below switches on the position reference, i.e. what the scripted step targets"
+   ],
+   [
+    21,
+    "EnemyWarlord reference: seems to queue a scripted card draw at instant priority"
+   ],
+   [
+    28,
+    "PlayerWarlord reference: build an auto action (type 5, seems to be playing a card) for the acting card"
+   ],
+   [
+    45,
+    "Minions are placed in the closest free slot on the board before queuing"
+   ],
+   [
+    55,
+    "Queue the finished auto action at player priority"
+   ],
+   [
+    63,
+    "References 0x1e/0x1f: make the acting card attack the target card with its current attack type"
+   ],
+   [
+    83,
+    "References 0x23/0x24: force the acting card's attack type to a fixed value (2 or 1)"
+   ],
+   [
+    101,
+    "PlayerMinion reference: queue an auto action (0x1e) that uses the minion's active ability, optionally on a target"
+   ],
+   [
+    124,
+    "Chat-style references: show a voice-line chat box for the hero or acting unit"
+   ],
+   [
+    147,
+    "Chat box spoken by the acting unit itself, using the action's sound clip"
+   ],
+   [
+    159,
+    "References 0x38-0x50: hand-related chat, big chat and Energy tip steps"
+   ],
+   [
+    176,
+    "Reference 0x41: big chat from the enemy hero; empty text falls back to the intro line"
+   ],
+   [
+    190,
+    "PlayerMana reference: show a small tutorial tip near the Energy display"
+   ],
+   [
+    207,
+    "References 0x51-0x82: radio message with a portrait, or Energy cost aura"
+   ],
+   [
+    208,
+    "Radio message: portrait comes from the player warlord or from the acting unit's card"
+   ],
+   [
+    250,
+    "Reference 0x82: show the Energy cost aura on the acting card"
+   ],
+   [
+    258,
+    "Reference 0x8c: trigger an enchantment effect scripted for this step"
+   ],
+   [
+    270,
+    "Reference 0xaa: light up the cards in the player's hand that can be played"
+   ],
+   [
+    275,
+    "If the step asks for it, switch on the tutorial highlight over the referenced UI element"
+   ],
+   [
+    287,
+    "Shared null-check failure path"
+   ]
+  ]
+ },
+ "327e384": {
+  "summary": "Turns on the tutorial highlight overlay at a world position: converts it to viewport space and writes it into the highlight material's color. Used by the tutorial when a scripted step highlights a UI element.",
+  "comments": [
+   [
+    4,
+    "Needs the live BattleManager and its tutorial highlight object"
+   ],
+   [
+    12,
+    "Initialise the highlight object the first time it is used"
+   ],
+   [
+    19,
+    "Show the highlight overlay"
+   ],
+   [
+    21,
+    "Convert the target position to viewport coordinates"
+   ],
+   [
+    30,
+    "Pass the position to the highlight shader through a material color"
+   ]
+  ]
+ },
+ "327d644": {
+  "summary": "Finds the CardScript a scripted action refers to, either the acting unit or the target unit, by looking at warlords, board minions or hands. Returns null with a warning for unsupported unit types or an error if the list is empty.",
+  "comments": [
+   [
+    4,
+    "acting=true reads the acting unit fields, otherwise the target unit fields"
+   ],
+   [
+    13,
+    "Low unit types: the two warlord values are answered directly"
+   ],
+   [
+    14,
+    "Value 10 is the player's warlord, 0x14 the enemy warlord; both return the hero card"
+   ],
+   [
+    38,
+    "Other types outside the supported set log a warning and return null"
+   ],
+   [
+    48,
+    "Remaining low type: search the player's minions and remnants in play"
+   ],
+   [
+    52,
+    "High types: 0x28 enemy minions, 0x32 player hand, 0x3c enemy hand"
+   ],
+   [
+    72,
+    "Choose which reference to look for: the acting unit (field 0x18) or the target unit (0x28)"
+   ],
+   [
+    82,
+    "No candidates at all: log an error and give up"
+   ],
+   [
+    86,
+    "Linear search of the list for the card whose unique id matches"
+   ],
+   [
+    97,
+    "Not found: index falls back to 0"
+   ],
+   [
+    99,
+    "The rest is decompiler noise from inlined List indexer and cast helpers; it just returns the found card"
+   ]
+  ]
+ },
+ "327dec4": {
+  "summary": "Computes the world position where a tutorial tip should appear for a position reference (hero, minion, hand card, Energy counter or UI button), then shifts it left or right by the horizontal offset according to the relation.",
+  "comments": [
+   [
+    4,
+    "The relation says whether the tip sits left of, right of or exactly on the anchor"
+   ],
+   [
+    7,
+    "Offset depends on the position reference and screen size"
+   ],
+   [
+    8,
+    "Start from the tutorial init object's position as a default"
+   ],
+   [
+    14,
+    "Choose the anchor by position reference"
+   ],
+   [
+    17,
+    "References 0xb-0xd: specific enemy hero slots"
+   ],
+   [
+    25,
+    "References 0x15-0x17: specific player hero slots"
+   ],
+   [
+    32,
+    "EnemyMinion: find the chosen minion among enemy minions and remnants in play"
+   ],
+   [
+    41,
+    "PlayerMinion: same lookup among the player's minions"
+   ],
+   [
+    51,
+    "EnemyCardInHand: find the card in the enemy hand"
+   ],
+   [
+    58,
+    "PlayerCardInHand: find the card in the player's hand; if it is in hand use its 2D position"
+   ],
+   [
+    71,
+    "UI references past EndTurn: active ability description, chat button, cemetery"
+   ],
+   [
+    107,
+    "Enemy/Player Energy counters: use the position of a text object on that side"
+   ],
+   [
+    112,
+    "EndTurn is hardcoded, so an error is logged and a canvas-based position is used"
+   ],
+   [
+    132,
+    "Apply the relation: shift left (10), right (0x14), or none (0x1e = exact)"
+   ]
+  ]
+ },
+ "327e624": {
+  "summary": "Returns the horizontal offset used when placing tutorial tips, taken from device variables and scaled by 1.3 on small-screen UI.",
+  "comments": [
+   [
+    7,
+    "Bit mask picks hero-slot references (0xb-0xd, 0x15-0x17), which use the separate 'for elements' offset"
+   ],
+   [
+    13,
+    "Small-screen UI makes the offset 30 percent bigger"
+   ]
+  ]
+ },
+ "327e4e0": {
+  "summary": "Searches a list of cards for the one whose unique id matches the chosen minion and returns it, defaulting to the first entry if none match. Logs an error if the list is empty.",
+  "comments": [
+   [
+    8,
+    "Empty list: log an error and return null"
+   ],
+   [
+    12,
+    "Linear search comparing each card's unique id with the chosen minion's"
+   ],
+   [
+    23,
+    "No match: index falls back to 0"
+   ],
+   [
+    25,
+    "The rest is decompiler noise from inlined List indexer and cast helpers"
+   ]
+  ]
+ },
+ "327e8bc": {
+  "summary": "Stops and hides the voice-line chat box used by the current scripted action: stops its audio, hides the waveform and box, and clears the text. Called when a scripted step ends.",
+  "comments": [
+   [
+    4,
+    "Look at the first scripted data entry of the action to see which chat box it used"
+   ],
+   [
+    7,
+    "Type 0x5a is the radio message: uses chat box index 2"
+   ],
+   [
+    13,
+    "Radio chat box index"
+   ],
+   [
+    15,
+    "Stop the voice clip, hide the waveform and the box, then clear its text"
+   ],
+   [
+    55,
+    "Otherwise index 0 for hero chat (0x32, 0x37 or player actions) and 1 for the other side"
+   ]
+  ]
+ },
+ "32a6c08": {
+  "summary": "Constructor for SmallTipData: copies the tip position, text and display settings (wait, arrow, duration, flags) from a tip params object. Used to describe tutorial tips and radio messages.",
+  "comments": [
+   [
+    4,
+    "Default tip duration is 6.0 seconds"
+   ],
+   [
+    7,
+    "Copy settings from the source params: wait flag, arrow, duration and display flags"
+   ]
+  ]
+ },
+ "32a6ca4": {
+  "summary": "Unity Awake for the battle alliance panel: hides it and hooks the background close button so a click closes the panel.",
+  "comments": [
+   [
+    6,
+    "Panel starts hidden"
+   ],
+   [
+    7,
+    "Register the close handler on the background button (inlined UnityEvent.AddListener)"
+   ]
+  ]
+ },
+ "32a6d74": {
+  "summary": "Opens the in-battle alliance panel for a player: fills in name, title, score with the live event ranking icon, avatar, and alliance info or a not-in-an-alliance message, then fades and scales the panel in.",
+  "comments": [
+   [
+    4,
+    "First open: remember the panel's normal scale"
+   ],
+   [
+    12,
+    "Player name and title; title row is hidden when empty"
+   ],
+   [
+    21,
+    "Look up the active live event to use its custom ranking icon for the score"
+   ],
+   [
+    35,
+    "Show the player's score and avatar with border"
+   ],
+   [
+    39,
+    "Alliance info is only shown if the player has an alliance name"
+   ],
+   [
+    44,
+    "In an alliance: show name, alliance score and badge"
+   ],
+   [
+    53,
+    "Not in an alliance: show the localized message instead"
+   ],
+   [
+    59,
+    "Show the panel, fade the canvas in over 0.35s"
+   ],
+   [
+    67,
+    "Start at 75 percent scale and tween up to the original scale"
+   ]
+  ]
+ },
+ "32a71a4": {
+  "summary": "Constructor for the AvailableActionsPool: preallocates INITIAL_CAPACITY AvailableAction objects so the AI can reuse them without allocating each frame.",
+  "comments": [
+   [
+    6,
+    "Create the backing list"
+   ],
+   [
+    9,
+    "Fill the list with INITIAL_CAPACITY placeholder actions"
+   ]
+  ]
+ },
+ "32a7380": {
+  "summary": "Hands out the next pooled AvailableAction. The index resets each new frame, and the pool grows by INITIAL_CAPACITY when used up.",
+  "comments": [
+   [
+    6,
+    "New frame: restart from the beginning of the pool"
+   ],
+   [
+    14,
+    "Enough free entries left: take the next one"
+   ],
+   [
+    16,
+    "Advance the index and return that pooled action"
+   ],
+   [
+    29,
+    "Rest of this block is decompiler noise from inlined list indexer code"
+   ],
+   [
+    60,
+    "Pool exhausted: add INITIAL_CAPACITY new actions and raise the count"
+   ]
+  ]
+ },
+ "32a8860": {
+  "summary": "Static constructor of the compiler-generated closure class for DebugCardPickerGrid; creates its shared singleton instance.",
+  "comments": []
+ },
+ "32a8924": {
+  "summary": "Compiler-generated predicate used when filtering the debug card picker: true if the card is the target card and its localized name contains the search text, ignoring case.",
+  "comments": [
+   [
+    8,
+    "Only the card this closure was built for can match"
+   ],
+   [
+    14,
+    "Case-insensitive substring search of the localized name; a non-negative result means found"
+   ]
+  ]
+ },
+ "32a75b4": {
+  "summary": "Start for the debug card picker: builds the filterable list from all playable cards sorted by name, previews the first card, hooks the search box and fills the army dropdown (Current Deck, each CardArmy, All).",
+  "comments": [
+   [
+    4,
+    "Create the filterable data helper that backs the scrolling list"
+   ],
+   [
+    9,
+    "Take every card in the full collection, filtered and ordered by name"
+   ],
+   [
+    26,
+    "Fill the list and preview the first card"
+   ],
+   [
+    34,
+    "Rebuild the filter whenever the search text changes"
+   ],
+   [
+    41,
+    "Start building the army dropdown: id -1 means the current deck"
+   ],
+   [
+    55,
+    "Loop over all CardArmy enum values and add one dropdown option each; the interface calls are decompiler noise"
+   ],
+   [
+    113,
+    "Cleanup of the enumerator (dispose); decompiler lost the try/finally structure"
+   ],
+   [
+    137,
+    "After the loop add an All option (id 100) and listen for selection changes"
+   ],
+   [
+    151,
+    "Exception-unwind code from the decompiler; no gameplay meaning"
+   ]
+  ]
+ },
+ "32a7980": {
+  "summary": "Fills the army dropdown of the debug card picker with Current Deck, every CardArmy value and All, then hooks selection changes to ChangeSelectedArmy.",
+  "comments": [
+   [
+    7,
+    "Clear old items; id -1 stands for the current deck"
+   ],
+   [
+    20,
+    "Loop over all CardArmy enum values adding one option per army; interface plumbing is decompiler noise"
+   ],
+   [
+    72,
+    "Cleanup of the enumerator (dispose); decompiler lost the try/finally structure"
+   ],
+   [
+    95,
+    "Add the All option (id 100), listen for selection changes and select the first item"
+   ],
+   [
+    110,
+    "Exception-unwind code from the decompiler; no gameplay meaning"
+   ]
+  ]
+ },
+ "32a7d74": {
+  "summary": "Adds one option (text plus numeric id as string) to the debug picker's dropdown and increases its visible item count.",
+  "comments": [
+   [
+    7,
+    "The id is stored as the item's value string; ChangeSelectedArmy parses it back"
+   ]
+  ]
+ },
+ "32a7e3c": {
+  "summary": "Dropdown selection handler of the debug card picker: id -1 means filter by current deck, any other id selects that CardArmy. Then the filter is rebuilt and the grid refreshed.",
+  "comments": [
+   [
+    7,
+    "Read the selected option's id back from its value string"
+   ],
+   [
+    8,
+    "Not -1: filter by army, no deck filter"
+   ],
+   [
+    16,
+    "-1 is Current Deck: filter by the deck list. The following code is RebuildFilter inlined"
+   ],
+   [
+    17,
+    "Environment-effect mode uses a cached predicate that keeps only env-effect cards"
+   ],
+   [
+    18,
+    "Normal mode: filter by deck, else by army (if one is selected), else by search text only"
+   ],
+   [
+    49,
+    "Install the predicate as the list's filtering criteria and rebuild the filtered items"
+   ],
+   [
+    69,
+    "Tell the grid adapter (IOSA) the item count changed; the interface lookup is decompiler noise"
+   ]
+  ]
+ },
+ "32a80f0": {
+  "summary": "Fills a card row in the debug picker grid with the card's localized name and its Energy cost, and remembers the card on the view holder.",
+  "comments": [
+   [
+    6,
+    "Look up the card shown at this row index"
+   ],
+   [
+    13,
+    "The cost shown is the card's Energy cost converted to text"
+   ]
+  ]
+ },
+ "32a81d0": {
+  "summary": "Opens the debug card picker in normal mode: stores the picked and summoned callbacks and the deck filter, then re-applies the filter if the list has already been set up.",
+  "comments": [
+   [
+    7,
+    "Show the picker panel and remember the callbacks and the deck list"
+   ],
+   [
+    11,
+    "Flag at offset 0x90 seems to mean the list is initialised; if not, Start will build it later"
+   ],
+   [
+    14,
+    "The rest is RebuildFilter inlined. Environment-effect mode uses a cached predicate that keeps only env-effect cards"
+   ],
+   [
+    15,
+    "Normal mode: filter by deck, else by army (if one is selected), else by search text only"
+   ],
+   [
+    57,
+    "Install the predicate as the list's filtering criteria and rebuild the filtered items"
+   ],
+   [
+    63,
+    "Tell the grid adapter (IOSA) the item count changed; the interface lookup is decompiler noise"
+   ]
+  ]
+ },
+ "32a8280": {
+  "summary": "Opens the debug card picker in environment-effect mode: stores the callbacks, sets the env-effect flag and re-applies the filter if the list is ready.",
+  "comments": [
+   [
+    7,
+    "Show the picker panel and remember the callbacks"
+   ],
+   [
+    10,
+    "Switch the picker to environment-effect cards only"
+   ],
+   [
+    11,
+    "Flag at offset 0x90 seems to mean the list is initialised; if not, Start will build it later"
+   ],
+   [
+    14,
+    "The rest is RebuildFilter inlined. Environment-effect mode uses a cached predicate that keeps only env-effect cards"
+   ],
+   [
+    15,
+    "Normal mode: filter by deck, else by army (if one is selected), else by search text only"
+   ],
+   [
+    57,
+    "Install the predicate as the list's filtering criteria and rebuild the filtered items"
+   ],
+   [
+    63,
+    "Tell the grid adapter (IOSA) the item count changed; the interface lookup is decompiler noise"
+   ]
+  ]
+ },
+ "32a8324": {
+  "summary": "Button handler: calls the card-picked callback with the currently selected card, then closes the picker panel.",
+  "comments": [
+   [
+    4,
+    "Report the chosen card to whoever opened the picker"
+   ],
+   [
+    8,
+    "Close the panel (the hide call is garbled by the decompiler)"
+   ]
+  ]
+ },
+ "32a8364": {
+  "summary": "Button handler: calls the card-summoned callback with the currently selected card, then closes the picker panel.",
+  "comments": [
+   [
+    4,
+    "Report the card to summon to whoever opened the picker"
+   ],
+   [
+    8,
+    "Close the panel (the hide call is garbled by the decompiler)"
+   ]
+  ]
+ },
+ "32a7f28": {
+  "summary": "Chooses the filtering predicate for the debug card list (environment effects, deck, army, or name search), installs it and refreshes the grid.",
+  "comments": [
+   [
+    4,
+    "Environment-effect mode uses a cached predicate that keeps only env-effect cards"
+   ],
+   [
+    5,
+    "Normal mode: filter by deck, else by army (if one is selected), else by search text only"
+   ],
+   [
+    47,
+    "Install the predicate as the list's filtering criteria and rebuild the filtered items"
+   ],
+   [
+    53,
+    "Tell the grid adapter (IOSA) the item count changed; the interface lookup is decompiler noise"
+   ]
+  ]
+ },
+ "32a8420": {
+  "summary": "Returns true if the card's localized name contains the current search text, ignoring case.",
+  "comments": [
+   [
+    5,
+    "Case-insensitive substring search; a non-negative IndexOf result means a match"
+   ]
+  ]
+ },
+ "32a8460": {
+  "summary": "Creates a views holder for the picker grid and hooks SelectCard onto every cell so clicking a card selects it.",
+  "comments": [
+   [
+    4,
+    "Build the normal holder first"
+   ],
+   [
+    7,
+    "Connect the selection callback to each cell in the group"
+   ],
+   [
+    11,
+    "Tail is decompiler noise from inlined constructor code; it returns the holder"
+   ]
+  ]
+ },
+ "32a857c": {
+  "summary": "Constructor of DebugCardPickerGrid: sets a do-nothing selection callback and creates the deck filter list and the visibility helper objects.",
+  "comments": [
+   [
+    5,
+    "Default selected-card-changed handler is a cached empty delegate"
+   ],
+   [
+    13,
+    "Empty deck filter list"
+   ],
+   [
+    15,
+    "The rest is inlined base-class initialisation (lists and visibility params)"
+   ]
+  ]
+ },
+ "32a86d4": {
+  "summary": "Search-box text-changed handler for the debug card picker; rebuilds the filter predicate and refreshes the grid.",
+  "comments": [
+   [
+    4,
+    "Environment-effect mode uses a cached predicate that keeps only env-effect cards"
+   ],
+   [
+    5,
+    "Normal mode: filter by deck, else by army (if one is selected), else by search text only"
+   ],
+   [
+    47,
+    "Install the predicate as the list's filtering criteria and rebuild the filtered items"
+   ],
+   [
+    53,
+    "Tell the grid adapter (IOSA) the item count changed; the interface lookup is decompiler noise"
+   ]
+  ]
+ }
+}

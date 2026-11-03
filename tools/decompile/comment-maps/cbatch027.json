@@ -1,0 +1,163 @@
+{
+"32b000c": {"summary": "Switches the card's flying controller between Flying and Landed, either instantly or via a 0.4s transition (transition code is inlined). Called when a unit gains or loses flying or vanguard; changes the controller state only.", "comments": [
+[4, "Find the FlyingCardController, looking it up on the 3D body if not cached yet"],
+[14, "Transition time is 0.4s; the decompiler wrapped the inlined controller code in a bogus do/while"],
+[24, "Negative time is invalid: log a warning and fall back to an instant state change"],
+[33, "Instant change: pick Flying or Landed directly"],
+[41, "Timed change: pick the transition state matching the requested direction"],
+[50, "Already in the requested transition state: nothing to do"],
+[53, "Starting to land: skip if the controller is already fully landed"],
+[60, "Re-enable the controller and remember the current local position as the start of the move"],
+[73, "Starting to fly: skip if the controller is already fully flying"],
+[80, "Target is the fly position; also record the current position as the move start"],
+[96, "Reached the end state: Landed disables the controller and snaps the card to its ground position"],
+[110, "Flying end state: keep the controller enabled"],
+[122, "Unreachable fallback created by the decompiler (unknown state); the rest is junk"]]},
+"32b00d0": {"summary": "Refreshes the bastion number shown on a card on the board: shows the value when the card has bastion above zero and hides the text object otherwise. Does nothing for cards still in hand.", "comments": [
+[8, "Cards in hand do not show a bastion counter"],
+[13, "Read the card's current bastion value"],
+[15, "Bastion is zero: the text object is hidden (decompiler mangled this branch)"],
+[27, "Bastion above zero: activate the text object and write the number into it"]]},
+"32b01f4": {"summary": "Called when a unit's summon sickness ends. Toggles the can-attack animation object based on whether the card can act, and fades the minion light sprite to full alpha over the ability display time.", "comments": [
+[4, "Show or hide the can-attack animation depending on whether the card can act now"],
+[17, "Fade the minion light to alpha 1 using the global ability display time, with InOutCubic easing"],
+[24, "Easing setup is inlined DOTween SetEase code; not game logic"]]},
+"32b02c0": {"summary": "Destroys the can-ability glow animation object on the card and clears the reference. Called when the card no longer has an ability ready to use.", "comments": []},
+"32b0330": {"summary": "Builds and returns the coroutine that turns the vanguard stealth look on or off, optionally waiting for a flicker first. Only creates the state machine; the work happens in MoveNext.", "comments": []},
+"32b03e4": {"summary": "Removes the visual effects for a trait on this card: ends or destroys its frame effects, plays any exit trait effects, and re-toggles flying for flying/vanguard. Called when a trait is lost or switched off.", "comments": [
+[7, "Look up the trait definition (config and effects)"],
+[9, "If a 'play' frame effect exists for this trait, tell it to exit (or destroy it) and forget it"],
+[31, "Same cleanup for the 'trigger' frame effects dictionary"],
+[55, "Trait config exists: go through its trait effects to find ones that play on removal"],
+[68, "Effect flag 1 seems to mean 'play on exit': resolve the animation and run it as a coroutine"],
+[91, "Losing flying: put the card down (landed)"],
+[95, "Losing vanguard: if the card still has flying, make it fly again (vanguard overrides flying)"]]},
+"32ae498": {"summary": "Removes the status frame effects from the card: exits or destroys trait frames in both effect dictionaries (all, or only some depending on clearAll), removes the quest frame when appropriate, and stops the codex frame.", "comments": [
+[7, "Closure captures this and clearAll for the predicate filters"],
+[11, "Collect the 'play' effect traits matching the filter and clean each one up"],
+[28, "Effect object exists: ask its component to Exit (plays outro) or destroy it directly, then drop the entry"],
+[69, "Repeat the same cleanup for the 'trigger' frame effects"],
+[127, "Quest frame is removed when clearing everything or when the card has no quests left"],
+[141, "Codex frame is always stopped"]]},
+"32b09d8": {"summary": "Spawns the summon sickness frame effect on top of the card, loading it from the generic battle animations, if one is not already showing. Stores the instance in summonSicknessFrame.", "comments": [
+[5, "Already showing: nothing to do"],
+[9, "Only proceed if the addressable summon sickness asset is loadable"],
+[15, "Load the prefab and instantiate it at the card's position with no rotation"],
+[27, "Parent-scale step: scale gets reset on the new object (decompiler lost the details)"]]},
+"32b0c0c": {"summary": "Destroys the summon sickness frame effect if present and clears the reference. Decompiler output is partly lost around the destroy call.", "comments": [
+[5, "Only act if the frame exists"],
+[9, "Destroy of the frame object (decompiler shows only the marshal plumbing)"]]},
+"32b0c9c": {"summary": "Resets a card that was teleported out of battle: reactivates the 3D body's parent, sets all child alpha back to 1 and adds the codex effect object to the card if missing. Decompiler output is garbled.", "comments": [
+[4, "Re-enable the parent of the 3D body and zero its local position"],
+[12, "Loop over child components and make each fully opaque again"],
+[18, "Decompiler merged ShowCodex code in here after the loop; below is the codex spawn"],
+[19, "Codex trait provides the custom effect prefab"],
+[27, "Only spawn if there is no effect yet and a prefab exists"],
+[43, "Instantiate it, parent it under the 2D controller, reset scale and rotation"]]},
+"32b0df4": {"summary": "Shows the codex frame effect on the card by instantiating the codex trait's prefab and parenting it under the 2D card controller, unless one already exists.", "comments": [
+[4, "Codex trait supplies the custom frame prefab"],
+[12, "Skip if the frame already exists or there is no prefab"],
+[28, "Spawn at the card position, parent under the 2D controller, then reset scale and rotation"]]},
+"32b10e0": {"summary": "Shows the oath frame effect on the card by instantiating the oath trait's prefab and parenting it under the 2D card controller, unless one already exists.", "comments": [
+[4, "Oath trait supplies the custom frame prefab"],
+[12, "Skip if the frame already exists or there is no prefab"],
+[28, "Spawn at the card position, parent under the 2D controller, then reset scale and rotation"]]},
+"32b0948": {"summary": "Destroys the codex frame effect if present and clears the reference.", "comments": [
+[5, "Only act if the frame exists"]]},
+"32b12c0": {"summary": "Destroys the oath frame effect if present and clears the reference.", "comments": [
+[5, "Only act if the frame exists"]]},
+"32b1350": {"summary": "Shows the ephemeral frame effect (stored as reflectedFrame) on the card, using the prefab held by the battle animations, parented under the 2D card controller.", "comments": [
+[5, "Already showing: nothing to do"],
+[9, "Get the ephemeral frame prefab from the battle manager's animations; bail if missing"],
+[24, "Spawn at the card position, parent under the 2D controller, then reset scale and rotation"]]},
+"32b1520": {"summary": "Destroys the reflected (ephemeral) frame effect if present and clears the reference.", "comments": [
+[5, "Only act if the frame exists"]]},
+"32b15b0": {"summary": "Spawns the stealth frame effect on the card if none exists, sets it up, and starts the coroutine that turns vanguard stealth on.", "comments": [
+[5, "Already showing: nothing to do"],
+[13, "Stealth prefab is held in the battle animations; stop if missing"],
+[28, "Spawn it at the card position and attach it to the card UI"],
+[31, "Start the SetVanguardStealth(on) coroutine; the rest is decompiler noise from inlined StartCoroutine"]]},
+"32b17a0": {"summary": "Removes the stealth frame effect if present and starts the coroutine that turns vanguard stealth off.", "comments": [
+[5, "Destroy the stealth frame if it exists"],
+[10, "Start the SetVanguardStealth(off) coroutine; the rest is decompiler noise from inlined StartCoroutine"]]},
+"32ae120": {"summary": "Refreshes the small trait icons on a unit card on the board: hides all icons, then shows one per in-play trait with its icon sprite and value counter. Decompiler merged neighbouring methods (ToggleTraitIcons, CleanStatusAnims) after the end.", "comments": [
+[8, "Only units show trait icons"],
+[14, "Hide all existing icons first"],
+[27, "Ambush cards owned by the opponent show no icons (hidden info)"],
+[34, "Build the list of traits to display and loop over it, one icon slot per trait"],
+[57, "Find the card's current trait data that matches this trait"],
+[67, "Trait has a value: get it with modifiers applied and enable the icon's counter"],
+[86, "Initialize the icon with the trait sprite, the value and a flag from the trait config"],
+[100, "Below here is merged code: ToggleTraitIcons (toggle every icon on/off)"],
+[130, "Further merged code: a copy of CleanStatusAnims (exit/remove trait frame effects, quest frame, codex)"]]},
+"32b18f8": {"summary": "Finds the board icon for a trait and plays a short yoyo scale-punch tween on it to draw attention. Decompiler merged FadeAllTraitsIcons and HighlightBloodThirst code into it.", "comments": [
+[7, "Walk the trait list to find the entry matching the requested trait"],
+[18, "Match found: take the icon at the same index"],
+[27, "Merged code from FadeAllTraitsIcons: fade every icon to a target alpha"],
+[31, "Merged code from HighlightBloodThirst: flash the blood thirst sprite"],
+[72, "Kill any running scale tween, restore the scale, then scale up and back twice with InQuint easing"]]},
+"32b19e0": {"summary": "Fades every board trait icon to a target alpha over a given time. Decompiler appended the blood thirst flash code at the end.", "comments": [
+[9, "Loop through all trait icons and fade each one"],
+[11, "Merged code after the loop: the blood thirst flash (yoyo fade of the frame sprite)"]]},
+"32b1a58": {"summary": "Makes the blood thirst frame flash by yoyo-fading its sprite to alpha 0.3 six times over 0.15s each, using InOutBounce easing.", "comments": [
+[7, "Only if the blood thirst frame object exists"],
+[13, "Fade the sprite to 0.3 alpha, looping 6 times back and forth"],
+[17, "Easing setup is inlined DOTween code; not game logic"]]},
+"32b1b7c": {"summary": "Shows or removes the mulligan-selected frame on the card and plays the toggle sound. Called when the player marks or unmarks a card to replace in the mulligan.", "comments": [
+[5, "Selected: spawn the frame from the prefab if not already showing"],
+[26, "Deselected: destroy the frame if it exists"],
+[33, "Play the Toggle sound cue from the sound collection; the rest is inlined SoundManager code"],
+[46, "No cue assigned: log an error if sound logging is enabled"],
+[58, "Debug sounds enabled: log which cue and mixer was played"]]},
+"32b1e10": {"summary": "Cleans up the mulligan visuals on the card by destroying the selected frame and the button frame. Called when the mulligan ends.", "comments": [
+[5, "Destroy the selected frame"],
+[10, "Destroy the mulligan button frame object"]]},
+"32b1f04": {"summary": "Builds and returns the coroutine that waits a given time and then resets the card's material. Only creates the state machine.", "comments": []},
+"32b1fa8": {"summary": "Plays the hand-to-board animation forward with the dissolve material, shows the 3D body, and starts a coroutine to reset the material at the animation event time. Used when a card is summoned.", "comments": [
+[4, "Use the dissolve material (legendary or normal) for the appearance effect"],
+[11, "Play the hand-to-board clip forward from the start"],
+[16, "Show the 3D body"],
+[18, "Reset the material later, at the time of the animation event"],
+[20, "Start the coroutine; the rest is decompiler noise from inlined StartCoroutine"]]},
+"32b21c0": {"summary": "Plays the hand-to-board animation in reverse, with the dissolve material, so the card goes back to hand, then starts the coroutine that resets the material.", "comments": [
+[4, "Use the dissolve material for the disappearing effect"],
+[10, "Rewind, set speed -1 and start at the clip's end so it plays backwards"],
+[21, "Reset the material at the animation event time"],
+[23, "Start the coroutine; the rest is decompiler noise from inlined StartCoroutine"]]},
+"32b20c0": {"summary": "Returns the dissolve material to use: the legendary one if the card uses a legendary summon effect, otherwise the normal one.", "comments": [
+[6, "Field offset picks dissolveMaterialLegendary or dissolveMaterial"]]},
+"32b2308": {"summary": "Shows the damage counter on the card with the damage amount and plays its animation. Called when the card takes damage.", "comments": [
+[9, "Activate the counter object, set its text to the damage and play the animation"]]},
+"32b20f8": {"summary": "Sets the material on the card's 3D renderer, remembering the original the first time, optionally refreshes the card image, and returns the renderer's resulting material.", "comments": [
+[5, "First call: save the original material so it can be restored later"],
+[13, "Optionally update the card image on the 3D base"],
+[16, "Read back the renderer's material; the rest is IL2CPP marshalling noise"]]},
+"32b2320": {"summary": "Puts the saved original material back on the 3D renderer, refreshes the card image and returns the renderer's resulting material.", "comments": [
+[5, "Restore the saved original material"],
+[7, "Read back the renderer's material; the rest is IL2CPP marshalling noise"]]},
+"32b235c": {"summary": "Fades the card highlight to the colour that says what you can do with it: sabotage, ephemeral, special action (teleport or oath) or normal playable. Called when a card becomes highlighted.", "comments": [
+[6, "Sabotage spells use the sabotage colour"],
+[22, "Ephemeral cards use their own playable colour"],
+[31, "Teleport card drawn this turn: use the special action colour"],
+[45, "Oath card that can be played with its oath now: special action colour"],
+[52, "Start a colour transition on the highlight material from the current to the target colour over 0.2s"]]},
+"32b2480": {"summary": "Changes the card highlight to the selected colour (a different one for legendary cards) and restarts the colour transition. Called when the card is selected.", "comments": [
+[5, "Rarity 4 is legendary: it has its own selected colour"],
+[33, "Set up the colour changer's material, target and current colours and restart the 0.2s transition"]]},
+"32b24ec": {"summary": "Stops all in-play animations on the card: cleans every status animation, destroys the tracked in-play objects, clears the list and stops the summon sickness animation. Most of the later code is decompiler noise from inlined List.Clear.", "comments": [
+[4, "Remove all status frames"],
+[8, "Destroy tracked in-play animation objects from last to first"],
+[15, "Also stop summon sickness"],
+[21, "List.Clear inlined: size set to 0"],
+[27, "From here on is decompiler noise (Array.Clear / IndexOf / LastIndexOf helpers); no extra game logic"]]},
+"32b0fd4": {"summary": "Attaches a status frame object to the card's 2D controller and resets its local scale to one and local rotation to identity.", "comments": [
+[7, "Parent the frame under the 2D card controller"],
+[10, "Reset local scale"],
+[13, "Reset local rotation"]]},
+"32ac648": {"summary": "Applies the card back sprite (for the player or opponent) to the card's back image and updates the shadow image to match, including layout and material update flags.", "comments": [
+[5, "Ask the battle manager for the card back sprites for this side"],
+[9, "Set the card back image sprite"],
+[14, "Update the shadow Image with the same sprite"],
+[19, "Shadow had no sprite yet: set it, flagging layout/material skips from the sprite's size and textures"],
+[58, "Shadow already had a sprite: only change it if different, comparing rect size and textures"]]}
+}

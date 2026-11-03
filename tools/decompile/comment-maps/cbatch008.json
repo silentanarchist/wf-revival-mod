@@ -1,0 +1,175 @@
+{
+"325bce8": {"summary": "Returns the cosmetic cardback item for this deck: looks up cardbackId in the player's full cosmetic collection, or falls back to a default for the deck's army. Called when drawing the deck's card back; decompiler output is badly mangled by inlined List.Find/FindAll/Any code.", "comments": [
+[5, "A cardback was chosen for this deck: look it up in the player's cosmetic collection"],
+[8, "Predicate matches items whose unique id equals this deck's cardbackId (see the b__56_0 lambda)"],
+[16, "Inlined List<CosmeticItem>.Find: scans the collection and returns the first item the predicate accepts"],
+[61, "No cardback id set: use the default cardback for the deck's army from the army utilities"],
+[69, "Default lookup is an inlined enumeration over the army data; decompiler lost the match logic and just returns null here"],
+[81, "From here on the listing is unrelated inlined List helper code (FindAll, FindIndex, FindLast, Any) that the decompiler appended"],
+[195, "Compiler-generated exception throw helpers for list enumeration (modified collection, enumerator misuse); not game logic"]
+]},
+"325be08": {"summary": "Checks the deck for cards that do not fit the hero's army. Returns true if any non-neutral card's army differs from the hero's army; logs an error and returns false if the hero or card list is missing.", "comments": [
+[6, "Need a hero and a card list to validate; otherwise log an error below"],
+[8, "Walk the card list from the last card to the first"],
+[18, "Neutral cards can go in any army's deck, so they are skipped"],
+[21, "A non-neutral card from a different army than the hero makes the deck invalid"],
+[28, "Missing hero or card list: cannot validate"]
+]},
+"325bf70": {"summary": "Checks whether the player owns enough copies of every card in the deck. Fills missingCards with one entry per missing copy and returns true only if nothing is missing.", "comments": [
+[12, "Inventory holds how many copies of each card the player owns"],
+[16, "First pass: count how many copies of each distinct card the deck needs"],
+[27, "TryAdd starts the count at 1; if the card is already counted, bump the count"],
+[34, "Second pass: compare each card's required count with the owned count"],
+[53, "Inventory manager missing: null check"],
+[57, "Shortfall = copies the deck needs minus copies owned"],
+[58, "Decompiler folded the loop test: skip cards where the player owns enough, otherwise flag the deck as incomplete"],
+[59, "Add the card to missingCards once for each missing copy"],
+[80, "At least one card is missing, so the result is false"]
+]},
+"325c3fc": {"summary": "Removes from the deck every non-neutral card whose army differs from the hero's army, logging a warning for each one. If the hero or card list is missing it only logs an error.", "comments": [
+[7, "No hero or no card list: nothing can be validated, log the error and stop"],
+[18, "Walk the card list backwards so RemoveAt does not skip entries"],
+[29, "Neutral cards are valid in every deck"],
+[31, "Card belongs to a different army than the hero: log it and remove it from the deck"]
+]},
+"325c6c8": {"summary": "Equality operator for CardDeck: two decks are equal if they are the same object or have the same deckId string. Null on either side means not equal.", "comments": [
+[4, "Same reference (or both null) means equal"],
+[7, "Exactly one side null means not equal"],
+[15, "Different string objects: compare deckId text (lengths first, then contents)"],
+[28, "Inlined string comparison: compares the character data 8 bytes at a time, then the tail"]
+]},
+"325c6f8": {"summary": "Inequality operator for CardDeck: true unless both are the same object or have equal deckId strings.", "comments": [
+[4, "Same reference means not unequal"],
+[9, "Both non-null: decks differ when their deckIds differ"]
+]},
+"325c738": {"summary": "Equals override: returns true if obj is a CardDeck with the same deckId as this deck.", "comments": [
+[4, "Null never equals"],
+[7, "Type check that obj is a CardDeck (inlined cast); decompiler shows its failure as a null reference throw"],
+[12, "Same deckId string object means equal"],
+[19, "Compare deckId contents: lengths first, then the characters, using inlined string equality"]
+]},
+"325c7cc": {"summary": "Serializes a deck to a shareable string: deck name, then each card's id, then the play mode, joined by a delimiter character and base64-encoded as UTF-8. Used for exporting or copying decks.", "comments": [
+[9, "Needs a deck with a name"],
+[10, "Escape the delimiter inside the deck name (replaced with %3A) so it cannot break the format"],
+[16, "Append the unique id of every card in the deck, each preceded by the delimiter"],
+[25, "Append the play mode last; a deck with no mode set is saved as Classic"],
+[34, "Encode the whole string as UTF-8 bytes and return it as base64"]
+]},
+"325cab8": {"summary": "Builds a CardDeck from a base64 deck string made by Serialize: decodes it, reads the name, cards and play mode, pulls the hero and defensive card out of the card list. Unknown or hidden cards are dropped.", "comments": [
+[5, "Decode base64 to UTF-8 text and split on the delimiter"],
+[19, "Second field is the play mode; defaults to 0 when missing"],
+[30, "First field holds the deck name followed by the card ids; split it again"],
+[38, "Restore delimiter characters that were escaped as %3A in the name"],
+[43, "Loop over the card ids: look each up by id and keep it only if it exists and is not hidden"],
+[82, "Scan the card list from the end to separate special cards from normal ones"],
+[96, "A Hero card becomes the deck's hero and is removed from the card list"],
+[104, "A card with type value 0xd2 is the deck's defensive card; move it out of the card list too"],
+[110, "Create the deck from the name, hero, cards and defensive card"],
+[111, "Store the parsed play mode as a nullable value on the deck"]
+]},
+"325d030": {"summary": "Returns true if the given card is this deck's hero or appears in the deck's card list. The card list check is a LINQ Any with a closure that compares cards.", "comments": [
+[4, "Closure stores the card to look for, used by the Any predicate"],
+[9, "No hero set: the deck cannot contain the card, return false"],
+[14, "Compare the hero's id with the card's id; same id means the deck has it"],
+[23, "Otherwise run Enumerable.Any over the card list with the closure predicate"],
+[26, "Everything from here to the end is decompiler noise: inlined IL2CPP generic LINQ helpers (Any, Append) and exception unwinding, not game logic"]
+]},
+"325d1b4": {"summary": "Lambda used by GetDeckCardback: returns true when a cosmetic item's uniqueId equals the deck's cardbackId.", "comments": [
+[7, "Compare the item's id with the deck's cardback id"],
+[12, "Missing item id never matches"],
+[16, "Different string objects: compare lengths, then characters (inlined string equality)"]
+]},
+"325d35c": {"summary": "Sets the card art sprite on the card image for a given card type. Applies the per-type image scale, sets the frame mask (tactics use no mask and a position offset), moves the image, creates its own material copy, and assigns the sprite to the Image.", "comments": [
+[7, "Remember the image's original position the first time through; the -1111 value marks it as not yet captured"],
+[18, "Capture the image's current local position as the baseline for later offsets"],
+[24, "Look up the scale for this card type from the card scales asset"],
+[36, "When the image is in its Big state, heroes and minions use an extra size multiplier"],
+[42, "Tactic cards: no art mask, apply the tactics offset position instead"],
+[49, "Other card types: use the sprite's texture as the frame mask alpha and no offset"],
+[57, "Move the image to its original position plus the type's offset"],
+[64, "First use: make a private copy of the image material so changes do not affect other cards"],
+[75, "Inlined Image.sprite setter: only changes the sprite if it differs from the current one"],
+[79, "No sprite set yet: assign the new sprite and mark the image dirty so it redraws"],
+[121, "Sprite changed: update layout and material skip flags before assigning it"]
+]},
+"325d854": {"summary": "Switches the card image to a Small, Big or other size state, doing nothing if already in that state. Sets target scale, shader clamp range and mask strength, applying them instantly or tweening them with DOTween.", "comments": [
+[5, "Already in this state: nothing to do"],
+[11, "Big: use the instanced material, enlarge by the big-size multiplier, turn the soft mask on and use the big clamp range"],
+[32, "Not Big: mask strength target is 0"],
+[33, "Neither Big nor Small: scale back to normal and clear the clamp range, no animation"],
+[41, "Small: restore original scale and the small clamp range"],
+[42, "Instant small change: turn off the mask and switch back to the original material"],
+[49, "Small and not instant: animate"],
+[55, "Stop any running tweens on the image transform, its material and the mask material"],
+[67, "Instant: set scale, clamp range and mask strength directly"],
+[88, "Animated: tween the scale with InOutQuad easing; when animating, call back on completion"],
+[102, "Tween the material clamp range and the mask effect strength over scaleTime"]
+]},
+"325d7f8": {"summary": "Turns the frame soft mask on or off. The rest of the body is decompiler noise.", "comments": [
+[6, "Set the soft mask component's enabled flag to the requested option"],
+[10, "Decompiler artifact: material and text background handling got mangled and ends in a null reference throw"]
+]},
+"325d858": {"summary": "Changes the card image state to Small, Big or other, tweening scale, clamp range and mask strength. Appears to be an identical copy of ChangeSize that the compiler emitted separately.", "comments": [
+[5, "Already in the requested state: nothing to do"],
+[11, "Big: use the instanced material, enlarge by the big-size multiplier, turn the soft mask on and use the big clamp range"],
+[32, "Not Big: mask strength target is 0"],
+[33, "Neither Big nor Small: scale back to normal and clear the clamp range, no animation"],
+[41, "Small: restore original scale and the small clamp range"],
+[42, "Instant small change: turn off the mask and switch back to the original material"],
+[49, "Small and not instant: animate"],
+[55, "Stop any running tweens on the image transform, its material and the mask material"],
+[67, "Instant: set scale, clamp range and mask strength directly"],
+[88, "Animated: tween the scale with InOutQuad easing; when animating, call back on completion"],
+[102, "Tween the material clamp range and the mask effect strength over scaleTime"]
+]},
+"325da9c": {"summary": "Moves the card image to a target scale, shader clamp range and mask strength, instantly or with DOTween tweens. Optionally runs a callback when the scale tween finishes (to disable the mask). Parameter names in the body are partly lost by the decompiler.", "comments": [
+[4, "Stop any running tweens on the image transform, its material and the mask material before starting new ones"],
+[15, "Reset the image to the instanced material"],
+[17, "Animated path"],
+[18, "No finish callback requested: plain scale tween with InOutQuad easing"],
+[24, "Finish callback requested: scale tween, then run the DoChange completion callback (b__23_0) on complete"],
+[34, "Tween the material's clamp range color/vector with InOutQuad easing"],
+[38, "Tween the _MaskEffectStrength property on the frame mask material, if the material has it"],
+[69, "Instant path: set scale, clamp range and mask strength immediately, no tweening"]
+]},
+"325dde4": {"summary": "Editor helper: draws a gizmo sphere at the card image's position plus the tactics offset when the object is selected. Does not affect gameplay.", "comments": [
+[7, "Needs the card image and its transform"],
+[9, "Gizmo position = image position plus the tactics offset"]
+]},
+"325de4c": {"summary": "Constructor: sets the default big-size multiplier, caches the shader property id for _Clamp_Range, and sets a marker value for the original image position meaning not yet captured.", "comments": [
+[5, "Default bigSizeMultiplier (packed float constants in the decompiler output)"],
+[8, "Original image position starts at -1111/1111 marker values, which SetImage treats as not yet recorded"]
+]},
+"325dec8": {"summary": "Static constructor: sets the clamp range vectors used for the card image shader in the Small and Big states.", "comments": [
+[5, "Clamp range used when the card image is small"],
+[7, "Clamp range used when the card image is big (floats packed into 64-bit constants by the decompiler)"]
+]},
+"325df64": {"summary": "Test script update loop: on each left mouse click flips between two image states on the CardImageController and runs the same size-change tween as ChangeSize. A debug tool, not used in matches.", "comments": [
+[5, "Only react to a left mouse click"],
+[9, "Toggle the option flag to pick the next state"],
+[14, "Already in that state: nothing to do"],
+[20, "Big: use the instanced material, enlarge, turn the mask on"],
+[41, "Not Big or Small: reset scale and clamp range, no animation"],
+[50, "Small: animate back to the original scale"],
+[55, "Stop running tweens on the image, its material and the mask"],
+[66, "Tween the scale, the material clamp range and the mask strength using the controller's scaleTime"]
+]},
+"325d698": {"summary": "Returns whether a scale is defined for the card type and what that scale is (1.0 if none). Builds the card type to scale dictionary on first use.", "comments": [
+[5, "Cache is empty: create the dictionary and fill it from the scales array"],
+[12, "Look up the card type in the cache"],
+[14, "Not found: return (false, 1.0), meaning no special scale"],
+[19, "Found: return (true, its scaleTransform)"]
+]},
+"325dfb0": {"summary": "Fills the card type to scale dictionary from the cardScalesByType array, adding new entries or overwriting existing ones for the same type. The decompiler has merged OnValidate code into it.", "comments": [
+[14, "Walk the configured scales array"],
+[27, "Add the entry if the card type is not cached yet, otherwise overwrite it"],
+[43, "Decompiler merged a copy of OnValidate here; the lines below check for duplicate card types"],
+[87, "Logs an error if two entries define the same card type"]
+]},
+"325e0b8": {"summary": "Editor validation hook: logs an error if two entries in the scales array use the same card type, then rebuilds the card type to scale dictionary.", "comments": [
+[24, "Compare every pair of entries in the scales array"],
+[49, "Two different entries with the same card type: log the duplicate definition error"],
+[61, "Make sure the dictionary exists"],
+[91, "Rebuild the dictionary: add each entry, or overwrite the one already there for that type"]
+]}
+}

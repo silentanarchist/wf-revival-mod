@@ -1,0 +1,156 @@
+{
+"3038cd4": {"summary": "Predicate used by GetCosmeticCollection: true if a cardback cosmetic should appear in the deck editor's cosmetic list. Hidden cardbacks are excluded; Show ones always pass; OnlyIfOwned ones pass only if the player's inventory holds at least one copy.", "comments": [
+[8, "Hidden cardbacks are never listed"],
+[10, "Visibility option Show: always listed"],
+[13, "Visibility option OnlyIfOwned: listed only if the player owns it"],
+[15, "Look up ownership in the inventory (InventoryManager.HasItem<CosmeticItem>, inlined by the decompiler)"],
+[40, "Decompiler dumped inlined LINQ Any() and generic helper code below (lines 40-594); it is noise, not game logic"],
+[595, "Real logic: fetch the item instance by ID from the inventory; ownership = its item count is above 0"],
+[598, "Item not found in inventory: not owned"],
+[618, "Owned if the stack count is positive"],
+[623, "Hidden, or not shown by its options: not listed"]
+]},
+"3038d9c": {"summary": "Button callback (Cancel in the save-deck popup) that closes the current pop-up window. It hides it, removes it from the open list, releases its addressable asset if it was auto-loaded, then returns to the previous window or the main menu.", "comments": [
+[8, "Only act if a pop-up window exists or is the current window"],
+[18, "Nothing to close if there is no pop-up"],
+[25, "Pop-up is the base menu: nothing to do (see end of function)"],
+[29, "Hide the pop-up and drop it from the open windows list"],
+[34, "If it was loaded automatically, destroy its object and release the addressable handle"],
+[44, "If it was the current window, go back to the one before it"],
+[48, "No windows left open: fall back to the base menu and show the main menu"]
+]},
+"3038dec": {"summary": "Callback (Cancel button in the discard confirmation popup) that closes the current pop-up window. Same logic as the TrySaveDeck cancel callback: hide, release, then show the previous window or main menu.", "comments": [
+[8, "Only act if a pop-up window exists or is the current window"],
+[18, "Nothing to close if there is no pop-up"],
+[25, "Pop-up is the base menu: nothing to do (see end of function)"],
+[29, "Hide the pop-up and drop it from the open windows list"],
+[34, "If it was loaded automatically, destroy its object and release the addressable handle"],
+[44, "If it was the current window, go back to the one before it"],
+[48, "No windows left open: fall back to the base menu and show the main menu"]
+]},
+"3038e3c": {"summary": "Callback run when the card detail window closes: if the player picked a different alternate-art version they own, it swaps the deck's copy for that version and remembers the choice. It then redraws the collection, deck counter, deck list, cost and cosmetic drawers, name and empty warning.", "comments": [
+[5, "Alternate-art version selected in the card window"],
+[7, "Nothing selected: leave"],
+[14, "Compare the selected card's ID with the card that was opened"],
+[16, "Same card as before: no change"],
+[21, "Player must own the alternate-art version"],
+[25, "If the deck holds the original card, swap it for the alternate-art one"],
+[30, "Remove the original and add the alternate version, then mark the deck as not synced to the server"],
+[38, "Remember the preferred art for this original card ID (original ID to chosen card ID)"],
+[47, "Refresh the card collection list"],
+[50, "Update the editing panel: deck counter text"],
+[62, "For custom game modes, append the card limit to the counter text (e.g. count/limit)"],
+[94, "Rebuild the deck list, counter, cost and cosmetic drawers"],
+[104, "Update deck name and show the empty-deck warning when the deck has no cards"],
+[127, "Decompiler null-check landing pad"]
+]},
+"3039028": {"summary": "Lambda predicate used by GetCardCollection: true when the card's original ID equals the captured card original ID. The body is an inlined string equality compare.", "comments": [
+[7, "Compare this card's original ID (the non-alternate-art ID) with the captured one"],
+[12, "Null on one side: not equal"],
+[16, "Different string lengths: not equal"],
+[22, "Decompiler expansion of an inlined string compare, checking characters in 8-byte blocks then singly"],
+[40, "Compare any remaining characters one at a time"]
+]},
+"3035da0": {"summary": "Unity Start for the deck editing window: registers drag listeners on card and cosmetic displays, owned-only toggles, Done and Close buttons, and subscribes to deck-edited, card-selected and click events. Runs once when the window is created.", "comments": [
+[4, "Drag events on the card list: CheckCardDrag"],
+[9, "Drag events on the cardback list: CheckCosmeticDrag"],
+[14, "'Show only owned' toggles for cards and cosmetics"],
+[24, "Done button saves the deck (TrySaveDeck); Close button tries to close (TryClose)"],
+[34, "Subscribe RefreshCards to the editing panel's OnDeckEdited event (decompiler shows thread-safe delegate combine)"],
+[48, "Card selected in the editing panel opens the card info window"],
+[54, "Click on a collection card: OnCardClick"],
+[79, "Click on a cosmetic cardback: OnCosmeticClick"],
+[80, "Decompiler null-check landing pad"]
+]},
+"3036288": {"summary": "Opens the deck editor with the deck passed in as data: makes a working copy, strips invalid cards, sets the owned toggles and fills the card and cosmetic lists. It also applies the active event's card limit, initializes the state controller and editing panel, and hides navigation.", "comments": [
+[4, "Base window open logic"],
+[6, "Cast data to CardDeck (type check expanded by decompiler) and copy it, so edits do not touch the original"],
+[19, "Remove cards that are no longer valid; returns true if anything was removed"],
+[21, "Restore the saved 'show only owned' toggle states"],
+[26, "Feed the editing deck into the card list and build both collections"],
+[33, "Look up the active live-ops event for this deck's game mode to get its settings"],
+[49, "Interface cast to IPlayEvent expanded by the decompiler"],
+[53, "Initialize the card list with the event's value (field at 0x80)"],
+[56, "Set up state controller, editing panel and filter to cards already in the deck"],
+[60, "Hide the navigation panel while editing"],
+[64, "Mark the deck unsynced if invalid cards were removed (needs saving)"]
+]},
+"30371d4": {"summary": "Refreshes the deck editor: rebuilds the card list from the current filters and updates the editing panel's deck counter text. For custom game modes it adds the card limit, and it redraws the deck list, counter, cost and cosmetic drawers, deck name and empty warning.", "comments": [
+[5, "Rebuild the visible card collection and push it to the card list"],
+[10, "Give the editing panel the current deck"],
+[13, "Update the deck counter with the number of cards in the deck"],
+[21, "Custom game mode: show count followed by the event's card limit"],
+[44, "IPlayEvent interface cast expanded by decompiler"],
+[52, "Redraw the deck list, then counter, cost and cosmetic drawers"],
+[62, "Update deck name text"],
+[64, "Show the empty-deck warning only when the deck has no cards"],
+[85, "Decompiler null-check landing pad"]
+]},
+"3037244": {"summary": "Click handler for a cardback in the deck editor: a right-click on an owned cardback sets it as the deck's cardback and marks the deck unsynced. It then refreshes the deck counter text (with the limit for custom modes) and the drawers.", "comments": [
+[6, "Check that the player owns this cosmetic"],
+[7, "Only right-click on an owned cardback does anything"],
+[19, "Store the cardback's ID on the deck and flag the deck as not synced to the server"],
+[26, "Update the deck counter text"],
+[33, "Custom game mode: append the event's card limit to the counter"],
+[56, "IPlayEvent interface cast expanded by decompiler"],
+[66, "Redraw counter, cost and cosmetic drawers"],
+[80, "Decompiler null-check landing pad"]
+]},
+"3037320": {"summary": "Click handler for a card in the collection. Right-click adds it to the deck if allowed, otherwise shows an error; any other click opens the card detail window with a callback to apply alternate-art choices.", "comments": [
+[5, "Right-click: quick add to the deck"],
+[10, "Ask the deck whether this card can be added (copy limits, army rules, etc.)"],
+[15, "Allowed: drop the card into the editing panel"],
+[18, "Not allowed: show an error message"],
+[26, "Other click: open card details"],
+[28, "Closure object so the close callback can see the card and window"],
+[36, "Set up the wildcards display for this card"],
+[43, "Find the active event for the deck's game mode (decompiler expands the interface cast)"],
+[64, "Show the card window with the card's tier"],
+[67, "When the window closes, run the alternate-art swap callback"]
+]},
+"3037444": {"summary": "Opens the card detail window for a card (from the deck panel), setting up wildcards and card tier info. It registers a close callback that applies any alternate-art selection.", "comments": [
+[4, "Closure object holding the card and this window"],
+[12, "Set up the wildcards display for this card"],
+[19, "Find the active event for the deck's game mode (decompiler expands the interface cast)"],
+[40, "Show the card window with the card's tier"],
+[43, "When the window closes, run the alternate-art swap callback"]
+]},
+"30377a8": {"summary": "Handles the Escape key in the deck editor. If the deck is saved or unchanged it simply returns. Otherwise it validates the deck and uploads it if valid, or shows a popup offering Cancel or Discard with the validation error.", "comments": [
+[6, "Deck is flagged as synced with the server: check whether to just leave"],
+[9, "Cast window data to CardDeck (type check expanded by decompiler)"],
+[20, "Deck already known in the manager: nothing to save, leave"],
+[25, "Build the Cancel button (reuses the cached close-popup callback)"],
+[36, "Validate the deck; any problem is reported through the error output"],
+[37, "Deck valid: upload it to the server and close the popup"],
+[45, "Deck invalid: build a Discard button and show the error text in a popup with Cancel and Discard"],
+[60, "Decompiler null-check landing pad"]
+]},
+"3037acc": {"summary": "Closes the deck editing window: re-shows the navigation, runs the base close, and if the collection screen is now current, tells it to return from the deck editor for the deck's game mode.", "comments": [
+[6, "Show the navigation panel again"],
+[7, "Base close logic"],
+[10, "If the window now showing is the collection screen (type check expanded by decompiler)"],
+[16, "Pass the edited deck's game mode back so the collection screen opens the right tab"],
+[22, "Collection screen returns from the deck editor"],
+[33, "Decompiler null-check landing pad"]
+]},
+"30368c0": {"summary": "Builds the list of cards shown in the deck editor: either all cards or only owned ones, filtered by several predicates, then sorted. The sort chain ends with ToList. Most of the function is unrelated decompiler junk from inlined LINQ helpers.", "comments": [
+[4, "Show-only-owned toggle off: start from every card in the game, filtered by the first predicate"],
+[16, "Toggle on: start from the card instances the player owns"],
+[24, "Further filters (window filters such as search, army or cost; names are in the lambdas b__32_1 to b__32_4)"],
+[44, "Sort by several keys: string key, then int, then bool, then army (details in b__32_5 to b__32_8)"],
+[81, "Copy the sorted sequence into a List; this is the real return value"],
+[89, "Everything below is unrelated LINQ helper code (ToList, ToLookup, etc.) that the decompiler glued on; ignore it"]
+]},
+"3037c30": {"summary": "Callback for the 'show only owned cards' toggle: if the value changed it stores it, rebuilds the card collection and pushes it to the card display.", "comments": [
+[5, "No change: nothing to do"],
+[9, "Store the new toggle value"],
+[10, "Rebuild the filtered card list with the new setting"],
+[13, "Hand the new list to the card display (UpdateCollection)"]
+]},
+"3037cb0": {"summary": "Callback for the 'show only owned cosmetics' toggle: if the value changed it stores it, rebuilds the cardback list and pushes it to the cosmetic display.", "comments": [
+[5, "No change: nothing to do"],
+[8, "Store the new toggle value"],
+[9, "Rebuild the cardback list with the new setting"],
+[13, "Hand the new list to the cosmetic display (UpdateCollection)"]
+]}
+}

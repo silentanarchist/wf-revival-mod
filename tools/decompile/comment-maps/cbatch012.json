@@ -1,0 +1,626 @@
+{
+ "32676b0": {
+  "summary": "Returns true if any trait currently showing on this entity matches the given trait (LINQ Any over CurrentShowingTraits). The decompiler output is mostly generic Linq boilerplate repeated several times; it has no side effects.",
+  "comments": [
+   [
+    4,
+    "Closure captures the trait so the Any() predicate can compare each CardTraitData against it"
+   ],
+   [
+    8,
+    "Source list is CurrentShowingTraits (traits visible on the card, not hidden ones)"
+   ],
+   [
+    19,
+    "Linq.Any argument checks: null list or null predicate throws ArgumentNull"
+   ],
+   [
+    28,
+    "Inlined interface lookup: finds the IEnumerable implementation of the list and gets an enumerator"
+   ],
+   [
+    48,
+    "Enumerate the traits; stop at the first one for which the predicate returns true"
+   ],
+   [
+    100,
+    "Calls the predicate (trait == requested trait) on the current element"
+   ],
+   [
+    112,
+    "Exception unwind / finally: the enumerator is disposed after the loop; result is whether a match was found"
+   ],
+   [
+    152,
+    "From here on the decompiler duplicated the Any() code for other generic instantiations; it is not game logic"
+   ],
+   [
+    466,
+    "Tail is unrelated generic Enumerable.Append code merged in by the decompiler; ignore it"
+   ]
+  ]
+ },
+ "326778c": {
+  "summary": "Returns the value of the first entry in CurrentTraits matching the given trait, or 0 if the card does not have it. Used to read numbered traits such as armour-like values.",
+  "comments": [
+   [
+    4,
+    "Closure holds the wanted trait for the Find predicate"
+   ],
+   [
+    10,
+    "Find the first current trait entry whose trait equals the requested one"
+   ],
+   [
+    11,
+    "Found: return its stored value; the decompiler lost the else branch, which returns 0 when nothing matched"
+   ]
+  ]
+ },
+ "3267878": {
+  "summary": "Returns the CardTraitData in CurrentTraits matching the given trait. If the card does not have the trait, returns a new hidden placeholder with trait none so callers never get null.",
+  "comments": [
+   [
+    10,
+    "Find the first current trait entry matching the requested trait"
+   ],
+   [
+    11,
+    "Not found: build an empty hidden placeholder entry (trait none) as a null-safe default"
+   ]
+  ]
+ },
+ "32649a4": {
+  "summary": "Adds up the melee or ranged attack changes from this entity's active extrinsic addStats effects. Returns the total for the requested attack type.",
+  "comments": [
+   [
+    4,
+    "Null check on the active effects list"
+   ],
+   [
+    15,
+    "Walk every active effect on this entity"
+   ],
+   [
+    17,
+    "Only extrinsic stat buffs (applied from outside, e.g. auras or enchantments) count"
+   ],
+   [
+    18,
+    "Pick the ranged or melee change field depending on attack type; any other type adds nothing"
+   ]
+  ]
+ },
+ "3264ff0": {
+  "summary": "Returns the card's current value for a trait plus the values of all active addTrait effects for that trait, never below zero. Used when abilities compare numbered traits like bastion.",
+  "comments": [
+   [
+    10,
+    "Result is unused here (decompiler artifact of a GetTrait call)"
+   ],
+   [
+    17,
+    "Sum the value of every active addTrait effect that grants this trait"
+   ],
+   [
+    25,
+    "Base current trait value plus granted amounts"
+   ],
+   [
+    26,
+    "Clamp negative totals to 0 (branchless max with 0)"
+   ]
+  ]
+ },
+ "3267bb8": {
+  "summary": "Coroutine for the fatigue card animation when a player draws from an empty deck. It scales the card in at the deck, tweens it to the shown position with a flip, waits, then scales it to zero.",
+  "comments": [
+   [
+    11,
+    "State 2 is the final state; any other state is handled below"
+   ],
+   [
+    13,
+    "State 1: the first wait is over, so shrink the card away and wait a final time"
+   ],
+   [
+    17,
+    "Scale the card down to zero"
+   ],
+   [
+    19,
+    "Wait for the card's creationTime before the coroutine finishes (state becomes 2)"
+   ],
+   [
+    28,
+    "State 0: first step. Any other state means the coroutine is done"
+   ],
+   [
+    37,
+    "Start the card at 1% scale so it can grow in"
+   ],
+   [
+    42,
+    "Move the card to the deck position"
+   ],
+   [
+    44,
+    "Show the fatigue damage number on the card"
+   ],
+   [
+    51,
+    "Set the card back sprite and hide the front side while it is still face down"
+   ],
+   [
+    54,
+    "Scale up to a start size, then bounce to full size after the creation delay"
+   ],
+   [
+    60,
+    "Move from the deck to the shown position with a bounce"
+   ],
+   [
+    64,
+    "First half of the flip: rotate to 180 degrees (0x42b40000) and call FinishCardDrawRotation when done"
+   ],
+   [
+    70,
+    "Second half of the flip: rotate back to 0 after the first half finishes"
+   ],
+   [
+    77,
+    "Wait for creation delay + draw time + show time, then continue in state 1"
+   ],
+   [
+    88,
+    "A null reference somewhere above ends here"
+   ],
+   [
+    90,
+    "Coroutine finished: state is set to -1 and false is returned"
+   ]
+  ]
+ },
+ "3268074": {
+  "summary": "Reset on the DrawFatigue coroutine iterator; always throws NotSupportedException as is standard for compiler-generated iterators.",
+  "comments": []
+ },
+ "3267a10": {
+  "summary": "Creates the DrawFatigue coroutine for the fatigue card (deck-empty draw damage animation). It only stores the arguments in the iterator; the animation runs when the coroutine is started.",
+  "comments": [
+   [
+    6,
+    "Argument names are shifted by the decompiler: the iterator stores this card, both positions, damage value and card back sprite"
+   ]
+  ]
+ },
+ "3267af0": {
+  "summary": "Switches the fatigue card between its front (image, description, damage text) and back (card back). Front elements get frontSide; the card back gets the opposite.",
+  "comments": [
+   [
+    4,
+    "Each element is null-checked then toggled with SetActive(frontSide)"
+   ],
+   [
+    11,
+    "Card back is shown when the front is hidden; the SetActive call itself was lost by the decompiler"
+   ]
+  ]
+ },
+ "32696a4": {
+  "summary": "Static constructor for FilterMethods' compiler-generated closure class; creates the shared instance used for cached lambdas.",
+  "comments": []
+ },
+ "326974c": {
+  "summary": "Lambda used by CheckIfMeetsCriteria: returns true if the given card is the same card as the captured evaluated card. Used to search the adjacent units list.",
+  "comments": [
+   [
+    5,
+    "Both null counts as equal; otherwise compares the Unity objects (decompiler expanded Unity's == operator)"
+   ]
+  ]
+ },
+ "3257878": {
+  "summary": "Decides whether evaluatedCard is a valid match for a TargetCriteria, relative to thisCard (the ability owner). It checks which side owns it, hero exclusions, card type, conditions, keywords, traits, stat filters, specific cards, enchantments and army. Returns true if every check passes.",
+  "comments": [
+   [
+    4,
+    "Closure holds the evaluated card for the adjacent-units search at the end"
+   ],
+   [
+    7,
+    "No criteria object: log an error"
+   ],
+   [
+    11,
+    "First handle special TargetsAffected modes that decide by identity rather than by filters"
+   ],
+   [
+    13,
+    "any: every card qualifies"
+   ],
+   [
+    18,
+    "self: matches only if the evaluated card is this card"
+   ],
+   [
+    27,
+    "target: matches only if the evaluated card is the chosen target card"
+   ],
+   [
+    36,
+    "Other modes: actingCard accepts anything"
+   ],
+   [
+    42,
+    "previousAbilityFiltered: card must be in the previous ability's target list, then continue to the filters"
+   ],
+   [
+    50,
+    "previousAbilityTargets: true only if the card is in the previous ability's targets"
+   ],
+   [
+    64,
+    "attacker or abilityOwner: card must be this card"
+   ],
+   [
+    89,
+    "targetIfMeetsCriteria: the evaluated card must differ from the chosen target card"
+   ],
+   [
+    95,
+    "excludeSimilarCards: reject cards that share the same raw card data as this card"
+   ],
+   [
+    107,
+    "Pick friendlyUnits or enemyUnits flag depending on whether the card is on the same side as thisCard"
+   ],
+   [
+    114,
+    "Allow this card itself only if includeSelf is set; excludeNotSelf rejects all other cards"
+   ],
+   [
+    121,
+    "excludeFriendlyHero: reject a friendly warlord (or equivalent)"
+   ],
+   [
+    123,
+    "excludeEnemyHero: reject an enemy warlord (or equivalent)"
+   ],
+   [
+    136,
+    "Remnants (dead-unit leftovers) are rejected unless includeRemnants is set"
+   ],
+   [
+    141,
+    "Card type must match the criteria"
+   ],
+   [
+    145,
+    "Spell type, condition, keyword and trait filters must all pass"
+   ],
+   [
+    150,
+    "Attack filter: compare the target's melee/ranged attack with this unit's attack"
+   ],
+   [
+    161,
+    "Current health filter (the alt value is the target's bastion value)"
+   ],
+   [
+    176,
+    "Energy cost filter"
+   ],
+   [
+    181,
+    "Rarity filter"
+   ],
+   [
+    190,
+    "Specific card list, excluded enchantments and army filters"
+   ],
+   [
+    195,
+    "adjacentToSelfIfMeetsCriteria: also require the card to be next to this unit"
+   ],
+   [
+    208,
+    "All checks passed: the card qualifies"
+   ],
+   [
+    235,
+    "Evaluated card was null: log a warning and fail"
+   ],
+   [
+    239,
+    "Mode 200 (referencedCardInThisCard): evaluated card must be in this card's referenced cards"
+   ],
+   [
+    253,
+    "Mode 0xc9: like above but the card must also be in play"
+   ],
+   [
+    266,
+    "Mode 0xeb: matches if the evaluated card's extra traits equal the player's talent card's extra traits (list compare is decompiler-expanded)"
+   ],
+   [
+    333,
+    "Any failed check ends up here and returns false"
+   ]
+  ]
+ },
+ "3268df0": {
+  "summary": "Compares a card stat against a filter number using a StatFilterOptions comparison (equal, at least, at most, versus this unit's attack, or versus an alternate value such as bastion). Returns true when the comparison holds, or when the option is unknown.",
+  "comments": [
+   [
+    4,
+    "Group of simple options: equal, equal-or-higher and the lower/attack comparisons"
+   ],
+   [
+    6,
+    "EqualTo: stat equals filter"
+   ],
+   [
+    12,
+    "EqualOrHigher: stat >= filter (signed compare expanded by the decompiler)"
+   ],
+   [
+    18,
+    "EqualOrLowerToThisUnitAttack: stat <= this unit's attack"
+   ],
+   [
+    19,
+    "HigherToThisUnitAttack: stat > this unit's attack"
+   ],
+   [
+    31,
+    "Alt-value options: compare altValue (not the stat) against the filter"
+   ],
+   [
+    32,
+    "EqualToAlt: altValue == filter"
+   ],
+   [
+    44,
+    "EqualOrHigherAlt: altValue >= filter"
+   ],
+   [
+    39,
+    "EqualOrLowerAlt: altValue <= filter"
+   ],
+   [
+    48,
+    "EqualOrLowerIncludingBastion: add altValue to stat first, then compare as <= filter"
+   ],
+   [
+    49,
+    "LowerToThisUnitAttack: stat < this unit's attack"
+   ],
+   [
+    56,
+    "Shared <= filter comparison (EqualOrLower and the cases that jump here)"
+   ]
+  ]
+ },
+ "326815c": {
+  "summary": "Checks whether a card satisfies a UnitConditions filter (damaged, flying, can attack, has armour, quest states, died this turn and so on), flipped when excludeTrait is set. Logs an error for unhandled conditions.",
+  "comments": [
+   [
+    6,
+    "Big if-tree over the UnitConditions enum; each leaf computes a bool, then the exclude flag is applied at the end"
+   ],
+   [
+    10,
+    "protectedFromAttackDamage: protected from damage, or has bastion higher than the attacker's attack"
+   ],
+   [
+    17,
+    "protectedFromDamageOrSurvivor: delegates to the card's own check"
+   ],
+   [
+    18,
+    "hasAbility: card has an active ability"
+   ],
+   [
+    32,
+    "flying: has unstoppable, and is not vanguard (decompiler spread this over several jumps)"
+   ],
+   [
+    44,
+    "protectedFromDamage: true if the card has any of three protective traits (list built from trait ids 0xf0, 0x136, 0xe6)"
+   ],
+   [
+    95,
+    "mightAttack: the card's mightAct flag"
+   ],
+   [
+    100,
+    "damaged: has damage that pending healing will not fully cover"
+   ],
+   [
+    112,
+    "none passes; canAttack reads the card's canAct (anti-cheat ObscuredBool)"
+   ],
+   [
+    127,
+    "0xdc/0xdd/0xde: dies from pending damage, died this turn, died since last turn"
+   ],
+   [
+    137,
+    "stealthAndNotDealtKillDmg: has stealth and pending damage is not lethal"
+   ],
+   [
+    154,
+    "hasArmour: current armour value above zero (ObscuredInt)"
+   ],
+   [
+    165,
+    "hasAttackValues: melee attack or ranged attack greater than 0"
+   ],
+   [
+    177,
+    "costEqualToAvailableEnergy: card cost equals the owner's unused Energy"
+   ],
+   [
+    188,
+    "isWarlordEquivalent: card is a warlord or warlord-like unit"
+   ],
+   [
+    196,
+    "hasQuests: card has at least one quest"
+   ],
+   [
+    203,
+    "hasSecretOrder: card has secret orders"
+   ],
+   [
+    208,
+    "hasUseSpiritStone: card has an ability of type 600"
+   ],
+   [
+    215,
+    "hasUseFaith: card has an ability of type 0x25d"
+   ],
+   [
+    222,
+    "isPraying: the card's praying flag"
+   ],
+   [
+    234,
+    "isWarlordOrVehicle / isBattlesuitOrVehicle: warlord or Battlesuit keyword, else falls back to a Vehicle keyword (id 10)"
+   ],
+   [
+    253,
+    "isInfrantryOrBeast: Infantry keyword, else a second keyword (id 0x23)"
+   ],
+   [
+    254,
+    "siege: ability requires loading"
+   ],
+   [
+    259,
+    "hasQuestCompleted: card has completed a quest (logged)"
+   ],
+   [
+    285,
+    "stealthOrWardOrDuplicitous: any of three traits (0x46, 0x8c, then 0xa0)"
+   ],
+   [
+    325,
+    "stealthOrCamouflage: stealth (0x46) or trait 0x3d9"
+   ],
+   [
+    360,
+    "onlyRemnants: card is a leaving-free remnant of a Necron unit"
+   ],
+   [
+    370,
+    "canUseDuty: the active ability has not been used yet"
+   ],
+   [
+    375,
+    "summonSickness: the card still has summoning sickness"
+   ],
+   [
+    382,
+    "Unknown condition: log an error"
+   ],
+   [
+    392,
+    "Apply the exclude flag: with exclude set the result is inverted"
+   ],
+   [
+    398,
+    "UnitConditions.none path: a trap armed but in deck is ignored (false); otherwise passes"
+   ],
+   [
+    414,
+    "Null card reference"
+   ]
+  ]
+ },
+ "3268c24": {
+  "summary": "Checks whether a card has the filtered trait (or any trait if the filter is none), inverted by excludeTrait. A card with a hidden/special trait blocks the match unless the filter is summonRift.",
+  "comments": [
+   [
+    6,
+    "any = card has the requested trait"
+   ],
+   [
+    9,
+    "any2 = card has a trait flagged by a cached lambda (appears to be a blocking trait such as untargetable)"
+   ],
+   [
+    17,
+    "If it has no blocking trait, or the filter is summonRift: result = (filter none) or (has trait XOR exclude)"
+   ],
+   [
+    20,
+    "Has a blocking trait and filter is not summonRift: fails"
+   ]
+  ]
+ },
+ "3269540": {
+  "summary": "Returns true if the card meets the trait criteria for at least one trait in the given list (OR over MeetsTraitCriteria).",
+  "comments": [
+   [
+    8,
+    "Walk the trait list"
+   ],
+   [
+    11,
+    "Once one trait has matched, stop calling MeetsTraitCriteria for the rest"
+   ],
+   [
+    14,
+    "Check this trait; the current trait value is read from the enumerator (decompiler lost the variable)"
+   ]
+  ]
+ },
+ "326930c": {
+  "summary": "Checks whether a raw card definition's traits satisfy the trait filter of a TargetCriteria (excludeTrait inverts). Used for cards not yet in play.",
+  "comments": [
+   [
+    13,
+    "any = the raw card has the filtered trait"
+   ],
+   [
+    21,
+    "any2 = card has a trait flagged by a cached lambda (appears to be a blocking trait)"
+   ],
+   [
+    23,
+    "No blocking trait, or the filter is trait 0x2da: continue with the normal check"
+   ],
+   [
+    28,
+    "Blocking trait and filter is not 0x2da: fails"
+   ],
+   [
+    33,
+    "Filter trait is none: always passes; otherwise has-trait XOR exclude flag"
+   ]
+  ]
+ },
+ "3268ec0": {
+  "summary": "Returns true if the criteria has no specific-card list, or if the raw card's uniqueId matches one of the cards in that list.",
+  "comments": [
+   [
+    9,
+    "No specific-card filter: everything passes"
+   ],
+   [
+    15,
+    "Linear search of the list comparing uniqueId strings"
+   ],
+   [
+    26,
+    "Match found: pass"
+   ],
+   [
+    33,
+    "List was non-empty but nothing matched (or loop ran out): fail"
+   ]
+  ]
+ }
+}

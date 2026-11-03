@@ -1,0 +1,715 @@
+{
+ "2faadc0": {
+  "summary": "Builds the list of environmental effect cards available to an army, either its offensive or defensive set. With justOwnedCards, only cards up to the player's forge level are included. Decompiler output is badly tangled here.",
+  "comments": [
+   [
+    13,
+    "Walk every environmental effect entry; only entries for the requested army matter"
+   ],
+   [
+    34,
+    "This entry belongs to useArmy: pick its offensive or defensive card array"
+   ],
+   [
+    35,
+    "Offensive set (array slot 1)"
+   ],
+   [
+    46,
+    "If only owned cards are wanted, skip cards beyond the forge level obtained"
+   ],
+   [
+    76,
+    "Defensive set (array slot 2): same loop as above"
+   ],
+   [
+    121,
+    "Decompiler lost the loop here; the code below is a duplicate unrolled pass over the same entries"
+   ],
+   [
+    135,
+    "Defensive branch: add the first card, then more as the 6th and 9th tiers unlock (thresholds 5 and 8)"
+   ],
+   [
+    203,
+    "Offensive branch: needs more than 2 (3+) to add the first card, then tiers at 5 and 8"
+   ]
+  ]
+ },
+ "2fab05c": {
+  "summary": "Builds the draft-mode list of environmental effect cards for an army. Offensive cards unlock gradually by draft victories: first at 3 wins, second at 6, third at 9; defensive cards are added the same way with no minimum.",
+  "comments": [
+   [
+    5,
+    "Offensive cards are not offered before 3 draft victories"
+   ],
+   [
+    11,
+    "Scan the effect entries for the ones matching useArmy"
+   ],
+   [
+    21,
+    "Offensive set (slot 1): first card at 3+ victories"
+   ],
+   [
+    40,
+    "Second card at 6+ victories"
+   ],
+   [
+    60,
+    "Third card at 9+ victories"
+   ],
+   [
+    72,
+    "Defensive set (slot 2): first card is always added"
+   ],
+   [
+    90,
+    "Second defensive card at 6+ victories"
+   ],
+   [
+    110,
+    "Third defensive card at 9+ victories"
+   ],
+   [
+    119,
+    "Out-of-range index check from the compiler"
+   ]
+  ]
+ },
+ "2fab4c8": {
+  "summary": "Returns the sprite for an army's icon by searching the armyIcons entries and loading the addressable image into the General cache group. Returns null if the army has no entry.",
+  "comments": [
+   [
+    11,
+    "Iterate the army icon entries"
+   ],
+   [
+    21,
+    "Entry matches this army: stop and load its sprite"
+   ],
+   [
+    26,
+    "Load the addressable sprite (reference-counted in the General cache)"
+   ],
+   [
+    31,
+    "Always dispose the enumerator"
+   ]
+  ]
+ },
+ "2fab670": {
+  "summary": "Finds the army icon entry for the given army and releases its addressable sprite from the General cache group. Called when the icon is no longer needed.",
+  "comments": [
+   [
+    12,
+    "Search the army icon entries for one matching cardArmy"
+   ],
+   [
+    21,
+    "Found: drop one reference to its sprite"
+   ]
+  ]
+ },
+ "2fabd18": {
+  "summary": "Property getter that copies the icon's localized name string (a three-field struct) into the return value.",
+  "comments": []
+ },
+ "2fabc2c": {
+  "summary": "Returns the scoring icon whose item type matches scoringItemType (LINQ FirstOrDefault over the scoringIcons array), or null if none. Almost all of the body is decompiler noise from inlined LINQ enumeration and exception handling.",
+  "comments": [
+   [
+    4,
+    "Closure capturing scoringItemType for the LINQ predicate"
+   ],
+   [
+    18,
+    "Start of inlined LINQ enumeration: loop until an icon matches the predicate"
+   ],
+   [
+    100,
+    "Match found"
+   ],
+   [
+    132,
+    "Exception cleanup path (try/finally dispose of the enumerator)"
+   ],
+   [
+    158,
+    "Rest is decompiler garbage from an inlined generic LINQ helper; it can be ignored"
+   ]
+  ]
+ },
+ "2fc6974": {
+  "summary": "Sets up one starter-deck card in the first-time deck choice screen: stores its deck info, tints the glow, hooks the click to the selection callback, and shows army icons, hero art and the description.",
+  "comments": [
+   [
+    10,
+    "Remember the prebuilt deck this container represents"
+   ],
+   [
+    14,
+    "Tint the glow image with the deck's glow colour, alpha 0"
+   ],
+   [
+    15,
+    "Start unselected"
+   ],
+   [
+    17,
+    "Replace any old click listeners with one that reports this container as selected"
+   ],
+   [
+    24,
+    "Show the army objects for the deck hero's army"
+   ],
+   [
+    33,
+    "Show the hero's full-size art"
+   ],
+   [
+    43,
+    "Fill in the deck description text"
+   ]
+  ]
+ },
+ "2fc6c50": {
+  "summary": "Switches the deck container between selected and unselected looks: the hero art scales up 10% when selected, the glow fades in or out, highlight objects are toggled, and the button is disabled while selected.",
+  "comments": [
+   [
+    7,
+    "Selected: enlarge hero art by 10%; otherwise normal size"
+   ],
+   [
+    23,
+    "Cancel any running glow tween before starting a new fade"
+   ],
+   [
+    31,
+    "Only start a fade if the alpha is not already at the target"
+   ],
+   [
+    48,
+    "Show highlight objects only while selected"
+   ],
+   [
+    49,
+    "Decompiler merged the OnDisable code in here after a bounds-check failure; ignore it"
+   ],
+   [
+    97,
+    "A selected deck cannot be clicked again"
+   ]
+  ]
+ },
+ "2fc6ee8": {
+  "summary": "When the container is disabled, releases the loaded full hero sprite of its deck from the addressable cache, warning if it was never loaded.",
+  "comments": [
+   [
+    9,
+    "Find the hero's full sprite reference"
+   ],
+   [
+    17,
+    "Look up the sprite in the General cache"
+   ],
+   [
+    19,
+    "Not in cache: log a warning instead of releasing"
+   ]
+  ]
+ },
+ "2fc798c": {
+  "summary": "Property getter that copies the deck info localized string (three fields) into the return value.",
+  "comments": []
+ },
+ "2fc79b4": {
+  "summary": "Predicate used to find the campaign whose army matches the army of the hero of the currently selected starter deck.",
+  "comments": [
+   [
+    5,
+    "Army of the campaign"
+   ],
+   [
+    9,
+    "True when it equals the selected deck hero's army"
+   ]
+  ]
+ },
+ "2fc7a38": {
+  "summary": "Success callback after the server grants the chosen starter deck. Collects the rewards, saves the selected army, records the first campaign node as visited and sent to the server, sets the new deck as default and closes the window.",
+  "comments": [
+   [
+    4,
+    "Result and granted deck must exist"
+   ],
+   [
+    8,
+    "Army of the deck's hero"
+   ],
+   [
+    9,
+    "Granted deck plus any extra rewards"
+   ],
+   [
+    11,
+    "Give the rewards to the player"
+   ],
+   [
+    14,
+    "Remember the player's chosen army"
+   ],
+   [
+    16,
+    "Take the first node of the campaign"
+   ],
+   [
+    20,
+    "Mark that node as visited and add its cost to the campaign's progress"
+   ],
+   [
+    39,
+    "Tell the server about the campaign progress and log analytics"
+   ],
+   [
+    42,
+    "Raise a signal that the campaign node was collected"
+   ],
+   [
+    48,
+    "Make the new deck the default deck of the active event"
+   ],
+   [
+    56,
+    "Tag the player as having collected their first deck"
+   ],
+   [
+    65,
+    "Record the tutorial deck grant as a transaction"
+   ],
+   [
+    67,
+    "Close the deck selection window"
+   ]
+  ]
+ },
+ "2fc7f90": {
+  "summary": "Error callback when granting the starter deck fails: logs the error with the retry count, then immediately retries the same cloud request with the same callbacks.",
+  "comments": [
+   [
+    5,
+    "Count this failure"
+   ],
+   [
+    8,
+    "Log the error and attempt number"
+   ],
+   [
+    10,
+    "Retry the grant for the selected deck"
+   ]
+  ]
+ },
+ "2fc6ffc": {
+  "summary": "Opens the deck selection window: hides the template container, creates a container for each starter deck that is not hidden by feature config, and hooks up the continue button. The decompiler also merged in the continue-click code.",
+  "comments": [
+   [
+    7,
+    "Hide the template container; copies are instantiated"
+   ],
+   [
+    13,
+    "Loop over starter decks"
+   ],
+   [
+    14,
+    "Out-of-range check; the decompiler merged the continue-click handler body in after it"
+   ],
+   [
+    26,
+    "Disable input while the request runs"
+   ],
+   [
+    31,
+    "Find the campaign matching the selected deck's army"
+   ],
+   [
+    60,
+    "Ask the server to grant the selected starter deck for the campaign's first node"
+   ],
+   [
+    73,
+    "Skip decks hidden by feature config"
+   ],
+   [
+    77,
+    "Make a container for this deck and register OnDeckSelected as callback"
+   ],
+   [
+    100,
+    "Show the container"
+   ],
+   [
+    106,
+    "Wire continue button; it starts hidden until a deck is selected"
+   ]
+  ]
+ },
+ "2fc72b0": {
+  "summary": "Continue-button handler: disables input, finds the campaign for the selected deck's army and asks the server to grant that starter deck. Results go to the success and error callbacks.",
+  "comments": [
+   [
+    9,
+    "Turn off UI input while waiting"
+   ],
+   [
+    14,
+    "Look up the campaign matching the selected deck's army"
+   ],
+   [
+    26,
+    "Use the campaign's first node"
+   ],
+   [
+    38,
+    "Send the grant request to the server"
+   ]
+  ]
+ },
+ "2fc7500": {
+  "summary": "Called when a deck container is clicked: deselects all the other containers, stores the chosen deck and refreshes the continue button.",
+  "comments": [
+   [
+    9,
+    "Loop over all containers"
+   ],
+   [
+    12,
+    "Deselect every container except the clicked one"
+   ],
+   [
+    21,
+    "Remember the chosen deck and update the continue button"
+   ]
+  ]
+ },
+ "2fc76a4": {
+  "summary": "Shows the continue button for the chosen deck: fades it in once, sets the army icon, stops the previous hero intro sound, plays the new hero's intro line and restarts the shine effect.",
+  "comments": [
+   [
+    4,
+    "First time only: fade in the continue area"
+   ],
+   [
+    10,
+    "Show the button and faction icon"
+   ],
+   [
+    21,
+    "Set the icon to the selected deck hero's army"
+   ],
+   [
+    26,
+    "Stop the previous intro sound if still playing"
+   ],
+   [
+    31,
+    "Play the hero's intro voice line"
+   ],
+   [
+    36,
+    "Restart the shine effect on the faction icon"
+   ],
+   [
+    55,
+    "Invoke the shine effect's completion event handlers (inlined Unity event code)"
+   ]
+  ]
+ },
+ "2fc78fc": {
+  "summary": "Constructor: creates the list of deck containers and sets default window flags and open/close delegates.",
+  "comments": []
+ },
+ "2fe04cc": {
+  "summary": "Fixes the JSON before it is read: if RankedGame arrives as a boolean token (type 9), rewrites it as a normalized bool.",
+  "comments": [
+   [
+    6,
+    "Only handle JSON objects"
+   ],
+   [
+    7,
+    "Is a RankedGame field present"
+   ],
+   [
+    13,
+    "Token type 9 is a boolean"
+   ],
+   [
+    17,
+    "Write it back normalized"
+   ]
+  ]
+ },
+ "2fe0608": {
+  "summary": "Constructor: sets all the opponent and player id, name, hero and alliance strings to empty defaults and RankedGame to true.",
+  "comments": []
+ },
+ "300c1e8": {
+  "summary": "When the window is enabled, adds CancelButtonClick as a click listener on the cancel button (inlined Unity event code).",
+  "comments": [
+   [
+    8,
+    "Inlined AddListener: append the handler to the button's persistent call list"
+   ]
+  ]
+ },
+ "300c278": {
+  "summary": "When the window is disabled, removes the CancelButtonClick listener from the cancel button by rebuilding the call lists (inlined Unity RemoveListener).",
+  "comments": [
+   [
+    18,
+    "Find calls matching this handler's target and method"
+   ],
+   [
+    43,
+    "Remove the matching calls"
+   ],
+   [
+    44,
+    "Rebuild the combined call list"
+   ]
+  ]
+ },
+ "300c308": {
+  "summary": "Opens the searching-opponent window: fills in the local player's info and shows the 'opponent not found yet' container.",
+  "comments": [
+   [
+    5,
+    "Needs the current match data"
+   ],
+   [
+    6,
+    "Show the local player's info"
+   ],
+   [
+    10,
+    "Opponent not found yet"
+   ]
+  ]
+ },
+ "300c48c": {
+  "summary": "Closes the window and cancels the ongoing opponent search: marks the matchmaker's search inactive and cancels the battle search.",
+  "comments": [
+   [
+    7,
+    "Matchmaker is no longer searching"
+   ],
+   [
+    9,
+    "Tell the search manager to cancel"
+   ]
+  ]
+ },
+ "300c4a0": {
+  "summary": "Cancels matchmaking: sets the matchmaker's search state to inactive and cancels the battle search. Same as the Close path without closing the window.",
+  "comments": [
+   [
+    6,
+    "Matchmaker is no longer searching"
+   ],
+   [
+    8,
+    "Cancel the search"
+   ]
+  ]
+ },
+ "300c50c": {
+  "summary": "Constructor: sets default window flags and open/close delegates.",
+  "comments": []
+ },
+ "300c514": {
+  "summary": "On destroy, releases the warlord card image of the current deck from the addressable cache, warning if it was not loaded.",
+  "comments": [
+   [
+    7,
+    "Find the warlord card image reference"
+   ],
+   [
+    15,
+    "Look up the image in the General cache"
+   ],
+   [
+    17,
+    "Not loaded: log a warning"
+   ]
+  ]
+ },
+ "300d6d4": {
+  "summary": "Static constructor creating the shared closure-holder instance for BattleLogItem lambdas.",
+  "comments": []
+ },
+ "300d744": {
+  "summary": "Callback when a match recording is fetched. If found, builds a Replay-mode match with it and starts the battle after 1 second. If not found, shows an error popup.",
+  "comments": [
+   [
+    4,
+    "Recording found"
+   ],
+   [
+    9,
+    "Pretend we are waiting for an opponent"
+   ],
+   [
+    24,
+    "Create match data in Replay mode"
+   ],
+   [
+    26,
+    "Attach the recording to the match"
+   ],
+   [
+    31,
+    "Copy the alt trait config flag from the recording"
+   ],
+   [
+    34,
+    "Start the battle after a 1 second delay"
+   ],
+   [
+    46,
+    "Recording not found: show an error popup with an OK button"
+   ],
+   [
+    98,
+    "The rest is decompiler noise from the inlined coroutine start"
+   ]
+  ]
+ },
+ "300c584": {
+  "summary": "Fills in one battle log row: both players' displays, the match type text, a win/loss/draw result with its colour and material, and the replay and pin buttons. Replay is only usable if the replay version is not '#1'.",
+  "comments": [
+   [
+    4,
+    "Remember the match log entry"
+   ],
+   [
+    19,
+    "Build own player's display data"
+   ],
+   [
+    34,
+    "Build the enemy's display data (including bot alt id)"
+   ],
+   [
+    37,
+    "Show the match type, translated from a Battle/MatchType key"
+   ],
+   [
+    46,
+    "Show the pin state"
+   ],
+   [
+    48,
+    "Pick result text and material: win, lose, otherwise draw"
+   ],
+   [
+    84,
+    "Hook up the replay and pin buttons"
+   ],
+   [
+    96,
+    "Replay only works if recorded with a supported replay version"
+   ]
+  ]
+ },
+ "300d300": {
+  "summary": "Sets the pin icon's alpha: faded when pinned, full when not pinned.",
+  "comments": []
+ },
+ "300d34c": {
+  "summary": "Asks the server for the match recording of this log entry and, when it arrives, passes it to the replay start callback.",
+  "comments": [
+   [
+    4,
+    "Needs a recording index"
+   ],
+   [
+    22,
+    "Log which recording is requested"
+   ],
+   [
+    24,
+    "Use our own PlayFab id if none passed"
+   ],
+   [
+    36,
+    "Run the recover-recording cloud script"
+   ]
+  ]
+ },
+ "300d4e0": {
+  "summary": "Toggles the pinned state of this recording on the server. The pin button is disabled until the response arrives.",
+  "comments": [
+   [
+    8,
+    "Block double clicks"
+   ],
+   [
+    25,
+    "Log the pin request"
+   ],
+   [
+    28,
+    "Ask for the opposite of the current pinned state"
+   ],
+   [
+    34,
+    "Call the server; success flips the state, error re-enables the button"
+   ]
+  ]
+ },
+ "300d664": {
+  "summary": "Pin success callback: re-enables the button, flips the pinned flag and updates the pin icon alpha.",
+  "comments": [
+   [
+    11,
+    "Flip the pinned flag"
+   ],
+   [
+    14,
+    "Update icon alpha to match"
+   ]
+  ]
+ },
+ "300d6a4": {
+  "summary": "Pin error callback: logs the error and re-enables the pin button (the rest is inlined Unity button state code).",
+  "comments": [
+   [
+    9,
+    "Inlined interactable setter"
+   ],
+   [
+    32,
+    "Recomputes the visual state; no game logic"
+   ]
+  ]
+ },
+ "300d868": {
+  "summary": "Compiler-generated record property returning the BattleLogPlayerData type used for equality.",
+  "comments": []
+ },
+ "300d9a0": {
+  "summary": "Compiler-generated record ToString for BattleLogPlayerData.",
+  "comments": []
+ },
+ "300da88": {
+  "summary": "Compiler-generated record helper appending all BattleLogPlayerData fields (ids, names, XP, ratings, season, match type, practice flag) to a StringBuilder.",
+  "comments": [
+   [
+    49,
+    "IsPractice is true for Practice and PracticeOffline matches"
+   ]
+  ]
+ }
+}

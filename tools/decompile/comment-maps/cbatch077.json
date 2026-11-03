@@ -1,0 +1,874 @@
+{
+ "2f5a398": {
+  "summary": "Per-frame update while the cemetery log is open. Finds which card link in a log entry the mouse is over and shows that card's preview, hiding it when no link is hovered. The decompiler inlined DisplayCard and image/sprite helper code, so the tail is messy.",
+  "comments": [
+   [
+    6,
+    "Log panel not open: nothing to do"
+   ],
+   [
+    15,
+    "Walk every log slider (starting at the first card type) looking for a hovered link"
+   ],
+   [
+    21,
+    "Loop head: stop when all entries are checked"
+   ],
+   [
+    44,
+    "Read the mouse position and ask TextMeshPro which link in this entry's text it is over"
+   ],
+   [
+    53,
+    "No link under the mouse: hide the preview card and go on to the next entry"
+   ],
+   [
+    75,
+    "A hovered link was found: its ID is a comma separated string like 'type,index'"
+   ],
+   [
+    82,
+    "Needs at least two parts: part 0 is the kind, part 1 the index into the cemetery action list"
+   ],
+   [
+    90,
+    "Kind '0' means show the first card of that action"
+   ],
+   [
+    96,
+    "Kind '1' means show the alternate card; any other kind shows nothing"
+   ],
+   [
+    110,
+    "Inlined DisplayCard: set up the preview card for the chosen raw card"
+   ],
+   [
+    115,
+    "If the card is a warlord's hero card (same prefab as player's hero), use the hero's current max health"
+   ],
+   [
+    128,
+    "Same check for the opponent's hero"
+   ],
+   [
+    139,
+    "Fill the preview UI with the card, switch it on and show the 'created by' text"
+   ],
+   [
+    147,
+    "Show the card face up and with no highlight"
+   ],
+   [
+    159,
+    "Inlined card UI positioning: remember the base position, then scale by card type (hero/minion differ)"
+   ],
+   [
+    196,
+    "Tactic cards have no portrait texture, so the mask is turned off; other cards use the card art sprite"
+   ],
+   [
+    219,
+    "Make a private material copy for the image if it has none yet"
+   ],
+   [
+    228,
+    "Inlined Image.sprite setter: only changes the sprite and flags a layout/material refresh if it differs"
+   ],
+   [
+    324,
+    "Shared null reference throw target"
+   ]
+  ]
+ },
+ "2f5a458": {
+  "summary": "Logs a troop being played by raising a CardPlayedSignal with the raw card, the in-play card, which side played it and the Energy cost paid. Called when a play-troop battle action is processed, used by challenge tracking.",
+  "comments": [
+   [
+    4,
+    "Pick the card being played: the in-play card if present, otherwise the raw card on the action"
+   ],
+   [
+    15,
+    "Auto-play from hand reads the card from the action's isPlayer field instead"
+   ],
+   [
+    21,
+    "No raw card data: nothing to log"
+   ],
+   [
+    25,
+    "Work out the Energy cost: current cost of the in-play card, or the raw card's base cost"
+   ],
+   [
+    48,
+    "Build the signal; the flag says whether the player (not the opponent) played it"
+   ],
+   [
+    54,
+    "Look up the signal broker handler and raise the signal (inlined Signal.Raise)"
+   ]
+  ]
+ },
+ "2f5a610": {
+  "summary": "Raises a TriggerAbilitySignal when an ability trigger fires. Passive triggers (while-in-play, variable while-in-play, synapse) are ignored. Used for challenge tracking.",
+  "comments": [
+   [
+    4,
+    "Skip continuous/passive triggers; only real event triggers are logged"
+   ],
+   [
+    7,
+    "Build the signal with the trigger type and the side that owns it"
+   ],
+   [
+    12,
+    "Look up the signal broker handler for this signal type (inlined Signal.Raise); the pointer math is decompiler noise"
+   ]
+  ]
+ },
+ "2f5a6b0": {
+  "summary": "Logs a tactic being played by raising a CardPlayedSignal and bumping the tacticsPlayed stat for the side that played it.",
+  "comments": [
+   [
+    4,
+    "Find the in-play card (or fall back to the raw card) and its cost"
+   ],
+   [
+    14,
+    "Pack raw card, in-play card and cost into a card info struct"
+   ],
+   [
+    22,
+    "Raise the signal for challenge tracking"
+   ],
+   [
+    24,
+    "Credit the tactic to the right side's battle stats"
+   ]
+  ]
+ },
+ "2f5a814": {
+  "summary": "Logs a heal by raising a HealUnitSignal carrying the heal info and amount. If there is no multi-target list, a one-item list holding the single target is built first.",
+  "comments": [
+   [
+    4,
+    "Multi-target heal with at least one target: go straight to raising the signal"
+   ],
+   [
+    7,
+    "Build and raise the signal with the heal info and heal value"
+   ],
+   [
+    18,
+    "Look up the signal broker handler for this signal type (inlined Signal.Raise); the pointer math is decompiler noise"
+   ],
+   [
+    37,
+    "Single-target heal: wrap the target in a new list (decompiler then jumps back to the raise)"
+   ]
+  ]
+ },
+ "2f5a96c": {
+  "summary": "Logs a troop kill by raising a TroopKilledSignal and adding one to the kill count of the relevant side's stats. Logs an error string if the action has no target.",
+  "comments": [
+   [
+    4,
+    "Need a target (the troop that died)"
+   ],
+   [
+    8,
+    "Killer is the acting card; raise the signal"
+   ],
+   [
+    12,
+    "Count the kill for the opposite side of the dead troop's owner"
+   ],
+   [
+    25,
+    "No target: write 'Can't TroopKilled' to the Unity log"
+   ]
+  ]
+ },
+ "2f5aad0": {
+  "summary": "Logs damage by raising a DamageSignal. If the damage info, its acting card or the damaged unit is missing it logs a debug message instead.",
+  "comments": [
+   [
+    4,
+    "All three must exist: damage info, its attacker and the damaged unit"
+   ],
+   [
+    10,
+    "Build and raise the signal"
+   ],
+   [
+    19,
+    "Look up the signal broker handler for this signal type (inlined Signal.Raise); the pointer math is decompiler noise"
+   ],
+   [
+    40,
+    "Missing data: log 'Can't LogDamage'"
+   ]
+  ]
+ },
+ "2f5abe4": {
+  "summary": "Logs an attack by raising an AttackSignal for the attacker and the damaged unit; logs a debug message if either is null.",
+  "comments": [
+   [
+    4,
+    "Both cards must exist"
+   ],
+   [
+    8,
+    "Build and raise the signal"
+   ],
+   [
+    17,
+    "Look up the signal broker handler for this signal type (inlined Signal.Raise); the pointer math is decompiler noise"
+   ],
+   [
+    37,
+    "Missing card: log 'Can't LogAttack'"
+   ]
+  ]
+ },
+ "2f5acf0": {
+  "summary": "Logs the end of a match by raising a BattleEndSignal with the match data, the current game mode event, the skull count and whether the player won.",
+  "comments": [
+   [
+    4,
+    "Get the live-ops game mode handler for the current event"
+   ],
+   [
+    7,
+    "Read the current playing event and the battle manager's match data"
+   ],
+   [
+    13,
+    "Skull count comes from the battle score manager"
+   ],
+   [
+    14,
+    "Build the end-of-battle signal and raise it"
+   ],
+   [
+    23,
+    "Look up the signal broker handler for this signal type (inlined Signal.Raise); the pointer math is decompiler noise"
+   ],
+   [
+    44,
+    "Shared null reference throw target"
+   ]
+  ]
+ },
+ "2f5ae00": {
+  "summary": "Logs that a card effect was added by raising an AddCardEffectSignal.",
+  "comments": [
+   [
+    4,
+    "Build the signal around the new effect"
+   ],
+   [
+    13,
+    "Look up the signal broker handler for this signal type (inlined Signal.Raise); the pointer math is decompiler noise"
+   ]
+  ]
+ },
+ "2f5af9c": {
+  "summary": "Returns the localized chat line a warlord says. For intros it prefers a custom intro for this exact opponent, then one for the opponent's army, then the default; for mirror matches it uses the mirror line; other messages use a translation key built from the warlord's id.",
+  "comments": [
+   [
+    6,
+    "Work out which warlord is speaking and which is the opponent"
+   ],
+   [
+    7,
+    "Intro and mirror match messages (the low enum values) get special handling"
+   ],
+   [
+    10,
+    "Normal case: warlords differ, or it is the player's own line"
+   ],
+   [
+    11,
+    "Look for a custom intro written for this specific opponent warlord"
+   ],
+   [
+    15,
+    "Debug log text 'customIntro between X and Y' and whether one was found"
+   ],
+   [
+    33,
+    "No specific intro: try an intro for the opponent's army"
+   ],
+   [
+    39,
+    "No army intro either: use the warlord's default message"
+   ],
+   [
+    46,
+    "Army intro found: use its localized message"
+   ],
+   [
+    53,
+    "Specific intro found: get its text and log it"
+   ],
+   [
+    90,
+    "Mirror match for the opponent side: switch to the MirrorMatch message"
+   ],
+   [
+    95,
+    "Other messages: build key Chat_Messages/<id>-Chat<index> and translate it"
+   ],
+   [
+    99,
+    "Use the shared chat reference id if the warlord has one instead of its own id"
+   ]
+  ]
+ },
+ "2f5b7dc": {
+  "summary": "Returns whether the player's warlord speaks first in the match intro. Defaults to true unless a custom intro for this opponent says otherwise.",
+  "comments": [
+   [
+    4,
+    "Default: player talks first"
+   ],
+   [
+    6,
+    "Check for a custom intro between the two warlords"
+   ],
+   [
+    7,
+    "A custom intro can override the speaking order"
+   ]
+  ]
+ },
+ "2f5b848": {
+  "summary": "Loads the chat voice AudioClip for a message type from the speaking warlord (using custom intro audio for intros and mirror audio for mirror matches), and falls back to the warlord's default chat sound if nothing is defined or loadable.",
+  "comments": [
+   [
+    5,
+    "Work out which warlord is speaking"
+   ],
+   [
+    6,
+    "Not an intro: pick the sound field for this message type"
+   ],
+   [
+    10,
+    "Follow chat audio reference cards to the warlord that actually holds the audio"
+   ],
+   [
+    20,
+    "Pick the audio reference for this message type (intro, mirror, hurry, can't do that, concede, greet, ...)"
+   ],
+   [
+    45,
+    "Unknown message type: warn that no chat sound is defined"
+   ],
+   [
+    83,
+    "Load the clip from the general addressables cache group"
+   ],
+   [
+    85,
+    "Loaded fine: return it"
+   ],
+   [
+    92,
+    "Nothing usable: fall back to the warlord's default chat sound"
+   ],
+   [
+    101,
+    "Intro message: mirror match for the opponent side uses the mirror sound instead"
+   ],
+   [
+    110,
+    "Look for a custom intro for this opponent, then one by army, else the plain intro sound"
+   ],
+   [
+    124,
+    "Inlined addressables load of the custom intro's audio reference"
+   ],
+   [
+    161,
+    "If the load operation already failed, log the error and return nothing"
+   ],
+   [
+    177,
+    "Otherwise block until loaded, then return the clip (decompiler output is rough here)"
+   ]
+  ]
+ },
+ "2f5b430": {
+  "summary": "Returns true if the acting warlord and the opponent warlord have the same chat id (compared as strings). Used to detect mirror matches.",
+  "comments": [
+   [
+    5,
+    "Get both warlords' chat ids"
+   ],
+   [
+    9,
+    "Same string object: equal"
+   ],
+   [
+    12,
+    "Either null: not equal"
+   ],
+   [
+    18,
+    "Different lengths: not equal; else compare characters"
+   ],
+   [
+    22,
+    "Inlined string equality: compares 8 bytes at a time, then the remaining characters"
+   ]
+  ]
+ },
+ "2f5b4bc": {
+  "summary": "Finds, on the player warlord's (or its custom intro reference's) intro list, the custom intro whose id matches the enemy warlord's chat id. Returns null if none.",
+  "comments": [
+   [
+    7,
+    "Either warlord missing: return null"
+   ],
+   [
+    13,
+    "If the warlord points to another card for its intros, load that card from the collection"
+   ],
+   [
+    20,
+    "Walk the custom intro list"
+   ],
+   [
+    34,
+    "Match when the intro's enemy id equals the enemy warlord's chat id"
+   ]
+  ]
+ },
+ "2f5b6ec": {
+  "summary": "Finds the first custom-intro-by-army entry whose army matches the enemy warlord's army, i.e. List.Find with a closure predicate. The decompiler pasted in many inlined List helper bodies, so most of the later code is noise.",
+  "comments": [
+   [
+    4,
+    "Closure object holds the enemy army for the predicate"
+   ],
+   [
+    8,
+    "Warlord has no by-army intro list: return null"
+   ],
+   [
+    16,
+    "Linear search through the list; return the first item the predicate accepts"
+   ],
+   [
+    59,
+    "Nothing matched: null"
+   ],
+   [
+    60,
+    "Everything from here down is inlined List helper code (FindAll, FindIndex, ForEach and error throws), not this method's logic"
+   ]
+  ]
+ },
+ "2f5b9d0": {
+  "summary": "Returns a copy of this CustomIntroChatData made with MemberwiseClone (shallow, despite the name), cast to the type.",
+  "comments": [
+   [
+    4,
+    "Shallow clone of this object"
+   ],
+   [
+    6,
+    "Cast check; decompiler garbled the failure branch"
+   ]
+  ]
+ },
+ "2f5d73c": {
+  "summary": "IEnumerator.Reset for the AutoProcessDone coroutine; always throws NotSupportedException.",
+  "comments": [
+   [
+    4,
+    "Required by IEnumerator but not supported for compiler generated iterators: always throws"
+   ]
+  ]
+ },
+ "2f5d838": {
+  "summary": "IEnumerator.Reset for the EndSelectionWithDelay coroutine; always throws NotSupportedException.",
+  "comments": [
+   [
+    4,
+    "Required by IEnumerator but not supported for compiler generated iterators: always throws"
+   ]
+  ]
+ },
+ "2f5dd94": {
+  "summary": "IEnumerator.Reset for the SetupChooseCardsUi coroutine; always throws NotSupportedException.",
+  "comments": [
+   [
+    4,
+    "Required by IEnumerator but not supported for compiler generated iterators: always throws"
+   ]
+  ]
+ },
+ "2f5d894": {
+  "summary": "Coroutine that builds the choose-card UIs. State 0 clears the old list and creates one UI per card with a short wait, state 1 shows the menu and, for offensive/defensive choices, animates each card in with a delay, state 2 continues that loop.",
+  "comments": [
+   [
+    12,
+    "State 2: previous card finished waiting; trigger the next card's animation"
+   ],
+   [
+    24,
+    "Advance the enumerator over the card UI list; when finished, run the finally block and end"
+   ],
+   [
+    33,
+    "Next card: animate it in, then wait a short time (about 0.05s)"
+   ],
+   [
+    43,
+    "State 1: initial wait over, show the menu elements"
+   ],
+   [
+    49,
+    "Environmental (offensive/defensive) choice: show the anchor and animate cards in one by one"
+   ],
+   [
+    72,
+    "State 0: start by clearing any previous choose card UIs"
+   ],
+   [
+    88,
+    "Create a UI for each card to choose from"
+   ],
+   [
+    104,
+    "Create the display card at its slot position"
+   ],
+   [
+    123,
+    "Environmental cards start hidden and are animated in later"
+   ],
+   [
+    93,
+    "All created: wait a short time then move to state 1"
+   ],
+   [
+    139,
+    "Any other state: finished"
+   ],
+   [
+    146,
+    "Compiler generated exception handling frame (decompiler noise)"
+   ]
+  ]
+ },
+ "2f5bfc0": {
+  "summary": "Registers the menu's click handler on the choose button's onClick event when the menu is enabled.",
+  "comments": [
+   [
+    4,
+    "Add the menu's click handler to the choose button (inlined AddListener)"
+   ],
+   [
+    13,
+    "Inlined UnityEvent add; the list math is decompiler noise"
+   ]
+  ]
+ },
+ "2f5c050": {
+  "summary": "Meant to remove the menu's click handler from the choose button when disabled. The decompiled code looks like an add, so it is probably an inlined RemoveListener misread.",
+  "comments": [
+   [
+    4,
+    "Operates on the choose button's onClick event (decompiled as an add; likely a remove)"
+   ],
+   [
+    13,
+    "Inlined UnityEvent list operation; the list math is decompiler noise"
+   ]
+  ]
+ },
+ "2f5c0e0": {
+  "summary": "Opens the choose-card menu for a set of cards (such as mulligan or choose-one effects). Shows buttons and title, starts the UI-building coroutine, auto-selects the recorded card in replays, and starts the end-of-selection timer when time is nearly up.",
+  "comments": [
+   [
+    4,
+    "Log which effect is asking for a choice"
+   ],
+   [
+    6,
+    "Nothing selected yet"
+   ],
+   [
+    7,
+    "Show the button group and set the title text from the acting card"
+   ],
+   [
+    17,
+    "Choose button is disabled until a card is selected; its label becomes the Done text"
+   ],
+   [
+    23,
+    "Offensive or defensive choices are 'environmental': the anchor starts hidden and cards animate in"
+   ],
+   [
+    32,
+    "Start the coroutine that creates the card UIs"
+   ],
+   [
+    38,
+    "In a replay, select the recorded choice (target index) automatically"
+   ],
+   [
+    43,
+    "If the replay is not in a paused play state, also auto-press Done"
+   ],
+   [
+    49,
+    "More than one second left: do nothing further"
+   ],
+   [
+    52,
+    "Timer at 1 or 0: start the coroutine that ends the selection"
+   ],
+   [
+    61,
+    "Rest is decompiler noise from the inlined StartCoroutine checks"
+   ]
+  ]
+ },
+ "2f5c6f8": {
+  "summary": "Creates the coroutine object that ends the card selection after a delay, holding this menu and the timer counter.",
+  "comments": [
+   [
+    4,
+    "Build the compiler generated iterator in state 0"
+   ]
+  ]
+ },
+ "2f5c68c": {
+  "summary": "Creates the coroutine object that automatically completes the choose-card step (used for replays).",
+  "comments": [
+   [
+    4,
+    "Build the compiler generated iterator in state 0"
+   ]
+  ]
+ },
+ "2f5c3ec": {
+  "summary": "Creates the coroutine object that builds the choose-card UIs for the given cards.",
+  "comments": [
+   [
+    4,
+    "Build the compiler generated iterator in state 0; it remembers the cards and the environmental flag"
+   ]
+  ]
+ },
+ "2f5c9d0": {
+  "summary": "Creates one card UI from the card prefab, positions it at its slot in the choose-menu anchor (slot index of total), scales it, fills it with the card data and returns it.",
+  "comments": [
+   [
+    8,
+    "Load the card UI prefab from the player data manager and instantiate it"
+   ],
+   [
+    13,
+    "Place it at the anchor slot for this index and parent it to the anchor"
+   ],
+   [
+    18,
+    "Environmental choices begin hidden and animate in later"
+   ],
+   [
+    22,
+    "Scale to the anchor's scale and fill with the card data; tapping opens the large card view"
+   ]
+  ]
+ },
+ "2f5cc94": {
+  "summary": "Called each second of the selection timer. If nothing is selected it picks a random card, updates the countdown text, and when the counter reaches 2 or less hides and destroys the menu and reports the chosen card to the battle manager.",
+  "comments": [
+   [
+    4,
+    "No card chosen yet?"
+   ],
+   [
+    12,
+    "Pick a random card from the choices"
+   ],
+   [
+    19,
+    "Update the countdown text"
+   ],
+   [
+    20,
+    "More than 2 seconds left: nothing else yet"
+   ],
+   [
+    28,
+    "Time is up: hide the elements and button group and title"
+   ],
+   [
+    40,
+    "Destroy every choose card UI and its companion object"
+   ],
+   [
+    56,
+    "Empty the list, then destroy all remaining children of the anchor"
+   ],
+   [
+    119,
+    "Dispose the transform enumerator (decompiler noise)"
+   ],
+   [
+    121,
+    "Tell the battle manager which card was chosen"
+   ]
+  ]
+ },
+ "2f5c480": {
+  "summary": "Marks a card as the current selection, enables the choose button, plays the select sound and deselects all the other choice cards.",
+  "comments": [
+   [
+    7,
+    "Remember the raw card data as the selection"
+   ],
+   [
+    10,
+    "Now that something is picked, the Done button can be pressed"
+   ],
+   [
+    12,
+    "Play the select sound effect"
+   ],
+   [
+    14,
+    "Deselect every other choice card"
+   ]
+  ]
+ },
+ "2f5d314": {
+  "summary": "Handler for pressing Done. If a card is selected it stops the auto-complete coroutine, hides the menu, destroys all choice UIs and reports the chosen card to the battle manager.",
+  "comments": [
+   [
+    4,
+    "Nothing selected: ignore the click"
+   ],
+   [
+    9,
+    "Stop the automatic Done timer coroutine"
+   ],
+   [
+    17,
+    "Hide the choose elements, buttons and title"
+   ],
+   [
+    29,
+    "Destroy all choice UIs and companions"
+   ],
+   [
+    45,
+    "Empty the list and destroy the anchor's child objects"
+   ],
+   [
+    110,
+    "Tell the battle manager which card was chosen"
+   ]
+  ]
+ },
+ "2f5ce30": {
+  "summary": "Hides and destroys the choose-card UI, then reports the selected card to the battle manager. Same cleanup as ClickChooseDone without the selection check.",
+  "comments": [
+   [
+    9,
+    "Hide the choose elements, buttons and title"
+   ],
+   [
+    21,
+    "Destroy all choice UIs and companions"
+   ],
+   [
+    37,
+    "Empty the list and destroy the anchor's child objects"
+   ],
+   [
+    102,
+    "Tell the battle manager which card was chosen"
+   ]
+  ]
+ },
+ "2f5cd94": {
+  "summary": "Writes the remaining seconds into the choose button's text using a number format string.",
+  "comments": [
+   [
+    6,
+    "Format the seconds and set the button label"
+   ]
+  ]
+ },
+ "2f5d44c": {
+  "summary": "Flips visibility of the choose-card menu (title, button and cards) and fades the background shade in or out to match.",
+  "comments": [
+   [
+    8,
+    "Show if currently hidden, hide if shown"
+   ],
+   [
+    11,
+    "Apply to title, title text and button"
+   ],
+   [
+    17,
+    "Also show or hide all the choice cards"
+   ],
+   [
+    20,
+    "Shade target alpha: fully clear when hiding, its on level when showing"
+   ],
+   [
+    24,
+    "Stop any running fade tween first"
+   ],
+   [
+    33,
+    "Set the alpha on whichever shade graphic exists (sprite or UI image)"
+   ]
+  ]
+ },
+ "2f5d3a4": {
+  "summary": "Shows or hides the choose-card menu elements and fades the battle background shade in or out.",
+  "comments": [
+   [
+    4,
+    "Apply visibility to title, title text and choose button"
+   ],
+   [
+    11,
+    "Also toggle all choice cards"
+   ],
+   [
+    14,
+    "Shade alpha: 0 when hiding, the configured on-level when showing"
+   ],
+   [
+    18,
+    "Stop any running fade tween"
+   ],
+   [
+    27,
+    "Apply the alpha to the sprite shade if present, otherwise the UI image shade"
+   ]
+  ]
+ },
+ "2f5d488": {
+  "summary": "Shows or hides every choose-card UI in the list.",
+  "comments": [
+   [
+    7,
+    "Go through every choice card UI and toggle it"
+   ]
+  ]
+ }
+}

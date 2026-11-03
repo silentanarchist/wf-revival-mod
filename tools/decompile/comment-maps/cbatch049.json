@@ -1,0 +1,677 @@
+{
+ "3291020": {
+  "summary": "Resolves a unit transforming out of a remnant: marks the target card as transforming and starts its transform animation with a callback. If no animation wait is needed it finishes the action here (reassemble minions, hero-death check, turn UI refresh).",
+  "comments": [
+   [
+    4,
+    "Closure captures a copy of the battle action and this manager for the transform callback."
+   ],
+   [
+    13,
+    "Log which card is transforming."
+   ],
+   [
+    17,
+    "Mark the card as a unit mid-transformation."
+   ],
+   [
+    23,
+    "Start the remnant transform; the callback captured above runs when it completes."
+   ],
+   [
+    24,
+    "Animation still pending: return now, the callback is expected to finish the action later."
+   ],
+   [
+    27,
+    "No animation to wait for: finish the action immediately (same epilogue as other Resolve methods)."
+   ],
+   [
+    31,
+    "Action done and queue empty: if either side's minions are out of position, queue a reassemble order."
+   ],
+   [
+    43,
+    "No automatic actions left in the queue: time to check whether the battle is over."
+   ],
+   [
+    45,
+    "Tutorial and campaign matches skip the hero-death check here."
+   ],
+   [
+    48,
+    "Reads each hero's card state; 5 seems to be waitingToDie, i.e. a hero is dead."
+   ],
+   [
+    89,
+    "Battle already in PostBattle: warn and bail out unless a forced disconnect loss is pending."
+   ],
+   [
+    104,
+    "Opponent disconnected and the local player should lose: record the result and run the normal end sequence."
+   ],
+   [
+    113,
+    "Normal end: enter PostBattle, stop the battle loop and tell the other player the match finished."
+   ],
+   [
+    115,
+    "In networked games the match-finished message is sent to the other player."
+   ],
+   [
+    125,
+    "Player's hero survived (enemy hero died): raise an enemy health change signal with the enemy hero's health."
+   ],
+   [
+    165,
+    "Work out the winner from which hero died."
+   ],
+   [
+    168,
+    "Build the ranked match result from Elo rating and XP, then fill in skull milestones for both sides."
+   ],
+   [
+    208,
+    "Match types 0x14, 0xd2 and 0xb4 (seem to be special event modes) notify LiveOps that a human won."
+   ],
+   [
+    214,
+    "Store the result, then finish the battle (results screen and rewards)."
+   ],
+   [
+    240,
+    "Neither hero is dead: just broadcast the while-in-play effects and carry on."
+   ],
+   [
+    245,
+    "Action resolution is over: clear the resolving flag so new actions can start."
+   ],
+   [
+    247,
+    "Enemy's turn: re-enable the enemy minions and recompute whether the enemy hero can act or attack."
+   ],
+   [
+    255,
+    "Hero can act only if it is the enemy's, in play, has attacks left (bloodthirst allows a second) and is not stunned."
+   ],
+   [
+    265,
+    "Ferocity/Oath heroes: recompute canAct, and switch to Active attack type if still summon sick."
+   ],
+   [
+    281,
+    "Show or hide the hero's attack-ready indicator on its card UI."
+   ],
+   [
+    297,
+    "Player's turn: highlight playable cards and re-enable minions and the hero."
+   ],
+   [
+    306,
+    "Nothing queued: start a garbage collection while idle and resume the turn clock."
+   ],
+   [
+    311,
+    "If the player can act, count the available actions; with only end turn left (outside a tutorial restriction) show the no-actions UI."
+   ],
+   [
+    330,
+    "Tutorial scripting: after a manual player action, resume scripted steps if they were waiting on it."
+   ],
+   [
+    345,
+    "Reset the manual-action marker for the next sequence."
+   ],
+   [
+    352,
+    "Shared failure label: a null manager or hero reference (compiler null checks)."
+   ]
+  ]
+ },
+ "328fcc8": {
+  "summary": "Resolves a Relentless trigger action: if the card is still in play or dying, fires its Relentless abilities. Then it finishes the action: reassembles minions, ends the battle if a hero died, and refreshes the turn UI.",
+  "comments": [
+   [
+    8,
+    "Only fire the trigger if the card is still in play or dying."
+   ],
+   [
+    13,
+    "Fire the Relentless ability trigger on the card's ability script."
+   ],
+   [
+    19,
+    "Action done and queue empty: if either side's minions are out of position, queue a reassemble order."
+   ],
+   [
+    31,
+    "No automatic actions left in the queue: time to check whether the battle is over."
+   ],
+   [
+    33,
+    "Tutorial and campaign matches skip the hero-death check here."
+   ],
+   [
+    36,
+    "Reads each hero's card state; 5 seems to be waitingToDie, i.e. a hero is dead."
+   ],
+   [
+    77,
+    "Battle already in PostBattle: warn and bail out unless a forced disconnect loss is pending."
+   ],
+   [
+    92,
+    "Opponent disconnected and the local player should lose: record the result and run the normal end sequence."
+   ],
+   [
+    101,
+    "Normal end: enter PostBattle, stop the battle loop and tell the other player the match finished."
+   ],
+   [
+    103,
+    "In networked games the match-finished message is sent to the other player."
+   ],
+   [
+    113,
+    "Player's hero survived (enemy hero died): raise an enemy health change signal with the enemy hero's health."
+   ],
+   [
+    153,
+    "Work out the winner from which hero died."
+   ],
+   [
+    156,
+    "Build the ranked match result from Elo rating and XP, then fill in skull milestones for both sides."
+   ],
+   [
+    196,
+    "Match types 0x14, 0xd2 and 0xb4 (seem to be special event modes) notify LiveOps that a human won."
+   ],
+   [
+    202,
+    "Store the result, then finish the battle (results screen and rewards)."
+   ],
+   [
+    228,
+    "Neither hero is dead: just broadcast the while-in-play effects and carry on."
+   ],
+   [
+    233,
+    "Action resolution is over: clear the resolving flag so new actions can start."
+   ],
+   [
+    235,
+    "Enemy's turn: re-enable the enemy minions and recompute whether the enemy hero can act or attack."
+   ],
+   [
+    243,
+    "Hero can act only if it is the enemy's, in play, has attacks left (bloodthirst allows a second) and is not stunned."
+   ],
+   [
+    253,
+    "Ferocity/Oath heroes: recompute canAct, and switch to Active attack type if still summon sick."
+   ],
+   [
+    269,
+    "Show or hide the hero's attack-ready indicator on its card UI."
+   ],
+   [
+    285,
+    "Player's turn: highlight playable cards and re-enable minions and the hero."
+   ],
+   [
+    294,
+    "Nothing queued: start a garbage collection while idle and resume the turn clock."
+   ],
+   [
+    299,
+    "If the player can act, count the available actions; with only end turn left (outside a tutorial restriction) show the no-actions UI."
+   ],
+   [
+    318,
+    "Tutorial scripting: after a manual player action, resume scripted steps if they were waiting on it."
+   ],
+   [
+    333,
+    "Reset the manual-action marker for the next sequence."
+   ],
+   [
+    340,
+    "Shared failure label: a null manager or hero reference (compiler null checks)."
+   ]
+  ]
+ },
+ "328fd34": {
+  "summary": "Resolves a CardPlayedByStimulation action: fires the card's ThisCardPlayed trigger with the stored target and caster. Then it finishes the action: reassembles minions, ends the battle if a hero died, and refreshes the turn UI.",
+  "comments": [
+   [
+    4,
+    "Pull the acting card and its target data out of the battle action."
+   ],
+   [
+    14,
+    "Fire the ThisCardPlayed trigger (the card was played via stimulation)."
+   ],
+   [
+    19,
+    "Action done and queue empty: if either side's minions are out of position, queue a reassemble order."
+   ],
+   [
+    31,
+    "No automatic actions left in the queue: time to check whether the battle is over."
+   ],
+   [
+    33,
+    "Tutorial and campaign matches skip the hero-death check here."
+   ],
+   [
+    36,
+    "Reads each hero's card state; 5 seems to be waitingToDie, i.e. a hero is dead."
+   ],
+   [
+    77,
+    "Battle already in PostBattle: warn and bail out unless a forced disconnect loss is pending."
+   ],
+   [
+    92,
+    "Opponent disconnected and the local player should lose: record the result and run the normal end sequence."
+   ],
+   [
+    101,
+    "Normal end: enter PostBattle, stop the battle loop and tell the other player the match finished."
+   ],
+   [
+    103,
+    "In networked games the match-finished message is sent to the other player."
+   ],
+   [
+    113,
+    "Player's hero survived (enemy hero died): raise an enemy health change signal with the enemy hero's health."
+   ],
+   [
+    153,
+    "Work out the winner from which hero died."
+   ],
+   [
+    156,
+    "Build the ranked match result from Elo rating and XP, then fill in skull milestones for both sides."
+   ],
+   [
+    196,
+    "Match types 0x14, 0xd2 and 0xb4 (seem to be special event modes) notify LiveOps that a human won."
+   ],
+   [
+    202,
+    "Store the result, then finish the battle (results screen and rewards)."
+   ],
+   [
+    228,
+    "Neither hero is dead: just broadcast the while-in-play effects and carry on."
+   ],
+   [
+    233,
+    "Action resolution is over: clear the resolving flag so new actions can start."
+   ],
+   [
+    235,
+    "Enemy's turn: re-enable the enemy minions and recompute whether the enemy hero can act or attack."
+   ],
+   [
+    243,
+    "Hero can act only if it is the enemy's, in play, has attacks left (bloodthirst allows a second) and is not stunned."
+   ],
+   [
+    253,
+    "Ferocity/Oath heroes: recompute canAct, and switch to Active attack type if still summon sick."
+   ],
+   [
+    269,
+    "Show or hide the hero's attack-ready indicator on its card UI."
+   ],
+   [
+    285,
+    "Player's turn: highlight playable cards and re-enable minions and the hero."
+   ],
+   [
+    294,
+    "Nothing queued: start a garbage collection while idle and resume the turn clock."
+   ],
+   [
+    299,
+    "If the player can act, count the available actions; with only end turn left (outside a tutorial restriction) show the no-actions UI."
+   ],
+   [
+    318,
+    "Tutorial scripting: after a manual player action, resume scripted steps if they were waiting on it."
+   ],
+   [
+    333,
+    "Reset the manual-action marker for the next sequence."
+   ],
+   [
+    340,
+    "Shared failure label: a null manager or hero reference (compiler null checks)."
+   ]
+  ]
+ },
+ "328fde8": {
+  "summary": "Resolves a Requiem trigger action: fires the card's Requiem abilities and broadcasts the unit's Requiem to other cards. Then it finishes the action: reassembles minions, ends the battle if a hero died, and refreshes the turn UI.",
+  "comments": [
+   [
+    8,
+    "Only fire the trigger if the card is still in play or dying."
+   ],
+   [
+    13,
+    "Fire the Requiem ability trigger."
+   ],
+   [
+    15,
+    "Let other cards react to this unit's Requiem."
+   ],
+   [
+    21,
+    "Action done and queue empty: if either side's minions are out of position, queue a reassemble order."
+   ],
+   [
+    33,
+    "No automatic actions left in the queue: time to check whether the battle is over."
+   ],
+   [
+    35,
+    "Tutorial and campaign matches skip the hero-death check here."
+   ],
+   [
+    38,
+    "Reads each hero's card state; 5 seems to be waitingToDie, i.e. a hero is dead."
+   ],
+   [
+    79,
+    "Battle already in PostBattle: warn and bail out unless a forced disconnect loss is pending."
+   ],
+   [
+    94,
+    "Opponent disconnected and the local player should lose: record the result and run the normal end sequence."
+   ],
+   [
+    103,
+    "Normal end: enter PostBattle, stop the battle loop and tell the other player the match finished."
+   ],
+   [
+    105,
+    "In networked games the match-finished message is sent to the other player."
+   ],
+   [
+    115,
+    "Player's hero survived (enemy hero died): raise an enemy health change signal with the enemy hero's health."
+   ],
+   [
+    155,
+    "Work out the winner from which hero died."
+   ],
+   [
+    158,
+    "Build the ranked match result from Elo rating and XP, then fill in skull milestones for both sides."
+   ],
+   [
+    198,
+    "Match types 0x14, 0xd2 and 0xb4 (seem to be special event modes) notify LiveOps that a human won."
+   ],
+   [
+    204,
+    "Store the result, then finish the battle (results screen and rewards)."
+   ],
+   [
+    230,
+    "Neither hero is dead: just broadcast the while-in-play effects and carry on."
+   ],
+   [
+    235,
+    "Action resolution is over: clear the resolving flag so new actions can start."
+   ],
+   [
+    237,
+    "Enemy's turn: re-enable the enemy minions and recompute whether the enemy hero can act or attack."
+   ],
+   [
+    245,
+    "Hero can act only if it is the enemy's, in play, has attacks left (bloodthirst allows a second) and is not stunned."
+   ],
+   [
+    255,
+    "Ferocity/Oath heroes: recompute canAct, and switch to Active attack type if still summon sick."
+   ],
+   [
+    271,
+    "Show or hide the hero's attack-ready indicator on its card UI."
+   ],
+   [
+    287,
+    "Player's turn: highlight playable cards and re-enable minions and the hero."
+   ],
+   [
+    296,
+    "Nothing queued: start a garbage collection while idle and resume the turn clock."
+   ],
+   [
+    301,
+    "If the player can act, count the available actions; with only end turn left (outside a tutorial restriction) show the no-actions UI."
+   ],
+   [
+    320,
+    "Tutorial scripting: after a manual player action, resume scripted steps if they were waiting on it."
+   ],
+   [
+    335,
+    "Reset the manual-action marker for the next sequence."
+   ],
+   [
+    342,
+    "Shared failure label: a null manager or hero reference (compiler null checks)."
+   ]
+  ]
+ },
+ "328fe68": {
+  "summary": "Resolves a Synapse trigger action: runs the card's Synapse effect if the card is still in play or dying. Then it finishes the action: reassembles minions, ends the battle if a hero died, and refreshes the turn UI.",
+  "comments": [
+   [
+    8,
+    "Only run the effect if the card is still in play or dying."
+   ],
+   [
+    11,
+    "Execute the Synapse effect with the data stored in the action."
+   ],
+   [
+    17,
+    "Action done and queue empty: if either side's minions are out of position, queue a reassemble order."
+   ],
+   [
+    29,
+    "No automatic actions left in the queue: time to check whether the battle is over."
+   ],
+   [
+    31,
+    "Tutorial and campaign matches skip the hero-death check here."
+   ],
+   [
+    34,
+    "Reads each hero's card state; 5 seems to be waitingToDie, i.e. a hero is dead."
+   ],
+   [
+    75,
+    "Battle already in PostBattle: warn and bail out unless a forced disconnect loss is pending."
+   ],
+   [
+    90,
+    "Opponent disconnected and the local player should lose: record the result and run the normal end sequence."
+   ],
+   [
+    99,
+    "Normal end: enter PostBattle, stop the battle loop and tell the other player the match finished."
+   ],
+   [
+    101,
+    "In networked games the match-finished message is sent to the other player."
+   ],
+   [
+    111,
+    "Player's hero survived (enemy hero died): raise an enemy health change signal with the enemy hero's health."
+   ],
+   [
+    151,
+    "Work out the winner from which hero died."
+   ],
+   [
+    154,
+    "Build the ranked match result from Elo rating and XP, then fill in skull milestones for both sides."
+   ],
+   [
+    194,
+    "Match types 0x14, 0xd2 and 0xb4 (seem to be special event modes) notify LiveOps that a human won."
+   ],
+   [
+    200,
+    "Store the result, then finish the battle (results screen and rewards)."
+   ],
+   [
+    226,
+    "Neither hero is dead: just broadcast the while-in-play effects and carry on."
+   ],
+   [
+    231,
+    "Action resolution is over: clear the resolving flag so new actions can start."
+   ],
+   [
+    233,
+    "Enemy's turn: re-enable the enemy minions and recompute whether the enemy hero can act or attack."
+   ],
+   [
+    241,
+    "Hero can act only if it is the enemy's, in play, has attacks left (bloodthirst allows a second) and is not stunned."
+   ],
+   [
+    251,
+    "Ferocity/Oath heroes: recompute canAct, and switch to Active attack type if still summon sick."
+   ],
+   [
+    267,
+    "Show or hide the hero's attack-ready indicator on its card UI."
+   ],
+   [
+    283,
+    "Player's turn: highlight playable cards and re-enable minions and the hero."
+   ],
+   [
+    292,
+    "Nothing queued: start a garbage collection while idle and resume the turn clock."
+   ],
+   [
+    297,
+    "If the player can act, count the available actions; with only end turn left (outside a tutorial restriction) show the no-actions UI."
+   ],
+   [
+    316,
+    "Tutorial scripting: after a manual player action, resume scripted steps if they were waiting on it."
+   ],
+   [
+    331,
+    "Reset the manual-action marker for the next sequence."
+   ],
+   [
+    338,
+    "Shared failure label: a null manager or hero reference (compiler null checks)."
+   ]
+  ]
+ },
+ "3295b58": {
+  "summary": "Removes pending actions tied to a card that is leaving play (its self-buffs). Cancels its effects from the action, instant and interrupt queues, then scans the delayed instant queue backwards and cancels matching actions.",
+  "comments": [
+   [
+    4,
+    "Cancel the card's own queued effects from the three main queues."
+   ],
+   [
+    7,
+    "Now scan the delayed instant queue; a null queue falls through to the null-reference throw."
+   ],
+   [
+    11,
+    "Walk the queue from the end so removals do not shift unvisited entries."
+   ],
+   [
+    16,
+    "Only actions that came from this card matter."
+   ],
+   [
+    22,
+    "Action type 1 is skipped."
+   ],
+   [
+    24,
+    "Action must also target this card (or have no card to compare against)."
+   ],
+   [
+    38,
+    "Certain action types (0x2d with sub-type 0x28, 0x1a, 0x2d) end the scan; decompiler may have lost a continue here."
+   ],
+   [
+    50,
+    "Log and cancel the action from the queue."
+   ]
+  ]
+ },
+ "3295ac4": {
+  "summary": "Hides the active ability description and restores the selected card's highlight: frames come back and the glow colors are tweened back. Called when an active ability display should stop, e.g. after targeting is done or cancelled.",
+  "comments": [
+   [
+    5,
+    "Only act if the active skill description panel exists."
+   ],
+   [
+    6,
+    "Fade the ability description out."
+   ],
+   [
+    8,
+    "Nothing else to do if no card is currently selected."
+   ],
+   [
+    14,
+    "Work on the selected card's highlight component."
+   ],
+   [
+    19,
+    "Highlight not in ability-display mode: nothing to restore."
+   ],
+   [
+    22,
+    "Bring the card frames back and clear the display flag."
+   ],
+   [
+    24,
+    "Reset the Energy cost icon's scale."
+   ],
+   [
+    31,
+    "Kill any running color tween on the highlight before starting a new one."
+   ],
+   [
+    35,
+    "No fade time: set the glow colors immediately."
+   ],
+   [
+    47,
+    "Hide the glow object (decompiler output unreliable near the null checks)."
+   ],
+   [
+    69,
+    "Fade time set: build a tween sequence that fades the glow colors back."
+   ],
+   [
+    82,
+    "Insert a callback into the sequence to finish the frame color change."
+   ]
+  ]
+ }
+}

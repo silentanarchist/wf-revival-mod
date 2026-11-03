@@ -1,0 +1,201 @@
+{
+"32b8a84": {"summary": "Fills the multi-card viewer with a list of cards and a header, then opens it as a window through the windows manager. Also records a windowOpen analytics event. The same open-window boilerplate is inlined in other HUD methods.", "comments": [
+[4, "the multi-card display must exist before it can be filled"],
+[9, "get the windows manager; the open-window logic below is inlined from its OpenWindow"],
+[14, "no window to open: log an error and bail out"],
+[30, "bring the window's canvas to the front of the UI"],
+[45, "window type 1 (popup-style): hide the previously current window first"],
+[54, "window type 0 (full screen): if other windows are open, hide them all"],
+[60, "make this the current window and push it onto the window stack unless it is already on top"],
+[90, "show the window (virtual call on the window)"],
+[91, "analytics: build and send a windowOpen event with window name, previous window and data id"],
+[121, "record to the delta analytics backend unless analytics are disabled"],
+[132, "add player id and platform, then forward the event to Firebase"]
+]},
+"32b8b0c": {"summary": "Looks up the UI animation anchor transform for a screen position, choosing the player-side or enemy-side anchor of the matching entry. Logs an error and returns the HUD's own transform if nothing matches.", "comments": [
+[9, "scan the configured anchor table for an entry whose position matches"],
+[22, "entry has a separate enemy-side anchor: use it when this is not the player's side"],
+[26, "position does not match: discard this candidate"],
+[36, "no anchor found: log an error and fall back to the HUD's own transform"]
+]},
+"32b820c": {"summary": "Shows or hides the reset-camera-zoom button. When shown, any running tween on it is killed and a small punch-scale animation is played to draw attention.", "comments": [
+[8, "show or hide the button"],
+[11, "stop any running tween on the button so animations do not stack"],
+[12, "hiding: nothing more to do"],
+[19, "decompiled DOTween DOPunchScale: punch the button scale by 20% of one"],
+[35, "DOTween debug option: store the target's name for debugging; harmless bookkeeping"]
+]},
+"32b8cc8": {"summary": "Click handler for the settings button: opens the battle settings window via the windows manager and records a windowOpen analytics event.", "comments": [
+[5, "windows manager is required"],
+[11, "settings window not assigned: log an error and bail out"],
+[27, "bring the window's canvas to the front of the UI"],
+[42, "window type 1 (popup-style): hide the previously current window first"],
+[51, "window type 0 (full screen): if other windows are open, hide them all"],
+[57, "make settings the current window and push it onto the window stack unless it is already on top"],
+[87, "show the window"],
+[88, "analytics: send a windowOpen event with window name, previous window and data id"],
+[118, "record to the delta analytics backend unless analytics are disabled"],
+[129, "add player id and platform, then forward the event to Firebase"]
+]},
+"32b838c": {"summary": "Fills a profile UI (name, title, avatar, avatar border) from a deck and warlord data record. In tutorial matches the name is the hero card's localized name instead of the deck name.", "comments": [
+[9, "tutorial match: show the hero card's localized name rather than a player name"],
+[16, "normal match: use the deck's name"],
+[19, "set the displayed profile name"],
+[20, "look up the player's chosen title cosmetic and show its localized name if present"],
+[27, "set the avatar image from the avatar id"],
+[30, "look up the avatar border cosmetic; stop if none"],
+[43, "swap the border: release the old border asset if it differs, store the new one"],
+[58, "show the border image on the avatar holder"]
+]},
+"32b892c": {"summary": "Opens the battle settings window through the windows manager and records a windowOpen analytics event. Same behaviour as the settings button handler, callable from code.", "comments": [
+[5, "windows manager is required"],
+[11, "settings window not assigned: log an error and bail out"],
+[27, "bring the window's canvas to the front of the UI"],
+[42, "window type 1 (popup-style): hide the previously current window first"],
+[51, "window type 0 (full screen): if other windows are open, hide them all"],
+[57, "make settings the current window and push it onto the window stack unless it is already on top"],
+[87, "show the window"],
+[88, "analytics: send a windowOpen event with window name, previous window and data id"],
+[118, "record to the delta analytics backend unless analytics are disabled"],
+[129, "add player id and platform, then forward the event to Firebase"]
+]},
+"32b8ccc": {"summary": "Replay button handler: restores the saved replay match data as the current match data, applies its alternative trait logic setting, and reloads the active scene to play the battle again.", "comments": [
+[8, "make the stored replay match data the current match"],
+[10, "needs replay match data with gameplay variables"],
+[12, "copy the replay's alternative trait logic setting into the player data"],
+[15, "reload the currently active scene by name"]
+]},
+"32b8d60": {"summary": "Play button handler for replays: marks auto-replay as running and starts the \"ReplayPlayAction\" coroutine on the battle manager.", "comments": [
+[7, "set the replay play flag on the battle manager (decompiled as 0 here)"],
+[10, "decompiled inline of StartCoroutine(string): start ReplayPlayAction by name"],
+[47, "error paths of StartCoroutine (empty name or not a MonoBehaviour); not normally reached"],
+[56, "decompiler tail: leftover exception/null-check glue, not real game logic"]
+]},
+"32b8df4": {"summary": "Pause button handler for replays: marks auto-replay as stopped, clears the queued replay actions and stops the \"ReplayPlayAction\" coroutine.", "comments": [
+[9, "set the replay play flag on the battle manager (decompiled as 1 here)"],
+[12, "drop any queued replay actions"],
+[13, "decompiled inline of StopCoroutine(string): stop ReplayPlayAction by name"]
+]},
+"32b8e88": {"summary": "Step button handler for replays: speeds up time, adds one to the replay action queue and, if it is the only queued action, starts the \"AddNextReplayAction\" coroutine to play it.", "comments": [
+[8, "speed up game time to 15x so the step plays quickly (0x41700000 is 15.0f)"],
+[9, "one more replay action is waiting to be played"],
+[13, "actions were already queued, so the coroutine is already running"],
+[16, "keep the speed-up from being reset to normal after the action"],
+[18, "decompiled inline of StartCoroutine(string): start AddNextReplayAction by name"],
+[55, "error paths of StartCoroutine; not normally reached"],
+[64, "decompiler tail: leftover exception/null-check glue, not real game logic"]
+]},
+"32b8f1c": {"summary": "Click handler for the offensive card button: if an offensive card is set on the battle manager, opens the card display window to show it. The decompiler merged the display window's initialization into this body, so the control flow is unreliable.", "comments": [
+[8, "nothing to show if no offensive card is set"],
+[13, "need the card display window singleton"],
+[21, "set the card being displayed"],
+[26, "the rest is the display window's open/setup code inlined by the decompiler; flow is mangled but the calls are right"],
+[61, "set up the card's flavour text, shown when non-empty"],
+[75, "set the clan flavour background sprite on the display (Unity Image.sprite setter inlined)"],
+[171, "set up the card voice-over, only if remote config enables troop or warlord voice-overs"],
+[196, "card type 10 (warlord) checks the warlord VO flag, type 0 (troop) the troop VO flag"],
+[202, "rebuild the voice-over button listener with the card's available sounds"],
+[262, "open the window itself"],
+[266, "reset all card views, then initialize the cards, lore, voice-over, tutorial object and overdraw"],
+[279, "show the voice-over button only for card types 0 and 10 (troop or warlord)"],
+[300, "card types 0xd2 or 200 show extra drawing options on the card"]
+]},
+"32b8fb0": {"summary": "Opens the alliance panel with the opponent's name, title, score, avatar, avatar border and alliance data taken from the current match data.", "comments": [
+[4, "needs match data with the enemy's battle data"],
+[8, "look up the cosmetic title and its localized name (empty text if none)"],
+[19, "look up avatar and avatar border cosmetics by id"],
+[25, "open the panel with all the profile and alliance fields (field names look scrambled by the decompiler)"]
+]},
+"32b91d0": {"summary": "Delegate constructor for the BattleManager ConnectionStatusChanged event. Stores the target object and method pointer; il2cpp runtime glue, not game logic.", "comments": [
+[4, "store the method info, code pointer and target object on the delegate"],
+[10, "non-static method with null target is an error; static methods use a shim invoker"]
+]},
+"32b9284": {"summary": "Begin-invoke stub of the ConnectionStatusChanged delegate: boxes the previous and new connection status and starts the asynchronous call. il2cpp runtime glue.", "comments": [
+[9, "box both status enums so they can be passed to the runtime"]
+]},
+"32b9324": {"summary": "End-invoke stub of the ConnectionStatusChanged delegate: finishes an asynchronous call and copies any out parameters back. il2cpp runtime glue with no game logic.", "comments": [
+[7, "runtime reflection code: counts out/ref parameters and invokes the method, then copies the results back"]
+]},
+"32b9330": {"summary": "Static constructor of the compiler-generated lambda holder class in BattleManager; creates the single shared instance used by its lambdas.", "comments": []},
+"32b93a0": {"summary": "Lambda predicate used by GetChoiceFullPool: true when the card is not null and has a unique id set.", "comments": [
+[9, "null checks here are the compiler's; result depends on uniqueId being set"]
+]},
+"32b94ac": {"summary": "Lambda predicate used by CheckForHeroDeckTransform: true when the card's unique id equals the transformed warlord id of the deck's warlord.", "comments": [
+[7, "compare this card's id with the warlord's transformedWarlordId"],
+[12, "decompiled string equality: same reference, then length, then the characters compared in chunks"]
+]},
+"32b94e4": {"summary": "Lambda predicate used by ApplyOffensiveAndDefensiveEffects: true when the card's unique id equals the defensive card's id.", "comments": [
+[9, "same reference means equal"],
+[15, "decompiled string equality: length first, then characters compared in chunks of 8 and then one by one"]
+]},
+"32b9504": {"summary": "Lambda predicate used by ApplyOffensiveAndDefensiveEffects: true when the card's unique id equals the offensive card's id.", "comments": [
+[9, "same reference means equal"],
+[15, "decompiled string equality: length first, then characters compared in chunks of 8 and then one by one"]
+]},
+"32b952c": {"summary": "Lambda predicate used by GetEnvEffectCards: true when the forge exists and its card's army equals the army being searched for.", "comments": [
+[8, "get the forge's card and read its army through a virtual call"]
+]},
+"32b95a0": {"summary": "Lambda from BattleFinished that starts the BasicBattleEndSequence coroutine on the outer battle manager.", "comments": [
+[8, "create the end sequence coroutine"],
+[11, "decompiled inline of StartCoroutine; the null and not-a-MonoBehaviour branches are error paths"],
+[25, "decompiler tail: exception/register glue, not real logic"]
+]},
+"32b95d8": {"summary": "Lambda from BattleFinished, run when the tutorial/script part is done. Runs the normal battle end sequence, then starts either BasicBattleEndSequence or CompleteBattleFinished as a coroutine.", "comments": [
+[11, "scripted post-game chats are over"],
+[12, "run the normal end-of-battle steps for this tutorial stage"],
+[14, "if that returned true, play the basic end sequence"],
+[18, "otherwise complete the battle finish directly (decompiler lost which object it uses; flow is shaky)"],
+[24, "decompiled inline of StartCoroutine; the null and not-a-MonoBehaviour branches are error paths"],
+[40, "decompiler tail: exception/register glue, not real logic"]
+]},
+"32b9660": {"summary": "Lambda predicate used by CheckUnitsCancellingAttack: true when a card's unique id equals the id of the unit at index i in unitsInPlay.", "comments": [
+[5, "id of the card being tested"],
+[6, "id of the unit at the captured index in the units in play"],
+[9, "same reference means equal"],
+[18, "decompiled string equality: length first, then characters compared in chunks of 8 and then one by one"]
+]},
+"32b9714": {"summary": "Lambda from ResolveTraitAnim, called when the trait animation object is spawned. Pushes the trait value into its TraitEffectController, then invokes the stored callback.", "comments": [
+[5, "if the spawned animation has a trait effect controller, show the trait's value on it"],
+[11, "then call the stored callback (the call itself is dropped by the decompiler)"]
+]},
+"32b9864": {"summary": "Lambda predicate used by GetChoiceOptions: true when a card's unique id equals the id of the randomly chosen card.", "comments": [
+[9, "same reference means equal"],
+[12, "decompiled string equality: length first, then characters compared in chunks of 8 and then one by one"]
+]},
+"32b9894": {"summary": "Callback run after a remnant is transformed back into a unit: finishes putting the card into play (reset stats, traits, summon sickness), then finishes resolving the action. This ends with the dead-hero check and match end, or re-enabling turn controls.", "comments": [
+[8, "reset the reanimated card to its in-hand values, then announce it as reanimated"],
+[11, "put it into play as a unit, reset summon sickness and fire its on-summon traits"],
+[17, "refresh in-play effects, stun state and figures; broadcast the while-in-play update"],
+[23, "refresh effects on both players' hands"],
+[27, "action does not wait for an animation: nothing more to resolve"],
+[37, "no more actions queued and not a special action (7): tidy the board"],
+[40, "if either side's minions are out of position, queue a reassemble order for that side"],
+[49, "no automatic actions left: check for a dead hero (not in tutorial or campaign)"],
+[55, "hero state 5 seems to mean dead; check player hero, then enemy hero"],
+[59, "log DeadHeroAfterActionsEnd details (long string-array build)"],
+[95, "already in post-battle: ignore, unless a disconnect-loss is pending"],
+[110, "disconnect loss flag set: record an enemy win and start the end sequence"],
+[119, "otherwise end the battle: set post-battle stage, stop the battle"],
+[121, "in a networked game tell the other player that the match finished"],
+[126, "set UI to finish-battle sequence and clear the during-battle flag"],
+[131, "if the enemy hero died, raise a health-change signal with its health"],
+[148, "read the Elo rating, from the event leaderboard if any, else from player data"],
+[171, "work out the winner and build a ranked match result with Elo and XP"],
+[177, "record skull milestones for both sides in the result"],
+[200, "store the result and the match length in minutes"],
+[207, "if the player won, flag it; for some match types (0x14, 0xb4, 0xd2) tell LiveOps"],
+[220, "save the match winner and finish the battle"],
+[242, "decompiler artifact: array bounds check failure path"],
+[246, "no hero died: just broadcast a while-in-play update"],
+[250, "action finished: allow the next action to resolve"],
+[253, "enemy's turn: activate enemy minions and refresh the enemy hero's attack readiness"],
+[261, "hero can attack only if not stunned/sick and other trait conditions hold (decompiler tangled these conditions)"],
+[271, "ferocity or oath trait: recompute shade; if summon sick, change attack type to active"],
+[287, "show or hide the hero's attack button depending on whether it can attack now"],
+[303, "player's turn: light up playable cards, activate player minions and hero"],
+[310, "queue is empty: run a GC pass and unpause the clock"],
+[316, "when the player may act, see what actions remain"],
+[325, "only end turn left and not tutorial-blocked: show the no-actions UI on the clock"],
+[334, "after a manual player action in a scripted stage, continue the scripted turn if it was waiting"]
+]}
+}

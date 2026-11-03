@@ -1,0 +1,891 @@
+{
+ "3274af0": {
+  "summary": "Shows the active skill display: marks it as displayed, activates the hide button object, kills the move tween, resets alpha to 0 and fades in. Also plays the ability box enter sound.",
+  "comments": [
+   [
+    4,
+    "Mark the display as visible so FadeOut and the touch handlers will act"
+   ],
+   [
+    5,
+    "Needs the hide button object; activate it, stop any move tween and fade from invisible"
+   ],
+   [
+    14,
+    "Look up the AbilityBoxEnter sound cue from the battle sound collection"
+   ],
+   [
+    21,
+    "Plays the ability box sound cue; the long debug branch only logs the cue, source and mixer names. Missing cue is logged as an error."
+   ],
+   [
+    34,
+    "Debug-sound mode: build and log a message with cue name, audio source and mixer"
+   ],
+   [
+    67,
+    "Decompiler artifact: a Play2D(AudioClip) inlined path follows; it is not reachable in normal flow"
+   ],
+   [
+    122,
+    "Null-check failure path: some required object (button, manager or sound manager) was missing"
+   ]
+  ]
+ },
+ "3274f34": {
+  "summary": "Hides the active skill display if it is showing: kills the move tween, deactivates the hide button, fades out at half the fade time and turns off the pressing light. Plays the ability box exit sound.",
+  "comments": [
+   [
+    4,
+    "Already hidden: nothing to do"
+   ],
+   [
+    7,
+    "Mark as not displayed and stop any running move tween"
+   ],
+   [
+    11,
+    "Hide the button object and start the fade-out (half the normal fade time)"
+   ],
+   [
+    16,
+    "If the pressing light is currently on, switch it off"
+   ],
+   [
+    26,
+    "Look up the AbilityBoxExit sound cue from the battle sound collection"
+   ],
+   [
+    33,
+    "Plays the ability box sound cue; the long debug branch only logs the cue, source and mixer names. Missing cue is logged as an error."
+   ],
+   [
+    51,
+    "Debug-sound mode: build and log a message with cue name, audio source and mixer"
+   ],
+   [
+    79,
+    "Decompiler artifact: a Play2D(AudioClip) inlined path follows; it is not reachable in normal flow"
+   ],
+   [
+    134,
+    "Null-check failure path: a required object was missing"
+   ]
+  ]
+ },
+ "3275100": {
+  "summary": "Called when the battle manager stops showing an active skill description: fades the description out and puts the selected card's highlight back to its regular state (scale, color, frames).",
+  "comments": [
+   [
+    8,
+    "Fade out the skill description if the manager has one"
+   ],
+   [
+    10,
+    "Only continue if a card is selected"
+   ],
+   [
+    20,
+    "Highlight is already regular: nothing to reset"
+   ],
+   [
+    23,
+    "Reset highlight: show regular frames, restore initial scale and kill any running color tween"
+   ],
+   [
+    36,
+    "Zero animation time: set colors instantly (decompiler garbled the setter calls)"
+   ],
+   [
+    70,
+    "Otherwise tween the frame colors back to regular with a DOTween sequence; the callback runs after the tween when alpha is 0"
+   ],
+   [
+    99,
+    "Null-check failure path"
+   ]
+  ]
+ },
+ "327511c": {
+  "summary": "Starts fading the acting light out over 0.3s with an InExpo ease and stores the tweener, if the acting light image exists.",
+  "comments": [
+   [
+    6,
+    "The acting light is the glow shown while the ability is waiting to resolve"
+   ]
+  ]
+ },
+ "3274d70": {
+  "summary": "Kills all running fade tweens on the skill display, hides the acting light, then starts new fades of the frame, Energy icon, background light, name, cost and description to the target alpha.",
+  "comments": [
+   [
+    4,
+    "Stop previous fade tweens first so they do not fight the new ones"
+   ],
+   [
+    28,
+    "Acting light is reset before fading"
+   ],
+   [
+    29,
+    "Start new fades to targetAlpha and keep the tweeners so they can be killed later"
+   ]
+  ]
+ },
+ "3274c34": {
+  "summary": "Kills all running fade tweens, hides the acting light and instantly sets the alpha of the frame, Energy icon, background light, name, description and cost text.",
+  "comments": [
+   [
+    4,
+    "Stop any running fade tweens before setting alpha directly"
+   ],
+   [
+    22,
+    "Reset acting light, then set alpha on the images and texts"
+   ],
+   [
+    29,
+    "Cost text may be missing; if present its color is set (decompiler lost the argument)"
+   ]
+  ]
+ },
+ "32751d4": {
+  "summary": "Resets the background (usable) light image color if it exists, so the card no longer looks usable.",
+  "comments": [
+   [
+    6,
+    "No background light assigned: nothing to do"
+   ],
+   [
+    10,
+    "Color reset call; decompiler lost the color argument"
+   ]
+  ]
+ },
+ "3275234": {
+  "summary": "Touch-down handler for the skill display: reads the touch position from the battle manager, shows the pressing light and plays the ability box click sound. Decompiler garbled the arguments and return value.",
+  "comments": [
+   [
+    7,
+    "Store the touch position in canvas world space (decompiler garbled the stores)"
+   ],
+   [
+    11,
+    "Display not currently shown: ignore the touch"
+   ],
+   [
+    16,
+    "Show the pressing light while the finger is down"
+   ],
+   [
+    22,
+    "Look up the AbilityBoxClick sound cue"
+   ],
+   [
+    41,
+    "Plays the ability box sound cue; the long debug branch only logs the cue, source and mixer names."
+   ],
+   [
+    42,
+    "Debug-sound mode: build and log a message with cue name, audio source and mixer"
+   ],
+   [
+    75,
+    "Decompiler artifact: an inlined Play2D(AudioClip) path follows; not reachable in normal flow"
+   ],
+   [
+    134,
+    "Null-check failure path"
+   ]
+  ]
+ },
+ "3275458": {
+  "summary": "Touch-drag handler: when the player drags on a usable, idle active ability of their own card, starts the targeted active ability and shows the acting light. Logs an error if manager or parent card is missing.",
+  "comments": [
+   [
+    9,
+    "Need both the battle manager and the parent card to continue"
+   ],
+   [
+    23,
+    "Replays: no interaction allowed"
+   ],
+   [
+    26,
+    "Ignore if the skill display is not showing"
+   ],
+   [
+    31,
+    "Only the local player's own card can start its ability"
+   ],
+   [
+    34,
+    "Ability must be a targeted active ability"
+   ],
+   [
+    38,
+    "Pressing light already on means the press is being handled elsewhere: skip"
+   ],
+   [
+    46,
+    "Already in targeted ability mode: do nothing"
+   ],
+   [
+    51,
+    "Check Energy, status and turn conditions allow using the ability"
+   ],
+   [
+    56,
+    "Enter targeting mode, set up the ability and wait for the target to resolve"
+   ],
+   [
+    61,
+    "Fade in the acting light to show the ability is active"
+   ],
+   [
+    85,
+    "Error path: log which of manager and parent card were null"
+   ]
+  ]
+ },
+ "327579c": {
+  "summary": "Click-down handler: stores the click position, shows the pressing light and plays the ability box click sound. Only acts while the display is visible.",
+  "comments": [
+   [
+    7,
+    "Record click position in canvas world space"
+   ],
+   [
+    10,
+    "Display hidden: ignore the click"
+   ],
+   [
+    15,
+    "Show the pressing light while pressed"
+   ],
+   [
+    21,
+    "Look up the AbilityBoxClick sound cue"
+   ],
+   [
+    40,
+    "Plays the ability box sound cue; the long debug branch only logs the cue, source and mixer names."
+   ],
+   [
+    41,
+    "Debug-sound mode: build and log a message with cue name, audio source and mixer"
+   ],
+   [
+    74,
+    "Decompiler artifact: an inlined Play2D(AudioClip) path follows; not reachable in normal flow"
+   ],
+   [
+    129,
+    "Null-check failure path"
+   ]
+  ]
+ },
+ "32757d8": {
+  "summary": "Mouse-drag version of OnTouchDrag: starts a targeted active ability for the player's own usable, idle card and shows the acting light. Logs an error if manager or parent card is missing.",
+  "comments": [
+   [
+    8,
+    "Need both the battle manager and the parent card to continue"
+   ],
+   [
+    22,
+    "Replays: no interaction allowed"
+   ],
+   [
+    25,
+    "Ignore if the skill display is not showing"
+   ],
+   [
+    30,
+    "Only the local player's own card can start its ability"
+   ],
+   [
+    33,
+    "Ability must be a targeted active ability"
+   ],
+   [
+    37,
+    "Pressing light already on means the press is being handled elsewhere: skip"
+   ],
+   [
+    45,
+    "Already in targeted ability mode: do nothing"
+   ],
+   [
+    50,
+    "Check Energy, status and turn conditions allow using the ability"
+   ],
+   [
+    55,
+    "Enter targeting mode, set up the ability and wait for the target to resolve"
+   ],
+   [
+    60,
+    "Fade in the acting light to show the ability is active"
+   ],
+   [
+    84,
+    "Error path: log which of manager and parent card were null"
+   ]
+  ]
+ },
+ "3275814": {
+  "summary": "Click-up handler: hides the pressing light, asks the battle manager to use the active ability and, if that worked, shows the acting light.",
+  "comments": [
+   [
+    4,
+    "Only react while the display is shown"
+   ],
+   [
+    7,
+    "Turn the pressing light off if it is on"
+   ],
+   [
+    20,
+    "Try to use the active ability (may start targeting or send the action)"
+   ],
+   [
+    22,
+    "Success: reset the acting light and fade it in"
+   ],
+   [
+    36,
+    "Decompiler merged a null-check failure label here"
+   ]
+  ]
+ },
+ "32759f4": {
+  "summary": "Simulated touch (e.g. from tutorial or AI): hides the pressing light, tries to use the active ability and, on success, shows the acting light, as a real click release would.",
+  "comments": [
+   [
+    8,
+    "Reads the display position (result unused)"
+   ],
+   [
+    9,
+    "Only react while the display is shown"
+   ],
+   [
+    12,
+    "Turn the pressing light off if it is on"
+   ],
+   [
+    25,
+    "Try to use the active ability"
+   ],
+   [
+    27,
+    "Success: reset the acting light and fade it in"
+   ]
+  ]
+ },
+ "3275850": {
+  "summary": "Touch-up-as-button handler: hides the pressing light, tries to use the active ability and, on success, shows the acting light.",
+  "comments": [
+   [
+    4,
+    "Only react while the display is shown"
+   ],
+   [
+    7,
+    "Turn the pressing light off if it is on"
+   ],
+   [
+    20,
+    "Try to use the active ability"
+   ],
+   [
+    22,
+    "Success: reset the acting light and fade it in"
+   ]
+  ]
+ },
+ "32756c0": {
+  "summary": "Activates the acting light object and fades it in to full alpha over 0.4s with an InExpo ease.",
+  "comments": [
+   [
+    6,
+    "Only if an acting light image is assigned"
+   ],
+   [
+    8,
+    "Turn it on and fade in; tweener is kept so HideActingLight can kill it"
+   ]
+  ]
+ },
+ "32745d0": {
+  "summary": "Kills the acting light tween and resets the acting light color.",
+  "comments": [
+   [
+    4,
+    "Stop the fade tween, if any"
+   ],
+   [
+    10,
+    "Reset the light color (decompiler lost the color argument)"
+   ]
+  ]
+ },
+ "327ae2c": {
+  "summary": "Static constructor for the compiler-generated lambda holder class of AI; creates the shared instance.",
+  "comments": []
+ },
+ "327aecc": {
+  "summary": "Lambda used in CombinedAttackCanKillWarlord: true when the given action has the same acting card as the action at the captured index. Decompiler output is partly broken near the compare.",
+  "comments": [
+   [
+    9,
+    "Both acting cards null counts as a match"
+   ],
+   [
+    25,
+    "Decompiler garbled the comparison here; meant to compare the two acting cards"
+   ]
+  ]
+ },
+ "3276724": {
+  "summary": "Returns whether AI action tweaking (random skipping) should be off for this match type. Off for some match types and for tutorial matches; on otherwise.",
+  "comments": [
+   [
+    5,
+    "Match type 0x14: tweaking stays enabled (returns false for disable)"
+   ],
+   [
+    10,
+    "Match type 0x78: same"
+   ],
+   [
+    15,
+    "Match type 0xD2: same"
+   ],
+   [
+    20,
+    "Match type 0x32 (seems to be the tutorial/FTUE type): disabled only if in the first-time tutorial"
+   ],
+   [
+    28,
+    "Every other match type: disable tweaking"
+   ]
+  ]
+ },
+ "3275e2c": {
+  "summary": "Sorts the AI's available actions by score (highest first) and then randomly removes some non-end-turn actions based on the bot config min skips, max skips and skip chance, to make the bot weaker.",
+  "comments": [
+   [
+    7,
+    "New matchmaking disabled: use the actions unchanged"
+   ],
+   [
+    10,
+    "Some match types never tweak"
+   ],
+   [
+    14,
+    "Read the bot config: min and max skip rounds and percent chance"
+   ],
+   [
+    28,
+    "Sort actions by action score, best first"
+   ],
+   [
+    30,
+    "Up to max skips rounds, each removing at most one action"
+   ],
+   [
+    36,
+    "Scan from the lowest-priority end backwards, skipping end turn actions"
+   ],
+   [
+    41,
+    "Under the min skips: always remove an action"
+   ],
+   [
+    50,
+    "After the min: remove only if a 0-100 random roll is below the skip chance"
+   ],
+   [
+    63,
+    "Remove the chosen action and stop this round"
+   ]
+  ]
+ },
+ "3276390": {
+  "summary": "Executes the AI's chosen action by queuing the matching attack, play card or active ability action on the battle manager, then plays a random AI voice line.",
+  "comments": [
+   [
+    6,
+    "Clear the action buffer before filling it"
+   ],
+   [
+    8,
+    "Action type below ranged attack: play card or melee attack"
+   ],
+   [
+    11,
+    "Unknown action type: log an error"
+   ],
+   [
+    24,
+    "Melee attack: switch the attacker to melee and queue an attack action"
+   ],
+   [
+    33,
+    "Play card: build a battle action (type 5) with the target card as argument"
+   ],
+   [
+    42,
+    "Minions are placed in the next free slot, checking adjacent slots"
+   ],
+   [
+    59,
+    "Ranged attack or ability types"
+   ],
+   [
+    60,
+    "Ranged attack: switch the attacker to ranged and queue an attack action"
+   ],
+   [
+    72,
+    "Active ability: set it up, then queue action 0x1e with the target"
+   ],
+   [
+    86,
+    "Action 0x4c with the target (seems to be the other ability-type action)"
+   ],
+   [
+    99,
+    "Queue the built action as an automatic action"
+   ],
+   [
+    101,
+    "Always play a random AI voice line after the action"
+   ]
+  ]
+ },
+ "32767d4": {
+  "summary": "Collects the available melee and ranged attacks for the given attacker, scores each one, and returns the best attack, or null if none exists.",
+  "comments": [
+   [
+    6,
+    "Get all currently possible actions for the attacker's side"
+   ],
+   [
+    11,
+    "Keep only melee and ranged attacks made by this attacker, and score each"
+   ],
+   [
+    49,
+    "No attacks found: return null"
+   ],
+   [
+    53,
+    "Prefer a first action matching the cached predicate; otherwise fall back to the first in the list"
+   ],
+   [
+    76,
+    "Pick the best action by comparing each against the current best"
+   ]
+  ]
+ },
+ "3276a58": {
+  "summary": "Chooses which cards the AI throws away in the opening mulligan: those costing more than 4 Energy (not Whispers of Chaos cards). Returns their unique in-game IDs.",
+  "comments": [
+   [
+    11,
+    "Whispers of Chaos cards are never marked for discard"
+   ],
+   [
+    16,
+    "Discard any card costing more than 4 Energy and remember its ID"
+   ],
+   [
+    34,
+    "Log the card name and the discard decision"
+   ],
+   [
+    43,
+    "Return the discarded IDs as an array"
+   ]
+  ]
+ },
+ "3276ccc": {
+  "summary": "Computes how much a card is worth on the board: reference value plus enchantment value, scaled down when damaged and by 0.8 when stunned or pinned down.",
+  "comments": [
+   [
+    5,
+    "Base value from the card data plus the value of its enchantments"
+   ],
+   [
+    17,
+    "Damaged: scale the value between 50% and 100% by remaining health fraction"
+   ],
+   [
+    28,
+    "Stunned or pinned down units are worth 20% less"
+   ]
+  ]
+ },
+ "3277168": {
+  "summary": "Builds one debug string listing each available action with its card, target and value, and logs it.",
+  "comments": [
+   [
+    7,
+    "For each action append type, acting card name, target name and value"
+   ],
+   [
+    43,
+    "Log the combined text"
+   ]
+  ]
+ },
+ "3277414": {
+  "summary": "Builds melee attack actions against valid enemy units for the card that might attack the buffed card. If exactly one such attack exists, its score gets +10.",
+  "comments": [
+   [
+    6,
+    "Get the opposing units in play"
+   ],
+   [
+    11,
+    "Check the unit could attack the buffed card and is a valid target"
+   ],
+   [
+    17,
+    "Add a melee attack action for this target"
+   ],
+   [
+    32,
+    "Count melee attacks and find the first"
+   ],
+   [
+    51,
+    "Only one possible attack: boost its score by 10"
+   ]
+  ]
+ },
+ "3275b5c": {
+  "summary": "Returns the AI score of an available action: play card, melee or ranged attack, active ability, or clicking a waystone (fixed 50). A combined attack that can kill the warlord adds 10000.",
+  "comments": [
+   [
+    8,
+    "Play card: score comes from the card scoring routine"
+   ],
+   [
+    12,
+    "Anything but melee here scores 0"
+   ],
+   [
+    21,
+    "Ranged attack, ability or waystone click"
+   ],
+   [
+    25,
+    "Waystone click has a fixed score of 50"
+   ],
+   [
+    27,
+    "Active ability: sum the ability's own scoring criteria, then target criteria"
+   ],
+   [
+    35,
+    "Ability found: add scores from non-target criteria"
+   ],
+   [
+    55,
+    "Add scoring criteria that apply to the target card"
+   ],
+   [
+    87,
+    "Attack: score the attack itself"
+   ],
+   [
+    90,
+    "Target card type 10 seems to be the warlord"
+   ],
+   [
+    94,
+    "If all units attacking together can kill the warlord, add a huge bonus"
+   ]
+  ]
+ },
+ "3278c94": {
+  "summary": "Returns a defensive attack value: zero when a hero attacks a hero, and zero when the score against a hero target is below 2; otherwise the given score.",
+  "comments": [
+   [
+    7,
+    "Hero attacking hero is worth nothing"
+   ],
+   [
+    15,
+    "Low value attacks on a hero are zeroed out"
+   ]
+  ]
+ },
+ "3278d10": {
+  "summary": "Returns whether a hero attack on another hero is suicidal, i.e. the attacker's current health is no higher than the target's. False for other card types.",
+  "comments": [
+   [
+    7,
+    "Only hero versus hero is checked"
+   ],
+   [
+    22,
+    "Attacker health at or below target health counts as suicide"
+   ]
+  ]
+ },
+ "3277998": {
+  "summary": "Checks whether all units attacking the same target as the given action together deal enough to kill the warlord (health plus bastion). Logs a warning when yes.",
+  "comments": [
+   [
+    11,
+    "Walk all actions; keep melee or ranged attacks on the same target as the given action"
+   ],
+   [
+    43,
+    "Keep only one action per acting card, replacing it when the new one hits harder"
+   ],
+   [
+    82,
+    "Decompiler lost the loop here; this sums the damage of the kept attacks"
+   ],
+   [
+    95,
+    "Compare the summed damage to the warlord's health plus bastion"
+   ],
+   [
+    105,
+    "Lethal: log a warning with the acting unit's name"
+   ]
+  ]
+ },
+ "3277704": {
+  "summary": "Scores an attack: buffed attack score, plus special attack criteria, sacrifice bonus, blast bonus for adjacent units and markerlight bonus for ranged attacks.",
+  "comments": [
+   [
+    7,
+    "Start with the buffed attack score using empty buff effects"
+   ],
+   [
+    9,
+    "Cards with special attack scoring add their own criteria (not sacrifice cards)"
+   ],
+   [
+    16,
+    "Sacrifice cards: bonus when the attacker would die and has no dodge or shield"
+   ],
+   [
+    38,
+    "Blast: add blast damage times number of adjacent units"
+   ],
+   [
+    49,
+    "Ranged attacks gain the target's markerlight value"
+   ]
+  ]
+ },
+ "32793fc": {
+  "summary": "Computes a card's effective attack for an attack type (ranged, melee, drop pod), including buffs; blind gives 0 ranged, remnants give 0, and results are not negative.",
+  "comments": [
+   [
+    5,
+    "Ranged: blinded cards deal 0"
+   ],
+   [
+    13,
+    "Walk active effects: set-attack effects override, add-stats effects accumulate"
+   ],
+   [
+    44,
+    "Base ranged attack plus bonus, clamped at zero"
+   ],
+   [
+    49,
+    "Melee: same logic using melee fields"
+   ],
+   [
+    86,
+    "Other type (drop pod or current type): drop pod trait uses drop pod attack"
+   ],
+   [
+    110,
+    "Remnants that are not leaving deal 0; otherwise use ranged or melee by current attack type"
+   ]
+  ]
+ },
+ "3278e04": {
+  "summary": "Same as the attack type version but takes a PlayerActions value: effective attack for ranged, melee or drop pod, including buffs, blind and remnants.",
+  "comments": [
+   [
+    5,
+    "Ranged: blinded cards deal 0"
+   ],
+   [
+    13,
+    "Walk active effects: set-attack effects override, add-stats effects accumulate"
+   ],
+   [
+    44,
+    "Base ranged attack plus bonus, clamped at zero"
+   ],
+   [
+    49,
+    "Melee: same logic using melee fields"
+   ],
+   [
+    86,
+    "Other action: drop pod trait uses drop pod attack"
+   ],
+   [
+    110,
+    "Remnants that are not leaving deal 0; otherwise use ranged or melee by current attack type"
+   ]
+  ]
+ },
+ "327900c": {
+  "summary": "Scores an attack while taking temporary buffs on both cards into account: damage dealt, damage taken in retaliation, ambush, extra scores from card data and a poison bonus.",
+  "comments": [
+   [
+    4,
+    "Build the attacker's damage info including its buff"
+   ],
+   [
+    8,
+    "Ranged attack: use ranged attack plus buff instead"
+   ],
+   [
+    14,
+    "Build the target's retaliation damage info the same way"
+   ],
+   [
+    28,
+    "Ambush targets hit back for a fixed 4 damage"
+   ],
+   [
+    36,
+    "Score for damaging the target"
+   ],
+   [
+    39,
+    "If the target hits back, subtract the score of damage to the attacker"
+   ],
+   [
+    51,
+    "Attacker would die from retaliation: no small bonus"
+   ],
+   [
+    55,
+    "Add per-card extra attack scores from card data"
+   ],
+   [
+    57,
+    "Poisonous attacker vs target without dodge, shield or drop pod that survives the hit: add poison score"
+   ]
+  ]
+ }
+}

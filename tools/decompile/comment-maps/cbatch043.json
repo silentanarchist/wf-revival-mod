@@ -1,0 +1,926 @@
+{
+ "3284700": {
+  "summary": "Called when a desync is detected: logs the error and ends the match as a win for the local player. It flags the match data, records the win by cancel, tells the server and opponent (networked games), and is ignored if the match is already over or cancelled.",
+  "comments": [
+   [
+    4,
+    "Log the desync reason as an error first"
+   ],
+   [
+    6,
+    "Match already in PostBattle: ignore the cancel request"
+   ],
+   [
+    10,
+    "Only the first cancel counts; later calls are ignored"
+   ],
+   [
+    13,
+    "Mark the match as cancelled by desync and remember we did it"
+   ],
+   [
+    19,
+    "Record the win-by-cancel with the opponent id, error text and a dump of the game state"
+   ],
+   [
+    21,
+    "Networked game: send the desync notice to the other player/server"
+   ],
+   [
+    25,
+    "Fire the OnOpponentDesync event for listeners (decompiler dropped the invoke)"
+   ],
+   [
+    35,
+    "Already-cancelled path: log a message that the cancel is ignored"
+   ]
+  ]
+ },
+ "3285d7c": {
+  "summary": "Builds one long debug string of the whole board state: both warlords, units in play, hands and decks for player and enemy. Used when reporting a desync so the two sides can be compared.",
+  "comments": [
+   [
+    4,
+    "Eight pieces: warlord, in-play, hand, deck, each for player then enemy"
+   ],
+   [
+    31,
+    "Format template labels the eight pieces (WLP/WLE, CPP/CPE, CHP/CHE, CDP/CDE)"
+   ],
+   [
+    77,
+    "Decompiler's array bounds checks; the bad-index path never happens in practice"
+   ]
+  ]
+ },
+ "3288bf0": {
+  "summary": "Builds a short debug string for a side's hero: in-game id, unique card id, health, melee attack, ranged attack and whether it can attack now. Part of the desync game-state dump.",
+  "comments": [
+   [
+    6,
+    "Twelve string parts concatenated at the end; the decompiler nests a bounds check per element"
+   ],
+   [
+    10,
+    "Each field re-fetches the hero for the given side"
+   ],
+   [
+    25,
+    "Current health (intrinsic, before temporary effects)"
+   ],
+   [
+    33,
+    "Melee attack value"
+   ],
+   [
+    41,
+    "Ranged attack value"
+   ],
+   [
+    49,
+    "Whether the hero can attack right now"
+   ],
+   [
+    53,
+    "Join all parts into the final string"
+   ]
+  ]
+ },
+ "3288f38": {
+  "summary": "Builds a debug string with one entry per unit in play for a side: board index, in-game id, card id, health, attacks and can-attack flag. Part of the desync game-state dump.",
+  "comments": [
+   [
+    10,
+    "Collect that side's in-play units into a list"
+   ],
+   [
+    12,
+    "Pick the player or enemy minion manager, used to get each unit's board index"
+   ],
+   [
+    16,
+    "Loop over every unit"
+   ],
+   [
+    26,
+    "First part is the text built so far (decompiler quirk; entries seem to accumulate)"
+   ],
+   [
+    32,
+    "Board position of this unit"
+   ],
+   [
+    40,
+    "In-game id of this unit"
+   ],
+   [
+    48,
+    "Unique card id from the card data"
+   ],
+   [
+    53,
+    "Health, then melee and ranged attack below"
+   ],
+   [
+    77,
+    "Whether this unit can attack now"
+   ],
+   [
+    83,
+    "Join parts into the running result"
+   ]
+  ]
+ },
+ "3289734": {
+  "summary": "Builds a debug string listing in-game id and card id of every card in a side's deck. Part of the desync game-state dump.",
+  "comments": [
+   [
+    5,
+    "Fetch all cards in this side's deck"
+   ],
+   [
+    8,
+    "Loop over each card and append its entry"
+   ],
+   [
+    22,
+    "In-game id of the card"
+   ],
+   [
+    30,
+    "Unique card id from the card data"
+   ],
+   [
+    33,
+    "Append to the running result"
+   ]
+  ]
+ },
+ "328570c": {
+  "summary": "Records that a hero resigned: creates a resign PlayerAction, marks the match as suspicious if it ended too early with no skulls, and appends the action to the current turn owner's action log (used for replays).",
+  "comments": [
+   [
+    4,
+    "Resigning side's hero"
+   ],
+   [
+    8,
+    "Build a PlayerAction of type 0x36 (resign) with the hero id and a game-time timestamp"
+   ],
+   [
+    10,
+    "Timestamp falls back to the minimum int if game time is infinite/invalid"
+   ],
+   [
+    16,
+    "Flag very short games without skulls as suspicious"
+   ],
+   [
+    19,
+    "Choose log by whose turn it is: player log on player turn, otherwise enemy log"
+   ],
+   [
+    35,
+    "Normal List.Add: room left in the array"
+   ],
+   [
+    40,
+    "List full: grow it, then store the action (decompiler expanded the Add)"
+   ]
+  ]
+ },
+ "3289db0": {
+  "summary": "Returns true if the game looks suspicious: the side has no skulls yet and the game has lasted no longer than the configured suspicious-game time. Used when a resign or early end is recorded.",
+  "comments": [
+   [
+    5,
+    "Skulls seem to be the score toward winning"
+   ],
+   [
+    6,
+    "No skulls earned: check the game length"
+   ],
+   [
+    8,
+    "Suspicious if the clock is invalid or within the threshold seconds"
+   ],
+   [
+    11,
+    "Has skulls: not suspicious"
+   ]
+  ]
+ },
+ "3289e54": {
+  "summary": "Cleans up leftover card objects at end of battle: deactivates every card in the cemetery and the hidden cards remaining in both shuffled decks.",
+  "comments": [
+   [
+    4,
+    "First the cemetery"
+   ],
+   [
+    8,
+    "Walk the cemetery list backwards, deactivating each card object"
+   ],
+   [
+    21,
+    "Then the hidden cards still in decks"
+   ],
+   [
+    22,
+    "Player's shuffled deck, walked from the end down (index 0 seems to be skipped)"
+   ],
+   [
+    30,
+    "Same for the enemy's shuffled deck"
+   ]
+  ]
+ },
+ "32877f8": {
+  "summary": "Runs when the battle is over. Plays the match-end music, shows a concede chat line on forfeit, then either runs scripted post-battle actions (tutorial/campaign) or starts the normal end-of-battle sequence.",
+  "comments": [
+   [
+    11,
+    "Tell the music manager the match finished"
+   ],
+   [
+    16,
+    "Forfeit: warlord says the concede chat line (enemy side if the enemy won)"
+   ],
+   [
+    22,
+    "Stop the AI coroutine and work out whether the player won"
+   ],
+   [
+    26,
+    "Scripted post-battle chats exist and the result is not a win-button skip"
+   ],
+   [
+    34,
+    "Run the custom post-battle script for the current tutorial stage"
+   ],
+   [
+    38,
+    "Bump the (anti-cheat) turn counter so the scripted manager reads a new turn"
+   ],
+   [
+    47,
+    "Ask the scripted AI manager for the turn data, flag post-game scripted chats"
+   ],
+   [
+    58,
+    "Execute the final scripted turn; its callback finishes the battle"
+   ],
+   [
+    69,
+    "No scripted ending: start the basic end-of-battle coroutine"
+   ],
+   [
+    75,
+    "Everything below is decompiler noise from the coroutine start helper; it just runs the coroutine"
+   ]
+  ]
+ },
+ "328a430": {
+  "summary": "Returns the match player id: the local player's id on the player's turn, otherwise the opponent's id.",
+  "comments": [
+   [
+    5,
+    "Pick whose id based on the turn flag"
+   ]
+  ]
+ },
+ "328a4ec": {
+  "summary": "At end of turn, works out how much unused Energy may be carried over (capped by the manaAccumulation game setting) and stores it on that side's Energy manager.",
+  "comments": [
+   [
+    6,
+    "Setting is 0: Energy does not carry over, nothing to do"
+   ],
+   [
+    9,
+    "Choose player or enemy mana manager (fields still say mana)"
+   ],
+   [
+    16,
+    "Max carry-over from the gameplay data"
+   ],
+   [
+    17,
+    "How much Energy went unused this turn"
+   ],
+   [
+    19,
+    "Carry over the smaller of the two"
+   ],
+   [
+    22,
+    "Wrap in an anti-cheat ObscuredInt and write the saved Energy fields"
+   ],
+   [
+    36,
+    "Tell the Energy manager how much is saved"
+   ]
+  ]
+ },
+ "328a580": {
+  "summary": "Called at turn start to give the active side its draw. Skips it if the turn script forbids drawing; if a Sentinel unit is in play it skips the draw and plays the sentinel animation/sound; otherwise queues the normal draws and an extra overtime draw.",
+  "comments": [
+   [
+    7,
+    "Tutorial/campaign script says no draw this turn: stop (only logs in dev mode)"
+   ],
+   [
+    24,
+    "Pick the hand of the side whose turn it is"
+   ],
+   [
+    33,
+    "No Sentinel in the hand: normal draw path"
+   ],
+   [
+    34,
+    "Hand cannot draw a turn-start card: nothing to do"
+   ],
+   [
+    41,
+    "Draw drawCardsPerTurn cards, one queued draw per loop"
+   ],
+   [
+    46,
+    "After the normal draws, overtime adds one forced draw action"
+   ],
+   [
+    52,
+    "Build a drawCard BattleAction and queue it as an automatic action"
+   ],
+   [
+    71,
+    "Sentinel present: the draw is skipped and the sentinel effects play instead"
+   ],
+   [
+    75,
+    "List every unit in play"
+   ],
+   [
+    81,
+    "Each unit with the Sentinel trait logs a warning and plays its trigger animation"
+   ],
+   [
+    100,
+    "Unless particles are disabled, spawn the sentinel animation over the deck"
+   ],
+   [
+    119,
+    "Play the ActivateSentinel sound cue (rest is the sound manager inlined by the decompiler)"
+   ]
+  ]
+ },
+ "328a6c8": {
+  "summary": "Called at turn start to wake up the side whose turn begins: lights playable cards in hand, activates its minions, then recomputes the hero's canAct/canAttack, Ferocity/Oath handling and the attack indicator.",
+  "comments": [
+   [
+    4,
+    "Player's turn: highlight playable cards and activate player minions"
+   ],
+   [
+    16,
+    "Enemy's turn: activate enemy minions"
+   ],
+   [
+    21,
+    "Hero may act only if it is in play, has attacks left (Bloodthirst allows one extra), is not stunned and not summoning sick"
+   ],
+   [
+    28,
+    "Store the result into canAct and canAttack"
+   ],
+   [
+    31,
+    "Ferocity or Oath: recompute canAct without the summon sickness check"
+   ],
+   [
+    44,
+    "Summon sick unit with these traits: switch its attack type to Active"
+   ],
+   [
+    47,
+    "Show or hide the can-attack animation on the hero card"
+   ]
+  ]
+ },
+ "328a844": {
+  "summary": "Handles the End Turn button (or timeout). Rejects it when blocked, in a scripted tutorial, or when a Berzerk unit still must attack; otherwise stops the clock and queues the end-turn action. Returns true if the turn is ending.",
+  "comments": [
+   [
+    8,
+    "Choosing a resolution card: cannot end turn"
+   ],
+   [
+    11,
+    "Turn already ending, player actions disabled or a blocking action pending: reject"
+   ],
+   [
+    22,
+    "Play the inactive end-turn button sound"
+   ],
+   [
+    27,
+    "Accepted: play the normal end-turn click sound"
+   ],
+   [
+    35,
+    "Scripted tutorial may forbid ending the turn at this moment"
+   ],
+   [
+    44,
+    "Cancel any half-finished targeting or play state"
+   ],
+   [
+    49,
+    "Player has a pending Berzerk unit that must still attack"
+   ],
+   [
+    56,
+    "Manual click (not timeout): show the Berzerk animation and tip and point at the target"
+   ],
+   [
+    81,
+    "Lock further end-turn clicks and stop the turn clock"
+   ],
+   [
+    89,
+    "Player timed out in a human match: check whether any action was taken this turn"
+   ],
+   [
+    101,
+    "No actions taken this turn: mark that the timer count should be reduced"
+   ],
+   [
+    106,
+    "Queue the end-turn action for the player"
+   ]
+  ]
+ },
+ "328b8dc": {
+  "summary": "Queues an automatic end-turn action (action type 0xE) for the given side, using the turn-end priority from the global variables.",
+  "comments": [
+   [
+    7,
+    "0xE is the endTurn BattleActionType; remaining bytes zeroed"
+   ],
+   [
+    10,
+    "Add it to the auto-action queue at turn-end priority"
+   ]
+  ]
+ },
+ "328bccc": {
+  "summary": "Shows a random 'Bored' hurry-up voice line speech bubble for the player when chat and voice lines are allowed.",
+  "comments": [
+   [
+    9,
+    "Chat must be allowed"
+   ],
+   [
+    13,
+    "Pick a random Bored voice line"
+   ],
+   [
+    18,
+    "Check voice lines are allowed for that card type"
+   ],
+   [
+    25,
+    "Get the player's chat bubble and start its ShowChat coroutine"
+   ],
+   [
+    33,
+    "Decompiler noise: expanded StartCoroutine helper and its error paths"
+   ]
+  ]
+ },
+ "328bd00": {
+  "summary": "Handles the chat button click: during a battle toggles the voice-line popup open/closed; outside battle states just logs that chat is unavailable.",
+  "comments": [
+   [
+    5,
+    "UI state is not a normal battle state: log and ignore"
+   ],
+   [
+    12,
+    "Normal battle state: chat may be used"
+   ],
+   [
+    19,
+    "Popup is available"
+   ],
+   [
+    26,
+    "Closed: open it, enable the mute toggle and refresh the chat lines"
+   ],
+   [
+    39,
+    "Open: disable the mute toggle and close it"
+   ],
+   [
+    50,
+    "Chat not available: log it only if dev tools are on"
+   ]
+  ]
+ },
+ "328bdf8": {
+  "summary": "Replay control: counts one more replay step in the queue and, if none was pending, starts the AddNextReplayAction coroutine. A fast action keeps the current time scale.",
+  "comments": [
+   [
+    4,
+    "One more queued replay step"
+   ],
+   [
+    8,
+    "A step is already queued: the running coroutine will handle it"
+   ],
+   [
+    11,
+    "Fast step: don't reset the time scale afterwards"
+   ],
+   [
+    14,
+    "Start the AddNextReplayAction coroutine by name (rest is the Unity helper expanded)"
+   ]
+  ]
+ },
+ "328bf34": {
+  "summary": "Replay control: starts automatic replay by clearing the pause flag and starting the ReplayPlayAction coroutine.",
+  "comments": [
+   [
+    5,
+    "Unpause auto-replay (flag is 'paused')"
+   ],
+   [
+    7,
+    "Start the ReplayPlayAction coroutine by name; the rest is Unity helper code"
+   ]
+  ]
+ },
+ "328bfac": {
+  "summary": "Replay control: pauses automatic replay by setting the pause flag, emptying the queued step count and stopping the ReplayPlayAction coroutine.",
+  "comments": [
+   [
+    5,
+    "Set the paused flag"
+   ],
+   [
+    8,
+    "Drop any queued steps"
+   ],
+   [
+    13,
+    "Stop the ReplayPlayAction coroutine by name"
+   ]
+  ]
+ },
+ "328c02c": {
+  "summary": "Replay control: restarts the replay by resetting match data to the stored replay data, copying the alternative-trait setting and reloading the current scene.",
+  "comments": [
+   [
+    7,
+    "Reset current match data to the saved replay match data"
+   ],
+   [
+    11,
+    "Re-apply the alternative trait logic flag from the replay's gameplay data"
+   ],
+   [
+    14,
+    "Reload the active scene to begin the replay again"
+   ]
+  ]
+ },
+ "328c138": {
+  "summary": "Replay control: speeds up time (scale 15) and queues one next-step replay action, starting the AddNextReplayAction coroutine if none is pending.",
+  "comments": [
+   [
+    4,
+    "Time scale 15 (0x41700000) to play the step quickly"
+   ],
+   [
+    5,
+    "One more queued step"
+   ],
+   [
+    9,
+    "Already queued: the running coroutine handles it"
+   ],
+   [
+    12,
+    "Don't reset the time scale after this step"
+   ],
+   [
+    13,
+    "Start AddNextReplayAction by name; the rest is the Unity helper expanded"
+   ]
+  ]
+ },
+ "328c1d0": {
+  "summary": "Replay step: logs and runs the next recorded action from the given action log by turning it into a remote action, or warns when the log is exhausted.",
+  "comments": [
+   [
+    8,
+    "Build the log line: index, count available and which side"
+   ],
+   [
+    29,
+    "Actions remain: log it and replay it as if received from the network"
+   ],
+   [
+    36,
+    "Move on to the next index"
+   ],
+   [
+    39,
+    "Log is exhausted"
+   ]
+  ]
+ },
+ "328c438": {
+  "summary": "Handles the player choosing to resign. In replays it just leaves the battle; in real matches it tells the opponent (PvP), records a resign action and ends the battle, unless a tutorial or campaign stage blocks resigning.",
+  "comments": [
+   [
+    11,
+    "Log the resign and whether this is a networked game"
+   ],
+   [
+    14,
+    "Replay match types: no resign, just leave the battle"
+   ],
+   [
+    18,
+    "Networked: send the forfeit to the other player"
+   ],
+   [
+    23,
+    "Record the resign in the action log"
+   ],
+   [
+    24,
+    "Not a tutorial or campaign stage: finish with a forfeit"
+   ],
+   [
+    31,
+    "Tutorial or campaign stage: check whether this stage allows resigning"
+   ],
+   [
+    33,
+    "Resign allowed: the hero dies with a Forfeit result"
+   ],
+   [
+    34,
+    "Resign blocked: run the stage's action-on-resign script if it has one"
+   ],
+   [
+    51,
+    "Replay path: leave the battle"
+   ]
+  ]
+ },
+ "328c618": {
+  "summary": "Debug cheat for the Win button: in non-networked matches ends the battle at once as a win, building the match result and saving it before calling BattleFinished. Blocked in PvP.",
+  "comments": [
+   [
+    8,
+    "Networked (PvP) game: win button disabled, only logs for dev tools"
+   ],
+   [
+    25,
+    "Battle already over: ignore"
+   ],
+   [
+    28,
+    "Record a resign action for the enemy side"
+   ],
+   [
+    32,
+    "Log the dead-hero parameters (the long string build)"
+   ],
+   [
+    65,
+    "Already in post battle: only continue if the lose-on-disconnect flag is set"
+   ],
+   [
+    78,
+    "That flag set: just record the result and run the basic end sequence"
+   ],
+   [
+    87,
+    "Normal path: enter PostBattle and stop battle activity"
+   ],
+   [
+    90,
+    "Networked: tell the server the match finished"
+   ],
+   [
+    94,
+    "Lock the UI and clear the during-battle flag"
+   ],
+   [
+    99,
+    "Enemy dies: raise a health change signal showing zero enemy health"
+   ],
+   [
+    116,
+    "Get the current rating; events with a leaderboard supply their own"
+   ],
+   [
+    139,
+    "Work out the winner for a WinButton result"
+   ],
+   [
+    142,
+    "Create the ranked match result with rating and XP"
+   ],
+   [
+    147,
+    "Fill in skull counts (player milestone and enemy milestone)"
+   ],
+   [
+    168,
+    "Store WinButton result with the winner and play time in minutes"
+   ],
+   [
+    177,
+    "Player won: mark the match as ended with a win"
+   ],
+   [
+    182,
+    "For certain match types (0x14, 0xD2, 0xB4) tell live-ops the player is human"
+   ],
+   [
+    188,
+    "Save the winner and finish the battle"
+   ]
+  ]
+ },
+ "328c6a4": {
+  "summary": "Debug cheat for the Draw button: in non-networked matches ends the battle at once as a draw, building the match result and saving it before calling BattleFinished. Blocked in PvP.",
+  "comments": [
+   [
+    8,
+    "Networked (PvP) game: debug button disabled, only logs for dev tools"
+   ],
+   [
+    25,
+    "Record a resign action for the enemy side"
+   ],
+   [
+    29,
+    "Log the dead-hero parameters (the long string build)"
+   ],
+   [
+    62,
+    "Already in post battle: only continue if the lose-on-disconnect flag is set"
+   ],
+   [
+    75,
+    "That flag set: just record the result and run the basic end sequence"
+   ],
+   [
+    84,
+    "Normal path: enter PostBattle and stop battle activity"
+   ],
+   [
+    87,
+    "Networked: tell the server the match finished"
+   ],
+   [
+    91,
+    "Lock the UI and clear the during-battle flag"
+   ],
+   [
+    96,
+    "Enemy dies: raise a health change signal showing zero enemy health"
+   ],
+   [
+    113,
+    "Get the current rating; events with a leaderboard supply their own"
+   ],
+   [
+    136,
+    "Work out the winner for a DrawButton result"
+   ],
+   [
+    139,
+    "Create the ranked match result with rating and XP"
+   ],
+   [
+    144,
+    "Fill in skull counts (player milestone and enemy milestone)"
+   ],
+   [
+    165,
+    "Store DrawButton result with the winner and play time in minutes"
+   ],
+   [
+    174,
+    "Player counted as winner: mark the match as ended with a win"
+   ],
+   [
+    179,
+    "For certain match types (0x14, 0xD2, 0xB4) tell live-ops the player is human"
+   ],
+   [
+    185,
+    "Save the winner and finish the battle"
+   ]
+  ]
+ },
+ "328c718": {
+  "summary": "Skip button for tutorial battles: runs the same end-of-battle logic as the Win button (a win for the player). Any other match type only logs an error.",
+  "comments": [
+   [
+    11,
+    "Only tutorial matches may be skipped"
+   ],
+   [
+    14,
+    "Other match type: log an error and do nothing"
+   ],
+   [
+    24,
+    "Log the dead-hero parameters (the long string build)"
+   ],
+   [
+    57,
+    "Already in post battle: only continue if the lose-on-disconnect flag is set"
+   ],
+   [
+    70,
+    "That flag set: just record the result and run the basic end sequence"
+   ],
+   [
+    79,
+    "Normal path: enter PostBattle and stop battle activity"
+   ],
+   [
+    82,
+    "Networked: tell the server the match finished"
+   ],
+   [
+    86,
+    "Lock the UI and clear the during-battle flag"
+   ],
+   [
+    91,
+    "Enemy dies: raise a health change signal showing zero enemy health"
+   ],
+   [
+    108,
+    "Get the current rating; events with a leaderboard supply their own"
+   ],
+   [
+    131,
+    "Work out the winner for a WinButton result"
+   ],
+   [
+    134,
+    "Create the ranked match result with rating and XP"
+   ],
+   [
+    139,
+    "Fill in skull counts (player milestone and enemy milestone)"
+   ],
+   [
+    160,
+    "Store WinButton result with the winner and play time in minutes"
+   ],
+   [
+    170,
+    "Player won: mark the match as ended with a win"
+   ],
+   [
+    174,
+    "For certain match types (0x14, 0xD2, 0xB4) tell live-ops the player is human"
+   ],
+   [
+    180,
+    "Save the winner and finish the battle"
+   ]
+  ]
+ },
+ "328c7ec": {
+  "summary": "Sends the 'ChangedLanguage' message to the parent transform's whole hierarchy so UI elements refresh their text after a language change.",
+  "comments": [
+   [
+    5,
+    "Parent of this object receives the broadcast"
+   ],
+   [
+    17,
+    "Wrap the message name in a Unity string span (decompiler expansion of BroadcastMessage)"
+   ],
+   [
+    36,
+    "Send ChangedLanguage to the parent and all its children"
+   ]
+  ]
+ }
+}

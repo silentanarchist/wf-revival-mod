@@ -1,0 +1,642 @@
+{
+ "2f578ac": {
+  "summary": "Adds a card to the cemetery list, parents it under the cemetery transform and flags it as in the cemetery with its slot index. Called when a card dies or is discarded.",
+  "comments": [
+   [
+    7,
+    "Append the card to the cemetery list (inlined List.Add: fast path, else grow the array)"
+   ],
+   [
+    20,
+    "Re-parent the card under the cemetery object and mark it as a cemetery card"
+   ],
+   [
+    24,
+    "New slot index is the list size after the add"
+   ],
+   [
+    41,
+    "Reached only if something was null: the compiler's null-check throw"
+   ]
+  ]
+ },
+ "2f57a04": {
+  "summary": "Removes a card from the cemetery list, logging an error if it is not in there. Called when a card leaves the cemetery (e.g. resurrected).",
+  "comments": [
+   [
+    5,
+    "Card must be in the list; otherwise log an error below"
+   ],
+   [
+    8,
+    "Not found: log 'Can't find card in cemetery that needs to be removed' (error level)"
+   ],
+   [
+    21,
+    "Found: look up its index and remove that entry"
+   ]
+  ]
+ },
+ "2f579bc": {
+  "summary": "Returns how many cards are currently in the cemetery list.",
+  "comments": []
+ },
+ "2f57ad0": {
+  "summary": "Appends an action to the battle log (cemetery log), then rewrites every log slider's text and background sprite, and refreshes the empty text. Called whenever a loggable action happens.",
+  "comments": [
+   [
+    6,
+    "Copy the action struct (0x68 bytes) and add it to the action list"
+   ],
+   [
+    23,
+    "Walk the log sliders, newest action first, and refresh each one's text"
+   ],
+   [
+    29,
+    "Ran out of sliders: finish by updating the 'empty log' text"
+   ],
+   [
+    40,
+    "Ask GetActionText for the localized line for this slider's action"
+   ],
+   [
+    53,
+    "Background sprite depends on who acted: player actions and enemy actions use different sprites"
+   ],
+   [
+    65,
+    "Decompiler pasted the body of GetActionText here after a bounds-check throw; treat it as inlined noise"
+   ],
+   [
+    68,
+    "From here the code is the GetActionText type switch: pick a localization term by action type"
+   ],
+   [
+    72,
+    "Melee attack (type 5)"
+   ],
+   [
+    80,
+    "Ranged attack (type 6)"
+   ],
+   [
+    85,
+    "Play card (type 10): targeted version if a target exists, else plain / ambush versions"
+   ],
+   [
+    102,
+    "Card was played with ambush: use the ambush wording (You/Opponent plays ambush)"
+   ],
+   [
+    132,
+    "Card ability (type 0xF): targeted or untargeted text"
+   ],
+   [
+    150,
+    "Draw trap (type 0x14): 'You draw' / 'Opponent draws'"
+   ],
+   [
+    162,
+    "Secret order resolved (type 0x19)"
+   ],
+   [
+    170,
+    "Displayed card in hand (type 0x1E): yours or the enemy's"
+   ],
+   [
+    181,
+    "Waystone (spirit stone) collected (type 0x23): yours or the enemy's"
+   ],
+   [
+    193,
+    "Exit ambush (type 0x28)"
+   ],
+   [
+    200,
+    "Fill the term with parameters (card links) and return the finished line"
+   ]
+  ]
+ },
+ "2f5843c": {
+  "summary": "Re-renders the text of every cemetery log slider after the player changes language, then updates the empty-log text.",
+  "comments": [
+   [
+    8,
+    "Walk the sliders newest action first, rebuilding each line in the new language"
+   ],
+   [
+    10,
+    "All sliders done: refresh the empty text"
+   ],
+   [
+    15,
+    "Decompiler glued the start of AddDisplayedCardActionToCemetery here after a bounds-check throw; ignore"
+   ],
+   [
+    36,
+    "Get this slider and its matching action, then set its new text"
+   ]
+  ]
+ },
+ "2f58558": {
+  "summary": "Builds a 'displayed card' log action (type 0x1E) from a battle action and adds it to the cemetery log. Used when a card is revealed from a hand.",
+  "comments": [
+   [
+    4,
+    "Zero the new action struct"
+   ],
+   [
+    16,
+    "Action type 0x1E = displayed card"
+   ],
+   [
+    18,
+    "Fill acting/target card info common to all log actions"
+   ],
+   [
+    19,
+    "Sets one flag byte from the struct (seems to be the acting side flag)"
+   ]
+  ]
+ },
+ "2f5881c": {
+  "summary": "Logs an exit-ambush action (type 0x28) for the given ambush card: its raw card, unique ID and owner side.",
+  "comments": [
+   [
+    16,
+    "Action type 0x28 = exit ambush"
+   ],
+   [
+    17,
+    "Copy card data, unique in-game ID and whether it belongs to the player"
+   ]
+  ]
+ },
+ "2f588a4": {
+  "summary": "Logs an attack action with its damage value: melee (type 5) or ranged (type 6) depending on the battle action.",
+  "comments": [
+   [
+    4,
+    "Zero the new action struct"
+   ],
+   [
+    16,
+    "Default to melee attack (5); ranged attacks use 6"
+   ],
+   [
+    21,
+    "Store the damage dealt, then fill common card info and add to the log"
+   ]
+  ]
+ },
+ "2f58934": {
+  "summary": "Logs a card ability action (type 0xF) and flags it when the target card has ambush so its name can be hidden.",
+  "comments": [
+   [
+    16,
+    "Action type 0xF = card ability"
+   ],
+   [
+    19,
+    "If there is a target, check whether it is an ambush card (flag set so the log hides its name)"
+   ]
+  ]
+ },
+ "2f58a34": {
+  "summary": "Logs a waystone (spirit stone) use action (type 0x23).",
+  "comments": [
+   [
+    16,
+    "Action type 0x23 = use waystone"
+   ]
+  ]
+ },
+ "2f58aa8": {
+  "summary": "Logs a play-card action (type 10), flagging ambush on the acting card and on the target card.",
+  "comments": [
+   [
+    16,
+    "Action type 10 = play card"
+   ],
+   [
+    19,
+    "Acting card with ambush is flagged so the log hides its identity"
+   ],
+   [
+    26,
+    "Same ambush check for the target, if any"
+   ],
+   [
+    37,
+    "Null acting card: compiler null-check throw"
+   ]
+  ]
+ },
+ "2f58bc0": {
+  "summary": "Logs a draw-trap action (type 0x14) for a card, adding 'created by' text when the card was made by another card.",
+  "comments": [
+   [
+    16,
+    "Action type 0x14 = draw trap"
+   ],
+   [
+    21,
+    "Card was created by another card: store the localized 'Created by <name>' text"
+   ],
+   [
+    31,
+    "Null reference exit"
+   ]
+  ]
+ },
+ "2f58d04": {
+  "summary": "Logs a play action for a drop-supply raw card (type 10), with no real card object, for the given side.",
+  "comments": [
+   [
+    15,
+    "Action type 10 = play card; only raw card data and the owner side are filled in"
+   ]
+  ]
+ },
+ "2f58d74": {
+  "summary": "Logs a secret order being executed (type 0x19) with the acting card and the enchantment, plus created-by text.",
+  "comments": [
+   [
+    16,
+    "Action type 0x19 = secret order resolved"
+   ],
+   [
+    22,
+    "Add 'Created by' text if the acting card was created by another card"
+   ],
+   [
+    34,
+    "Null reference exit"
+   ]
+  ]
+ },
+ "2f585dc": {
+  "summary": "Copies acting-card and target-card info (raw data, unique ID, side, created-by text) from a battle action into a log action. Shared by the Add*Action methods.",
+  "comments": [
+   [
+    6,
+    "Acting card present: copy raw card, unique ID and owner side"
+   ],
+   [
+    16,
+    "If the acting card was created by another card, store its 'Created by' text"
+   ],
+   [
+    24,
+    "No target: skip to the ambush flag reset"
+   ],
+   [
+    27,
+    "Target present: copy raw card, side and unique ID"
+   ],
+   [
+    35,
+    "Same created-by text for the target card"
+   ],
+   [
+    42,
+    "Clear the played-with-ambush flag; callers set it later if needed"
+   ]
+  ]
+ },
+ "2f58ed8": {
+  "summary": "Toggles the battle-log action panel: when shown it hides it and the shade; otherwise it shows the shade and slides the panel in.",
+  "comments": [
+   [
+    6,
+    "Log the current displaying flag for debugging"
+   ],
+   [
+    9,
+    "Currently showing: hide the panel, turn off the shade and the card viewer"
+   ],
+   [
+    32,
+    "Not showing: dim the screen with the shade and set up the slide-in"
+   ],
+   [
+    47,
+    "Tween the panel's X position to the final spot over about 0.15s, and mark it as displaying"
+   ]
+  ]
+ },
+ "2f57d08": {
+  "summary": "Picks the localization term for a log action by its type (and by who acted or whether it has a target) and formats it via GetActionWithParams.",
+  "comments": [
+   [
+    5,
+    "Types below 0x10: attacks, play card, card ability"
+   ],
+   [
+    7,
+    "Melee attack"
+   ],
+   [
+    13,
+    "Ranged attack"
+   ],
+   [
+    21,
+    "Play card: targeted wording, else ambush or plain 'you play' / 'opponent plays'"
+   ],
+   [
+    38,
+    "Played with ambush: the card name is hidden, so use the ambush wording"
+   ],
+   [
+    68,
+    "Card ability: targeted vs untargeted wording"
+   ],
+   [
+    85,
+    "Types 0x10-0x19: draw trap and secret order"
+   ],
+   [
+    106,
+    "Displayed card in hand: yours or the enemy's"
+   ],
+   [
+    117,
+    "Waystone (spirit stone): you or the enemy"
+   ],
+   [
+    129,
+    "Exit ambush; any other action type yields an empty string"
+   ],
+   [
+    136,
+    "Format the chosen term with its link parameters"
+   ]
+  ]
+ },
+ "2f590f4": {
+  "summary": "Fills the term's placeholders: first param (acting card link) and, if there is a target, a clickable link to the target card or 'Ambushed troop' text.",
+  "comments": [
+   [
+    7,
+    "One parameter, or two when the action has a target card"
+   ],
+   [
+    13,
+    "Param 0: the acting card text"
+   ],
+   [
+    18,
+    "Target is not an ambush card: build a clickable link with the target's name"
+   ],
+   [
+    22,
+    "Link format is a 'link' tag with type 1, the action index, and the underlined card name"
+   ],
+   [
+    42,
+    "Target has ambush: show the generic 'Ambushed troop' text instead of its name"
+   ],
+   [
+    48,
+    "Format the term with the parameters"
+   ],
+   [
+    53,
+    "Array bounds check failure"
+   ]
+  ]
+ },
+ "2f5939c": {
+  "summary": "Builds the first parameter text for a log line: a clickable link with the acting card's name, or the localized trait name for traps and secret orders. The decompiler also pasted the link-click and DisplayCard code here.",
+  "comments": [
+   [
+    6,
+    "Play-card action: needs an acting card"
+   ],
+   [
+    16,
+    "Hidden trap (type 0x14) or secret order (0x3C) card: show the trait name instead of the card"
+   ],
+   [
+    30,
+    "Displayed-card action uses the target card instead"
+   ],
+   [
+    48,
+    "Everything from here to the string building is misplaced CheckCardLink / DisplayCard code"
+   ],
+   [
+    85,
+    "No link under the mouse: hide the card viewer"
+   ],
+   [
+    105,
+    "Link ID is 'type,actionIndex'; type 0 = acting card, 1 = target card"
+   ],
+   [
+    140,
+    "Decompiler lost the loop here; what follows is DisplayCard (show card, set sprite and layout)"
+   ],
+   [
+    145,
+    "Is this card the player's hero? use the hero's current max health"
+   ],
+   [
+    171,
+    "Activate the card viewer, set the created-by text and show the front"
+   ],
+   [
+    356,
+    "Real logic resumes: build the link string with the card name"
+   ],
+   [
+    371,
+    "Not a play-card action: other action types use link type 0 with the acting card"
+   ],
+   [
+    373,
+    "No acting card: log an error and return a link without a name"
+   ]
+  ]
+ },
+ "2f5981c": {
+  "summary": "Each frame checks if the mouse is over a card link in a log line; if so shows that card in the viewer, otherwise hides it. The decompiler also inlined DisplayCard.",
+  "comments": [
+   [
+    18,
+    "Loop over every log slider text"
+   ],
+   [
+    48,
+    "Find the link under the mouse pointer (-1 means none)"
+   ],
+   [
+    51,
+    "No link: hide the card viewer and go on to the next slider"
+   ],
+   [
+    72,
+    "Link ID is 'type,actionIndex'"
+   ],
+   [
+    87,
+    "Type 0 shows the acting card, type 1 the target card"
+   ],
+   [
+    107,
+    "Decompiler lost the loop here; the rest is the inlined body of DisplayCard"
+   ],
+   [
+    113,
+    "Hero shown: use the hero's current max health, else 0"
+   ],
+   [
+    140,
+    "Show the card viewer, set created-by text and the card front"
+   ],
+   [
+    157,
+    "Reset card scale and texture position (float compare with 1111 is a 'not initialized' check)"
+   ],
+   [
+    322,
+    "Null reference exit"
+   ]
+  ]
+ },
+ "2f59c78": {
+  "summary": "On click, finds the log link under the mouse, looks up the linked battle card and shows it on the board, then closes the log panel.",
+  "comments": [
+   [
+    18,
+    "Loop over all log sliders"
+   ],
+   [
+    45,
+    "Find the link under the mouse (-1 means no link)"
+   ],
+   [
+    62,
+    "Read the link ID, 'type,actionIndex'"
+   ],
+   [
+    74,
+    "Type 0 uses the acting card ID, type 1 the target card ID"
+   ],
+   [
+    88,
+    "Look up the live card by its unique ID"
+   ],
+   [
+    93,
+    "Card exists: display it in the battle and hide the log"
+   ],
+   [
+    103,
+    "Decompiler glued the start of HideCemeteryLogBtn here; ignore"
+   ]
+  ]
+ },
+ "2f59ae4": {
+  "summary": "Shows a raw card in the log's card viewer with hero max health, created-by text, scale, texture and sprite set up. Called when a card link is hovered or clicked.",
+  "comments": [
+   [
+    6,
+    "If the card is the player's hero, use the hero's max health"
+   ],
+   [
+    23,
+    "Same check for the enemy hero"
+   ],
+   [
+    31,
+    "Load the card data into the viewer and make it visible"
+   ],
+   [
+    37,
+    "Show the front of the card and turn off the highlight"
+   ],
+   [
+    50,
+    "Compare with -1111 (sentinel); first time, remember the original text position"
+   ],
+   [
+    69,
+    "Scale the card by its type; big minion and hero cards use a bigger scale"
+   ],
+   [
+    86,
+    "Tactics get no image mask; other cards show the card art texture"
+   ],
+   [
+    102,
+    "Offset the card texts by the saved position and make a material for them"
+   ],
+   [
+    140,
+    "Decompiler merged Image.SetSprite here: updates the card art sprite and layout/material flags"
+   ]
+  ]
+ },
+ "2f5a02c": {
+  "summary": "Returns the cards played this match, newest first, found in the action log, that meet the given criteria.",
+  "comments": [
+   [
+    8,
+    "Go backward through the action log"
+   ],
+   [
+    12,
+    "Only play-card actions (type 10) count"
+   ],
+   [
+    17,
+    "Look up the card and check it against the criteria"
+   ],
+   [
+    23,
+    "Matches: add to the list and return it right away (the loop appears to stop at the first hit)"
+   ]
+  ]
+ },
+ "2f5a21c": {
+  "summary": "Toggles the battle log slider: slides it in and shows the shade, or slides out and hides shade and card viewer. First open sends an analytics event.",
+  "comments": [
+   [
+    5,
+    "Finish any tween still playing"
+   ],
+   [
+    8,
+    "Currently closed: slide the log in"
+   ],
+   [
+    13,
+    "Send the battle-log-opened analytics event only the first time"
+   ],
+   [
+    28,
+    "Currently open: slide it back out and hide shade and card viewer"
+   ]
+  ]
+ },
+ "2f59f80": {
+  "summary": "Closes the battle log slider by tweening it back, hiding the shade and card viewer, and flipping the showing flag.",
+  "comments": [
+   [
+    4,
+    "Already closed: just set the flag"
+   ],
+   [
+    10,
+    "Slide the panel back out over 0.3s"
+   ],
+   [
+    13,
+    "Hide shade and card viewer, then toggle the flag"
+   ]
+  ]
+ }
+}

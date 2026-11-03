@@ -1,0 +1,660 @@
+{
+ "32cb64c": {
+  "summary": "Coroutine for the Recall-to-deck action: sends a card from the board, hand or cemetery back into its owner's deck. Plays the return animation, notifies other cards (unit jammed / returned to deck), refreshes hands, then finishes the action.",
+  "comments": [
+   [
+    7,
+    "Switch on coroutine state: 0 = start, 1 = after unit-to-card transform, 2 = after cemetery card recreated, 3 = final bookkeeping"
+   ],
+   [
+    10,
+    "waitForAnim is false: normal path; otherwise check below whether a dying/dead card is being recalled"
+   ],
+   [
+    13,
+    "Remember where the card is coming from: board (or dying) versus cemetery"
+   ],
+   [
+    26,
+    "Decompiler glue: this throw is really a tail block that calls ReactToUnitJammed on units in play and both hands"
+   ],
+   [
+    101,
+    "Warlords can never be recalled to the deck"
+   ],
+   [
+    110,
+    "Ephemeral (reflected copy) cards cannot be recalled to deck: log a warning and cancel"
+   ],
+   [
+    120,
+    "Card is on the board: reset it to hand values, remove from minion manager and units list, then animate unit back to card"
+   ],
+   [
+    153,
+    "Card is in hand: reset it, remove it from its owner's hand, then move it to the deck"
+   ],
+   [
+    165,
+    "Card is in the cemetery: revive it, reparent to the deck, remove from cemetery list and animate it into the deck"
+   ],
+   [
+    205,
+    "Any other card state cannot be recalled: log an error and cancel the action"
+   ],
+   [
+    215,
+    "Waiting-for-animation case: a card already dead or lethally damaged (ferocity) cannot be recalled, so cancel"
+   ],
+   [
+    236,
+    "State 1: transform finished, undissolve the card, then continue to the move-to-deck step"
+   ],
+   [
+    247,
+    "State 3: card reached the deck. Add it to the deck data and notify listeners"
+   ],
+   [
+    252,
+    "From the board: queue a minion reassemble, broadcast Unit Jammed and Returned To Deck"
+   ],
+   [
+    259,
+    "From the cemetery: only broadcast Returned To Deck"
+   ],
+   [
+    262,
+    "Refresh card cost/glow effects in both hands, update figures, then finish the action"
+   ],
+   [
+    274,
+    "Move the card into the deck with animation and wait, then go to state 3"
+   ]
+  ]
+ },
+ "32cc3e0": {
+  "summary": "Always throws NotSupportedException: this compiler-generated coroutine iterator does not support Reset(). Never called by the game.",
+  "comments": []
+ },
+ "32cc44c": {
+  "summary": "Coroutine for the Recall-to-hand action: returns a card from the board or cemetery to its owner's hand. Animates it, broadcasts Unit Jammed / Card Returned Hand and refreshes both hands.",
+  "comments": [
+   [
+    7,
+    "States 1 and 2 (after transform or cemetery recreation): add the card to its owner's hand and wait for that"
+   ],
+   [
+    29,
+    "State 3: card is in hand. Send notifications and refresh"
+   ],
+   [
+    31,
+    "Came from the board: queue a minion reassemble and broadcast Unit Jammed and Card Returned Hand"
+   ],
+   [
+    38,
+    "Came from the cemetery: only broadcast Card Returned Hand"
+   ],
+   [
+    41,
+    "Refresh effects in both hands and tell listeners a card was created in hand"
+   ],
+   [
+    50,
+    "State 0: work out whether the card is on the board or in the cemetery and log it"
+   ],
+   [
+    68,
+    "Decompiler glue: this throw hides a tail block that calls CardReturnedHand on units in play and both hands"
+   ],
+   [
+    145,
+    "Warlords cannot be recalled to hand: log an error and cancel"
+   ],
+   [
+    153,
+    "From the board: reset to hand values, remove from minion manager and unit list, animate back to a card"
+   ],
+   [
+    186,
+    "Otherwise it must be in the cemetery: log and revive it"
+   ],
+   [
+    210,
+    "Cemetery card: reset, set owner from the action, undissolve, remove from cemetery list, animate into hand"
+   ],
+   [
+    229,
+    "Any other state: warn and cancel"
+   ],
+   [
+    241,
+    "Finish the action when cancelled or invalid"
+   ]
+  ]
+ },
+ "32cce04": {
+  "summary": "Always throws NotSupportedException: this compiler-generated coroutine iterator does not support Reset(). Never called by the game.",
+  "comments": []
+ },
+ "32cd098": {
+  "summary": "Always throws NotSupportedException: this compiler-generated coroutine iterator does not support Reset(). Never called by the game.",
+  "comments": []
+ },
+ "32cd104": {
+  "summary": "Coroutine that makes a unit attack a target as a scripted attack (e.g. from an ability). Queues the attack, optionally queues reset actions, and pauses briefly if the attacker has berzerk.",
+  "comments": [
+   [
+    12,
+    "No target: log an error and just finish the action"
+   ],
+   [
+    28,
+    "Queue the scripted attack from the acting card to the target at instant priority"
+   ],
+   [
+    32,
+    "extraValue set: also queue reset actions for the attacker"
+   ],
+   [
+    39,
+    "Berzerk attackers show their trigger animation and wait before the action finishes"
+   ],
+   [
+    51,
+    "Target missing: log error"
+   ],
+   [
+    58,
+    "Finish the action"
+   ]
+  ]
+ },
+ "32cd36c": {
+  "summary": "Always throws NotSupportedException: this compiler-generated coroutine iterator does not support Reset(). Never called by the game.",
+  "comments": []
+ },
+ "32cd3d8": {
+  "summary": "Coroutine that steals a card from a deck and puts it into the other player's hand with draw animations. Fails with a warning if the card is not in the deck.",
+  "comments": [
+   [
+    7,
+    "State machine: 0 draw and show, 1 scale tween, 2 wait, 3 move into hand, 4 finish"
+   ],
+   [
+    12,
+    "State 1: scale the drawn card to its drawn size with a bounce and wait"
+   ],
+   [
+    31,
+    "State 0: if the target card is not in a deck, log a failure and finish"
+   ],
+   [
+    82,
+    "Draw the targeted card out of the deck on behalf of the acting player"
+   ],
+   [
+    115,
+    "Remember the card's original owner; the receiving hand is the opposite player's hand"
+   ],
+   [
+    124,
+    "Step time 0.4 seconds"
+   ],
+   [
+    125,
+    "Original owner is the enemy: show the card being drawn; otherwise skip straight to the wait"
+   ],
+   [
+    141,
+    "State 3: remove the card from the original deck, switch its owner and add it to the receiver's hand"
+   ],
+   [
+    161,
+    "State 4: set it to in-hand state, finish the action and refresh the receiver's hand effects"
+   ],
+   [
+    175,
+    "State 2: wait step time then continue to state 3"
+   ]
+  ]
+ },
+ "32cdb20": {
+  "summary": "Always throws NotSupportedException: this compiler-generated coroutine iterator does not support Reset(). Never called by the game.",
+  "comments": []
+ },
+ "32cdb8c": {
+  "summary": "Coroutine that steals a card from a player's hand into the other player's hand, showing it in the centre first. Warlords cannot be stolen.",
+  "comments": [
+   [
+    7,
+    "State 2: card arrived, set in-hand state, finish and refresh both hands"
+   ],
+   [
+    20,
+    "State 1: remove from original owner's hand, switch ownership, add to receiver's hand"
+   ],
+   [
+    38,
+    "State 0: validate the target is actually in a hand"
+   ],
+   [
+    77,
+    "Warlords cannot be stolen: warn and finish"
+   ],
+   [
+    91,
+    "Receiver is the opposite hand to the card's current owner"
+   ],
+   [
+    98,
+    "Strip hand effects from the card for both hands, reset it and show it in the centre"
+   ],
+   [
+    118,
+    "Not in hand: log a failure with the card state and finish"
+   ]
+  ]
+ },
+ "32ce188": {
+  "summary": "Always throws NotSupportedException: this compiler-generated coroutine iterator does not support Reset(). Never called by the game.",
+  "comments": []
+ },
+ "32ce1f4": {
+  "summary": "Coroutine that steals an enemy minion: moves it to the stealer's board in the next free slot and refreshes hands and minion order. Warlords cannot be stolen and nothing happens if there is no room.",
+  "comments": [
+   [
+    5,
+    "State 1: after the move, reset summon sickness and refresh in-play effects and hands"
+   ],
+   [
+    35,
+    "State 0: warlords cannot be stolen"
+   ],
+   [
+    50,
+    "Remember the original owner; check the other side has a free slot"
+   ],
+   [
+    56,
+    "Slot free: remove the minion from the old owner's game state and hands"
+   ],
+   [
+    65,
+    "Remove from old board, strip extrinsic effects, change owner and rescale for the new side"
+   ],
+   [
+    76,
+    "Move into the next slot on the new side and wait a short time"
+   ],
+   [
+    95,
+    "No free slot: warn and finish"
+   ]
+  ]
+ },
+ "32ced20": {
+  "summary": "Always throws NotSupportedException: this compiler-generated coroutine iterator does not support Reset(). Never called by the game.",
+  "comments": []
+ },
+ "32ced8c": {
+  "summary": "Coroutine that summons a new unit from card data onto the board: checks for a free slot, creates the card, plays its summon animation, registers it in play and finishes the action.",
+  "comments": [
+   [
+    6,
+    "State 2: unit has entered the field; bump the unit counter and register it in unitsInPlay"
+   ],
+   [
+    37,
+    "Broadcast Unit Summoned; apply an attached effect and log the play for the challenge log"
+   ],
+   [
+    46,
+    "If a trigger effect came with the action, fire it on the new unit"
+   ],
+   [
+    61,
+    "State 1 (decompiler reuses a variable name): summon animation finished"
+   ],
+   [
+    65,
+    "State 0: pick the acting player's minion manager and check for a free slot"
+   ],
+   [
+    81,
+    "No room: log that summoning is cancelled and finish the action"
+   ],
+   [
+    99,
+    "Create the card for the acting player's hero army and set it up as a unit in play"
+   ],
+   [
+    104,
+    "Ambush units are flagged as ambush"
+   ],
+   [
+    113,
+    "Record who created this unit if the action names a caster"
+   ],
+   [
+    123,
+    "If a summon animation exists and loads, summon the minion with it and wait for it"
+   ],
+   [
+    148,
+    "No animation played: summon into the minion manager directly"
+   ],
+   [
+    158,
+    "Play the minion-played-into-field routine and wait (state 2)"
+   ]
+  ]
+ },
+ "32cf5f8": {
+  "summary": "Always throws NotSupportedException: this compiler-generated coroutine iterator does not support Reset(). Never called by the game.",
+  "comments": []
+ },
+ "32cf664": {
+  "summary": "Coroutine that plays a trait animation: optional start delay, VFX, screen shake, unit shakes, tween sequence, animation clip and movement, waiting between steps as the animation info requires.",
+  "comments": [
+   [
+    7,
+    "States 2 and 3: tween finished; continue with the wait-for-effect step"
+   ],
+   [
+    10,
+    "If the animation says to wait for its duration before the effect, wait that long (state 4)"
+   ],
+   [
+    21,
+    "Play the minion animation clip if enabled and wait for it (state 5)"
+   ],
+   [
+    32,
+    "Play minion movement (move and disappear) if enabled and wait (state 6)"
+   ],
+   [
+    51,
+    "State 1: after the start delay, launch the VFX, screen shake, unit shakes and tween"
+   ],
+   [
+    71,
+    "Start the screen shake if the animation has one"
+   ],
+   [
+    79,
+    "Start a shake coroutine for each unit shake entry"
+   ],
+   [
+    97,
+    "Tween animation: build the sequence; wait for it or its callback when it is meant to block"
+   ],
+   [
+    136,
+    "State 0: set up the VFX closure; skip everything if particles are disabled"
+   ],
+   [
+    149,
+    "Replays without auto-play skip animations"
+   ],
+   [
+    152,
+    "Wait the configured start delay first"
+   ],
+   [
+    165,
+    "States 4, 5, 6: resume the next step chain"
+   ],
+   [
+    181,
+    "Final state: log that the play animation finished"
+   ]
+  ]
+ },
+ "32cfe64": {
+  "summary": "Always throws NotSupportedException: this compiler-generated coroutine iterator does not support Reset(). Never called by the game.",
+  "comments": []
+ },
+ "32d004c": {
+  "summary": "Always throws NotSupportedException: this compiler-generated coroutine iterator does not support Reset(). Never called by the game.",
+  "comments": []
+ },
+ "32d0154": {
+  "summary": "Always throws NotSupportedException: this compiler-generated coroutine iterator does not support Reset(). Never called by the game.",
+  "comments": []
+ },
+ "32d01c0": {
+  "summary": "Coroutine that shakes a unit after an optional delay: pushed away from another unit if given, otherwise a size-based shake. Does nothing if the unit left play.",
+  "comments": [
+   [
+    15,
+    "Wait the configured shake delay first"
+   ],
+   [
+    29,
+    "Stop if there is no unit to shake or it is no longer in play"
+   ],
+   [
+    41,
+    "Has an away-from unit: compute the direction between the two and push back"
+   ],
+   [
+    50,
+    "Direction is shaker position minus the other unit's position"
+   ],
+   [
+    62,
+    "Push strength depends on unit size"
+   ],
+   [
+    73,
+    "No away unit: plain shake whose strength depends on unit size (small, medium, big)"
+   ]
+  ]
+ },
+ "32d04b0": {
+  "summary": "Always throws NotSupportedException: this compiler-generated coroutine iterator does not support Reset(). Never called by the game.",
+  "comments": []
+ },
+ "32d051c": {
+  "summary": "Coroutine that resolves using a waystone: if allowed, broadcasts the action, grants spirit-stone Energy and destroys the waystone unit. If not ready it cancels, and in a networked game flags a cheating opponent.",
+  "comments": [
+   [
+    8,
+    "Check the waystone can be used"
+   ],
+   [
+    10,
+    "Send the action to the other player"
+   ],
+   [
+    16,
+    "Give the acting player the spirit stone Energy and notify listeners"
+   ],
+   [
+    24,
+    "Destroy the waystone unit, then record the use in the cemetery"
+   ],
+   [
+    31,
+    "Not ready: log it"
+   ],
+   [
+    40,
+    "Networked game and the opponent sent it: cancel the match with a win for us, since this should be impossible"
+   ],
+   [
+    49,
+    "Finish the action; flag says whether it was a manual player action"
+   ]
+  ]
+ },
+ "32d0804": {
+  "summary": "Always throws NotSupportedException: this compiler-generated coroutine iterator does not support Reset(). Never called by the game.",
+  "comments": []
+ },
+ "32d0870": {
+  "summary": "Coroutine that sets up the environmental effect selection after mulligan. Replays and bot matches finish the mulligan; otherwise picks or presents environment effect cards.",
+  "comments": [
+   [
+    10,
+    "Stop the mulligan timer"
+   ],
+   [
+    12,
+    "Offline game: mark the enemy mulligan and ack as already received"
+   ],
+   [
+    19,
+    "Replay: skip selection and finish the mulligan; random draw consumed to keep replay RNG in sync"
+   ],
+   [
+    23,
+    "Bot-type replays consume a random int; others go straight to the final phase"
+   ],
+   [
+    50,
+    "Environment effects disabled: just mark selection and continue"
+   ],
+   [
+    56,
+    "Darken the screen and get the environment effect cards for the player going first"
+   ],
+   [
+    65,
+    "Zero or one option: choose it automatically"
+   ],
+   [
+    74,
+    "Reconnect check: if the connection was lost, handle disconnection"
+   ],
+   [
+    88,
+    "Multiple options: hide mulligan UI"
+   ],
+   [
+    92,
+    "If the mulligan screen is shown, open the choose-card UI with a time limit"
+   ],
+   [
+    113,
+    "No UI: second player picks randomly, first player takes the first option"
+   ]
+  ]
+ },
+ "32d0d0c": {
+  "summary": "Always throws NotSupportedException: this compiler-generated coroutine iterator does not support Reset(). Never called by the game.",
+  "comments": []
+ },
+ "32d0d78": {
+  "summary": "Coroutine for the mulligan phase: sets stage and UI state, deals mulligan cards to both hands (tutorial counts can force it), and starts the mulligan countdown.",
+  "comments": [
+   [
+    7,
+    "State 0: set stage to Mulligan and wait the intro step time"
+   ],
+   [
+    26,
+    "State 1: dim screen if the mulligan UI is used and read tutorial forced card counts"
+   ],
+   [
+    57,
+    "Deal mulligan cards to both hands"
+   ],
+   [
+    64,
+    "Mulligan UI not shown: skip it by finishing the mulligan"
+   ],
+   [
+    70,
+    "Tutorial tip duration set: wait for it before showing mulligan"
+   ],
+   [
+    83,
+    "Wait the time for cards to be drawn unless the mulligan was stopped"
+   ],
+   [
+    101,
+    "State 2: after the tip wait"
+   ],
+   [
+    113,
+    "State 3: activate the mulligan UI; replays set up their own mulligan start"
+   ],
+   [
+    121,
+    "Start the mulligan countdown"
+   ],
+   [
+    122,
+    "If we were disconnected, trigger disconnection handling"
+   ]
+  ]
+ },
+ "32d1204": {
+  "summary": "Always throws NotSupportedException: this compiler-generated coroutine iterator does not support Reset(). Never called by the game.",
+  "comments": []
+ },
+ "32d1270": {
+  "summary": "Coroutine that builds the match result data, updates ratings (ELO) for online matches, stores it for the main menu, then waits and closes the battle doors to show the finish screen.",
+  "comments": [
+   [
+    8,
+    "State 0: build MatchResultData from the current match result"
+   ],
+   [
+    17,
+    "Read the opponent's new rating from online end-match data"
+   ],
+   [
+    33,
+    "For rating-affecting game types, write old and new ratings for both players"
+   ],
+   [
+    51,
+    "Store the result data in PlayerDataManager for the main menu"
+   ],
+   [
+    55,
+    "skipDelay: go straight to closing doors"
+   ],
+   [
+    64,
+    "Wait for end of frame while a voice line popup is active, else wait a short time"
+   ],
+   [
+    84,
+    "States 2 and 3: after waiting"
+   ],
+   [
+    94,
+    "Close the battle doors unless scripted postgame chats are running; then wait instead"
+   ]
+  ]
+ },
+ "32d15f0": {
+  "summary": "Always throws NotSupportedException: this compiler-generated coroutine iterator does not support Reset(). Never called by the game.",
+  "comments": []
+ },
+ "32d165c": {
+  "summary": "Coroutine that shows the campaign heroes intro: disables voice line popups, runs the post-mulligan scripted turn, waits, then re-enables popups.",
+  "comments": [
+   [
+    6,
+    "State 2: re-enable voice line popups"
+   ],
+   [
+    14,
+    "State 1: after the scripted turn, wait a short time"
+   ],
+   [
+    25,
+    "State 0: disable popups and run the post-mulligan campaign scripted turn"
+   ]
+  ]
+ },
+ "32d17f4": {
+  "summary": "Always throws NotSupportedException: this compiler-generated coroutine iterator does not support Reset(). Never called by the game.",
+  "comments": []
+ }
+}

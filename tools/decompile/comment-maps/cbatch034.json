@@ -1,0 +1,849 @@
+{
+ "32b99b8": {
+  "summary": "Closure callback run after the execute swarm animation finishes. It finishes resolving the action: reassembles minions, checks for a dead hero and ends the match (sets result, Elo/XP, saves, sends match-finished), or else clears the resolving flag and re-enables turn controls.",
+  "comments": [
+   [
+    4,
+    "Closure callback: runs when the action animation ends; 'outer' is the BattleManager that queued it."
+   ],
+   [
+    12,
+    "Count queued actions; if this was not action type 7 and the queue is empty, tidy up unit positions."
+   ],
+   [
+    15,
+    "If a side's minions are out of place on the board, queue a reassemble order for that side."
+   ],
+   [
+    25,
+    "No automatic actions left: check whether a hero died. Skipped in tutorial and campaign matches."
+   ],
+   [
+    30,
+    "Hero state 5 seems to mean dead. If neither hero is dead, jump to the normal resume path."
+   ],
+   [
+    35,
+    "Someone's hero died: remember whether it was the player's, then build and log the 'DeadHeroAfterActionsEnd' text."
+   ],
+   [
+    71,
+    "Already in the post-battle stage: normally log a warning and stop, unless a disconnect loss is pending."
+   ],
+   [
+    86,
+    "Disconnect-loss flag set: record an Enemy win and run the basic end-of-battle sequence instead."
+   ],
+   [
+    95,
+    "Normal ending: enter post-battle stage and stop the battle; tell the other client the match finished if networked."
+   ],
+   [
+    102,
+    "Lock the UI into the finish-battle state and clear the 'during battle' flag."
+   ],
+   [
+    107,
+    "If the player won, raise a signal zeroing the enemy hero's health bar."
+   ],
+   [
+    124,
+    "Look up the current event; ranked events (leaderboard) supply an Elo rating, otherwise the player's stored Elo is used."
+   ],
+   [
+    130,
+    "Decompiler expanded an interface-method lookup here; it just calls the event's Elo rating getter."
+   ],
+   [
+    147,
+    "Work out the winner and create the ranked match result with Elo and XP."
+   ],
+   [
+    153,
+    "Fill the result's skull milestones: own skulls, and the enemy's skulls based on the player hero's remaining health."
+   ],
+   [
+    176,
+    "Store the result and winner, then record the match length in minutes from the start time."
+   ],
+   [
+    183,
+    "On a player win, flag a win and notify live-ops for certain match types (0x14, 0xb4, 0xd2) that the opponent was human."
+   ],
+   [
+    196,
+    "Save the winner, finish the battle and return; the rest of the callback is skipped."
+   ],
+   [
+    218,
+    "Decompiler artifact: array-bounds failure path of the log string builder."
+   ],
+   [
+    222,
+    "No hero died (or tutorial/campaign): broadcast the 'while in play' trigger check."
+   ],
+   [
+    226,
+    "Action fully resolved: clear the resolving-action flag."
+   ],
+   [
+    229,
+    "Enemy's turn: reactivate enemy minions and refresh the enemy hero's attack state."
+   ],
+   [
+    237,
+    "Hero can attack only with no tutorial restriction, not stunned and not summon-sick; this sets shade and canAttack."
+   ],
+   [
+    248,
+    "Ferocity or oath heroes get their shade recomputed and may switch attack type while summon-sick."
+   ],
+   [
+    263,
+    "Show or hide the hero's attack button depending on whether it can attack now."
+   ],
+   [
+    279,
+    "Player's turn (decompiler reuses the heroCard name for the BattleManager): relight playable cards, activate minions and hero."
+   ],
+   [
+    286,
+    "Queue empty: start the GC pass, unpause the turn clock and rebuild the available actions list."
+   ],
+   [
+    295,
+    "In a tutorial, check whether ending the turn is permitted."
+   ],
+   [
+    301,
+    "If the only action left is ending the turn, show the 'no actions left' UI on the clock."
+   ],
+   [
+    310,
+    "In scripted tutorials, if the player just acted manually, resume the scripted turn once the AI script stops waiting for them."
+   ],
+   [
+    320,
+    "Reset the manual-action marker."
+   ],
+   [
+    327,
+    "Shared null-reference throw target."
+   ]
+  ]
+ },
+ "32b99e4": {
+  "summary": "Closure callback run after the Energy buff animation finishes. It finishes resolving the action: reassembles minions, checks for a dead hero and ends the match (sets result, Elo/XP, saves, sends match-finished), or else clears the resolving flag and re-enables turn controls.",
+  "comments": [
+   [
+    4,
+    "Closure callback: runs when the action animation ends; 'outer' is the BattleManager that queued it."
+   ],
+   [
+    12,
+    "Count queued actions; if this was not action type 7 and the queue is empty, tidy up unit positions."
+   ],
+   [
+    15,
+    "If a side's minions are out of place on the board, queue a reassemble order for that side."
+   ],
+   [
+    25,
+    "No automatic actions left: check whether a hero died. Skipped in tutorial and campaign matches."
+   ],
+   [
+    30,
+    "Hero state 5 seems to mean dead. If neither hero is dead, jump to the normal resume path."
+   ],
+   [
+    35,
+    "Someone's hero died: remember whether it was the player's, then build and log the 'DeadHeroAfterActionsEnd' text."
+   ],
+   [
+    71,
+    "Already in the post-battle stage: normally log a warning and stop, unless a disconnect loss is pending."
+   ],
+   [
+    86,
+    "Disconnect-loss flag set: record an Enemy win and run the basic end-of-battle sequence instead."
+   ],
+   [
+    95,
+    "Normal ending: enter post-battle stage and stop the battle; tell the other client the match finished if networked."
+   ],
+   [
+    102,
+    "Lock the UI into the finish-battle state and clear the 'during battle' flag."
+   ],
+   [
+    107,
+    "If the player won, raise a signal zeroing the enemy hero's health bar."
+   ],
+   [
+    124,
+    "Look up the current event; ranked events (leaderboard) supply an Elo rating, otherwise the player's stored Elo is used."
+   ],
+   [
+    130,
+    "Decompiler expanded an interface-method lookup here; it just calls the event's Elo rating getter."
+   ],
+   [
+    147,
+    "Work out the winner and create the ranked match result with Elo and XP."
+   ],
+   [
+    153,
+    "Fill the result's skull milestones: own skulls, and the enemy's skulls based on the player hero's remaining health."
+   ],
+   [
+    176,
+    "Store the result and winner, then record the match length in minutes from the start time."
+   ],
+   [
+    183,
+    "On a player win, flag a win and notify live-ops for certain match types (0x14, 0xb4, 0xd2) that the opponent was human."
+   ],
+   [
+    196,
+    "Save the winner, finish the battle and return; the rest of the callback is skipped."
+   ],
+   [
+    218,
+    "Decompiler artifact: array-bounds failure path of the log string builder."
+   ],
+   [
+    222,
+    "No hero died (or tutorial/campaign): broadcast the 'while in play' trigger check."
+   ],
+   [
+    226,
+    "Action fully resolved: clear the resolving-action flag."
+   ],
+   [
+    229,
+    "Enemy's turn: reactivate enemy minions and refresh the enemy hero's attack state."
+   ],
+   [
+    237,
+    "Hero can attack only with no tutorial restriction, not stunned and not summon-sick; this sets shade and canAttack."
+   ],
+   [
+    248,
+    "Ferocity or oath heroes get their shade recomputed and may switch attack type while summon-sick."
+   ],
+   [
+    263,
+    "Show or hide the hero's attack button depending on whether it can attack now."
+   ],
+   [
+    279,
+    "Player's turn (decompiler reuses the heroCard name for the BattleManager): relight playable cards, activate minions and hero."
+   ],
+   [
+    286,
+    "Queue empty: start the GC pass, unpause the turn clock and rebuild the available actions list."
+   ],
+   [
+    295,
+    "In a tutorial, check whether ending the turn is permitted."
+   ],
+   [
+    301,
+    "If the only action left is ending the turn, show the 'no actions left' UI on the clock."
+   ],
+   [
+    310,
+    "In scripted tutorials, if the player just acted manually, resume the scripted turn once the AI script stops waiting for them."
+   ],
+   [
+    320,
+    "Reset the manual-action marker."
+   ],
+   [
+    327,
+    "Shared null-reference throw target."
+   ]
+  ]
+ },
+ "32b9a08": {
+  "summary": "Closure callback run after the Energy buff (second variant) animation finishes. It finishes resolving the action: reassembles minions, checks for a dead hero and ends the match (sets result, Elo/XP, saves, sends match-finished), or else clears the resolving flag and re-enables turn controls.",
+  "comments": [
+   [
+    4,
+    "Closure callback: runs when the action animation ends; 'outer' is the BattleManager that queued it."
+   ],
+   [
+    12,
+    "Count queued actions; if this was not action type 7 and the queue is empty, tidy up unit positions."
+   ],
+   [
+    15,
+    "If a side's minions are out of place on the board, queue a reassemble order for that side."
+   ],
+   [
+    25,
+    "No automatic actions left: check whether a hero died. Skipped in tutorial and campaign matches."
+   ],
+   [
+    30,
+    "Hero state 5 seems to mean dead. If neither hero is dead, jump to the normal resume path."
+   ],
+   [
+    35,
+    "Someone's hero died: remember whether it was the player's, then build and log the 'DeadHeroAfterActionsEnd' text."
+   ],
+   [
+    71,
+    "Already in the post-battle stage: normally log a warning and stop, unless a disconnect loss is pending."
+   ],
+   [
+    86,
+    "Disconnect-loss flag set: record an Enemy win and run the basic end-of-battle sequence instead."
+   ],
+   [
+    95,
+    "Normal ending: enter post-battle stage and stop the battle; tell the other client the match finished if networked."
+   ],
+   [
+    102,
+    "Lock the UI into the finish-battle state and clear the 'during battle' flag."
+   ],
+   [
+    107,
+    "If the player won, raise a signal zeroing the enemy hero's health bar."
+   ],
+   [
+    124,
+    "Look up the current event; ranked events (leaderboard) supply an Elo rating, otherwise the player's stored Elo is used."
+   ],
+   [
+    130,
+    "Decompiler expanded an interface-method lookup here; it just calls the event's Elo rating getter."
+   ],
+   [
+    147,
+    "Work out the winner and create the ranked match result with Elo and XP."
+   ],
+   [
+    153,
+    "Fill the result's skull milestones: own skulls, and the enemy's skulls based on the player hero's remaining health."
+   ],
+   [
+    176,
+    "Store the result and winner, then record the match length in minutes from the start time."
+   ],
+   [
+    183,
+    "On a player win, flag a win and notify live-ops for certain match types (0x14, 0xb4, 0xd2) that the opponent was human."
+   ],
+   [
+    196,
+    "Save the winner, finish the battle and return; the rest of the callback is skipped."
+   ],
+   [
+    218,
+    "Decompiler artifact: array-bounds failure path of the log string builder."
+   ],
+   [
+    222,
+    "No hero died (or tutorial/campaign): broadcast the 'while in play' trigger check."
+   ],
+   [
+    226,
+    "Action fully resolved: clear the resolving-action flag."
+   ],
+   [
+    229,
+    "Enemy's turn: reactivate enemy minions and refresh the enemy hero's attack state."
+   ],
+   [
+    237,
+    "Hero can attack only with no tutorial restriction, not stunned and not summon-sick; this sets shade and canAttack."
+   ],
+   [
+    248,
+    "Ferocity or oath heroes get their shade recomputed and may switch attack type while summon-sick."
+   ],
+   [
+    263,
+    "Show or hide the hero's attack button depending on whether it can attack now."
+   ],
+   [
+    279,
+    "Player's turn (decompiler reuses the heroCard name for the BattleManager): relight playable cards, activate minions and hero."
+   ],
+   [
+    286,
+    "Queue empty: start the GC pass, unpause the turn clock and rebuild the available actions list."
+   ],
+   [
+    295,
+    "In a tutorial, check whether ending the turn is permitted."
+   ],
+   [
+    301,
+    "If the only action left is ending the turn, show the 'no actions left' UI on the clock."
+   ],
+   [
+    310,
+    "In scripted tutorials, if the player just acted manually, resume the scripted turn once the AI script stops waiting for them."
+   ],
+   [
+    320,
+    "Reset the manual-action marker."
+   ],
+   [
+    327,
+    "Shared null-reference throw target."
+   ]
+  ]
+ },
+ "32b9e2c": {
+  "summary": "Iterator Reset that always throws NotSupportedException, as for any compiler-generated coroutine.",
+  "comments": []
+ },
+ "32ba484": {
+  "summary": "Iterator Reset that always throws NotSupportedException, as for any compiler-generated coroutine.",
+  "comments": []
+ },
+ "32baae4": {
+  "summary": "Iterator Reset that always throws NotSupportedException, as for any compiler-generated coroutine.",
+  "comments": []
+ },
+ "32bb0a4": {
+  "summary": "Iterator Reset that always throws NotSupportedException, as for any compiler-generated coroutine.",
+  "comments": []
+ },
+ "32bb258": {
+  "summary": "Iterator Reset that always throws NotSupportedException, as for any compiler-generated coroutine.",
+  "comments": []
+ },
+ "32bb548": {
+  "summary": "Iterator Reset that always throws NotSupportedException, as for any compiler-generated coroutine.",
+  "comments": []
+ },
+ "32bb7d4": {
+  "summary": "Iterator Reset that always throws NotSupportedException, as for any compiler-generated coroutine.",
+  "comments": []
+ },
+ "32bba2c": {
+  "summary": "Iterator Reset that always throws NotSupportedException, as for any compiler-generated coroutine.",
+  "comments": []
+ },
+ "32bbc6c": {
+  "summary": "Iterator Reset that always throws NotSupportedException, as for any compiler-generated coroutine.",
+  "comments": []
+ },
+ "32bbe60": {
+  "summary": "Iterator Reset that always throws NotSupportedException, as for any compiler-generated coroutine.",
+  "comments": []
+ },
+ "32bc41c": {
+  "summary": "Iterator Reset that always throws NotSupportedException, as for any compiler-generated coroutine.",
+  "comments": []
+ },
+ "32bc804": {
+  "summary": "Iterator Reset that always throws NotSupportedException, as for any compiler-generated coroutine.",
+  "comments": []
+ },
+ "32b9a58": {
+  "summary": "Coroutine that plays back recorded replay actions one at a time for the current turn, waiting one second between steps. It runs each action, decrements the replay queue and restores time scale when finished.",
+  "comments": [
+   [
+    6,
+    "States 2 and 3 are wait steps; state 0 logs the start and falls into the main loop."
+   ],
+   [
+    10,
+    "State 2: if no replay actions remain, stop; otherwise run the next one."
+   ],
+   [
+    22,
+    "State 3: keep waiting while actions are queued or neither side may act; then reset time scale to 1 and end."
+   ],
+   [
+    42,
+    "State 1: resume after the one-second wait; abort if the manager is gone."
+   ],
+   [
+    48,
+    "If actions are still being processed or neither side may act yet, wait another second."
+   ],
+   [
+    54,
+    "Restore normal time scale unless a flag asks to keep the current (replay fast-forward) speed."
+   ],
+   [
+    60,
+    "Log the player and enemy replay indices and actions left."
+   ],
+   [
+    80,
+    "Run the next logged action for whichever side's turn it is (player or enemy log)."
+   ],
+   [
+    90,
+    "Decrement the replay queue; if more remain, wait and continue in state 2."
+   ],
+   [
+    97,
+    "Queue is empty: start the ReplayPlayAction coroutine if it is not active, else wait while speed is 15x."
+   ],
+   [
+    112,
+    "Decompiler artifact: string array bounds failure path."
+   ]
+  ]
+ },
+ "32b9e98": {
+  "summary": "Coroutine at battle start that deals each side its environmental cards: spawns the defensive card into hand, shows and applies the offensive card, and waits between steps. Which cards belong to which side depends on who goes first.",
+  "comments": [
+   [
+    6,
+    "State 1 (after reveal wait): show the offensive button for the hero's army and destroy the revealed card."
+   ],
+   [
+    25,
+    "State 0: look up the defensive and offensive card ids from the match data, depending on who goes first."
+   ],
+   [
+    43,
+    "If there is a defensive card id, find it in the full card collection and add it to the starting side's hand."
+   ],
+   [
+    59,
+    "Defensive card id not in the collection: log an error."
+   ],
+   [
+    79,
+    "No offensive card id: nothing to do, end."
+   ],
+   [
+    87,
+    "Decide whether to show the offensive card (it is skipped if it is an empty one)."
+   ],
+   [
+    99,
+    "Reveal the offensive card on screen and wait two seconds."
+   ],
+   [
+    107,
+    "State 2: reveal done; apply the offensive card's effect."
+   ],
+   [
+    121,
+    "Apply the environmental effect; if it was shown, wait four seconds before finishing."
+   ],
+   [
+    131,
+    "Offensive card could not be found: log an error."
+   ]
+  ]
+ },
+ "32ba4f0": {
+  "summary": "Coroutine that counts down once per second while trying to reconnect to the battle server. It re-attempts every third second, updates the UI, and reports success or failure when the countdown ends.",
+  "comments": [
+   [
+    8,
+    "State 1: one second passed; decrement seconds left and retry the connection every third second."
+   ],
+   [
+    22,
+    "Stop if the connection is no longer in the trying-to-reconnect state."
+   ],
+   [
+    27,
+    "Arithmetic trick for 'secLeft divisible by 3'; then ask the network manager to retry."
+   ],
+   [
+    35,
+    "State 0: seconds allowed = max(10, max reconnect time minus 3 per previous disconnect minus 3); count this disconnect."
+   ],
+   [
+    63,
+    "Continue while fewer than 6 disconnects and time remains and still reconnecting: update status UI and wait one real second."
+   ],
+   [
+    84,
+    "Countdown over or connection state changed: log the final connection status."
+   ],
+   [
+    102,
+    "Still not reconnected: tell the UI reconnection failed."
+   ],
+   [
+    108,
+    "Otherwise report successful reconnection."
+   ],
+   [
+    109,
+    "Decompiler lost the tail here; it ends by throwing an exception that reports the final status, which looks unreachable in practice."
+   ]
+  ]
+ },
+ "32bab50": {
+  "summary": "Coroutine for the standard end of a battle: after a short wait it logs the result, hides the cemetery and chat button, and kills the losing side's units with death delays. Forfeit and disconnect results skip ahead; a win-button result calls CompleteBattleFinished.",
+  "comments": [
+   [
+    6,
+    "State 0 waits one second; state 1 starts the actual end sequence."
+   ],
+   [
+    34,
+    "Log the winner and battle result."
+   ],
+   [
+    41,
+    "Hide the cemetery and chat button."
+   ],
+   [
+    47,
+    "Remember whether the player lost, and whether it was a forfeit (no warlord death sound then)."
+   ],
+   [
+    49,
+    "Enemy did not win: destroy the enemy's units (player victory path)."
+   ],
+   [
+    57,
+    "Wait time = minion death time per unit plus the warlord duration, or 2 seconds without globals."
+   ],
+   [
+    72,
+    "Continue to the player side: if the player lost, destroy the player's units the same way."
+   ],
+   [
+    104,
+    "Later states, keyed on the battle result: forfeit goes on to destroy units."
+   ],
+   [
+    109,
+    "Disconnect falls through to a half-second wait; win button starts CompleteBattleFinished."
+   ],
+   [
+    127,
+    "Short half-second wait before the final state."
+   ]
+  ]
+ },
+ "32bb110": {
+  "summary": "Coroutine that handles a choose-a-card effect: builds the pool, asks the player (via UI) or enemy (AI) to pick, waits for the selection and passes the chosen index to the callback.",
+  "comments": [
+   [
+    5,
+    "State 1: loop that waits while the UI is still in the card-choice state."
+   ],
+   [
+    9,
+    "Keep waiting a frame while the player is choosing."
+   ],
+   [
+    15,
+    "Choice made: convert the chosen card into its index in the pool."
+   ],
+   [
+    22,
+    "State 0: build the full choice pool for this action."
+   ],
+   [
+    23,
+    "Empty pool: call back with index 0 and stop."
+   ],
+   [
+    31,
+    "Player's action: open the card choice UI; enemy's: the AI picks immediately."
+   ],
+   [
+    38,
+    "Deliver the chosen index to the callback."
+   ]
+  ]
+ },
+ "32bb2c4": {
+  "summary": "Coroutine that shows the 'targetting' tooltip above the acting card and highlights valid targets, waiting until the player picks a unit target, then hides the tooltip and pauses the clock.",
+  "comments": [
+   [
+    15,
+    "If the game is already back to normal, the target was chosen while the unit played: do nothing."
+   ],
+   [
+    19,
+    "Start tracking the card, unpause the turn clock, and show tooltip text just above the card."
+   ],
+   [
+    33,
+    "Highlight the potential targets for a card played from hand."
+   ],
+   [
+    35,
+    "Keep waiting while still choosing a target."
+   ],
+   [
+    44,
+    "Target chosen: stop tracking, hide the tooltip and pause the clock for animation."
+   ]
+  ]
+ },
+ "32bb5f4": {
+  "summary": "Coroutine that closes the end-of-battle doors: hides the HUD, sets up the doors with the result, skull count and winner, disables touch input and waits before marking the match finished and waiting to leave.",
+  "comments": [
+   [
+    6,
+    "State 1 (after the door wait): mark the match as finished and waiting to leave."
+   ],
+   [
+    16,
+    "State 0: stop tracking and enable the end-of-battle door object."
+   ],
+   [
+    22,
+    "Hide the battle HUD with animation."
+   ],
+   [
+    25,
+    "Gather match result data and skull count for the door display; SetupDoor returns the time to wait."
+   ],
+   [
+    34,
+    "Disable touch input, then wait for the door animation."
+   ]
+  ]
+ },
+ "32bb840": {
+  "summary": "Coroutine run when a battle ends: waits for the ranked match result to finish processing, then sets the post-battle UI state, leaves the battle room and shows the share button.",
+  "comments": [
+   [
+    6,
+    "State 2: processing finished; go to the post-battle UI and leave the room."
+   ],
+   [
+    13,
+    "Keep the room alive if the enemy won by the player's forfeit; otherwise leave normally."
+   ],
+   [
+    19,
+    "Leave the battle room on the network and show the share button if one exists."
+   ],
+   [
+    31,
+    "State 1: after the wait, check whether the result is processed."
+   ],
+   [
+    40,
+    "State 0: if the result status is 2, wait two real seconds first."
+   ],
+   [
+    49,
+    "Wait until the result has finished processing, then pause a quarter second before state 2."
+   ]
+  ]
+ },
+ "32bba98": {
+  "summary": "Coroutine that waits a clip's delay and then plays a body animation on the target unit. If the clip does not wait for completion, the finish callback is called immediately.",
+  "comments": [
+   [
+    6,
+    "State 0: store the onFinish callback and wait for the clip's delay."
+   ],
+   [
+    28,
+    "State 1: find the target unit from the clip's target type."
+   ],
+   [
+    32,
+    "Not waiting for completion: fire the finish callback now."
+   ],
+   [
+    41,
+    "Waiting: pass a wrapper so the callback runs when the animation ends."
+   ],
+   [
+    45,
+    "Play the body animation on the target unit."
+   ]
+  ]
+ },
+ "32bbcd8": {
+  "summary": "Coroutine that waits an effect's VFX delay, resolves start and end transforms if not already given, and spawns the animation.",
+  "comments": [
+   [
+    14,
+    "State 0: wait the VFX delay if it is positive."
+   ],
+   [
+    23,
+    "Resolve start and end transforms from the animation's position options when no start parent was given."
+   ],
+   [
+    38,
+    "Create the VFX animation between the two points."
+   ]
+  ]
+ },
+ "32bbecc": {
+  "summary": "Coroutine that kills a side's warlord and then each of its minions one by one after battle end, waiting between deaths, used by the end-of-battle sequence.",
+  "comments": [
+   [
+    9,
+    "State 0: kill the hero first, if its object still exists and is active."
+   ],
+   [
+    33,
+    "Mark the hero destroyed and start its death animation, then wait the warlord death time."
+   ],
+   [
+    59,
+    "Units missing: log an error."
+   ],
+   [
+    62,
+    "State 1: kill the minions from the last to the first."
+   ],
+   [
+    85,
+    "Walk the minion list backwards; for each active minion mark it destroyed and start its death."
+   ],
+   [
+    105,
+    "Wait a fraction of a second between minion deaths."
+   ],
+   [
+    115,
+    "All minions handled: wait the final delay."
+   ],
+   [
+    131,
+    "States 2 and 3: after each death delay, continue the loop or end."
+   ]
+  ]
+ },
+ "32bc488": {
+  "summary": "Coroutine that plays a campaign scripted turn: keeps asking the scripted AI manager to play the next action, waiting between actions, until none remain, then clears the scripted flag and calls onComplete.",
+  "comments": [
+   [
+    8,
+    "State 2: after the wait; keep going if more scripted actions remain."
+   ],
+   [
+    14,
+    "More scripted actions: wait a second and resolve the next one."
+   ],
+   [
+    21,
+    "No more actions: clear the scripted-actions flag and call onComplete."
+   ],
+   [
+    31,
+    "State 1: play the next scripted action and wait the time the script asks for."
+   ],
+   [
+    53,
+    "State 0: count the coroutine, log it, and bail out with a warning if there is no scripted data."
+   ],
+   [
+    71,
+    "Flag that scripted actions are running, reset the action counter and go to the loop."
+   ]
+  ]
+ }
+}

@@ -1,0 +1,1243 @@
+{
+ "2f80ac8": {
+  "summary": "Builds the display text of a tutorial tip: looks up the localized 'Tips/<id>' term and expands the placeholder markers in it (modular descriptions, keyword names, card names, trait names, Energy icons). Returns an empty string if the term is missing.",
+  "comments": [
+   [
+    4,
+    "Look up the localized tip text for this tip's id"
+   ],
+   [
+    10,
+    "No translation found: return empty text (or the raw value if it is non-null)"
+   ],
+   [
+    16,
+    "Pass 1: regex-scan for modular-description markers and replace each with its localized description"
+   ],
+   [
+    26,
+    "Loop over every regex match (IEnumerator pattern; the decompiler also inlined the Dispose/finally code)"
+   ],
+   [
+    60,
+    "Strip the marker delimiters, then split the marker body on commas: name, argument 1, argument 2"
+   ],
+   [
+    77,
+    "First part names the 'Modular_Description/' term to look up"
+   ],
+   [
+    80,
+    "Second part, when present, is substituted into the first parameter slot of the description"
+   ],
+   [
+    101,
+    "Third part, when present, is substituted into the second parameter slot"
+   ],
+   [
+    110,
+    "Replace the whole original marker in the tip text with the expanded description"
+   ],
+   [
+    121,
+    "Decompiler artifact: these while(true) loops and gotos are the IDisposable cleanup of the foreach loops, not game logic"
+   ],
+   [
+    185,
+    "Pass 2: check for card-name markers (the regex is hidden by the decompiler)"
+   ],
+   [
+    189,
+    "Pass 3: check for keyword markers; if none present skip to the Energy icon step"
+   ],
+   [
+    212,
+    "Keyword list: melee, ranged and reanimate are shown as bold localized names from MainMenu/General"
+   ],
+   [
+    240,
+    "Then loop over every DefinedTrait enum value and replace its marker with the localized trait name"
+   ],
+   [
+    308,
+    "Card-name branch: for each marker, find the card by id in the player's card collection"
+   ],
+   [
+    342,
+    "Closure object carries the card id for the Find predicate"
+   ],
+   [
+    360,
+    "Default name comes from the Card_Name term; the collection lookup below may override it with the localized card name"
+   ],
+   [
+    366,
+    "If PlayerDataManager is missing, just log it and keep the term translation"
+   ],
+   [
+    387,
+    "Replace the card marker with the card's name"
+   ],
+   [
+    191,
+    "Last pass: replace numbered Energy markers (0-8) with the matching Energy sprite tag"
+   ],
+   [
+    207,
+    "Index 0 to 8 are tried; each present marker becomes an inline sprite tag"
+   ]
+  ]
+ },
+ "2f813c8": {
+  "summary": "Coroutine for showing a tutorial tip: sets up the tip, positions it, fades it in, waits the fade time, then either shows a continue prompt or auto-hides the tip after its duration.",
+  "comments": [
+   [
+    8,
+    "State 0: first step. Configure the tip and start the fade-in"
+   ],
+   [
+    11,
+    "Fill in text, arrows and skip flag from the tip data"
+   ],
+   [
+    16,
+    "Move the tip object to the position given in the tip data (only Y is taken here)"
+   ],
+   [
+    21,
+    "Call a virtual fade method with target alpha 1.0 (probably FadeElements)"
+   ],
+   [
+    23,
+    "Wait for the fade duration before continuing"
+   ],
+   [
+    33,
+    "State 1: fade finished"
+   ],
+   [
+    38,
+    "Show the continue text only if this tip wants a continue click"
+   ],
+   [
+    44,
+    "No continue button: auto-close the tip after its duration via the StopTip coroutine"
+   ]
+  ]
+ },
+ "2f81580": {
+  "summary": "Reset for the ShowTip coroutine; coroutines cannot be rewound, so it always throws NotSupportedException.",
+  "comments": [
+   [
+    4,
+    "Compiler-generated: iterator Reset is not supported, so build and throw NotSupportedException"
+   ]
+  ]
+ },
+ "2f8163c": {
+  "summary": "Coroutine that waits a set time, then, if the tip object is still active, clears the waiting-for-click flag and finishes the tutorial tip.",
+  "comments": [
+   [
+    5,
+    "State 0: start waiting for the tip duration"
+   ],
+   [
+    13,
+    "State 1: time is up"
+   ],
+   [
+    17,
+    "Outer tip script must still exist and its object still be active"
+   ],
+   [
+    29,
+    "Clear the waiting-for-click flag so a later click does not skip again"
+   ],
+   [
+    30,
+    "Tell the battle manager this tip is done so the tutorial can continue"
+   ]
+  ]
+ },
+ "2f817a0": {
+  "summary": "Reset for the StopTip coroutine; coroutines cannot be rewound, so it always throws NotSupportedException.",
+  "comments": [
+   [
+    4,
+    "Compiler-generated: iterator Reset is not supported, so build and throw NotSupportedException"
+   ]
+  ]
+ },
+ "2f80c58": {
+  "summary": "Creates the ShowTip coroutine for the given tip data. Does no work itself until the coroutine is started.",
+  "comments": [
+   [
+    4,
+    "Compiler-generated iterator factory: state 0, remember owner and tip data"
+   ]
+  ]
+ },
+ "2f80da0": {
+  "summary": "Called when the player clicks Continue on a tutorial tip: hides the continue text, ends the tip, stops the pointer animation and runs the next scripted turn of the tutorial.",
+  "comments": [
+   [
+    4,
+    "Hide the continue text"
+   ],
+   [
+    9,
+    "Stop the tip permanently and fetch the battle manager"
+   ],
+   [
+    12,
+    "Log that the scripted turn is resuming"
+   ],
+   [
+    17,
+    "Stop the tutorial pointer animation"
+   ],
+   [
+    19,
+    "Tell the scripted AI that the player has acted"
+   ],
+   [
+    20,
+    "Get the data for the current scripted tutorial turn"
+   ],
+   [
+    21,
+    "Run the next scripted turn as a coroutine on the battle manager"
+   ],
+   [
+    25,
+    "Unity's StartCoroutine inlined: throws if the routine is null or the owner is not a MonoBehaviour"
+   ],
+   [
+    39,
+    "Decompiler mangled the tail of the inlined StartCoroutine; the call itself is what matters"
+   ]
+  ]
+ },
+ "2f80df0": {
+  "summary": "Prepares a tutorial tip for display: stops running animations and the pending auto-hide, fills the tip data, activates the object at full alpha and starts waiting for a click.",
+  "comments": [
+   [
+    4,
+    "Stop any fade tween already running"
+   ],
+   [
+    6,
+    "Cancel any pending auto-hide coroutine from a previous tip"
+   ],
+   [
+    7,
+    "Fill in text and arrows from the tip data"
+   ],
+   [
+    10,
+    "Activate the tip object"
+   ],
+   [
+    12,
+    "Set the canvas group alpha (decompiler shows it oddly)"
+   ],
+   [
+    13,
+    "Start listening for a click to skip the tip"
+   ],
+   [
+    14,
+    "Remember when the tip appeared so very early clicks are ignored (see Update)"
+   ]
+  ]
+ },
+ "2f80f18": {
+  "summary": "Fills the tip UI from SmallTipData: the text, the left/right arrows and the prevent-skip flag, fixes the layout and logs it.",
+  "comments": [
+   [
+    5,
+    "Set the tip text"
+   ],
+   [
+    6,
+    "Show or hide the arrows as requested"
+   ],
+   [
+    7,
+    "Remember whether this tip must not be skippable by clicking"
+   ],
+   [
+    9,
+    "Force a layout rebuild so the box fits the new text"
+   ],
+   [
+    10,
+    "Log the setup with the prevent-skip value and text"
+   ]
+  ]
+ },
+ "2f811b8": {
+  "summary": "Tells the battle manager that the tutorial tip being waited on is finished, so the tutorial can proceed.",
+  "comments": [
+   [
+    7,
+    "Only notify if a battle manager is attached"
+   ],
+   [
+    13,
+    "Clears the 'waiting for tutorial tip' state in the battle"
+   ]
+  ]
+ },
+ "2f776f4": {
+  "summary": "Fades the tip's canvas group, and each arrow that is currently active, to the target alpha over the fade duration.",
+  "comments": [
+   [
+    4,
+    "Kill any previous fade first"
+   ],
+   [
+    5,
+    "Fade the whole tip; keep the tween so StopAnims can kill it"
+   ],
+   [
+    9,
+    "Left arrow: only fade it if it is shown"
+   ],
+   [
+    18,
+    "Right arrow: same, using an explicit tween because the DOFade helper was inlined"
+   ],
+   [
+    33,
+    "Tween the arrow's color alpha toward the target"
+   ]
+  ]
+ },
+ "2f7787c": {
+  "summary": "Kills the running background fade tween. The decompiler inlined the whole DOTween Kill/despawn code, so most of this is library pooling bookkeeping, not game logic.",
+  "comments": [
+   [
+    4,
+    "Nothing to do when no fade tween exists"
+   ],
+   [
+    8,
+    "Skip if DOTween is not initialised or the tween is already inactive"
+   ],
+   [
+    11,
+    "A tween owned by a Sequence cannot be killed directly: log a DOTween warning and stop"
+   ],
+   [
+    53,
+    "Inlined DOTween Kill: pooled-tween bookkeeping starts here (library internals, not game code)"
+   ],
+   [
+    58,
+    "Run the tween's OnKill callback if it has one"
+   ],
+   [
+    61,
+    "Remove the tween from the active list and recycle it into the pool"
+   ],
+   [
+    211,
+    "Tail is unrelated exception-handling code the decompiler merged in from a neighboring function"
+   ]
+  ]
+ },
+ "2f81038": {
+  "summary": "Resets both tutorial arrows to transparent, enables each one according to the flags and fades them in to full alpha.",
+  "comments": [
+   [
+    7,
+    "Left arrow: start fully transparent"
+   ],
+   [
+    10,
+    "Enable or disable the arrow object per the tip data"
+   ],
+   [
+    11,
+    "Fade it in to alpha 1 over the fade duration"
+   ],
+   [
+    18,
+    "Right arrow: same steps, with the DOFade helper inlined"
+   ],
+   [
+    30,
+    "Tween the right arrow's alpha up to 1.0"
+   ]
+  ]
+ },
+ "2f812d0": {
+  "summary": "Per-frame check: if the tip is waiting for a click, may be skipped and has no continue button, a mouse click after the minimum delay skips (finishes) the tip.",
+  "comments": [
+   [
+    4,
+    "Bail out unless: waiting for click, skipping allowed, no continue button, mouse pressed, and enough time has passed"
+   ],
+   [
+    7,
+    "Stop waiting so the click only counts once"
+   ],
+   [
+    8,
+    "Cancel the pending auto-hide"
+   ],
+   [
+    9,
+    "Finish the tip so the tutorial moves on"
+   ],
+   [
+    10,
+    "Log that the tip was skipped"
+   ]
+  ]
+ },
+ "2f817e0": {
+  "summary": "Initialises the player, opponent and radio voice line boxes: each is initialised, hidden and its text cleared.",
+  "comments": [
+   [
+    4,
+    "Player and opponent chat boxes use the shared setup helper"
+   ],
+   [
+    6,
+    "Radio box is set up inline: same steps as SetUpChatBox"
+   ],
+   [
+    13,
+    "Clear the text (set to empty string) and reset the visible-character count so typewriter starts fresh"
+   ]
+  ]
+ },
+ "2f81804": {
+  "summary": "Initialises one voice line box, hides it and clears its chat text.",
+  "comments": [
+   [
+    7,
+    "Initialise the box"
+   ],
+   [
+    10,
+    "Hide it"
+   ],
+   [
+    13,
+    "Clear the text and reset typewriter state"
+   ]
+  ]
+ },
+ "2f818bc": {
+  "summary": "Shows a voice line in the chat box of the given scene type by starting that box's ShowChat coroutine.",
+  "comments": [
+   [
+    5,
+    "Pick the box (player, opponent or radio)"
+   ],
+   [
+    9,
+    "Create the ShowChat coroutine for the data"
+   ],
+   [
+    16,
+    "Inlined Unity StartCoroutine: refuses null routines and non-MonoBehaviour owners"
+   ],
+   [
+    27,
+    "Decompiler lost the tail of the inlined StartCoroutine; the call is just StartCoroutine(showChat)"
+   ]
+  ]
+ },
+ "2f818f8": {
+  "summary": "Returns the voice line box for a scene type: radio, opponent or player. Throws for any other value.",
+  "comments": [
+   [
+    4,
+    "Radio message box"
+   ],
+   [
+    7,
+    "Opponent's box"
+   ],
+   [
+    11,
+    "Neither: build the 'index not valid' error and throw it"
+   ],
+   [
+    21,
+    "Decompiler glued the start of another function (ShowChat state machine creation) after the throw; ignore it"
+   ],
+   [
+    27,
+    "Player's box"
+   ]
+  ]
+ },
+ "2f81a84": {
+  "summary": "Hides the chat box of the given type: stops its audio, turns off the audio equalizer, deactivates the object and clears its text.",
+  "comments": [
+   [
+    4,
+    "Find the box for this type"
+   ],
+   [
+    8,
+    "Stop any voice clip playing and clear the playing flag"
+   ],
+   [
+    12,
+    "Turn off the audio wave display"
+   ],
+   [
+    15,
+    "Deactivate the box and clear its text"
+   ]
+  ]
+ },
+ "2f81e2c": {
+  "summary": "Typewriter coroutine: reveals the chat text one character at a time, waiting a fixed delay between characters.",
+  "comments": [
+   [
+    8,
+    "State 2: a delay has passed; reveal the next character"
+   ],
+   [
+    15,
+    "State 0: start with zero visible characters and wait one delay"
+   ],
+   [
+    36,
+    "State 1: first delay done; read how many characters the text has"
+   ],
+   [
+    47,
+    "More characters left: show one more and wait again"
+   ],
+   [
+    66,
+    "All characters shown: reset the counter and finish"
+   ]
+  ]
+ },
+ "2f81ff8": {
+  "summary": "Reset for the AnimateText coroutine; coroutines cannot be rewound, so it always throws NotSupportedException.",
+  "comments": [
+   [
+    4,
+    "Compiler-generated: iterator Reset is not supported, so build and throw NotSupportedException"
+   ]
+  ]
+ },
+ "2f82118": {
+  "summary": "Reset for the FinishChat coroutine; coroutines cannot be rewound, so it always throws NotSupportedException.",
+  "comments": [
+   [
+    4,
+    "Compiler-generated: iterator Reset is not supported, so build and throw NotSupportedException"
+   ]
+  ]
+ },
+ "2f8215c": {
+  "summary": "Coroutine body for showing a voice line: stores the data, marks a voice line as playing, then runs the box's no-argument ShowChat routine.",
+  "comments": [
+   [
+    5,
+    "First step only"
+   ],
+   [
+    13,
+    "Mark the box as playing and remember the data"
+   ],
+   [
+    15,
+    "Hand off to the inner ShowChat coroutine and wait for it"
+   ],
+   [
+    19,
+    "Second step: inner routine finished, end"
+   ]
+  ]
+ },
+ "2f821ec": {
+  "summary": "Reset for the ShowChat (with data) coroutine; coroutines cannot be rewound, so it always throws NotSupportedException.",
+  "comments": [
+   [
+    4,
+    "Compiler-generated: iterator Reset is not supported, so build and throw NotSupportedException"
+   ]
+  ]
+ },
+ "2f823e8": {
+  "summary": "Reset for the ShowChat coroutine; coroutines cannot be rewound, so it always throws NotSupportedException.",
+  "comments": [
+   [
+    4,
+    "Compiler-generated: iterator Reset is not supported, so build and throw NotSupportedException"
+   ]
+  ]
+ },
+ "2f819b8": {
+  "summary": "Creates the ShowChat coroutine that plays the given voice line data in this box.",
+  "comments": [
+   [
+    4,
+    "Compiler-generated iterator factory"
+   ]
+  ]
+ },
+ "2f81b74": {
+  "summary": "Creates the inner ShowChat coroutine (no arguments) for this box.",
+  "comments": [
+   [
+    4,
+    "Compiler-generated iterator factory"
+   ]
+  ]
+ },
+ "2f81c08": {
+  "summary": "Prepares audio for a voice line: turns on the wave equalizer and assigns the line's audio clip to the audio source.",
+  "comments": [
+   [
+    4,
+    "Show the audio wave equalizer"
+   ],
+   [
+    7,
+    "Only continue if the voice line has a clip"
+   ],
+   [
+    13,
+    "Assign the clip to the audio source"
+   ],
+   [
+    19,
+    "Unity null-check on the source (inlined); throws if destroyed"
+   ]
+  ]
+ },
+ "2f81cc4": {
+  "summary": "Creates the FinishChat coroutine, which waits for the given duration to end the chat.",
+  "comments": [
+   [
+    4,
+    "Compiler-generated iterator factory; stores the duration"
+   ]
+  ]
+ },
+ "2f81d68": {
+  "summary": "Creates the typewriter coroutine for this chat box.",
+  "comments": [
+   [
+    4,
+    "Compiler-generated iterator factory"
+   ]
+  ]
+ },
+ "2f81854": {
+  "summary": "Hides the voice line box object and clears its chat text.",
+  "comments": [
+   [
+    5,
+    "Deactivate the box"
+   ],
+   [
+    9,
+    "Clear the text and reset the typewriter's visible character count"
+   ]
+  ]
+ },
+ "2f81a9c": {
+  "summary": "Stops the voice line audio and equalizer, hides the box and clears its chat text.",
+  "comments": [
+   [
+    5,
+    "Stop audio and clear the playing flag"
+   ],
+   [
+    10,
+    "Turn off the equalizer"
+   ],
+   [
+    13,
+    "Hide the box and clear its text"
+   ]
+  ]
+ },
+ "2f847f0": {
+  "summary": "Coroutine for the AI's chat reply: waits the chat duration plus 0.3 seconds, then shows a random chat message from the AI warlord.",
+  "comments": [
+   [
+    7,
+    "State 0: wait the length of the player's chat line plus a short pause"
+   ],
+   [
+    15,
+    "State 1: wait finished; pick a random reply and show it as the opponent (not the player)"
+   ]
+  ]
+ },
+ "2f848cc": {
+  "summary": "Reset for the ChatAIResponse coroutine; coroutines cannot be rewound, so it always throws NotSupportedException.",
+  "comments": [
+   [
+    4,
+    "Compiler-generated: iterator Reset is not supported, so build and throw NotSupportedException"
+   ]
+  ]
+ },
+ "2f849ac": {
+  "summary": "Reset for the SetChatButtonOnCooldown coroutine; coroutines cannot be rewound, so it always throws NotSupportedException.",
+  "comments": [
+   [
+    4,
+    "Compiler-generated: iterator Reset is not supported, so build and throw NotSupportedException"
+   ]
+  ]
+ },
+ "2f849f0": {
+  "summary": "Coroutine that shows a warlord's intro chat message and waits as long as its voice clip lasts.",
+  "comments": [
+   [
+    7,
+    "State 0: show the intro message for this side"
+   ],
+   [
+    14,
+    "Display the Intro chat, ignoring UI state so it always shows"
+   ],
+   [
+    15,
+    "Wait as long as the voice clip lasts"
+   ],
+   [
+    21,
+    "State 1: clip finished, end"
+   ]
+  ]
+ },
+ "2f84acc": {
+  "summary": "Reset for the ShowHeroIntroMessage coroutine; coroutines cannot be rewound, so it always throws NotSupportedException.",
+  "comments": [
+   [
+    4,
+    "Compiler-generated: iterator Reset is not supported, so build and throw NotSupportedException"
+   ]
+  ]
+ },
+ "2f84c20": {
+  "summary": "Reset for the ShowHeroesIntroMessage coroutine; coroutines cannot be rewound, so it always throws NotSupportedException.",
+  "comments": [
+   [
+    4,
+    "Compiler-generated: iterator Reset is not supported, so build and throw NotSupportedException"
+   ]
+  ]
+ },
+ "2f824cc": {
+  "summary": "Thread-safe add for the OnPopUpShow event. The decompiler also merged in unrelated add/remove loops from neighboring event code.",
+  "comments": [
+   [
+    5,
+    "Standard lock-free event add: combine delegates and swap with CompareExchange until it sticks"
+   ],
+   [
+    13,
+    "Everything below is merged neighbor code (other events' add/remove), not part of this method"
+   ]
+  ]
+ },
+ "2f82568": {
+  "summary": "Thread-safe remove for the OnPopUpShow event. Trailing loops are merged neighbor code.",
+  "comments": [
+   [
+    5,
+    "Lock-free event remove: swap the new delegate in with CompareExchange, retrying on conflict"
+   ],
+   [
+    13,
+    "The rest is merged code from neighboring event methods"
+   ]
+  ]
+ },
+ "2f82604": {
+  "summary": "Thread-safe add for the OnPopUpHide event. Trailing loops are merged neighbor code.",
+  "comments": [
+   [
+    5,
+    "Lock-free event add with CompareExchange retry"
+   ],
+   [
+    13,
+    "The rest is merged code from neighboring event methods"
+   ]
+  ]
+ },
+ "2f826a0": {
+  "summary": "Thread-safe remove for the OnPopUpHide event.",
+  "comments": [
+   [
+    5,
+    "Lock-free event remove with CompareExchange retry"
+   ]
+  ]
+ },
+ "2f827e4": {
+  "summary": "Unsubscribes the controller from the chat popup's show, hide and voice-line-pressed events when destroyed. Identical to RemovePopUpListeners.",
+  "comments": [
+   [
+    9,
+    "Stop listening for the popup opening"
+   ],
+   [
+    15,
+    "Stop listening for the popup closing"
+   ],
+   [
+    17,
+    "Stop listening for chat buttons being pressed"
+   ],
+   [
+    22,
+    "Lock-free event remove loop"
+   ],
+   [
+    30,
+    "Tail is merged code from another function (disables the chat buttons); ignore"
+   ]
+  ]
+ },
+ "2f82afc": {
+  "summary": "Sets up the chat popup buttons for a match: picks the player's warlord (using its secret identity if it has one), wires each button to ClickChat and fills it with that warlord's localized chat line. Buttons whose line is missing or not allowed for the match type are disabled.",
+  "comments": [
+   [
+    8,
+    "Need match data with a player deck warlord, otherwise log 'deckWarlord null'"
+   ],
+   [
+    14,
+    "Use the warlord's secret identity for chat lines if it has one"
+   ],
+   [
+    19,
+    "Match types for which special lines are allowed (three types loaded from static data)"
+   ],
+   [
+    24,
+    "Loop over the chat buttons"
+   ],
+   [
+    35,
+    "Initialise the button and hook up its press event to the popup's click handler"
+   ],
+   [
+    41,
+    "Buttons map to ChatMessage values starting at 5 (first chat lines)"
+   ],
+   [
+    43,
+    "Index inside the enum: line is usable only if it has text (and, for special cards, the match type matches)"
+   ],
+   [
+    51,
+    "Index outside the enum: treat as enabled"
+   ],
+   [
+    55,
+    "Set the button's label to the localized chat line"
+   ],
+   [
+    59,
+    "Enable the button only if usable, and remember its message type"
+   ],
+   [
+    69,
+    "No deck warlord: log it and return"
+   ]
+  ]
+ },
+ "2f82db8": {
+  "summary": "Plays a chat line for the local player in the player's voice line box. Skipped when chat is not available unless ignoreUiState is set.",
+  "comments": [
+   [
+    4,
+    "Unless forced, only show if chat is currently allowed"
+   ],
+   [
+    7,
+    "Build voice data (text, clip, portrait) for the local player's message"
+   ],
+   [
+    12,
+    "Respect the voice-over settings for this card type"
+   ],
+   [
+    19,
+    "Get the player's chat box"
+   ],
+   [
+    23,
+    "Start its ShowChat coroutine (inlined StartCoroutine with null and MonoBehaviour checks)"
+   ],
+   [
+    41,
+    "Decompiler lost the end of StartCoroutine; it is a plain call"
+   ]
+  ]
+ },
+ "2f82ef8": {
+  "summary": "Shows a warlord chat message from the player or opponent, logs it, and for the local player also sends it over the network, starts the button cooldown and triggers the AI's possible reply. Opponent messages are counted, and after several the player gets a tip about muting enemy chat.",
+  "comments": [
+   [
+    8,
+    "Log which message is being displayed and for whom"
+   ],
+   [
+    14,
+    "Proceed if forced, or chat is currently allowed for this side"
+   ],
+   [
+    16,
+    "Build voice line data and show it in the right box"
+   ],
+   [
+    18,
+    "Local player's message only:"
+   ],
+   [
+    19,
+    "Send it to the opponent over the network"
+   ],
+   [
+    20,
+    "Put the chat button on cooldown"
+   ],
+   [
+    23,
+    "Let the AI opponent maybe answer after this line ends"
+   ],
+   [
+    27,
+    "Get the opposing hero for the replay log"
+   ],
+   [
+    29,
+    "Opponent's message (not the intro): count it toward the mute tip"
+   ],
+   [
+    32,
+    "After 5 received chats in a turn and not muted, show the mute tip once"
+   ],
+   [
+    42,
+    "Tip text: 'Battle/Tips/MuteEnemyChat', shown as a radio message with the hero portrait"
+   ],
+   [
+    58,
+    "Local message is logged to the replay as the player's"
+   ],
+   [
+    61,
+    "Record the chat in the replay log"
+   ]
+  ]
+ },
+ "2f837a8": {
+  "summary": "Shows a chat line spoken by a unit card in the box of its owner's side, using the unit's portrait (or the card art if it is an ambush unit).",
+  "comments": [
+   [
+    8,
+    "Ambush units are face-down, so use the real card sprite rather than the board image"
+   ],
+   [
+    14,
+    "Normal case: use the sprite currently on the card"
+   ],
+   [
+    18,
+    "Build voice data from the clip, text, sprite and card type"
+   ],
+   [
+    24,
+    "Respect voice-over settings for this card type"
+   ],
+   [
+    31,
+    "Pick the box by owner (the flip expression means player->Player box, opponent->Opponent box)"
+   ],
+   [
+    35,
+    "Start the box's ShowChat coroutine (inlined StartCoroutine)"
+   ],
+   [
+    53,
+    "Decompiler lost the end of StartCoroutine"
+   ]
+  ]
+ },
+ "2f8354c": {
+  "summary": "Shows a tutorial radio tip with the speaker's portrait in the radio voice line box. If the tip says to wait, the battle manager is told to wait for the tip.",
+  "comments": [
+   [
+    4,
+    "Radio voice lines respect the voice-over settings for this card type"
+   ],
+   [
+    12,
+    "If the tip blocks the tutorial, flag the battle manager as waiting"
+   ],
+   [
+    17,
+    "Build the voice data from audio, tip text, speaker portrait and card type"
+   ],
+   [
+    21,
+    "Use the radio chat box"
+   ],
+   [
+    25,
+    "Start ShowChat on the box (inlined StartCoroutine)"
+   ],
+   [
+    43,
+    "Decompiler lost the end of StartCoroutine"
+   ]
+  ]
+ },
+ "2f83a38": {
+  "summary": "Shows the voice line a unit says when summoned, unless another voice line is already playing. Needs both a summon sound and a localized summon chat text, otherwise logs a missing-message warning.",
+  "comments": [
+   [
+    4,
+    "Unsubscribe from the card's summon-message event so it fires only once"
+   ],
+   [
+    11,
+    "Skip if any voice line is already playing"
+   ],
+   [
+    17,
+    "The card must have a summon sound"
+   ],
+   [
+    22,
+    "Get the localized summon chat text; log a warning if missing"
+   ],
+   [
+    40,
+    "Ambush units show the real card sprite; others show the board image"
+   ],
+   [
+    50,
+    "Build the voice data and respect voice-over settings"
+   ],
+   [
+    63,
+    "Pick the box of the unit's owner"
+   ],
+   [
+    67,
+    "Start ShowChat (inlined StartCoroutine)"
+   ],
+   [
+    85,
+    "Decompiler lost the end of StartCoroutine"
+   ]
+  ]
+ },
+ "2f83bb4": {
+  "summary": "Creates the coroutine that shows both heroes' intro messages.",
+  "comments": [
+   [
+    4,
+    "Compiler-generated iterator factory"
+   ]
+  ]
+ },
+ "2f83c5c": {
+  "summary": "Handler for the chat button: toggles the chat popup open or closed. If the popup is not available it only logs 'Chat unavailable' when dev tools are enabled.",
+  "comments": [
+   [
+    5,
+    "Chat popup is available this match"
+   ],
+   [
+    10,
+    "Closed: open it, make it interactive and refresh the lines"
+   ],
+   [
+    25,
+    "Open: make it non-interactive and close it"
+   ],
+   [
+    36,
+    "Chat not available: log it only when the dev tools flag (anti-cheat wrapped) is on"
+   ]
+  ]
+ },
+ "2f829cc": {
+  "summary": "Subscribes the controller to the chat popup's show, hide and voice-line-pressed events. The decompiler merged neighbor code into the tail.",
+  "comments": [
+   [
+    9,
+    "Listen for the popup opening"
+   ],
+   [
+    15,
+    "Listen for the popup closing"
+   ],
+   [
+    17,
+    "Listen for a chat button press"
+   ],
+   [
+    22,
+    "Lock-free event add loop"
+   ],
+   [
+    30,
+    "Everything past here is merged code from neighboring event methods"
+   ]
+  ]
+ },
+ "2f827e8": {
+  "summary": "Unsubscribes the controller from the chat popup's show, hide and voice-line-pressed events.",
+  "comments": [
+   [
+    9,
+    "Stop listening for the popup opening"
+   ],
+   [
+    15,
+    "Stop listening for the popup closing"
+   ],
+   [
+    17,
+    "Stop listening for chat button presses"
+   ],
+   [
+    22,
+    "Lock-free event remove loop"
+   ],
+   [
+    30,
+    "Tail is merged code from another function; ignore"
+   ]
+  ]
+ },
+ "2f8433c": {
+  "summary": "Handles a chat button press by the local player: shows the message, sends it over the network, starts the button cooldown, lets the AI maybe reply and logs it to the replay.",
+  "comments": [
+   [
+    4,
+    "Always treated as the local player's message"
+   ],
+   [
+    12,
+    "Log the message being sent"
+   ],
+   [
+    14,
+    "Only continue if chat is currently allowed"
+   ],
+   [
+    17,
+    "Build voice data and show it in the player's box"
+   ],
+   [
+    19,
+    "Send the chat to the opponent over the network"
+   ],
+   [
+    21,
+    "Put the chat button on cooldown"
+   ],
+   [
+    24,
+    "Let the AI opponent maybe respond after this line ends"
+   ],
+   [
+    28,
+    "Get the hero for the replay log"
+   ],
+   [
+    32,
+    "Opponent-chat mute tip code: decompiler left a copy of the shared logic here; it does not run for the local player"
+   ],
+   [
+    62,
+    "Add the chat to the replay log"
+   ]
+  ]
+ },
+ "2f82ecc": {
+  "summary": "Shows a warlord chat message in the right box for the given side, without network sending or logging.",
+  "comments": [
+   [
+    4,
+    "Build voice line data for this message and side"
+   ],
+   [
+    9,
+    "Respect voice-over settings for this card type"
+   ],
+   [
+    16,
+    "Box by side: player->Player box, otherwise Opponent box"
+   ],
+   [
+    20,
+    "Start ShowChat (inlined StartCoroutine)"
+   ],
+   [
+    38,
+    "Decompiler lost the end of StartCoroutine"
+   ]
+  ]
+ },
+ "2f838f0": {
+  "summary": "Displays prepared voice line data in the player's or opponent's chat box, if voice lines are allowed for that card type.",
+  "comments": [
+   [
+    8,
+    "Respect voice-over settings for the data's card type"
+   ],
+   [
+    15,
+    "Box by side: player->Player box, otherwise Opponent box"
+   ],
+   [
+    19,
+    "Start ShowChat (inlined StartCoroutine)"
+   ],
+   [
+    37,
+    "Decompiler lost the end of StartCoroutine"
+   ]
+  ]
+ },
+ "2f84458": {
+  "summary": "Closes the chat box for the player or opponent: stops audio, turns off the equalizer, hides the box and clears its text.",
+  "comments": [
+   [
+    7,
+    "Pick the box by side"
+   ],
+   [
+    9,
+    "Stop any playing clip and clear the playing flag"
+   ],
+   [
+    13,
+    "Turn off the audio wave display"
+   ],
+   [
+    16,
+    "Hide the box and clear its text"
+   ]
+  ]
+ }
+}

@@ -1,0 +1,752 @@
+{
+ "2f2e1a8": {
+  "summary": "Returns true if this card may attack right now. Needs attack > 0, no cantAttack/nonCombatant trait, side allowed to act, an in-play state, a valid UI state and canAct. Used by UI highlighting and attack input.",
+  "comments": [
+   [
+    4,
+    "Needs melee or ranged attack above 0, and not a remnant, and no cantAttack/nonCombatant trait"
+   ],
+   [
+    6,
+    "Pick the allow-actions flag for the owner's side (player or enemy); null battle manager means a crash"
+   ],
+   [
+    15,
+    "Side may act and card state is one of the in-play states (bitmask test)"
+   ],
+   [
+    16,
+    "Player's own card: only attackable in the normal battle UI state or while a minion attack is being aimed"
+   ],
+   [
+    26,
+    "Final gate: the anti-cheat canAct flag decides the result"
+   ]
+  ]
+ },
+ "2f2e32c": {
+  "summary": "Returns true if the card can use its active ability now. Checks the ability exists, the side may act, state is in play, Energy for the ability (and oath) is available, UI state allows it and canAct is set.",
+  "comments": [
+   [
+    4,
+    "Card must have an active ability at all"
+   ],
+   [
+    6,
+    "Pick the allow-actions flag for the owner's side"
+   ],
+   [
+    14,
+    "Side must currently be allowed to act"
+   ],
+   [
+    15,
+    "Card must be in an in-play state"
+   ],
+   [
+    21,
+    "Choose the owner's player manager (player or enemy) to check Energy against"
+   ],
+   [
+    26,
+    "Check Energy is enough for the ability cost, with psychic/plasma Energy flags"
+   ],
+   [
+    37,
+    "Oath trait: the oath cost must also be affordable and the oath condition satisfied"
+   ],
+   [
+    51,
+    "For the human player the UI must be in a state where ability use is sensible"
+   ],
+   [
+    70,
+    "Normal case: canAct decides. Oath cards may still use the ability when exhausted if the oath can be paid"
+   ],
+   [
+    82,
+    "Fall back to the decrypted canAct value"
+   ]
+  ]
+ },
+ "2f2f06c": {
+  "summary": "Runs a card's start-of-turn handling: clears summon sickness and attack counters, removes drop pod/stealth on its owner's turn, records stun/blind, fires TurnStart, Talent, Psyker, Reactor, Transient and Landing triggers. Warlords only log and refresh summon visuals.",
+  "comments": [
+   [
+    4,
+    "Non-hero cards take the main path; heroes jump to the logging/visual tail at the bottom"
+   ],
+   [
+    10,
+    "Read the current turn counter (anti-cheat int) to compare with the turn this card entered play"
+   ],
+   [
+    17,
+    "Played on an earlier turn: summon sickness wears off"
+   ],
+   [
+    22,
+    "Reset per-turn state: praying flag and attack count"
+   ],
+   [
+    24,
+    "Drop pod is removed at the owner's turn start while in play; remembered so Landing fires later"
+   ],
+   [
+    39,
+    "Stealth is lost at the owner's turn start and the loss is broadcast"
+   ],
+   [
+    46,
+    "Activate the minion so it can act this turn"
+   ],
+   [
+    47,
+    "Remember stun/blind present at the start of the owner's turn"
+   ],
+   [
+    55,
+    "Unit that already has lethal pending damage skips turn-start abilities"
+   ],
+   [
+    64,
+    "Fire the generic TurnStart trigger for every card on either player's turn"
+   ],
+   [
+    65,
+    "Rest only runs on the owner's own turn"
+   ],
+   [
+    69,
+    "Own-turn triggers: TurnStartPlayer and Relentless"
+   ],
+   [
+    75,
+    "Tutorial scripts can suppress the Talent trigger"
+   ],
+   [
+    87,
+    "If still in play, resolve Psyker: gain psychic Energy"
+   ],
+   [
+    94,
+    "Reactor: gain plasma Energy"
+   ],
+   [
+    97,
+    "Transient: the unit is destroyed at turn start"
+   ],
+   [
+    100,
+    "Landing trigger fires only if a drop pod was just removed"
+   ],
+   [
+    117,
+    "Hero path (decompiler tangled): logs 'Called OnTurnStart for warlord' with psyker and reactor values, then continues"
+   ],
+   [
+    146,
+    "Tail (decompiler merged code from another method): refreshes summon-sickness animation and canAct/ferocity/oath state and attack UI"
+   ],
+   [
+    160,
+    "canAct is true only on owner's turn, in play, no attacks yet (or bloodthirst second), not stunned and not summon sick"
+   ],
+   [
+    171,
+    "Ferocity or oath cards get a separate ability-use flag and switch to the active attack type when summon sick"
+   ]
+  ]
+ },
+ "2f2fd84": {
+  "summary": "Returns true if this card's current bastion value is at least the attacker's current combat attack, so the attack is absorbed. False when the attacker is null.",
+  "comments": [
+   [
+    4,
+    "No attacker means no bastion block"
+   ],
+   [
+    10,
+    "Compare attacker's combat attack against this card's bastion"
+   ]
+  ]
+ },
+ "2f2fef8": {
+  "summary": "Fires this card's OtherCardLanding abilities when another card triggers a landing event; does nothing if the other card is this card. Called by the battle manager for each card in play.",
+  "comments": [
+   [
+    5,
+    "Only react to other cards, never to this card itself"
+   ],
+   [
+    10,
+    "Run abilities with trigger OtherCardLanding, with the other card as the source and an empty damage info"
+   ]
+  ]
+ },
+ "2f2ff9c": {
+  "summary": "Fires this card's OtherCardSpiritStone abilities when another card triggers a spirit stone event; does nothing if the other card is this card. Called by the battle manager for each card in play.",
+  "comments": [
+   [
+    5,
+    "Only react to other cards, never to this card itself"
+   ],
+   [
+    10,
+    "Run abilities with trigger OtherCardSpiritStone, with the other card as the source and an empty damage info"
+   ]
+  ]
+ },
+ "2f30040": {
+  "summary": "Fires this card's OtherCardRequiem abilities when another card triggers a requiem event; does nothing if the other card is this card. Called by the battle manager for each card in play.",
+  "comments": [
+   [
+    5,
+    "Only react to other cards, never to this card itself"
+   ],
+   [
+    10,
+    "Run abilities with trigger OtherCardRequiem, with the other card as the source and an empty damage info"
+   ]
+  ]
+ },
+ "2f300e4": {
+  "summary": "Fires this card's OtherCardMob abilities when another card triggers a mob event; does nothing if the other card is this card. Called by the battle manager for each card in play.",
+  "comments": [
+   [
+    5,
+    "Only react to other cards, never to this card itself"
+   ],
+   [
+    10,
+    "Run abilities with trigger OtherCardMob, with the other card as the source and an empty damage info"
+   ]
+  ]
+ },
+ "2f301b4": {
+  "summary": "Fires this card's OtherCardRegiment abilities when another card triggers a regiment event; does nothing if the other card is this card. Called by the battle manager for each card in play.",
+  "comments": [
+   [
+    5,
+    "Only react to other cards, never to this card itself"
+   ],
+   [
+    10,
+    "Run abilities with trigger OtherCardRegiment, with the other card as the source and an empty damage info"
+   ]
+  ]
+ },
+ "2f30258": {
+  "summary": "Fires this card's TriggeredCodex abilities when another card triggers a codex event; does nothing if the other card is this card. Called by the battle manager for each card in play.",
+  "comments": [
+   [
+    5,
+    "Only react to other cards, never to this card itself"
+   ],
+   [
+    10,
+    "Run abilities with trigger TriggeredCodex, with the other card as the source and an empty damage info"
+   ]
+  ]
+ },
+ "2f30404": {
+  "summary": "Runs the given ability card's abilities as if this card had been played (ThisCardPlayed trigger), with this card as source and target. Does nothing when the ability card is null.",
+  "comments": [
+   [
+    5,
+    "Skip when no ability card was supplied"
+   ],
+   [
+    9,
+    "Trigger ThisCardPlayed on the ability card, flagged as an ability play"
+   ]
+  ]
+ },
+ "2f2faf0": {
+  "summary": "Resolves the Psyker trait: plays the psyker animation on the card and the psychic Energy gain animation, then gives the owner psychic Energy equal to the card's psyker value.",
+  "comments": [
+   [
+    4,
+    "Needs battle manager, animations and card image, else it falls into the null exception"
+   ],
+   [
+    10,
+    "Play the psyker animation on the card"
+   ],
+   [
+    11,
+    "Find the owner's psychic Energy display and play the gain animation there"
+   ],
+   [
+    22,
+    "Log 'AddPsychicMana' and build a temporary psychic Energy buff (decompiler packed player flag and amount together)"
+   ],
+   [
+    28,
+    "Create the buff for the owner's hero with the psyker amount and apply it"
+   ]
+  ]
+ },
+ "2f2fc24": {
+  "summary": "Resolves the Reactor trait: plays the reactor animation and plasma Energy gain animation, then gives the owner plasma Energy equal to the card's reactor value.",
+  "comments": [
+   [
+    4,
+    "Needs battle manager, animations and card image, else it falls into the null exception"
+   ],
+   [
+    10,
+    "Play the reactor animation on the card"
+   ],
+   [
+    11,
+    "Find the owner's plasma Energy display and play the gain animation there"
+   ],
+   [
+    22,
+    "Log 'AddPlasmaMana' and build a temporary plasma Energy buff (decompiler packed player flag and amount together)"
+   ],
+   [
+    28,
+    "Create the buff for the owner's hero with the reactor amount and apply it"
+   ]
+  ]
+ },
+ "2f2fd58": {
+  "summary": "Resolves the Transient trait: queues an automatic destroyUnit action for this card (priority 0x14) and marks the unit as destroyed so it leaves play.",
+  "comments": [
+   [
+    8,
+    "Build a destroyUnit battle action targeting this card (decompiler shows raw memset/memcpy of the struct)"
+   ],
+   [
+    14,
+    "Queue it as an automatic action so it resolves with other pending actions"
+   ],
+   [
+    15,
+    "Mark the unit destroyed right away"
+   ]
+  ]
+ },
+ "2f2efd0": {
+  "summary": "Queues an automatic battle action (type 0x10, remove effect) for this card and the given effect at the given priority.",
+  "comments": [
+   [
+    4,
+    "Build the action struct: type 0x10 = remove effect, with this card and the effect"
+   ],
+   [
+    9,
+    "Put the action on the auto-action queue with the given priority"
+   ]
+  ]
+ },
+ "2f30660": {
+  "summary": "Queues an automatic battle action (type 0x3d, clear end-of-turn effects) for this card at the given priority.",
+  "comments": [
+   [
+    4,
+    "Build the action struct: type 0x3d = clear end-of-turn effects for this card"
+   ],
+   [
+    8,
+    "Put the action on the auto-action queue with the given priority"
+   ]
+  ]
+ },
+ "2f30714": {
+  "summary": "Shows or hides the back of the card by toggling the front object and the back container on its 2D card controller. The decompiler's control flow here is partly broken.",
+  "comments": [
+   [
+    11,
+    "Show the back: hide the front and enable the back container"
+   ],
+   [
+    21,
+    "Show the front: enable the front and disable the back container (decompiler mangled this branch)"
+   ],
+   [
+    30,
+    "Shared tail: the back container flag is applied here"
+   ]
+  ]
+ },
+ "2f30730": {
+  "summary": "Sets whether a hand card is playable and updates its visuals: highlight colour, codex and oath displays, and the ephemeral glitch effect. Logs an error if asked to activate a card that is not in hand.",
+  "comments": [
+   [
+    4,
+    "Activating a card that is not in hand is a bug: log it"
+   ],
+   [
+    12,
+    "Recover a mulligan-selected non-hero card by putting it back into hand state"
+   ],
+   [
+    16,
+    "Store the playable flag"
+   ],
+   [
+    17,
+    "Cards in certain states or non-player cards or deactivation: playable off, remove highlight"
+   ],
+   [
+    22,
+    "Stop showing codex/oath indicators when the card is not playable"
+   ],
+   [
+    35,
+    "Playable player card: show highlight colour"
+   ],
+   [
+    38,
+    "Show codex indicator if it can be played with codex now, else stop showing it"
+   ],
+   [
+    50,
+    "Show oath indicator if it can be played with oath from hand"
+   ],
+   [
+    55,
+    "Ephemeral cards on the player's side get the glitch effect"
+   ],
+   [
+    60,
+    "Refresh the ephemeral display"
+   ]
+  ]
+ },
+ "2f30c54": {
+  "summary": "Builds the list of targets an ability can pick for this card, based on the ability's targets-available counter (a big switch on the target mode value). Handles self, heroes repeated per Energy/stone/faith/secret, hand, deck, cemetery, adjacent units, previous targets, then filters and trims by count and selection mode. The decompiler output is heavily tangled.",
+  "comments": [
+   [
+    6,
+    "Read the ability's targets-available rule; no rule means an empty list"
+   ],
+   [
+    17,
+    "Reuse the shared pooled target list and clear it"
+   ],
+   [
+    28,
+    "Switch on the target mode value; each branch fills the pooled list"
+   ],
+   [
+    75,
+    "Mode 0xbe: cards played, from the cemetery manager"
+   ],
+   [
+    79,
+    "Mode 0xb4: scan the whole card collection for raw cards meeting the criteria"
+   ],
+   [
+    118,
+    "Mutation filter: drop targets that already have a single-use mutation"
+   ],
+   [
+    132,
+    "Pick friendly/enemy side flags relative to this card's owner"
+   ],
+   [
+    145,
+    "Mode 0xa1: one hero entry per spirit stone, for each chosen side"
+   ],
+   [
+    203,
+    "Mode 0xa2: one hero entry per faith point, for each chosen side"
+   ],
+   [
+    267,
+    "Mode 0xf5: one hero entry per secret played, for each chosen side"
+   ],
+   [
+    324,
+    "Mode 0xaa: one hero entry per total Energy, for each chosen side"
+   ],
+   [
+    376,
+    "Debug log of target counts and side flags"
+   ],
+   [
+    397,
+    "Mode 0x82: the enemy hero; mode 0xa0: one hero entry per unused Energy"
+   ],
+   [
+    504,
+    "Mode 0x5a/0x78: the hero or self as the sole target"
+   ],
+   [
+    518,
+    "Modes by value: 0x8c previous ability targets, 0x50 self, 0x32-0x41 hand/deck/cemetery lists"
+   ],
+   [
+    610,
+    "Units in play, adjacent units, hero's neighbours (0x64-0x73) and similar lookups"
+   ],
+   [
+    673,
+    "Remove every candidate that fails the criteria filter (or that is the same unique card when excluded)"
+   ],
+   [
+    697,
+    "Selection already chosen: keep only the chosen card"
+   ],
+   [
+    730,
+    "Limit the count (selection mode): top by order, last N, first N or random picks"
+   ],
+   [
+    857,
+    "Modes 0xc9 (referenced cards still in play), 0xe6 (highest health warlord or both heroes), 0xf0 (lowest health unit)"
+   ],
+   [
+    902,
+    "Return the pooled target list"
+   ],
+   [
+    905,
+    "Decompiler lost loop here: removes single-use-mutation targets from the list, going backwards"
+   ]
+  ]
+ },
+ "2f30d2c": {
+  "summary": "Turns this card into a hero: sets hero card state, applies the given position and scale, stores them as the home position, and shows or hides the ambush visual. The decompiler dropped the 'this' name in places.",
+  "comments": [
+   [
+    4,
+    "Set card state to 2 (in play)"
+   ],
+   [
+    9,
+    "Move to the hero position and remember position and scale as defaults"
+   ],
+   [
+    20,
+    "Set the in-play sorting layer"
+   ],
+   [
+    24,
+    "Only heroes and minions get the extra visuals"
+   ],
+   [
+    30,
+    "Ambush visual is shown only if the card does not have the ambush trait"
+   ]
+  ]
+ },
+ "2f30e94": {
+  "summary": "Plays the invoke animation when a card turns into a minion, then plays the rarity-based invoke sound (rarity 1 if the card has ambush). Debug builds log the sound.",
+  "comments": [
+   [
+    5,
+    "Play the card UI's invoke animation"
+   ],
+   [
+    9,
+    "Ambush cards use the lowest rarity cue"
+   ],
+   [
+    15,
+    "Get the invoke cue for the rarity and play it through the sound manager"
+   ],
+   [
+    35,
+    "If sound debugging is on, log the cue, source and mixer first"
+   ],
+   [
+    68,
+    "Decompiler junk: inlined Play2D fallback and error paths; nothing important"
+   ]
+  ]
+ },
+ "2f30f48": {
+  "summary": "Teleport-style minion summon: hides the 2D card, shows the 3D body, then plays the rarity-based invoke sound.",
+  "comments": [
+   [
+    5,
+    "Hide the 2D card"
+   ],
+   [
+    7,
+    "Show the 3D body of the minion"
+   ],
+   [
+    11,
+    "Get the invoke cue for the card's rarity and play it"
+   ],
+   [
+    31,
+    "If sound debugging is on, log the cue first"
+   ],
+   [
+    64,
+    "Decompiler junk: inlined Play2D fallback and error paths"
+   ]
+  ]
+ },
+ "2f31020": {
+  "summary": "Returns the time of the first animation event in the hand-to-board clip. The decompiler merged in code from SetAsDeck here, so the visible result is unreliable.",
+  "comments": [
+   [
+    7,
+    "If the clip has no events the decompiler jumps into unrelated SetAsDeck-like code"
+   ],
+   [
+    31,
+    "Normal path: return the first event's time"
+   ]
+  ]
+ },
+ "2f310d0": {
+  "summary": "Puts the card into the deck state and sets its canvas sorting order to 11 plus its index in the deck.",
+  "comments": [
+   [
+    4,
+    "Move the card to deck state and position"
+   ],
+   [
+    9,
+    "Higher deck index draws on top"
+   ]
+  ]
+ },
+ "2f31104": {
+  "summary": "Sets the card to the in-deck state, shows deck visibility, moves it to the deck position and resets its collider size and offset.",
+  "comments": [
+   [
+    4,
+    "Mark card as in deck"
+   ],
+   [
+    7,
+    "Snap to the deck marker"
+   ],
+   [
+    11,
+    "Skip collider reset for cemetery or removed cards"
+   ],
+   [
+    18,
+    "Enable the collider and disable the big-view collider"
+   ],
+   [
+    23,
+    "Reset box collider size and offset to original values"
+   ]
+  ]
+ },
+ "2f31148": {
+  "summary": "Copies the deck reference object's local position, rotation and scale onto this card, placing it at the owner's deck.",
+  "comments": [
+   [
+    4,
+    "Find the owner's deck manager and its reference object"
+   ],
+   [
+    8,
+    "Copy position, rotation and then scale"
+   ]
+  ]
+ },
+ "2f3120c": {
+  "summary": "Moves a minion to a board position, tweening when needed and skipping if it is already there or already tweening there. Returns false in all visible paths. Logs an error if the object is missing.",
+  "comments": [
+   [
+    7,
+    "Object or transform missing: log and give up"
+   ],
+   [
+    16,
+    "Skip if the target is almost the same as the last stored position and already in place"
+   ],
+   [
+    22,
+    "Skip if an active tween already heads to the same target"
+   ],
+   [
+    25,
+    "No animation: set the local position directly and store it"
+   ],
+   [
+    38,
+    "Animated: only tween in board states or when called from the card; then reassemble callback"
+   ],
+   [
+    51,
+    "Store the new target as the home position"
+   ],
+   [
+    54,
+    "Reset rotation to identity"
+   ]
+  ]
+ },
+ "2f31730": {
+  "summary": "Moves an asset card to a board position with an optional tween and optionally stores it as the permanent position. Skips when it is already there; kills any older tween first.",
+  "comments": [
+   [
+    7,
+    "Object or transform missing: log and give up"
+   ],
+   [
+    16,
+    "Skip if the target matches the stored position and is in place"
+   ],
+   [
+    22,
+    "An active tween to the same target means nothing to do; otherwise kill it"
+   ],
+   [
+    33,
+    "No animation: set position directly and store it"
+   ],
+   [
+    45,
+    "Animated: tween to the target and remember it"
+   ],
+   [
+    54,
+    "Only update the home position when setAsPermanent is true"
+   ]
+  ]
+ },
+ "2f31560": {
+  "summary": "Checks whether the card's rotation is about identity and its local position is within a small tolerance of the target. Used to skip needless moves.",
+  "comments": [
+   [
+    9,
+    "Rotation must be nearly identity (dot product above 0.999999)"
+   ],
+   [
+    16,
+    "Position within a tiny distance counts as in place"
+   ],
+   [
+    25,
+    "Otherwise accept a looser Manhattan tolerance of 0.1"
+   ]
+  ]
+ },
+ "2f31aa8": {
+  "summary": "Tweens a card in hand to a target position, rotation and scale, killing any previous tweens. Only acts if the card is in hand state.",
+  "comments": [
+   [
+    4,
+    "Only for cards in hand state"
+   ],
+   [
+    5,
+    "Kill the previous rotation tween and start a new one"
+   ],
+   [
+    15,
+    "Kill the previous scale tween and tween to the hand scale"
+   ],
+   [
+    20,
+    "Kill the previous move tween and start a new move to the target"
+   ]
+  ]
+ }
+}

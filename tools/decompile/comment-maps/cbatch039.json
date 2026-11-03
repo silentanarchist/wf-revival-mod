@@ -1,0 +1,247 @@
+{
+"32d1860": {"summary": "Coroutine body of BattleManager.StartBattlePhase. Runs after mulligan: replay fast-forward, boss/skull/campaign intro animations, hero intro voice lines, applies starting enchantments one by one, adds extra hand cards, shows chat/cemetery, waits for the action queue to drain, then starts the first turn.", "comments": [
+[8, "state 0: first entry. Replays start playing, and a replay that resumes mid-match queues its earlier actions"],
+[16, "replay resumes from a later action: pause and feed the already-recorded actions back in"],
+[27, "boss match: play the boss intro and wait 3 seconds (resume at state 1)"],
+[35, "state 1 resume: boss intro done, fall through to the skull check"],
+[43, "skull match: play the skull intro, wait 3 seconds (resume at state 2)"],
+[50, "campaign boss match: play its intro, wait 3 seconds (resume at state 3)"],
+[60, "state 2 resume: skull intro done, go on to the campaign boss check"],
+[71, "intro messages: a campaign post-mulligan script replaces the normal hero intro lines"],
+[85, "mark the match as properly started and in battle; hide the mulligan wait text"],
+[94, "normal matches without environmental effects: the second player gets the extra 'goes second' card in deck"],
+[97, "apply starting enchantments (player first, one per 0.2s step via state 4/5/6)"],
+[107, "player enchantments done: now the enemy's enchantments, triggered instantly in a loop"],
+[130, "give each side its extra starting hand card, if the hero has one set (first player, then second)"],
+[159, "non-tutorial matches show the chat button and the cemetery view"],
+[169, "later states: 4 = enchantment step delay, 5 = trigger the player's enchantment and show it, 6 = next one, 7 = queue wait"],
+[203, "state 6: advance to the next player enchantment, then loop back to the check at LAB_032d1cf0"],
+[227, "wait until all queued board actions are finished (retry every short delay, state 7)"],
+[235, "queue empty: remove the dark shade, set the starting hands up and start the first turn coroutine"]
+]},
+"32d20b8": {"summary": "IEnumerator.Reset for the StartBattlePhase coroutine; always throws NotSupportedException as for all compiler-generated iterators.", "comments": []},
+"32d2124": {"summary": "Coroutine body of BattleManager.StartBattleSequence. Fades out the loading screen, plays the camera intro, creates tutorial/campaign starting troops, runs pre-mulligan scripted actions if any, then starts the mulligan (or the tutorial start sequence).", "comments": [
+[6, "state 2: the campaign pre-mulligan script finished, go to the mulligan"],
+[15, "state 1: the tutorial pre-mulligan script finished, check for a campaign one next"],
+[24, "state 0: fade the loading screen and play the camera intro"],
+[36, "tutorial and campaign matches begin with scripted starting troops already on the board"],
+[43, "tutorial pre-mulligan script: run it and wait for it to finish (state 1)"],
+[53, "campaign pre-mulligan script: run it and wait for it to finish (state 2)"],
+[63, "tutorial goes straight into its own start sequence; every other match begins the mulligan"]
+]},
+"32d2390": {"summary": "IEnumerator.Reset for the StartBattleSequence coroutine; always throws NotSupportedException.", "comments": []},
+"32d23fc": {"summary": "Coroutine body of BattleManager.StopHandAnim. Waits the given delay and then stops the tutorial pointer hand animation.", "comments": [
+[5, "state 0: start waiting for the delay"],
+[13, "state 1: delay over, stop the pointer animation"]
+]},
+"32d2500": {"summary": "IEnumerator.Reset for the StopHandAnim coroutine; always throws NotSupportedException.", "comments": []},
+"32d285c": {"summary": "IEnumerator.Reset for the TimedCampaignStartSequence coroutine; always throws NotSupportedException.", "comments": []},
+"32d28c4": {"summary": "IDisposable.Dispose for the TutorialStartSequence iterator. If it was suspended in a state that needs cleanup (a bit mask of states) it is reset to finished.", "comments": [
+[3, "bit-mask test on state+3 for the states that need cleanup; the code in those states has nothing to finally-run here"]
+]},
+"32d28f0": {"summary": "Coroutine body of BattleManager.TutorialStartSequence. Waits briefly, lands the enemy then player hero into the field, sets up camera zoom, plays each pre-mulligan scripted tutorial action with its waits, updates deck displays, shows the HUD and starts the battle phase.", "comments": [
+[10, "states 0-3: short waits then the enemy hero lands into the field"],
+[12, "state 0: log and wait for outer delay"],
+[23, "state 1: wait about 0.6 seconds"],
+[30, "state 2: show the enemy hero and start its landing animation"],
+[59, "state 3: wait about 0.8 seconds before the player hero lands"],
+[68, "states 4-5: player hero lands, then camera and tutorial script setup"],
+[69, "state 4: show the player hero and start its landing animation"],
+[100, "state 5: set up camera zoom (no wait when combat auto-zoom is on), then get the tutorial stage's script list"],
+[133, "start iterating the scripted actions; the decompiler shows the list enumerator through raw offsets"],
+[142, "loop head: take the next scripted action or finish"],
+[144, "all actions done: refresh deck displays, show the HUD and hand over to the battle phase"],
+[160, "next action: wait its 'wait before' time (can be skipped by the player), then run it in state 6"],
+[177, "state 6 (decompiler reads it from the wrong variable): execute the action and wait for its sound or default chat time"],
+[207, "state 7: wait the action's 'wait after' time"],
+[209, "state 8: close chat boxes if the player skipped, clear the skip flag and loop to the next action"],
+[243, "common exit; the unwind code that follows is the try/finally for the enumerator"]
+]},
+"32d314c": {"summary": "IEnumerator.Reset for the TutorialStartSequence coroutine; always throws NotSupportedException.", "comments": []},
+"32d31b8": {"summary": "Coroutine body of BattleManager.WaitOpponentLastActions. While the opponent is disconnected it keeps waiting in 2-second steps (up to a budget of 12 seconds) for their final actions; then, if still in battle, clears the opponent's claim of match finished and shows the disconnection popup.", "comments": [
+[5, "state 1: resumed after a 2-second wait"],
+[13, "state 0: start with a 12 second budget (0x41480000 is 12.0f)"],
+[19, "still waiting for the opponent's last actions and budget left: log, wait 2s and reduce the budget"],
+[29, "wait over: if the match is still on, reset the opponent-finished claim and show the disconnect popup"]
+]},
+"32d336c": {"summary": "IEnumerator.Reset for the WaitOpponentLastActions coroutine; always throws NotSupportedException.", "comments": []},
+"327e9bc": {"summary": "Property getter returning the scenario variables: the tutorial set in a tutorial match, otherwise the editor set when running in the Unity editor, else the default set.", "comments": [
+[5, "tutorial match uses its own scenario variables"],
+[9, "editor builds use the editor variables, players the default ones"]
+]},
+"327ea68": {"summary": "Property getter returning the global game variables (VarsGlobal) held by the PlayerDataManager singleton, or null if it does not exist.", "comments": []},
+"327ec14": {"summary": "Called to pause the tutorial. It does not pause anything: with dev tools enabled it only logs 'Ignoring instruction to pause tutorial.'.", "comments": [
+[8, "only act when asked to stop; then only when dev tools are on, in which case the warning is logged"]
+]},
+"327ed60": {"summary": "Property getter for the friendly hand anchor. Each time it is read it moves the anchor to where the player hand is, converting the position from the HUD camera to the board camera, then returns it.", "comments": [
+[21, "convert the hand's HUD position into board-camera space; -10 minus camera z is the depth used"]
+]},
+"327ee44": {"summary": "Property getter for the enemy hand anchor. Each time it is read it moves the anchor to where the enemy hand is, converting the position between cameras (the summary text said the player hand; the code uses the enemy hand), then returns it.", "comments": [
+[21, "convert the hand's position between HUD and board cameras and place the anchor there"]
+]},
+"327ef78": {"summary": "Setter for CurrentConnectionStatus. If the value changes it first fires OnConnectionStatusChanged with the old and new status, then stores the new one.", "comments": [
+[4, "only act on a real change"]
+]},
+"327eff0": {"summary": "Setter for battleStage. Logs 'battleStage changed from X to Y' and stores the new stage.", "comments": []},
+"327f0d8": {"summary": "Getter returning the anti-cheat obscured player fatigue value (the damage taken from an empty deck) by copying its three words.", "comments": []},
+"327f0f0": {"summary": "Setter storing an obscured player fatigue value (deck-out damage counter) into the battle manager.", "comments": []},
+"327f108": {"summary": "Getter returning the anti-cheat obscured enemy fatigue value (the damage taken from an empty deck) by copying its three words.", "comments": []},
+"327f120": {"summary": "Setter storing an obscured enemy fatigue value (deck-out damage counter) into the battle manager.", "comments": []},
+"327f138": {"summary": "Getter returning the anti-cheat obscured turn counter by copying its three words.", "comments": []},
+"327f150": {"summary": "Setter storing an obscured turn counter value into the battle manager.", "comments": []},
+"327f170": {"summary": "Setter for the waiting-for-tutorial-tip flag. Logs the new value and stores it; the tutorial uses it to hold back play until a tip is dismissed.", "comments": []},
+"327f21c": {"summary": "Returns the Z position of the 2D elements canvas. The decompiler lost the actual read; the null checks are what remains.", "comments": [
+[8, "decompiler lost the transform read; the value comes from the canvas position z"]
+]},
+"327f364": {"summary": "Returns the blocking overlay held by the PlayerDataManager singleton, or null if there is no manager.", "comments": []},
+"327f550": {"summary": "Unity Awake. Makes this the BattleManager singleton, or destroys this object if a different instance already exists.", "comments": [
+[6, "an instance already exists and it is not this one: destroy this duplicate object"],
+[20, "no instance yet: become the singleton"]
+]},
+"327f554": {"summary": "Makes this the BattleManager singleton, or destroys this object if a different instance already exists. Same code as Awake.", "comments": [
+[6, "an instance already exists and it is not this one: destroy this duplicate object"],
+[20, "no instance yet: become the singleton"]
+]},
+"327f798": {"summary": "Initializes the battle manager: singleton, initial state, data-dependent elements, battle HUD, DOTween capacity (200 tweens, 10 sequences), marks the player as in battle, sets chat online status, sets up the board and creates the actions pool.", "comments": [
+[7, "make sure the singleton is set"],
+[10, "reset counters and UI, then wire data-dependent parts"],
+[18, "normal speed; initialize DOTween with safe mode and room for 200 tweens and 10 sequences"],
+[30, "tell the player data manager we are in a battle; remember the match start time"],
+[38, "chat status 1 when invisible mode is on, otherwise 2 (online)"],
+[42, "build the board (heroes, decks, mana) and prepare the target reticle and available-actions pool"]
+]},
+"327fbe4": {"summary": "Starts the battle manager: sets data-dependent elements, battle HUD, DOTween capacity, in-battle flag, chat status, board and the available-actions pool. Like Initialize but without the singleton and initial state steps.", "comments": [
+[4, "wire match-data dependent elements and the HUD"],
+[12, "initialize DOTween with room for 200 tweens and 10 sequences"],
+[23, "mark the player as being in a battle and record the start time"],
+[31, "chat status 1 when invisible mode is on, otherwise 2 (online)"],
+[35, "build the board and prepare the target reticle and actions pool"]
+]},
+"327f874": {"summary": "Sets up the initial battle state: for replays stores a copy of the match data, hides chat, card preview, tutorial tip, mulligan and cemetery objects, resets the turn, cards-played and action counters, creates the scripted-AI manager and challenge log.", "comments": [
+[8, "replay: keep a separate copy of the match data for the replay player"],
+[17, "hide the chat button, card preview, skill description and tutorial tip until needed"],
+[31, "mulligan screen is hidden when the match rules say no mulligan"],
+[36, "hide the cemetery; reset turn, cards-played-this-turn and action counters to zero"],
+[53, "create the scripted AI manager (used for tutorial/campaign scripts) and the challenge log"],
+[57, "set the Photon view id to 1 and hide the choose-card and mulligan wait UI"]
+]},
+"327fefc": {"summary": "Sets up elements that depend on the match data: logs the match data, initializes the card trait collection, links the network manager, sets chat options, records the battle start time, shows deck sizes and loads the cursor sprites for the hero's army.", "comments": [
+[9, "log the match data and init the trait collection"],
+[13, "give the network manager a link back to this battle manager"],
+[19, "remember when the battle started and show deck sizes"],
+[28, "replays are flagged so replay-only behaviour is used"],
+[36, "tutorial pointer's chat button is hidden"],
+[40, "swap army cursors: release the cursor of the previous army when it differs"],
+[45, "load cursor and hotspot sprites for this army and assign them to the pointer"]
+]},
+"32804f4": {"summary": "Unimplemented boss-intro animation stub; with dev tools enabled it only logs a not-implemented warning.", "comments": [
+[8, "only logs when dev tools are enabled"]
+]},
+"3280538": {"summary": "Unimplemented skulls-intro animation stub; with dev tools enabled it only logs a not-implemented warning.", "comments": [
+[8, "only logs when dev tools are enabled"]
+]},
+"328057c": {"summary": "Unimplemented campaign boss intro animation stub; with dev tools enabled it only logs a not-implemented warning.", "comments": [
+[8, "only logs when dev tools are enabled"]
+]},
+"32800c8": {"summary": "Builds the board at match start: shows enemy data (hidden when ELO is above a threshold), applies hero deck transforms, saves match start analytics, decides who goes first, sets data and warlords for both sides, builds decks and starting troops, sets Energy accumulation, warlord life and hides things for the tutorial.", "comments": [
+[8, "enemy ELO display depends on the player's rating against a hide threshold"],
+[16, "swap in transformed heroes when a deck qualifies, for both sides"],
+[21, "record match start in analytics"],
+[27, "work out who goes first (initiative); the first player's data is set up first"],
+[44, "second side is the opposite of the first"],
+[47, "set up the HUD profiles, then decks and starting troops for both sides"],
+[55, "extra Energy per turn accumulation is on when the rules add Energy for the second player"],
+[61, "apply warlord life changes and custom max life"],
+[62, "tutorial only: hide heroes and decks until the intro sequence shows them, and set chat and cemetery buttons"],
+[98, "common null failure exit"]
+]},
+"3280d68": {"summary": "Called when battle initialization finishes. Blocks live-ops, achievement and trophy auto updates during the match, stops menu music, starts battle music and starts the StartBattleSequence coroutine.", "comments": [
+[9, "do not auto-update live ops, achievements or trophies while in a match"],
+[16, "stop the menu music and start the battle music init"],
+[21, "start the battle sequence coroutine; the code after it is the decompiler's inlined StartCoroutine checks"]
+]},
+"3280f28": {"summary": "Returns the board position of a hero's side by checking its minion manager exists. The returned vector is lost by the decompiler.", "comments": [
+[3, "pick the player or enemy minion manager"],
+[7, "decompiler lost the return value; it is the hero slot position"]
+]},
+"3280600": {"summary": "Checks whether a side's deck meets the hero transform rules and, if so, swaps the warlord for the transformed hero, stores the original warlord in the match data and rewrites the hero's chat messages for the player.", "comments": [
+[8, "find the deck's transform rule; null data is logged as an error at the end"],
+[16, "the deck must meet the rule's criteria, otherwise the hero stays as it is"],
+[22, "look up the replacement hero in the full hero collection"],
+[29, "remember the original warlord (player or enemy) so it can be shown later"],
+[40, "replace the warlord in the deck data with the transformed hero"],
+[42, "only the player's chat lines are updated"],
+[56, "decompiler output is unreliable here; it loads the new hero's chat messages into the chat options"],
+[97, "null failure exit"],
+[101, "rawBattleData was null: log it as an error"]
+]},
+"3280fc4": {"summary": "After an action, randomly decides whether the AI opponent should emote with a chat voice line; only against AI and when the config allows it, then starts a ChatAIResponse coroutine.", "comments": [
+[4, "random roll 2..10; below 2 never happens, so the check just filters AI matches"],
+[19, "only against the AI"],
+[22, "when matchmaking is not disabled, the config must allow AI emotes after actions"],
+[33, "start the AI chat response after the configured replay delay; the rest is the inlined StartCoroutine checks"]
+]},
+"32809a0": {"summary": "Sets up one side before play: orders the hero, creates the deck, sets the starting Energy, creates the hero's starting troops and re-places all minions on that side of the board.", "comments": [
+[4, "hero goes first in the play order, then deck and starting Energy"],
+[10, "no starting troops: nothing more to do"],
+[22, "create each starting troop"],
+[30, "pick the side's minion manager, hide shadows and reposition troops"],
+[42, "position the left-side minions, then the right-side ones (decompiler split the loops)"],
+[87, "second loop (right minions) as the decompiler placed it after the function"]
+]},
+"3280a04": {"summary": "Applies warlord life modifiers from the match gameplay data to both heroes, and in EventAI or PracticeOffline matches also forces the player's and enemy's custom max life.", "comments": [
+[8, "gameplay data changes warlord life: add it to both heroes' max life"],
+[29, "only AI event and offline practice matches use custom max life values"],
+[41, "player max life override, if set"],
+[49, "enemy max life override, if set"]
+]},
+"3281110": {"summary": "Creates a side's deck from the match deck data, shuffles it when the match type allows, adds the tutorial's initial cards, stores the shuffled deck, sets up the display and draws the tutorial starting hand cards.", "comments": [
+[11, "player and enemy use different deck data and deck object"],
+[37, "shuffle only for match types that allow it (not for scripted ones)"],
+[43, "tutorial: insert its scripted initial cards into the deck"],
+[65, "store the result as the side's shuffled deck and refresh the display"],
+[76, "tutorial: draw the scripted starting hand cards"]
+]},
+"3281900": {"summary": "Returns the tutorial stage's starting hand card list for the player or the enemy.", "comments": []},
+"32808c8": {"summary": "Logs and sets up a side's deck and full warlord hero, then makes the warlord trigger its on-summon traits.", "comments": [
+[8, "build the full hero from the deck data"],
+[13, "activate the warlord's traits as if it was summoned"]
+]},
+"3281dc4": {"summary": "Tutorial only: spawns the tutorial stage's scripted starting troops for the player and the enemy, then re-places the enemy minions on the board.", "comments": [
+[8, "only when a tutorial stage exists"],
+[13, "create the player's troops"],
+[17, "create the enemy's troops one by one and reposition them (decompiler duplicated the left/right loops)"],
+[79, "right-side loop placed by the decompiler after the main body"]
+]},
+"3281e90": {"summary": "Creates each starting troop for a side, hides the card shadow and re-places all minions on that side of the board.", "comments": [
+[5, "create every troop in the list"],
+[13, "pick the side's minion manager and hide its shadow"],
+[21, "reposition left minions, then right minions (the loops are split by the decompiler)"],
+[66, "right-side loop placed by the decompiler after the main body"]
+]},
+"3281f54": {"summary": "Creates one starting troop card for a side, marks it as a unit in play, sets it up, activates its traits, moves it into a board slot and adds it to unitsInPlay.", "comments": [
+[15, "create the card under the side's minion manager using the hero's army"],
+[18, "mark as a unit in play and set up as a card on that side"],
+[23, "fire its traits as if summoned, then give it its play order"],
+[28, "put it in a slot without animation"],
+[30, "append to the unitsInPlay list (decompiler shows the List.Add internals)"]
+]},
+"328102c": {"summary": "Gives a card the next unit-in-play order number, increments the counter and registers the card as in play with the card manager.", "comments": [
+[13, "order number records the sequence in which units entered play"],
+[17, "advance the counter for the next unit"]
+]},
+"3282148": {"summary": "Returns the size of a unit on the board for a card type and side. Types 10 and 0 use the side's minion manager; all other types use global variables. The returned vector is lost by the decompiler.", "comments": [
+[6, "card types 10 and 0 are sized by the side's minion manager"],
+[20, "any other type uses global default sizes, chosen per side"]
+]},
+"3281448": {"summary": "Sets a side's starting Energy plus psychic, plasma and spirit stone values from hero data and any tutorial bonus, and updates the Energy holder UI (spirit stone, faith and quest points toggles).", "comments": [
+[8, "choose the side's player manager and the base starting Energy"],
+[12, "hero data adds a modifier to starting Energy and a psychic modifier"],
+[20, "tutorial adds extra Energy and initial damage for its side"],
+[40, "plasma and spirit stone modifiers come from the hero data"],
+[46, "store all the obscured values in the player manager; the decompiler shows them as raw offsets"],
+[75, "update the Energy display, then toggle the spirit stone, faith and quest point holders"],
+[91, "quest points use the scenario variables: different field depending on a scenario flag"],
+[119, "null failure exit"]
+]}
+}

@@ -1,0 +1,707 @@
+{
+ "314e668": {
+  "summary": "Fills the ranked deck info panel for a deck: warlord name, army icon, hero art, Energy cost chart, cardback and the card list. Called when a deck is picked in the ranked menu. The decompiler merged DeckListDrawer.Initialize into this body.",
+  "comments": [
+   [
+    4,
+    "Release the previously shown cardback's addressable references before swapping decks"
+   ],
+   [
+    11,
+    "Show the general info container and hide the cards-in-deck panel"
+   ],
+   [
+    13,
+    "Store the new deck and write its name into the deck name label"
+   ],
+   [
+    15,
+    "Show the warlord's localized card name"
+   ],
+   [
+    22,
+    "Army icon for the warlord's army, then the full hero art in the character image"
+   ],
+   [
+    31,
+    "Draw the deck's Energy cost curve"
+   ],
+   [
+    34,
+    "Fetch the deck's cardback cosmetic and keep it so it can be unloaded next time"
+   ],
+   [
+    43,
+    "Put the cardback sprite on each cardback image and replay the cardback animation"
+   ],
+   [
+    48,
+    "Decompiler junk: stray exception/Toggle epilogue merged into the loop; not real logic"
+   ],
+   [
+    89,
+    "Hand the deck to the cards-in-deck panel and set its game mode"
+   ],
+   [
+    101,
+    "Decompiler inlined DeckListDrawer.Initialize here: fills the card list panel from the deck library"
+   ],
+   [
+    119,
+    "If the warlord is not shown in the list, filter hero cards out of the library with a LINQ Where"
+   ],
+   [
+    148,
+    "foreach over the (filtered) library, hand-expanded by the decompiler as interface lookups"
+   ],
+   [
+    197,
+    "Add each card to the deck list display"
+   ],
+   [
+    209,
+    "Shared null-check failure target"
+   ],
+   [
+    211,
+    "End of foreach: dispose the enumerator, then sort the displayed cards"
+   ],
+   [
+    248,
+    "Everything below is exception-handler/landing-pad residue, including the code that adds the hero to the library"
+   ],
+   [
+    258,
+    "Seems to be the Initialize prologue: get the card library and make sure the deck's hero is in it"
+   ]
+  ]
+ },
+ "314e984": {
+  "summary": "Shows or hides the general info container and does the opposite to the cards-in-deck panel. Called by SetContent with true.",
+  "comments": [
+   [
+    4,
+    "Toggle the general info view on or off"
+   ],
+   [
+    6,
+    "Cards-in-deck panel is shown exactly when the general info is hidden"
+   ]
+  ]
+ },
+ "314e9e8": {
+  "summary": "Opens the card display window for the current deck's warlord card, setting up card art, lore, voice-over button and related cards. Called when the warlord name button is clicked in the ranked deck panel. Decompiler output is heavily tangled.",
+  "comments": [
+   [
+    4,
+    "Singleton card display window; needs a current deck to show"
+   ],
+   [
+    12,
+    "Make the warlord the window's current card and remember its tier"
+   ],
+   [
+    17,
+    "Loop over the window's card UI slots, hiding each one before use"
+   ],
+   [
+    35,
+    "Decompiler pulled in code from other CardDisplayWindow methods below (display, related cards, lore, voice-over)"
+   ],
+   [
+    52,
+    "Lore: fetch the flavour text; show the lore box only if the text is non-empty"
+   ],
+   [
+    66,
+    "Set the lore background to the clan flavour sprite, with the Image sprite-change bookkeeping inlined"
+   ],
+   [
+    162,
+    "Voice-over setup (SetCardVoiceOver): creates a closure for the button"
+   ],
+   [
+    166,
+    "Troop and warlord voice-overs are gated by remote config flags"
+   ],
+   [
+    168,
+    "Card type 0 is a troop, type 10 a warlord"
+   ],
+   [
+    193,
+    "Clear old listeners, then bind the voice-over button to play the card's available sounds"
+   ],
+   [
+    252,
+    "Open the window: initialize cards, lore, voice-over, tutorial objects and overdraw"
+   ],
+   [
+    270,
+    "Show the voice-over button only for troop or warlord cards"
+   ],
+   [
+    291,
+    "Show the extra panel for spell types 0xd2 / 200 and load its drawing options"
+   ],
+   [
+    306,
+    "Enable the window's image and fire its open callback"
+   ]
+  ]
+ },
+ "314ea38": {
+  "summary": "Fills a deck info drawer: Energy cost curve, cardback front and background sprites, deck name and warlord name. Called when a deck entry is displayed.",
+  "comments": [
+   [
+    4,
+    "Draw the deck's Energy cost curve first"
+   ],
+   [
+    6,
+    "Use the deck's cardback sprite for the front image"
+   ],
+   [
+    10,
+    "Same cardback sprite on the background image"
+   ],
+   [
+    15,
+    "Set deck name text if the label exists"
+   ],
+   [
+    22,
+    "Warlord label: set it to the hero's localized card name"
+   ],
+   [
+    35,
+    "Shared null-check failure target"
+   ]
+  ]
+ },
+ "314f940": {
+  "summary": "Static constructor of the compiler-generated closure class; creates its single shared instance used by the cached LINQ delegates.",
+  "comments": []
+ },
+ "314f37c": {
+  "summary": "Unity Awake: registers CloseButtonOnClick as a listener on the close button's click event.",
+  "comments": [
+   [
+    4,
+    "Hook up the close button"
+   ],
+   [
+    16,
+    "Inlined AddListener: append the delegate to the persistent call list, growing it if full"
+   ]
+  ]
+ },
+ "314f40c": {
+  "summary": "Builds the card list for a prebuilt demo deck: creates one info item per deck slot once, sorts the cards by Energy cost then name, and initializes or resets each item. Called when the practice deck info opens.",
+  "comments": [
+   [
+    4,
+    "Remember the close callback"
+   ],
+   [
+    8,
+    "First call: create DECK_SIZE card info items from the prefab"
+   ],
+   [
+    29,
+    "Items already exist: hide the template, then sort the deck"
+   ],
+   [
+    39,
+    "Order cards by cost, then by name (cached lambdas)"
+   ],
+   [
+    48,
+    "Keep the sorted library"
+   ],
+   [
+    52,
+    "Walk every item: fill with a card if there is one, else reset it"
+   ],
+   [
+    64,
+    "Show the card, in the deck's game mode"
+   ],
+   [
+    66,
+    "No card for this slot: clear the item"
+   ],
+   [
+    68,
+    "Index out of range / epilogue residue from the decompiler"
+   ]
+  ]
+ },
+ "314f9d8": {
+  "summary": "Sets up a card slot preview: shows the Energy cost (hidden for negative cost or Hero cards) and the localized card name.",
+  "comments": [
+   [
+    7,
+    "Remember the card in this preview"
+   ],
+   [
+    10,
+    "Negative cost or a Hero card: hide the Energy cost"
+   ],
+   [
+    16,
+    "Show or hide the cost holder"
+   ],
+   [
+    29,
+    "Write the Energy cost text, then the card name"
+   ]
+  ]
+ },
+ "314fb64": {
+  "summary": "Sets a cosmetic item's sprite on the preview cardback image, with Unity's inlined Image.sprite setter logic.",
+  "comments": [
+   [
+    4,
+    "Remember the cosmetic item"
+   ],
+   [
+    9,
+    "Inlined Image.sprite setter: only update when the sprite actually changes"
+   ],
+   [
+    12,
+    "No previous sprite: just assign the new one and mark the image dirty"
+   ],
+   [
+    51,
+    "Had a sprite already: compare and update layout/material flags only when it differs"
+   ],
+   [
+    91,
+    "Shared null-check failure target"
+   ]
+  ]
+ },
+ "314fc38": {
+  "summary": "Unity Awake: registers click handlers for the deck cards, general info, warlord text and change-deck buttons.",
+  "comments": [
+   [
+    4,
+    "Each button gets its handler in turn; any missing button falls through to a null error"
+   ],
+   [
+    22,
+    "Change-deck button uses inlined AddListener"
+   ]
+  ]
+ },
+ "314fdc0": {
+  "summary": "Unity OnDisable: unloads the demo deck's character image and releases the current cardback's addressable reference.",
+  "comments": [
+   [
+    6,
+    "Unload the demo deck's hero image if there is one"
+   ],
+   [
+    14,
+    "Release the cardback's addressable asset"
+   ],
+   [
+    31,
+    "Warn if the asset was not loaded in the cache"
+   ],
+   [
+    37,
+    "Shared null-check failure target"
+   ]
+  ]
+ },
+ "314fe8c": {
+  "summary": "Unity OnDestroy: removes click listeners from the demo deck info buttons and clears the warlord button's runtime call list.",
+  "comments": [
+   [
+    4,
+    "Remove the handlers added in Awake"
+   ],
+   [
+    19,
+    "Warlord button: clear its runtime calls list instead of removing one handler"
+   ],
+   [
+    30,
+    "Clear the call array and rebuild the executing list"
+   ]
+  ]
+ },
+ "314ffdc": {
+  "summary": "Sets the demo deck info panel for a chosen deck: name, warlord, art, Energy curve, card list and button visibility. A player's own deck wrapper is shown differently from a built-in demo deck. Called when a deck is picked in practice mode.",
+  "comments": [
+   [
+    5,
+    "Remember the callback and play mode"
+   ],
+   [
+    9,
+    "Unload resources from the previously shown deck and cardback"
+   ],
+   [
+    27,
+    "Show general info view"
+   ],
+   [
+    30,
+    "Type check: is this a player's deck (PlayerDeckDemoDeckInfoWrapper)?"
+   ],
+   [
+    36,
+    "Player deck: take army icon, hero image and cardback from the player's CardDeck"
+   ],
+   [
+    44,
+    "Fill the panel, Energy curve and card list"
+   ],
+   [
+    49,
+    "Show the deck-cards button and the change-deck button for a player deck"
+   ],
+   [
+    56,
+    "Built-in demo deck: hide the change-deck button"
+   ],
+   [
+    65,
+    "Offsets 0x18/0x20 select the classic or skirmish deck by play mode"
+   ],
+   [
+    84,
+    "Show the cards button when the deck has no tutorial index"
+   ],
+   [
+    88,
+    "Final step: set the lore text (SetUnlockState label in the decompiler)"
+   ]
+  ]
+ },
+ "315015c": {
+  "summary": "Shows or hides the general info container and does the opposite to the cards-in-deck panel.",
+  "comments": [
+   [
+    4,
+    "Toggle the general info view"
+   ],
+   [
+    6,
+    "Cards-in-deck panel is shown exactly when the general info is hidden"
+   ]
+  ]
+ },
+ "31505ec": {
+  "summary": "Writes the deck name, warlord name, army icon, lore, hero image and cardback sprites onto the demo deck panel.",
+  "comments": [
+   [
+    4,
+    "Texts and images: deck name, warlord name, army icon, lore, hero art"
+   ],
+   [
+    19,
+    "Keep the cardback cosmetic so it can be released later"
+   ],
+   [
+    25,
+    "Put the cardback sprite on each cardback image and replay the animation"
+   ],
+   [
+    36,
+    "Decompiler junk: unrelated localization lookup merged in (PrebuiltDecks/ name key)"
+   ]
+  ]
+ },
+ "31509c0": {
+  "summary": "Opens the deck info popup in view mode for the current demo deck, building a CardDeck from the classic or skirmish prebuilt deck if needed.",
+  "comments": [
+   [
+    6,
+    "Not a player deck wrapper: build a CardDeck from the prebuilt deck for the play mode"
+   ],
+   [
+    15,
+    "Player deck wrapper: use its existing CardDeck"
+   ],
+   [
+    17,
+    "Context for the popup, view-only"
+   ],
+   [
+    19,
+    "Inlined WindowsManager.OpenWindow<DeckInfoPopup>: find the popup window reference and open it"
+   ],
+   [
+    58,
+    "Window type not found: log an error"
+   ]
+  ]
+ },
+ "3150b0c": {
+  "summary": "Opens the deck selection popup so the player can swap the deck shown. Only works for player-deck wrappers; DeckChanged is the callback.",
+  "comments": [
+   [
+    8,
+    "Only a player deck wrapper can change decks; anything else returns"
+   ],
+   [
+    12,
+    "Build the selection context with the current deck and DeckChanged callback"
+   ],
+   [
+    16,
+    "Inlined WindowsManager.OpenWindow<DeckSelectionPopup>"
+   ],
+   [
+    57,
+    "Window not found: log an error"
+   ]
+  ]
+ },
+ "3150c54": {
+  "summary": "Callback for deck selection: forwards the new deck to the stored callback, then queries the active ranked live-ops event.",
+  "comments": [
+   [
+    4,
+    "Notify the owner of the new deck"
+   ],
+   [
+    8,
+    "Ask LiveOps for the active ranked event and call one of its interface methods"
+   ]
+  ]
+ },
+ "3150d88": {
+  "summary": "Opens the card display window for the demo deck's warlord card (initializes card art, lore, voice-over and related cards). Called when the warlord text is clicked. Decompiler output is heavily tangled.",
+  "comments": [
+   [
+    6,
+    "Offsets 0x18/0x20 pick the classic or skirmish deck by play mode"
+   ],
+   [
+    15,
+    "Make the warlord the window's current card"
+   ],
+   [
+    27,
+    "Loop over the window's card UI slots, hiding each one"
+   ],
+   [
+    38,
+    "Decompiler pulled in code from other CardDisplayWindow methods (display, related cards, lore, voice-over)"
+   ],
+   [
+    55,
+    "Lore: show the lore box only when the flavour text is non-empty"
+   ],
+   [
+    69,
+    "Lore background from the clan flavour sprite; Image sprite-change code inlined"
+   ],
+   [
+    165,
+    "Voice-over setup: closure for the button"
+   ],
+   [
+    169,
+    "Troop and warlord voice-overs are gated by remote config"
+   ],
+   [
+    198,
+    "Clear old listeners, bind voice-over button to the card's available sounds"
+   ],
+   [
+    255,
+    "Open the window: initialize cards, lore, voice-over, tutorial objects"
+   ],
+   [
+    273,
+    "Voice-over button only for troop or warlord cards"
+   ],
+   [
+    294,
+    "Spell types 0xd2/200 show an extra panel with drawing options"
+   ],
+   [
+    310,
+    "Enable the window image and fire its callback"
+   ]
+  ]
+ },
+ "3150e7c": {
+  "summary": "Unity Awake: registers ButtonOnClick as a click listener on the deck selector item's button.",
+  "comments": [
+   [
+    4,
+    "Hook up the item's button"
+   ],
+   [
+    14,
+    "Inlined AddListener: append the delegate to the persistent call list"
+   ]
+  ]
+ },
+ "3150f0c": {
+  "summary": "Unity OnDestroy: removes the ButtonOnClick listener from the item's button by collecting matching calls and removing them.",
+  "comments": [
+   [
+    4,
+    "Same delegate as Awake, used as the match key"
+   ],
+   [
+    15,
+    "Collect every call matching this target/method"
+   ],
+   [
+    40,
+    "Remove the matches and rebuild the combined call list"
+   ],
+   [
+    59,
+    "Shared null-check failure target"
+   ]
+  ]
+ },
+ "3150f9c": {
+  "summary": "Sets up a deck selector item for a practice deck: image, name, army colour and a highlight when it is the player's own deck. Called when the practice menu fills its list.",
+  "comments": [
+   [
+    5,
+    "Unload the previously assigned deck, if any"
+   ],
+   [
+    14,
+    "Border for the player's own deck is off by default"
+   ],
+   [
+    16,
+    "Type check: is this the player's own deck wrapper?"
+   ],
+   [
+    22,
+    "Player's own deck: enable border, use army icon and the localized 'Your deck' label"
+   ],
+   [
+    35,
+    "Built-in deck: hide the player-deck highlight, take image, name and army colour from the deck"
+   ],
+   [
+    56,
+    "Tail: apply highlight state; decompiler lost the exact flow"
+   ]
+  ]
+ },
+ "3151294": {
+  "summary": "Sets the deck selector item's image, name text, background colour and selected state. Decompiler lost parameter names here.",
+  "comments": [
+   [
+    3,
+    "Store the selected flag"
+   ],
+   [
+    5,
+    "Set the image, then the name text, then the background colour"
+   ],
+   [
+    12,
+    "Highlight object for the selected state"
+   ]
+  ]
+ },
+ "3151378": {
+  "summary": "Selects this deck item: highlights it, deselects the previous one, makes its deck the practice menu's selection and updates the deck info and mode text.",
+  "comments": [
+   [
+    9,
+    "Turn on this item's highlight"
+   ],
+   [
+    13,
+    "Already selected: nothing to do; otherwise un-highlight the old one"
+   ],
+   [
+    25,
+    "Record the new selection in the menu"
+   ],
+   [
+    28,
+    "Callback so the info panel can report a changed player deck"
+   ],
+   [
+    31,
+    "Refresh the deck info panel for this deck and mode"
+   ],
+   [
+    35,
+    "Remember the choice as the last selected demo deck and set the 'practice' mode label"
+   ]
+  ]
+ },
+ "31515a4": {
+  "summary": "Click handler for the deck item: selects it, deselects the previous item and updates the practice menu's deck info. Same logic as SelectItem.",
+  "comments": [
+   [
+    9,
+    "Turn on this item's highlight"
+   ],
+   [
+    16,
+    "Already selected: nothing to do; otherwise un-highlight the old one"
+   ],
+   [
+    25,
+    "Record the new selection in the menu"
+   ],
+   [
+    28,
+    "Callback so the info panel can report a changed player deck"
+   ],
+   [
+    31,
+    "Refresh the deck info panel"
+   ],
+   [
+    35,
+    "Remember as last selected demo deck and set the 'practice' label"
+   ]
+  ]
+ },
+ "3151240": {
+  "summary": "Returns the deck button sprite by loading its addressable reference through the reference counter; waits synchronously and logs failures. Returns null if not loadable.",
+  "comments": [
+   [
+    9,
+    "Addressables manager is needed for reference counting"
+   ],
+   [
+    19,
+    "Null or invalid reference: warn and return nothing"
+   ],
+   [
+    27,
+    "Get the reference counter for the General cache group"
+   ],
+   [
+    44,
+    "Already loaded and valid? If the operation failed, log a warning"
+   ],
+   [
+    67,
+    "Not loaded yet: start the load and block until it completes"
+   ],
+   [
+    81,
+    "Already loaded: reuse it"
+   ],
+   [
+    88,
+    "Bump the reference count and return the loaded sprite"
+   ]
+  ]
+ }
+}

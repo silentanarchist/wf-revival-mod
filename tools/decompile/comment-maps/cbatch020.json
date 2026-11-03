@@ -1,0 +1,413 @@
+{
+ "3270298": {
+  "summary": "Builds a list of all 15 audio references on the card (12 chat sounds, then summon, attack and death audio) and returns only those that pass a filter, i.e. are actually set. Used to find which sounds a card has.",
+  "comments": [
+   [
+    4,
+    "Allocate a 15-slot array of audio references; the code below fills each slot in order."
+   ],
+   [
+    7,
+    "Slots 0-11 take the chat sounds (default, intro, mirror match, concede, hurry, can't do that, greet, threat, ...)."
+   ],
+   [
+    31,
+    "Generic 1 chat sound; the IsInst check is the array's element type-store check."
+   ],
+   [
+    44,
+    "Slots 12-14 take the summon, attack and death audio references."
+   ],
+   [
+    53,
+    "Get (or lazily create) the cached filter delegate that keeps non-empty references."
+   ],
+   [
+    60,
+    "LINQ Where(filter) then ToList: this is the actual return value of the method."
+   ],
+   [
+    74,
+    "Everything from here to the end is decompiler noise from inlined LINQ (ToLookup, enumerators, catch handlers)."
+   ],
+   [
+    75,
+    "Dead code: LINQ source-null argument errors; not reachable in practice."
+   ],
+   [
+    787,
+    "Array store type check failed (decompiler artifact)."
+   ],
+   [
+    790,
+    "Allocation failure / bad exception path."
+   ],
+   [
+    793,
+    "Array allocation returned null."
+   ]
+  ]
+ },
+ "3270734": {
+  "summary": "Returns the AudioClip for a chat message type (intro, concede, greet, taunt, etc.) from this card, using its chat audio reference card if set. Falls back to the default chat sound if that message has no sound.",
+  "comments": [
+   [
+    4,
+    "Walk the chatAudioReferenceCard chain so a card can borrow another card's voice lines; 'this' ends on the last card."
+   ],
+   [
+    14,
+    "Binary-search style split of the ChatMessage enum: lower half first."
+   ],
+   [
+    16,
+    "Intro greeting at match start."
+   ],
+   [
+    20,
+    "Mirror match chat line."
+   ],
+   [
+    24,
+    "Bored message uses the hurry-up sound."
+   ],
+   [
+    28,
+    "ICantDoThat uses its own sound; jumps to the shared load code."
+   ],
+   [
+    32,
+    "Concede (surrender) message."
+   ],
+   [
+    41,
+    "Upper half of the enum: Taunt, Sorry and Oops map to the three generic sounds."
+   ],
+   [
+    56,
+    "Greet, Threat and WellPlayed have their own sounds."
+   ],
+   [
+    68,
+    "Unknown message type: log 'No chat sound defined' warning and fall back to the default sound."
+   ],
+   [
+    77,
+    "If a specific sound loaded, return it."
+   ],
+   [
+    84,
+    "Otherwise load and return the default chat sound."
+   ]
+  ]
+ },
+ "3270998": {
+  "summary": "Returns the card's summon audio clip, loading it through the addressables reference counter. Follows the chat audio reference card chain first, and returns null if the sound is unset, invalid or fails to load.",
+  "comments": [
+   [
+    4,
+    "Follow the chatAudioReferenceCard chain to the last card; that card's sounds are the ones used."
+   ],
+   [
+    15,
+    "No summonAudio set on that card: fall through to a null reference check (decompiler tail)."
+   ],
+   [
+    17,
+    "Reference is not a valid addressable (empty key): no sound, return null."
+   ],
+   [
+    24,
+    "Get the AddressablesManager singleton that tracks reference counts for loaded assets."
+   ],
+   [
+    34,
+    "Null or empty reference: log a warning and return null."
+   ],
+   [
+    42,
+    "Fetch the ref counter entry for this asset in the General cache group."
+   ],
+   [
+    60,
+    "If a previous load operation exists and already failed, log 'Failed to Load Addressable' and return null."
+   ],
+   [
+    78,
+    "No cached handle yet (refCount 0), or the cached one is unusable: load synchronously (WaitForCompletion)."
+   ],
+   [
+    99,
+    "Loaded: bump the reference count and return the loaded AudioClip."
+   ],
+   [
+    110,
+    "Decompiler null-check tail: throws NullReferenceException."
+   ]
+  ]
+ },
+ "3270a6c": {
+  "summary": "Returns the card's attack audio clip, loading it through the addressables reference counter. Follows the chat audio reference card chain first, and returns null if the sound is unset, invalid or fails to load.",
+  "comments": [
+   [
+    4,
+    "Follow the chatAudioReferenceCard chain to the last card; that card's sounds are the ones used."
+   ],
+   [
+    15,
+    "No attackAudio set on that card: fall through to a null reference check (decompiler tail)."
+   ],
+   [
+    17,
+    "Reference is not a valid addressable (empty key): no sound, return null."
+   ],
+   [
+    24,
+    "Get the AddressablesManager singleton that tracks reference counts for loaded assets."
+   ],
+   [
+    34,
+    "Null or empty reference: log a warning and return null."
+   ],
+   [
+    42,
+    "Fetch the ref counter entry for this asset in the General cache group."
+   ],
+   [
+    60,
+    "If a previous load operation exists and already failed, log 'Failed to Load Addressable' and return null."
+   ],
+   [
+    78,
+    "No cached handle yet (refCount 0), or the cached one is unusable: load synchronously (WaitForCompletion)."
+   ],
+   [
+    99,
+    "Loaded: bump the reference count and return the loaded AudioClip."
+   ],
+   [
+    110,
+    "Decompiler null-check tail: throws NullReferenceException."
+   ]
+  ]
+ },
+ "3270b40": {
+  "summary": "Returns the card's death audio clip, loading it through the addressables reference counter. Follows the chat audio reference card chain first, and returns null if the sound is unset, invalid or fails to load.",
+  "comments": [
+   [
+    4,
+    "Follow the chatAudioReferenceCard chain to the last card; that card's sounds are the ones used."
+   ],
+   [
+    15,
+    "No deathAudio set on that card: fall through to a null reference check (decompiler tail)."
+   ],
+   [
+    17,
+    "Reference is not a valid addressable (empty key): no sound, return null."
+   ],
+   [
+    24,
+    "Get the AddressablesManager singleton that tracks reference counts for loaded assets."
+   ],
+   [
+    34,
+    "Null or empty reference: log a warning and return null."
+   ],
+   [
+    42,
+    "Fetch the ref counter entry for this asset in the General cache group."
+   ],
+   [
+    60,
+    "If a previous load operation exists and already failed, log 'Failed to Load Addressable' and return null."
+   ],
+   [
+    78,
+    "No cached handle yet (refCount 0), or the cached one is unusable: load synchronously (WaitForCompletion)."
+   ],
+   [
+    99,
+    "Loaded: bump the reference count and return the loaded AudioClip."
+   ],
+   [
+    110,
+    "Decompiler null-check tail: throws NullReferenceException."
+   ]
+  ]
+ },
+ "3270c34": {
+  "summary": "Loads this card's custom ranged-attack particle animation (a CardAnim asset) and returns its AnimInfo. Returns null if none is set or it is invalid.",
+  "comments": [
+   [
+    5,
+    "Only if the card has a custom ranged attack particle reference."
+   ],
+   [
+    6,
+    "Reference not valid (empty): return null."
+   ],
+   [
+    14,
+    "Load the CardAnim asset from the General addressables cache group."
+   ],
+   [
+    19,
+    "Loaded successfully: take its animInfo as the result."
+   ],
+   [
+    25,
+    "Null-reference tail from the decompiler; reached if a reference was null."
+   ]
+  ]
+ },
+ "3270d00": {
+  "summary": "Decides whether targetCard can be targeted by thisCard. Rejects targets not in play, warded, camouflaged or stealthed enemies, then applies the card's TargetCriteria filter (inlined CheckIfMeetsCriteria). Called when picking or validating targets.",
+  "comments": [
+   [
+    4,
+    "A card with no target criteria cannot target anything."
+   ],
+   [
+    12,
+    "Target must be in play."
+   ],
+   [
+    16,
+    "Warded target: only its own side may target it."
+   ],
+   [
+    23,
+    "Camouflaged target: enemy tactics (spells) cannot target it."
+   ],
+   [
+    31,
+    "Stealth target: enemies cannot target it."
+   ],
+   [
+    38,
+    "Start of the inlined criteria check: the target is stored in a closure used by the later predicate."
+   ],
+   [
+    47,
+    "Switch on targetsAffected: which relationship the target must have to the caster."
+   ],
+   [
+    49,
+    "Any: accepted immediately."
+   ],
+   [
+    54,
+    "Self: the target must be the card itself."
+   ],
+   [
+    63,
+    "Target: compare to the chosen target card."
+   ],
+   [
+    73,
+    "Remaining modes (actingCard, previous ability targets, attacker, abilityOwner, ...) handled here."
+   ],
+   [
+    78,
+    "Previous-ability-filtered: target must be among the earlier ability's targets."
+   ],
+   [
+    86,
+    "Previous-ability-targets: look up the target in that list (index search)."
+   ],
+   [
+    100,
+    "Attacker / ability owner: target must equal thisCard."
+   ],
+   [
+    104,
+    "Reference/null-safe equality check of two cards (Unity object comparison)."
+   ],
+   [
+    125,
+    "Target if meets criteria: the target must differ from the check card, otherwise falls to the full filter."
+   ],
+   [
+    131,
+    "Optionally exclude cards of the same kind as this one."
+   ],
+   [
+    143,
+    "Side check: friendly or enemy units allowed depending on whether target is on the same side."
+   ],
+   [
+    149,
+    "Handle includeSelf / excludeNotSelf and the friendly/enemy warlord exclusion flags."
+   ],
+   [
+    157,
+    "Excluding friendly warlord: reject if target is a warlord on this card's side (logs reason)."
+   ],
+   [
+    159,
+    "Excluding enemy warlord: reject if target is an enemy warlord (logs reason)."
+   ],
+   [
+    172,
+    "Remnants (dead unit leftovers) excluded unless includeRemnants is set."
+   ],
+   [
+    177,
+    "Card type, spell type, condition, keyword and trait filters must all pass."
+   ],
+   [
+    186,
+    "Attack stat filter: compares target melee/ranged attack to the criteria."
+   ],
+   [
+    197,
+    "Current health filter (Obscured health value, bastion trait value used as the alternate)."
+   ],
+   [
+    212,
+    "Energy cost filter on the target's current cost."
+   ],
+   [
+    217,
+    "Rarity filter."
+   ],
+   [
+    226,
+    "Specific-card and excluded-enchantment criteria."
+   ],
+   [
+    229,
+    "Army/faction filter."
+   ],
+   [
+    231,
+    "Mode 100: target must be among the adjacent units of thisCard."
+   ],
+   [
+    244,
+    "All filters passed: accept."
+   ],
+   [
+    275,
+    "Referenced-cards mode (200): target must be in thisCard's referenced card list."
+   ],
+   [
+    289,
+    "Mode 201: like above but the target must also be in play."
+   ],
+   [
+    302,
+    "Mode 235: target matches the Talent card of the caster's hero; compared through a decompiled struct compare."
+   ],
+   [
+    312,
+    "Byte-wise equality of the talent's extra traits against the criteria's condition filter (decompiler rendering of a struct compare)."
+   ],
+   [
+    369,
+    "Failed any check: not a valid target."
+   ]
+  ]
+ }
+}
