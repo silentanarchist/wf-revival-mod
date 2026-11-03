@@ -352,6 +352,11 @@ class Func:
                 self.ptrsize[mm.group(2)] = {"long": 8, "ulong": 8, "longlong": 8, "ulonglong": 8, "undefined8": 8, "code": 8, "int": 4, "uint": 4, "undefined4": 4, "float": 4,
                                              "short": 2, "ushort": 2, "undefined2": 2, "char": 1, "byte": 1, "undefined1": 1, "undefined": 1, "bool": 1}.get(mm.group(1), 8)
         body_text = "\n".join(body)
+        # Ghidra reuses the register of `this` for a local once `this` is dead: from the first `this = ...` on,
+        # the name means that local, not the object
+        m_this = re.search(r"\n\s*this = ", body_text)
+        if m_this and not self.m["static"]:
+            body_text = body_text[:m_this.start()] + re.sub(r"\bthis\b", "obj", body_text[m_this.start():])
         if rename:
             rx = re.compile(r"\b(" + "|".join(map(re.escape, rename)) + r")\b")
             body_text = rx.sub(lambda mm: rename[mm.group(1)], body_text)
