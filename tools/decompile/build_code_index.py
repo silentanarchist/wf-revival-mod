@@ -9,7 +9,8 @@ Writes <out dir>/files/<path> (the served files, unchanged) and <out dir>/index.
   fields   {field id: [display "Type.field", path, line]}    fields declared in served files
   symbols  [[name, kind, owner, path, line]]                 for the search (kind: type|method|field|enum|property)
   xref     [[caller method id, kind c|r|w, target id]]       where caller or target is in a served file
-Method ids are code addresses in lower-case hex, or "Type::Name" for methods without code.
+Method ids are Android code addresses in lower-case hex, "pc:<rva>" for Windows-only methods, or "Type::Name" for
+methods without code.
 Field ids are "Type.field" with the type's full key (namespace included)."""
 import json, os, re, shutil, sys
 
@@ -36,7 +37,8 @@ for root, _, fs in os.walk(src):
 served.sort()
 
 TYPE = re.compile(r"^( *)(class|struct|enum|interface) (\S+)")
-METHOD = re.compile(r"^( *)(?:[\w<>\[\],.? ]+ )?([\w<>.`$]+)\((.*)\)   // 0x([0-9A-F]+)$")
+METHOD = re.compile(r"^( *)(?:[\w<>\[\],.? ]+ )?([\w<>.`$]+)\((.*)\)   // android 0x([0-9A-F]+) · pc .*$")
+PCONLY = re.compile(r"^( *)(?:[\w<>\[\],.? ]+ )?([\w<>.`$]+)\((.*)\)   // pc 0x([0-9A-F]+) · not in the Android build  \(Windows only\)(: same code.*)?$")
 NOCODE = re.compile(r"^( *)(?:[\w<>\[\],.? ]+ )?([\w<>.`$]+)\((.*)\);   // no code")
 FIELD = re.compile(r"^( *)/\* 0x[0-9a-f]+ \*/ +(static )?(.+?) ([\w<>$@`.]+);$")
 ENUMV = re.compile(r"^( *)(\w+) = (-?\d+),$")
@@ -80,6 +82,13 @@ for rel in served:
             else:
                 methods[mid] = [owner + "." + m.group(2), rel, i, i]
             open_method = (mid, m.group(1))
+            symbols.append([m.group(2), "method", owner, rel, i])
+            continue
+        m = PCONLY.match(line)
+        if m:                                  # Windows-only method: id "pc:<address>"
+            mid = "pc:" + m.group(4).lower()
+            methods[mid] = [owner + "." + m.group(2), rel, i, i]
+            if not m.group(5): open_method = (mid, m.group(1))
             symbols.append([m.group(2), "method", owner, rel, i])
             continue
         m = NOCODE.match(line)

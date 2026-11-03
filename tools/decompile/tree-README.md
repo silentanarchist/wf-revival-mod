@@ -2,9 +2,12 @@
 
 The whole of the game's own code - `Assembly-CSharp` (the game) and `Assembly-CSharp-firstpass` (the libraries
 compiled with it: Photon PUN, UI Extensions, anti-cheat, console) - decompiled from the compiled game
-(`libil2cpp.so`, Android build of game 1.35.0; the PC build is the same code, see `pc-android-code-match.md`) and
-rewritten to read like C#. Made on 2026-11-02 for writing hooks and learning how the game works. **It is
-pseudo-code: it does not compile and is not meant to.** Game content: keep it out of public repositories.
+(`libil2cpp.so`, Android build of game 1.35.0; the PC build `GameAssembly.dll` is the same code, see
+`pc-android-code-match.md`) and rewritten to read like C#. The few methods only the Windows build has (mouse hover
+tips, the custom cursor, the keyboard replay controls in `BattleManager.Update`, the PC skin and UI scaling) were
+decompiled from the PC build and sit at the end of their type under a `// ---- Windows only` line.
+Made on 2026-11-02 for writing hooks and learning how the game works. **It is pseudo-code: it does not compile and
+is not meant to.** Game content: keep it out of public repositories.
 
 Not included: Unity's own assemblies, .NET (mscorlib, System.*), PlayFab, Newtonsoft, DOTween - their source is
 public. The method table `methods.tsv` covers every game method (address -> type, method, file).
@@ -37,7 +40,8 @@ class BattleCommsManager : MonoBehaviour
     // fields (offset in the object)
     /* 0x20 */   PhotonView photonView;          <- real memory offset: *(this + 0x20)
     ...
-    public void SendForfeit()   // 0x32B3CF8     <- address of the method's code in libil2cpp.so
+    public void SendForfeit()   // android 0x32B3CF8 · pc 0x14E7B30   <- the method's code address in the Android
+                                                                   libil2cpp.so and in the PC GameAssembly.dll (RVA)
     {
         // locals: PhotonView photonView;        <- locals the decompiler could type
         ...
@@ -71,9 +75,12 @@ class BattleCommsManager : MonoBehaviour
 ## Hooking
 
 Harmony hooks go on the method as declared (type and method name from the file header, parameters as listed).
-The address comment (`// 0x32B3CF8`) is the Android address; `methods.tsv` maps every method's address to its
-file for looking something up from a stack trace. Field offsets are the same on PC and Android (both 64-bit
-IL2CPP from the same source).
+The address comment gives the method's code address in both builds (Android `libil2cpp.so`, and the RVA in the
+PC `GameAssembly.dll`, "not in the PC build" for Android-only methods; `// pc 0x... · not in the Android build
+(Windows only)` for the PC-only ones); `methods.tsv` maps every Android address to its file. A PC RVA is the
+offset from `GameAssembly.dll`'s load address (`GameAssembly.dll + 0x98BCB0`). Field offsets are the same on PC and Android (both 64-bit IL2CPP from the same source); the code is
+the same too, except the platform services (Steam / Google Play, Helpshift, notifications) and small bits marked
+"Windows only" / "Android only" in their files.
 
 ## Coverage
 

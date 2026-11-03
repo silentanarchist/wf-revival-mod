@@ -1,12 +1,30 @@
 #!/usr/bin/env python3
 """Assemble the per-function readable output into one file per top-level type, in a project tree.
-Usage: assemble.py <readable dir> <out root> [folders.json]"""
+Usage: assemble.py <readable dir> <out root> [folders.json] [pc readable dir]
+The pc readable dir (readable_pc.py output, files named by PC code address) holds methods that exist only in the
+Windows build; each goes into its type after the Android methods, marked "Windows only"."""
 import json, os, re, sys, collections
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 GAME = json.load(open(os.path.join(HERE, "model.json")))["types"]
+PC_ADDR = json.load(open(os.path.join(HERE, "pc-addr.json"))) if os.path.exists(os.path.join(HERE, "pc-addr.json")) else {}
+
+def addr_note(addr):
+    """The method's code address on Android and, when the same method exists in the Windows build, there too
+    (RVA inside GameAssembly.dll)."""
+    pc = PC_ADDR.get("%x" % addr)
+    return "// android 0x%X · pc %s" % (addr, ("0x%X" % pc) if pc else "not in the PC build")
 rd_dir, out_root = sys.argv[1], sys.argv[2]
 folders = json.load(open(sys.argv[3])) if len(sys.argv) > 3 and os.path.exists(sys.argv[3]) else {}
+pc_dir = sys.argv[4] if len(sys.argv) > 4 else None
+PC_ONLY = collections.defaultdict(list)      # type key -> [(pc address, method)] for methods only the PC build has
+if pc_dir:
+    PC_GAME = json.load(open(os.path.join(HERE, "pc-model", "model.json")))["types"]
+    have = {f[:-3] for f in os.listdir(pc_dir) if f.endswith(".cs")}
+    for full, t in PC_GAME.items():
+        for m in t["methods"]:
+            if m["addr"] > 0 and "%x" % (m["addr"] + 0x180000000) in have:
+                PC_ONLY[full].append((m["addr"] + 0x180000000, m))
 
 def short_type(t):
     return re.sub(r"\b(System\.Collections\.Generic|System\.Collections|UnityEngine\.UI|UnityEngine|System|CodeStage\.AntiCheat\.ObscuredTypes|Everguild\.LiveOps|Everguild)\.", "", t)
@@ -84,19 +102,39 @@ def render_type(t, depth, full):
             continue
         path = os.path.join(rd_dir, "%x.cs" % m["addr"])
         if not os.path.exists(path):
-            out.append(inner + method_header_line(t, m) + "   // 0x%X: not decompiled" % m["addr"])
+            out.append(inner + method_header_line(t, m) + "   " + addr_note(m["addr"]) + ": not decompiled")
             continue
         body = open(path, encoding="utf-8").read().rstrip("\n").split("\n")
         if body and body[0].startswith("// "):
             if body[0] != "// (named)": out.append(inner + body[0])
             body = body[1:]
         # first line is the header from the readability pass; replace it with the modifiers form
-        hdr = method_header_line(t, m) + "   // 0x%X" % m["addr"]
+        hdr = method_header_line(t, m) + "   " + addr_note(m["addr"])
         out.append(inner + hdr)
         out.append(inner + "{")
         for l in body[1:]:
             out.append((inner + l) if l.strip() else "")
         out.append(inner + "}")
+    # methods only the Windows build has (the Android build dropped them: mouse, keyboard, PC skin)
+    if PC_ONLY.get(full):
+        out.append("")
+        out.append(inner + "// ---- Windows only: these methods are not in the Android build")
+        seen = {}
+        for pc_addr, m in PC_ONLY[full]:
+            out.append("")
+            if pc_addr in seen:      # identical code folded by the compiler
+                out.append(inner + method_header_line(t, m) + "   // pc 0x%X · not in the Android build  (Windows only): same code as %s() above" % (pc_addr - 0x180000000, seen[pc_addr]))
+                continue
+            seen[pc_addr] = m["name"]
+            body = open(os.path.join(pc_dir, "%x.cs" % pc_addr), encoding="utf-8").read().rstrip("\n").split("\n")
+            if body and body[0].startswith("// "):
+                if body[0] != "// (named)": out.append(inner + body[0])
+                body = body[1:]
+            out.append(inner + method_header_line(t, m) + "   // pc 0x%X · not in the Android build  (Windows only)" % (pc_addr - 0x180000000))
+            out.append(inner + "{")
+            for l in body[1:]:
+                out.append((inner + l) if l.strip() else "")
+            out.append(inner + "}")
     # nested types
     for nk_, nt in sorted(NESTED.get(full, []), key=lambda x: x[1]["tdi"]):
         out.append("")
@@ -163,6 +201,9 @@ with open(os.path.join(out_root, "INDEX.md"), "w") as f:
     f.write("# Index of types\n\nFile | Type | Kind | Methods with code\n--- | --- | --- | ---\n")
     for p, full, k, n in index:
         f.write("%s | %s | %s | %d\n" % (p, full, k, n))
+for cand in ("tree-README.md", "README.md"):            # the guide to reading the output (tree-README.md in the tools repo)
+    if os.path.exists(os.path.join(HERE, cand)):
+        import shutil; shutil.copyfile(os.path.join(HERE, cand), os.path.join(out_root, "README.md")); break
 with open(os.path.join(out_root, "methods.tsv"), "w") as f:
     f.write("address\ttype\tmethod\tfile\n")
     fileof = {full: p for p, full, _, _ in index}
@@ -171,7 +212,4 @@ with open(os.path.join(out_root, "methods.tsv"), "w") as f:
         while top in GAME and "." in GAME[top]["name"]: top = outer_key(GAME[top])
         for m in t["methods"]:
             if m["addr"] > 0: f.write("0x%X\t%s\t%s\t%s\n" % (m["addr"], full, m["name"], fileof.get(top, "?")))
-readme = os.path.join(HERE, "tree-README.md")
-if os.path.exists(readme):
-    open(os.path.join(out_root, "README.md"), "w").write(open(readme).read())
 print("wrote %d files" % written)

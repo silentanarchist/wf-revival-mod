@@ -10,8 +10,9 @@ IL2CPP's own bookkeeping (metadata init, class init, write barriers, GC card mar
 import re, json, sys, os, struct
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-MODEL = json.load(open(os.path.join(HERE, "model-all.json")))["types"]
-GAME = json.load(open(os.path.join(HERE, "model.json")))["types"]
+MODEL_DIR = os.environ.get("READABLE_MODEL", HERE)      # another model (the PC build's): readable_pc.py
+MODEL = json.load(open(os.path.join(MODEL_DIR, "model-all.json")))["types"]
+GAME = json.load(open(os.path.join(MODEL_DIR, "model.json")))["types"]
 
 # ---------------------------------------------------------------- name sanitising (how Ghidra prints the symbols)
 def ghidra_c(name):
@@ -246,8 +247,6 @@ def load_script(path):
         FUNC_NAMES["func_0x%08x" % e["Address"]] = ghidra_c(n[:i]) + "__" + re.sub(r"[^\w<>`]", "_", n[i + 2:])
 
 # ---------------------------------------------------------------- IL2CPP helper functions still unnamed in Ghidra
-# NOTE: these addresses are for the Android libil2cpp.so of game 1.35.0. For another build, find the frequent
-# func_0x... in the output, decompile them with ghidra-scripts/DecompAddrs.py and fill this table in again.
 HELPERS = {
     "func_0x02d2a3c4": "IDENTITY",         # metadata item (string literal / type) load: value is the argument
     "func_0x02d2a520": "throw",            # il2cpp_raise_exception(exception, method)
@@ -258,7 +257,7 @@ HELPERS = {
     "func_0x02d2a538": "Box",
     "func_0x02d652cc": "il2cpp_init_class", "func_0x02d65328": "il2cpp_class_init",
     "func_0x02d2a36c": "icall",
-    "func_0x02e1ada0": "GC_CARD_MARK",   # (unused: the GC card-marking block is stripped as boilerplate)
+    "func_0x02e1ada0": "GC_CARD_MARK",
     "func_0x02d2a52c": "il2cpp_throw_error",
     "func_0x02d2a53c": "Monitor.Enter", "func_0x02d2a9dc": "Monitor.Exit",
     "func_0x062e5d20": "__cxa_begin_catch", "func_0x062e5d30": "__cxa_end_catch", "func_0x062e5d70": "__stack_chk_fail",
@@ -665,6 +664,14 @@ class Func:
                     k = resolve_type(bt[7:])[0]
                     if k: self.xref.add(("w" if is_store(m) else "r", k + "." + sf[off][0]))
                     return bt[7:] + "." + sf[off][0]
+                top = max((o for o in sf if o < off), default=None)      # inside a struct-typed static (ObscuredBool...)
+                if top is not None:
+                    r = field_at(sf[top][1], off - top)
+                    if r:
+                        self.types[bt[7:] + "." + sf[top][0] + "." + r[0]] = r[1]
+                        k = resolve_type(bt[7:])[0]
+                        if k: self.xref.add(("w" if is_store(m) else "r", k + "." + sf[top][0]))
+                        return bt[7:] + "." + sf[top][0] + "." + r[0]
                 return m.group(0)
             if bt.endswith("[]"):
                 if off == 0x18: return base + ".Length"
@@ -680,6 +687,16 @@ class Func:
             self.note_field(bt, off, r[0], "w" if is_store(m) else "r")
             return base + "." + r[0]
         t = self.FIELD.sub(fld, t)
+        def st0(m):          # *X.__statics : the static field at offset 0 (usually the singleton Instance)
+            tyname = m.group(1)
+            sf = static_fields_of(tyname)
+            if 0 in sf:
+                self.types[tyname + "." + sf[0][0]] = sf[0][1]
+                k = resolve_type(tyname)[0]
+                if k: self.xref.add(("w" if is_store(m) else "r", k + "." + sf[0][0]))
+                return tyname + "." + sf[0][0]
+            return m.group(0)
+        t = re.sub(r"\*(\w[\w.<>,]*?)\.__statics\b", st0, t)
         def deref(m):
             v = m.group(1)
             ty = self.type_of(v)

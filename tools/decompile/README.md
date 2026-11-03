@@ -88,7 +88,35 @@ files into a maps folder and apply them the same way. Only decompiler-made names
 files: field offsets, `obj.field` from offsets, `// interface call`, coroutine state machines, the compiler's
 null checks, what `str_...` identifiers and `*(x + 0x38)` leftovers mean.
 
-## 6. (Optional) the website's code browser
+## 6. (Optional) the PC build: addresses side by side, Windows-only methods
+
+The PC build (`GameAssembly.dll` + its `global-metadata.dat`, in the Steam install) is the same code; what differs
+is the platform services, and a few methods only one build has. To print the PC address next to the Android one
+in every method header, dump the PC build with Il2CppDumper too, then:
+
+```
+python3 parse_dump.py pc-dump.cs pc-model/model-all.json
+python3 parse_dump.py pc-dump.cs pc-model/model.json Assembly-CSharp.dll Assembly-CSharp-firstpass.dll
+python3 match_pc.py model.json pc-model/model.json pc-addr.json
+```
+
+`assemble.py` reads `pc-addr.json` when it exists. For the Windows-only methods (mouse hover tips, custom cursor,
+the keyboard replay controls in `BattleManager.Update`, PC skin, UI scaling) import `GameAssembly.dll` into the
+same Ghidra project (`-import GameAssembly.dll -loader PeLoader -noanalysis`; it loads at 0x180000000, so add
+that to the addresses in the name lists made from the PC `script.json`), apply the names as in step 3, decompile
+the wanted addresses with `DecompAll.py` into `raw-pc/`, and run
+
+```
+python3 readable_pc.py pc-dump-dir/ raw-pc/ readable-pc/
+python3 assemble.py readable/ game-code/ folders.json readable-pc/
+```
+
+`readable_pc.py` rewrites the x64 decompiler output into the shapes the Android pass knows (its `HELPERS_PC` table
+and `pc-static-getters.json` hold 1.35.0 PC addresses; find them again for another build the same way as the
+Android helpers) and runs the same pass; `assemble.py` puts each method at the end of its type under a
+`// ---- Windows only` line.
+
+## 7. (Optional) the website's code browser
 
 The site can show the readable tree to accounts with the Developer switch (server: Revival/Code*, page /#code).
 It needs the cross-references, which `readable.py` writes when `READABLE_XREF` names a file:
