@@ -103,6 +103,15 @@ give each to an AI with `comment-prompt.txt` (replace BATCHFILE and OUTFILE), co
 them the same way. The line numbers refer to the batch text, so apply on the same readable output the batches
 were made from (apply_comments.py records what it did in `applied.txt` and never comments a function twice).
 
+### 5c. Hand-written reconstructions (the clarity pass)
+
+For the classes people need to really understand, a clean rewrite replaces the mechanical body inside the same
+file (no duplicate files): `assemble.py readable/ game-code/ folders.json [pc readable dir or -] clean/` reads
+`clean/<Type>/<Method>.cs` (`__<n>` suffix and `// @params T1, T2` for overloads; `// @status FULL|FULL*|PARTLY|DEAD`)
+and puts its body in place with `· hand-written (FULL)` in the method header; a file with only comment lines is
+a note above the mechanical body; `<Type>/_class.cs` goes under the class header and `<Type>/_fields.cs`
+(`name: comment` lines) annotates the field table. The clean files are game code and stay private with the tree.
+
 ## 6. (Optional) the PC build: addresses side by side, Windows-only methods
 
 The PC build (`GameAssembly.dll` + its `global-metadata.dat`, in the Steam install) is the same code; what differs

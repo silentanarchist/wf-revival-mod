@@ -40,7 +40,7 @@ TYPE = re.compile(r"^( *)(class|struct|enum|interface) (\S+)")
 METHOD = re.compile(r"^( *)(?:[\w<>\[\],.? ]+ )?([\w<>.`$]+)\((.*)\)   // android 0x([0-9A-F]+) · pc .*$")
 PCONLY = re.compile(r"^( *)(?:[\w<>\[\],.? ]+ )?([\w<>.`$]+)\((.*)\)   // pc 0x([0-9A-F]+) · not in the Android build  \(Windows only\)(: same code.*)?$")
 NOCODE = re.compile(r"^( *)(?:[\w<>\[\],.? ]+ )?([\w<>.`$]+)\((.*)\);   // no code")
-FIELD = re.compile(r"^( *)/\* 0x[0-9a-f]+ \*/ +(static )?(.+?) ([\w<>$@`.]+);$")
+FIELD = re.compile(r"^( *)/\* 0x[0-9a-f]+ \*/ +(static )?(.+?) ([\w<>$@`.]+);(?:   //.*)?$")
 ENUMV = re.compile(r"^( *)(\w+) = (-?\d+),$")
 PROP = re.compile(r"^( *)(.+?) (\w+) \{( get;)?( set;)? \}$")
 

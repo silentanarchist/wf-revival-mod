@@ -68,6 +68,10 @@ class BattleCommsManager : MonoBehaviour
   `switch` on `this.state`; `this.outer` is the enclosing object, `this.current` the yielded value, and the
   method's locals are fields of the state machine. Lambdas live in `<>c` (static) or `<>c__DisplayClassN_M`
   (capturing) nested types, named `<Method>b__N_M`.
+- A method header ending in `· hand-written (FULL)` is a reconstruction written by reading the decompile and
+  the disassembly: real C#-like code, compiler noise removed, constants folded, `// ?` where unsure, DEAD =
+  never called. A comment block above a mechanical method is a note from the same pass. (The AI class and its
+  helpers so far; more classes get this treatment over time.)
 - `LAB_...:` labels and `goto`s are the decompiler's; long methods with many early-outs read better bottom-up.
 - Long methods (the battle coroutines) can come out tangled or partly; the calls and field accesses are right,
   the control flow is to be read with care.

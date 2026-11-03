@@ -1,6 +1,12 @@
 #!/usr/bin/env python3
 """Assemble the per-function readable output into one file per top-level type, in a project tree.
-Usage: assemble.py <readable dir> <out root> [folders.json] [pc readable dir]
+Usage: assemble.py <readable dir> <out root> [folders.json] [pc readable dir] [clean dir]
+The clean dir holds hand-written reconstructions that replace or annotate the mechanical output, one file per
+method: <clean dir>/<Type>/<Method>.cs (or <Method>__<n>.cs for overloads; `// @params T1, T2` picks the overload).
+A file whose first non-comment line is `{` replaces the method body (its `// @status FULL|FULL*|PARTLY|DEAD` is
+shown in the header); a file with only comment lines is placed above the mechanical body as a note.
+<Type>/_class.cs is a comment block put under the class header; <Type>/_fields.cs holds `name: comment` lines
+appended to the field table. Type names use the model key with '/' for nested types' dots.
 The pc readable dir (readable_pc.py output, files named by PC code address) holds methods that exist only in the
 Windows build; each goes into its type after the Android methods, marked "Windows only"."""
 import json, os, re, sys, collections
@@ -16,7 +22,37 @@ def addr_note(addr):
     return "// android 0x%X · pc %s" % (addr, ("0x%X" % pc) if pc else "not in the PC build")
 rd_dir, out_root = sys.argv[1], sys.argv[2]
 folders = json.load(open(sys.argv[3])) if len(sys.argv) > 3 and os.path.exists(sys.argv[3]) else {}
-pc_dir = sys.argv[4] if len(sys.argv) > 4 else None
+pc_dir = sys.argv[4] if len(sys.argv) > 4 and sys.argv[4] != "-" else None
+clean_dir = sys.argv[5] if len(sys.argv) > 5 else None
+
+def clean_files(full):
+    d = os.path.join(clean_dir, full.replace(".", "/")) if clean_dir else None
+    return d if d and os.path.isdir(d) else None
+
+def clean_for(full, m):
+    """-> (comment lines, body lines or None, status) from the clean dir for this method, or None"""
+    d = clean_files(full)
+    if not d: return None
+    name = m["name"].replace(".", "_")
+    ptypes = [short_type(ty).replace(" ", "") for ty, _ in m["params"]]
+    for f in sorted(os.listdir(d)):
+        if not (f == name + ".cs" or re.match(re.escape(name) + r"__\d+\.cs$", f)): continue
+        lines = open(os.path.join(d, f), encoding="utf-8").read().rstrip("\n").split("\n")
+        want = [l for l in lines if l.startswith("// @params")]
+        if want:
+            w = [x.strip().replace(" ", "") for x in want[0][len("// @params"):].split(",") if x.strip()]
+            if w != ptypes: continue
+        status = next((l[len("// @status"):].strip() for l in lines if l.startswith("// @status")), "")
+        comments = [l for l in lines if l.startswith("//") and not l.startswith("// @")]
+        body = [l for l in lines if not l.startswith("//")]
+        body = body if any(l.strip() for l in body) else None
+        if body:
+            while body and not body[0].strip(): body.pop(0)
+            if body and body[0].strip() == "{": body = body[1:]
+            while body and not body[-1].strip(): body.pop()
+            if body and body[-1].strip() == "}": body = body[:-1]
+        return comments, body, status
+    return None
 PC_ONLY = collections.defaultdict(list)      # type key -> [(pc address, method)] for methods only the PC build has
 if pc_dir:
     PC_GAME = json.load(open(os.path.join(HERE, "pc-model", "model.json")))["types"]
@@ -69,6 +105,15 @@ def render_type(t, depth, full):
     out.append(head)
     out.append(ind + "{")
     inner = ind + "    "
+    cd = clean_files(full)
+    if cd and os.path.exists(os.path.join(cd, "_class.cs")):
+        out.extend(inner + l for l in open(os.path.join(cd, "_class.cs"), encoding="utf-8").read().rstrip("\n").split("\n"))
+        out.append("")
+    FIELD_NOTES = {}
+    if cd and os.path.exists(os.path.join(cd, "_fields.cs")):
+        for l in open(os.path.join(cd, "_fields.cs"), encoding="utf-8"):
+            if ":" in l and not l.startswith("//"):
+                k, v = l.split(":", 1); FIELD_NOTES[k.strip()] = v.strip()
     if kind == "enum":
         for v, n in sorted(((int(k), v) for k, v in t["enum"].items())):
             out.append("%s%s = %d," % (inner, n, v))
@@ -81,7 +126,7 @@ def render_type(t, depth, full):
     if inst:
         out.append(inner + "// fields (offset in the object)")
         for f in inst:
-            out.append("%s%s %s %s;%s" % (inner, ("/* 0x%x */" % f["offset"]).ljust(12), short_type(f["type"]), f["name"], ""))
+            out.append("%s%s %s %s;%s" % (inner, ("/* 0x%x */" % f["offset"]).ljust(12), short_type(f["type"]), f["name"], ("   // " + FIELD_NOTES[f["name"]]) if f["name"] in FIELD_NOTES else ""))
     if stat:
         out.append(inner + "// static fields")
         for f in stat:
@@ -105,6 +150,15 @@ def render_type(t, depth, full):
             out.append(inner + method_header_line(t, m) + "   " + addr_note(m["addr"]) + ": not decompiled")
             continue
         body = open(path, encoding="utf-8").read().rstrip("\n").split("\n")
+        cl = clean_for(full, m)
+        if cl and cl[1] is not None:            # hand-written reconstruction replaces the mechanical body
+            for c in cl[0]: out.append(inner + c)
+            out.append(inner + method_header_line(t, m) + "   " + addr_note(m["addr"]) + " · hand-written" + (" (%s)" % cl[2] if cl[2] else ""))
+            out.append(inner + "{")
+            for l in cl[1]: out.append((inner + l) if l.strip() else "")
+            out.append(inner + "}")
+            continue
+        if cl: out.extend(inner + c for c in cl[0])   # a note above the mechanical body
         if body and body[0].startswith("// "):
             if body[0] != "// (named)": out.append(inner + body[0])
             body = body[1:]
