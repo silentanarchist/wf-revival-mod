@@ -80,6 +80,30 @@ namespace WarpforgeRevival
             private static void Postfix(DeckListDrawer __instance) => HideDefenceSlot(__instance);
         }
 
+        // Queuing with a deck that has no Defence card asks "you have not assigned a Defence card" (0.15.17).
+        // The game's PlayEvent.StartMatch shows that popup when DeckUtility.HasDefensiveCards says the player owns
+        // Defence cards of the warlord's faction but the deck has none (HaveItInInventory), unless the mode is a
+        // draft. On this server everyone owns every card, and a mode whose "assignDefensiveCardsInEditMode" switch
+        // is off (Classic) has no Defence slot - the card is picked after the mulligan - so it asked on every
+        // queue. For such a mode the deck counts as having its Defence card. StartMatch is the only caller.
+        [HarmonyPatch(typeof(DeckUtility), nameof(DeckUtility.HasDefensiveCards))]
+        private static class NoDefenceWarning
+        {
+            private static bool noted;
+
+            private static bool Prefix(CardDeck deck, ref DeckUtility.DefensiveCardInventoryCheck __result)
+            {
+                try
+                {
+                    if ((object)deck == null || BattlefieldCards.DefenceInEditor(deck.CustomGameModeEvent)) return true;
+                    __result = DeckUtility.DefensiveCardInventoryCheck.HaveItAssigned;
+                    if (!noted) { noted = true; RevivalMod.Log.Msg("[decks] no Defence card warning: this mode picks the Defence card at the start of the match"); }
+                    return false;
+                }
+                catch (Exception e) { RevivalMod.Log.Warning("[decks] Defence card warning: " + e.Message); return true; }
+            }
+        }
+
         // Offensive and defensive cards unlock with a faction's Forge level. The revival server has
         // no Forge, so treat every faction as fully levelled: all of them are available.
         [HarmonyPatch(typeof(EnviromentalEffectCardsSO), nameof(EnviromentalEffectCardsSO.GetEnvCardList))]
