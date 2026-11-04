@@ -8,7 +8,9 @@
 # the install steps and the version's section of releases/patcher/CHANGELOG.md. Builds that already have a
 # Release are left alone. Only the current build is kept in releases/patcher/.
 #
-# These Releases are never marked "Latest", so the mod's own "latest release" links keep pointing at the mod.
+# Each new patcher Release is marked "Latest" (owner, 2026-11-04): GitHub only shows the Latest release's files
+# without opening the Assets list, and players kept missing the APK. Mod releases (release.yml) are marked Latest too, so
+# whichever came out last is on top. Nothing links to releases/latest (checked 2026-11-04).
 # A version whose CHANGELOG.md heading ends in "(test build)" is published as a pre-release.
 # The app's source is the WarpforgePatcher folder (plus the Core it uses) of
 # https://github.com/silentanarchist/MelonLoaderInstaller. releases/patcher/SOURCE-COMMIT names the exact commit the
@@ -90,7 +92,7 @@ jobs:
               fi
               continue
             fi
-            gh release create "$tag" "$apk" "$srczip" --target "$GITHUB_SHA" --title "WF Revival Patcher ${version}" --notes-file notes.md --latest=false $pre
+            gh release create "$tag" "$apk" "$srczip" --target "$GITHUB_SHA" --title "WF Revival Patcher ${version}" --notes-file notes.md $([ -z "$pre" ] && echo --latest || echo --latest=false) $pre
             echo "published $tag ${pre:+(pre-release)}"
             if [ -n "$DISCORD_WEBHOOK_URL" ] && [ -z "$pre" ]; then
               body="$(printf '%s' "$section" | sed -E 's/^#### +(.*)$/**\1**/')"
