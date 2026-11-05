@@ -13,6 +13,7 @@ Changes made on the server take effect for everyone at once; the ones listed her
 - **Players online:** the main menu shows how many players are online right now ("12 Players Online" with a green dot), left of the settings button, on every main-menu tab.
 
 ### Fixes
+- **"Invalid Parameters" when starting the game:** a player who once signed in to the original game with an email address (or Google Play on a phone) and never uninstalled it got "Invalid Parameters." at start-up; that old login is now cleared and the game signs in normally.
 - **No more "no Defence card" warning when queuing:** in a mode where the Defence card is picked at the start of the match (Classic), queuing no longer warns that your deck has no Defence card assigned.
 - **Ferren Areios with Vico Therbeus:** with both on the board, Oath troops can use their Oath ability up to 3 times every turn (the game let them act only once per turn). Not yet confirmed in play.
 - **Bots and Oath:** a bot only uses an Oath ability when it can pay its Energy cost. Not yet confirmed in play.
