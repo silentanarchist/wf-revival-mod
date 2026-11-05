@@ -272,7 +272,7 @@ namespace WarpforgeRevival
                 var src = check.Cast<RectTransform>();
                 rt.anchoredPosition = src.anchoredPosition - new Vector2(0f, src.rect.height + 24f);
             }
-            report.gameObject.SetActive(AccountPage.IsTester);
+            report.gameObject.SetActive(AccountPage.CanReportBugs);
         }
 
         // ---- Export card art: the card pictures from this copy of the game, as a zip for the website
@@ -475,13 +475,13 @@ namespace WarpforgeRevival
             try { if ((object)compressTick != null && compressTick.Pointer != IntPtr.Zero) compressTick.enabled = compressArt; } catch { }
         }
 
-        /// <summary>The report button only for testers (switched on by the phone layout fix like the others).</summary>
+        /// <summary>The report button only for players the server lets send reports (switched on by the phone layout fix like the others).</summary>
         private static void ReportVisible(Transform root)
         {
             try
             {
                 if ((object)report == null || report.Pointer == IntPtr.Zero) return;
-                if (AccountPage.IsTester) Show(report, root);
+                if (AccountPage.CanReportBugs) Show(report, root);
                 else if (report.gameObject.activeSelf) report.gameObject.SetActive(false);
             }
             catch { }

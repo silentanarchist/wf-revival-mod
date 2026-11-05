@@ -16,7 +16,7 @@ namespace WarpforgeRevival
     /// Bug reports from testers (plan: claude/tester-bug-reports.md in the project docs).
     ///
     /// Manual: F8 on PC, Settings > Mod > Report a bug, or in a match the small "Report bug" tab on
-    /// the left edge of the screen (testers only).
+    /// the left edge of the screen (players the server lets send reports: testers, or everyone - 0.15.19).
     /// The screen is captured first, then a short form asks for a title, type, how bad, and what
     /// happened; the mod adds the context (versions, device, scene, match rules), its last 400 log
     /// lines and the screenshot, and sends it to the server (POST /playfab/Revival/BugSubmit with the
@@ -399,7 +399,7 @@ namespace WarpforgeRevival
             if (atMenuDone || !AccountPage.StatusKnown) return;
             atMenuDone = true;
             SendDrafts();
-            if (pendingOld != null && AccountPage.IsTester && !Form.Open)
+            if (pendingOld != null && AccountPage.CanReportBugs && !Form.Open)
             {
                 string folder = pendingOld;
                 pendingOld = null;
@@ -415,7 +415,7 @@ namespace WarpforgeRevival
             {
                 var e = Event.current;
                 if (e == null) return;
-                bool tester = AccountPage.IsTester && !string.IsNullOrEmpty(PlayFabTransport.SessionTicket);
+                bool tester = AccountPage.CanReportBugs && !string.IsNullOrEmpty(PlayFabTransport.SessionTicket);
 #if !ANDROID_PORT
                 if (tester && !Form.Open && e.type == EventType.KeyDown && e.keyCode == KeyCode.F8) { captureNext = true; e.Use(); }
 #endif
@@ -437,13 +437,13 @@ namespace WarpforgeRevival
         /// <summary>Starts a manual report (the screen is captured on the next frame). From the Mod page's button.</summary>
         internal static void Request()
         {
-            if (AccountPage.IsTester && !Form.Open) captureNext = true;
+            if (AccountPage.CanReportBugs && !Form.Open) captureNext = true;
         }
 
         /// <summary>Starts a manual report after a short wait (a window closing first, so it is not in the screenshot).</summary>
         internal static void RequestAfter(float seconds)
         {
-            if (AccountPage.IsTester && !Form.Open) captureAt = Time.realtimeSinceStartup + seconds;
+            if (AccountPage.CanReportBugs && !Form.Open) captureAt = Time.realtimeSinceStartup + seconds;
         }
         private static float captureAt;
 
@@ -885,7 +885,10 @@ namespace WarpforgeRevival
                         {
                             sent = true; sentUrl = url ?? "";
                             heading = Loc.T("bugReport.sentHeading", "Bug {id} sent", ("id", id));
-                            status = sentUrl.Length > 0
+                            if (!AccountPage.IsTester) sentUrl = "";   // the website's bug list is for testers only
+                            status = !AccountPage.IsTester
+                                ? Loc.T("bugReport.thanksPlain", "Thank you. Your report reached the team.")
+                                : sentUrl.Length > 0
                                 ? Loc.T("bugReport.thanksLink", "Thank you. Add steps or more details on the website:\n{url}", ("url", sentUrl))
                                 : Loc.T("bugReport.thanks", "Thank you. Add steps or more details on the website (Bugs page).");
                             RevivalMod.Log.Msg($"[bugs] report sent as {id}");

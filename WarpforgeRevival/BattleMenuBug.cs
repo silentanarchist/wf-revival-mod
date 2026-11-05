@@ -28,7 +28,7 @@ namespace WarpforgeRevival
 
         private static void Add(BattleSettingsWindow window)
         {
-            if (!AccountPage.IsTester) return;
+            if (!AccountPage.CanReportBugs) return;
             var resign = window.resignButton;
             if ((object)resign == null) return;
             var rt = resign.transform.Cast<RectTransform>();

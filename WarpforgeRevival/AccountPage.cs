@@ -90,12 +90,16 @@ namespace WarpforgeRevival
 
         private static volatile string linkedName;          // null: not asked yet, "": not linked
         private static volatile bool tester, busy;
+        private static volatile int bugs = -1;              // -1: the server did not say (before 2026-11-05); 0 / 1
         private static bool described;
 
         /// <summary>Site account this player is linked to ("" when none or not known yet).</summary>
         internal static string LinkedAccount => linkedName ?? "";
         /// <summary>True when the linked site account is an in-game tester.</summary>
         internal static bool IsTester => tester;
+        /// <summary>True when this player may send bug reports (the server's "bugReports" setting: testers, everyone or
+        /// off); servers that do not say keep the old rule, testers only (0.15.19).</summary>
+        internal static bool CanReportBugs => bugs < 0 ? tester : bugs == 1;
         /// <summary>Whether the linked site account has a recovery code: null until the server has said (servers before 2026-10-16 do not).</summary>
         internal static bool? HasRecovery => hasRecovery;
         private static bool? hasRecovery;
@@ -166,9 +170,12 @@ namespace WarpforgeRevival
                                 : Loc.T("account.unlinked", "This game was unlinked from its account. Start the game again and sign in."));
                         if (data.TryGetProperty("recovery", out var rc) && (rc.ValueKind == System.Text.Json.JsonValueKind.True || rc.ValueKind == System.Text.Json.JsonValueKind.False))
                             hasRecovery = linked.Length > 0 && rc.ValueKind == System.Text.Json.JsonValueKind.True;
-                        bool changed = linked != linkedName || isTester != tester;
+                        int canBugs = data.TryGetProperty("bugReports", out var br) && (br.ValueKind == System.Text.Json.JsonValueKind.True || br.ValueKind == System.Text.Json.JsonValueKind.False)
+                            ? (br.ValueKind == System.Text.Json.JsonValueKind.True ? 1 : 0) : -1;
+                        bool changed = linked != linkedName || isTester != tester || canBugs != bugs;
                         linkedName = linked;
                         tester = isTester;
+                        bugs = canBugs;
                         ok = true;
                         message = linked.Length > 0 ? (isTester ? Loc.T("account.linkedTester", "Linked to {name} - in-game tester.", ("name", linked)) : Loc.T("account.linked", "Linked to {name}.", ("name", linked))) : Loc.T("account.notLinked", "Not linked to a site account.");
                         if (changed)
