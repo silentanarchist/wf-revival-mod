@@ -5,6 +5,15 @@ Called Warpforge Patcher up to 0.4.0.
 The Android app that patches the game on the device itself. Write "device", not "phone", unless something only applies to phones. Newest first. A heading ending in
 "(test build)" is published as a pre-release.
 
+## 0.4.4 - 2026-11-05
+
+### New
+- **Progress bar.** A bar at the bottom of the log shows what the app is doing and how far along it is: downloads (with size and speed), each patching step, unpacking a backup file, and handing the game to Android's installer.
+
+### Fixed
+- A download that stops receiving data no longer hangs forever. After 30 seconds without data the app stops it and says so; for an app update it also links to the releases page, so you can download the APK by hand.
+- The screen no longer freezes while the patched game is handed to Android's installer.
+
 ## 0.4.2 - 2026-10-28
 
 ### New
