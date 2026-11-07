@@ -73,6 +73,22 @@ namespace WarpforgeRevival
         private static volatile bool loaded;
         private static volatile int matchPort;
 
+        // Reconnects in matches (0.15.20; see Reconnects): 0 = the server did not say (the mod's defaults apply)
+        private static volatile int reconnectSeconds, reconnectDrops, hiccupSeconds;
+        /// <summary>Seconds a dropped player has to get back into the match ("reconnectSeconds", 15-180).</summary>
+        public static int ReconnectSeconds => reconnectSeconds;
+        /// <summary>Drops of one player in one match that are still retried ("reconnectDrops", 1-30).</summary>
+        public static int ReconnectDrops => reconnectDrops;
+        /// <summary>Seconds without an answer before the match connection counts as lost ("reconnectHiccupSeconds", 10-30).</summary>
+        public static int HiccupSeconds => hiccupSeconds;
+
+        private static int Clamped(JsonElement root, string name, int min, int max)
+        {
+            if (root.ValueKind != JsonValueKind.Object || !root.TryGetProperty(name, out var v) || v.ValueKind != JsonValueKind.Number ||
+                !v.TryGetInt32(out int n)) return 0;
+            return Math.Max(min, Math.Min(max, n));
+        }
+
         /// <summary>True once the server has answered (with settings or without) at least once.</summary>
         public static bool Loaded => loaded;
         /// <summary>Port of the server's match service ("matchPort"); 0 = the server's usual port.</summary>
@@ -146,6 +162,7 @@ namespace WarpforgeRevival
                         if (loaded && (turnSeconds != 0 || longGameEvent != null || rules.Length > 0))
                             RevivalMod.Log.Msg("[settings] the server no longer provides settings; using local values");
                         matchPort = 0;
+                        reconnectSeconds = reconnectDrops = hiccupSeconds = 0;
                         turnSeconds = 0;
                         offenseCards = false;
                         offenceModes = null;
@@ -187,6 +204,12 @@ namespace WarpforgeRevival
                     if (doc.RootElement.ValueKind == JsonValueKind.Object && doc.RootElement.TryGetProperty("matchPort", out var mp) && mp.ValueKind == JsonValueKind.Number)
                         port = mp.GetInt32();
                     matchPort = port > 0 && port < 65536 ? port : 0;
+                    int rs = Clamped(doc.RootElement, "reconnectSeconds", 15, 180), rd = Clamped(doc.RootElement, "reconnectDrops", 1, 30),
+                        hs = Clamped(doc.RootElement, "reconnectHiccupSeconds", 10, 30);
+                    if (rs != reconnectSeconds || rd != reconnectDrops || hs != hiccupSeconds)
+                        RevivalMod.Log.Msg($"[settings] server settings: reconnect window {(rs > 0 ? rs + " s" : "default")}, " +
+                                           $"drops retried {(rd > 0 ? rd.ToString() : "default")}, connection timeout {(hs > 0 ? hs + " s" : "default")}");
+                    reconnectSeconds = rs; reconnectDrops = rd; hiccupSeconds = hs;
                     loaded = true;
                     int life = 0;
                     if (doc.RootElement.ValueKind == JsonValueKind.Object && doc.RootElement.TryGetProperty("practiceClassicWarlordLife", out var pl) && pl.ValueKind == JsonValueKind.Number)

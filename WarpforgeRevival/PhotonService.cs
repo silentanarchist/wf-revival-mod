@@ -113,6 +113,7 @@ namespace WarpforgeRevival
                     string where = server + (host == "127.0.0.1" ? " (encrypted)" : "");
                     if (announced != where) { announced = where; RevivalMod.Log.Msg("[match] matches use the revival server's match service at " + where); }
                     PhotonNetwork.SwitchToProtocol(Il2CppExitGames.Client.Photon.ConnectionProtocol.Tcp);
+                    Reconnects.SetPeerTimeout();          // 0.15.20: ride out short network hiccups
                     PhotonNetwork.ConnectToMaster(host, port, AppName, version);
                 }
                 catch (Exception e) { RevivalMod.Log.Warning("[match] " + e.Message); }
