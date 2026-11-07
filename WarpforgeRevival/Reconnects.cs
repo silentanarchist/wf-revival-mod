@@ -10,14 +10,14 @@ namespace WarpforgeRevival
     /// this match (BattleManager.AttemptReconnect: floor 10 s, and no attempt at all after the 6th drop); the opponent
     /// waits the same 30 s minus 3 s per drop before winning by disconnect (ForfeitDisconnectedEnemy, floor 15 s).
     /// Both countdowns are started from ShowDisconnectionPopup, so before each start this sets the window from the
-    /// server's "reconnectSeconds" (default 60) and clears the game's own drop counter, so the window no longer
+    /// server's "reconnectSeconds" (default 30) and clears the game's own drop counter, so the window no longer
     /// shrinks. The drop limit is kept, but counted here: after "reconnectDrops" (default 9) drops of our own in one
     /// match the game's counter is set to its own limit and the next drop is not retried. The opponent's side has no
     /// limit in the game; their own client stops retrying at the same limit.
     /// </summary>
     internal static class Reconnects
     {
-        private const int DefaultSeconds = 60, DefaultDrops = 9;
+        private const int DefaultSeconds = 30, DefaultDrops = 9;
         private const int GameDropLimit = 6;         // AttemptReconnect runs only while playerDisconnects < 6
         private static IntPtr match;                 // the BattleManager the counts below belong to
         private static int ownDrops;
