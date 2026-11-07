@@ -178,11 +178,17 @@ namespace WarpforgeRevival
                 if ((object)battle == null || battle.Pointer == IntPtr.Zero || battle.m_CachedPtr == IntPtr.Zero) return;
                 if (IsReplay(battle)) { cardsFromReplay = true; return; }
                 if (cardsFromReplay) { seenCards.Clear(); cardsFromReplay = false; }
-                if (!Live(cardManager)) cardManager = UnityEngine.Object.FindObjectOfType<BattleCardManager>();   // once a match (M-11)
+                if (!Live(cardManager))
+                {
+                    cardManager = UnityEngine.Object.FindObjectOfType<BattleCardManager>();   // once a match (M-11)
+                    // A new card manager is a new match. Card numbers start again from 0 each match, so the old
+                    // test (is card 0 unseen?) never fired and a match whose recording was not saved left its
+                    // table behind for the next one (0.15.20).
+                    if (Live(cardManager)) seenCards.Clear();
+                }
                 var manager = cardManager;
                 var all = (object)manager == null ? null : manager.GetAllCardsInGame();
                 if (all == null) return;
-                if (all.Count > 0 && seenCards.Count > 0 && !seenCards.ContainsKey(all[0].uniqueInGameID)) seenCards.Clear();    // a new match
                 for (int i = 0; i < all.Count && seenCards.Count < 600; i++)
                 {
                     var c = all[i];
