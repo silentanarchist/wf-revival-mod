@@ -104,6 +104,27 @@ namespace WarpforgeRevival
             }
         }
 
+        // A deck code whose warlord the game cannot find (mistyped, or from another game version) still gave a deck:
+        // CardDeck.DeserializeDeckString drops every card it does not know, warlord included, and returns a deck with
+        // no warlord. The deck window then failed halfway open (DeckInfoPopup.Open, null warlord) and the screen stayed
+        // locked (B-0014). Such a code now counts as invalid: the import window shows the game's own "bad code"
+        // message. The chat's shared-deck messages read codes the same way; they never had a warlord-less deck
+        // before either, and a null deck is what the game already returns for any broken code (0.15.22).
+        [HarmonyPatch(typeof(CardDeck), nameof(CardDeck.DeserializeDeckString))]
+        private static class NoWarlordlessCode
+        {
+            private static void Postfix(ref CardDeck __result)
+            {
+                try
+                {
+                    if ((object)__result == null || (object)__result.deckHero != null) return;
+                    __result = null;
+                    RevivalMod.Log.Msg("[decks] deck code refused: its warlord is not a known card");
+                }
+                catch (Exception e) { RevivalMod.Log.Warning("[decks] deck code: " + e.Message); }
+            }
+        }
+
         // Offensive and defensive cards unlock with a faction's Forge level. The revival server has
         // no Forge, so treat every faction as fully levelled: all of them are available.
         [HarmonyPatch(typeof(EnviromentalEffectCardsSO), nameof(EnviromentalEffectCardsSO.GetEnvCardList))]

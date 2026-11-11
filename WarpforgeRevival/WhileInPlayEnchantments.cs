@@ -76,6 +76,55 @@ namespace WarpforgeRevival
             }
         }
 
+        // ---------------------------------------------------------------- diagnostics (0.15.22)
+        // B-0015: on 0.15.21 Everstorm again gave no -1 Ranged to troops entering later, and neither patch above logged
+        // anything in that match, so the refresh never asked about the card that holds the enchantment. The refresh
+        // (BroadcastWhileInPlay) only walks manager.unitsInPlay and both hands. This notes, a few times a match, every
+        // card that carries a "while in play" enchantment, its state, and whether it is in unitsInPlay at all.
+        private static IntPtr diagMatch;
+        private static int diagLines;
+        private static float nextDiag;
+        private static string lastDiag;
+        private static BattleCardManager diagCards;
+
+        [HarmonyPatch(typeof(BattleManagerSupport), nameof(BattleManagerSupport.BroadcastWhileInPlay))]
+        private static class Diagnose
+        {
+            private static void Postfix(BattleManager manager)
+            {
+                try
+                {
+                    if ((object)manager == null || manager.m_CachedPtr == IntPtr.Zero) return;
+                    if (manager.Pointer != diagMatch) { diagMatch = manager.Pointer; diagLines = 0; lastDiag = null; diagCards = null; nextDiag = 0; }
+                    if (diagLines >= 8) return;
+                    float now = UnityEngine.Time.realtimeSinceStartup;
+                    if (now < nextDiag) return;
+                    nextDiag = now + 5f;
+                    if ((object)diagCards == null || diagCards.m_CachedPtr == IntPtr.Zero) diagCards = UnityEngine.Object.FindObjectOfType<BattleCardManager>();
+                    var all = (object)diagCards == null ? null : diagCards.GetAllCardsInGame();
+                    if (all == null) return;
+                    var inPlay = manager.unitsInPlay;
+                    var sb = new System.Text.StringBuilder();
+                    for (int i = 0; i < all.Count; i++)
+                    {
+                        var c = all[i];
+                        if ((object)c == null || c.m_CachedPtr == IntPtr.Zero || !FromEnchantment(c)) continue;
+                        bool listed = inPlay != null && inPlay.Contains(c);
+                        bool reached = false;
+                        try { reached = c.HasWhileInPlayAbility(); } catch { }
+                        sb.Append(sb.Length > 0 ? "; " : "").Append($"{Name(c)} ({(c.isPlayer ? "ours" : "theirs")}, {c.cardState}, " +
+                            $"in unitsInPlay {(listed ? "yes" : "NO")}, IsInPlay {c.IsInPlay()}, refreshed {(reached ? "yes" : "no")})");
+                    }
+                    string line = sb.Length > 0 ? sb.ToString() : "none";
+                    if (line == lastDiag) return;
+                    lastDiag = line;
+                    diagLines++;
+                    RevivalMod.Log.Msg("[whileinplay] cards carrying a while-in-play enchantment: " + line);
+                }
+                catch (Exception e) { if (diagLines < 8) { diagLines++; RevivalMod.Log.Warning("[whileinplay] diagnostics: " + e.Message); } }
+            }
+        }
+
         // ---------------------------------------------------------------- 2. the card is its own acting card
 
         [HarmonyPatch(typeof(RawCardScript), nameof(RawCardScript.UpdateWhileInPlay))]
