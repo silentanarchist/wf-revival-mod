@@ -193,8 +193,8 @@ namespace WarpforgeRevival
             float now = UnityEngine.Time.realtimeSinceStartup;
             // 0.12.62: the three refreshes after the loading scene closed are off. They never prevented a
             // black menu on the Pixel 6 Pro (4 black menus in 14 starts with them), and on a Pixel 8 Pro a
-            // one-frame black was seen at the transition right when they ran. The refresh stays as the
-            // first fix step in ScreenCheck, where it brought the picture back on the Pixel 8 Pro (00:23).
+            // one-frame black was seen at the transition right when they ran. (The refresh was later a fix step
+            // in ScreenCheck's black-picture checks; those and GpuState were removed in 0.15.23.)
             if (now < nextLook) return;
             nextLook = now + 0.25f;
             try
