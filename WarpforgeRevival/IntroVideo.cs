@@ -56,6 +56,17 @@ namespace WarpforgeRevival
             try { return (RevivalMod.Config.LoadingVideo ?? "").Trim(); } catch { return ""; }
         }
 
+        /// <summary>True when the loading video is not decoded at all (LoadingVideo = Still or Off), so the phones'
+        /// black menu (from decoding the clip) cannot happen and ScreenCheck has nothing to watch (0.15.24).</summary>
+        internal static bool VideoSkipped
+        {
+            get
+            {
+                string m = Mode();
+                return m.Equals("Still", StringComparison.OrdinalIgnoreCase) || m.Equals("Off", StringComparison.OrdinalIgnoreCase);
+            }
+        }
+
         private static void DropTexture()
         {
             try
@@ -193,8 +204,8 @@ namespace WarpforgeRevival
             float now = UnityEngine.Time.realtimeSinceStartup;
             // 0.12.62: the three refreshes after the loading scene closed are off. They never prevented a
             // black menu on the Pixel 6 Pro (4 black menus in 14 starts with them), and on a Pixel 8 Pro a
-            // one-frame black was seen at the transition right when they ran. (The refresh was later a fix step
-            // in ScreenCheck's black-picture checks; those and GpuState were removed in 0.15.23.)
+            // one-frame black was seen at the transition right when they ran. The refresh stays as the
+            // first fix step in ScreenCheck, where it brought the picture back on the Pixel 8 Pro (00:23).
             if (now < nextLook) return;
             nextLook = now + 0.25f;
             try
