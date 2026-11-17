@@ -20,7 +20,8 @@ namespace WarpforgeRevival
     ///  - the starting hand, the second player's extra cards and the turn timer are read from here
     ///    by LongGame (starting hand) and TurnClock;
     ///  - the Offence card pick and who goes first (0.13.24) are applied by MatchOptions.
-    /// A challenge without "revivalRules" is an ordinary Classic/Skirmish challenge, as before.
+    /// Since 0.15.26 every challenge carries them: one sent from the game's own buttons gets its mode's preset
+    /// (EveryChallengeHasRules). A challenge without "revivalRules" (another mode) is an ordinary one.
     /// </summary>
     internal static class ChallengeRules
     {
@@ -251,6 +252,40 @@ namespace WarpforgeRevival
             outgoingTo = to;
             outgoingAt = Time.realtimeSinceStartup;
             Apply(rules, true);     // the challenger's own match uses them too
+        }
+
+        /// <summary>
+        /// Every challenge carries a rule set (0.15.26). A challenge sent from the game's own buttons (the friend list's
+        /// Challenge and its mode popup) used to carry none, and each game then filled the gaps from its own state - its
+        /// player's selected mode, the practice menu's last choice - so the two games could play by different rules
+        /// (Offence pick on one side only, different warlord health) and the match desynced. Such a challenge now sends
+        /// the chosen mode's preset, exactly as the Challenge page does when nothing is changed. The page's own
+        /// challenge (rules just noted for this friend) is left alone.
+        /// </summary>
+        [HarmonyPatch(typeof(ChallengeManager), nameof(ChallengeManager.StartChallengeWithUser))]
+        private static class EveryChallengeHasRules
+        {
+            private static void Prefix(string __1, IPlayEvent __3)
+            {
+                try
+                {
+                    string friend = __1;
+                    if (string.IsNullOrEmpty(friend)) return;
+                    if (outgoing != null && string.Equals(friend, outgoingTo, StringComparison.OrdinalIgnoreCase) &&
+                        Time.realtimeSinceStartup - outgoingAt <= 15f) return;          // the Challenge page's own
+                    var data = (object)__3 == null ? null : __3.GetBaseData();
+                    string mode = (object)data == null ? null : data.eventId;
+                    if (string.IsNullOrEmpty(mode) || !AllowedModes().Contains(mode))
+                    {
+                        RevivalMod.Log.Msg($"[challenge] challenge to {friend} in '{mode ?? "unknown"}': not a challenge mode, sent without rules");
+                        return;
+                    }
+                    var rules = Preset(__3, mode);
+                    RevivalMod.Log.Msg($"[challenge] challenge to {friend} from the game's own menu: sending {mode}'s rules");
+                    Outgoing(friend, rules);
+                }
+                catch (Exception e) { RevivalMod.Log.Warning("[challenge] rules for a challenge: " + e.Message); }
+            }
         }
 
         /// <summary>
