@@ -45,6 +45,16 @@ namespace WarpforgeRevival
                 string why;
                 int? rule = ChallengeRules.Offence;
                 string ev = ChallengeRules.RulesEvent ?? ((object)md == null ? null : Replays.EventOf(md)) ?? LongGame.PlayingEventId();
+                // An ordinary friend challenge (no custom rules): both games follow one mode (0.15.25). Before, each game
+                // took the mode its own player had selected, so friends in different modes disagreed on whether there
+                // is an Offence pick, and the match broke on its first move (2026-11-16).
+                bool ordinaryChallenge = rule == null && !replay && InFriendChallenge(md);
+                if (ordinaryChallenge)
+                {
+                    string own = ev;
+                    ev = ServerSettings.ChallengeMode;
+                    if (own != ev) RevivalMod.Log.Msg($"[match] friend challenge without custom rules: following {ev} (your selected mode is {own ?? "unknown"})");
+                }
                 if (rule != null)
                 {
                     on = rule == 1;
@@ -53,7 +63,7 @@ namespace WarpforgeRevival
                 else
                 {
                     on = ServerSettings.OffenceFor(ev);
-                    why = "game mode " + (ev ?? "unknown") + (replay ? " (replay without a saved choice)" : "");
+                    why = "game mode " + (ev ?? "unknown") + (replay ? " (replay without a saved choice)" : ordinaryChallenge ? " (friend challenge)" : "");
                 }
                 BattlefieldCards.Set(on);
                 // the Defence card: from the deck, or picked after the mulligan when the mode has no slot in the editor
@@ -62,6 +72,21 @@ namespace WarpforgeRevival
                                    (BattlefieldCards.PickOn != on ? " - could not be switched on this device" : ""));
             }
             catch (Exception e) { RevivalMod.Log.Warning("[match] Offence cards for this match: " + e.Message); }
+        }
+
+        /// <summary>A friend challenge: its match type, or (they may not be set yet as the battle starts) its room,
+        /// which the game names Practice_&lt;challenger&gt; (BattleNetworkManager.GetPracticeRoomName).</summary>
+        private static bool InFriendChallenge(MatchData md)
+        {
+            try
+            {
+                if ((object)md != null && (md.playMode == PlayModes.Duel || md.matchType == MatchType.Duel)) return true;
+                if (PhotonNetwork.offlineMode || !PhotonNetwork.inRoom) return false;
+                var room = PhotonNetwork.room;
+                string name = (object)room == null ? null : room.Name;
+                return name != null && name.StartsWith("Practice_", StringComparison.Ordinal);
+            }
+            catch { return false; }
         }
 
         [HarmonyPatch(typeof(SupportMethods), nameof(SupportMethods.GetPlayerGoesFirstWithInitiative))]

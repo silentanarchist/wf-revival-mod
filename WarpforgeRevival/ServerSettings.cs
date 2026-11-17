@@ -95,6 +95,11 @@ namespace WarpforgeRevival
         public static int MatchPort => matchPort;
 
         private static volatile string creatorUrl;
+        private static volatile string challengeMode;
+        /// <summary>The game mode whose Offence card and Defence card rules an ordinary friend challenge (one without
+        /// custom rules) follows: the server's "challengeMode", else RevivalClassic (0.15.25). Before, each side used
+        /// its own player's selected mode, so two friends in different modes ran different rules.</summary>
+        public static string ChallengeMode => !string.IsNullOrEmpty(challengeMode) ? challengeMode : "RevivalClassic";
 
         private static volatile string rules = "";
         /// <summary>
@@ -171,6 +176,7 @@ namespace WarpforgeRevival
                         modeHands = new System.Collections.Generic.Dictionary<string, (int, int)>();
                         practiceClassicLife = 0;
                         creatorUrl = null;
+                        challengeMode = null;
                         MenuLayout.FromServer(null);
                         loaded = true;
                         return;
@@ -189,6 +195,14 @@ namespace WarpforgeRevival
                         if (v.StartsWith("https://", StringComparison.OrdinalIgnoreCase) || v.StartsWith("http://", StringComparison.OrdinalIgnoreCase)) creator = v;
                     }
                     creatorUrl = creator;
+                    string cm = null;
+                    if (doc.RootElement.ValueKind == JsonValueKind.Object && doc.RootElement.TryGetProperty("challengeMode", out var cme) &&
+                        cme.ValueKind == JsonValueKind.String)
+                    {
+                        string v = (cme.GetString() ?? "").Trim();
+                        if (v.Length > 0 && v.Length <= 64) cm = v;
+                    }
+                    challengeMode = cm;
                     string rv = "";
                     if (doc.RootElement.ValueKind == JsonValueKind.Object && doc.RootElement.TryGetProperty("rulesVersion", out var rve) &&
                         (rve.ValueKind == JsonValueKind.String || rve.ValueKind == JsonValueKind.Number))

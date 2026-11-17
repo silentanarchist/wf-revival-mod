@@ -136,6 +136,12 @@ namespace WarpforgeRevival
                 {
                     int bonus = ServerSettings.PracticeClassicLife;
                     if (bonus == 0 || !practiceModeKnown || practiceMode != PlayModes.Classic) return;
+                    // Practice against the AI only (0.15.25). The practice-menu choice above is remembered for the rest
+                    // of the session, so a friend challenge played afterwards also got the bonus - on the side of the
+                    // player who had been in Practice only, which put the two games' warlord health out of step
+                    // (desyncs late in challenges, 2026-11-16).
+                    var md = __instance.matchData;
+                    if ((object)md == null || md.matchType != MatchType.PracticeOffline) return;
                     var modes = LiveOpsManager.GetHandler<GameModes>();
                     var current = (object)modes == null ? null : modes.CurrentPlayingEvent;
                     var data = (object)current == null ? null : current.GetBaseData();
