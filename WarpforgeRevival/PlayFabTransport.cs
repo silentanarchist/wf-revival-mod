@@ -114,6 +114,8 @@ namespace WarpforgeRevival
                         {
                             // the server needs a newer mod: update now instead of failing the sign-in
                             if (await RevivalMod.UpdateForServer()) return;      // the game closes; nothing is handed back
+                            // the update could not be installed: the game shows its error popup next, with the server's words (0.15.28)
+                            GameSignIn.RefusedForVersion = GameSignIn.OutOfDateMessage(body);
                             break;
                         }
                         string why = login && round < 8 ? GameSignIn.NeedsSignIn(body) : null;

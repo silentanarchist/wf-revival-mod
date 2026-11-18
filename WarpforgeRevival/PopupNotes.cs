@@ -45,6 +45,19 @@ namespace WarpforgeRevival
                 try
                 {
                     text = ChallengeRules.Decorate(text);        // a custom-rules challenge: its rules on the game's popup
+                    // The sign-in was refused because the mod is too old and the update could not be downloaded
+                    // (2026-11-12: a player on a slow connection saw only "Account not found" and thought the account
+                    // was gone). The game shows a PlayFab error popup by its error code; show the server's own words
+                    // and how to update instead (0.15.28).
+                    string refused = GameSignIn.RefusedForVersion;
+                    if (refused != null && localizeTexts && text != null && text.StartsWith("PlayfabErrors/", StringComparison.Ordinal))
+                    {
+                        GameSignIn.RefusedForVersion = null;
+                        RevivalMod.Log.Msg($"[popup] '{text}' after an out-of-date sign-in: the server's message is shown instead");
+                        text = refused + "\n\n" + Loc.T("popup.updateByHand",
+                            "The mod could not download the update (the connection to the server was too slow or was cut). Your account is fine. Update with the Patcher app or download the new version from the Discord, then start the game again.");
+                        localizeTexts = false;
+                    }
                     string shown = text;
                     if (localizeTexts && !string.IsNullOrEmpty(text))
                     {

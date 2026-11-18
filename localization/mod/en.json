@@ -203,6 +203,7 @@
   "popup.rateLimited": "Too many requests to the server. Wait a minute and try again.",
   "popup.serverBusy": "The server could not do that right now. Try again in a moment.",
   "popup.somethingWrong": "Something went wrong.",
+  "popup.updateByHand": "The mod could not download the update (the connection to the server was too slow or was cut). Your account is fine. Update with the Patcher app or download the new version from the Discord, then start the game again.",
   "practice.yourDeck": "Your deck",
   "profile.draws": "{count} D",
   "profile.friendCode": "Friend code: {code}",

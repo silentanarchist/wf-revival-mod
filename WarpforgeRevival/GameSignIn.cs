@@ -207,6 +207,25 @@ namespace WarpforgeRevival
             catch { return false; }
         }
 
+        /// <summary>The server's own words (in the player's language) when it refused the sign-in because this mod is
+        /// too old and the update could not be installed; shown on the game's error popup instead of its "Account not
+        /// found" (PopupNotes, 0.15.28). Null otherwise.</summary>
+        internal static volatile string RefusedForVersion;
+
+        /// <summary>The errorMessage of an out-of-date answer (see OutOfDate), or a general sentence.</summary>
+        internal static string OutOfDateMessage(string body)
+        {
+            try
+            {
+                using var doc = System.Text.Json.JsonDocument.Parse(body);
+                if (doc.RootElement.TryGetProperty("errorMessage", out var m) && m.ValueKind == System.Text.Json.JsonValueKind.String &&
+                    !string.IsNullOrWhiteSpace(m.GetString()))
+                    return m.GetString().Trim();
+            }
+            catch { }
+            return Loc.T("update.needed", "This server needs a newer WF Revival mod. Downloading it...");
+        }
+
         /// <summary>From any thread: shows "Updating" while the update downloads (no closing yet).</summary>
         internal static void Updating(string text)
         {
