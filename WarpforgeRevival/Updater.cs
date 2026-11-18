@@ -154,10 +154,15 @@ namespace WarpforgeRevival
             {
                 var offer = known ?? await Manifest();
                 if (offer == null || !offer.Value.newer) throw new InvalidOperationException("the server has no newer mod to offer");
-                using var http = Net.Client(TimeSpan.FromSeconds(120));
-                var data = await http.GetByteArrayAsync(server + offer.Value.url);
-                string got = Convert.ToHexString(SHA256.HashData(data)).ToLowerInvariant();
-                if (got != offer.Value.sha) throw new InvalidDataException("downloaded mod does not match the server's checksum");
+                // keeps going for as long as data arrives (0.15.28; a fixed 120 s gave up on slow connections)
+                var download = await Net.Download(server + offer.Value.url, progress: (got, total) =>
+                    GameSignIn.Updating(message + "\n" + (total > 0
+                        ? Loc.T("update.progress", "{done} of {total} KB", ("done", (got / 1024).ToString()), ("total", (total / 1024).ToString()))
+                        : Loc.T("update.progressNoTotal", "{done} KB", ("done", (got / 1024).ToString())))));
+                if (!download.Ok) throw new System.Net.Http.HttpRequestException($"the server answered HTTP {(int)download.Status}");
+                var data = download.Data;
+                string sum = Convert.ToHexString(SHA256.HashData(data)).ToLowerInvariant();
+                if (sum != offer.Value.sha) throw new InvalidDataException("downloaded mod does not match the server's checksum");
                 // signed by the project owner (0.14.0), and newer than the running build by its own version
                 string refused = ModSignature.Check(data, FileName, out string signedVersion);
                 if (refused != null) throw new InvalidDataException("downloaded mod refused: " + refused);

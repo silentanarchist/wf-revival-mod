@@ -291,5 +291,7 @@
   "update.newer": "A newer WF Revival mod is available from the server. Downloading it...",
   "update.noMod": "The server has no mod to offer.",
   "update.noServer": "Not connected to a server.",
+  "update.progress": "{done} of {total} KB",
+  "update.progressNoTotal": "{done} KB",
   "update.updating": "Updating the mod to {version}..."
 }

@@ -87,7 +87,12 @@ namespace WarpforgeRevival
                     if (name.IndexOfAny(new[] { '/', '\\' }) >= 0 || !name.StartsWith("custom-")) continue;
                     string path = Path.Combine(folder, name);
                     if (File.Exists(path) && Sha256(path) == sha) continue;
-                    var data = await http.GetByteArrayAsync(server + "/api/v1/content/custom/" + name);
+                    // keeps going for as long as data arrives (0.15.28)
+                    var fileReq = new System.Net.Http.HttpRequestMessage(System.Net.Http.HttpMethod.Get, server + "/api/v1/content/custom/" + name);
+                    fileReq.Headers.TryAddWithoutValidation("X-Revival-Login", login);
+                    var file = await Net.Download(fileReq);
+                    if (!file.Ok) { RevivalMod.Log.Warning($"[custom] {name}: HTTP {(int)file.Status}; package not updated"); return; }
+                    var data = file.Data;
                     string got = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(data)).ToLowerInvariant();
                     if (got != sha) { RevivalMod.Log.Warning($"[custom] {name} does not match the server's checksum; package not updated"); return; }
                     File.WriteAllBytes(path + ".new", data);

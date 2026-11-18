@@ -49,6 +49,77 @@ namespace WarpforgeRevival
         internal static HttpClient Client(TimeSpan timeout, bool gzip = false)
             => new HttpClient(Handler(gzip), disposeHandler: false) { Timeout = timeout };
 
+        // ---------------------------------------------------------------- downloads that keep going while data arrives (0.15.28)
+        /// <summary>How long a download may go without receiving a single byte before it is given up.</summary>
+        internal static readonly TimeSpan DownloadIdle = TimeSpan.FromSeconds(45);
+        /// <summary>The longest a download may take in all, however slowly it keeps arriving.</summary>
+        internal static readonly TimeSpan DownloadMax = TimeSpan.FromMinutes(30);
+
+        /// <summary>The result of Download: the HTTP status, and the body when the status was a success.</summary>
+        internal readonly struct Downloaded
+        {
+            internal readonly HttpStatusCode Status;
+            internal readonly byte[] Data;
+            internal Downloaded(HttpStatusCode status, byte[] data) { Status = status; Data = data; }
+            internal bool Ok => Data != null;
+        }
+
+        /// <summary>
+        /// Downloads a file for as long as it keeps arriving. A fixed time limit (120 s for the mod update before
+        /// 0.15.28) gave up on a player whose connection was slow but working (2026-11-12: the sign-in alone took
+        /// 107 s). Here the download is only given up when no data at all arrives for DownloadIdle (the connection
+        /// has stalled or dropped), or after DownloadMax in all. progress(received, total) is called from the
+        /// download's thread, at most about twice a second; total is -1 when the server does not say the size.
+        /// Throws on a stalled or failed download; a non-success status comes back as Status with no Data.
+        /// </summary>
+        internal static async System.Threading.Tasks.Task<Downloaded> Download(HttpRequestMessage request, bool gzip = false,
+            Action<long, long> progress = null)
+        {
+            using var http = new HttpClient(Handler(gzip), disposeHandler: false) { Timeout = System.Threading.Timeout.InfiniteTimeSpan };
+            using var all = new System.Threading.CancellationTokenSource(DownloadMax);
+            using var idle = new System.Threading.CancellationTokenSource(DownloadIdle);
+            using var both = System.Threading.CancellationTokenSource.CreateLinkedTokenSource(all.Token, idle.Token);
+            try
+            {
+                using var reply = await http.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, both.Token);
+                if (!reply.IsSuccessStatusCode) return new Downloaded(reply.StatusCode, null);
+                long total = reply.Content.Headers.ContentLength ?? -1;
+                using var body = await reply.Content.ReadAsStreamAsync(both.Token);
+                using var into = total > 0 && total < int.MaxValue ? new System.IO.MemoryStream((int)total) : new System.IO.MemoryStream();
+                var buffer = new byte[64 * 1024];
+                long got = 0;
+                var lastReport = DateTime.UtcNow;
+                while (true)
+                {
+                    idle.CancelAfter(DownloadIdle);                  // data keeps coming: the idle clock starts again
+                    int n = await body.ReadAsync(buffer, 0, buffer.Length, both.Token);
+                    if (n == 0) break;
+                    into.Write(buffer, 0, n);
+                    got += n;
+                    if (progress != null && (DateTime.UtcNow - lastReport).TotalMilliseconds >= 500)
+                    {
+                        lastReport = DateTime.UtcNow;
+                        try { progress(got, total); } catch { }
+                    }
+                }
+                if (total > 0 && got != total) throw new System.IO.IOException($"the download ended early ({got} of {total} bytes)");
+                try { progress?.Invoke(got, total); } catch { }
+                return new Downloaded(reply.StatusCode, into.ToArray());
+            }
+            catch (OperationCanceledException) when (idle.IsCancellationRequested && !all.IsCancellationRequested)
+            {
+                throw new TimeoutException($"no data arrived for {DownloadIdle.TotalSeconds:0} seconds (the connection stalled or dropped)");
+            }
+            catch (OperationCanceledException) when (all.IsCancellationRequested)
+            {
+                throw new TimeoutException($"the download took longer than {DownloadMax.TotalMinutes:0} minutes");
+            }
+        }
+
+        /// <summary>Download for a plain GET.</summary>
+        internal static System.Threading.Tasks.Task<Downloaded> Download(string url, bool gzip = false, Action<long, long> progress = null)
+            => Download(new HttpRequestMessage(HttpMethod.Get, url), gzip, progress);
+
         // ---------------------------------------------------------------- the mod's own server calls (M-25)
         // Nine places built "POST JSON to /playfab/Revival/..., with the session, read data / errorMessage" by
         // hand, three ways, two with their own clients and timeouts, one with its own retry, and the same message

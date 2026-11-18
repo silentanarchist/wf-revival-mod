@@ -93,15 +93,16 @@ namespace WarpforgeRevival
                 using var req = new HttpRequestMessage(HttpMethod.Get, server + b.GetProperty("url").GetString());
                 var login = GameSignIn.Token();
                 if (login != null) req.Headers.TryAddWithoutValidation("X-Revival-Login", login);
-                using var reply = await http.SendAsync(req);
-                if (reply.StatusCode == HttpStatusCode.Forbidden || reply.StatusCode == HttpStatusCode.Unauthorized)
+                // keeps going for as long as data arrives (0.15.28); the game does not wait for it past its usual limit
+                var reply = await Net.Download(req, gzip: true);
+                if (reply.Status == HttpStatusCode.Forbidden || reply.Status == HttpStatusCode.Unauthorized)
                 {
                     bundlesRefused = true;
                     RevivalMod.Log.Warning($"Content bundle {name} needs a signed-in game; it is downloaded after you sign in and used from the next start");
                     continue;
                 }
-                reply.EnsureSuccessStatusCode();
-                var data = await reply.Content.ReadAsByteArrayAsync();
+                if (!reply.Ok) throw new HttpRequestException($"bundle {name}: HTTP {(int)reply.Status}");
+                var data = reply.Data;
                 var got = Convert.ToHexString(SHA256.HashData(data)).ToLowerInvariant();
                 if (got != want) throw new InvalidDataException($"bundle {name} checksum mismatch");
                 File.WriteAllBytes(path + ".tmp", data);
