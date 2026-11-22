@@ -63,6 +63,7 @@
   "bugReport.title": "Title",
   "bugReport.type": "Type",
   "bugReport.whatHappened": "What happened",
+  "cards.restart": "The card data was updated on the server. Restart the game to play online: until then you are only matched with players who have not restarted either.",
   "challenge.byCode": "Or by friend code",
   "challenge.codePlaceholder": "Friend code",
   "challenge.customRules": "Custom rules:",

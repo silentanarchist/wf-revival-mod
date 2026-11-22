@@ -71,10 +71,12 @@ namespace WarpforgeRevival
                         opts.m_UseUWRForLocalBundles = false;
                     }
                     RevivalMod.Log.Msg($"[addressables] {name} -> {replacement}");
+                    CardsCheck.Noted(name, replacement);           // which card data this run plays with (0.15.30)
                     return replacement;
                 }
 
                 RevivalMod.Log.Warning($"[addressables] no replacement for remote content '{name}'");
+                CardsCheck.Noted(name, null);
                 return id;
             }
             catch (Exception e)

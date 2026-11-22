@@ -26,9 +26,9 @@ namespace WarpforgeRevival
     public class RevivalMod : MelonMod
     {
         #if ANDROID_PORT
-        public const string Version = "0.15.29-a";
+        public const string Version = "0.15.30-a";
 #else
-        public const string Version = "0.15.29-w";
+        public const string Version = "0.15.30-w";
 #endif
 
         /// <summary>
@@ -161,6 +161,7 @@ namespace WarpforgeRevival
             BugReport.Start();               // crash/freeze tracking: as early as possible after the settings
             Cards = new CardPackClient(Config.ServerUrl, dataDir);
             Cards.StartSync();
+            CardsCheck.Start();              // tells the player when the server's card data is newer than this run's (0.15.30)
 #if !ANDROID_PORT   // Windows only
             NoSteam.Apply(HarmonyInstance);
 #endif

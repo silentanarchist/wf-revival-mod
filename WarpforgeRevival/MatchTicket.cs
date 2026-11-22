@@ -44,8 +44,12 @@ namespace WarpforgeRevival
             try
             {
                 // the version goes with it: from 0.14.17 the match service picks who goes first when both players' mods follow it
-                var reply = await Net.PostJson("/playfab/Revival/MatchTicket", "{}", TimeSpan.FromSeconds(10),
-                    new[] { new System.Collections.Generic.KeyValuePair<string, string>("X-Revival-Mod", RevivalMod.Version) }, retry: true);
+                // and the card data this run plays with (0.15.30): the match service only pairs players with the same cards
+                var headers = new System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<string, string>>
+                    { new System.Collections.Generic.KeyValuePair<string, string>("X-Revival-Mod", RevivalMod.Version) };
+                string cards = CardsCheck.InUse;
+                if (cards != null) headers.Add(new System.Collections.Generic.KeyValuePair<string, string>("X-Revival-Cards", cards));
+                var reply = await Net.PostJson("/playfab/Revival/MatchTicket", "{}", TimeSpan.FromSeconds(10), headers.ToArray(), retry: true);
                 var data = reply.Data;
                 if (reply.Ok && data.ValueKind == System.Text.Json.JsonValueKind.Object && data.TryGetProperty("ticket", out var t))
                 {
