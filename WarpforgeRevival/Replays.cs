@@ -158,6 +158,42 @@ namespace WarpforgeRevival
             return recorded == c.CardsVersion || recorded == c.PackVersion;
         }
 
+        /// <summary>
+        /// A replay recorded with older cards that still plays out the same (0.15.31): the server's "cardsCompatible"
+        /// list leads from its cards version to this game's, and none of the cards changed on the way is in the replay
+        /// (its decks, its Offence/Defence picks or its card table). 2026-11-22: changing Everstorm in the card data had
+        /// made every older replay refuse, though only those with Everstorm play out differently.
+        /// </summary>
+        private static bool CompatibleCards(string recorded, string replayJson)
+        {
+            try
+            {
+                var c = RevivalMod.Cards;
+                string current = (object)c == null ? null : c.CardsVersion;
+                if (string.IsNullOrEmpty(recorded) || string.IsNullOrEmpty(current) || string.IsNullOrEmpty(replayJson)) return false;
+                var steps = ServerSettings.CardsCompatible;
+                var changed = new System.Collections.Generic.HashSet<string>();
+                string at = recorded;
+                for (int hop = 0; hop < 20 && at != current; hop++)
+                {
+                    int i = steps.FindIndex(x => x.from == at);
+                    if (i < 0) return false;
+                    foreach (var id in steps[i].changed) changed.Add(id);
+                    at = steps[i].to;
+                }
+                if (at != current) return false;
+                foreach (var id in changed)
+                    if (replayJson.IndexOf("\"" + id + "\"", StringComparison.Ordinal) >= 0)
+                    {
+                        RevivalMod.Log.Msg($"[replay] recorded with cards {recorded}; card {id} changed since, and it is in this replay");
+                        return false;
+                    }
+                RevivalMod.Log.Msg($"[replay] recorded with cards {recorded}; none of the {changed.Count} card(s) changed since is in it: played");
+                return true;
+            }
+            catch (Exception e) { RevivalMod.Log.Warning("[replay] compatible cards: " + e.Message); return false; }
+        }
+
         // ---- in-match card numbers -> card ids, taken every few seconds while a match runs (0.13.39)
         private static readonly Dictionary<int, (string id, bool own)> seenCards = new Dictionary<int, (string, bool)>();
         private static float nextCardLook;
@@ -309,7 +345,7 @@ namespace WarpforgeRevival
                         var got = ReadRules(rr);
                         string why = got == null ? "its saved rules could not be read"
                                    : got.Value.mod != RevivalMod.RulesVersion ? "it was recorded with a different version of the mod's rules"
-                                   : !SameCards(got.Value.cards) ? "it was recorded with a different set of cards"
+                                   : !SameCards(got.Value.cards) && !CompatibleCards(got.Value.cards, json) ? "it was recorded with a different set of cards"
                                    : null;
                         if (why != null)
                         {

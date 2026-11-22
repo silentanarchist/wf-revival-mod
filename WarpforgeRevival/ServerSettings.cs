@@ -101,6 +101,40 @@ namespace WarpforgeRevival
         /// its own player's selected mode, so two friends in different modes ran different rules.</summary>
         public static string ChallengeMode => !string.IsNullOrEmpty(challengeMode) ? challengeMode : "RevivalClassic";
 
+        /// <summary>
+        /// Card changes that leave older replays playable (0.15.31; "cardsCompatible" in the server's settings):
+        /// a list of {"from": old cards version, "to": newer cards version, "changed": [card ids]}. A replay recorded
+        /// with "from" still plays on "to" when none of the "changed" cards is in it (see Replays). Read in its own
+        /// try, so a malformed entry only leaves this list empty.
+        /// </summary>
+        internal static volatile System.Collections.Generic.List<(string from, string to, string[] changed)> CardsCompatible =
+            new System.Collections.Generic.List<(string, string, string[])>();
+
+        private static System.Collections.Generic.List<(string, string, string[])> ReadCardsCompatible(JsonElement root)
+        {
+            var list = new System.Collections.Generic.List<(string, string, string[])>();
+            try
+            {
+                if (root.ValueKind != JsonValueKind.Object || !root.TryGetProperty("cardsCompatible", out var arr) || arr.ValueKind != JsonValueKind.Array)
+                    return list;
+                foreach (var e in arr.EnumerateArray())
+                {
+                    if (list.Count >= 50 || e.ValueKind != JsonValueKind.Object) continue;
+                    if (!e.TryGetProperty("from", out var f) || f.ValueKind != JsonValueKind.String) continue;
+                    if (!e.TryGetProperty("to", out var t) || t.ValueKind != JsonValueKind.String) continue;
+                    if (!e.TryGetProperty("changed", out var c) || c.ValueKind != JsonValueKind.Array) continue;
+                    var ids = new System.Collections.Generic.List<string>();
+                    foreach (var id in c.EnumerateArray())
+                        if (id.ValueKind == JsonValueKind.String && !string.IsNullOrWhiteSpace(id.GetString()) && ids.Count < 200) ids.Add(id.GetString().Trim());
+                    string from = (f.GetString() ?? "").Trim(), to = (t.GetString() ?? "").Trim();
+                    if (from.Length == 0 || to.Length == 0 || from.Length > 64 || to.Length > 64 || ids.Count == 0) continue;
+                    list.Add((from, to, ids.ToArray()));
+                }
+            }
+            catch (Exception e) { RevivalMod.Log.Warning("[settings] cardsCompatible: " + e.Message); list.Clear(); }
+            return list;
+        }
+
         private static volatile string rules = "";
         /// <summary>
         /// The server's own rules version ("rulesVersion" in its settings; "" when it has none). The
@@ -203,6 +237,7 @@ namespace WarpforgeRevival
                         if (v.Length > 0 && v.Length <= 64) cm = v;
                     }
                     challengeMode = cm;
+                    CardsCompatible = ReadCardsCompatible(doc.RootElement);
                     string rv = "";
                     if (doc.RootElement.ValueKind == JsonValueKind.Object && doc.RootElement.TryGetProperty("rulesVersion", out var rve) &&
                         (rve.ValueKind == JsonValueKind.String || rve.ValueKind == JsonValueKind.Number))
