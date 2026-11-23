@@ -8,24 +8,40 @@ Changes made on the server take effect for everyone at once; the ones listed her
 
 ## Unreleased
 
+## 0.15.31 - 2026-11-23
+
 ### New
-- **Bug reports: "Include extended logs"** (off unless you tick it): sends every log the game and its mod loader keep and, on PC, Unity's own log and the files from recent crashes, so a crash can be looked at without hunting for files. A note under the tick says what they hold; only the admins see them.
-- **Players online:** the main menu shows how many players are online right now ("12 Players Online" with a green dot), left of the settings button, on every main-menu tab.
+- **One queue for everyone:** the ranked / unranked switch is gone; every queued match is unranked, so all players search in the same queue.
+- **Friend challenges always use a rule set:** a challenge sent from the game's own buttons now carries its mode's rules (Classic or Skirmish), including the extra warlord health, so both players always play under the same rules.
+- **Players online:** the main menu shows how many players are online right now (e.g. "12 Players Online" with a green dot), left of the settings button.
+- **Bug reports: "Include extended logs"** (off unless you tick it): sends all the game's and the mod loader's logs and, on PC, Unity's own log and recent crash files, so a crash can be looked at without hunting for files. Only the admins see them.
+- **Download progress:** while the mod updates itself, the window shows how much has arrived.
 
 ### Fixes
-- **Report a bug for everyone the server allows:** the Report a bug buttons (Settings > Mod, the battle menu, F8) and the offer after a crash now follow the server's bug-report setting instead of showing to testers only. Players who are not testers get a plain thank-you instead of a link to the website's bug list, which stays for testers.
-- **"Invalid Parameters" when starting the game:** a player who once signed in to the original game with an email address (or Google Play on a phone) and never uninstalled it got "Invalid Parameters." at start-up; that old login is now cleared and the game signs in normally.
-- **No more "no Defence card" warning when queuing:** in a mode where the Defence card is picked at the start of the match (Classic), queuing no longer warns that your deck has no Defence card assigned.
-- **Ferren Areios with Vico Therbeus:** with both on the board, Oath troops can use their Oath ability up to 3 times every turn (the game let them act only once per turn). Not yet confirmed in play.
-- **Bots and Oath:** a bot only uses an Oath ability when it can pay its Energy cost. Not yet confirmed in play.
-- **Testers deck editor:** backing out of a deck in the Testers window's deck editor returns to the Testers window again (it opened the normal Collection over it and closed the Testers window).
-- **Chat:** the text you type stops before the Send button, so the end of a long message no longer hides under it.
-- **Opponent's profile on the first click:** in a match, clicking the opponent should now open their profile the first time (the original game often needed a second click). Not yet confirmed in play.
-- **Updating from an old mod:** games with mod 0.14.0 to 0.14.42 can update themselves again (they refused every build since the rename to WF Revival, so they could not sign in).
+- **Everstorm** (Space Wolves Offence card): its −1 Ranged no longer takes units below 1, as the card says. Restart your game once to get it.
+- **Fewer desyncs in friend challenges:** both players now always follow the same rules (Offence card step, starting hand, extra health). Before, each side used its own selected mode.
+- **Reconnecting:** a dropped connection gets a steadier 30-second window to come back, up to 9 times per match, and short hiccups no longer count as a drop.
+- **Slow connections:** downloads (mod updates, card and text data) keep going as long as data is still arriving, instead of giving up after 2 minutes.
+- **"Account not found" when the mod is out of date:** the server now tells you to update the mod (in your language) and your saved sign-in is no longer cleared. If the update can't download, the message says how to update by hand.
+- **Old replays still play after a card fix:** a replay recorded before a card change only refuses to play if it contains the changed card.
+- **Players with different card data are no longer matched together**, so a game that hasn't restarted since a card update can't desync a match.
+- **Deck codes without a warlord** are refused instead of loading a broken deck.
+- **Ferren Areios with Vico Therbeus:** with both on the board, Oath troops can use their Oath ability up to 3 times every turn.
+- **Bots and Oath:** a bot only uses an Oath ability when it can pay its Energy cost.
+- **Report a bug for everyone:** the Report a bug buttons (Settings > Mod, the battle menu, F8) and the offer after a crash follow the server's setting instead of showing to testers only.
+- **"Invalid Parameters" at start-up:** a login left over from the original game (email or Google Play) is cleared and the game signs in normally.
+- **No "no Defence card" warning** when queuing a mode where the Defence card is picked at the start of the match (Classic).
+- **Black menu fix (Android):** still applied on devices that need it, but no longer saves screenshots, and skipped when the loading video is set to Still or Off.
+- **Replays:** the move list no longer shows cards from the previous match.
+- **Testers deck editor:** backing out returns to the Testers window.
+- **Chat:** the typing box ends before the Send button, and the "Type message" hint stays fully visible.
+- **Opponent's profile** opens on the first click in a match.
+- **The bug report window** no longer lets clicks through to the game.
+- **Updating from an old mod:** games with mod 0.14.0 to 0.14.42 can update themselves again.
 
 ### Changed
-- **Memory in the log:** the log notes the game's memory use before and after every match and every 5 minutes, and when the phone says memory is low; on Android 11 and newer it also notes how the game's last runs ended (closed for low memory, crash, closed by you, ...), and an automatic crash report includes it. This is to find out whether long sessions run out of memory on phones.
-- **Fewer hooks into the game:** game methods that several of the mod's features changed now carry one hook each instead of two or three (9 fewer), a little less start-up time, mostly on phones.
+- **Shorter black screen when starting on Android:** 42 start-up tracing hooks were removed, and game methods that several features changed now carry one hook each.
+- **Memory in the log:** the log notes the game's memory use around matches and every 5 minutes, and on Android 11+ how recent runs ended, to track down crashes on devices with little memory.
 
 ## 0.15.0 - 2026-10-24
 
