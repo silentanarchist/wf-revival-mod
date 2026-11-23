@@ -10,9 +10,12 @@ and custom-tester.json: {"version", "cards": [{"id", "name", "guid", "art", "sho
 
 Updates to official cards (approved designs with "updates", claude/official-card-updates.md; 2026-11-23): each is built
 from the official card itself (the card template bundle is the game's allcards, so it is there), with only its rules
-fields taken from the design's compiled layout (UPDATE_FIELDS); id, short id, art, sounds and AI scoring stay the
-official card's. The object goes into the cards bundle under its own key and is NOT added to the collection: the mod
-plays it in place of the official card only in the testers' custom-card modes (CardUpdates.cs). References to
+fields taken from what the design changed (UPDATE_FIELDS, compared with the official card compiled the same way:
+WF_SERVER + WF_CONTENT, see official_compiled). The manifest lists the fields it changed ("changed") and every other
+card field ("official"): the mod copies the "official" fields from the official card as the game loaded it onto the
+update object at start-up, so the update is a patch on the current official card, and a later fix in the game's own
+card bundle carries through. The object goes into the cards bundle under its own key and is NOT added to the
+collection: the mod plays it in place of the official card only in the testers' custom-card modes (CardUpdates.cs). References to
 official cards (the card itself, a summoned unit: {"$ref": id} in the design, internal references in the official
 card) point into the game's own allcards bundle through an external file entry (the bundle is loaded by then).
 
@@ -278,7 +281,11 @@ def build_cards(cards, art_guids, out, platform, updates=()):
                 # an update saved before 2026-11-23 has no compiled official version: its whole rules field is taken
                 layout[k] = merge(official[oid][k], to_official(copy.deepcopy(u['native'][k]), ext, pids))
             changed.append(k)
-        print('  update %s (%s): %s' % (oid, u['id'], ', '.join(changed) or 'nothing changed' + ('' if isinstance(base, dict) else ' (no nativeBase)')))
+        print('  update %s (%s): %s' % (oid, u['id'], ', '.join(changed) or 'nothing changed' + ('' if isinstance(base, dict) else ' (no compiled official card)')))
+        # the patch: the mod takes these fields from the update and every other card field from the official card as the
+        # game loaded it (so a later fix to the official card in the game's own card bundle carries through)
+        u['changed'] = changed
+        u['official'] = [k for k in official[oid] if not k.startswith('m_') and k not in changed and k != 'uniqueId']
         layout['m_Script'] = official[oid]['m_Script']
         layout['m_Name'] = official[oid].get('m_Name', '') + ' (update)'
         obj = copy.copy(template)
@@ -418,6 +425,26 @@ def verify(path, want_types):
     assert not dangling
 
 
+_emu = []
+
+
+def official_compiled(official_id):
+    """The official card's own design compiled the way the server compiles an update to it (the server's
+    _creator_update_base), so the update's changes can be told apart from what the compiler does not write.
+    Needs WF_SERVER (the server code folder) and WF_CONTENT (its content folder with creator-official.json and
+    creator-native.json); without them None (the update's whole rules fields are taken)."""
+    server, content = os.environ.get('WF_SERVER'), os.environ.get('WF_CONTENT')
+    if not server or not content:
+        return None
+    if not _emu:
+        sys.path.insert(0, server)
+        import playfab_emu
+        emu = object.__new__(playfab_emu.PlayFabEmulator)
+        emu.content_root = content
+        _emu.append(emu)
+    return _emu[0]._creator_update_base(official_id)
+
+
 def main():
     args = sys.argv[1:]
     art_dir, version = None, 1
@@ -439,7 +466,7 @@ def main():
             if any(u['updates'] == c['updates'] for u in updates):
                 raise SystemExit('two approved updates to %s' % c['updates'])
             updates.append({'id': c['id'], 'updates': c['updates'], 'text': c.get('text', ''), 'native': c['native'],
-                            'base': c.get('nativeBase')})
+                            'base': official_compiled(c['updates']) or c.get('nativeBase')})
             continue
         cards.append({'id': c['id'], 'name': c.get('name', ''), 'text': c.get('text', ''), 'lore': c.get('lore', ''),
                       'native': c['native'], 'shortId': SHORT_ID_BASE + int(c['id'].split('-')[-1])})
@@ -459,6 +486,8 @@ def main():
                                     'text': {'en': {'text': markup(u['text'])}} if u['text'].strip() else {}})
     for platform in ('pc', 'android'):
         p1, _ = build_cards(cards, art_guids, out, platform, updates)
+        for entry, u in zip(manifest['updates'], updates):
+            entry['changed'], entry['official'] = u['changed'], u['official']
         # no new cards (updates only): no pictures, so no art bundle
         p2 = build_art(cards, art_dir, out, platform)[0] if cards else None
         manifest['files'][platform] = {os.path.basename(p): {'size': os.path.getsize(p), 'sha256': sha256(p)} for p in (p1, p2) if p}
