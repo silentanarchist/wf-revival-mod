@@ -125,23 +125,62 @@ namespace WarpforgeRevival
             }
         }
 
-        private struct Offer { public bool newer; public string label, sha, url; }
+        private struct Offer { public bool newer; public string label, sha, url, login; public Version number; }
 
+        /// <summary>
+        /// What the server offers. Two builds (0.15.32): the main build for everyone (/api/v1/mod/manifest) and the
+        /// testers' build (/api/v1/content/tester-mod/manifest, answered only for a tester's or admin's saved sign-in).
+        /// A tester build is the main version plus a fourth number (0.15.32.1, .2, ...), so the newer of the two is
+        /// taken: a tester gets the tester build, and moves to the next main version (0.15.33) once it is out, until a
+        /// tester build of that one exists.
+        /// </summary>
         private static async Task<Offer?> Manifest()
         {
             using var http = Net.Client(TimeSpan.FromSeconds(Math.Max(30, RevivalMod.Config.TimeoutSeconds)));
-            using var manifest = JsonDocument.Parse(await http.GetStringAsync(server + "/api/v1/mod/manifest" + ManifestQuery));
-            var root = manifest.RootElement;
+            Offer? main;
+            using (var manifest = JsonDocument.Parse(await http.GetStringAsync(server + "/api/v1/mod/manifest" + ManifestQuery)))
+                main = Read(manifest.RootElement, null);
+            Offer? tester = null;
+            string login = null;
+            try { login = GameSignIn.Token(); } catch { }
+            if (!string.IsNullOrEmpty(login))
+            {
+                try
+                {
+                    using var req = new System.Net.Http.HttpRequestMessage(System.Net.Http.HttpMethod.Get, server + "/api/v1/content/tester-mod/manifest" + ManifestQuery);
+                    req.Headers.TryAddWithoutValidation("X-Revival-Login", login);
+                    using var reply = await http.SendAsync(req);
+                    if (reply.IsSuccessStatusCode)
+                    {
+                        using var doc = JsonDocument.Parse(await reply.Content.ReadAsStringAsync());
+                        tester = Read(doc.RootElement, login);
+                    }
+                }
+                catch (Exception e) { RevivalMod.Log.Warning("[update] tester build: " + e.Message); }
+            }
+            if (tester != null && (main == null || tester.Value.number > main.Value.number))
+            {
+                if (tester.Value.newer) RevivalMod.Log.Msg($"[update] the testers' build {tester.Value.label} is newer than the main build {main?.label ?? "(none)"}");
+                return tester;
+            }
+            return main;
+        }
+
+        private static Offer? Read(JsonElement root, string login)
+        {
             if (!root.TryGetProperty("available", out var av) || !av.GetBoolean()) return null;
             // "version" stays in the form older builds understand; "label" is the name shown to people
             string number = root.GetProperty("version").GetString();
             var rv = RevivalMod.Number(number); var lv = RevivalMod.Number(RevivalMod.Version);
+            if (rv == null) return null;
             return new Offer
             {
-                newer = rv != null && lv != null && rv > lv,
+                newer = lv != null && rv > lv,
+                number = rv,
                 label = root.TryGetProperty("label", out var lb) && lb.ValueKind == JsonValueKind.String ? lb.GetString() : number,
                 sha = root.GetProperty("sha256").GetString(),
-                url = root.GetProperty("url").GetString()
+                url = root.GetProperty("url").GetString(),
+                login = login
             };
         }
 
@@ -155,7 +194,10 @@ namespace WarpforgeRevival
                 var offer = known ?? await Manifest();
                 if (offer == null || !offer.Value.newer) throw new InvalidOperationException("the server has no newer mod to offer");
                 // keeps going for as long as data arrives (0.15.28; a fixed 120 s gave up on slow connections)
-                var download = await Net.Download(server + offer.Value.url, progress: (got, total) =>
+                // the testers' build is only handed out with the tester's saved sign-in
+                var request = new System.Net.Http.HttpRequestMessage(System.Net.Http.HttpMethod.Get, server + offer.Value.url);
+                if (offer.Value.login != null) request.Headers.TryAddWithoutValidation("X-Revival-Login", offer.Value.login);
+                var download = await Net.Download(request, progress: (got, total) =>
                     GameSignIn.Updating(message + "\n" + (total > 0
                         ? Loc.T("update.progress", "{done} of {total} KB", ("done", (got / 1024).ToString()), ("total", (total / 1024).ToString()))
                         : Loc.T("update.progressNoTotal", "{done} KB", ("done", (got / 1024).ToString())))));

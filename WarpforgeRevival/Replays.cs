@@ -119,8 +119,6 @@ namespace WarpforgeRevival
                     };
                     string ev = ChallengeRules.ActiveEvent ?? EventOf(md) ?? LongGame.PlayingEventId() ?? "";
                     string cards = RevivalMod.Cards?.CardsVersion ?? RevivalMod.Cards?.PackVersion ?? "";
-                    // a custom-card mode match plays the package's updates to official cards (0.15.32): its replay needs the same package
-                    if (cards.Length > 0 && CustomBundle.Version > 0 && CardUpdates.Count > 0 && CardUpdates.ActiveIn(ev)) cards += ".c" + CustomBundle.Version;
                     string bad = Math.Abs(factor * 10 - tenths) > 0.001 ? "warlordHealthMultiplier" : null;
                     foreach (var kv in v)
                     {
@@ -345,14 +343,9 @@ namespace WarpforgeRevival
                     if (doc.RootElement.TryGetProperty("revivalRules", out var rr))
                     {
                         var got = ReadRules(rr);
-                        // "<cards>.c<package>": recorded in a custom-card mode with the testers' package's updates to official cards
-                        string recordedCards = got?.cards ?? "", package = null;
-                        int at = recordedCards.LastIndexOf(".c", StringComparison.Ordinal);
-                        if (at > 0) { package = recordedCards.Substring(at + 2); recordedCards = recordedCards.Substring(0, at); }
                         string why = got == null ? "its saved rules could not be read"
                                    : got.Value.mod != RevivalMod.RulesVersion ? "it was recorded with a different version of the mod's rules"
-                                   : !SameCards(recordedCards) && !CompatibleCards(recordedCards, json) ? "it was recorded with a different set of cards"
-                                   : package != null && package != CustomBundle.Version.ToString() ? $"it was recorded with custom-card package {package} (this game has {(CustomBundle.Version > 0 ? CustomBundle.Version.ToString() : "none")})"
+                                   : !SameCards(got.Value.cards) && !CompatibleCards(got.Value.cards, json) ? "it was recorded with a different set of cards"
                                    : null;
                         if (why != null)
                         {

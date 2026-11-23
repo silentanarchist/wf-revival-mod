@@ -42,7 +42,7 @@ namespace WarpforgeRevival
             "pc";
 #endif
 
-        /// <summary>The package's version (0 when none is loaded): on the match ticket, and in replays of custom-card modes (0.15.32).</summary>
+        /// <summary>The package's version (0 when none is loaded): for the match ticket and replays later.</summary>
         internal static int Version { get; private set; }
         internal static int CardCount { get; private set; }
 
@@ -138,9 +138,7 @@ namespace WarpforgeRevival
             int version = root.TryGetProperty("version", out var v) && v.TryGetInt32(out int vi) ? vi : 0;
             string cardsFile = Path.Combine(folder, "custom-cards_" + Platform + ".bundle");   // the package files for this platform
             string artFile = Path.Combine(folder, "custom-art_" + Platform + ".bundle");
-            // a package of updates to official cards only (0.15.32) has no pictures, so no art bundle
-            bool newCards = root.TryGetProperty("cards", out var listed) && listed.ValueKind == JsonValueKind.Array && listed.GetArrayLength() > 0;
-            foreach (var f in newCards ? new[] { cardsFile, artFile } : new[] { cardsFile })
+            foreach (var f in new[] { cardsFile, artFile })
                 if (!File.Exists(f)) { RevivalMod.Log.Warning("[custom] package file missing: " + f); return; }
 
             var keys = new Dictionary<string, string>();      // card id -> the card's key (its GUID in the inventory)
@@ -159,11 +157,8 @@ namespace WarpforgeRevival
                 if (!string.IsNullOrEmpty(id) && !string.IsNullOrEmpty(art)) arts[id] = art;
             }
 
-            if (newCards)
-            {
-                artBundle = AssetBundle.LoadFromFile(artFile);
-                if ((object)artBundle == null) { RevivalMod.Log.Warning("[custom] the art bundle could not be opened"); return; }
-            }
+            artBundle = AssetBundle.LoadFromFile(artFile);
+            if ((object)artBundle == null) { RevivalMod.Log.Warning("[custom] the art bundle could not be opened"); return; }
             foreach (var kv in arts)
             {
                 Sprite sp = null;
@@ -206,12 +201,10 @@ namespace WarpforgeRevival
                 }
                 CardText.SetPackageTexts(texts);
             }
-            CardUpdates.Load(root, cardsBundle);
             Version = version; CardCount = added;
             int total = 0;
             try { total = PlayerDataManager.singletonManager.allCardCollection.Count; } catch { }
-            RevivalMod.Log.Msg($"[custom] custom-card package v{version}: {added} card(s) added to the collection ({total} cards now), {sprites.Count} picture(s), {CardUpdates.Count} update(s) to official cards");
-            MatchTicket.Renew();      // the match ticket says which package this game has (0.15.32)
+            RevivalMod.Log.Msg($"[custom] custom-card package v{version}: {added} card(s) added to the collection ({total} cards now), {sprites.Count} picture(s)");
         }
 
         /// <summary>The fallback: every asset of a type in a bundle (loaded asynchronously, waited for), the one with that name

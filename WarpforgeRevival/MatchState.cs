@@ -100,7 +100,7 @@ namespace WarpforgeRevival
         [HarmonyPatch(typeof(BattleManager), nameof(BattleManager.StartBattleManager))]
         private static class NewBattle
         {
-            private static void Prefix() { room = null; turn = 0; steps.Clear(); stepN = 0; dealMatch = null; cards = null; CardUpdates.MatchStarted(); }
+            private static void Prefix() { room = null; turn = 0; steps.Clear(); stepN = 0; dealMatch = null; cards = null; }
         }
 
         [HarmonyPatch(typeof(BattleManager), nameof(BattleManager.ResolveEndTurn))]
