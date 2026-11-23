@@ -54,7 +54,10 @@ KEYWORDS = {'Hunt Mark': 'huntMark', 'Blood Thirst': 'bloodThirst', 'Ferocity': 
             'Sniper': 'sniper', 'Strike': 'strike', 'Slay': 'slay', 'Artifice': 'artifice', 'Shield': 'shield',
             'Invulnerable': 'invulnerable', 'Regeneration': 'regeneration', 'Blind': 'blind', 'Ephemeral': 'ephemeral',
             'Talent': 'talent', 'Armour': 'armour', 'Stealth': 'stealth', 'Stun': 'stun', 'Fast': 'fast',
-            'Codex': 'codex', 'Melee': 'melee', 'Ranged': 'ranged', 'Agenda': 'agenda', 'Teleport': 'teleport', 'Oath': 'oath', 'Blast': 'blast'}
+            'Codex': 'codex', 'Melee': 'melee', 'Ranged': 'ranged', 'Agenda': 'agenda', 'Teleport': 'teleport', 'Oath': 'oath', 'Blast': 'blast',
+            # the tag is the game's own trait name (DefinedTrait), which the game shows by its display name: Destroyer
+            # is the trait "frenzied" (2026-11-23)
+            'Swarm': 'swarm', 'Remnant': 'remnant', 'Destroyer': 'frenzied', 'Frenzied': 'frenzied'}
 
 
 def markup(text):
