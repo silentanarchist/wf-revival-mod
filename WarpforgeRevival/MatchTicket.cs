@@ -39,6 +39,13 @@ namespace WarpforgeRevival
             }
         }
 
+        /// <summary>Asks for a new ticket now: something it carries changed (the custom-card package was loaded).</summary>
+        internal static void Renew()
+        {
+            lock (Gate) { validUntil = DateTime.UtcNow; }      // counts as running out: Refresh fetches a new one, the old stays usable meanwhile
+            try { Refresh(); } catch (Exception e) { RevivalMod.Log.Warning("[match] ticket: " + e.Message); }
+        }
+
         private static async Task Fetch(string session)
         {
             try
@@ -49,6 +56,10 @@ namespace WarpforgeRevival
                     { new System.Collections.Generic.KeyValuePair<string, string>("X-Revival-Mod", RevivalMod.Version) };
                 string cards = CardsCheck.InUse;
                 if (cards != null) headers.Add(new System.Collections.Generic.KeyValuePair<string, string>("X-Revival-Cards", cards));
+                // and the testers' custom-card package (0.15.32: it carries updates to official cards), so testers are only
+                // paired with testers who have the same one
+                int custom = CustomBundle.Version;
+                if (custom > 0) headers.Add(new System.Collections.Generic.KeyValuePair<string, string>("X-Revival-Custom", custom.ToString()));
                 var reply = await Net.PostJson("/playfab/Revival/MatchTicket", "{}", TimeSpan.FromSeconds(10), headers.ToArray(), retry: true);
                 var data = reply.Data;
                 if (reply.Ok && data.ValueKind == System.Text.Json.JsonValueKind.Object && data.TryGetProperty("ticket", out var t))

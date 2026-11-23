@@ -6,7 +6,15 @@ Writes, for each platform (pc, android):
   custom-cards_<platform>.bundle   the RawCardScript objects (+ the card MonoScripts), one per card, keyed by a GUID
   custom-art_<platform>.bundle     one Texture2D + Sprite per card (RGBA32, 1024 x 1024), keyed by the card's art GUID
 and custom-tester.json: {"version", "cards": [{"id", "name", "guid", "art", "shortId"}], "text": {id: {lang: {name, text, lore}}},
-"files": {platform: {name: {"size", "sha256"}}}}.
+"updates": [{"id", "design", "guid", "text": {lang: {text}}}], "files": {platform: {name: {"size", "sha256"}}}}.
+
+Updates to official cards (approved designs with "updates", claude/official-card-updates.md; 2026-11-23): each is built
+from the official card itself (the card template bundle is the game's allcards, so it is there), with only its rules
+fields taken from the design's compiled layout (UPDATE_FIELDS); id, short id, art, sounds and AI scoring stay the
+official card's. The object goes into the cards bundle under its own key and is NOT added to the collection: the mod
+plays it in place of the official card only in the testers' custom-card modes (CardUpdates.cs). References to
+official cards (the card itself, a summoned unit: {"$ref": id} in the design, internal references in the official
+card) point into the game's own allcards bundle through an external file entry (the bundle is loaded by then).
 
 Templates: the game's own allcards bundle (card objects and the two MonoScripts) and the Genestealer Cults art bundle
 (textures and sprites), stripped to what is needed. Nothing in them is changed; the originals are read only.
@@ -22,10 +30,17 @@ from PIL import Image
 HERE = os.path.dirname(os.path.abspath(__file__))
 GAME = os.environ.get('WF_GAME', '/mnt/user-data/uploads/Warhammer 40k Warpforge')
 CARDS_TEMPLATE = os.environ.get('WF_ALLCARDS', os.path.join(HERE, '..', 'build', 'allcards_assets_all.bundle'))
+# the card template per platform: the game's allcards bundle as the server serves it (an update's references point into it,
+# so it must be the copy the games load; the PC and Android files have the same inner name and object ids)
+TEMPLATES = {'pc': CARDS_TEMPLATE, 'android': os.environ.get('WF_ALLCARDS_ANDROID', CARDS_TEMPLATE)}
 ART_TEMPLATE = os.environ.get('WF_ART_TEMPLATE', os.path.join(GAME, 'Warpforge_Data', 'StreamingAssets', 'aa', 'StandaloneWindows64',
                                                               'genestealercultscardassets_assets_all.bundle'))
 ANDROID = 13
 SHORT_ID_BASE = 90000          # cardShortId range reserved for custom cards (official ones end far below)
+# the rules of a card; everything else of an updated card stays the official card's (claude/official-card-updates.md)
+UPDATE_FIELDS = ('manaCost', 'meleeAttack', 'rangeAttack', 'maxHealth', 'armour', 'keyword', 'CardTraits', 'ShowTraits',
+                 'cardAbilities', 'activeAbility', 'alternativeAbility', 'hasActiveAbility', 'hasAlternativeAbility',
+                 'choicesDefinition', 'targetsAvailableCounter', 'cardTargetCriteria', 'targeted', 'blockActionsWhileResolving')
 LANGS = ['en', 'cs', 'de', 'es', 'fr', 'it', 'ja', 'ko', 'pl', 'pt-BR', 'ru', 'tr', 'zh-CN']
 
 
@@ -106,6 +121,52 @@ def fill_art(node, art_guids):
     return node
 
 
+def to_official(node, ext, pids):
+    """An updated card's references into the game's allcards bundle: {"$ref": id} -> that card, and an internal reference
+    copied from the official card (file 0 = allcards) -> the same object through the external entry `ext`."""
+    if isinstance(node, dict):
+        if '$ref' in node:
+            rid = node['$ref']
+            if rid not in pids:
+                raise SystemExit('an update refers to a card that is not an official card: ' + str(rid))
+            return {'m_FileID': ext, 'm_PathID': pids[rid]}
+        if '$art' in node:
+            raise SystemExit('an update cannot change a picture: ' + str(node['$art']))
+        if set(node) == {'m_FileID', 'm_PathID'}:
+            return {'m_FileID': ext, 'm_PathID': node['m_PathID']} if node['m_FileID'] == 0 and node['m_PathID'] else dict(node)
+        return {k: to_official(v, ext, pids) for k, v in node.items()}
+    if isinstance(node, list):
+        return [to_official(v, ext, pids) for v in node]
+    return node
+
+
+def three_way(official, base, new):
+    """The official card's value with only what the update changed: where the update's compiled value (`new`) equals the
+    official design compiled the same way (`base`), the official value stays (with what the compiler does not write,
+    such as an effect's animations); where it differs, the update's value. Lists of different length are compared item
+    by item, and the update's extra items are taken as they are. Returns (value, changed)."""
+    if json.dumps(new, sort_keys=True) == json.dumps(base, sort_keys=True):
+        return official, False
+    if isinstance(new, dict) and isinstance(base, dict) and isinstance(official, dict) and '$ref' not in new and '$ref' not in base:
+        out, changed = dict(official), False
+        for k, v in new.items():
+            if k in official and k in base:
+                out[k], c = three_way(official[k], base[k], v)
+            else:
+                out[k], c = v, True
+            changed |= c
+        return out, changed
+    if isinstance(new, list) and isinstance(base, list) and isinstance(official, list):
+        out = []
+        for i, v in enumerate(new):
+            if i < len(base) and i < len(official):
+                out.append(three_way(official[i], base[i], v)[0])
+            else:
+                out.append(v)
+        return out, True
+    return new, True
+
+
 def zero(v):
     if isinstance(v, dict):
         return {k: zero(x) for k, x in v.items()}
@@ -139,17 +200,22 @@ def merge(template, value, sample=None):
     return value if value is not None else zero(template)
 
 
-def build_cards(cards, art_guids, out, platform):
-    env = UnityPy.load(CARDS_TEMPLATE)
+def build_cards(cards, art_guids, out, platform, updates=()):
+    env = UnityPy.load(TEMPLATES[platform])
     bf, sf = serialized(env)
     ab = [o for o in sf.objects.values() if o.type.name == 'AssetBundle'][0]
     abt = ab.read_typetree()
     template = None
     pictures = {}          # (army, card type) -> an official card's picture GUID, the custom card's stand-in picture
+    official, pids = {}, {}     # official card id -> its layout / its object's path id in allcards (for updates)
+    own_cab = [k for k, f in bf.files.items() if hasattr(f, 'objects')][0]
     for o in list(sf.objects.values()):
         if o.type.name == 'MonoBehaviour':
             t = o.read_typetree()
             if 'uniqueId' in t and 'cardAbilities' in t:
+                pids[t['uniqueId']] = o.path_id
+                if any(u['updates'] == t['uniqueId'] for u in updates):
+                    official[t['uniqueId']] = t
                 g = (t.get('cardImageReference') or {}).get('m_AssetGUID')
                 if g:
                     pictures.setdefault((t.get('cardArmy'), t.get('cardType')), g)
@@ -181,6 +247,49 @@ def build_cards(cards, art_guids, out, platform):
         container.append((guid, {'preloadIndex': len(preload), 'preloadSize': len(pre), 'asset': {'m_FileID': 0, 'm_PathID': obj.path_id}}))
         preload += pre
         built.append((uid, guid, obj.path_id))
+    if updates:
+        # the game's own allcards bundle as an external file of this one (Unity finds it loaded by its inner name)
+        ext_entry = copy.copy(sf.externals[0])
+        ext_entry.path = 'archive:/%s/%s' % (own_cab, own_cab)
+        try:
+            ext_entry.guid = b'\x00' * 16
+        except Exception:
+            pass
+        ext_entry.type = 0
+        sf.externals.append(ext_entry)
+        ext = len(sf.externals)          # file ids count the external entries from 1
+    for u in updates:
+        oid = u['updates']
+        if oid not in official:
+            raise SystemExit('update %s: no official card %s in the card template' % (u['id'], oid))
+        layout = to_official(copy.deepcopy(official[oid]), ext, pids)
+        base = u.get('base')
+        changed = []
+        for k in UPDATE_FIELDS:      # only the rules come from the design (its picture is the official card's anyway)
+            if k not in u['native'] or k not in official[oid]:
+                continue
+            if isinstance(base, dict) and k in base:
+                # the official value, with only what the update changed (the official value's references are its own)
+                value, c = three_way(official[oid][k], base[k], u['native'][k])
+                if not c:
+                    continue
+                layout[k] = merge(official[oid][k], to_official(copy.deepcopy(value), ext, pids))
+            else:
+                # an update saved before 2026-11-23 has no compiled official version: its whole rules field is taken
+                layout[k] = merge(official[oid][k], to_official(copy.deepcopy(u['native'][k]), ext, pids))
+            changed.append(k)
+        print('  update %s (%s): %s' % (oid, u['id'], ', '.join(changed) or 'nothing changed' + ('' if isinstance(base, dict) else ' (no nativeBase)')))
+        layout['m_Script'] = official[oid]['m_Script']
+        layout['m_Name'] = official[oid].get('m_Name', '') + ' (update)'
+        obj = copy.copy(template)
+        obj.path_id = pid_for('update', oid)
+        sf.objects[obj.path_id] = obj
+        obj.save_typetree(layout)
+        guid = guid_for('update', oid)
+        pre = [{'m_FileID': 0, 'm_PathID': p} for p in scripts + [obj.path_id]]
+        container.append((guid, {'preloadIndex': len(preload), 'preloadSize': len(pre), 'asset': {'m_FileID': 0, 'm_PathID': obj.path_id}}))
+        preload += pre
+        built.append((oid, guid, obj.path_id))
     del sf.objects[template.path_id]
     abt['m_Name'] = abt['m_AssetBundleName'] = 'custom-cards.bundle'
     abt['m_Container'] = sorted(container)
@@ -302,7 +411,8 @@ def verify(path, want_types):
         if hasattr(f, 'objects'):
             plat = f.target_platform
     names = [k for k in env.file.files.keys()]
-    print('  %s: %s, platform %s, container %d, dangling %d, %d bytes, inner %s' % (os.path.basename(path), kinds, plat, len(abt['m_Container']), len(dangling), os.path.getsize(path), names))
+    externals = [f.externals for f in env.file.files.values() if hasattr(f, 'objects')][0]
+    print('  %s: %s, platform %s, container %d, dangling %d, %d bytes, inner %s, external files %s' % (os.path.basename(path), kinds, plat, len(abt['m_Container']), len(dangling), os.path.getsize(path), names, [e.path for e in externals]))
     for t in want_types:
         assert t in kinds, t
     assert not dangling
@@ -317,37 +427,49 @@ def main():
         i = args.index('--version'); version = int(args[i + 1]); del args[i:i + 2]
     out, files = args[0], args[1:]
     os.makedirs(out, exist_ok=True)
-    cards = []
+    cards, updates = [], []
     for n, f in enumerate(files):
         c = json.load(open(f, encoding='utf-8'))
         if c.get('status') != 'approved':
             print('skipped (not approved):', f); continue
-        if c.get('updates'):
-            # an update to an official card (compiled with that card's own id): a patch, not a new card - not built here yet
-            print('skipped (update to official card %s, a patch):' % c['updates'], f); continue
         if not isinstance(c.get('native'), dict):
             raise SystemExit('no compiled layout in ' + f)
+        if c.get('updates'):
+            # an update to an official card: built from that card, played in its place only in the custom-card modes
+            if any(u['updates'] == c['updates'] for u in updates):
+                raise SystemExit('two approved updates to %s' % c['updates'])
+            updates.append({'id': c['id'], 'updates': c['updates'], 'text': c.get('text', ''), 'native': c['native'],
+                            'base': c.get('nativeBase')})
+            continue
         cards.append({'id': c['id'], 'name': c.get('name', ''), 'text': c.get('text', ''), 'lore': c.get('lore', ''),
                       'native': c['native'], 'shortId': SHORT_ID_BASE + int(c['id'].split('-')[-1])})
-    if not cards:
+    if not cards and not updates:
         raise SystemExit('no approved cards')
-    art_dir = art_dir or os.path.join(os.path.dirname(files[0]), 'art')
+    art_dir = art_dir or os.path.join(os.path.dirname(os.path.abspath(files[0])), 'art')
     art_guids = {c['id']: guid_for('art', c['id']) for c in cards}
-    manifest = {'version': version, 'cards': [], 'text': {}, 'files': {}}
+    manifest = {'version': version, 'cards': [], 'text': {}, 'updates': [], 'files': {}}
     for c in cards:
         manifest['cards'].append({'id': c['id'], 'name': c['name'], 'guid': guid_for('card', c['id']), 'art': art_guids[c['id']], 'shortId': c['shortId'],
                                   'rarity': c['native'].get('cardRarity', 1), 'army': c['native'].get('cardArmy', 0)})
         # English from the design; other languages fall back to it until the creator site carries translations
         manifest['text'][c['id']] = {'en': {'name': c['name'], 'text': markup(c['text']), 'lore': c['lore']}}
+    for u in updates:
+        # the rules text in the language it was written in (English until translations exist); empty = the official text
+        manifest['updates'].append({'id': u['updates'], 'design': u['id'], 'guid': guid_for('update', u['updates']),
+                                    'text': {'en': {'text': markup(u['text'])}} if u['text'].strip() else {}})
     for platform in ('pc', 'android'):
-        p1, _ = build_cards(cards, art_guids, out, platform)
-        p2, _ = build_art(cards, art_dir, out, platform)
-        manifest['files'][platform] = {os.path.basename(p): {'size': os.path.getsize(p), 'sha256': sha256(p)} for p in (p1, p2)}
+        p1, _ = build_cards(cards, art_guids, out, platform, updates)
+        # no new cards (updates only): no pictures, so no art bundle
+        p2 = build_art(cards, art_dir, out, platform)[0] if cards else None
+        manifest['files'][platform] = {os.path.basename(p): {'size': os.path.getsize(p), 'sha256': sha256(p)} for p in (p1, p2) if p}
         print(platform + ':')
-        verify(p1, ('MonoBehaviour', 'MonoScript'))
-        verify(p2, ('Texture2D', 'Sprite'))
+        # the card scripts are in the bundle (the kit's allcards build) or in the game's script bundle (its served allcards)
+        verify(p1, ('MonoBehaviour',))
+        if p2:
+            verify(p2, ('Texture2D', 'Sprite'))
     json.dump(manifest, open(os.path.join(out, 'custom-tester.json'), 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
-    print('cards:', ', '.join('%s (%s)' % (c['id'], c['name']) for c in cards))
+    print('cards:', ', '.join('%s (%s)' % (c['id'], c['name']) for c in cards) or 'none')
+    print('updates:', ', '.join('%s (%s)' % (u['updates'], u['id']) for u in updates) or 'none')
 
 
 if __name__ == '__main__':

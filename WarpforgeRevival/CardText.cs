@@ -181,6 +181,9 @@ namespace WarpforgeRevival
             if ((object)card == null || card.Pointer == IntPtr.Zero) return false;
             string id = card.uniqueId;
             if (id == null) return false;
+            // an update to an official card (0.15.32): its own rules text, the official name (only that object, so the
+            // official card keeps its text everywhere else)
+            if (CardUpdates.TextOf(card, out string updated)) { entry = ("", updated); return true; }
             var pkg = packageTexts;
             if (pkg.Count > 0 && pkg.TryGetValue(id, out var langs))
             {
