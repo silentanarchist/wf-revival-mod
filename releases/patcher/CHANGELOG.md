@@ -5,6 +5,12 @@ Called Warpforge Patcher up to 0.4.0.
 The Android app that patches the game on the device itself. Write "device", not "phone", unless something only applies to phones. Newest first. A heading ending in
 "(test build)" is published as a pre-release.
 
+## 0.4.5 - 2026-11-23
+
+### Fixed
+- After you confirm an install, Android keeps installing for a while without saying anything. Tapping the patch button again during that time and confirming a second time made the app report "Session files in use" as a failure, even though the game (or the app update) was being installed. The app now waits for the first install to finish and reports it properly.
+- While Android installs, the patch button now reads "Waiting for Android: install the patched game. Tap only if Android's prompt was closed." instead of "Continue: …", so it no longer looks like the next step.
+
 ## 0.4.4 - 2026-11-05
 
 ### New
