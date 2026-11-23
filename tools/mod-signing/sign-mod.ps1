@@ -8,13 +8,15 @@
 #   sign-mod.ps1            signs every DLL in to-sign\ into signed\ (run by "1 - sign builds.bat")
 #   sign-mod.ps1 -Check     checks every DLL in signed\ carries a good signature (needs only public-keys.txt);
 #                           exit code 1 when one does not (the push and install scripts stop then)
+#   -Tester                 the same with to-sign-test\ and signed-test\: the testers' builds (0.15.32.1, .2, ...),
+#                           pushed to W:\mod-test by "5 - push signed tester builds to server.bat"
 # The signature goes on the end of the file (see ModSignature.cs in the mod for the format); nothing else changes.
-param([switch]$Check)
+param([switch]$Check, [switch]$Tester)
 $ErrorActionPreference = 'Stop'
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $keys = Join-Path $here 'keys'
-$toSign = Join-Path $here 'to-sign'
-$signed = Join-Path $here 'signed'
+$toSign = Join-Path $here $(if ($Tester) { 'to-sign-test' } else { 'to-sign' })
+$signed = Join-Path $here $(if ($Tester) { 'signed-test' } else { 'signed' })
 foreach ($d in @($toSign, $signed)) { if (-not (Test-Path $d)) { New-Item -ItemType Directory -Path $d | Out-Null } }
 
 # Windows PowerShell 5.1 (Desktop) has BigInteger in System.Numerics; PowerShell 7 (Core) elsewhere
