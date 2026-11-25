@@ -33,3 +33,7 @@ archive/pc-patcher/tool/melon_data.zip
 *.user
 # mod signing keys: never commit (tools/mod-signing)
 *signing-key*.txt
+
+# made when the card-package builder runs (Python cache; the server code it loads opens logs/)
+__pycache__/
+tools/custom-cards/logs/
